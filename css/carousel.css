@@ -27,7 +27,7 @@ body {
   margin-bottom: 60px;
 
   /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-  margin-top: -90px;
+  margin-top: -60px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -45,17 +45,27 @@ body {
   top: 90px;
   left: 0;
   min-width: 100%;
-  max-height: 400px;
+  max-height: 350px;
 }
 
-.carousel-inner > .item > .container > .mascot {
-    margin-top: 100px;
-    height: 120px;
-    float: right;
+.mascot {
+  margin-top: 60px;
+  margin-left: 5%;
+  height: 120px;
+  float: left;
+  overflow: hidden;
 }
 
-.carousel-inner > .item > .container > .mascot > img {
-    height: 100%;
+.mascot > img {
+  height: 100%;
+}
+
+.login-btn {
+  position: relative;
+  z-index: 10;
+  margin-top: 70px;
+  margin-right: 5%;
+  float: right;
 }
 
 /* MARKETING CONTENT
@@ -85,7 +95,7 @@ body {
 ------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  margin: 20px 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
@@ -97,6 +107,13 @@ body {
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
+
+@media (max-width: 710px) {
+  .mascot {
+    display: none;
+    visibility: hidden;
+  }
+}
 
 @media (min-width: 768px) {
 
@@ -125,7 +142,6 @@ body {
   .featurette-heading {
     font-size: 50px;
   }
-
 }
 
 @media (min-width: 992px) {
