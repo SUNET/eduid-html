@@ -44,8 +44,9 @@ body {
   position: absolute;
   top: 90px;
   left: 0;
+  width: 58%;
+  height: 58%;
   min-width: 100%;
-  max-width: 488px;
   max-height: 350px;
 }
 
