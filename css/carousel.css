@@ -62,6 +62,18 @@ body {
   height: 100%;
 }
 
+.sunet-logo {
+  position: absolute;
+  margin-left: 5%;
+  bottom: 0;
+  height: 120px;
+  float: left;
+}
+
+.sunet-logo > img {
+  height: 100%;
+}
+
 .login-btn {
   position: relative;
   z-index: 10;
@@ -115,6 +127,10 @@ body {
     display: none;
     visibility: hidden;
   }
+ .sunet-logo {
+    display: none;
+    visibility: hidden;
+ }
 }
 
 @media (min-width: 768px) {
