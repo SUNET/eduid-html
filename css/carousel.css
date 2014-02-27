@@ -67,10 +67,10 @@ body {
   margin-left: 5%;
   bottom: 0;
   height: 120px;
-  float: left;
+  z-index: 99;
 }
 
-.sunet-logo > img {
+.sunet-logo > a > img {
   height: 100%;
 }
 
