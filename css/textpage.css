@@ -1,0 +1,95 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: relative;
+  z-index: 15;
+}
+
+
+.mascot {
+  float:left;
+  height: 120px;
+}
+
+.mascot > img {
+  height: 100%;
+}
+
+.sunet-logo {
+  height: 120px;
+}
+
+.sunet-logo > a > img {
+  height: 100%;
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (max-width: 710px) {
+  .mascot {
+    display: none;
+    visibility: hidden;
+  }
+ .sunet-logo {
+    display: none;
+    visibility: hidden;
+ }
+}
+
+@media (min-width: 768px) {
+
+  /* Remove the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+.masthead {
+  padding-top: 10px;
+  background-color: #777;
+}
+
+.masthead img {
+  max-width: 108px;
+  max-height: 110px;
+}
+
+.text-divider {
+  margin: 20px 0; /* Space out the Bootstrap <hr> more */
+}
