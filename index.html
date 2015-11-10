@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv-SE">
 <head>
     <meta charset="UTF-8">
@@ -7,14 +7,14 @@
 
     <title>Eduid</title>
 
-    <link rel='stylesheet' id='eduid-style-main-css' href='assets/css/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='eduid-style-main-css' href='/assets/css/style.min.css' type='text/css' media='all' />
 
 </head>
 
 <body class="home page">
-    <a class="skip-link screen-reader-text" href="index.html#content">Skip to content</a>
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
 
-    <header id="header" data-clone=".header">
+    <header id="header" class="header">
         <div class="logo">
 
         </div>
@@ -24,11 +24,11 @@
         <nav>
             <div>
                 <ul class="menu">
-                    <li><a href="index.html">Student</a></li>
-                    <li><a href="tekniker.html">Tekniker</a></li>
-                    <li><a href="personal.html">Personal</a></li>
-                    <li><a href="faq.html">Vanliga frågor</a></li>
-                    <li><a href="en/index.html">English</a></li>
+                    <li><a href="/">Student</a></li>
+                    <li><a href="/tekniker.html">Tekniker</a></li>
+                    <li><a href="/personal.html">Personal</a></li>
+                    <li><a href="/faq.html">Vanliga frågor</a></li>
+                    <li><a href="/en/">English</a></li>
                 </ul>
             </div>
             <div class="buttons">
@@ -46,12 +46,17 @@
         <ul></ul>
     </div>
     <div id="wrapper" class="page-student">
-        <section class="default">
-
-            <div class="sidenav-header"></div>
-
-            <header class="header"></header>
-
+        <section class="default fullscreen">
+            <div class="header">
+                <div class="buttons">
+                    <div class="button orange">
+                        <a href="https://signup.eduid.se/">Skapa konto</a>
+                    </div>
+                    <div class="button white-border">
+                        <a href="https://dashboard.eduid.se/">Logga in</a>
+                    </div>
+                </div>
+            </div>
             <div class="wrap">
 
                 <span class="hidden page-title">
@@ -65,17 +70,16 @@
 
 
                                     <div class="col-md-5 float-center">
-                                        <img src="index.html" data-src="/assets/images/start-2.gif" data-mobile-src="/assets/images/mobil-start.png" alt="start-2" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
+                                        <img src="" data-src="/assets/images/start-2.gif" data-mobile-src="/assets/images/mobil-start.png" alt="start-2" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
                                     </div>
                                     <div class="col-md-12 center-div text-center">
 
                                         <h2>e-konto för högskolan</h2>
-                                        <h3>
-                                            Använd eduID för att logga in på <a title="antagning.se" href="http://www.antagning.se">antagning.se</a> eller för att aktivera och hantera studentkonton på dina lärosäten – under hela din högskoletid.<br/><br/>
+                                        <h3 class="dark">
+                                            Använd eduID för att logga in på <a title="antagning.se" href="http://www.antagning.se">antagning.se</a> eller för att aktivera och hantera studentkonton på dina lärosäten – under hela din högskoletid.<br/>
                                             eduID ger dig ett konto som du kan använda från din första ansökan om högskoleutbildning tills du är alumn.
                                         </h3>
-                                        <p>&nbsp;</p>
-                                        <p><img class="alignnone size-full" src="assets/images/sunet-gray.png" alt="sunet-gray" width="70" height="40" /><img class="alignnone size-full" src="assets/images/uhr-gray.png" alt="uhr-gray" width="110" height="40" /><img class="alignnone size-full" src="assets/images/minameddelanden.png" alt="minameddelanden" width="120" height="40" /></p>
+                                        <p><img class="alignnone size-full" src="/assets/images/sunet-gray.png" alt="sunet-gray" width="70" height="40" /><img class="alignnone size-full" src="/assets/images/uhr-gray.png" alt="uhr-gray" width="110" height="40" /><img class="alignnone size-full" src="/assets/images/minameddelanden.png" alt="minameddelanden" width="120" height="40" /></p>
                                     </div>
 
 
@@ -85,12 +89,11 @@
                     </div>
                 </div>
 
-                <div class="button-holder"><button class="button scroll">Varför eduID?</button></div>
+                <div class="button-holder"><button class="button scroll-down"></button></div>
             </div>
         </section>
 
         <section id="varfor-eduid" class="default">
-            <header class="header"></header>
 
             <div class="wrap">
 
@@ -106,7 +109,7 @@
 
 
                                     <div class="col-md-5 float-left">
-                                        <img src="index.html" data-src="/assets/images/professor-talking-2.gif" data-mobile-src="/assets/images/mobil-professor.png" alt="professor-talking-2" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
+                                        <img src="" data-src="/assets/images/professor-talking-2.gif" data-mobile-src="/assets/images/mobil-professor.png" alt="professor-talking-2" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
                                     </div>
                                     <div class="col-md-6">
 
@@ -132,13 +135,10 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="button-holder"><button class="button scroll">Hur kommer jag igång med eduID?</button></div>
             </div>
         </section>
 
         <section id="hur-kommer-jag-igang-med-eduid" class="default">
-            <header class="header"></header>
 
             <div class="wrap">
 
@@ -152,9 +152,9 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-5 float-right">
-                                        <img src="index.html" data-src="/assets/images/hipster-tjej0001.gif" data-mobile-src="/assets/images/mobil-hipstertjej.png" alt="hipster-tjej0001" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
+                                        <img src="" data-src="/assets/images/hipster-tjej0001.gif" data-mobile-src="/assets/images/mobil-hipstertjej.png" alt="hipster-tjej0001" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <h2>Hur kommer jag igång med eduID?</h2>
                                         <h3>För att kunna använda eduID inom högskolan – behöver du antingen ett mobiltelefonnummer som är registrerat på dig eller ett konto på skatteverkets tjänst Mina meddelanden.</h3>
                                         <h3>Via en mobiltelefon registrerad på dig:</h3>
@@ -172,7 +172,6 @@
                                             <li>Vänta på mail från minmyndighetspost.se, logga in på eduid.se och bekräfta ditt konto.</li>
                                             <li>Klart!</li>
                                         </ul>
-                                        <h3>Klart!</h3>
                                     </div>
 
 
@@ -181,12 +180,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="button-holder"><button class="button scroll">Vanliga frågor</button></div>
             </div>
         </section>
 
         <section id="faq" class="default div-overflow  questions">
-            <header class="header"></header>
 
             <div class="wrap">
 
@@ -202,7 +199,7 @@
 
 
                                     <div class="col-md-5 float-left">
-                                        <img src="index.html" data-src="/assets/images/faq.gif" data-mobile-src="/assets/images/mobil-nord.png" alt="faq" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
+                                        <img src="" data-src="/assets/images/faq.gif" data-mobile-src="/assets/images/mobil-nord.png" alt="faq" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
                                     </div>
                                     <div class="col-md-7">
 
@@ -289,14 +286,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="button-holder"><button class="button scroll black">Om eduID</button></div>
             </div>
         </section>
 
 
         <section id="footer">
-            <header class="header"></header>
 
             <span class="hidden page-title">
                 Om eduID
@@ -308,20 +302,21 @@
                             <div class="container">
                                 <div class="row text-center">
                                     <h2>Om eduID</h2>
-                                    <p>eduID är en identitetsutgivare för alla SWAMID-anslutna organisationer som har behov av väl identifierade och autentisierade användare. Tjänsten är avsedd för organisationer, primärt lärosäten, som är anslutna till SWAMID eller som tecknar separat avtal om användning av eduID.</p>
+                                    <p>eduID är en identitetsutgivare för alla SWAMID-anslutna organisationer som har behov av väl identifierade och autentisierade tanvändare. Tjänsten är avsedd för organisationer, primärt lärosäten, som är anslutna till SWAMID eller som tecknar separat avtal om användning av eduID.</p>
                                     <p>eduID är en tjänst framtagen av SUNET i samarbete med antagning.se</p>
                                     <p>&nbsp;</p>
-                                    <p><img class="alignnone size-full" src="assets/images/sunet-vit.png" alt="sunet-vit" width="70" height="40" /><img class="alignnone size-full" src="assets/images/uhr-vit2.png" alt="uhr-vit2" width="90" height="40" /><img class="alignnone size-full" src="assets/images/minameddelanden-vit.png" alt="minameddelanden-vit" width="120" height="40" /></p>
+                                    <p><img class="alignnone size-full" src="/assets/images/sunet-vit.png" alt="sunet-vit" width="70" height="40" /><img class="alignnone size-full" src="/assets/images/uhr-vit2.png" alt="uhr-vit2" width="90" height="40" /><img class="alignnone size-full" src="/assets/images/minameddelanden-vit.png" alt="minameddelanden-vit" width="120" height="40" /></p>
                                 </div>
+                                <div class="button-holder"><button class="button scroll-up">Till toppen</button></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="button-holder"><button class="button scroll">Till toppen</button></div>
+                
             </div>
         </section>
     </div>
 
-    <script type='text/javascript' src='scripts/combined.min.js'></script>
+    <script type='text/javascript' src='/scripts/combined.min.js'></script>
 </body>
 </html>
