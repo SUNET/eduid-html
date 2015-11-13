@@ -28,7 +28,7 @@
 }
 
 #code-verify-lg input {
-    height:60px;
+    height: 45px;
     border-radius: 0;
     padding: 0 20px;
 }
@@ -79,7 +79,7 @@
     margin-bottom:10px;
 }
 #email-register-lg input {
-    height:45px;
+    height: 45px;
     border-radius: 0;
     padding: 0 20px;
 }
@@ -132,9 +132,9 @@ div.modal-content > div.modal-header > h3 {
 /* review fetched info */
 
 div.eduid-fetched-info-form .form-control {
-    height: 60px;
+    height: 45px;
     border-radius: 0px;
-    padding: 20px;
+    padding: 10px;
 }
 
 div.eduid-fetched-info-form {
@@ -210,7 +210,7 @@ form.form-inline div.input-group p.help-block {
     height: 45px;
     line-height: 45px;
     border-radius: 0;
-    padding: 0 30px 0 20px;
+    padding: 0 10px;
     text-transform: uppercase;
     margin-bottom: 10px;
 }
@@ -219,10 +219,10 @@ form.form-inline div.input-group p.help-block {
 .btn-liveconnect  .btn-text {
     color:#fff;
 }
-.btn-social,
-.btn-social:hover {
+.btn-social {
     width:calc(50% - 5px);
-    color:#000;
+    position: relative;
+    margin: 10px auto;
 }
 
 .btn,
@@ -252,7 +252,7 @@ form.accept-cancel {
 #input-code-verify,
 #input-email-register {
     width:100%;
-    height:60px;
+    height: 45px;
     padding:0 20px;
     border-radius: 0;
     box-shadow: none;
@@ -333,12 +333,6 @@ div#recaptcha_widget_div input#recaptcha_response_field {
         padding:25px;
     }
 
-    .btn-social {
-        width:335px;
-    }
-    .btn-facebook {
-        margin-left: 4px;
-    }
     #email-register-lg input,
     #code-verify-lg input {
         margin-bottom:10px;
@@ -362,10 +356,10 @@ div#recaptcha_widget_div input#recaptcha_response_field {
 
 @media only screen and (min-width: 768px) {
 
-#email-register-sm,
-#code-verify-sm {
-    display: none;
-}
+    #email-register-sm,
+    #code-verify-sm {
+        display: none;
+    }
 
 }
 
