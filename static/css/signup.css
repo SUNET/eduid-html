@@ -364,6 +364,10 @@ div#recaptcha_widget_div input#recaptcha_response_field {
 }
 
 @media only screen and (max-width: 767px) {
+    .btn,
+    button[type=submit].btn {
+        margin-top:10px;
+    }
     /* Don't display  background clouds on small screens*/
     .media {
         display: none;
