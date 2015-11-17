@@ -65,7 +65,7 @@ ul.wizard-nav-list li:last-child {
     padding-left:10px;
     border-radius:0;
     font-family:'Roboto-Black';
-    font-size:16px;
+    font-size:15px;
     color:#4d4d4d;
 }
 
@@ -78,18 +78,18 @@ ul.wizard-nav-list li:last-child {
 #profile-menu-large li:hover,
 ul.wizard-nav-list li.active,
 ul.wizard-nav-list li.already-visited:hover,
-.nav>li>a:hover, 
+.nav>li>a:hover,
 .nav>li>a:focus {
     position:relative;
-    background-color:#fff; 
-} 
+    background-color:#fff;
+}
 ul.wizard-nav-list > li.active a.wizard-nav-link,
 ul.wizard-nav-list li.already-visited a.wizard-nav-link {
     color: #111 !important;
 }
 #profile-menu-large li.active a,
 #profile-menu-large li:hover a {
-    padding-left:30px;
+    /*padding-left:30px;*/
 }
 .nav-tabs>li>a:hover {
     border-color:transparent;
@@ -109,8 +109,8 @@ ul.wizard-nav-list li.already-visited:hover:after {
     position:absolute;
     top:0;
     right:-20px;
-    width: 0; 
-	height: 0; 
+    width: 0;
+	height: 0;
 	border-top: 22px solid transparent;
 	border-bottom: 22px solid transparent;
 	border-left: 20px solid #fff;
@@ -119,8 +119,8 @@ ul.wizard-nav-list li a span.glyphicon {
     display: none;
 }
 
-.nav-tabs>li.active>a, 
-.nav-tabs>li.active>a:hover, 
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
 .nav-tabs>li.active>a:focus,
 #profile-menu-large li:last-child:hover {
     background-color:transparent;
@@ -577,6 +577,110 @@ ul.circles-widget-labels li {
   border-right: 1px solid #ccc;
 }
 
+.tab-content {
+  padding-top: 16px;
+}
+
+#emailsview-form,
+#mobilesview-form {
+  height: 100%;
+  overflow: hidden;
+}
+
+#emailsview-form .form-group {
+  float: left;
+  margin-right: 10px;
+}
+
+#emailsview-form .form-group input{
+  min-width: 300px;
+}
+
+#emailsview-formadd {
+  float: left;
+  margin-top: 0;
+}
+
+#mobilesview-form .form-group {
+  float: left;
+  margin-right: 10px;
+}
+
+#mobilesview-form .form-group input{
+  min-width: 300px;
+}
+
+#mobilesview-formadd {
+  float: left;
+  margin-top: 0;
+}
+
+/*Accordion FAQ*/
+.panel-default,
+.panel,
+.panel-default > .panel-heading {
+    background-color:#629c92;
+    border-color:#629c92;
+    color:#fff;
+}
+.panel-heading {
+    position:relative;
+    padding: 20px;
+    border-radius:0!important;
+}
+.panel-heading a:focus,
+.panel-heading a:hover {
+    text-decoration:none;
+}
+.panel .arrow {
+    outline: none;
+    position:absolute;
+    top:20px;
+    right:20px;
+    display:block;
+    width:20px;
+    height:20px;
+    background:url(../img/sprite.png) -126px -57px no-repeat;
+    pointer-events:none;
+
+    -webkit-transition: transform 500ms;
+       -o-transition: transform 500ms;
+          transition: transform 500ms;
+}
+.panel .in + .arrow {
+    -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+       -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.panel-heading a {
+    width:100%;
+    display:block;
+    font-size: 20px;
+    line-height: 26px;
+    font-family: Roboto-Black;
+    margin-top: 0;
+    margin-bottom: 0;
+    cursor: pointer;
+    padding-right: 25px;
+    color:#fff;
+    outline: none;
+}
+.panel-body {
+    padding:0 20px 20px;
+    font-size:16px;
+}
+.panel {
+    position:relative;
+    border-radius:0!important;
+}
+.panel a {
+    color:#fff;
+    font-weight:bold;
+}
+/*END: Accordion FAQ*/
+
+
 @media only screen and (max-width: 991px) {
 
     div#profile-menu-large {
@@ -595,7 +699,7 @@ ul.circles-widget-labels li {
 }
 
 @media only screen and (max-width: 767px) {
-       
+
     .profile-combo > .col-md-3 {
         padding:0;
     }
@@ -619,7 +723,7 @@ div#profile-menu-small {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
-    
+
 }
 
 /* Wizard

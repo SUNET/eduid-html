@@ -1,4 +1,4 @@
-body, 
+body,
 .well,
 .container-fluid .jumbotron,
 div.wizard-content,
@@ -98,6 +98,8 @@ input:focus {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   z-index: 9998;
   padding: 20px 35px 0; }
 
@@ -110,8 +112,9 @@ input:focus {
     margin: 0; }
 .header nav li {
     list-style: none;
-    margin: 0 30px;
+    margin: 0 18px;
     line-height: 40px; }
+
 .header nav li.current-menu-item a {
       color: #fff;
       border-bottom: 3px solid #fff; }
@@ -131,11 +134,11 @@ input:focus {
 .header nav a {
     font-family: 'Roboto-Medium';
     font-size: 14px;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     color:#3f5c57;
   }
 .header nav a:hover {
-      color: #fff; 
+      color: #fff;
         text-decoration:none;}
 .header .buttons {
     float: right; }
@@ -144,21 +147,29 @@ input:focus {
       height: 40px;
       padding-top: 0;
       padding-bottom: 0;
-      margin: 0 10px; 
+      margin: 0 10px;
       border:4px solid transparent;
     }
 
 .header .buttons .button.log-out {
-        background-color:#747474;
-        border-color:#747474;
-    }
+  background-color:#747474;
+  border-color:#747474;
+}
 .header .buttons .button.orange {
-        background:#dd650e;
-        border-color:#dd650e;
-    }
+  background:#dd650e;
+  border-color:#dd650e;
+}
+
+.header .buttons .button.orange:hover {
+    background:#c85c0e;
+    border-color:#c85c0e;
+}
+
 .header .buttons .button.white-border {
-        background: transparent;
-        border-color: #fff; }
+  background: transparent;
+  border-color: #fff;
+}
+
 .header .buttons a {
       color: #fff;
       line-height: 32px; }
@@ -186,9 +197,15 @@ div#content-block {
 
 
 /* Main marketing message and sign up button */
+#content-block > h3:first-child{
+    font-weight: bold;
+    font-size: 32px;
+}
+
 .jumbotron {
     margin: 60px 0;
     text-align: center;
+    clear: both;
 }
 
 .jumbotron h1,
@@ -203,6 +220,10 @@ div#content-block {
 
 .jumbotron .lead {
     margin: 1em 0 2em 0;
+}
+
+.jumbotron p {
+    color: #3f5c57;
 }
 
 .jumbotron input {
@@ -266,10 +287,6 @@ form.form-horizontal label {
   font-weight: 400;
 }
 
-form.form-horizontal .btn-primary {
-  margin-left: 26%;
-}
-
 form.form-horizontal .btn-primary.wizard-next {
   margin-left: 0;
 }
@@ -280,6 +297,7 @@ form.form-horizontal .btn-primary.wizard-next {
 
 .table-form .btn-link {
   padding: 0;
+  margin-bottom: 0;
 }
 
 div.form-content {
@@ -301,9 +319,9 @@ div.controls > span.uneditable-input {
 }
 
 .form-control {
-    height:60px;
-    border-radius:0;
-    box-shadow:none;
+    height: 45px;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .form-control:focus {
@@ -314,27 +332,17 @@ div.controls > span.uneditable-input {
     margin-left:0;
 }
 .intro h4 {
-    font-family:'Roboto-Black';
-    font-size:36px;
+    font-family: 'Roboto-Black';
+    font-size: 36px;
 }
 
-
-.form-control {
-    height:60px;
-    border-radius:0;
-    box-shadow:none;
+.form-group.has-error .help-block {
+    border: 2px solid #a94442;
+    padding: .3em 1em;
 }
 
-.form-control:focus {
-    border-color:#fff;
-    box-shadow:none;
-}
-.form-horizontal .form-group {
-    margin-left:0;
-}
-.intro h4 {
-    font-family:'Roboto-Black';
-    font-size:36px;
+#askDialogInput {
+  min-width: 220px;
 }
 /* Buttons
     -------------------------------------------------------------------------------------- */
@@ -342,13 +350,13 @@ div.controls > span.uneditable-input {
 .buttons .button {
     padding: 0;
 }
-.buttons .button a { 
+.buttons .button a {
     padding:20px 40px;
 }
 
 .btn {
-    height:60px;
-    line-height:60px;
+    height:45px;
+    line-height:45px;
     border-radius: 0;
     padding: 0 40px;
     text-transform:uppercase;
@@ -358,12 +366,16 @@ div.controls > span.uneditable-input {
     text-decoration:none;
 }
 .btn-primary,
-.btn-primary:hover,
-.btn-success,
-.btn-success:hover {
+.btn-success {
     background:#58b78c;
     border-color:#58b78c;
 }
+.btn-primary:hover,
+.btn-success:hover {
+    background:#4a9c77;
+    border-color:#4a9c77;
+}
+
 .btn-warning,
 .btn-warning:hover {
     background:#dd650d;
@@ -383,8 +395,7 @@ button[type=submit].btn {
 }
 
 .btn-social {
-    display: inline-block;
-    border-radius: 5px;
+    display: block;
     color: white;
     text-decoration: none;
 }
@@ -406,7 +417,6 @@ button[type=submit].btn {
     vertical-align: middle;
     padding: 0 14px 0 10px;
     margin: 0 0 0 4px;
-    border-left: 1px solid #ccc;
 }
 
 .pre-big {
@@ -545,6 +555,10 @@ ul.nav.navbar-nav li a {
 }
 
 /* Footer */
+#footer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 #footer, .push {
   height: 3em;
@@ -560,14 +574,13 @@ ul.nav.navbar-nav li a {
 }
 
 div#footer span.langselector {
-  color: rgb(85, 85, 85);;
+  color: rgb(85, 85, 85);
   display: inline-block;
   height: 14px;
   line-height: 14px;
   margin-bottom: 2px;
   margin-right: 2px;
   margin-top: 2px;
-  padding: 4px;
   text-align: left;
 }
 #footer .langselector {
@@ -595,7 +608,7 @@ div#footer span.langselector {
 	     url('../fonts/roboto-light-webfont.woff') format('woff'),
          url('../fonts/roboto-light-webfont.svg#webfontZam02nTh') format('svg'),
 	     url('../fonts/roboto-light-webfont.ttf') format('truetype');
-	     
+
 	font-weight: normal;
 	font-style: normal;
 }
@@ -606,7 +619,7 @@ div#footer span.langselector {
 	     url('../fonts/roboto-regular-webfont.woff') format('woff'),
          url('../fonts/roboto-regular-webfont.svg#webfontZam02nTh') format('svg'),
 	     url('../fonts/roboto-regular-webfont.ttf') format('truetype');
-	     
+
 	font-weight: normal;
 	font-style: normal;
 }
@@ -618,7 +631,7 @@ div#footer span.langselector {
 	     url('../fonts/roboto-black-webfont.woff') format('woff'),
          url('../fonts/roboto-black-webfont.svg#webfontZam02nTh') format('svg'),
 	     url('../fonts/roboto-black-webfont.ttf') format('truetype');
-	     
+
 	font-weight: normal;
 	font-style: normal;
 }
@@ -630,7 +643,7 @@ div#footer span.langselector {
 	     url('../fonts/roboto-medium-webfont.woff') format('woff'),
          url('../fonts/roboto-medium-webfont.svg#webfontZam02nTh') format('svg'),
 	     url('../fonts/roboto-medium-webfont.ttf') format('truetype');
-	     
+
 	font-weight: normal;
 	font-style: normal;
 }
@@ -641,10 +654,10 @@ div#footer span.langselector {
 @media only screen and (min-width: 960px) and (max-width: 1053px) {
 
     .header nav li {
-        margin:0 10px;
+        margin:0 8px;
     }
     .header .logo {
-        margin:12px 10px 0 0;
+        margin:12px 0 0 0;
         width: 90px;
         height: 30px;
         background-size: 90px;
@@ -653,25 +666,13 @@ div#footer span.langselector {
 
 @media only screen and (min-width: 1054px) and (max-width: 1179px) {
     .header nav li {
-        margin:0 13px;
+        margin:0 10px;
     }
     .header .logo {
-        margin:12px 10px 0 0;
+        margin:12px 0 0 0;
         width: 90px;
         height: 30px;
         background-size: 90px;
-    }
-}
-
-@media only screen and (min-width: 1180px) and (max-width: 1279px) {
-    .header nav li {
-        margin:0 20px;
-    }
-}
-
-@media only screen and (min-width: 1280px) {
-    .header nav li {
-        margin:0 30px;
     }
 }
 
@@ -690,8 +691,18 @@ div#footer span.langselector {
 }
 
 @media only screen and (min-width: 992px) {
-    .tabbable .info-container {
-        margin-top: 50px;
+
+    #personaldataview-form .form-group {
+      float: left;
+      width: 48%;
+    }
+
+    #personaldataview-form .form-group:nth-child(odd) {
+      margin-left: 2%;
+    }
+
+    #personaldataview-form .form-group:nth-child(even) {
+      margin-right: 2%;
     }
 }
 
@@ -732,7 +743,7 @@ div#footer span.langselector {
         width:700px;
     }
     .header .logo {
-        margin:12px 10px 0 0;
+        margin:12px 0 0 0;
         width: 80px;
         height: 27px;
         background-size: 80px;
@@ -763,8 +774,8 @@ div#footer span.langselector {
         font-size: 10px;
         line-height:30px;
         height:30px;
-    } 
-    
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -782,7 +793,6 @@ div#footer span.langselector {
 }
 
 @media only screen and (max-width: 767px) {
-
   .jumbotron h1,
   .jumbotron h2 {
         font-size: 32px;
@@ -863,7 +873,7 @@ div#footer span.langselector {
         float:none;
         height:auto;
     }
-    #header .buttons a { 
+    #header .buttons a {
         display:block;
         padding:10px 0;
         line-height:1em;
@@ -877,24 +887,20 @@ div#footer span.langselector {
     .jumbotron {
         padding:0;
     }
-    .well {
-        padding:0;
-    }
 
     #content-block {
         margin-top:70px;
+        max-width: 1200px;
     }
 
     /* Buttons */
     .btn {
-        margin-left:auto!important;
-        margin-right:auto;
-        width:300px;
-        max-width:100%;
-        padding:0;
-        font-size:13px
+        margin-left: auto!important;
+        margin-right: auto;
+        max-width: 100%;
+        font-size: 13px;
     }
-    
+
     /* Footer */
     #footer,
     .footer {
@@ -903,7 +909,7 @@ div#footer span.langselector {
     }
 
     /* Pages */
-    
+
     .tab-content {
         padding-right:0;
         padding-left:0;
@@ -940,10 +946,10 @@ div#footer span.langselector {
     nav.navbar.navbar-default#eduid-navbar {
         background-color: #333;
         border-color: #333;
-    } 
+    }
 
-    #eduid-navbar div.navbar-header > span, 
-    #eduid-navbar div.navbar-header > span:before, 
+    #eduid-navbar div.navbar-header > span,
+    #eduid-navbar div.navbar-header > span:before,
     #eduid-navbar div.navbar-header > span:after {
         cursor: pointer;
         border-radius: 2px;
@@ -971,7 +977,7 @@ div#footer span.langselector {
         top: -10px;
     }
     #eduid-navbar div.navbar-header > span:after {
-        bottom: -10px; 
+        bottom: -10px;
     }
     #eduid-navbar div.navbar-header > span.open {
         background-color: transparent;
@@ -996,9 +1002,14 @@ div#footer span.langselector {
 
     }
 }
-    
-@media only screen and (min-width: 768px) {
 
+@media only screen and (min-width: 768px) {
+  .header nav li:first-child {
+    margin-left: 0;
+  }
+  .header nav li:last-child {
+    margin-right: 0;
+  }
     nav.navbar.navbar-default#eduid-navbar {
         background-color: transparent;
         border-color: transparent;
@@ -1073,11 +1084,19 @@ div#footer span.langselector {
       *border-left-color: #ffffff;
     }
 
+  .btn-facebook {
+    float: left;
+  }
+  .btn-google {
+    float: right;
+  }
+
 }
 
 p.eduid-strong {
     font-weight: 600;
 }
+
 
 /* Modals
 -------------------------------------------------- */
@@ -1124,44 +1143,25 @@ div.modal-dialog div.modal-footer a {
     margin-right: auto;
 }
 
-@media only screen and (max-width: 991px) {
-
-div.messages-wrapper {
-    min-height: 2px;
-    height: auto;
-  width:338px;
+.alert-danger {
+    color: #a94442;
+    background-color: transparent;
+    border-color: #ebccd1;
+    border: 2px solid #a94442;
+    padding: .3em 1em;
 }
 
+@media only screen and (max-width: 991px) {
 }
 
 @media only screen and (min-width: 992px) {
-
-div.messages-wrapper {
-    min-height:80px;
-    width:600px;
-    float: right;
-}
-
 }
 
 @media only screen and (max-width: 768px) {
-
-div.messages-wrapper {
-    display: block;
-    position: relative;
-    left: 5px !important;
 }
 
-}
 @media only screen and (min-width: 768px) {
-
-div.messages-wrapper {
-  position:absolute;
-  top:70px;
-  left:330px;
-  height:0px;
 }
 
-}
 /* End of Messages
 -------------------------------------------------- */

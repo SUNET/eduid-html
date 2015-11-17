@@ -80,9 +80,13 @@
               }
             });
             if (!exists) {
+              $('.messages-wrapper').removeClass('messages-wrapper-empty');
               $(this).appendTo(".messages");
             } else {
               $(this).hide();
+              if ($('.messages-wrapper .messages').children().lenght === 0) {
+                $('.messages-wrapper').addClass('messages-wrapper-empty');
+              }
             }
         });
   
@@ -110,9 +114,14 @@
   
       $('body').on('communication-error', function(){
         var message = $('#communication-error-template').text();
+        $('.messages-wrapper').addClass('messages-wrapper-empty');
         $('.container div.messages').append(message);
         window.setTimeout(function () {
-          $('.communication-error').fadeOut();
+          $('.communication-error').fadeOut(400, function (){
+              if ($('.messages-wrapper .messages').children().lenght === 0) {
+                $('.messages-wrapper').addClass('messages-wrapper-empty');
+              }
+          });
         }, 5*1000);
       });
   
@@ -120,7 +129,11 @@
         var message = $('#communication-error-permissions-template').text();
         $('.container div.messages').append(message);
         window.setTimeout(function () {
-          $('.communication-error-permissions').fadeOut();
+          $('.communication-error-permissions').fadeOut(400, function (){
+              if ($('.messages-wrapper .messages').children().lenght === 0) {
+                $('.messages-wrapper').addClass('messages-wrapper-empty');
+              }
+          });
         }, 5*1000);
       });
   

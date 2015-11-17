@@ -8,8 +8,12 @@
           window.clearTimeout(window.messagesTimer);
         }
         $('.alert').not('.fixed').fadeOut(400, function (){
+          var messages_holder = $(this).parent();
           $(this).remove();
-        });
+          if (messages_holder.children().length === 0) {
+            messages_holder.parent().addClass('messages-wrapper-empty');
+        }
+      });
       };
 
       var setMessagesTimer = function () {
