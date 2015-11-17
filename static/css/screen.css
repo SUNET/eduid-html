@@ -98,6 +98,8 @@ input:focus {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   z-index: 9998;
   padding: 20px 35px 0; }
 
@@ -112,12 +114,7 @@ input:focus {
     list-style: none;
     margin: 0 18px;
     line-height: 40px; }
-.header nav li:first-child {
-  margin-left: 0;
-}
-.header nav li:last-child {
-  margin-right: 0;
-}
+
 .header nav li.current-menu-item a {
       color: #fff;
       border-bottom: 3px solid #fff; }
@@ -200,6 +197,11 @@ div#content-block {
 
 
 /* Main marketing message and sign up button */
+#content-block > h3:first-child{
+    font-weight: bold;
+    font-size: 32px;
+}
+
 .jumbotron {
     margin: 60px 0;
     text-align: center;
@@ -285,10 +287,6 @@ form.form-horizontal label {
   font-weight: 400;
 }
 
-form.form-horizontal .btn-primary {
-  margin-left: 26%;
-}
-
 form.form-horizontal .btn-primary.wizard-next {
   margin-left: 0;
 }
@@ -299,6 +297,7 @@ form.form-horizontal .btn-primary.wizard-next {
 
 .table-form .btn-link {
   padding: 0;
+  margin-bottom: 0;
 }
 
 div.form-content {
@@ -320,9 +319,9 @@ div.controls > span.uneditable-input {
 }
 
 .form-control {
-    height:60px;
-    border-radius:0;
-    box-shadow:none;
+    height: 45px;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .form-control:focus {
@@ -333,27 +332,17 @@ div.controls > span.uneditable-input {
     margin-left:0;
 }
 .intro h4 {
-    font-family:'Roboto-Black';
-    font-size:36px;
+    font-family: 'Roboto-Black';
+    font-size: 36px;
 }
 
-
-.form-control {
-    height:60px;
-    border-radius:0;
-    box-shadow:none;
+.form-group.has-error .help-block {
+    border: 2px solid #a94442;
+    padding: .3em 1em;
 }
 
-.form-control:focus {
-    border-color:#fff;
-    box-shadow:none;
-}
-.form-horizontal .form-group {
-    margin-left:0;
-}
-.intro h4 {
-    font-family:'Roboto-Black';
-    font-size:36px;
+#askDialogInput {
+  min-width: 220px;
 }
 /* Buttons
     -------------------------------------------------------------------------------------- */
@@ -377,12 +366,16 @@ div.controls > span.uneditable-input {
     text-decoration:none;
 }
 .btn-primary,
-.btn-primary:hover,
-.btn-success,
-.btn-success:hover {
+.btn-success {
     background:#58b78c;
     border-color:#58b78c;
 }
+.btn-primary:hover,
+.btn-success:hover {
+    background:#4a9c77;
+    border-color:#4a9c77;
+}
+
 .btn-warning,
 .btn-warning:hover {
     background:#dd650d;
@@ -402,8 +395,7 @@ button[type=submit].btn {
 }
 
 .btn-social {
-    display: inline-block;
-    border-radius: 5px;
+    display: block;
     color: white;
     text-decoration: none;
 }
@@ -563,6 +555,10 @@ ul.nav.navbar-nav li a {
 }
 
 /* Footer */
+#footer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 #footer, .push {
   height: 3em;
@@ -695,8 +691,18 @@ div#footer span.langselector {
 }
 
 @media only screen and (min-width: 992px) {
-    .tabbable .info-container {
-        margin-top: 50px;
+
+    #personaldataview-form .form-group {
+      float: left;
+      width: 48%;
+    }
+
+    #personaldataview-form .form-group:nth-child(odd) {
+      margin-left: 2%;
+    }
+
+    #personaldataview-form .form-group:nth-child(even) {
+      margin-right: 2%;
     }
 }
 
@@ -787,7 +793,6 @@ div#footer span.langselector {
 }
 
 @media only screen and (max-width: 767px) {
-
   .jumbotron h1,
   .jumbotron h2 {
         font-size: 32px;
@@ -882,22 +887,18 @@ div#footer span.langselector {
     .jumbotron {
         padding:0;
     }
-    .well {
-        padding:0;
-    }
 
     #content-block {
         margin-top:70px;
+        max-width: 1200px;
     }
 
     /* Buttons */
     .btn {
-        margin-left:auto!important;
-        margin-right:auto;
-        width:300px;
-        max-width:100%;
-        padding:0;
-        font-size:13px
+        margin-left: auto!important;
+        margin-right: auto;
+        max-width: 100%;
+        font-size: 13px;
     }
 
     /* Footer */
@@ -1003,7 +1004,12 @@ div#footer span.langselector {
 }
 
 @media only screen and (min-width: 768px) {
-
+  .header nav li:first-child {
+    margin-left: 0;
+  }
+  .header nav li:last-child {
+    margin-right: 0;
+  }
     nav.navbar.navbar-default#eduid-navbar {
         background-color: transparent;
         border-color: transparent;
@@ -1078,11 +1084,19 @@ div#footer span.langselector {
       *border-left-color: #ffffff;
     }
 
+  .btn-facebook {
+    float: left;
+  }
+  .btn-google {
+    float: right;
+  }
+
 }
 
 p.eduid-strong {
     font-weight: 600;
 }
+
 
 /* Modals
 -------------------------------------------------- */
@@ -1127,6 +1141,14 @@ div.modal-dialog div.modal-footer a {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: transparent;
+    border-color: #ebccd1;
+    border: 2px solid #a94442;
+    padding: .3em 1em;
 }
 
 @media only screen and (max-width: 991px) {
