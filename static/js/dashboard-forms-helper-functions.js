@@ -15,7 +15,8 @@
                 title: title,
                 content: content,
                 trigger: 'focus',
-                placement: 'auto'
+                placement: 'auto',
+                html: true
             })
         }
     }
