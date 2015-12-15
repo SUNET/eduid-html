@@ -36,6 +36,28 @@
                 'json')});
         },
 
+        getLetterState = function (action, nin) {
+            var actions_url = $('.actions-url').data('url');
+            $.post(actions_url, {
+                action: action,
+                identifier: nin
+            },
+            function (data, statusText, xhr) {
+                if (data.sent) {
+                    $('#proofingLetterSent').modal();
+                } else {
+                    $('#sendProofingLetter').modal();
+                    $('#doSendProofingLetter').click(function () {
+
+                    });
+                }
+            },
+            'json');
+        },
+
+        sendProofingLetter = function () {
+        },
+
         initialize = function (container, url) {
             if (container.find('.form-content .alert-danger').length > 0){
                 container.find('.form-content').show();
@@ -91,6 +113,12 @@
                 },
                 'json');
             });
+            container.find('input#letter-proofing').unbind('click').
+                click(function (e) {
+                    var nin_value = $(e.target).data('index'),
+                        action = $(e.target).attr('name');
+                    getLetterState(action, nin_value);
+                });
     };
     tabbedform.changetabs_calls.push(initialize);
 }());
