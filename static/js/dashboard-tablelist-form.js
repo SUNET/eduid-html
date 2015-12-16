@@ -36,10 +36,46 @@
                 'json')});
         },
 
-        sendProofingLetter = function () {
+        sendProofingLetter = function (container, actions_url, nin, modal) {
+            $.post(actions_url, {
+                action: 'send_letter',
+                identifier: nin
+            },
+            function (data, statusText, xhr) {
+                if (data.result === 'error') {
+                    $('.info-container').find('.alert').remove();
+                    sendInfo(container, 'danger', data.message);
+                } else {
+                    $('.info-container').find('.alert').remove();
+                    sendInfo(container, data.result, data.message);
+                }
+            },
+            'json');
+            modal.modal('hide');
         },
 
-        verifyCodeInLetter = function () {
+        verifyCodeInLetter = function (container, actions_url, nin, modal) {
+            var value = $('#proofingLetterCode').val();
+            if (!value) {
+                $('#proofingLetterRequired').removeClass('hide').show().delay(5000).hide();
+            } else {
+                $.post(actions_url, {
+                    action: 'finish_letter',
+                    identifier: nin,
+                    verification_code: value
+                },
+                function (data, statusText, xhr) {
+                    if (data.result === 'error') {
+                        $('.info-container').find('.alert').remove();
+                        sendInfo(container, 'danger', data.message);
+                    } else {
+                        $('.info-container').find('.alert').remove();
+                        sendInfo(container, data.result, data.message);
+                    }
+                },
+                'json');
+                modal.modal('hide');
+            }
         },
 
         getLetterState = function (container, action, nin) {
@@ -50,6 +86,7 @@
             },
             function (data, statusText, xhr) {
                 if (data.result === 'error') {
+                    $('.info-container').find('.alert').remove();
                     sendInfo(container, 'danger', data.message);
                 } else {
                     var modal,
@@ -58,13 +95,17 @@
                         }, '');
                     if (!data.sent) {
                         modal = $('#sendProofingLetter');
-                        modal.find('#doSendProofingLetter').click(sendProofingLetter);
+                        modal.find('#doSendProofingLetter').click(function (e) {
+                            sendProofingLetter(container, actions_url, nin, modal);
+                        });
                         modal.find('#sendProofingLetterText').html(data.message);
                         modal.find('#proofingAddress').html(address);
                         modal.modal();
                     } else {
                         modal = $('#proofingLetterSent');
-                        modal.find('#doSendProofingCode').click(verifyCodeInLetter);
+                        modal.find('#doSendProofingCode').click(function (e) {
+                            verifyCodeInLetter(container, actions_url, nin, modal);
+                        });
                         modal.find('#proofingLetterSentText').html(data.message);
                         modal.find('#proofingAddressSent').html(address);
                         modal.modal();
