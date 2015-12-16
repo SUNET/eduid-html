@@ -10,6 +10,7 @@
             var messageHTML = '<div class="alert alert-' + cls +
     '"><button type="button" class="close" data-dismiss="alert">&times;</button>' +
             msg + '</div>';
+            container.find('.info-container').find('.alert').remove();
             container.find('.info-container').prepend(messageHTML);
         },
 
@@ -43,10 +44,8 @@
             },
             function (data, statusText, xhr) {
                 if (data.result === 'error') {
-                    $('.info-container').find('.alert').remove();
                     sendInfo(container, 'danger', data.message);
                 } else {
-                    $('.info-container').find('.alert').remove();
                     sendInfo(container, data.result, data.message);
                 }
             },
@@ -57,7 +56,8 @@
         verifyCodeInLetter = function (container, actions_url, nin, modal) {
             var value = $('#proofingLetterCode').val();
             if (!value) {
-                $('#proofingLetterRequired').removeClass('hide').show().delay(5000).hide();
+                $('#proofingLetterCode').parent().addClass('has-error');
+                $('#proofingLetterCodeLabel').removeClass('hide');
             } else {
                 $.post(actions_url, {
                     action: 'finish_letter',
@@ -66,10 +66,8 @@
                 },
                 function (data, statusText, xhr) {
                     if (data.result === 'error') {
-                        $('.info-container').find('.alert').remove();
                         sendInfo(container, 'danger', data.message);
                     } else {
-                        $('.info-container').find('.alert').remove();
                         sendInfo(container, data.result, data.message);
                     }
                 },
@@ -86,20 +84,15 @@
             },
             function (data, statusText, xhr) {
                 if (data.result === 'error') {
-                    $('.info-container').find('.alert').remove();
                     sendInfo(container, 'danger', data.message);
                 } else {
-                    var modal,
-                        address = data.address.reduce(function (prev, curr, i, arr) {
-                            return prev + curr + '</br>';
-                        }, '');
+                    var modal;
                     if (!data.sent) {
                         modal = $('#sendProofingLetter');
                         modal.find('#doSendProofingLetter').click(function (e) {
                             sendProofingLetter(container, actions_url, nin, modal);
                         });
                         modal.find('#sendProofingLetterText').html(data.message);
-                        modal.find('#proofingAddress').html(address);
                         modal.modal();
                     } else {
                         modal = $('#proofingLetterSent');
@@ -107,7 +100,6 @@
                             verifyCodeInLetter(container, actions_url, nin, modal);
                         });
                         modal.find('#proofingLetterSentText').html(data.message);
-                        modal.find('#proofingAddressSent').html(address);
                         modal.modal();
                     }
                 }
