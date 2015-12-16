@@ -36,26 +36,42 @@
                 'json')});
         },
 
-        getLetterState = function (action, nin) {
+        sendProofingLetter = function () {
+        },
+
+        verifyCodeInLetter = function () {
+        },
+
+        getLetterState = function (container, action, nin) {
             var actions_url = $('.actions-url').data('url');
             $.post(actions_url, {
                 action: action,
                 identifier: nin
             },
             function (data, statusText, xhr) {
-                if (data.sent) {
-                    $('#proofingLetterSent').modal();
+                if (data.result === 'error') {
+                    sendInfo(container, 'danger', data.message);
                 } else {
-                    $('#sendProofingLetter').modal();
-                    $('#doSendProofingLetter').click(function () {
-
-                    });
+                    var modal,
+                        address = data.address.reduce(function (prev, curr, i, arr) {
+                            return prev + curr + '</br>';
+                        }, '');
+                    if (data.sent) {
+                        modal = $('#proofingLetterSent');
+                        modal.find('#doSendProofingCode').click(verifyCodeInLetter);
+                        modal.find('#proofingLetterSentText').html(data.message);
+                        modal.find('#proofingAddressSent').html(address);
+                        modal.modal();
+                    } else {
+                        modal = $('#sendProofingLetter');
+                        modal.find('#doSendProofingLetter').click(sendProofingLetter);
+                        modal.find('#sendProofingLetterText').html(data.message);
+                        modal.find('#proofingAddress').html(address);
+                        modal.modal();
+                    }
                 }
             },
             'json');
-        },
-
-        sendProofingLetter = function () {
         },
 
         initialize = function (container, url) {
@@ -115,9 +131,10 @@
             });
             container.find('input#letter-proofing').unbind('click').
                 click(function (e) {
+                    e.preventDefault();
                     var nin_value = $(e.target).data('index'),
                         action = $(e.target).attr('name');
-                    getLetterState(action, nin_value);
+                    getLetterState(container, action, nin_value);
                 });
     };
     tabbedform.changetabs_calls.push(initialize);
