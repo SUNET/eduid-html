@@ -56,17 +56,17 @@
                         address = data.address.reduce(function (prev, curr, i, arr) {
                             return prev + curr + '</br>';
                         }, '');
-                    if (data.sent) {
-                        modal = $('#proofingLetterSent');
-                        modal.find('#doSendProofingCode').click(verifyCodeInLetter);
-                        modal.find('#proofingLetterSentText').html(data.message);
-                        modal.find('#proofingAddressSent').html(address);
-                        modal.modal();
-                    } else {
+                    if (!data.sent) {
                         modal = $('#sendProofingLetter');
                         modal.find('#doSendProofingLetter').click(sendProofingLetter);
                         modal.find('#sendProofingLetterText').html(data.message);
                         modal.find('#proofingAddress').html(address);
+                        modal.modal();
+                    } else {
+                        modal = $('#proofingLetterSent');
+                        modal.find('#doSendProofingCode').click(verifyCodeInLetter);
+                        modal.find('#proofingLetterSentText').html(data.message);
+                        modal.find('#proofingAddressSent').html(address);
                         modal.modal();
                     }
                 }
