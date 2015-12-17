@@ -73,6 +73,7 @@
                 },
                 'json');
                 modal.modal('hide');
+                location.reload(true);
             }
         },
 
