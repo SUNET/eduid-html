@@ -10,6 +10,7 @@
             var messageHTML = '<div class="alert alert-' + cls +
     '"><button type="button" class="close" data-dismiss="alert">&times;</button>' +
             msg + '</div>';
+            container.find('.info-container').find('.alert').remove();
             container.find('.info-container').prepend(messageHTML);
         },
 
@@ -34,6 +35,77 @@
                     }
                 },
                 'json')});
+        },
+
+        sendProofingLetter = function (container, actions_url, nin, modal) {
+            $.post(actions_url, {
+                action: 'send_letter',
+                identifier: nin
+            },
+            function (data, statusText, xhr) {
+                if (data.result === 'error') {
+                    sendInfo(container, 'danger', data.message);
+                } else {
+                    sendInfo(container, data.result, data.message);
+                }
+            },
+            'json');
+            modal.modal('hide');
+        },
+
+        verifyCodeInLetter = function (container, actions_url, nin, modal) {
+            var value = $('#proofingLetterCode').val();
+            if (!value) {
+                $('#proofingLetterCode').parent().addClass('has-error');
+                $('#proofingLetterCodeLabel').removeClass('hide');
+            } else {
+                $.post(actions_url, {
+                    action: 'finish_letter',
+                    identifier: nin,
+                    verification_code: value
+                },
+                function (data, statusText, xhr) {
+                    if (data.result === 'error') {
+                        sendInfo(container, 'danger', data.message);
+                    } else {
+                        sendInfo(container, data.result, data.message);
+                    }
+                },
+                'json');
+                modal.modal('hide');
+                $('ul.nav-tabs li.active a').click();
+            }
+        },
+
+        getLetterState = function (container, action, nin) {
+            var actions_url = $('.actions-url').data('url');
+            $.post(actions_url, {
+                action: action,
+                identifier: nin
+            },
+            function (data, statusText, xhr) {
+                if (data.result === 'error') {
+                    sendInfo(container, 'danger', data.message);
+                } else {
+                    var modal;
+                    if (!data.sent) {
+                        modal = $('#sendProofingLetter');
+                        modal.find('#doSendProofingLetter').click(function (e) {
+                            sendProofingLetter(container, actions_url, nin, modal);
+                        });
+                        modal.find('#sendProofingLetterText').html(data.message);
+                        modal.modal();
+                    } else {
+                        modal = $('#proofingLetterSent');
+                        modal.find('#doSendProofingCode').click(function (e) {
+                            verifyCodeInLetter(container, actions_url, nin, modal);
+                        });
+                        modal.find('#proofingLetterSentText').html(data.message);
+                        modal.modal();
+                    }
+                }
+            },
+            'json');
         },
 
         initialize = function (container, url) {
@@ -91,6 +163,13 @@
                 },
                 'json');
             });
+            container.find('input#letter-proofing').unbind('click').
+                click(function (e) {
+                    e.preventDefault();
+                    var nin_value = $(e.target).data('index'),
+                        action = $(e.target).attr('name');
+                    getLetterState(container, action, nin_value);
+                });
     };
     tabbedform.changetabs_calls.push(initialize);
 }());
