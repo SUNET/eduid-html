@@ -180,56 +180,6 @@
             addDisableMmPopover();
         },
 
-        basewizard: function () {
-            var dataholder = $('span.dataholder#basewizard-data'),
-                step = parseInt(dataholder.data('step')),
-                datakey = dataholder.data('datakey'),
-                model = dataholder.data('model'),
-                path = dataholder.data('path'),
-                msg_done = dataholder.data('msg_done'),
-                msg_sending = dataholder.data('msg_sending'),
-                msg_next = dataholder.data('msg_next'),
-                msg_back = dataholder.data('msg_back'),
-                msg_dismiss = dataholder.data('msg_dismiss'),
-                eduidwizard;
-        
-            $.fn.wizard.logging = true;
-        
-            eduidwizard = EduidWizard("#"+model+"-wizard", step, {
-                    showCancel: true,
-                    isModal: true,
-                    submitUrl: path,
-                    contentHeight: 400,
-                    contentWidth: 650,
-                    buttons: {
-                      submitText: msg_done,
-                      submittingText: msg_sending,
-                      nextText: msg_next,
-                      backText: msg_back,
-                      cancelText: msg_dismiss,
-                    },
-                }
-            );
-        },
-
-        wizard_norEduPersonNIN: function () {
-            var msg_invalidnin = $('span.dataholder#ninwizard-data').data('msg_invalidnin');
-        
-            window.validateNIN = function (el) {
-                var val = el.val(),
-                    re = /^(18|19|20)\d{2}(0[1-9]|1[0-2])\d{2}[-\s]?\d{4}$/,
-                    ret = {
-                      status: true
-                    };
-                if (!re.test(val)) {
-                  ret.status = false;
-                  ret.msg = msg_invalidnin;
-                }
-                // if format is valid, then try to send to server
-                return ret;
-            };
-        },
-
         initialize_pending_actions: function () {
             $('ul.pending-actions a').click(function (e) {
                 var action_path = e.target.href.split('#')[1];

@@ -1,7 +1,6 @@
 body,
 .well,
 .container-fluid .jumbotron,
-div.wizard-content,
 div.modal-dialog .modal-content {
     background-color:#bbded9;
     background-image:url(../img/texture.png);
@@ -285,10 +284,6 @@ form.form-inline div.alert {
 
 form.form-horizontal label {
   font-weight: 400;
-}
-
-form.form-horizontal .btn-primary.wizard-next {
-  margin-left: 0;
 }
 
 .table-thin {
