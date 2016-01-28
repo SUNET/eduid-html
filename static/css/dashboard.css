@@ -30,20 +30,17 @@
     padding-left:0;
     padding-right:0;
 }
-#profile-menu-large ul,
-ul.wizard-nav-list {
+#profile-menu-large ul {
     border-right:none;
 }
-#profile-menu-large li,
-ul.wizard-nav-list li {
+#profile-menu-large li {
     position:relative;
     color:#000;
     padding-left:0;
     border-bottom: 1px solid #629c92;
 }
 
-#profile-menu-large li:last-child,
-ul.wizard-nav-list li:last-child {
+#profile-menu-large li:last-child {
     border:none;
 }
 #profile-menu-large li#profile-filled-li:after,
@@ -76,16 +73,10 @@ ul.wizard-nav-list li:last-child {
 
 #profile-menu-large li.active,
 #profile-menu-large li:hover,
-ul.wizard-nav-list li.active,
-ul.wizard-nav-list li.already-visited:hover,
 .nav>li>a:hover,
 .nav>li>a:focus {
     position:relative;
     background-color:#fff;
-}
-ul.wizard-nav-list > li.active a.wizard-nav-link,
-ul.wizard-nav-list li.already-visited a.wizard-nav-link {
-    color: #111 !important;
 }
 #profile-menu-large li.active a,
 #profile-menu-large li:hover a {
@@ -101,9 +92,7 @@ ul.wizard-nav-list li.already-visited a.wizard-nav-link {
     margin-bottom:0;
 }
 #profile-menu-large li.active:after,
-#profile-menu-large li:hover:after,
-ul.wizard-nav-list li.active:after,
-ul.wizard-nav-list li.already-visited:hover:after {
+#profile-menu-large li:hover:after {
     content:'';
     display:block;
     position:absolute;
@@ -114,9 +103,6 @@ ul.wizard-nav-list li.already-visited:hover:after {
 	border-top: 22px solid transparent;
 	border-bottom: 22px solid transparent;
 	border-left: 20px solid #fff;
-}
-ul.wizard-nav-list li a span.glyphicon {
-    display: none;
 }
 
 .nav-tabs>li.active>a,
@@ -405,47 +391,7 @@ form#resetpasswordstep2view-form div.checkbox {
 /* End of reset password view styles
 -------------------------------------------------- */
 
-/* Wizard
--------------------------------------------------- */
-
-.wizard-modal p {
-    margin: 0 0 10px;
-    padding: 0;
-}
-
-#wizard-ns-detail-servers, .wizard-additional-servers {
-    font-size:12px;
-    margin-top:10px;
-    margin-left:15px;
-}
-#wizard-ns-detail-servers > li, .wizard-additional-servers li {
-    line-height:20px;
-    list-style-type:none;
-}
-#wizard-ns-detail-servers > li > img {
-    padding-right:5px;
-}
-
-.wizard-modal .chzn-container .chzn-results {
-    max-height:150px;
-                        }
-.wizard-addl-subsection {
-    margin-bottom:40px;
-}
-.wizard-progress-container > .progress {
-    width:135px;
-}
-
-.wizard-modal .help-inline .error {
-  color: #b94a48;
-}
-
 /*  Forms  */
-
-div.modal.wizard > div.wizard-dialog {
-  width: 650px;
-  margin-top: 60px !important;
-}
 
 #chpass-form-buttons {
     text-align: center;
@@ -726,147 +672,6 @@ div#profile-menu-small {
 
 }
 
-/* Wizard
--------------------------------------------------- */
-
-.wizard-modal p {
-    margin: 0 0 10px;
-    padding: 0;
-}
-
-div.wizard-steps,
-ul.wizard-nav-list > li > a {
-    background-color: transparent !important;
-}
-
-#wizard-ns-detail-servers, .wizard-additional-servers {
-    font-size:12px;
-    margin-top:10px;
-    margin-left:15px;
-}
-#wizard-ns-detail-servers > li, .wizard-additional-servers li {
-    line-height:20px;
-    list-style-type:none;
-}
-#wizard-ns-detail-servers > li > img {
-    padding-right:5px;
-}
-
-.wizard-modal .chzn-container .chzn-results {
-    max-height:150px;
-                        }
-.wizard-addl-subsection {
-    margin-bottom:40px;
-}
-.wizard-progress-container > .progress {
-    width:135px;
-}
-
-.wizard-modal .help-inline .error {
-  color: #b94a48;
-}
-
-.wizard-card > h3 {
-  color: #333;
-}
-
-.wizard-header h3.modal-title.wizard-title {
-  color: #fff;
-}
-
-button.wizard-next {
-    margin-left: 0 !important;
-}
-
-div.wizard-steps {
-    height: 295px !important;
-    width: 36%;
-}
-
 a#go-to-mobiles-tab {
     cursor: pointer;
 }
-
-/* end wizard */
-
-
-@media only screen and (min-width: 598px) {
-
-.wizard-body .wizard-steps {
-    height:298px !important;
-}
-
-}
-
-@media only screen and (max-width: 597px) {
-
-div.wizard div.wizard-steps {
-  display: none;
-}
-
-div.wizard div.wizard-dialog {
-  width: 94% !important;
-  margin-top: 15px !important;
-}
-
-div.wizard div.wizard-card-container,
-div.wizard div.wizard-buttons-container > div.btn-group-single {
-  margin-left: 0px !important;
-}
-
-div.wizard div.wizard-content,
-div.wizard div.wizard-body,
-div.wizard div.wizard-cards,
-div.wizard div.wizard-card-container {
-  height: auto !important;
-}
-
-}
-
-@media only screen and (max-width: 650px) {
-
-div.wizard-card {
-  padding: 20px 35px 0px !important;
-}
-
-div.wizard div.wizard-steps {
-  display: none;
-}
-
-div.wizard div.wizard-dialog {
-  width: 94% !important;
-  margin-top: 15px !important;
-}
-
-div.wizard div.wizard-card-container {
-  margin-left: 0px;
-}
-
-div.wizard div.wizard-content,
-div.wizard div.wizard-body,
-div.wizard div.wizard-cards,
-div.wizard div.wizard-card-container {
-  height: auto !important;
-}
-
-div.wizard div.wizard-buttons-container > div.btn-group-single {
-  float: none !important;
-}
-}
-
-@media only screen and (min-width: 651px) and (max-width: 767px)  {
-
-div.wizard-buttons-container .btn {
-        margin-left:auto;
-        margin-right:auto;
-        width:auto;
-        max-width:100%;
-        padding-left: 30px;
-        padding-right: 30px;
-        font-size:13px
-    }
-
-}
-
-/* End of wizard
--------------------------------------------------- */

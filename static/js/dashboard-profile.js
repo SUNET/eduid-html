@@ -1,17 +1,8 @@
 (function ($) {
   var dataholder = $('span.dataholder#profile-data'),
       workmode = dataholder.data('workmode'),
-      open_wizard = dataholder.data('openwizard'),
-      datakey = dataholder.data('datakey'),
-      wizard_nins_url = dataholder.data('wizard_nins_url'),
       userstatus_url = dataholder.data('userstatus_url'),
       polling_timeout = parseInt(dataholder.data('polling_timeout'));
-
-  if (open_wizard === 'True') {
-    open_wizard = true;
-  } else {
-    open_wizard = false;
-  }
 
   var loa_popovers = function () {
     $('.circles-widget-labels a').popover({
@@ -33,26 +24,6 @@
       $("button[data-toggle=tooltip]").tooltip();
       loa_popovers();
   
-      if ((workmode === 'personal') && open_wizard) {
-        if (datakey === '') {
-          var params = {};
-        } else {
-          var params = {
-              norEduPersonNIN: datakey
-            },
-            initial_card = 1;
-        }
-        $.get( wizard_nins_url, params, function (data, textStatus, jqXHR) {
-            var wizardholder = $('div.openwizard');
-            wizardholder.html(data);
-            wizardholder.find('span.scriptholder').each(function (i, e) {
-                var script = $(e).data('script');
-                console.log('Executing wizard form script: ' + script);
-                window.forms_helper_functions[script]();
-            });
-            currentwizard.show();
-        });
-      }
       // show progress
       var profile_filled = $('span.dataholder#profile-data').data('profile_filled'),
           pb = $('div.profile-filled-progress-bar');
