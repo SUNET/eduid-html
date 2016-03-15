@@ -70,10 +70,10 @@
                     } else {
                         sendInfo(container, data.result, data.message);
                     }
+                    modal.modal('hide');
+                    $('ul.nav-tabs li.active a').click();
                 },
                 'json');
-                modal.modal('hide');
-                $('ul.nav-tabs li.active a').click();
             }
         },
 
