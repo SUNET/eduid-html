@@ -154,6 +154,11 @@ input:focus {
   background-color:#747474;
   border-color:#747474;
 }
+.header .buttons .button.log-out button#logout-button{
+    background-color: transparent;
+    margin-top: -5px;
+}
+
 .header .buttons .button.orange {
   background:#dd650e;
   border-color:#dd650e;
