@@ -20,15 +20,18 @@ webpackKarma.externals = {
 webpackKarma.module.preLoaders = [
   {
     test: /\.js/, 
-    loader: 'isparta-instrumenter-loader',
+    loader: 'isparta',
     exclude: /(tests|node_modules)\//,
-    query: {
-      babel: {
-        presets: [ 'es2015', 'react' ]
-      }
-    }
   }
 ];
+webpackKarma.isparta = {
+  embedSource: true,
+  noAutoWrap: true,
+  // these babel options will be passed only to isparta and not to babel-loader
+  babel: {
+    presets: ['es2015', 'react']
+  }
+};
 
 module.exports = function (config) {
   config.set({
