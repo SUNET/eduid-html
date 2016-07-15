@@ -17,6 +17,7 @@
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
+    "babel-plugin-react-intl": "^2.1.3",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
@@ -40,6 +41,7 @@
     "path": "^0.12.7",
     "phantomjs-prebuilt": "^2.1.7",
     "react-addons-test-utils": "^15.2.1",
+    "react-intl": "^2.1.3",
     "watchify": "^3.7.0",
     "webpack": "^1.13.1"
   }
