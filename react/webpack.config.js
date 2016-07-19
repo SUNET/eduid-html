@@ -1,5 +1,5 @@
 
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     entry: {
@@ -7,7 +7,7 @@ module.exports = {
     },
     output: {
       path: path.join(__dirname, '/../static/js'),
-      filename: '[name]-bundle.js'
+      filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
     resolve: {
