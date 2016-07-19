@@ -19,7 +19,7 @@ webpackKarma.externals = {
 };
 webpackKarma.module.preLoaders = [
   {
-    test: /\.js/, 
+    test: /\.js$/,
     loader: 'isparta',
     exclude: /(tests|node_modules)\//,
   }
