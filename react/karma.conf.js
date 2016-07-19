@@ -39,8 +39,8 @@ module.exports = function (config) {
 
     // just run once by default unless --watch flag is passed
     //singleRun: !argv.watch,
-    singleRun: false,
-    autoWatch: true,
+    singleRun: true,
+    autoWatch: false,
 
     // which karma frameworks do we want integrated
     frameworks: [ 'mocha', 'chai' ], //use the mocha test framework
