@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/personal-data.js",
   "scripts": {
-    "start": "webpack --progress --colors --watch",
+    "start": "webpack --progress --colors --watch --debug --output-pathinfo",
     "test": "karma start",
-    "test:watch": "karma start"
+    "build": "webpack --config webpack.prod.config.js"
   },
   "author": "Enrique Pérez Arnaud",
   "license": "BSD-2-Clause",
