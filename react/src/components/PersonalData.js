@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import sv from 'react-intl/locale-data/sv';
-import svMessages from '../../l10n/sv-SE.json';
+import svMessages from '../../l10n/sv.json';
 
 import TextEntry from 'components/TextEntry';
 import TextSelect from 'components/TextSelect';
