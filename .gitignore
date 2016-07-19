@@ -3,5 +3,5 @@
 .*.swo
 node_modules/
 coverage/
-static/js/*-bundle.js
-static/js/*-bundle.js.map
+static/js/*-bundle.dev.js
+static/js/*-bundle.dev.js.map
