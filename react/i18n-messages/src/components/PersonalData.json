@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pd.given_name",
+    "defaultMessage": "Given Name"
+  },
+  {
+    "id": "pd.surname",
+    "defaultMessage": "SurName"
+  },
+  {
+    "id": "pd.display_name",
+    "defaultMessage": "Display Name"
+  },
+  {
+    "id": "pd.language",
+    "defaultMessage": "Language"
+  }
+]

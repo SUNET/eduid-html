@@ -1,4 +1,8 @@
 
 {
-  "greeting.welcome_message": "svenskä hej"
+  "greeting.welcome_message": "svenskä hej",
+  "pd.given_name": "svenskä gn",
+  "pd.surname": "",
+  "pd.display_name": "",
+  "pd.language": ""
 }
