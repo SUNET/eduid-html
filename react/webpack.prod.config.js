@@ -9,6 +9,7 @@ var webpackProd = {
 };
 
 delete webpackProd.entry.server;
+delete webpackProd.entry.hot;
 
 webpackProd.output = {
   filename: '[name]-bundle.prod.js',
