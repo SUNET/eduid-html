@@ -9,12 +9,18 @@
     "build": "webpack --config webpack.prod.config.js"
   },
   "babel": {
-    "presets": ["es2015", "react"],
+    "presets": [
+      "es2015",
+      "react"
+    ],
     "plugins": [
-      ["react-intl", {
+      [
+        "react-intl",
+        {
           "messagesDir": "./i18n-messages/",
           "enforceDescriptions": false
-      }]
+        }
+      ]
     ]
   },
   "author": "Enrique Pérez Arnaud",
@@ -25,6 +31,7 @@
     "react-dom": "^15.2.1"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-intl": "^2.1.3",
@@ -32,6 +39,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
     "enzyme": "^2.4.1",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.4",
@@ -50,9 +58,13 @@
     "mocha": "^2.5.3",
     "path": "^0.12.7",
     "phantomjs-prebuilt": "^2.1.7",
+    "postcss": "^5.1.0",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "react-addons-test-utils": "^15.2.1",
     "react-hot-loader": "^1.3.0",
     "react-intl": "^2.1.3",
+    "style-loader": "^0.13.1",
     "watchify": "^3.7.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"

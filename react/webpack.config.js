@@ -1,6 +1,8 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 module.exports = {
     entry: {
@@ -33,11 +35,18 @@ module.exports = {
         {
           test: /\.json$/,
           loader: 'json'
+        },
+        {
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css-loader', 'postcss-loader']
         }
       ]
     },
     plugins:[
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin() 
-    ]
+    ],
+    postcss: function () {
+      return [autoprefixer, precss];
+    }
 };

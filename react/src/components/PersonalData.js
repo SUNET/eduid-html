@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData, FormattedMessage } from 'react-intl';
 
+import s from 'components/PersonalData.scss';
+
 import TextEntry from 'components/TextEntry';
 import TextSelect from 'components/TextSelect';
 
