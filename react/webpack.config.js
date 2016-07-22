@@ -1,12 +1,16 @@
 
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
     entry: {
+      server: 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
+      hot: 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
       personal_data: './src/personal-data'
     },
     output: {
-      path: path.join(__dirname, '/../static/js'),
+      path: path.join(__dirname, 'build'),
+      publicPath: '/build/',
       filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
@@ -23,22 +27,17 @@ module.exports = {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          loaders: ['react-hot', 'babel-loader'],
           exclude: /node_modules/,
-          query: {
-            presets: ['es2015', 'react'],
-            plugins: [
-              ["react-intl", {
-                  messagesDir: "./i18n-messages/",
-                  enforceDescriptions: false
-              }]
-            ]
-          }
         },
         {
           test: /\.json$/,
           loader: 'json'
         }
       ]
-    }
+    },
+    plugins:[
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin() 
+    ]
 };

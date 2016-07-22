@@ -4,12 +4,16 @@ const webpackConfig = require('./webpack.config');
 
 var webpackProd = {
   entry: webpackConfig.entry,
-  output: webpackConfig.output,
   resolve: webpackConfig.resolve,
   module: webpackConfig.module
 };
 
-webpackProd.output.filename = '[name]-bundle.prod.js';
+delete webpackProd.entry.server;
+
+webpackProd.output = {
+  filename: '[name]-bundle.prod.js',
+  path: path.join(__dirname, '/../static/js')
+}
 
 webpackProd.plugins = [
   new webpack.DefinePlugin({

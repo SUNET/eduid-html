@@ -4,9 +4,18 @@
   "description": "",
   "main": "src/personal-data.js",
   "scripts": {
-    "start": "webpack --progress --colors --watch --debug --output-pathinfo",
+    "start": "webpack-dev-server",
     "test": "karma start",
     "build": "webpack --config webpack.prod.config.js"
+  },
+  "babel": {
+    "presets": ["es2015", "react"],
+    "plugins": [
+      ["react-intl", {
+          "messagesDir": "./i18n-messages/",
+          "enforceDescriptions": false
+      }]
+    ]
   },
   "author": "Enrique Pérez Arnaud",
   "license": "BSD-2-Clause",
@@ -42,8 +51,10 @@
     "path": "^0.12.7",
     "phantomjs-prebuilt": "^2.1.7",
     "react-addons-test-utils": "^15.2.1",
+    "react-hot-loader": "^1.3.0",
     "react-intl": "^2.1.3",
     "watchify": "^3.7.0",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
