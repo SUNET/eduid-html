@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData, FormattedMessage } from 'react-intl';
 
+import r from '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import s from 'components/PersonalData.scss';
+
+import { Button } from 'react-bootstrap';
 
 import TextEntry from 'components/TextEntry';
 import TextSelect from 'components/TextSelect';
@@ -65,20 +68,25 @@ let PersonalData = React.createClass({
                                                defaultMessage={`Display Name`} />),
         language_label = (<FormattedMessage id="pd.language"
                                                defaultMessage={`Language`} />),
+        button_save = (<FormattedMessage id="button_save"
+                                               defaultMessage={`Save`} />),
         options = this.state.languages.map(function (lang) {
           return <option key={lang[0]} value={lang[0]}>{lang[1]}</option>;
         });
 
     return (
         <IntlProvider locale={ lang_code } messages={ messages }>
-          <div id="personal-data-form" className="eduid-form">
-            <TextEntry name="given_name" label={givenname_label} />
-            <TextEntry name="surname" label={surname_label} />
-            <TextEntry name="display_name" label={displayname_label} />
-            <TextSelect name="language" label={language_label}>
-              {options}
-            </TextSelect>
-          </div>
+          <form id="personaldataview-form" class="form-horizontal" role="form">
+            <fieldset id="personal-data-form" className="tabpane">
+              <TextEntry name="given_name" label={givenname_label} />
+              <TextEntry name="surname" label={surname_label} />
+              <TextEntry name="display_name" label={displayname_label} />
+              <TextSelect name="language" label={language_label}>
+                {options}
+              </TextSelect>
+              <Button bsStyle="primary">{button_save}</Button>
+            </fieldset>
+          </form>
         </IntlProvider>
     );
   }

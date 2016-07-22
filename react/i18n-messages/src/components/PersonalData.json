@@ -14,5 +14,9 @@
   {
     "id": "pd.language",
     "defaultMessage": "Language"
+  },
+  {
+    "id": "button_save",
+    "defaultMessage": "Save"
   }
 ]

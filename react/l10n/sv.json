@@ -1,8 +1,9 @@
 
 {
-  "greeting.welcome_message": "svenskä hej",
-  "pd.given_name": "svenskä gn",
-  "pd.surname": "",
-  "pd.display_name": "",
-  "pd.language": ""
+  "greeting.welcome_message": "Hej!",
+  "pd.given_name": "Förnamn",
+  "pd.surname": "Efternamn",
+  "pd.display_name": "Visningsnamn",
+  "pd.language": "Språk",
+  "button_save": "Spara"
 }
