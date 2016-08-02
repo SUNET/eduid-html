@@ -17,7 +17,7 @@ webpackProd.devtool = 'inline-source-map';
 webpackProd.output = {
   filename: '[name]-bundle.prod.js',
   publicPath: '/build/',
-  path: path.join(__dirname, '/../static/js')
+  path: path.join(__dirname, 'build')
 }
 
 webpackProd.plugins = [

@@ -12,7 +12,6 @@ module.exports = {
     },
     output: {
       path: path.join(__dirname, 'build'),
-      publicPath: '/build/',
       filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
