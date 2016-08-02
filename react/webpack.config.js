@@ -8,10 +8,12 @@ module.exports = {
     entry: {
       server: 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
       hot: 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+      fetch: 'whatwg-fetch',
       personal_data: './src/personal-data'
     },
     output: {
       path: path.join(__dirname, 'build'),
+      publicPath: '/build/',
       filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
@@ -71,10 +73,7 @@ module.exports = {
     },
     plugins:[
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
-      new webpack.ProvidePlugin({
-        $: 'jquery'
-      })
+      new webpack.NoErrorsPlugin()
     ],
     postcss: function () {
       return [autoprefixer, precss];

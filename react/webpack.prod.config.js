@@ -35,9 +35,6 @@ webpackProd.plugins = [
       output: {
       comments: false,
     },
-  }),
-  new webpack.ProvidePlugin({
-    $: 'jquery'
   })
 ];
 

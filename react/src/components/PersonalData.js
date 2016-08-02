@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData, FormattedMessage } from 'react-intl';
 
-import r from '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import s from 'components/PersonalData.scss';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'components/PersonalData.scss';
 
 import { Button } from 'react-bootstrap';
 
@@ -34,6 +34,16 @@ if (lang_code === 'sv') {
 addLocaleData(locale);
 
 
+let checkStatus = function (response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    var error = new Error(response.statusText);
+    error.response = response;
+    throw error;
+  }
+};
+
 let PersonalData = React.createClass({
 
   getInitialState: function () {
@@ -43,18 +53,20 @@ let PersonalData = React.createClass({
   },
 
   componentDidMount: function () {
-    $.ajax({
-      url: this.props.langs_src,
-      dataType: 'json',
-      cache: false,
-      success: function (data) {
-        this.setState({
-          languages: data
-        });
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.langs_src, status, err.toString());
-      }.bind(this)
+    console.log('Hohohohoooo: ', this.props.langs_src);
+    fetch(this.props.langs_src, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(checkStatus)
+    .then(function (response) {
+      this.setState({
+        languages: response.json()
+      });
+    })
+    .catch(function (err) {
+      console.log('Error', err);
     });
   },
 
@@ -93,8 +105,7 @@ let PersonalData = React.createClass({
                            type="text" />
               <TextControl name="language"
                            label={language_label}
-                           componentClass="select"
-                           langs_src="http://personal-data.eduid.docker:8080/available-languages">
+                           componentClass="select">
                 {options}
               </TextControl>
               <Button bsStyle="primary">{button_save}</Button>
