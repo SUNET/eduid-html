@@ -6,8 +6,7 @@ import s from 'components/PersonalData.scss';
 
 import { Button } from 'react-bootstrap';
 
-import TextEntry from 'components/TextEntry';
-import TextSelect from 'components/TextSelect';
+import TextControl from 'components/TextControl';
 
 const language = navigator.languages
                    ? navigator.languages[0]
@@ -52,10 +51,10 @@ let PersonalData = React.createClass({
         this.setState({
           languages: data
         });
-      },
+      }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.langs_src, status, err.toString());
-      }
+      }.bind(this)
     });
   },
 
@@ -63,7 +62,7 @@ let PersonalData = React.createClass({
     let givenname_label = (<FormattedMessage id="pd.given_name"
                                                defaultMessage={`Given Name`} />),
         surname_label = (<FormattedMessage id="pd.surname"
-                                               defaultMessage={`SurName`} />),
+                                               defaultMessage={`Surname`} />),
         displayname_label = (<FormattedMessage id="pd.display_name"
                                                defaultMessage={`Display Name`} />),
         language_label = (<FormattedMessage id="pd.language"
@@ -76,14 +75,27 @@ let PersonalData = React.createClass({
 
     return (
         <IntlProvider locale={ lang_code } messages={ messages }>
-          <form id="personaldataview-form" class="form-horizontal" role="form">
+          <form id="personaldataview-form"
+                className="form-horizontal"
+                role="form">
             <fieldset id="personal-data-form" className="tabpane">
-              <TextEntry name="given_name" label={givenname_label} />
-              <TextEntry name="surname" label={surname_label} />
-              <TextEntry name="display_name" label={displayname_label} />
-              <TextSelect name="language" label={language_label}>
+              <TextControl name="given_name"
+                           label={givenname_label}
+                           componentClass="input"
+                           type="text" />
+              <TextControl name="surname"
+                           label={surname_label}
+                           componentClass="input"
+                           type="text" />
+              <TextControl name="display_name"
+                           label={displayname_label}
+                           componentClass="input"
+                           type="text" />
+              <TextControl name="language"
+                           label={language_label}
+                           componentClass="select">
                 {options}
-              </TextSelect>
+              </TextControl>
               <Button bsStyle="primary">{button_save}</Button>
             </fieldset>
           </form>
