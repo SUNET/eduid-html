@@ -93,7 +93,8 @@ let PersonalData = React.createClass({
                            type="text" />
               <TextControl name="language"
                            label={language_label}
-                           componentClass="select">
+                           componentClass="select"
+                           langs_src="http://personal-data.eduid.docker:8080/available-languages">
                 {options}
               </TextControl>
               <Button bsStyle="primary">{button_save}</Button>
