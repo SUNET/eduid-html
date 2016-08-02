@@ -3,5 +3,4 @@
 .*.swo
 node_modules/
 coverage/
-static/js/*-bundle.dev.js
-static/js/*-bundle.dev.js.map
+react/build/
