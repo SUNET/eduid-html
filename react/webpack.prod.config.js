@@ -12,8 +12,11 @@ var webpackProd = {
 delete webpackProd.entry.server;
 delete webpackProd.entry.hot;
 
+webpackProd.devtool = 'inline-source-map';
+
 webpackProd.output = {
   filename: '[name]-bundle.prod.js',
+  publicPath: '/build/',
   path: path.join(__dirname, '/../static/js')
 }
 
@@ -32,6 +35,9 @@ webpackProd.plugins = [
       output: {
       comments: false,
     },
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery'
   })
 ];
 
