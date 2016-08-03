@@ -13,7 +13,7 @@ let TextControl = React.createClass({
 
   getValidationState: function () {
     if (this.props.validation !== undefined) {
-      return this.props.validation(this.state.value);
+      return this.props.validation(this.props.value);
     } else {
       return "success";
     }
@@ -28,7 +28,7 @@ let TextControl = React.createClass({
           </ControlLabel>
           <FormControl componentClass={this.props.componentClass}
                        type={this.props.type}
-                       value={this.state.value}
+                       value={this.props.value}
                        onChange={this.props.handleChange}>
             {this.props.children}
           </FormControl>

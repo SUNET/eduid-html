@@ -15,8 +15,8 @@ delete webpackProd.entry.hot;
 webpackProd.devtool = 'inline-source-map';
 
 webpackProd.output = {
-  filename: '[name]-bundle.prod.js',
-  publicPath: '/build/',
+  filename: '[name].js',
+  publicPath: '/static/build/',
   path: path.join(__dirname, 'build')
 }
 

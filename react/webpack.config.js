@@ -9,7 +9,8 @@ module.exports = {
       server: 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
       hot: 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
       fetch: 'whatwg-fetch',
-      personal_data: './src/personal-data'
+      personal_data: './src/personal-data',
+      dashboard: './src/dashboard-tabbed-form'
     },
     output: {
       path: path.join(__dirname, 'build'),
