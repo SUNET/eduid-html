@@ -19,7 +19,7 @@ const lang_code = language.substring(0,2);
 // not from a string in a var, neither from a string built on the spot.
 // So we have to import all locales :(
 import svLocale from 'react-intl/locale-data/sv';
-import svMessages from '../../l10n/sv.json';
+import svMessages from '../../i18n/l10n/sv.json';
 import enLocale from 'react-intl/locale-data/en';
 const enMessages = {};
 
