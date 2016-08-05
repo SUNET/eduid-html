@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 
 let TextControl = React.createClass({
-
-  getInitialState: function () {
-    return {
-      value: ""
-    };
-  },
 
   getValidationState: function () {
     if (this.props.validation !== undefined) {
@@ -39,5 +33,13 @@ let TextControl = React.createClass({
   }
 });
 
+TextControl.PropTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
+  validation: PropTypes.func,
+  children: PropTypes.node,
+}
 
 export default TextControl;

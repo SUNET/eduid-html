@@ -25,7 +25,7 @@ module.exports = {
         path.join(__dirname, 'src')
       ],
       // allow us to avoid including extension name
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['', '.js', '.jsx', '.json'],
     },
     module: {
       loaders: [

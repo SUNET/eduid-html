@@ -1,7 +1,15 @@
 /*jslint vars: false, nomen: true, browser: true */
 /*global $, console, alert, deform */
 
-import init_personal_data_form from "components/PersonalData";
+import React from 'react';
+import init_app from "../init-app";
+import PersonalData from 'components/PersonalData';
+
+let app = (
+    <PersonalData
+      langs_src="http://personal-data.eduid.docker:8080/available-languages" // this has to come from config
+    />);
+
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -28,7 +36,7 @@ var TabbedForm = function (container) {
 
     var get_form = function (url, target) {
           if (url === 'personaldata') {
-            init_personal_data_form(target.get(0));
+            init_app(app, target.get(0));
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
