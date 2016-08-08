@@ -8,7 +8,6 @@ module.exports = {
     entry: {
       server: 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
       hot: 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-      fetch: 'whatwg-fetch',
       personal_data: './src/entry-points/personal-data',
       dashboard: './src/entry-points/dashboard-tabbed-form'
     },
@@ -74,6 +73,10 @@ module.exports = {
     },
     plugins:[
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.ProvidePlugin({
+        'Promise': 'exports?global.Promise!es6-promise',
+        'window.fetch': 'exports?self.fetch!whatwg-fetch'
+      }),
       new webpack.NoErrorsPlugin()
     ],
     postcss: function () {

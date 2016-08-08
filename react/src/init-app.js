@@ -10,10 +10,12 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
+import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import eduIDApp from "./store";
+import { fetchConfig } from "actions/ConfigActions";
 
 const language = navigator.languages
                    ? navigator.languages[0]
@@ -25,7 +27,11 @@ const messages = require('../i18n/l10n/' + lang_code)
 
 addLocaleData(locale);
 
-let store = createStore(eduIDApp);
+let store = createStore(
+        eduIDApp,
+        applyMiddleware(
+            thunkMiddleware
+            ));
 
 const init_app = function (component, target) {
   let app = ( <Provider store={store}>
@@ -34,7 +40,7 @@ const init_app = function (component, target) {
                 </IntlProvider>
               </Provider> );
 
-  ReactDOM.render(app, target);
+  ReactDOM.render(app, target, () => store.dispatch(fetchConfig()));
 };
 
 export default init_app;

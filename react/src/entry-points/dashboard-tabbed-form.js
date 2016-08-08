@@ -3,12 +3,9 @@
 
 import React from 'react';
 import init_app from "../init-app";
-import PersonalData from 'components/PersonalData';
+import PersonalDataContainer from 'containers/PersonalData';
 
-let app = (
-    <PersonalData
-      langs_src="http://personal-data.eduid.docker:8080/available-languages" // this has to come from config
-    />);
+let app = <PersonalDataContainer />;
 
 
 if (window.tabbedform === undefined) {

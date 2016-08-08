@@ -15,7 +15,7 @@ let TextControl = React.createClass({
 
   render: function () {
     return (
-        <FormGroup controlId="item-{this.props.name}"
+        <FormGroup controlId={this.props.name}
                    validationState={this.getValidationState()}>
           <ControlLabel>
             {this.props.label}

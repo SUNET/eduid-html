@@ -1,11 +1,11 @@
 
-const SAVE_USERDATA = 'SAVE_USERDATA';
-const GET_USERDATA = 'GET_USERDATA';
-const GET_USERDATA_SUCCESS = 'GET_USERDATA_SUCCESS';
-const GET_USERDATA_FAIL = 'GET_USERDATA_FAIL';
-const POST_USERDATA = 'POST_USERDATA';
-const POST_USERDATA_SUCCESS = 'POST_USERDATA_SUCCESS';
-const POST_USERDATA_FAIL = 'POST_USERDATA_FAIL';
+export const SAVE_USERDATA = 'SAVE_USERDATA';
+export const GET_USERDATA = 'GET_USERDATA';
+export const GET_USERDATA_SUCCESS = 'GET_USERDATA_SUCCESS';
+export const GET_USERDATA_FAIL = 'GET_USERDATA_FAIL';
+export const POST_USERDATA = 'POST_USERDATA';
+export const POST_USERDATA_SUCCESS = 'POST_USERDATA_SUCCESS';
+export const POST_USERDATA_FAIL = 'POST_USERDATA_FAIL';
 
 
 export function saveUserdata (data) {
@@ -21,17 +21,18 @@ export function getUserdata () {
   };
 }
 
-export function getUserdataSucess () {
+export function getUserdataSucess (data) {
   return {
     type: GET_USERDATA_SUCCESS,
+    payload: data
   };
 }
 
-export function getUserdataFail () {
+export function getUserdataFail (err) {
   return {
     type: GET_USERDATA_FAIL,
     error: true,
-    payload: new Error()
+    payload: new Error(err)
   };
 }
 
@@ -47,10 +48,10 @@ export function postUserdataSucess () {
   };
 }
 
-export function postUserdataFail () {
+export function postUserdataFail (err) {
   return {
     type: POST_USERDATA_FAIL,
     error: true,
-    payload: new Error()
+    payload: new Error(err)
   };
 }

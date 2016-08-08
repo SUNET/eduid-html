@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import * as actions from "actions/PersonalDataActions";
 import PersonalData from 'components/PersonalData';
 
 
@@ -9,15 +10,15 @@ const mapStateToProps = (state, props) => {
     surname: state.personal_data.surname,
     display_name: state.personal_data.display_name,
     language: state.personal_data.language,
-    langs: []
+    langs: state.config.available_languages
   }
 };
 
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleSave: () => {
-      console.log('Saving eduID', props.display_name)
+    handleSave: (display_name) => {
+      console.log('Saving eduID', props.display_name);
     }
   }
 };

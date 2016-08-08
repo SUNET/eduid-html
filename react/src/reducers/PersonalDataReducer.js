@@ -14,7 +14,7 @@ const personalData = Immutable.Map({
 let personalDataReducer = (state=personalData, action) => {
   switch (action.type) {
     case actions.SAVE_USERDATA:
-      return Immutable.Map(action.data);
+      return Immutable.Map(action.payload);
     default:
       return state;
   }

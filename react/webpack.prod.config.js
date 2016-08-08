@@ -26,6 +26,10 @@ webpackProd.plugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
+  new webpack.ProvidePlugin({
+    'Promise': 'exports?global.Promise!es6-promise',
+    'window.fetch': 'exports?self.fetch!whatwg-fetch'
+  }),
   new webpack.optimize.DedupePlugin(),
   new webpack.optimize.OccurrenceOrderPlugin(true),
   new webpack.optimize.UglifyJsPlugin({
