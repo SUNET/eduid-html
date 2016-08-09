@@ -12,7 +12,6 @@ import 'style/PersonalData.scss';
 let PersonalData = React.createClass({
 
   render: function () {
-    const { store } = this.context;
     let givenname_label = (
             <FormattedMessage
               id="pd.given_name"
@@ -38,7 +37,7 @@ let PersonalData = React.createClass({
               id="button_save"
               defaultMessage={`Save`} />),
 
-        options = store.getState().config.get("available_languages").toArray().map(function (lang) {
+        options = this.props.langs.map(function (lang) {
           return (<option
                     key={lang[0]}
                     value={lang[0]}>{lang[1]}
@@ -83,7 +82,7 @@ let PersonalData = React.createClass({
   }
 });
 
-PersonalData.PropTypes = {
+PersonalData.propTypes = {
   given_name: PropTypes.string,
   surname: PropTypes.string,
   display_name: PropTypes.string,
