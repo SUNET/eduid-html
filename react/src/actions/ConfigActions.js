@@ -1,4 +1,7 @@
 
+import { checkStatus } from "actions/common";
+
+
 export const GET_CONFIG = 'GET_CONFIG';
 export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
 export const GET_CONFIG_FAIL = 'GET_CONFIG_FAIL';
@@ -29,16 +32,6 @@ export function getConfigFail (err) {
 
 
 // Async (thunk) action creators
-
-let checkStatus = function (response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    var error = new Error(response.statusText);
-    error.response = response;
-    throw error;
-  }
-};
 
 export function fetchConfig () {
   return function (dispatch) {

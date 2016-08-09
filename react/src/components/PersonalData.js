@@ -1,15 +1,21 @@
 
 import React, { PropTypes } from 'react';
+import { dispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import { Button } from 'react-bootstrap';
 import TextControl from 'components/TextControl';
+import { fetchPersonalData } from "components/PersonalData";
 
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/PersonalData.scss';
 
 
 let PersonalData = React.createClass({
+
+  componentDidMount: function () {
+    dispatch(fetchPersonalData());
+  },
 
   render: function () {
     let givenname_label = (

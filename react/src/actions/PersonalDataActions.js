@@ -55,3 +55,29 @@ export function postUserdataFail (err) {
     payload: new Error(err)
   };
 }
+
+
+// Async (thunk) action creators
+
+export function fetchPersonalData () {
+  return function (dispatch) {
+    dispatch(getUserdata());
+
+    // XXX take url from congfig
+    window.fetch('/personal-data/user', {
+      // To automatically send cookies for the current domain,
+      // set credentials to 'same-origin'; use 'include' for CORS
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "Pragma": "no-cache"
+      }
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(userdata => dispatch(getUserdataSuccess(userdata)))
+    .catch(err => dispatch(getUserdataFail(err)))
+  }
+}
