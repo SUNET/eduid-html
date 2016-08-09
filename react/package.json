@@ -20,7 +20,8 @@
           "messagesDir": "./i18n/",
           "enforceDescriptions": false
         }
-      ]
+      ],
+      "transform-object-rest-spread"
     ]
   },
   "author": "Enrique Pérez Arnaud",
@@ -38,6 +39,7 @@
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-intl": "^2.1.3",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",

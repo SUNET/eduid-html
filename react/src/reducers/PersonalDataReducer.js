@@ -1,20 +1,21 @@
 
-import Immutable from "immutable";
 import * as actions from "actions/PersonalDataActions";
 
 
-const personalData = Immutable.Map({
+const personalData = {
     given_name: '',
     surname: '',
     display_name: '',
     language: 'sv'
-});
+};
 
 
 let personalDataReducer = (state=personalData, action) => {
   switch (action.type) {
     case actions.SAVE_USERDATA:
-      return Immutable.Map(action.payload);
+      return {
+        ...action.payload
+      };
     default:
       return state;
   }
