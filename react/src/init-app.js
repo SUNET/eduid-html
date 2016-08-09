@@ -10,7 +10,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware } from "redux";
@@ -27,10 +28,11 @@ const messages = require('../i18n/l10n/' + lang_code)
 
 addLocaleData(locale);
 
-let store = createStore(
+const store = createStore(
         eduIDApp,
         applyMiddleware(
-            thunkMiddleware
+            thunkMiddleware,
+            createLogger()
             ));
 
 const init_app = function (component, target) {
