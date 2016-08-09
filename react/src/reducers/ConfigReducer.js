@@ -2,11 +2,11 @@
 import * as actions from "actions/ConfigActions";
 
 
-const configData = Immutable.Map({
+const configData = {
     is_fetching: false,
     failed: false,
-    available_languages: Immutable.List()
-});
+    available_languages: []
+};
 
 
 let configReducer = (state=configData, action) => {
