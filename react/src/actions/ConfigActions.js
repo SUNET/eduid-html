@@ -14,14 +14,6 @@ export function getConfig () {
 }
 
 
-export function getConfigSuccess (config) {
-  return {
-    type: GET_CONFIG_SUCCESS,
-    payload: config
-  };
-}
-
-
 export function getConfigFail (err) {
   return {
     type: GET_CONFIG_FAIL,
@@ -54,7 +46,7 @@ export function fetchConfig () {
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(config => dispatch(getConfigSuccess(config)))
+    .then(config => dispatch(config))
     .then(() => initApp(dispatch))
     .catch(err => {
       console.log('eduID Error (fetching config data)', err);

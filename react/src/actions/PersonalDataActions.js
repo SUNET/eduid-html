@@ -21,13 +21,6 @@ export function getUserdata () {
   };
 }
 
-export function getUserdataSuccess (data) {
-  return {
-    type: GET_USERDATA_SUCCESS,
-    payload: data
-  };
-}
-
 export function getUserdataFail (err) {
   return {
     type: GET_USERDATA_FAIL,
@@ -78,7 +71,7 @@ export function fetchPersonalData () {
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(userdata => dispatch(getUserdataSuccess(userdata)))
+    .then(userdata => dispatch(userdata))
     .catch(err => {
       console.log('eduID Error (fetching personal data)', err);
       dispatch(getUserDataFail(err));
