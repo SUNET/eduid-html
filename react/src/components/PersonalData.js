@@ -1,54 +1,43 @@
 
 import React, { PropTypes } from 'react';
-import { dispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import { Button } from 'react-bootstrap';
 import TextControl from 'components/TextControl';
-import { fetchPersonalData } from "components/PersonalData";
 
+//  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/PersonalData.scss';
 
 
 let PersonalData = React.createClass({
 
-  componentDidMount: function () {
-    dispatch(fetchPersonalData());
-  },
-
   render: function () {
-    let givenname_label = (
+    // i18n messages
+    const givenname_label = (
             <FormattedMessage
               id="pd.given_name"
               defaultMessage={`Given Name`} />),
 
-        surname_label = (
+          surname_label = (
             <FormattedMessage
               id="pd.surname"
               defaultMessage={`Surname`} />),
 
-        displayname_label = (
+          displayname_label = (
             <FormattedMessage
               id="pd.display_name"
               defaultMessage={`Display Name`} />),
 
-        language_label = (
+          language_label = (
             <FormattedMessage
               id="pd.language"
               defaultMessage={`Language`} />),
 
-        button_save = (
+          button_save = (
             <FormattedMessage
               id="button_save"
-              defaultMessage={`Save`} />),
-
-        options = this.props.langs.map(function (lang) {
-          return (<option
-                    key={lang[0]}
-                    value={lang[0]}>{lang[1]}
-                  </option>);
-        });
+              defaultMessage={`Save`} />);
 
     return (
         <div>
@@ -57,26 +46,25 @@ let PersonalData = React.createClass({
                 role="form">
             <fieldset id="personal-data-form" className="tabpane">
               <TextControl name="given_name"
-                           defaultValue={this.props.given_name}
+                           initialValue={this.props.given_name}
                            label={givenname_label}
                            componentClass="input"
                            type="text" />
               <TextControl name="surname"
-                           defaultValue={this.props.surname}
+                           initialValue={this.props.surname}
                            label={surname_label}
                            componentClass="input"
                            type="text" />
               <TextControl name="display_name"
-                           defaultValue={this.props.display_name}
+                           initialValue={this.props.display_name}
                            label={displayname_label}
                            componentClass="input"
                            type="text" />
               <TextControl name="language"
-                           defaultValue={this.props.language}
+                           initialValue={this.props.language}
                            label={language_label}
-                           componentClass="select">
-                {options}
-              </TextControl>
+                           componentClass="select"
+                           options={this.props.langs} />
               <Button bsStyle="primary"
                       onClick={this.props.handleSave}>
                     {button_save}
@@ -94,10 +82,6 @@ PersonalData.propTypes = {
   display_name: PropTypes.string,
   language: PropTypes.string,
   langs: PropTypes.array
-}
-
-PersonalData.contextTypes = {
-  store: PropTypes.object
 }
 
 export default PersonalData;

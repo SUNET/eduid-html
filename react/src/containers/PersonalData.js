@@ -25,6 +25,6 @@ const mapDispatchToProps = (dispatch, props) => {
 const PersonalDataContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PersonalData)
+)(PersonalData);
 
 export default PersonalDataContainer;

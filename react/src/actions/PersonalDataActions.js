@@ -21,7 +21,7 @@ export function getUserdata () {
   };
 }
 
-export function getUserdataSucess (data) {
+export function getUserdataSuccess (data) {
   return {
     type: GET_USERDATA_SUCCESS,
     payload: data
@@ -56,8 +56,9 @@ export function postUserdataFail (err) {
   };
 }
 
-
 // Async (thunk) action creators
+
+import { checkStatus } from "actions/common";
 
 export function fetchPersonalData () {
   return function (dispatch) {
@@ -65,7 +66,7 @@ export function fetchPersonalData () {
 
     // XXX take url from congfig
     window.fetch('/personal-data/user', {
-      // To automatically send cookies for the current domain,
+      // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
       headers: {
@@ -78,6 +79,9 @@ export function fetchPersonalData () {
     .then(checkStatus)
     .then(response => response.json())
     .then(userdata => dispatch(getUserdataSuccess(userdata)))
-    .catch(err => dispatch(getUserdataFail(err)))
+    .catch(err => {
+      console.log('eduID Error (fetching personal data)', err);
+      dispatch(getUserDataFail(err));
+    });
   }
 }

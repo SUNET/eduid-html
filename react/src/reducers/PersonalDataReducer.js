@@ -8,7 +8,7 @@ const personalData = {
     given_name: '',
     surname: '',
     display_name: '',
-    language: 'sv'
+    language: ''
 };
 
 
@@ -21,18 +21,20 @@ let personalDataReducer = (state=personalData, action) => {
     case actions.GET_USERDATA:
       return {
         ...state,
-        is_fetching: true
+        is_fetching: true,
+        failed: false
       };
     case actions.GET_USERDATA_SUCCESS:
       return {
-          ...action.payload,
-          is_fetching: false,
+        ...action.payload,
+        is_fetching: false,
+        failed: false
       };
     case actions.GET_USERDATA_FAIL:
       return {
-          ...state,
-          is_fetching: false,
-          failed: true
+        ...state,
+        is_fetching: false,
+        failed: true
       };
     default:
       return state;

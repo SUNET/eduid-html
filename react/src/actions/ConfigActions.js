@@ -1,6 +1,6 @@
 
 import { checkStatus } from "actions/common";
-
+import { fetchPersonalData } from "actions/PersonalDataActions";
 
 export const GET_CONFIG = 'GET_CONFIG';
 export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
@@ -33,8 +33,12 @@ export function getConfigFail (err) {
 
 // Async (thunk) action creators
 
+const initApp = (dispatch) => {
+  dispatch(fetchPersonalData());
+};
+
 export function fetchConfig () {
-  return function (dispatch) {
+  return dispatch => {
     dispatch(getConfig());
 
     window.fetch('/personal-data/config', {
@@ -51,6 +55,10 @@ export function fetchConfig () {
     .then(checkStatus)
     .then(response => response.json())
     .then(config => dispatch(getConfigSuccess(config)))
-    .catch(err => dispatch(getConfigFail(err)))
+    .then(() => initApp(dispatch))
+    .catch(err => {
+      console.log('eduID Error (fetching config data)', err);
+      dispatch(getConfigFail(err));
+    });
   }
 }
