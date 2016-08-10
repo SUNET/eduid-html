@@ -1,5 +1,5 @@
 
-import * as actions from "actions/PersonalDataActions";
+import * as actions from "actions/PersonalData";
 
 
 const personalData = {

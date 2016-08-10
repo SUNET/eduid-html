@@ -1,5 +1,5 @@
 
-import * as actions from "actions/ConfigActions";
+import * as actions from "actions/Config";
 
 
 const configData = {

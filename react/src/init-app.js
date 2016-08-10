@@ -16,7 +16,7 @@ import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware } from "redux";
 import eduIDApp from "./store";
-import { fetchConfig } from "actions/ConfigActions";
+import { fetchConfig } from "actions/Config";
 
 const language = navigator.languages
                    ? navigator.languages[0]

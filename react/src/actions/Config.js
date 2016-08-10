@@ -1,6 +1,6 @@
 
 import { checkStatus } from "actions/common";
-import { fetchPersonalData } from "actions/PersonalDataActions";
+import { fetchPersonalData } from "actions/PersonalData";
 
 export const GET_CONFIG = 'GET_CONFIG';
 export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';

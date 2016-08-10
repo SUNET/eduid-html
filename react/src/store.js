@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux';
-import personalDataReducer from 'reducers/PersonalDataReducer';
-import configReducer from 'reducers/ConfigReducer';
+import personalDataReducer from 'reducers/PersonalData';
+import configReducer from 'reducers/Config';
 
 const eduIDApp = combineReducers({
   config: configReducer,
