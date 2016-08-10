@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/entry-points/personal-data.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack --watch --progress",
     "test": "karma start",
     "build": "webpack --config webpack.prod.config.js"
   },

@@ -6,14 +6,18 @@ const precss = require('precss');
 
 module.exports = {
     entry: {
-      server: 'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
-      hot: 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+      // To activate the web server, uncomment below 2 lines and
+      // add a script to package.json pointing to "webpack-dev-server"
+      // WebpackDevServer host and port:
+      // server: 'webpack-dev-server/client?http://localhost:8080',
+      // "only" prevents reload on syntax errors:
+      // hot: 'webpack/hot/only-dev-server',
       personal_data: './src/entry-points/personal-data',
       dashboard: './src/entry-points/dashboard-tabbed-form'
     },
     output: {
       path: path.join(__dirname, 'build'),
-      publicPath: '/build/',
+      publicPath: '/static/build/',
       filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
