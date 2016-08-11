@@ -1,6 +1,7 @@
 
 import { connect } from 'react-redux';
 import PersonalData from 'components/PersonalData';
+import { saveUserdata } from "actions/PersonalData";
 
 
 const mapStateToProps = (state, props) => {
@@ -16,8 +17,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleSave: (display_name) => {
-      console.log('Saving eduID', props.display_name);
+    handleSave: (e) => {
+      dispatch(saveUserdata());
     }
   }
 };

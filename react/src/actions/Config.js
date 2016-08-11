@@ -1,6 +1,6 @@
 
 import { checkStatus } from "actions/common";
-import { fetchPersonalData } from "actions/PersonalData";
+import { fetchUserdata } from "actions/PersonalData";
 
 export const GET_CONFIG = 'GET_CONFIG';
 export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
@@ -26,7 +26,7 @@ export function getConfigFail (err) {
 // Async (thunk) action creators
 
 const initApp = (dispatch) => {
-  dispatch(fetchPersonalData());
+  dispatch(fetchUserdata());
 };
 
 export function fetchConfig () {

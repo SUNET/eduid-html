@@ -8,13 +8,6 @@ export const POST_USERDATA_SUCCESS = 'POST_USERDATA_SUCCESS';
 export const POST_USERDATA_FAIL = 'POST_USERDATA_FAIL';
 
 
-export function saveUserdata (data) {
-  return {
-    type: SAVE_USERDATA,
-    payload: data
-  };
-}
-
 export function getUserdata () {
   return {
     type: GET_USERDATA,
@@ -31,13 +24,7 @@ export function getUserdataFail (err) {
 
 export function postUserdata () {
   return {
-    type: POST_USERDATA,
-  };
-}
-
-export function postUserdataSucess () {
-  return {
-    type: POST_USERDATA_SUCCESS,
+    type: POST_USERDATA
   };
 }
 
@@ -53,7 +40,7 @@ export function postUserdataFail (err) {
 
 import { checkStatus } from "actions/common";
 
-export function fetchPersonalData () {
+export function fetchUserdata () {
   return function (dispatch) {
     dispatch(getUserdata());
 
@@ -75,6 +62,40 @@ export function fetchPersonalData () {
     .catch(err => {
       console.log('eduID Error (fetching personal data)', err);
       dispatch(getUserDataFail(err));
+    });
+  }
+}
+
+
+export function saveUserdata () {
+  return function (dispatch, getState) {
+    dispatch(postUserdata());
+
+    let state = getState(),
+        data = {
+            'given_name': state.personal_data.given_name,
+            'surname': state.personal_data.surname,
+            'display_name': state.personal_data.display_name,
+            'language': state.personal_data.language
+        };
+
+    window.fetch('/personal-data/user', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "Pragma": "no-cache"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(userdata => dispatch(userdata))
+    .catch(err => {
+      console.log('eduID Error (saving personal data)', err);
+      dispatch(postUserDataFail(err));
     });
   }
 }
