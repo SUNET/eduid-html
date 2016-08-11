@@ -5,7 +5,7 @@ import * as actions from "actions/Config";
 const configData = {
     is_fetching: false,
     failed: false,
-    available_languages: []
+    AVAILABLE_LANGUAGES: []
 };
 
 
