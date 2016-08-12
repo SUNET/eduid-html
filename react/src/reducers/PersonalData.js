@@ -14,10 +14,6 @@ const personalData = {
 
 let personalDataReducer = (state=personalData, action) => {
   switch (action.type) {
-    case actions.SAVE_USERDATA:
-      return {
-        ...action.payload
-      };
     case actions.GET_USERDATA:
       return {
         ...state,
@@ -31,6 +27,24 @@ let personalDataReducer = (state=personalData, action) => {
         failed: false
       };
     case actions.GET_USERDATA_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true
+      };
+    case actions.POST_USERDATA:
+      return {
+        ...state,
+        is_fetching: true,
+        failed: false
+      };
+    case actions.POST_USERDATA_SUCCESS:
+      return {
+        ...action.payload,
+        is_fetching: false,
+        failed: false
+      };
+    case actions.POST_USERDATA_FAIL:
       return {
         ...state,
         is_fetching: false,
