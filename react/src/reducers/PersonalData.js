@@ -32,6 +32,11 @@ let personalDataReducer = (state=personalData, action) => {
         is_fetching: false,
         failed: true
       };
+    case actions.CHANGE_USERDATA:
+      return {
+        ...state,
+        ...action.payload
+      };
     case actions.POST_USERDATA:
       return {
         ...state,

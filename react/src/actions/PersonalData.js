@@ -1,8 +1,8 @@
 
-export const SAVE_USERDATA = 'SAVE_USERDATA';
 export const GET_USERDATA = 'GET_USERDATA';
 export const GET_USERDATA_SUCCESS = 'GET_USERDATA_SUCCESS';
 export const GET_USERDATA_FAIL = 'GET_USERDATA_FAIL';
+export const CHANGE_USERDATA = 'CHANGE_USERDATA';
 export const POST_USERDATA = 'POST_USERDATA';
 export const POST_USERDATA_SUCCESS = 'POST_USERDATA_SUCCESS';
 export const POST_USERDATA_FAIL = 'POST_USERDATA_FAIL';
@@ -19,6 +19,13 @@ export function getUserdataFail (err) {
     type: GET_USERDATA_FAIL,
     error: true,
     payload: new Error(err)
+  };
+}
+
+export function changeUserdata (data) {
+  return {
+    type: CHANGE_USERDATA,
+    payload: data
   };
 }
 
@@ -69,8 +76,8 @@ export function fetchUserdata () {
 
 export function saveUserdata () {
   return function (dispatch, getState) {
-    dispatch(postUserdata());
 
+    dispatch(postUserdata());
     let state = getState(),
         data = {
             'given_name': state.personal_data.given_name,
