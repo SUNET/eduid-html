@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(fetchOpenidQRCode());
     }
   }
-
 };
 
 const OpenidConnectContainer = connect(

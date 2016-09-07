@@ -29,10 +29,11 @@ export function fetchOpenidQRCode () {
     let state = getState(),
         data = {
             'nin': document.getElementById('nin-input').value
-        }
+        },
+        url = state.config.OIDC_PROOFING_URL;
 
-    // XXX take url from congfig
-    window.fetch('/openid/get-qrcode', {
+    
+    window.fetch( url, {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',

@@ -16,7 +16,7 @@ let OpenidConnect = React.createClass({
     const get_qrcode_button = (
             <FormattedMessage
               id="oc.get_qrcode"
-              defaultMessage={`Get QRCode`} />);
+              defaultMessage={`CONFIRM USING SE-LEG`} />);
 
     return (
         <div>
