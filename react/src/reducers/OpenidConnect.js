@@ -5,7 +5,7 @@ import * as actions from "actions/OpenidConnect";
 const openidData = {
     is_fetching: false,
     failed: false,
-    qrcode: ''
+    qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
 };
 
 

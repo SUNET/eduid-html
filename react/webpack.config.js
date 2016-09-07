@@ -13,7 +13,8 @@ module.exports = {
       // "only" prevents reload on syntax errors:
       // hot: 'webpack/hot/only-dev-server',
       personal_data: './src/entry-points/personal-data',
-      dashboard: './src/entry-points/dashboard-tabbed-form'
+      dashboard: './src/entry-points/dashboard-tabbed-form',
+      openid_connect: './src/entry-points/openid-connect'
     },
     output: {
       path: path.join(__dirname, 'build'),

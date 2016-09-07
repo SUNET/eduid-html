@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 };
 
-const OpeindConnectContainer = connect(
+const OpenidConnectContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(OpenidConnect);
