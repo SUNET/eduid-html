@@ -1,0 +1,10 @@
+
+{
+  "greeting.welcome_message": "Hej!",
+  "pd.given_name": "Förnamn",
+  "pd.surname": "Efternamn",
+  "pd.display_name": "Visningsnamn",
+  "pd.language": "Språk",
+  "button_save": "Spara",
+  "oc.get_qrcode": "BEKRÄFTA MED SE-LEG"
+}
