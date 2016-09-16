@@ -28,7 +28,7 @@ const messages = require('../i18n/l10n/' + lang_code)
 
 addLocaleData(locale);
 
-const store = createStore(
+export const store = createStore(
         eduIDApp,
         applyMiddleware(
             thunkMiddleware,

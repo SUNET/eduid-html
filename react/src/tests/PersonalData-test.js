@@ -9,7 +9,7 @@ import PersonalData from 'components/PersonalData';
 describe("A suite", function() {
   
   it("contains spec with an expectation", function() {
-    expect(shallow(<PersonalData />).find(".eduid-form")).to.have.length(1);
+    expect(shallow(<PersonalData />).find(".form-horizontal")).to.have.length(1);
   });
   
   it("should be equal", function (){

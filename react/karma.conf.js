@@ -43,7 +43,7 @@ module.exports = function (config) {
     autoWatch: false,
 
     // which karma frameworks do we want integrated
-    frameworks: [ 'mocha', 'chai' ], //use the mocha test framework
+    frameworks: [ 'mocha' ], //use the mocha test framework
     // files with tests
     files: [
       'src/test.webpack.js'

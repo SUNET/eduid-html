@@ -14,7 +14,7 @@ export function postOpenidFail (err) {
   return {
     type: POST_OPENID_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: err
   };
 }
 
@@ -23,23 +23,26 @@ export function postOpenidFail (err) {
 import { checkStatus } from "actions/common";
 
 export function fetchOpenidQRCode () {
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
     dispatch(postOpenid());
 
-    let state = getState(),
-        data = {
-            'nin': document.getElementById('nin-input').value
-        },
-        url = state.config.OIDC_PROOFING_URL;
+    const state = getState(),
+          input = document.getElementById('nin-input'),
+          nin = input && input.value || 'dummy',
+          data = {
+            'nin': nin
+          },
+          url = state.config.OIDC_PROOFING_URL;
 
     
-    window.fetch( url, {
+    let promise = window.fetch( url, {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
-      method: 'post',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
+        'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
         "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
         "Pragma": "no-cache"
@@ -50,8 +53,9 @@ export function fetchOpenidQRCode () {
     .then(response => response.json())
     .then(openiddata => dispatch(openiddata))
     .catch(err => {
-      console.log('eduID Error (fetching openid data)', err);
+      console.log('eduID Error fetching openid data from ' + url, err.toString());
       dispatch(postOpenidFail(err));
     });
+    return promise;
   }
 }
