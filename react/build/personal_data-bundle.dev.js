@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f4956a08d34ff56486ce"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "511e865cc2c80ba0255f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11618,6 +11618,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.store = undefined;
 	
 	var _react = __webpack_require__(78);
 	
@@ -11664,7 +11665,7 @@
 	
 	(0, _reactIntl.addLocaleData)(locale);
 	
-	var store = (0, _redux.createStore)(_store2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)()));
+	var store = exports.store = (0, _redux.createStore)(_store2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)()));
 	
 	var init_app = function init_app(component, target) {
 	  var app = _react2.default.createElement(
@@ -29691,7 +29692,7 @@
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Promise) {(function(self) {
+	/* WEBPACK VAR INJECTION */(function(Promise, global) {(function(self) {
 	  'use strict';
 	
 	  if (self.fetch) {
@@ -30127,8 +30128,8 @@
 	
 	
 	/*** EXPORTS FROM exports-loader ***/
-	module.exports = self.fetch;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(209)))
+	module.exports = global.fetch;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(209), (function() { return this; }())))
 
 /***/ },
 /* 237 */
@@ -30385,7 +30386,7 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
+	    __webpack_provided_window_dot_fetch('https://dashboard.dev.eduid.se/services/jsconfig/get-config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
@@ -30434,6 +30435,7 @@
 	var openidData = {
 	  is_fetching: false,
 	  failed: false,
+	  // as default, a gif with a single pixel.
 	  qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
 	};
 	
@@ -30510,18 +30512,21 @@
 	    dispatch(postOpenid());
 	
 	    var state = getState(),
+	        input = document.getElementById('nin-input'),
+	        nin = input && input.value || 'dummy',
 	        data = {
-	      'nin': document.getElementById('nin-input').value
+	      'nin': nin
 	    },
 	        url = state.config.OIDC_PROOFING_URL;
 	
 	    __webpack_provided_window_dot_fetch(url, {
 	      // To automatically send cookies only for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
-	      credentials: 'include',
-	      method: 'post',
+	      credentials: 'same-origin',
+	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
+	        'Content-Type': 'application/json',
 	        "Access-Control-Allow-Origin": "*",
 	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
 	        "Pragma": "no-cache"
@@ -30532,7 +30537,7 @@
 	    }).then(function (openiddata) {
 	      return dispatch(openiddata);
 	    }).catch(function (err) {
-	      console.log('eduID Error (fetching openid data)', err);
+	      console.log('eduID Error fetching openid data from ' + url, err.toString());
 	      dispatch(postOpenidFail(err));
 	    });
 	  };
@@ -49756,7 +49761,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  background-color: #e9f0f5; }\n", ""]);
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  /*  background-color: $blue; */ }\n", ""]);
 	
 	// exports
 
