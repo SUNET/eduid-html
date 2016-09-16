@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "511e865cc2c80ba0255f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7d78b3ad5cd254bcf9cd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25897,7 +25897,7 @@
 /* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -30620,7 +30620,7 @@
 	    __webpack_provided_window_dot_fetch(url, {
 	      // To automatically send cookies only for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
-	      credentials: 'same-origin',
+	      credentials: 'include',
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',

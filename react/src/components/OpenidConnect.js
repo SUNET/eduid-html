@@ -40,6 +40,7 @@ let OpenidConnect = React.createClass({
 
 OpenidConnect.propTypes = {
   qrcode: PropTypes.string,
+  handleGetQRCode: PropTypes.func
 }
 
 export default OpenidConnect;
