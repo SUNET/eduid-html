@@ -5,10 +5,10 @@
   "main": "src/entry-points/personal-data.js",
   "scripts": {
     "start": "webpack --watch --progress",
-    "test":  "karma start",
+    "test": "karma start",
     "debug": "karma start --single-run=false --debug",
     "build": "webpack --config webpack.prod.config.js",
-    "flow":  "flow; test $? -eq 0 -o $? -eq 2"
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "babel": {
     "presets": [
