@@ -5,9 +5,10 @@
   "main": "src/entry-points/personal-data.js",
   "scripts": {
     "start": "webpack --watch --progress",
-    "test": "karma start",
+    "test":  "karma start",
     "debug": "karma start --single-run=false --debug",
-    "build": "webpack --config webpack.prod.config.js"
+    "build": "webpack --config webpack.prod.config.js",
+    "flow":  "flow; test $? -eq 0 -o $? -eq 2"
   },
   "babel": {
     "presets": [
@@ -22,7 +23,8 @@
           "enforceDescriptions": false
         }
       ],
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "transform-flow-strip-types"
     ]
   },
   "author": "Enrique Pérez Arnaud",
@@ -40,6 +42,7 @@
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-intl": "^2.1.3",
+    "babel-plugin-transform-flow-strip-types": "^6.14.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
@@ -50,6 +53,7 @@
     "exports-loader": "^0.6.3",
     "fetch-mock": "^5.1.2",
     "file-loader": "^0.9.0",
+    "flow-bin": "^0.32.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.4",
     "json-loader": "^0.5.4",
