@@ -47,7 +47,11 @@ var TabbedForm = function (container) {
               container.find("button[data-toggle=tooltip]").tooltip();
               container.find("label[data-toggle=tooltip]").tooltip();
               if (url === "nins") {
-                init_app(app, document.getElementById('openid-connect-root'));
+                const root = document.getElementById('openid-connect-root'),
+                      form = root.previousElementSibling;
+                if (!form.classList.contains('hidden')) {
+                  init_app(app, root);
+                }
               }
 
           }, 'html').fail(function (xhr) {
