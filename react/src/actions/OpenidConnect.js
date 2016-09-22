@@ -1,4 +1,8 @@
 
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import init_app from "../init-app";
+
 export const POST_OPENID = 'POST_OPENID';
 export const POST_OPENID_SUCCESS = 'POST_OPENID_SUCCESS';
 export const POST_OPENID_FAIL = 'POST_OPENID_FAIL';
@@ -26,14 +30,28 @@ export function fetchOpenidQRCode () {
   return (dispatch, getState) => {
     dispatch(postOpenid());
 
-    const state = getState(),
-          input = document.getElementById('nin-input'),
+    const nin_required_msg = (
+            <FormattedMessage
+              id="oc.nin_required_msg"
+              defaultMessage={`You must enter a NIN before confirming it using se-leg`} />),
+          state = getState(),
+          input = document.querySelector('input[name=norEduPersonNIN]'),
           nin = input && input.value || 'dummy',
           data = {
             'nin': nin
           },
           url = state.config.OIDC_PROOFING_URL;
 
+    console.log('Getting QRCode for NIN: ' + nin);
+
+    if (nin === 'dummy' && input.parentElement.children.length === 1) {
+      let msg = (<span className="text-danger">{nin_required_msg}</span>),
+          holder = document.createElement('div');
+      input.insertBefore(holder);
+      init_app(msg, holder);
+      dispatch(postOpenidFail(new Error('No NIN entered')));
+      return;
+    }
     
     let promise = window.fetch( url, {
       // To automatically send cookies only for the current domain,
