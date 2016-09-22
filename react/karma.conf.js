@@ -69,8 +69,7 @@ module.exports = function (config) {
       'karma-sourcemap-loader',
       'karma-chrome-launcher',
       'karma-coverage',
-      'karma-mocha',
-      'karma-chai-lodash'
+      'karma-mocha'
     ],
   });
 };

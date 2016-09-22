@@ -31,7 +31,10 @@ let OpenidConnect = React.createClass({
             </fieldset>
           </form>
           <div id="qrcode">
-            <img src={this.props.qrcode} />
+            <figure>
+              <img src={this.props.qrcode} />
+              <figcaption>{this.props.nonce}</figcaption>
+            </figure>
           </div>
         </div>
     );
@@ -40,6 +43,7 @@ let OpenidConnect = React.createClass({
 
 OpenidConnect.propTypes = {
   qrcode: PropTypes.string,
+  nonce: PropTypes.string,
   handleGetQRCode: PropTypes.func
 }
 
