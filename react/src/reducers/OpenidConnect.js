@@ -5,6 +5,7 @@ import * as actions from "actions/OpenidConnect";
 const openidData = {
     is_fetching: false,
     failed: false,
+    error: "",
     // as default, a gif with a single pixel.
     qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
     nonce: ""
@@ -29,7 +30,8 @@ let openidConnectReducer = (state=openidData, action) => {
       return {
         ...state,
         is_fetching: false,
-        failed: true
+        failed: true,
+        error: action.payload.message
       };
     default:
       return state;
