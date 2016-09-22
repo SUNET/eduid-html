@@ -24,6 +24,8 @@ let OpenidConnect = React.createClass({
                 className="form-horizontal"
                 role="form">
             <fieldset id="openid-connect">
+              <span className="error-msg text-danger">{this.props.errorMsg}</span>
+              <br />
               <Button bsStyle="primary"
                       onClick={this.props.handleGetQRCode}>
                     {get_qrcode_button}
@@ -44,6 +46,7 @@ let OpenidConnect = React.createClass({
 OpenidConnect.propTypes = {
   qrcode: PropTypes.string,
   nonce: PropTypes.string,
+  errorMsg: PropTypes.string,
   handleGetQRCode: PropTypes.func
 }
 

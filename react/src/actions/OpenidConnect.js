@@ -18,7 +18,10 @@ export function postOpenidFail (err) {
   return {
     type: POST_OPENID_FAIL,
     error: true,
-    payload: err
+    payload: {
+      error: err,
+      message: err.toString()
+    }
   };
 }
 
@@ -30,10 +33,7 @@ export function fetchOpenidQRCode () {
   return (dispatch, getState) => {
     dispatch(postOpenid());
 
-    const nin_required_msg = (
-            <FormattedMessage
-              id="oc.nin_required_msg"
-              defaultMessage={`You must enter a NIN before confirming it using se-leg`} />),
+    const error_msg = "",
           state = getState(),
           input = document.querySelector('input[name=norEduPersonNIN]'),
           nin = input && input.value || 'dummy',
@@ -44,11 +44,7 @@ export function fetchOpenidQRCode () {
 
     console.log('Getting QRCode for NIN: ' + nin);
 
-    if (nin === 'dummy' && input.parentElement.children.length === 1) {
-      let msg = (<span className="text-danger">{nin_required_msg}</span>),
-          holder = document.createElement('div');
-      input.insertBefore(holder);
-      init_app(msg, holder);
+    if (nin === 'dummy') {
       dispatch(postOpenidFail(new Error('No NIN entered')));
       return;
     }
