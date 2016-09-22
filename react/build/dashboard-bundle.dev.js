@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "837b3942ace1f0723ea3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d2aee2781ce0a75115a4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25909,7 +25909,7 @@
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -30494,13 +30494,12 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    __webpack_provided_window_dot_fetch('http://jsconfig.eduid.docker:8080/get-config', {
+	    __webpack_provided_window_dot_fetch('https://dashboard.dev.eduid.se/services/jsconfig/get-config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
 	      headers: {
 	        'Accept': 'application/json',
-	        "Access-Control-Request-Method": "POST",
 	        "Access-Control-Allow-Origin": "*",
 	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
 	        "Pragma": "no-cache"
@@ -30544,6 +30543,7 @@
 	var openidData = {
 	  is_fetching: false,
 	  failed: false,
+	  error: "",
 	  // as default, a gif with a single pixel.
 	  qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 	  nonce: ""
@@ -30567,7 +30567,8 @@
 	    case actions.POST_OPENID_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
-	        failed: true
+	        failed: true,
+	        error: action.payload.message
 	      });
 	    default:
 	      return state;
@@ -30623,7 +30624,10 @@
 	  return {
 	    type: POST_OPENID_FAIL,
 	    error: true,
-	    payload: err
+	    payload: {
+	      error: err,
+	      message: err.toString()
+	    }
 	  };
 	}
 	
@@ -30633,9 +30637,7 @@
 	  return function (dispatch, getState) {
 	    dispatch(postOpenid());
 	
-	    var nin_required_msg = _react2.default.createElement(_reactIntl.FormattedMessage, {
-	      id: 'oc.nin_required_msg',
-	      defaultMessage: 'You must enter a NIN before confirming it using se-leg' }),
+	    var error_msg = "",
 	        state = getState(),
 	        input = document.querySelector('input[name=norEduPersonNIN]'),
 	        nin = input && input.value || 'dummy',
@@ -30646,15 +30648,7 @@
 	
 	    console.log('Getting QRCode for NIN: ' + nin);
 	
-	    if (nin === 'dummy' && input.parentElement.children.length === 1) {
-	      var msg = _react2.default.createElement(
-	        'span',
-	        { className: 'text-danger' },
-	        nin_required_msg
-	      ),
-	          holder = document.createElement('div');
-	      input.insertBefore(holder);
-	      (0, _initApp2.default)(msg, holder);
+	    if (nin === 'dummy') {
 	      dispatch(postOpenidFail(new Error('No NIN entered')));
 	      return;
 	    }
