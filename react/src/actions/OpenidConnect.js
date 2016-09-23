@@ -36,7 +36,7 @@ export function fetchOpenidQRCode () {
     const error_msg = "",
           state = getState(),
           input = document.querySelector('input[name=norEduPersonNIN]'),
-          nin = input && input.value || 'dummy',
+          nin = input ? (input.value || 'no nin') : 'testing',
           data = {
             'nin': nin
           },
@@ -44,7 +44,7 @@ export function fetchOpenidQRCode () {
 
     console.log('Getting QRCode for NIN: ' + nin);
 
-    if (nin === 'dummy') {
+    if (nin === 'no nin') {
       dispatch(postOpenidFail(new Error('No NIN entered')));
       return;
     }

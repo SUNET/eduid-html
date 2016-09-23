@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6ea6279aef5fb86c275d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b2bab34f13a83de1466d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30396,7 +30396,7 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    __webpack_provided_window_dot_fetch('https://dashboard.dev.eduid.se/services/jsconfig/get-config', {
+	    __webpack_provided_window_dot_fetch('/services/jsconfig/get-config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
@@ -30542,7 +30542,7 @@
 	    var error_msg = "",
 	        state = getState(),
 	        input = document.querySelector('input[name=norEduPersonNIN]'),
-	        nin = input && input.value || 'dummy',
+	        nin = input ? input.value || 'no nin' : 'testing',
 	        data = {
 	      'nin': nin
 	    },
@@ -30550,7 +30550,7 @@
 	
 	    console.log('Getting QRCode for NIN: ' + nin);
 	
-	    if (nin === 'dummy') {
+	    if (nin === 'no nin') {
 	      dispatch(postOpenidFail(new Error('No NIN entered')));
 	      return;
 	    }

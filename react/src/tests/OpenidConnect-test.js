@@ -25,7 +25,10 @@ describe("OIDC Actions", () => {
     const expectedAction = {
       type: "POST_OPENID_FAIL",
       error: true,
-      payload: err
+      payload: {
+        error: 'Bad error',
+        message: 'Bad error'
+      }
     };
     expect(actions.postOpenidFail(err)).toEqual(expectedAction);
   });
@@ -46,17 +49,22 @@ describe("Async Actions", () => {
     fetchMock.post('http://localhost/oidc',
        {
         type: actions.POST_OPENID_SUCCESS,
-        payload: {qrcode: 'new code'}
+        payload: {qrcode: 'new code', nonce: 'new nonce'}
       });
 
     const expectedActions = [
       {type: actions.POST_OPENID},
-      {type: actions.POST_OPENID_SUCCESS, payload: {qrcode: 'new code'}}
+      {type: actions.POST_OPENID_SUCCESS,
+       payload: {
+        qrcode: 'new code',
+        nonce: 'new nonce'
+       }
+      }
     ];
 
     const store = mockStore({
       config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
-      openid_data: {qrcode: 'old code'}
+      openid_data: {qrcode: 'old code', nonce: 'old nonce'}
     });
 
     store.dispatch(actions.fetchOpenidQRCode())
@@ -75,13 +83,16 @@ describe("Async Actions", () => {
       {
         type: actions.POST_OPENID_FAIL,
         error: true,
-        payload: new Error('Internal Server Error')
+        payload: {
+          error: new Error('Internal Server Error'),
+          message: 'Error: Internal Server Error'
+        }
       }
     ];
 
     const store = mockStore({
       config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
-      openid_data: {qrcode: 'old code'}
+      openid_data: {qrcode: 'old code', nonce: 'old nonce'}
     });
 
     store.dispatch(actions.fetchOpenidQRCode())
@@ -108,7 +119,7 @@ describe("Async Actions", () => {
 
     const store = mockStore({
       config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
-      openid_data: {qrcode: 'old code'}
+      openid_data: {qrcode: 'old code', nonce: 'old nonce'}
     });
 
     store.dispatch(actions.fetchOpenidQRCode())
@@ -125,7 +136,8 @@ describe("Reducers", () => {
   const mockState = {
     is_fetching: false,
     failed: false,
-    qrcode: "code"
+    qrcode: "code",
+    nonce: 'nonce'
   };
 
   it("Receives a POST_OPENID action", () => {
@@ -139,6 +151,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
         qrcode: "code",
+        nonce: "nonce",
         is_fetching: true,
         failed: false
       }
@@ -151,12 +164,13 @@ describe("Reducers", () => {
         mockState,
         {
           type: actions.POST_OPENID_SUCCESS,
-          payload: { qrcode: 'new code' }
+          payload: { qrcode: 'new code', nonce: 'new nonce' }
         }
       )
     ).toEqual(
       {
         qrcode: "new code",
+        nonce: "new nonce",
         is_fetching: false,
         failed: false
       }
@@ -170,14 +184,19 @@ describe("Reducers", () => {
         {
           type: actions.POST_OPENID_FAIL,
           error: true,
-          payload: "Bad error"
+          payload: {
+            error: "Bad error",
+            message: "Bad error"
+          }
         }
       )
     ).toEqual(
       {
         qrcode: "code",
+        nonce: "nonce",
         is_fetching: false,
-        failed: true
+        failed: true,
+        error: "Bad error"
       }
     );
   });
@@ -196,6 +215,7 @@ describe("Reducers", () => {
         is_fetching: false,
         failed: false,
         qrcode: "code",
+        nonce: "nonce"
       }
     );
   });
@@ -205,7 +225,8 @@ describe("Reducers", () => {
 function setupComponent() {
   const props = {
     handleGetQRCode: createSpy(),
-    qrcode: 'code'
+    qrcode: 'code',
+    nonce: 'nonce'
   }
 
   const wrapper = shallow(<OpenidConnect {...props} />)
@@ -224,7 +245,8 @@ describe("OpenidConnect Component", () => {
           fieldset = wrapper.find('fieldset'),
           button = wrapper.find('Button'),
           divQrcode = wrapper.find('div#qrcode'),
-          img = wrapper.find('img');
+          img = wrapper.find('img'),
+          caption = wrapper.find('figcaption');
 
     expect(form.hasClass('form-horizontal')).toBeTruthy();
     expect(form.contains(fieldset.get(0))).toBeTruthy();
@@ -234,6 +256,7 @@ describe("OpenidConnect Component", () => {
     expect(form.props()).toContain({role: 'form'});
     expect(fieldset.props()).toContain({id: 'openid-connect'});
     expect(img.props()).toContain({src: 'code'});
+    expect(caption).toBeTruthy();
 
     expect(props.handleGetQRCode.calls.length).toEqual(0);
     button.props().onClick();
@@ -257,23 +280,27 @@ const fakeStore = (state) => ({
 });
 
 describe("OpenidConnect Container", () => {
-  let fulltext;
-  let qrcode;
-  let mockProps;
-  let wrapper;
+  let fulltext,
+      qrcode,
+      nonce,
+      mockProps,
+      wrapper,
+      dispatch;
 
   beforeEach(() => {
     const store = fakeStore({
       openid_data: {
         is_fetching: false,
         failed: false,
-        qrcode: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-      }
+        qrcode: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        nonce: 'new nonce'
+      },
+      config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
     });
 
     mockProps = {
       qrcode: 'data: old code',
-      handleGetQRCode: createSpy()
+      nonce: 'old nonce'
     };
 
     wrapper = mount(
@@ -286,16 +313,31 @@ describe("OpenidConnect Container", () => {
 
     fulltext = wrapper.find(OpenidConnectContainer).text();
     qrcode = wrapper.find('img').props().src;
+    nonce = wrapper.find('figcaption').text();
+    dispatch = store.dispatch;
+  });
+
+
+  afterEach(() => {
+    fetchMock.restore()
   });
 
   it("Renders", () => {
     expect(qrcode).toEqual('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+    expect(nonce).toEqual('new nonce');
   });
 
   it("Clicks", () => {
-    expect(mockProps.handleGetQRCode.calls.length).toEqual(0);
+
+    fetchMock.post('http://localhost/oidc',
+       {
+        type: actions.POST_OPENID_SUCCESS,
+        payload: {qrcode: 'new code', nonce: 'new nonce'}
+      });
+
+    expect(dispatch.calls.length).toEqual(0);
     wrapper.find('Button').props().onClick();
-    expect(mockProps.handleGetQRCode.calls.length).toEqual(0);
+    expect(dispatch.calls.length).toEqual(1);
   });
 
 });

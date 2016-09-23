@@ -33,7 +33,7 @@ export function fetchConfig () {
   return dispatch => {
     dispatch(getConfig());
 
-    window.fetch('https://dashboard.dev.eduid.se/services/jsconfig/get-config', {
+    window.fetch('/services/jsconfig/get-config', {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
