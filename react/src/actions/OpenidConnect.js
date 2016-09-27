@@ -20,7 +20,7 @@ export function postOpenidFail (err) {
     error: true,
     payload: {
       error: err,
-      message: err.toString()
+      message: err
     }
   };
 }
@@ -45,7 +45,7 @@ export function fetchOpenidQRCode () {
     console.log('Getting QRCode for NIN: ' + nin);
 
     if (nin === 'no nin') {
-      dispatch(postOpenidFail(new Error('No NIN entered')));
+      dispatch(postOpenidFail('Error: No NIN entered'));
       return;
     }
     
@@ -68,7 +68,7 @@ export function fetchOpenidQRCode () {
     .then(openiddata => dispatch(openiddata))
     .catch(err => {
       console.log('eduID Error fetching openid data from ' + url, err.toString());
-      dispatch(postOpenidFail(err));
+      dispatch(postOpenidFail(err.toString()));
     });
     return promise;
   }

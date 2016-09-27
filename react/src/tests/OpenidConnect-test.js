@@ -85,7 +85,7 @@ describe("Async Actions", () => {
         type: actions.POST_OPENID_FAIL,
         error: true,
         payload: {
-          error: new Error('Internal Server Error'),
+          error: 'Error: Internal Server Error',
           message: 'Error: Internal Server Error'
         }
       }
@@ -108,7 +108,10 @@ describe("Async Actions", () => {
     const errorResponse = {
         type: actions.POST_OPENID_FAIL,
         error: true,
-        payload: 'Terrible Error'
+        payload: {
+          error: 'Terrible Error',
+          message: 'Terrible Error'
+        }
       };
 
     fetchMock.post('http://localhost/oidc', errorResponse);

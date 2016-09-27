@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --watch --progress",
     "test": "karma start",
-    "debug": "karma start --single-run=false --debug",
+    "debug": "karma start --single-run=false --debug --browser Firefox",
     "build": "webpack --config webpack.prod.config.js",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
