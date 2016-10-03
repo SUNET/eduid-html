@@ -2,8 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Button } from 'react-bootstrap';
-import Spinner from "react-spinkit";
+import EduIDButton from 'components/EduIDButton';
 
 //  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -18,23 +17,23 @@ let OpenidConnect = React.createClass({
             <FormattedMessage
               id="oc.get_qrcode"
               defaultMessage={`CONFIRM USING SE-LEG`} />);
-    let spinner = '';
+    let spinning = false;
 
-    if (this.props.is_fetching) spinner = <Spinner spinnerName="three-bounce" />;
+    if (this.props.is_fetching) spinning = true;
 
     return (
         <div>
-          {spinner}
           <form id="openid-connect-form"
                 className="form-horizontal"
                 role="form">
             <fieldset id="openid-connect">
               <span className="error-msg text-danger">{this.props.errorMsg}</span>
               <br />
-              <Button bsStyle="primary"
+              <EduIDButton bsStyle="primary"
+                      spinning={spinning}
                       onClick={this.props.handleGetQRCode}>
                     {get_qrcode_button}
-              </Button>
+              </EduIDButton>
             </fieldset>
           </form>
           <div id="qrcode">
