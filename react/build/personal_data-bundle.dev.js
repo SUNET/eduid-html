@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dfaefba8aae5db4a70a9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ae9a908033d089252586"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30583,7 +30583,7 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    __webpack_provided_window_dot_fetch('/services/jsconfig/get-config', {
+	    __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
