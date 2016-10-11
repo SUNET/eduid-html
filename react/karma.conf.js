@@ -35,7 +35,28 @@ webpackKarma.isparta = {
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'Chrome' ], //run in Chrome
+    browsers: [ 'PhantomJS' ], //run in Browsers
+    // Run each test in 3 browsers:
+    // browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ], //run in Browsers
+
+    customLaunchers: {
+      'PhantomJS_debug': {
+        base: 'PhantomJS',
+        options: {
+          windowName: 'debug',
+          settings: {
+            webSecurityEnabled: false
+          },
+        },
+        flags: ['--load-images=true'],
+        debug: true
+      }
+    },
+
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
 
     // just run once by default unless --watch flag is passed
     //singleRun: !argv.watch,
@@ -67,7 +88,9 @@ module.exports = function (config) {
     plugins: [
       'karma-webpack',
       'karma-sourcemap-loader',
+      'karma-phantomjs-launcher',
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
       'karma-coverage',
       'karma-mocha'
     ],

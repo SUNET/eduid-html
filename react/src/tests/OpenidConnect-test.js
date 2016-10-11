@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
+import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
@@ -84,7 +85,7 @@ describe("Async Actions", () => {
         type: actions.POST_OPENID_FAIL,
         error: true,
         payload: {
-          error: new Error('Internal Server Error'),
+          error: 'Error: Internal Server Error',
           message: 'Error: Internal Server Error'
         }
       }
@@ -107,7 +108,10 @@ describe("Async Actions", () => {
     const errorResponse = {
         type: actions.POST_OPENID_FAIL,
         error: true,
-        payload: 'Terrible Error'
+        payload: {
+          error: 'Terrible Error',
+          message: 'Terrible Error'
+        }
       };
 
     fetchMock.post('http://localhost/oidc', errorResponse);
@@ -243,7 +247,7 @@ describe("OpenidConnect Component", () => {
     const { wrapper, props } = setupComponent(),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
-          button = wrapper.find('Button'),
+          button = wrapper.find('EduIDButton'),
           divQrcode = wrapper.find('div#qrcode'),
           img = wrapper.find('img'),
           caption = wrapper.find('figcaption');
