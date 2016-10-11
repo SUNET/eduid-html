@@ -35,7 +35,9 @@ webpackKarma.isparta = {
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ], //run in Browsers
+    browsers: [ 'PhantomJS' ], //run in Browsers
+    // Run each test in 3 browsers:
+    // browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ], //run in Browsers
 
     customLaunchers: {
       'PhantomJS_debug': {
