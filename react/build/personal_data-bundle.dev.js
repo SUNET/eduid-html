@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ae9a908033d089252586"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "043a22591e119d435437"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30569,21 +30569,20 @@
 	  return {
 	    type: GET_CONFIG_FAIL,
 	    error: true,
-	    payload: new Error(err)
+	    payload: {
+	      error: err,
+	      message: err
+	    }
 	  };
 	}
 	
 	// Async (thunk) action creators
 	
-	var initApp = function initApp(dispatch) {
-	  dispatch((0, _PersonalData.fetchUserdata)());
-	};
-	
 	function fetchConfig() {
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
+	    return __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
@@ -30597,11 +30596,9 @@
 	      return response.json();
 	    }).then(function (config) {
 	      return dispatch(config);
-	    }).then(function () {
-	      return initApp(dispatch);
 	    }).catch(function (err) {
 	      console.log('eduID Error (fetching config data)', err);
-	      dispatch(getConfigFail(err));
+	      dispatch(getConfigFail(err.toString()));
 	    });
 	  };
 	}
