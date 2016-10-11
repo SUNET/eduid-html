@@ -18,22 +18,21 @@ export function getConfigFail (err) {
   return {
     type: GET_CONFIG_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: {
+      error: err,
+      message: err
+    }
   };
 }
 
 
 // Async (thunk) action creators
 
-const initApp = (dispatch) => {
-  dispatch(fetchUserdata());
-};
-
 export function fetchConfig () {
   return dispatch => {
     dispatch(getConfig());
 
-    window.fetch('/jsconfig/get-config', {
+    return window.fetch('/jsconfig/get-config', {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
@@ -47,10 +46,9 @@ export function fetchConfig () {
     .then(checkStatus)
     .then(response => response.json())
     .then(config => dispatch(config))
-    .then(() => initApp(dispatch))
     .catch(err => {
       console.log('eduID Error (fetching config data)', err);
-      dispatch(getConfigFail(err));
-    });
+      dispatch(getConfigFail(err.toString()));
+    })
   }
 }

@@ -24,11 +24,11 @@ describe("EduIDButton Component should mount", () => {
     const { wrapper, props } = setupComponent(),
           button = wrapper.find('Button'),
           divEl = button.find('div.spin-holder'),
-          divEl = wrapper.find('Glyphicon');
+          glyph = divEl.find('Glyphicon');
 
     expect(button.hasClass('has-spinner')).toBe(true);
     expect(button.hasClass('active')).toBe(false);
-    expect(button.props['disabled']).toBe(undefined);
+    expect(button.nodes[0].props.disabled).toBe(false);
     expect(divEl.hasClass('spin-holder')).toBe(true);
     expect(glyph.hasClass('spinner')).toBe(true);
   });
@@ -36,12 +36,12 @@ describe("EduIDButton Component should mount", () => {
   it("Renders with spinner", () => {
     const { wrapper, props } = setupComponent(true),
           button = wrapper.find('Button'),
-          divEl = wrapper.find('div.spin-holder'),
-          glyph = wrapper.find('Glyphicon');
+          divEl = button.find('div.spin-holder'),
+          glyph = divEl.find('Glyphicon');
 
     expect(button.hasClass('has-spinner')).toBe(true);
     expect(button.hasClass('active')).toBe(true);
-    expect(button.props['disabled']).toBe(true);
+    expect(button.nodes[0].props.disabled).toBe(true);
     expect(divEl.hasClass('spin-holder')).toBe(true);
     expect(glyph.hasClass('spinner')).toBe(true);
   });
