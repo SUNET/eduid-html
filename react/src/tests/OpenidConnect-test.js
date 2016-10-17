@@ -16,7 +16,7 @@ describe("OIDC Actions", () => {
 
   it("should create an action to trigger fetching a qrcode", () => {
     const expectedAction = {
-      type: "POST_OPENID"
+      type: actions.POST_OIDC_PROOFING_PROOFING
     };
     expect(actions.postOpenid()).toEqual(expectedAction);
   });
@@ -24,7 +24,7 @@ describe("OIDC Actions", () => {
   it("should create an action to signal an error fetching a qrcode", () => {
     const err = 'Bad error';
     const expectedAction = {
-      type: "POST_OPENID_FAIL",
+      type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
       error: true,
       payload: {
         error: 'Bad error',
@@ -49,13 +49,13 @@ describe("Async Actions", () => {
 
     fetchMock.post('http://localhost/oidc',
        {
-        type: actions.POST_OPENID_SUCCESS,
+        type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
         payload: {qrcode: 'new code', nonce: 'new nonce'}
       });
 
     const expectedActions = [
-      {type: actions.POST_OPENID},
-      {type: actions.POST_OPENID_SUCCESS,
+      {type: actions.POST_OIDC_PROOFING_PROOFING},
+      {type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
        payload: {
         qrcode: 'new code',
         nonce: 'new nonce'
@@ -80,9 +80,9 @@ describe("Async Actions", () => {
     fetchMock.post('http://localhost/oidc', 500);
 
     const expectedActions = [
-      {type: actions.POST_OPENID},
+      {type: actions.POST_OIDC_PROOFING_PROOFING},
       {
-        type: actions.POST_OPENID_FAIL,
+        type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
         error: true,
         payload: {
           error: 'Error: Internal Server Error',
@@ -106,7 +106,7 @@ describe("Async Actions", () => {
   it("Try to fetch qrcode but server returns error", (done) => {
 
     const errorResponse = {
-        type: actions.POST_OPENID_FAIL,
+        type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
         error: true,
         payload: {
           error: 'Terrible Error',
@@ -117,7 +117,7 @@ describe("Async Actions", () => {
     fetchMock.post('http://localhost/oidc', errorResponse);
 
     const expectedActions = [
-      {type: actions.POST_OPENID},
+      {type: actions.POST_OIDC_PROOFING_PROOFING},
       errorResponse
     ];
 
@@ -144,12 +144,12 @@ describe("Reducers", () => {
     nonce: 'nonce'
   };
 
-  it("Receives a POST_OPENID action", () => {
+  it("Receives a POST_OIDC_PROOFING_PROOFING action", () => {
     expect(
       openidConnectReducer(
         mockState,
         {
-          type: actions.POST_OPENID
+          type: actions.POST_OIDC_PROOFING_PROOFING
         }
       )
     ).toEqual(
@@ -162,12 +162,12 @@ describe("Reducers", () => {
     );
   });
 
-  it("Receives a POST_OPENID_SUCCESS action", () => {
+  it("Receives a POST_OIDC_PROOFING_PROOFING_SUCCESS action", () => {
     expect(
       openidConnectReducer(
         mockState,
         {
-          type: actions.POST_OPENID_SUCCESS,
+          type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
           payload: { qrcode: 'new code', nonce: 'new nonce' }
         }
       )
@@ -181,12 +181,12 @@ describe("Reducers", () => {
     );
   });
 
-  it("Receives a POST_OPENID_FAIL action", () => {
+  it("Receives a POST_OIDC_PROOFING_PROOFING_FAIL action", () => {
     expect(
       openidConnectReducer(
         mockState,
         {
-          type: actions.POST_OPENID_FAIL,
+          type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
           error: true,
           payload: {
             error: "Bad error",
@@ -335,7 +335,7 @@ describe("OpenidConnect Container", () => {
 
     fetchMock.post('http://localhost/oidc',
        {
-        type: actions.POST_OPENID_SUCCESS,
+        type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
         payload: {qrcode: 'new code', nonce: 'new nonce'}
       });
 

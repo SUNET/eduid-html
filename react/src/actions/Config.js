@@ -2,21 +2,21 @@
 import { checkStatus } from "actions/common";
 import { fetchUserdata } from "actions/PersonalData";
 
-export const GET_CONFIG = 'GET_CONFIG';
-export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
-export const GET_CONFIG_FAIL = 'GET_CONFIG_FAIL';
+export const GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
+export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
+export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 
 
 export function getConfig () {
   return {
-    type: GET_CONFIG
+    type: GET_JSCONFIG_CONFIG
   };
 }
 
 
 export function getConfigFail (err) {
   return {
-    type: GET_CONFIG_FAIL,
+    type: GET_JSCONFIG_CONFIG_FAIL,
     error: true,
     payload: {
       error: err,
@@ -32,7 +32,7 @@ export function fetchConfig () {
   return dispatch => {
     dispatch(getConfig());
 
-    return window.fetch('/jsconfig/get-config', {
+    return window.fetch('/jsconfig/config', {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',

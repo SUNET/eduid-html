@@ -3,20 +3,20 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import init_app from "../init-app";
 
-export const POST_OPENID = 'POST_OPENID';
-export const POST_OPENID_SUCCESS = 'POST_OPENID_SUCCESS';
-export const POST_OPENID_FAIL = 'POST_OPENID_FAIL';
+export const POST_OIDC_PROOFING_PROOFING = 'POST_OIDC_PROOFING_PROOFING';
+export const POST_OIDC_PROOFING_PROOFING_SUCCESS = 'POST_OIDC_PROOFING_PROOFING_SUCCESS';
+export const POST_OIDC_PROOFING_PROOFING_FAIL = 'POST_OIDC_PROOFING_PROOFING_FAIL';
 
 
 export function postOpenid () {
   return {
-    type: POST_OPENID
+    type: POST_OIDC_PROOFING_PROOFING
   };
 }
 
 export function postOpenidFail (err) {
   return {
-    type: POST_OPENID_FAIL,
+    type: POST_OIDC_PROOFING_PROOFING_FAIL,
     error: true,
     payload: {
       error: err,
