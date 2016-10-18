@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "043a22591e119d435437"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3a6a9479677da2c7bb50"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30608,17 +30608,17 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.GET_CONFIG:
+	    case actions.GET_JSCONFIG_CONFIG:
 	      return _extends({}, state, {
 	        is_fetching: true,
 	        failed: false
 	      });
-	    case actions.GET_CONFIG_SUCCESS:
+	    case actions.GET_JSCONFIG_CONFIG_SUCCESS:
 	      return _extends({}, action.payload, {
 	        is_fetching: false,
 	        failed: false
 	      });
-	    case actions.GET_CONFIG_FAIL:
+	    case actions.GET_JSCONFIG_CONFIG_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
 	        failed: true
@@ -30644,7 +30644,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.GET_CONFIG_FAIL = exports.GET_CONFIG_SUCCESS = exports.GET_CONFIG = undefined;
+	exports.GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG = undefined;
 	exports.getConfig = getConfig;
 	exports.getConfigFail = getConfigFail;
 	exports.fetchConfig = fetchConfig;
@@ -30653,19 +30653,19 @@
 	
 	var _PersonalData = __webpack_require__(235);
 	
-	var GET_CONFIG = exports.GET_CONFIG = 'GET_CONFIG';
-	var GET_CONFIG_SUCCESS = exports.GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
-	var GET_CONFIG_FAIL = exports.GET_CONFIG_FAIL = 'GET_CONFIG_FAIL';
+	var GET_JSCONFIG_CONFIG = exports.GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
+	var GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
+	var GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 	
 	function getConfig() {
 	  return {
-	    type: GET_CONFIG
+	    type: GET_JSCONFIG_CONFIG
 	  };
 	}
 	
 	function getConfigFail(err) {
 	  return {
-	    type: GET_CONFIG_FAIL,
+	    type: GET_JSCONFIG_CONFIG_FAIL,
 	    error: true,
 	    payload: {
 	      error: err,
@@ -30680,7 +30680,7 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    return __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
+	    return __webpack_provided_window_dot_fetch('/jsconfig/config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
@@ -30738,17 +30738,17 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.POST_OPENID:
+	    case actions.POST_OIDC_PROOFING_PROOFING:
 	      return _extends({}, state, {
 	        is_fetching: true,
 	        failed: false
 	      });
-	    case actions.POST_OPENID_SUCCESS:
+	    case actions.POST_OIDC_PROOFING_PROOFING_SUCCESS:
 	      return _extends({}, action.payload, {
 	        is_fetching: false,
 	        failed: false
 	      });
-	    case actions.POST_OPENID_FAIL:
+	    case actions.POST_OIDC_PROOFING_PROOFING_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
 	        failed: true,
@@ -30775,7 +30775,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.POST_OPENID_FAIL = exports.POST_OPENID_SUCCESS = exports.POST_OPENID = undefined;
+	exports.POST_OIDC_PROOFING_PROOFING_FAIL = exports.POST_OIDC_PROOFING_PROOFING_SUCCESS = exports.POST_OIDC_PROOFING_PROOFING = undefined;
 	exports.postOpenid = postOpenid;
 	exports.postOpenidFail = postOpenidFail;
 	exports.fetchOpenidQRCode = fetchOpenidQRCode;
@@ -30794,19 +30794,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var POST_OPENID = exports.POST_OPENID = 'POST_OPENID';
-	var POST_OPENID_SUCCESS = exports.POST_OPENID_SUCCESS = 'POST_OPENID_SUCCESS';
-	var POST_OPENID_FAIL = exports.POST_OPENID_FAIL = 'POST_OPENID_FAIL';
+	var POST_OIDC_PROOFING_PROOFING = exports.POST_OIDC_PROOFING_PROOFING = 'POST_OIDC_PROOFING_PROOFING';
+	var POST_OIDC_PROOFING_PROOFING_SUCCESS = exports.POST_OIDC_PROOFING_PROOFING_SUCCESS = 'POST_OIDC_PROOFING_PROOFING_SUCCESS';
+	var POST_OIDC_PROOFING_PROOFING_FAIL = exports.POST_OIDC_PROOFING_PROOFING_FAIL = 'POST_OIDC_PROOFING_PROOFING_FAIL';
 	
 	function postOpenid() {
 	  return {
-	    type: POST_OPENID
+	    type: POST_OIDC_PROOFING_PROOFING
 	  };
 	}
 	
 	function postOpenidFail(err) {
 	  return {
-	    type: POST_OPENID_FAIL,
+	    type: POST_OIDC_PROOFING_PROOFING_FAIL,
 	    error: true,
 	    payload: {
 	      error: err,
