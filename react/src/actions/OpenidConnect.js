@@ -27,7 +27,7 @@ export function postOpenidFail (err) {
 
 // Async (thunk) action creators
 
-import { checkStatus } from "actions/common";
+import { checkStatus, ajaxHeaders } from "actions/common";
 
 export function fetchOpenidQRCode () {
   return (dispatch, getState) => {
@@ -54,13 +54,7 @@ export function fetchOpenidQRCode () {
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-        "Pragma": "no-cache"
-      },
+      headers: ajaxHeaders,
       body: JSON.stringify(data)
     })
     .then(checkStatus)

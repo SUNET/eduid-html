@@ -1,5 +1,5 @@
 
-import { checkStatus } from "actions/common";
+import { checkStatus, ajaxHeaders } from "actions/common";
 import { fetchUserdata } from "actions/PersonalData";
 
 export const GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
@@ -36,12 +36,7 @@ export function fetchConfig () {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-        "Pragma": "no-cache"
-      }
+      headers: ajaxHeaders
     })
     .then(checkStatus)
     .then(response => response.json())
