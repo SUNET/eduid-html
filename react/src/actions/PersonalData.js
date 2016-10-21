@@ -45,7 +45,7 @@ export function postUserdataFail (err) {
 
 // Async (thunk) action creators
 
-import { checkStatus } from "actions/common";
+import { checkStatus, ajaxHeaders } from "actions/common";
 
 export function fetchUserdata () {
   return function (dispatch) {
@@ -56,12 +56,7 @@ export function fetchUserdata () {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-        "Pragma": "no-cache"
-      }
+      headers: ajaxHeaders
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -89,12 +84,7 @@ export function saveUserdata () {
     window.fetch('/personal-data/user', {
       method: 'post',
       credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-        "Pragma": "no-cache"
-      },
+      headers: ajaxHeaders,
       body: JSON.stringify(data)
     })
     .then(checkStatus)

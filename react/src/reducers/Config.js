@@ -11,19 +11,19 @@ const configData = {
 
 let configReducer = (state=configData, action) => {
   switch (action.type) {
-    case actions.GET_CONFIG:
+    case actions.GET_JSCONFIG_CONFIG:
       return {
           ...state, 
           is_fetching: true,
           failed: false
       };
-    case actions.GET_CONFIG_SUCCESS:
+    case actions.GET_JSCONFIG_CONFIG_SUCCESS:
       return {
           ...action.payload,
           is_fetching: false,
           failed: false
       };
-    case actions.GET_CONFIG_FAIL:
+    case actions.GET_JSCONFIG_CONFIG_FAIL:
       return {
           ...state,
           is_fetching: false,

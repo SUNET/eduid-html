@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "043a22591e119d435437"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dd4e2e63dce400935265"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -29935,12 +29935,7 @@
 	      // To automatically send cookies only for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      }
+	      headers: _common.ajaxHeaders
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
 	    }).then(function (userdata) {
@@ -29967,12 +29962,7 @@
 	    __webpack_provided_window_dot_fetch('/personal-data/user', {
 	      method: 'post',
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      },
+	      headers: _common.ajaxHeaders,
 	      body: JSON.stringify(data)
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
@@ -30437,7 +30427,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(2), RootInstanceProvider = __webpack_require__(10), ReactMount = __webpack_require__(12), React = __webpack_require__(78); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30448,6 +30438,13 @@
 	  } else {
 	    throw new Error(response.statusText);
 	  }
+	};
+	
+	var ajaxHeaders = exports.ajaxHeaders = {
+	  'Accept': 'application/json',
+	  "Access-Control-Allow-Origin": "*",
+	  "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+	  "Pragma": "no-cache"
 	};
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(238); if (makeExportsHot(module, __webpack_require__(78))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "common.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -30611,17 +30608,17 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.GET_CONFIG:
+	    case actions.GET_JSCONFIG_CONFIG:
 	      return _extends({}, state, {
 	        is_fetching: true,
 	        failed: false
 	      });
-	    case actions.GET_CONFIG_SUCCESS:
+	    case actions.GET_JSCONFIG_CONFIG_SUCCESS:
 	      return _extends({}, action.payload, {
 	        is_fetching: false,
 	        failed: false
 	      });
-	    case actions.GET_CONFIG_FAIL:
+	    case actions.GET_JSCONFIG_CONFIG_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
 	        failed: true
@@ -30647,7 +30644,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.GET_CONFIG_FAIL = exports.GET_CONFIG_SUCCESS = exports.GET_CONFIG = undefined;
+	exports.GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG = undefined;
 	exports.getConfig = getConfig;
 	exports.getConfigFail = getConfigFail;
 	exports.fetchConfig = fetchConfig;
@@ -30656,19 +30653,19 @@
 	
 	var _PersonalData = __webpack_require__(235);
 	
-	var GET_CONFIG = exports.GET_CONFIG = 'GET_CONFIG';
-	var GET_CONFIG_SUCCESS = exports.GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';
-	var GET_CONFIG_FAIL = exports.GET_CONFIG_FAIL = 'GET_CONFIG_FAIL';
+	var GET_JSCONFIG_CONFIG = exports.GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
+	var GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
+	var GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 	
 	function getConfig() {
 	  return {
-	    type: GET_CONFIG
+	    type: GET_JSCONFIG_CONFIG
 	  };
 	}
 	
 	function getConfigFail(err) {
 	  return {
-	    type: GET_CONFIG_FAIL,
+	    type: GET_JSCONFIG_CONFIG_FAIL,
 	    error: true,
 	    payload: {
 	      error: err,
@@ -30683,16 +30680,11 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    return __webpack_provided_window_dot_fetch('/jsconfig/get-config', {
+	    return __webpack_provided_window_dot_fetch('/services/jsconfig/config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      }
+	      headers: _common.ajaxHeaders
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
 	    }).then(function (config) {
@@ -30741,17 +30733,17 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.POST_OPENID:
+	    case actions.POST_OIDC_PROOFING_PROOFING:
 	      return _extends({}, state, {
 	        is_fetching: true,
 	        failed: false
 	      });
-	    case actions.POST_OPENID_SUCCESS:
+	    case actions.POST_OIDC_PROOFING_PROOFING_SUCCESS:
 	      return _extends({}, action.payload, {
 	        is_fetching: false,
 	        failed: false
 	      });
-	    case actions.POST_OPENID_FAIL:
+	    case actions.POST_OIDC_PROOFING_PROOFING_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
 	        failed: true,
@@ -30778,7 +30770,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.POST_OPENID_FAIL = exports.POST_OPENID_SUCCESS = exports.POST_OPENID = undefined;
+	exports.POST_OIDC_PROOFING_PROOFING_FAIL = exports.POST_OIDC_PROOFING_PROOFING_SUCCESS = exports.POST_OIDC_PROOFING_PROOFING = undefined;
 	exports.postOpenid = postOpenid;
 	exports.postOpenidFail = postOpenidFail;
 	exports.fetchOpenidQRCode = fetchOpenidQRCode;
@@ -30797,19 +30789,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var POST_OPENID = exports.POST_OPENID = 'POST_OPENID';
-	var POST_OPENID_SUCCESS = exports.POST_OPENID_SUCCESS = 'POST_OPENID_SUCCESS';
-	var POST_OPENID_FAIL = exports.POST_OPENID_FAIL = 'POST_OPENID_FAIL';
+	var POST_OIDC_PROOFING_PROOFING = exports.POST_OIDC_PROOFING_PROOFING = 'POST_OIDC_PROOFING_PROOFING';
+	var POST_OIDC_PROOFING_PROOFING_SUCCESS = exports.POST_OIDC_PROOFING_PROOFING_SUCCESS = 'POST_OIDC_PROOFING_PROOFING_SUCCESS';
+	var POST_OIDC_PROOFING_PROOFING_FAIL = exports.POST_OIDC_PROOFING_PROOFING_FAIL = 'POST_OIDC_PROOFING_PROOFING_FAIL';
 	
 	function postOpenid() {
 	  return {
-	    type: POST_OPENID
+	    type: POST_OIDC_PROOFING_PROOFING
 	  };
 	}
 	
 	function postOpenidFail(err) {
 	  return {
-	    type: POST_OPENID_FAIL,
+	    type: POST_OIDC_PROOFING_PROOFING_FAIL,
 	    error: true,
 	    payload: {
 	      error: err,
@@ -30845,13 +30837,7 @@
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
 	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-Type': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      },
+	      headers: _common.ajaxHeaders,
 	      body: JSON.stringify(data)
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();

@@ -14,19 +14,19 @@ const openidData = {
 
 let openidConnectReducer = (state=openidData, action) => {
   switch (action.type) {
-    case actions.POST_OPENID:
+    case actions.POST_OIDC_PROOFING_PROOFING:
       return {
         ...state,
         is_fetching: true,
         failed: false
       };
-    case actions.POST_OPENID_SUCCESS:
+    case actions.POST_OIDC_PROOFING_PROOFING_SUCCESS:
       return {
         ...action.payload,
         is_fetching: false,
         failed: false
       };
-    case actions.POST_OPENID_FAIL:
+    case actions.POST_OIDC_PROOFING_PROOFING_FAIL:
       return {
         ...state,
         is_fetching: false,
