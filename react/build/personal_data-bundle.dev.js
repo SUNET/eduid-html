@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3a6a9479677da2c7bb50"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dd4e2e63dce400935265"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -29834,12 +29834,7 @@
 	      // To automatically send cookies only for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      }
+	      headers: _common.ajaxHeaders
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
 	    }).then(function (userdata) {
@@ -29866,12 +29861,7 @@
 	    __webpack_provided_window_dot_fetch('/personal-data/user', {
 	      method: 'post',
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      },
+	      headers: _common.ajaxHeaders,
 	      body: JSON.stringify(data)
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
@@ -30336,7 +30326,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(2), RootInstanceProvider = __webpack_require__(10), ReactMount = __webpack_require__(12), React = __webpack_require__(78); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30347,6 +30337,13 @@
 	  } else {
 	    throw new Error(response.statusText);
 	  }
+	};
+	
+	var ajaxHeaders = exports.ajaxHeaders = {
+	  'Accept': 'application/json',
+	  "Access-Control-Allow-Origin": "*",
+	  "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+	  "Pragma": "no-cache"
 	};
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(238); if (makeExportsHot(module, __webpack_require__(78))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "common.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -30582,16 +30579,11 @@
 	  return function (dispatch) {
 	    dispatch(getConfig());
 	
-	    return __webpack_provided_window_dot_fetch('/jsconfig/config', {
+	    return __webpack_provided_window_dot_fetch('/services/jsconfig/config', {
 	      // To automatically send cookies for the current domain,
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
-	      headers: {
-	        'Accept': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      }
+	      headers: _common.ajaxHeaders
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
 	    }).then(function (config) {
@@ -30744,13 +30736,7 @@
 	      // set credentials to 'same-origin'; use 'include' for CORS
 	      credentials: 'include',
 	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-Type': 'application/json',
-	        "Access-Control-Allow-Origin": "*",
-	        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-	        "Pragma": "no-cache"
-	      },
+	      headers: _common.ajaxHeaders,
 	      body: JSON.stringify(data)
 	    }).then(_common.checkStatus).then(function (response) {
 	      return response.json();
