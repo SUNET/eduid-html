@@ -32,7 +32,7 @@ export function fetchConfig () {
   return dispatch => {
     dispatch(getConfig());
 
-    return window.fetch('/jsconfig/config', {
+    return window.fetch('/services/jsconfig/config', {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
