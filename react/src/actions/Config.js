@@ -31,8 +31,11 @@ export function getConfigFail (err) {
 export function fetchConfig () {
   return dispatch => {
     dispatch(getConfig());
+    
+    const input = document.getElementById('jsconfig_url'),
+          jsconfig_url = input ? input.value : '/services/jsconfig/config';
 
-    return window.fetch('/services/jsconfig/config', {
+    return window.fetch(jsconfig_url, {
       // To automatically send cookies for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
