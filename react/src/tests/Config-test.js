@@ -46,7 +46,7 @@ describe("Config async actions", () => {
 
   it("Fetch config and dispatch action with result", (done) => {
 
-    fetchMock.get('/jsconfig/config',
+    fetchMock.get('/services/jsconfig/config',
        {
         type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
         payload: {param1: 'value 1'}
@@ -74,7 +74,7 @@ describe("Config async actions", () => {
 
   it("Try to fetch config but find server error", (done) => {
 
-    fetchMock.get('/jsconfig/config', 500);
+    fetchMock.get('/services/jsconfig/config', 500);
 
     const expectedActions = [
       {type: actions.GET_JSCONFIG_CONFIG},
@@ -110,7 +110,7 @@ describe("Config async actions", () => {
         }
       };
 
-    fetchMock.get('/jsconfig/config', errorResponse);
+    fetchMock.get('/services/jsconfig/config', errorResponse);
 
     const expectedActions = [
       {type: actions.GET_JSCONFIG_CONFIG},
