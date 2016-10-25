@@ -16,7 +16,7 @@ mv /root/nodesource.list /etc/apt/sources.list.d/
 apt-key add /root/nodesource.pub
 rm /root/nodesource.pub
 apt-get update
-apt-get install -y nodejs
+apt-get install -y nodejs bzip2
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
