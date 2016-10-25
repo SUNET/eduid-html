@@ -1,6 +1,7 @@
 # Created by .gitignore support plugin (hsz.mobi)
 .*.swp
 .*.swo
+.idea/
 node_modules/
 coverage/
 react/build/*.hot-update.js*
