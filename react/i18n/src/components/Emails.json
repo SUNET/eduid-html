@@ -1,0 +1,10 @@
+[
+  {
+    "id": "emails.email",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "emails.button_add",
+    "defaultMessage": "Add"
+  }
+]
