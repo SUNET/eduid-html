@@ -119,7 +119,7 @@ describe("Config async actions", () => {
 
     const store = mockStore({
       config: {param1: 'no value'},
-      openid_data: {qrcode: 'old code', nonce: 'old nonce'}
+      openid_data: {qr_img: 'old code', qr_code: 'old nonce'}
     });
 
     store.dispatch(actions.fetchConfig())

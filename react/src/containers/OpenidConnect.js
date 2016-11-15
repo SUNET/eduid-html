@@ -6,8 +6,8 @@ import { fetchOpenidQRCode } from "actions/OpenidConnect";
 
 const mapStateToProps = (state, props) => {
   return {
-    qrcode: state.openid_data.qrcode,
-    nonce: state.openid_data.nonce,
+    qr_img: state.openid_data.qr_img,
+    qr_code: state.openid_data.qr_code,
     is_fetching: state.openid_data.is_fetching,
     errorMsg: state.openid_data.error
   }
