@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dc3693f72f830ab84676"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5ae8e40783f6eb01581a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31994,8 +31994,8 @@
 	  failed: false,
 	  error: "",
 	  // as default, a gif with a single pixel.
-	  qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-	  nonce: ""
+	  qr_img: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+	  qr_code: ""
 	};
 	
 	var openidConnectReducer = function openidConnectReducer() {

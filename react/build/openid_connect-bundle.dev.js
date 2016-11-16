@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dc3693f72f830ab84676"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5ae8e40783f6eb01581a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31997,8 +31997,8 @@
 	  failed: false,
 	  error: "",
 	  // as default, a gif with a single pixel.
-	  qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-	  nonce: ""
+	  qr_img: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+	  qr_code: ""
 	};
 	
 	var openidConnectReducer = function openidConnectReducer() {
@@ -53196,8 +53196,8 @@
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
 	  return {
-	    qrcode: state.openid_data.qrcode,
-	    nonce: state.openid_data.nonce,
+	    qr_img: state.openid_data.qr_img,
+	    qr_code: state.openid_data.qr_code,
 	    is_fetching: state.openid_data.is_fetching,
 	    errorMsg: state.openid_data.error
 	  };
@@ -53289,11 +53289,11 @@
 	        _react2.default.createElement(
 	          'figure',
 	          null,
-	          _react2.default.createElement('img', { src: this.props.qrcode }),
+	          _react2.default.createElement('img', { src: this.props.qr_img }),
 	          _react2.default.createElement(
 	            'figcaption',
 	            null,
-	            this.props.nonce
+	            this.props.qr_code
 	          )
 	        )
 	      )
@@ -53306,8 +53306,8 @@
 	
 	
 	OpenidConnect.propTypes = {
-	  qrcode: _react.PropTypes.string,
-	  nonce: _react.PropTypes.string,
+	  qr_img: _react.PropTypes.string,
+	  qr_code: _react.PropTypes.string,
 	  errorMsg: _react.PropTypes.string,
 	  is_fetching: _react.PropTypes.bool,
 	  handleGetQRCode: _react.PropTypes.func
