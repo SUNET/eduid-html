@@ -63,7 +63,7 @@ export function fetchUserdata () {
     .then(userdata => dispatch(userdata))
     .catch(err => {
       console.log('eduID Error (fetching personal data)', err);
-      dispatch(getUserDataFail(err));
+      dispatch(getUserdataFail(err));
     });
   }
 }
