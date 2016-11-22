@@ -45,9 +45,8 @@ let Emails = React.createClass({
   }
 });
 
-PersonalData.propTypes = {
+Emails.propTypes = {
   emails: PropTypes.array
 }
 
-export default PersonalData;
-
+export default Emails;
