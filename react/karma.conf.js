@@ -17,25 +17,30 @@ webpackKarma.externals = {
   'react/lib/ExecutionEnvironment': true,
   'react/lib/ReactContext': true
 };
-webpackKarma.module.preLoaders = [
-  {
-    test: /\.js$/,
-    loader: 'isparta',
-    exclude: /(tests|node_modules)\//,
-  }
-];
-webpackKarma.isparta = {
-  embedSource: true,
-  noAutoWrap: true,
-  // these babel options will be passed only to isparta and not to babel-loader
-  babel: {
-    presets: ['es2015', 'react']
-  }
-};
+
+const nodebug = process.env.npm_lifecycle_script.indexOf('--debug') === -1
+
+if (nodebug) {
+  webpackKarma.module.preLoaders = [
+    {
+      test: /\.js$/,
+      loader: 'isparta',
+      exclude: /(tests|node_modules)\//,
+    }
+  ];
+  webpackKarma.isparta = {
+    embedSource: true,
+    noAutoWrap: true,
+    // these babel options will be passed only to isparta and not to babel-loader
+    babel: {
+      presets: ['es2015', 'react']
+    }
+  };
+}
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'PhantomJS' ], //run in Browsers
+    browsers: [ 'Chrome' ], //run in Browsers
     // Run each test in 3 browsers:
     // browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ], //run in Browsers
 
