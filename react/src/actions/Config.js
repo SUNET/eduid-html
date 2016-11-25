@@ -3,8 +3,8 @@ import { checkStatus, ajaxHeaders } from "actions/common";
 import { fetchUserdata } from "actions/PersonalData";
 
 export const GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
-export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
-export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
+export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_SERVICES_JSCONFIG_CONFIG_SUCCESS';
+export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_SERVICES_JSCONFIG_CONFIG_FAIL';
 
 
 export function getConfig () {
