@@ -92,7 +92,7 @@ export function saveUserdata () {
     .then(userdata => dispatch(userdata))
     .catch(err => {
       console.log('eduID Error (saving personal data)', err);
-      dispatch(postUserDataFail(err));
+      dispatch(postUserdataFail(err));
     });
   }
 }
