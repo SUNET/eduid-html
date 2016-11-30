@@ -1,5 +1,5 @@
 
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders } from "redux-saga";
 import { getUserData, getUserDataFail } from "actions/PersonalData";
 
 
