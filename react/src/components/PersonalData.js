@@ -70,6 +70,7 @@ let PersonalData = React.createClass({
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
               <Button bsStyle="primary"
+                      id="personal-data-button"
                       onClick={this.props.handleSave}>
                     {button_save}
               </Button>
