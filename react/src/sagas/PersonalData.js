@@ -1,6 +1,8 @@
 
+import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders } from "sagas/common";
 import { getUserData, getUserDataFail } from "actions/PersonalData";
+
 
 
 export function* requestPersonalData () {
