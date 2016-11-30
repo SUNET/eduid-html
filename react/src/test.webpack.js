@@ -5,5 +5,7 @@ var Promise = require('es6-promise').Promise;  // Promise polyfill
 
 var intl = require('intl');  // intl polyfill
 
+var babel = require("babel-polyfill");  // babel polyfill
+
 var context = require.context('.', true, /-test\.js$/); //make sure you have your directory and regex test set correctly!
 context.keys().forEach(context);

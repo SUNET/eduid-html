@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import PersonalData from 'components/PersonalData';
-import { saveUserdata, changeUserdata } from "actions/PersonalData";
+import { postUserdata, changeUserdata } from "actions/PersonalData";
 
 
 const mapStateToProps = (state, props) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleSave: (e) => {
-      dispatch(saveUserdata());
+      dispatch(postUserdata());
     },
     handleChange: function (e) {
       let data = {};
