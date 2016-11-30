@@ -18,13 +18,13 @@ let personalDataReducer = (state=personalData, action) => {
       return {
         ...state,
         is_fetching: true,
-        failed: false
+        failed: false,
       };
     case actions.GET_USERDATA_SUCCESS:
       return {
         ...action.payload,
         is_fetching: false,
-        failed: false
+        failed: false,
       };
     case actions.GET_USERDATA_FAIL:
       return {

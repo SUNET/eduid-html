@@ -1,6 +1,6 @@
 
 export const GET_USERDATA = 'GET_USERDATA';
-export const GET_USERDATA_SUCCESS = 'GET_USERDATA_SUCCESS';
+export const GET_USERDATA_SUCCESS = 'GET_PERSONAL_DATA_SERVICES_PERSONAL_DATA_USER_SUCCESS';
 export const GET_USERDATA_FAIL = 'GET_USERDATA_FAIL';
 export const CHANGE_USERDATA = 'CHANGE_USERDATA';
 export const POST_USERDATA = 'POST_USERDATA';
@@ -48,11 +48,12 @@ export function postUserdataFail (err) {
 import { checkStatus, ajaxHeaders } from "actions/common";
 
 export function fetchUserdata () {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(getUserdata());
-
+     let state = getState(),
+         url = state.config.PERSONAL_DATA_URL;
     // XXX take url from congfig
-    window.fetch('/personal-data/user', {
+     let promise = window.fetch(url, {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
@@ -63,8 +64,11 @@ export function fetchUserdata () {
     .then(userdata => dispatch(userdata))
     .catch(err => {
       console.log('eduID Error (fetching personal data)', err);
-      dispatch(getUserDataFail(err));
+      dispatch(getUserdataFail(err));
     });
+
+    return promise;
+
   }
 }
 
@@ -79,9 +83,10 @@ export function saveUserdata () {
             'surname': state.personal_data.surname,
             'display_name': state.personal_data.display_name,
             'language': state.personal_data.language
-        };
+        },
+        url = state.config.PERSONAL_DATA_URL;
 
-    window.fetch('/personal-data/user', {
+    let promise = window.fetch(url, {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,
@@ -94,5 +99,8 @@ export function saveUserdata () {
       console.log('eduID Error (saving personal data)', err);
       dispatch(postUserdataFail(err));
     });
+
+    return promise;
+
   }
 }
