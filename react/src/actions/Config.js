@@ -6,7 +6,6 @@ export const GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
 export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_SERVICES_JSCONFIG_CONFIG_SUCCESS';
 export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_SERVICES_JSCONFIG_CONFIG_FAIL';
 
-
 export function getConfig () {
   return {
     type: GET_JSCONFIG_CONFIG
@@ -44,6 +43,7 @@ export function fetchConfig () {
     .then(checkStatus)
     .then(response => response.json())
     .then(config => dispatch(config))
+    .then(() => dispatch(fetchUserdata())) //TODO: Review where we must put this action.
     .catch(err => {
       console.log('eduID Error (fetching config data)', err);
       dispatch(getConfigFail(err.toString()));

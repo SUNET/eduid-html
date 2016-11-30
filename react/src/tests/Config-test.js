@@ -169,7 +169,8 @@ describe("Config reducers", () => {
       {
         param1: 'new value',
         is_fetching: false,
-        failed: false
+        failed: false,
+        config: true,
       }
     );
   });
