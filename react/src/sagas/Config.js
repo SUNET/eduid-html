@@ -8,18 +8,20 @@ export function* requestConfig () {
     try {
         const input = document.getElementById('jsconfig_url'),
               jsconfig_url = input ? input.value : '/services/jsconfig/config';
-        yield call(fetchConfig, jsconfig_url);
+        console.log('Getting config from ' + jsconfig_url);
+        const config = yield call(fetchConfig, jsconfig_url);
+        yield put(config);
     } catch(error) {
+        console.log('Error fetching config: ' + error.toString());
         yield put(getConfigFail(error.toString()));
     }
 }
 
-function* fetchConfig (url) {
-    yield window.fetch(url, {
+function fetchConfig (url) {
+    return window.fetch(url, {
       credentials: 'include',
       headers: ajaxHeaders
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(config => put(config))
 }

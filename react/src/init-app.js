@@ -41,9 +41,9 @@ addLocaleData(locale);
 
 function* rootSaga() {
   yield [
-    take(configActions.GET_JSCONFIG_CONFIG, requestConfig),
-    take(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
-    take(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode)
