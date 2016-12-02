@@ -10,7 +10,9 @@ const mapStateToProps = (state, props) => {
     surname: state.personal_data.surname,
     display_name: state.personal_data.display_name,
     language: state.personal_data.language,
-    langs: state.config.AVAILABLE_LANGUAGES
+    langs: state.config.AVAILABLE_LANGUAGES,
+    is_fetching: state.personal_data.is_fetching,
+    errorMsg: state.personal_data.error
   }
 };
 
