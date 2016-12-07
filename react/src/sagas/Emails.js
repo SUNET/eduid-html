@@ -8,37 +8,38 @@ import { getEmails, getEmailsFail, postEmailFail } from "actions/Emails";
 export function* requestEmails () {
     try {
         yield put(getEmails());
-        const config = select(state => state.config);
-        yield call(fetchEmails, config);
+        const config = yield select(state => state.config);
+        const emails = yield call(fetchEmails, config);
+        yield put(emails);
     } catch(error) {
         yield put(getEmailsFail(error.toString()));
     }
 }
 
-function* fetchEmails (config) {
-    yield window.fetch(config.EMAILS_URL, {
+function fetchEmails (config) {
+    return window.fetch(config.EMAILS_URL + 'all', {
         credentials: 'include',
         headers: ajaxHeaders
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(emails => put(emails))
 }
 
 export function* saveEmail () {
     try {
-        const state = select(state => state),
+        const state = yield select(state => state),
               data = {
                 email: state.emails.email
               };
-        yield call(sendEmail, state.config, data);
+        const emails = yield call(sendEmail, state.config, data);
+        yield put(emails);
     } catch(error) {
         yield put(postUserDataFail(error.toString()));
     }
 }
 
-function* sendEmail (config, data) {
-    yield window.fetch(config.EMAILS_URL, {
+function sendEmail (config, data) {
+    return window.fetch(config.EMAILS_URL, {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,
@@ -46,5 +47,4 @@ function* sendEmail (config, data) {
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(emails => put(emails))
 }

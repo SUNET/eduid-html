@@ -16,17 +16,18 @@ export function* requestOpenidQRcode () {
         console.log('Getting QRCode for NIN: ' + nin);
 
         if (nin === 'no nin') {
-            put(postOpenidFail('Error: No NIN entered'));
+            yield put(postOpenidFail('Error: No NIN entered'));
         } else {
-            yield call(fetchQRcode, openid_url, data);
+            const oidcData = yield call(fetchQRcode, openid_url, data);
+            yield put(oidcData);
         }
     } catch(error) {
         yield put(postOpenidFail(error.toString()));
     }
 }
 
-function* fetchQRcode (url, data) {
-    yield window.fetch(url, {
+function fetchQRcode (url, data) {
+    return window.fetch(url, {
         credentials: 'include',
         method: 'POST',
         headers: ajaxHeaders,
@@ -34,5 +35,4 @@ function* fetchQRcode (url, data) {
     })
     .then(checkStatus)
     .then(response => response.json())
-    .then(oidcData => put(oidcData))
 }
