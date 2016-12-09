@@ -33,7 +33,7 @@ const TableList = React.createClass({
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {
           if (entry.primary) {
-            return (<tr className="emailrow" data-identifier={index}>
+            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
                         <span className="nobutton">{primary}</span>
@@ -43,29 +43,29 @@ const TableList = React.createClass({
                     </td>
                 </tr>);
           } else if (entry.confirmed) {
-            return (<tr className="emailrow" data-identifier={index}>
+            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="btn-link">
+                        <EduIDButton bsStyle="link">
                             {makePrimary}
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="btn-link">
+                        <EduIDButton bsStyle="link">
                             {remove}
                         </EduIDButton>
                     </td>
                 </tr>);
           } else {
-            return (<tr className="emailrow" data-identifier={index}>
+            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="btn-link">
+                        <EduIDButton bsStyle="link">
                             {pending}
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="btn-link">
+                        <EduIDButton bsStyle="link">
                             {remove}
                         </EduIDButton>
                     </td>

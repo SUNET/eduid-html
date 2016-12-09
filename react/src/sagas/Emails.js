@@ -29,7 +29,9 @@ export function* saveEmail () {
     try {
         const state = yield select(state => state),
               data = {
-                email: state.emails.email
+                email: state.emails.email,
+                confirmed: false,
+                primary: false
               };
         const emails = yield call(sendEmail, state.config, data);
         yield put(emails);
@@ -39,7 +41,7 @@ export function* saveEmail () {
 }
 
 function sendEmail (config, data) {
-    return window.fetch(config.EMAILS_URL, {
+    return window.fetch(config.EMAILS_URL + 'new', {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,
