@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Emails from 'components/Emails';
-import { postEmail, changeEmail, startConfirmation } from "actions/Emails";
+import { postEmail, changeEmail, startConfirmation, stopConfirmation } from "actions/Emails";
 
 
 const mapStateToProps = (state, props) => {
@@ -31,6 +31,9 @@ const mapDispatchToProps = (dispatch, props) => {
             email: e.target.parentNode.parentNode.getAttribute('data-object')
         };
         dispatch(startConfirmation(data));
+    },
+    handleStopConfirmation: function (e) {
+        dispatch(stopConfirmation());
     }
   }
 };

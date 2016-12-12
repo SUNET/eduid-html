@@ -62,6 +62,11 @@ let emailsReducer = (state=emailsData, action) => {
         ...state,
         confirming: action.payload.email
       };
+    case actions.STOP_CONFIRMATION:
+      return {
+        ...state,
+        confirming: ''
+      };
     default:
       return state;
   }

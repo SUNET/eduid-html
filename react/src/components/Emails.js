@@ -39,9 +39,6 @@ let Emails = React.createClass({
           }),
           placeholder = this.props.intl.formatMessage(msgs.placeholder);
 
-    let modalClasses = 'modal fade';
-    if (this.props.confirming) modalClasses = 'modal show';
-
     return (
         <div className="emailsview-form-container ">
             <TableList entries={this.props.emails}
@@ -66,7 +63,8 @@ let Emails = React.createClass({
             <ConfirmModal
                 title={confirmTitle}
                 placeholder={placeholder}
-                modalClasses={modalClasses} />
+                showModal={Boolean(this.props.confirming)}
+                closeModal={this.props.handleStopConfirmation} />
         </div>
     );
   }
@@ -79,7 +77,8 @@ Emails.propTypes = {
   confirming: PropTypes.string,
   handleChange: PropTypes.func,
   handleAdd: PropTypes.func,
-  handleStartConfirmation: PropTypes.func
+  handleStartConfirmation: PropTypes.func,
+  handleStopConfirmation: PropTypes.func
 }
 
 export default injectIntl(Emails);

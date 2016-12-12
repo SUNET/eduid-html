@@ -7,6 +7,7 @@ export const POST_EMAIL = 'POST_EMAIL';
 export const POST_EMAIL_SUCCESS = 'POST_EMAIL_SERVICES_EMAILS_NEW_SUCCESS';
 export const POST_EMAIL_FAIL = 'POST_EMAIL_SERVICES_EMAILS_NEW__FAIL';
 export const START_CONFIRMATION = 'START_CONFIRMATION';
+export const STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 
 
 export function getEmails () {
@@ -48,5 +49,11 @@ export function startConfirmation (data) {
   return {
     type: START_CONFIRMATION,
     payload: data
+  };
+}
+
+export function stopConfirmation () {
+  return {
+    type: STOP_CONFIRMATION
   };
 }

@@ -1,7 +1,7 @@
 
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, FormGroup, FormControl, HelpBlock } from 'react-bootstrap';
 
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
@@ -40,40 +40,41 @@ let ConfirmModal = React.createClass({
     if (this.props.is_fetching) spinning = true;
 
     return (
-      <div id="askDialog"
-           className={this.props.modalClasses}
+      <div id="emailConfirmDialog"
            tabIndex="-1"
            role="dialog"
            aria-labelledby="askDialogPrompt"
            aria-hidden="true"
            data-backdrop="true">
 
-            <Modal.Dialog>
+            <Modal show={this.props.showModal}>
                 <Modal.Header>
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <input className="xlarge"
-                           id="askDialogInput"
-                           name="xlInput"
-                           type="text"
-                           placeholder={this.props.placeholder} />
-                    <p>
+                    <FormGroup controlId="emailConfirmDialogInput"
+                               bsSize="small">
+                        <FormControl name="xlInput"
+                                     type="text"
+                                     placeholder={this.props.placeholder} />
+                        <FormControl.Feedback />
+                        <HelpBlock>
                         {lost_code}
                         <a href="#"
                            className="resend-code">
                             {resend_code}
                         </a>
-                    </p>
-                    <p className="extra-info"></p>
+                        </HelpBlock>
+                    </FormGroup>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button className="finish-button">
                          {finish}
                     </Button>
-                    <Button className="cancel-button">
+                    <Button className="cancel-button"
+                            onClick={this.props.closeModal}>
                          {cancel}
                     </Button>
                     <EduIDButton bsStyle="primary"
@@ -84,7 +85,7 @@ let ConfirmModal = React.createClass({
                     </EduIDButton>
                 </Modal.Footer>
 
-            </Modal.Dialog>
+            </Modal>
       </div>
     );
   }
@@ -94,6 +95,8 @@ ConfirmModal.propTypes = {
   title: PropTypes.object,
   placeholder: PropTypes.string,
   handleConfirm: PropTypes.func,
+  closeModal: PropTypes.func,
+  showModal: PropTypes.bool,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool
 }
