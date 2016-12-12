@@ -95,7 +95,7 @@ describe("Reducers", () => {
     given_name: '',
     surname: '',
     display_name: '',
-    language: ''
+    language: '',
   };
 
     it("Receives a GET_USERDATA action", () => {
@@ -139,7 +139,11 @@ it("Receives a GET_USERDATA_FAIL action", () => {
       personalDataReducer(
         mockState,
         {
-          type: actions.GET_USERDATA_FAIL
+          type: actions.GET_USERDATA_FAIL,
+          payload: {
+          error: "Bad error",
+          message: "Bad error"
+         }
         }
       )
     ).toEqual(
@@ -149,7 +153,8 @@ it("Receives a GET_USERDATA_FAIL action", () => {
         given_name: '',
         surname: '',
         display_name: '',
-        language: ''
+        language: '',
+        error: 'Bad error',
       }
     );
   });
@@ -215,7 +220,11 @@ it("Receives a POST_USERDATA_FAIL action", () => {
       personalDataReducer(
         mockState,
         {
-          type: actions.POST_USERDATA_FAIL
+          type: actions.POST_USERDATA_FAIL,
+          payload: {
+            error: "Bad error",
+            message: "Bad error"
+          }
         }
       )
     ).toEqual(
@@ -225,7 +234,8 @@ it("Receives a POST_USERDATA_FAIL action", () => {
         given_name: '',
         surname: '',
         display_name: '',
-        language: ''
+        language: '',
+        error: "Bad error"
       }
     );
   });
