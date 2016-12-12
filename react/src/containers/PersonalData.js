@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import PersonalData from 'components/PersonalData';
-import { saveUserdata, changeUserdata } from "actions/PersonalData";
+import { postUserdata, changeUserdata } from "actions/PersonalData";
 
 
 const mapStateToProps = (state, props) => {
@@ -10,7 +10,9 @@ const mapStateToProps = (state, props) => {
     surname: state.personal_data.surname,
     display_name: state.personal_data.display_name,
     language: state.personal_data.language,
-    langs: state.config.AVAILABLE_LANGUAGES
+    langs: state.config.AVAILABLE_LANGUAGES,
+    is_fetching: state.personal_data.is_fetching,
+    errorMsg: state.personal_data.error
   }
 };
 
@@ -18,7 +20,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleSave: (e) => {
-      dispatch(saveUserdata());
+      dispatch(postUserdata());
     },
     handleChange: function (e) {
       let data = {};

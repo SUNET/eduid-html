@@ -5,6 +5,7 @@ import * as actions from "actions/PersonalData";
 const personalData = {
     is_fetching: false,
     failed: false,
+    error: '',
     given_name: '',
     surname: '',
     display_name: '',
@@ -30,7 +31,8 @@ let personalDataReducer = (state=personalData, action) => {
       return {
         ...state,
         is_fetching: false,
-        failed: true
+        failed: true,
+        error: action.payload.message
       };
     case actions.CHANGE_USERDATA:
       return {
@@ -53,7 +55,8 @@ let personalDataReducer = (state=personalData, action) => {
       return {
         ...state,
         is_fetching: false,
-        failed: true
+        failed: true,
+        error: action.payload.message
       };
     default:
       return state;

@@ -4,9 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button } from 'react-bootstrap';
 import TextControl from 'components/TextControl';
+import TableList from 'components/TableList';
 
-//  XXX this interferes with the bootstrap in eduid-html
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/PersonalData.scss';
 
 
@@ -24,22 +23,25 @@ let Emails = React.createClass({
               defaultMessage={`Add`} />);
 
     return (
-        <div>
-          <form id="emailsview-form"
-                className="form-horizontal"
-                role="form">
-            <fieldset id="emails-form" className="tabpane">
-              <TextControl name="email"
-                           label={email_label}
-                           componentClass="input"
-                           type="text"
-                           handleChange={this.props.handleChange} />
-              <Button bsStyle="primary"
-                      onClick={this.props.handleAdd}>
-                    {button_add}
-              </Button>
-            </fieldset>
-          </form>
+        <div className="emailsview-form-container ">
+            <TableList entries={this.props.emails} />
+            <div className="form-content">
+              <form id="emailsview-form"
+                    className="form-horizontal"
+                    role="form">
+                <fieldset id="emails-form" className="tabpane">
+                  <TextControl name="email"
+                               label={email_label}
+                               componentClass="input"
+                               type="text"
+                               handleChange={this.props.handleChange} />
+                  <Button bsStyle="primary"
+                          onClick={this.props.handleAdd}>
+                        {button_add}
+                  </Button>
+                </fieldset>
+              </form>
+            </div>
         </div>
     );
   }

@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import OpenidConnect from 'components/OpenidConnect';
-import { fetchOpenidQRCode } from "actions/OpenidConnect";
+import { postOpenid } from "actions/OpenidConnect";
 
 
 const mapStateToProps = (state, props) => {
@@ -17,7 +17,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleGetQRCode: function (e) {
-      dispatch(fetchOpenidQRCode());
+      dispatch(postOpenid());
     }
   }
 };

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "tl.primary",
+    "defaultMessage": "PRIMARY"
+  },
+  {
+    "id": "tl.make_primary",
+    "defaultMessage": "MAKE PRIMARY"
+  },
+  {
+    "id": "tl.remove",
+    "defaultMessage": "REMOVE"
+  },
+  {
+    "id": "tl.pending",
+    "defaultMessage": "PENDING CONFIRMATION"
+  }
+]

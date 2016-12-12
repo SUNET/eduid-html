@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Emails from 'components/Emails';
-import { addEmail, changeEmail } from "actions/Emails";
+import { postEmail, changeEmail } from "actions/Emails";
 
 
 const mapStateToProps = (state, props) => {
@@ -14,7 +14,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleAdd: (e) => {
-      dispatch(addEmail());
+      dispatch(postEmail());
     },
     handleChange: function (e) {
       let data = {

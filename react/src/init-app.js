@@ -10,17 +10,20 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import createSagaMiddleware, { take } from 'redux-saga'
-import { call, put } from 'redux-saga/effects'
+import createSagaMiddleware, { take, takeEvery } from 'redux-saga'
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware } from "redux";
 import eduIDApp from "./store";
-import { fetchConfig } from "actions/Config";
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
-import { requestPersonalData } from "sagas/PersonalData";
+import * as emailActions from "actions/Emails";
+import * as openidActions from "actions/OpenidConnect";
+import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
+import { requestEmails, saveEmail } from "sagas/Emails";
+import { requestConfig } from "sagas/Config";
+import { requestOpenidQRcode } from "sagas/OpenidConnect";
 
 /* i18n */
 
@@ -38,7 +41,12 @@ addLocaleData(locale);
 
 function* rootSaga() {
   yield [
-    take(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData)
+    takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeEvery(pdataActions.POST_USERDATA, savePersonalData),
+    takeEvery(emailActions.POST_EMAIL, saveEmail),
+    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode)
   ];
 }
 
@@ -64,7 +72,7 @@ const init_app = function (component, target) {
                 </IntlProvider>
               </Provider> );
 
-  ReactDOM.render(app, target, () => store.dispatch(fetchConfig()));
+  ReactDOM.render(app, target, () => store.dispatch(configActions.getConfig()));
 };
 
 export default init_app;

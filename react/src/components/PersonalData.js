@@ -2,8 +2,8 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Button } from 'react-bootstrap';
 import TextControl from 'components/TextControl';
+import EduIDButton from 'components/EduIDButton';
 
 //  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -39,6 +39,9 @@ let PersonalData = React.createClass({
               id="button_save"
               defaultMessage={`Save`} />);
 
+    let spinning = false;
+    if (this.props.is_fetching) spinning = true;
+
     return (
         <div>
           <form id="personaldataview-form"
@@ -69,11 +72,12 @@ let PersonalData = React.createClass({
                            componentClass="select"
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
-              <Button bsStyle="primary"
+              <EduIDButton bsStyle="primary"
                       id="personal-data-button"
+                      spinning={spinning}
                       onClick={this.props.handleSave}>
                     {button_save}
-              </Button>
+              </EduIDButton>
             </fieldset>
           </form>
         </div>
@@ -86,7 +90,9 @@ PersonalData.propTypes = {
   surname: PropTypes.string,
   display_name: PropTypes.string,
   language: PropTypes.string,
-  langs: PropTypes.array
+  langs: PropTypes.array,
+  errorMsg: PropTypes.string,
+  is_fetching: PropTypes.bool
 }
 
 export default PersonalData;
