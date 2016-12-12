@@ -38,98 +38,6 @@ describe("Config Actions", () => {
 const middlewares = [ thunkMiddleware ];
 const mockStore = configureStore(middlewares);
 
-describe("Config async actions", () => {
-
-  afterEach(() => {
-    fetchMock.restore()
-  });
-
-  it("Fetch config and dispatch action with result", (done) => {
-
-    fetchMock.get('/services/jsconfig/config',
-       {
-        type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
-        payload: {param1: 'value 1'}
-      });
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      {type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
-       payload: {
-         param1: 'value 1'
-       }
-      }
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-
-  it("Try to fetch config but find server error", (done) => {
-
-    fetchMock.get('/services/jsconfig/config', 500);
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      {
-        type: actions.GET_JSCONFIG_CONFIG_FAIL,
-        error: true,
-        payload: {
-          error: 'Error: Internal Server Error',
-          message: 'Error: Internal Server Error'
-        }
-      }
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-
-  it("Try to fetch config but server returns error", (done) => {
-
-    const errorResponse = {
-        type: actions.GET_JSCONFIG_CONFIG_FAIL,
-        error: true,
-        payload: {
-          error: 'Terrible Error',
-          message: 'Terrible Error'
-        }
-      };
-
-    fetchMock.get('/services/jsconfig/config', errorResponse);
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      errorResponse
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-      openid_data: {qrcode: 'old code', nonce: 'old nonce'}
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-});
-
 
 describe("Config reducers", () => {
 
@@ -151,6 +59,7 @@ describe("Config reducers", () => {
       {
         param1: 'old value',
         is_fetching: true,
+        is_configured: false,
         failed: false
       }
     );
@@ -170,7 +79,7 @@ describe("Config reducers", () => {
         param1: 'new value',
         is_fetching: false,
         failed: false,
-        config: true,
+        is_configured: true,
       }
     );
   });
@@ -193,6 +102,7 @@ describe("Config reducers", () => {
         param1: 'old value',
         is_fetching: false,
         failed: true,
+        is_configured: false,
       }
     );
   });
