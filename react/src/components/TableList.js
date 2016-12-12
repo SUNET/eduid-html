@@ -33,7 +33,8 @@ const TableList = React.createClass({
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {
           if (entry.primary) {
-            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
+            return (<tr className="emailrow"
+                        key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
                         <span className="nobutton">{primary}</span>
@@ -43,7 +44,10 @@ const TableList = React.createClass({
                     </td>
                 </tr>);
           } else if (entry.confirmed) {
-            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
+            return (<tr className="emailrow"
+                        data-identifier={index}
+                        data-object={entry.email}
+                        key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
                         <EduIDButton bsStyle="link">
@@ -57,10 +61,14 @@ const TableList = React.createClass({
                     </td>
                 </tr>);
           } else {
-            return (<tr className="emailrow" data-identifier={index} key={entry.email}>
+            return (<tr className="emailrow"
+                        data-identifier={index}
+                        data-object={entry.email}
+                        key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="link">
+                        <EduIDButton bsStyle="link"
+                                     onClick={this.props.handleStartConfirmation}>
                             {pending}
                         </EduIDButton>
                     </td>
@@ -86,7 +94,8 @@ const TableList = React.createClass({
 });
 
 TableList.PropTypes = {
-    entries: PropTypes.array
+    entries: PropTypes.array,
+    handleStartConfirmation: PropTypes.func
 }
 
 export default TableList;

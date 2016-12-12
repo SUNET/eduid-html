@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cm.lost_code",
+    "defaultMessage": "Lost your confirmation code?"
+  },
+  {
+    "id": "cm.resend_code",
+    "defaultMessage": "Resend confirmation code"
+  },
+  {
+    "id": "cm.ok",
+    "defaultMessage": "OK"
+  },
+  {
+    "id": "cm.finish",
+    "defaultMessage": "FINISH"
+  },
+  {
+    "id": "cm.cancel",
+    "defaultMessage": "CANCEL"
+  }
+]

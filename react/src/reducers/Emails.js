@@ -5,6 +5,8 @@ import * as actions from "actions/Emails";
 const emailsData = {
     is_fetching: false,
     failed: false,
+    confirming: '',
+    error: '',
     emails: [],
     email: '',
 };
@@ -22,7 +24,8 @@ let emailsReducer = (state=emailsData, action) => {
       return {
         ...action.payload,
         is_fetching: false,
-        failed: false
+        failed: false,
+        confirming: ''
       };
     case actions.GET_EMAILS_FAIL:
       return {
@@ -45,13 +48,19 @@ let emailsReducer = (state=emailsData, action) => {
       return {
         ...action.payload,
         is_fetching: false,
-        failed: false
+        failed: false,
+        confirming: ''
       };
     case actions.POST_EMAIL_FAIL:
       return {
         ...state,
         is_fetching: false,
         failed: true
+      };
+    case actions.START_CONFIRMATION:
+      return {
+        ...state,
+        confirming: action.payload.email
       };
     default:
       return state;

@@ -1,12 +1,13 @@
 
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
-import { Button } from 'react-bootstrap';
+import EduIDButton from 'components/EduIDButton';
 import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
+import ConfirmModal from 'components/ConfirmModal';
 
-import 'style/PersonalData.scss';
+import 'style/Emails.scss';
 
 
 let Emails = React.createClass({
@@ -17,14 +18,34 @@ let Emails = React.createClass({
             <FormattedMessage
               id="emails.email"
               defaultMessage={`Email`} />),
+
           button_add = (
             <FormattedMessage
               id="emails.button_add"
-              defaultMessage={`Add`} />);
+              defaultMessage={`Add`} />),
+
+          confirmTitle = (
+            <FormattedMessage
+              id="emails.confirm_email_title"
+              defaultMessage={`Check your email inbox for {email} for further instructions`}
+              values={{email: this.props.confirming}}/>),
+
+          msgs = defineMessages({
+              placeholder: {
+                  id: "emails.confirm_email_placeholder",
+                  defaultMessage: "Email confirmation code",
+                  description: "Placeholder for email text input"
+              }
+          }),
+          placeholder = this.props.intl.formatMessage(msgs.placeholder);
+
+    let modalClasses = 'modal fade';
+    if (this.props.confirming) modalClasses = 'modal show';
 
     return (
         <div className="emailsview-form-container ">
-            <TableList entries={this.props.emails} />
+            <TableList entries={this.props.emails}
+                       handleStartConfirmation={this.props.handleStartConfirmation} />
             <div className="form-content">
               <form id="emailsview-form"
                     className="form-horizontal"
@@ -35,20 +56,30 @@ let Emails = React.createClass({
                                componentClass="input"
                                type="text"
                                handleChange={this.props.handleChange} />
-                  <Button bsStyle="primary"
+                  <EduIDButton bsStyle="primary"
                           onClick={this.props.handleAdd}>
                         {button_add}
-                  </Button>
+                  </EduIDButton>
                 </fieldset>
               </form>
             </div>
+            <ConfirmModal
+                title={confirmTitle}
+                placeholder={placeholder}
+                modalClasses={modalClasses} />
         </div>
     );
   }
 });
 
 Emails.propTypes = {
-  emails: PropTypes.array
+  intl: intlShape.isRequired,
+  emails: PropTypes.array,
+  errorMsg: PropTypes.string,
+  confirming: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleAdd: PropTypes.func,
+  handleStartConfirmation: PropTypes.func
 }
 
-export default Emails;
+export default injectIntl(Emails);
