@@ -61,7 +61,7 @@ let ConfirmModal = React.createClass({
                         <FormControl.Feedback />
                         <HelpBlock>
                         {lost_code}
-                        <a href="#"
+                        <a href="#" onClick={this.props.handleResendCode}
                            className="resend-code">
                             {resend_code}
                         </a>
@@ -95,6 +95,7 @@ ConfirmModal.propTypes = {
   title: PropTypes.object,
   placeholder: PropTypes.string,
   handleConfirm: PropTypes.func,
+  handleResendCode: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
   errorMsg: PropTypes.string,

@@ -64,7 +64,8 @@ let Emails = React.createClass({
                 title={confirmTitle}
                 placeholder={placeholder}
                 showModal={Boolean(this.props.confirming)}
-                closeModal={this.props.handleStopConfirmation} />
+                closeModal={this.props.handleStopConfirmation}
+                handleResendCode={this.props.handleResend} />
         </div>
     );
   }
@@ -76,6 +77,7 @@ Emails.propTypes = {
   errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   handleChange: PropTypes.func,
+  handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
   handleStartConfirmation: PropTypes.func,
   handleStopConfirmation: PropTypes.func

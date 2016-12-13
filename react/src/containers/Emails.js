@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Emails from 'components/Emails';
-import { postEmail, changeEmail, startConfirmation, stopConfirmation } from "actions/Emails";
+import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode } from "actions/Emails";
 
 
 const mapStateToProps = (state, props) => {
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch, props) => {
             email: e.target.value
         };
         dispatch(changeEmail(data));
+    },
+    handleResend: function (e) {
+        dispatch(startResendEmailCode());
     },
     handleStartConfirmation: function (e) {
         const data = {

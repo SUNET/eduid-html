@@ -5,6 +5,7 @@ import * as actions from "actions/Emails";
 const emailsData = {
     is_fetching: false,
     failed: false,
+    resending: false,
     confirming: '',
     error: '',
     emails: [],
@@ -17,15 +18,13 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.GET_EMAILS:
       return {
         ...state,
-        is_fetching: true,
-        failed: false
+        is_fetching: true
       };
     case actions.GET_EMAILS_SUCCESS:
       return {
+        ...state,
         ...action.payload,
-        is_fetching: false,
-        failed: false,
-        confirming: ''
+        is_fetching: false
       };
     case actions.GET_EMAILS_FAIL:
       return {
@@ -41,15 +40,13 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.POST_EMAIL:
       return {
         ...state,
-        is_fetching: true,
-        failed: false
+        is_fetching: true
       };
     case actions.POST_EMAIL_SUCCESS:
       return {
+        ...state,
         ...action.payload,
-        is_fetching: false,
-        failed: false,
-        confirming: ''
+        is_fetching: false
       };
     case actions.POST_EMAIL_FAIL:
       return {
@@ -66,6 +63,11 @@ let emailsReducer = (state=emailsData, action) => {
       return {
         ...state,
         confirming: ''
+      };
+    case actions.START_RESEND_EMAIL_CODE:
+      return {
+        ...state,
+        resending: true
       };
     default:
       return state;

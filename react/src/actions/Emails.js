@@ -8,6 +8,8 @@ export const POST_EMAIL_SUCCESS = 'POST_EMAIL_SERVICES_EMAILS_NEW_SUCCESS';
 export const POST_EMAIL_FAIL = 'POST_EMAIL_SERVICES_EMAILS_NEW__FAIL';
 export const START_CONFIRMATION = 'START_CONFIRMATION';
 export const STOP_CONFIRMATION = 'STOP_CONFIRMATION';
+export const START_RESEND_EMAIL_CODE = 'START_RESEND_EMAIL_CODE'
+export const START_RESEND_EMAIL_CODE_FAIL = 'START_RESEND_EMAIL_CODE_FAIL'
 
 
 export function getEmails () {
@@ -55,5 +57,19 @@ export function startConfirmation (data) {
 export function stopConfirmation () {
   return {
     type: STOP_CONFIRMATION
+  };
+}
+
+export function startResendEmailCode () {
+  return {
+    type: START_RESEND_EMAIL_CODE
+  };
+}
+
+export function resendEmailCodeFail (err) {
+  return {
+    type: START_RESEND_EMAIL_CODE_FAIL,
+    error: true,
+    payload: new Error(err)
   };
 }
