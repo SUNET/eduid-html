@@ -5,9 +5,15 @@ import * as actions from "actions/Emails";
 const emailsData = {
     is_fetching: false,
     failed: false,
-    resending: false,
-    confirming: '',
     error: '',
+    message: '',
+    resending: {
+      is_fetching: false,
+      failed: false,
+      error: {},
+      message: ''
+    },
+    confirming: '',
     emails: [],
     email: '',
 };
@@ -67,7 +73,27 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.START_RESEND_EMAIL_CODE:
       return {
         ...state,
-        resending: true
+        resending: {is_fetching: true}
+      };
+    case actions.START_RESEND_EMAIL_CODE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: 'emails.resend_success'
+        }
+      };
+    case actions.START_RESEND_EMAIL_CODE_FAIL:
+      return {
+        ...state,
+        resending: {
+          is_fetching: false,
+          failed: true,
+          error: action.payload.error
+        }
       };
     default:
       return state;

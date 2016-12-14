@@ -1,8 +1,8 @@
 
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Button, Modal, FormGroup, FormControl, HelpBlock } from 'react-bootstrap';
+import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
+import _ from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 
@@ -10,34 +10,20 @@ import EduIDButton from 'components/EduIDButton';
 let ConfirmModal = React.createClass({
 
   render: function () {
-    // i18n messages
-    const lost_code = (
-            <FormattedMessage
-              id="cm.lost_code"
-              defaultMessage={`Lost your confirmation code?`} />),
 
-          resend_code = (
-            <FormattedMessage
-              id="cm.resend_code"
-              defaultMessage={`Resend confirmation code`} />),
+    let spinning = false,
+        msgid, msg, alertElem;
 
-          ok = (
-            <FormattedMessage
-              id="cm.ok"
-              defaultMessage={`OK`} />),
-
-          finish = (
-            <FormattedMessage
-              id="cm.finish"
-              defaultMessage={`FINISH`} />),
-
-          cancel = (
-            <FormattedMessage
-              id="cm.cancel"
-              defaultMessage={`CANCEL`} />);
-
-    let spinning = false;
     if (this.props.is_fetching) spinning = true;
+    if (this.props.resending.is_fetching) spinning = true;
+    if (this.props.resending.failed) {
+      msg= _.getMsg(this.props.resending.error.form);
+      alertElem = ( <Alert bsStyle="danger">{msg}</Alert> );
+    }
+    if (this.props.resending.message) {
+      msg = _.getMsg(this.props.resending.message, {email: this.props.confirming});
+      alertElem = ( <Alert bsStyle="warning">{msg}</Alert> );
+    }
 
     return (
       <div id="emailConfirmDialog"
@@ -53,6 +39,7 @@ let ConfirmModal = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
+                    {alertElem}
                     <FormGroup controlId="emailConfirmDialogInput"
                                bsSize="small">
                         <FormControl name="xlInput"
@@ -60,10 +47,10 @@ let ConfirmModal = React.createClass({
                                      placeholder={this.props.placeholder} />
                         <FormControl.Feedback />
                         <HelpBlock>
-                        {lost_code}
+                        {_.getMsg('cm.lost_code')}
                         <a href="#" onClick={this.props.handleResendCode}
                            className="resend-code">
-                            {resend_code}
+                            {_.getMsg('cm.resend_code')}
                         </a>
                         </HelpBlock>
                     </FormGroup>
@@ -71,17 +58,17 @@ let ConfirmModal = React.createClass({
 
                 <Modal.Footer>
                     <Button className="finish-button">
-                         {finish}
+                         {_.getMsg('cm.finish')}
                     </Button>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal}>
-                         {cancel}
+                         {_.getMsg('cm.cancel')}
                     </Button>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
                           spinning={spinning}
                           onClick={this.props.handleConfirm}>
-                        {ok}
+                        {_.getMsg('cm.ok')}
                     </EduIDButton>
                 </Modal.Footer>
 
@@ -95,6 +82,8 @@ ConfirmModal.propTypes = {
   title: PropTypes.object,
   placeholder: PropTypes.string,
   handleConfirm: PropTypes.func,
+  confirming: PropTypes.string,
+  resending: PropTypes.object,
   handleResendCode: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,

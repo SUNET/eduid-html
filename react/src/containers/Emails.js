@@ -9,7 +9,8 @@ const mapStateToProps = (state, props) => {
     emails: state.emails.emails,
     is_fetching: state.emails.is_fetching,
     errorMsg: state.emails.error,
-    confirming: state.emails.confirming
+    confirming: state.emails.confirming,
+    resending: state.emails.resending
   }
 };
 

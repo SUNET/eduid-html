@@ -1,7 +1,7 @@
 
 import React, { PropTypes } from 'react';
-import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
+import I18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
@@ -13,31 +13,6 @@ import 'style/Emails.scss';
 let Emails = React.createClass({
 
   render: function () {
-    // i18n messages
-    const email_label = (
-            <FormattedMessage
-              id="emails.email"
-              defaultMessage={`Email`} />),
-
-          button_add = (
-            <FormattedMessage
-              id="emails.button_add"
-              defaultMessage={`Add`} />),
-
-          confirmTitle = (
-            <FormattedMessage
-              id="emails.confirm_email_title"
-              defaultMessage={`Check your email inbox for {email} for further instructions`}
-              values={{email: this.props.confirming}}/>),
-
-          msgs = defineMessages({
-              placeholder: {
-                  id: "emails.confirm_email_placeholder",
-                  defaultMessage: "Email confirmation code",
-                  description: "Placeholder for email text input"
-              }
-          }),
-          placeholder = this.props.intl.formatMessage(msgs.placeholder);
 
     return (
         <div className="emailsview-form-container ">
@@ -49,33 +24,35 @@ let Emails = React.createClass({
                     role="form">
                 <fieldset id="emails-form" className="tabpane">
                   <TextControl name="email"
-                               label={email_label}
+                               label=<I18n msgid='emails.email_label'>
                                componentClass="input"
                                type="text"
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
                           onClick={this.props.handleAdd}>
-                        {button_add}
+                        <I18n msgid='emails.button_add' />
                   </EduIDButton>
                 </fieldset>
               </form>
             </div>
             <ConfirmModal
-                title={confirmTitle}
-                placeholder={placeholder}
+                title=<I18n msgid='emails.confirm_title' />
+                placeholder=<I18n msgid='emails.placeholder' />
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
-                handleResendCode={this.props.handleResend} />
+                handleResendCode={this.props.handleResend}
+                resending={this.props.resending}
+                confirming={this.props.confirming} />
         </div>
     );
   }
 });
 
 Emails.propTypes = {
-  intl: intlShape.isRequired,
   emails: PropTypes.array,
   errorMsg: PropTypes.string,
   confirming: PropTypes.string,
+  resending: PropTypes.object,
   handleChange: PropTypes.func,
   handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
@@ -83,4 +60,4 @@ Emails.propTypes = {
   handleStopConfirmation: PropTypes.func
 }
 
-export default injectIntl(Emails);
+export default Emails;
