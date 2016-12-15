@@ -1,32 +1,86 @@
 
-import React, { PropTypes } from 'react';
+// Inspired by react-intl's `injectIntl()` HOC factory function implementation:
+// https://github.com/yahoo/react-intl
+
+import React, {Component, PropTypes} from 'react';
+import invariant from 'invariant';
 import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
+function getDisplayName(Component) {
+    return Component.displayName || Component.name || 'Component';
+}
 
-const I18n = React.createClass({
+function invariantIntlContext({intl} = {}) {
+    invariant(intl,
+        '[React Intl] Could not find required `intl` object. ' +
+        '<IntlProvider> needs to exist in the component ancestry.'
+    );
+}
 
-    propTypes: {
-        intl: intlShape.isRequired,
-        msgid: PropTypes.string
-        values: PropTypes.object
-    },
+export default function i18n(WrappedComponent, options = {}) {
+    const {
+        intlPropName = 'intl',
+        l10nPropName = 'l10n',
+        withRef      = false,
+    } = options;
 
-    render: (msgid, values) => {
-        if (msgs[msgid] !== undefined) {
-            if (values !== undefined) {
-                return msgs[msgid](values);
-            } else {
-                return msgs[msgid];
-            }
-        } else if (unformatted[msgid] !== undefined) {
-            return this.props.intl.formatMessage(unformated[msgid], values);
-        } else {
-            return 'UNKNOWN MESSAGE ID'
+    WrappedComponent.propTypes['l10n'] = PropTypes.func;
+
+    class InjectIntl extends Component {
+        constructor(props, context) {
+            super(props, context);
+            invariantIntlContext(context);
+        }
+
+        getWrappedInstance() {
+            invariant(withRef,
+                '[React Intl] To access the wrapped instance, ' +
+                'the `{withRef: true}` option must be set when calling: ' +
+                '`injectIntl()`'
+            );
+
+            return this.refs.wrappedInstance;
+        }
+
+        render() {
+
+            const l10n = (msgid, values) => {
+                if (msgs[msgid] !== undefined) {
+                    if (values !== undefined) {
+                        return msgs[msgid](values);
+                    } else {
+                        return msgs[msgid];
+                    }
+                } else if (unformatted[msgid] !== undefined) {
+                    return this.context.intl.formatMessage(unformatted[msgid], values);
+                } else {
+                    return 'UNKNOWN MESSAGE ID'
+                }
+            };
+
+            return (
+                <WrappedComponent
+                    {...this.props}
+                    {...{[intlPropName]: this.context.intl}}
+                    {...{[l10nPropName]: l10n}}
+                    ref={withRef ? 'wrappedInstance' : null}
+                />
+            );
         }
     }
-});
 
-export default injectIntl(I18n);
+    InjectIntl.displayName = `InjectIntl(${getDisplayName(WrappedComponent)})`;
+
+    InjectIntl.contextTypes = {
+        intl: intlShape,
+        l10n: PropTypes.func
+    };
+
+    InjectIntl.WrappedComponent = WrappedComponent;
+
+    return InjectIntl;
+}
+
 
 const msgs = {
     /************************/
@@ -37,6 +91,11 @@ const msgs = {
         <FormattedMessage
             id="out_of_sync"
             defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
+
+    "button_save": (
+        <FormattedMessage
+          id="button_save"
+          defaultMessage={`Save`} />),
 
     /************************/
     /* ConfirmModal *********/
@@ -68,6 +127,31 @@ const msgs = {
             defaultMessage={`CANCEL`} />),
 
     /************************/
+    /* TABLE LIST ***********/
+    /************************/
+
+    "tl.primary": (
+        <FormattedMessage
+          id="tl.primary"
+          defaultMessage={`PRIMARY`} />),
+
+    "tl.make_primary": (
+        <FormattedMessage
+          id="tl.make_primary"
+          defaultMessage={`MAKE PRIMARY`} />),
+
+    "tl.remove": (
+        <FormattedMessage
+          id="tl.remove"
+          defaultMessage={`REMOVE`} />),
+
+    "tl.pending": (
+        <FormattedMessage
+          id="tl.pending"
+          defaultMessage={`PENDING CONFIRMATION`} />),
+
+
+    /************************/
     /* Emails ***************/
     /************************/
 
@@ -92,6 +176,40 @@ const msgs = {
           id="emails.confirm_email_title"
           defaultMessage={`Check your email inbox for {email} for further instructions`}
           values={values} />),
+
+    /************************/
+    /* OIDC *****************/
+    /************************/
+
+    'oc.get_qrcode': (
+        <FormattedMessage
+          id="oc.get_qrcode"
+          defaultMessage={`CONFIRM USING SE-LEG`} />),
+
+    /************************/
+    /* PERSONAL DATA ********/
+    /************************/
+
+    "pd.given_name": (
+        <FormattedMessage
+          id="pd.given_name"
+          defaultMessage={`Given Name`} />),
+
+    "pd.surname": (
+        <FormattedMessage
+          id="pd.surname"
+          defaultMessage={`Surname`} />),
+
+    "pd.display_name": (
+        <FormattedMessage
+          id="pd.display_name"
+          defaultMessage={`Display Name`} />),
+
+    "pd.language": (
+        <FormattedMessage
+          id="pd.language"
+          defaultMessage={`Language`} />),
+
 
 };
 

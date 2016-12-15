@@ -1,7 +1,7 @@
 
 import React, { PropTypes } from 'react';
 
-import I18n from 'i18n-messages';
+import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
@@ -24,20 +24,20 @@ let Emails = React.createClass({
                     role="form">
                 <fieldset id="emails-form" className="tabpane">
                   <TextControl name="email"
-                               label=<I18n msgid='emails.email_label'>
+                               label={this.props.l10n('emails.email_label')}
                                componentClass="input"
                                type="text"
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
                           onClick={this.props.handleAdd}>
-                        <I18n msgid='emails.button_add' />
+                      {this.props.l10n('emails.button_add')}
                   </EduIDButton>
                 </fieldset>
               </form>
             </div>
             <ConfirmModal
-                title=<I18n msgid='emails.confirm_title' />
-                placeholder=<I18n msgid='emails.placeholder' />
+                title={this.props.l10n('emails.confirm_title', {email: this.props.confirming})}
+                placeholder={this.props.l10n('emails.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
@@ -60,4 +60,4 @@ Emails.propTypes = {
   handleStopConfirmation: PropTypes.func
 }
 
-export default Emails;
+export default i18n(Emails);

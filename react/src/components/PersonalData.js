@@ -1,7 +1,7 @@
 
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
 
+import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 
@@ -13,31 +13,6 @@ import 'style/PersonalData.scss';
 let PersonalData = React.createClass({
 
   render: function () {
-    // i18n messages
-    const givenname_label = (
-            <FormattedMessage
-              id="pd.given_name"
-              defaultMessage={`Given Name`} />),
-
-          surname_label = (
-            <FormattedMessage
-              id="pd.surname"
-              defaultMessage={`Surname`} />),
-
-          displayname_label = (
-            <FormattedMessage
-              id="pd.display_name"
-              defaultMessage={`Display Name`} />),
-
-          language_label = (
-            <FormattedMessage
-              id="pd.language"
-              defaultMessage={`Language`} />),
-
-          button_save = (
-            <FormattedMessage
-              id="button_save"
-              defaultMessage={`Save`} />);
 
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
@@ -50,32 +25,32 @@ let PersonalData = React.createClass({
             <fieldset id="personal-data-form" className="tabpane">
               <TextControl name="given_name"
                            initialValue={this.props.given_name}
-                           label={givenname_label}
+                           label={this.props.l10n('pd.given_name')}
                            componentClass="input"
                            type="text"
                            handleChange={this.props.handleChange} />
               <TextControl name="surname"
                            initialValue={this.props.surname}
-                           label={surname_label}
+                           label={this.props.l10n('pd.surname')}
                            componentClass="input"
                            type="text"
                            handleChange={this.props.handleChange} />
               <TextControl name="display_name"
                            initialValue={this.props.display_name}
-                           label={displayname_label}
+                           label={this.props.l10n('pd.display_name')}
                            componentClass="input"
                            type="text"
                            handleChange={this.props.handleChange} />
               <TextControl name="language"
                            initialValue={this.props.language}
-                           label={language_label}
+                           label={this.props.l10n('pd.language')}
                            componentClass="select"
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       onClick={this.props.handleSave}>
-                    {button_save}
+                    {this.props.l10n('button_save')}
               </EduIDButton>
             </fieldset>
           </form>
@@ -94,4 +69,4 @@ PersonalData.propTypes = {
   is_fetching: PropTypes.bool
 }
 
-export default PersonalData;
+export default i18n(PersonalData);
