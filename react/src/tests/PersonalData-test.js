@@ -259,6 +259,71 @@ function setupComponent() {
     wrapper,
   }
 }
+  const mockState = {
+    personal_data: {
+        is_fetching: false,
+        failed: false,
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: '',
+        is_fetching: false,
+        failed: false,
+    },
+    config : {
+        is_configured : false,
+        is_fetching: false,
+        failed: false,
+        PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+    }
+  };
+const getState = () => mockState;
+
+import {requestPersonalData, savePersonalData, fetchPersonalData, sendPersonalData} from '../sagas/PersonalData';
+import { put, call } from "redux-saga/effects";
+
+describe("Async component", () => {
+
+    it("Sagas requestPersonalData", () => {
+
+       const generator = requestPersonalData(getState);
+
+       let next = generator.next(actions.getUserdata());
+       expect(next.value).toEqual(put(actions.getUserdata()));
+
+       const config = {
+           PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+       };
+       next = generator.next();
+
+       next = generator.next(config);
+       expect(next.value).toEqual(call(fetchPersonalData, config));
+
+       const userdata = call(fetchPersonalData, config);
+       next = generator.next(next.value);
+       expect(next.value).toEqual(put(userdata));
+    });
+
+    it("Sagas savePersonalData", () => {
+
+       const generator = savePersonalData(getState);
+
+       let next = generator.next();
+
+       const config = next.value;
+
+       const data = generator.next(config);
+
+       next = generator.next(data.value);
+       var result = next;
+       expect(next.value).toEqual(call(sendPersonalData, config, data.value));
+
+       next = generator.next(next);
+       expect(next.value).toEqual(put(result))
+
+    });
+
+});
 
 describe("PersonalData Component", () => {
 
@@ -388,10 +453,7 @@ describe("PersonalData Container", () => {
         {type: actions.POST_USERDATA_SUCCESS,
         payload: {language: 'en', given_name: 'Pablo'}
       });
-    //       wrapper.find('#given_name').value = "Pablo";
-    //   const test = wrapper.find('#given_name');
-    //
-    // test.props().onChange(test);
+
 
     expect(dispatch.calls.length).toEqual(0);
     wrapper.find('#personal-data-button').props().onClick();
