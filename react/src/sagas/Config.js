@@ -17,7 +17,7 @@ export function* requestConfig () {
     }
 }
 
-function fetchConfig (url) {
+export function fetchConfig (url) {
     return window.fetch(url, {
       credentials: 'include',
       headers: ajaxHeaders

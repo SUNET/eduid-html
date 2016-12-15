@@ -125,3 +125,43 @@ describe("Config reducers", () => {
     );
   });
 });
+
+ const mockState = {
+    personal_data: {
+        is_fetching: false,
+        failed: false,
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: '',
+        is_fetching: false,
+        failed: false,
+    },
+    config : {
+        is_configured : false,
+        is_fetching: false,
+        failed: false,
+        PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+    }
+  };
+const getState = () => mockState;
+
+import {requestConfig, fetchConfig} from '../sagas/Config';
+import { put, call } from "redux-saga/effects";
+
+describe("Async component", () => {
+
+    it("Sagas requestConfig", () => {
+
+       const generator = requestConfig(getState);
+
+       const url = '/services/jsconfig/config';
+       let next = generator.next(url);
+       expect(next.value).toEqual(call(fetchConfig, url));
+
+       const config = next.value;
+       next = generator.next(next.value);
+       expect(next.value).toEqual(put(config));
+    });
+
+});
