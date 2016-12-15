@@ -250,3 +250,46 @@ describe("OpenidConnect Container", () => {
   });
 
 });
+
+
+const state = {
+config : {
+    OIDC_PROOFING_URL: 'http://localhost/services/personal-data/user'
+}
+};
+
+import {requestOpenidQRcode, fetchQRcode} from '../sagas/OpenidConnect';
+import { put, call, select } from "redux-saga/effects";
+
+describe("Async component", () => {
+
+    it("Sagas requestOpenidQRcode", () => {
+
+       const generator = requestOpenidQRcode();
+
+       let next = generator.next();
+       let debug = select(state => state.config.OIDC_PROOFING_URL);
+       // WE need modfied the following selector due a problems with indent.
+       // The test fails if we dont do that, previous selector:
+       // function (state) {
+	   //                     return state.config.OIDC_PROOFING_URL;
+	   //                 }
+       next.value.SELECT.selector = function (state) {
+	      return state.config.OIDC_PROOFING_URL;
+	    }
+
+       expect(next.value).toEqual(debug);
+
+       const oidcData = generator.next(next.value);
+       const  data = {
+                'nin': 'testing'
+              };
+       expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
+
+       next = generator.next(oidcData.value)
+       expect(next.value).toEqual(put(oidcData.value));
+
+    });
+
+});
+

@@ -259,6 +259,7 @@ function setupComponent() {
     wrapper,
   }
 }
+
   const mockState = {
     personal_data: {
         is_fetching: false,
@@ -355,8 +356,6 @@ describe("PersonalData Component", () => {
   });
 
 });
-
-
 
 
 import { Provider } from 'react-redux';

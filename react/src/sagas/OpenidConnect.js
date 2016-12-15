@@ -6,7 +6,7 @@ import { postOpenidFail } from "actions/OpenidConnect";
 
 export function* requestOpenidQRcode () {
     try {
-        const openid_url = select(state => state.config.OIDC_PROOFING_URL),
+        const openid_url = yield select(state => state.config.OIDC_PROOFING_URL),
               input = document.querySelector('input[name=norEduPersonNIN]'),
               nin = input ? (input.value || 'no nin') : 'testing',
               data = {
@@ -26,7 +26,7 @@ export function* requestOpenidQRcode () {
     }
 }
 
-function fetchQRcode (url, data) {
+export function fetchQRcode (url, data) {
     return window.fetch(url, {
         credentials: 'include',
         method: 'POST',
