@@ -1,10 +1,7 @@
 [
   {
-    "id": "emails.email",
-    "defaultMessage": "Email"
-  },
-  {
-    "id": "emails.button_add",
-    "defaultMessage": "Add"
+    "id": "emails.confirm_email_placeholder",
+    "description": "Placeholder for email text input",
+    "defaultMessage": "Email confirmation code"
   }
 ]

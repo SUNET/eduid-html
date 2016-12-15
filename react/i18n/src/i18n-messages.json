@@ -1,0 +1,47 @@
+[
+  {
+    "id": "out_of_sync",
+    "defaultMessage": "User data is out of sync. Reload page to re-sync."
+  },
+  {
+    "id": "cm.lost_code",
+    "defaultMessage": "Lost your confirmation code?"
+  },
+  {
+    "id": "cm.resend_code",
+    "defaultMessage": "Resend confirmation code"
+  },
+  {
+    "id": "cm.ok",
+    "defaultMessage": "OK"
+  },
+  {
+    "id": "cm.finish",
+    "defaultMessage": "FINISH"
+  },
+  {
+    "id": "cm.cancel",
+    "defaultMessage": "CANCEL"
+  },
+  {
+    "id": "emails.resend_success",
+    "defaultMessage": "New code successfully sent to {email}"
+  },
+  {
+    "id": "emails.email",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "emails.button_add",
+    "defaultMessage": "Add"
+  },
+  {
+    "id": "emails.confirm_email_title",
+    "defaultMessage": "Check your email inbox for {email} for further instructions"
+  },
+  {
+    "id": "emails.confirm_email_placeholder",
+    "description": "Placeholder for email text input",
+    "defaultMessage": "Email confirmation code"
+  }
+]

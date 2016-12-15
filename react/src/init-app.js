@@ -21,7 +21,7 @@ import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
 import * as openidActions from "actions/OpenidConnect";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
-import { requestEmails, saveEmail } from "sagas/Emails";
+import { requestEmails, saveEmail, requestResendEmailCode } from "sagas/Emails";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 
@@ -46,6 +46,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
+    takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode)
   ];
 }
@@ -65,6 +66,12 @@ sagaMiddleware.run(rootSaga);
 
 /* render app */
 
+const getConfig = function () {
+    if (!store.getState().config.is_configured) {
+        store.dispatch(configActions.getConfig());
+    }
+};
+
 const init_app = function (component, target) {
   let app = ( <Provider store={store}>
                 <IntlProvider locale={ lang_code } messages={ messages }>
@@ -72,7 +79,7 @@ const init_app = function (component, target) {
                 </IntlProvider>
               </Provider> );
 
-  ReactDOM.render(app, target, () => store.dispatch(configActions.getConfig()));
+  ReactDOM.render(app, target, getConfig);
 };
 
 export default init_app;
