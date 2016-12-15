@@ -41,6 +41,7 @@ let Emails = React.createClass({
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
+                handleConfirm={this.props.handleConfirm}
                 resending={this.props.resending}
                 confirming={this.props.confirming} />
         </div>

@@ -40,20 +40,15 @@ let ConfirmModal = React.createClass({
 
                 <Modal.Body>
                     {alertElem}
-                    <FormGroup controlId="emailConfirmDialogInput"
-                               bsSize="small">
-                        <FormControl name="xlInput"
-                                     type="text"
-                                     placeholder={this.props.placeholder} />
-                        <FormControl.Feedback />
-                        <HelpBlock>
-                        {this.props.l10n('cm.lost_code')}
-                        <a href="#" onClick={this.props.handleResendCode}
-                           className="resend-code">
-                            {this.props.l10n('cm.resend_code')}
-                        </a>
-                        </HelpBlock>
-                    </FormGroup>
+                    <TextControl name={this.props.inputId}
+                                 placeholder={this.props.placeholder}
+                                 componentClass='input'
+                                 type='text' />
+                    {this.props.l10n('cm.lost_code')}
+                    <a href="#" onClick={this.props.handleResendCode}
+                       className="resend-code">
+                        {this.props.l10n('cm.resend_code')}
+                    </a>
                 </Modal.Body>
 
                 <Modal.Footer>
