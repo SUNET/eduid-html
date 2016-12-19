@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
-import _ from 'i18n-messages';
+import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 
@@ -17,11 +17,11 @@ let ConfirmModal = React.createClass({
     if (this.props.is_fetching) spinning = true;
     if (this.props.resending.is_fetching) spinning = true;
     if (this.props.resending.failed) {
-      msg= _.getMsg(this.props.resending.error.form);
+      msg= this.props.l10n(this.props.resending.error.form);
       alertElem = ( <Alert bsStyle="danger">{msg}</Alert> );
     }
     if (this.props.resending.message) {
-      msg = _.getMsg(this.props.resending.message, {email: this.props.confirming});
+      msg = this.props.l10n(this.props.resending.message, {email: this.props.confirming});
       alertElem = ( <Alert bsStyle="warning">{msg}</Alert> );
     }
 
@@ -40,35 +40,30 @@ let ConfirmModal = React.createClass({
 
                 <Modal.Body>
                     {alertElem}
-                    <FormGroup controlId="emailConfirmDialogInput"
-                               bsSize="small">
-                        <FormControl name="xlInput"
-                                     type="text"
-                                     placeholder={this.props.placeholder} />
-                        <FormControl.Feedback />
-                        <HelpBlock>
-                        {_.getMsg('cm.lost_code')}
-                        <a href="#" onClick={this.props.handleResendCode}
-                           className="resend-code">
-                            {_.getMsg('cm.resend_code')}
-                        </a>
-                        </HelpBlock>
-                    </FormGroup>
+                    <TextControl name={this.props.inputId}
+                                 placeholder={this.props.placeholder}
+                                 componentClass='input'
+                                 type='text' />
+                    {this.props.l10n('cm.lost_code')}
+                    <a href="#" onClick={this.props.handleResendCode}
+                       className="resend-code">
+                        {this.props.l10n('cm.resend_code')}
+                    </a>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button className="finish-button">
-                         {_.getMsg('cm.finish')}
+                         {this.props.l10n('cm.finish')}
                     </Button>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal}>
-                         {_.getMsg('cm.cancel')}
+                         {this.props.l10n('cm.cancel')}
                     </Button>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
                           spinning={spinning}
                           onClick={this.props.handleConfirm}>
-                        {_.getMsg('cm.ok')}
+                        {this.props.l10n('cm.ok')}
                     </EduIDButton>
                 </Modal.Footer>
 
@@ -91,4 +86,4 @@ ConfirmModal.propTypes = {
   is_fetching: PropTypes.bool
 }
 
-export default ConfirmModal;
+export default i18n(ConfirmModal);

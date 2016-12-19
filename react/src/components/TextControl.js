@@ -33,7 +33,7 @@ const TextControl = React.createClass({
   },
 
   render: function () {
-    let children;
+    let children, label, help;
     if ((this.props.componentClass === 'select') &&
         (this.props.options)) {
       children = this.props.options.map(opt => {
@@ -43,29 +43,38 @@ const TextControl = React.createClass({
                 </option>);
       }, this);
     }
+    if (this.props.label) {
+        label = (
+          <ControlLabel>
+            {this.props.label}
+          </ControlLabel>);
+    }
+    if (this.props.help) {
+        help = <HelpBlock>{this.props.help}</HelpBlock>;
+    }
     return (
         <FormGroup controlId={this.props.name}
                    validationState={this.getValidationState()}>
-          <ControlLabel>
-            {this.props.label}
-          </ControlLabel>
+          {label}
           <FormControl componentClass={this.props.componentClass}
                        type={this.props.type}
                        value={this.state.value}
+                       placeholder={this.props.placeholder}
                        onChange={this.handleChange}>
             {children}
           </FormControl>
           <FormControl.Feedback />
-          <HelpBlock>{this.props.help}</HelpBlock>
+          {help}
         </FormGroup>
     );
   }
 });
 
 TextControl.PropTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   componentClass: PropTypes.string.isRequired,
   type: PropTypes.string,
+  placeholder: PropTypes.string,
   initialValue: PropTypes.string,
   handleChange: PropTypes.func,
   validation: PropTypes.func,
