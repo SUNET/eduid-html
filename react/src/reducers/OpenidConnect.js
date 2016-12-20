@@ -7,8 +7,8 @@ const openidData = {
     failed: false,
     error: "",
     // as default, a gif with a single pixel.
-    qrcode: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-    nonce: ""
+    qr_img: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+    qr_code: ""
 };
 
 
