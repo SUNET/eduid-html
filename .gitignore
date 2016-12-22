@@ -5,3 +5,4 @@
 node_modules/
 coverage/
 react/build/*.hot-update.js*
+npm-debug.log
