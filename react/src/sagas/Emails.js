@@ -16,7 +16,7 @@ export function* requestEmails () {
     }
 }
 
-function fetchEmails (config) {
+export function fetchEmails (config) {
     return window.fetch(config.EMAILS_URL + 'all', {
         credentials: 'include',
         headers: ajaxHeaders
@@ -40,7 +40,7 @@ export function* saveEmail () {
     }
 }
 
-function sendEmail (config, data) {
+export function sendEmail (config, data) {
     return window.fetch(config.EMAILS_URL + 'new', {
       method: 'post',
       credentials: 'include',
@@ -64,7 +64,7 @@ export function* requestResendEmailCode () {
     }
 }
 
-function requestResend (config, data) {
+export function requestResend (config, data) {
     return window.fetch(config.EMAILS_URL + 'resend-code', {
       method: 'post',
       credentials: 'include',

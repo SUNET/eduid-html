@@ -73,7 +73,12 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.START_RESEND_EMAIL_CODE:
       return {
         ...state,
-        resending: {is_fetching: true}
+        resending: {
+          is_fetching: true,
+          failed: false,
+          error: {},
+          message: ''
+        }
       };
     case actions.START_RESEND_EMAIL_CODE_SUCCESS:
       return {
@@ -92,7 +97,8 @@ let emailsReducer = (state=emailsData, action) => {
         resending: {
           is_fetching: false,
           failed: true,
-          error: action.payload.error
+          error: action.payload.error,
+          message: ''
         }
       };
     default:

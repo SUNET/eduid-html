@@ -16,7 +16,6 @@ let PersonalData = React.createClass({
 
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
-
     return (
         <div>
           <form id="personaldataview-form"

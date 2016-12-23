@@ -38,7 +38,13 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleStopConfirmation: function (e) {
         dispatch(stopConfirmation());
-    }
+    },
+    handleConfirm: function (e) {
+        const data = {
+            code: window.getElementById('email-confirm-code').value,
+            // XXX email: e.target.parentNode.parentNode.getAttribute('data-object')
+        };
+    },
   }
 };
 

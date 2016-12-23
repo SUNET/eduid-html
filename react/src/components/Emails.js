@@ -29,6 +29,7 @@ let Emails = React.createClass({
                                type="text"
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
+                               id="email-button"
                           onClick={this.props.handleAdd}>
                       {this.props.l10n('emails.button_add')}
                   </EduIDButton>

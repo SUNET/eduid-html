@@ -35,18 +35,13 @@ describe("OIDC Actions", () => {
   });
 });
 
-
-const middlewares = [ thunkMiddleware ];
-const mockStore = configureStore(middlewares);
-
-
 describe("Reducers", () => {
 
   const mockState = {
     is_fetching: false,
     failed: false,
-    qrcode: "code",
-    nonce: 'nonce'
+    qr_img: "code",
+    qr_code: 'nonce'
   };
 
   it("Receives a POST_OIDC_PROOFING_PROOFING action", () => {
@@ -59,8 +54,8 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        qrcode: "code",
-        nonce: "nonce",
+        qr_img: "code",
+        qr_code: "nonce",
         is_fetching: true,
         failed: false
       }
@@ -73,13 +68,13 @@ describe("Reducers", () => {
         mockState,
         {
           type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
-          payload: { qrcode: 'new code', nonce: 'new nonce' }
+          payload: { qr_img: 'new code', qr_code: 'new nonce' }
         }
       )
     ).toEqual(
       {
-        qrcode: "new code",
-        nonce: "new nonce",
+        qr_img: "new code",
+        qr_code: "new nonce",
         is_fetching: false,
         failed: false
       }
@@ -101,8 +96,8 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        qrcode: "code",
-        nonce: "nonce",
+        qr_img: "code",
+        qr_code: "nonce",
         is_fetching: false,
         failed: true,
         error: "Bad error"
@@ -123,8 +118,8 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: false,
-        qrcode: "code",
-        nonce: "nonce"
+        qr_img: "code",
+        qr_code: "nonce"
       }
     );
   });
@@ -134,8 +129,8 @@ describe("Reducers", () => {
 function setupComponent() {
   const props = {
     handleGetQRCode: createSpy(),
-    qrcode: 'code',
-    nonce: 'nonce'
+    qr_img: 'code',
+    qr_code: 'nonce'
   }
 
   const wrapper = shallow(<OpenidConnect {...props} />)
@@ -201,15 +196,15 @@ describe("OpenidConnect Container", () => {
       openid_data: {
         is_fetching: false,
         failed: false,
-        qrcode: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        nonce: 'new nonce'
+        qr_img: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        qr_code: 'new nonce'
       },
       config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
     });
 
     mockProps = {
-      qrcode: 'data: old code',
-      nonce: 'old nonce'
+      qr_img: 'data: old code',
+      qr_code: 'old nonce'
     };
 
     wrapper = mount(
@@ -241,7 +236,7 @@ describe("OpenidConnect Container", () => {
     fetchMock.post('http://localhost/oidc',
        {
         type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
-        payload: {qrcode: 'new code', nonce: 'new nonce'}
+        payload: {qr_img: 'new code', qr_code: 'new nonce'}
       });
 
     expect(dispatch.calls.length).toEqual(0);

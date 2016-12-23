@@ -34,11 +34,6 @@ describe("Config Actions", () => {
   });
 });
 
-
-const middlewares = [ thunkMiddleware ];
-const mockStore = configureStore(middlewares);
-
-
 describe("Config reducers", () => {
 
   const mockState = {
