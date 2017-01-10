@@ -306,12 +306,17 @@ describe("Async component", () => {
        let next = generator.next();
 
        // const config = next.value;
-       const data = generator.next(mockState.config);
-       const test = select(mockState => mockState.config)
-       expect(data).toEqual(select(mockState => mockState.config));
-       next = generator.next(data.value);
+       next = generator.next(mockState.config);
+
+       const data = mockState.personal_data;
+       const config = mockState.config;
+
+       // expect(data).toEqual(select(mockState => mockState.config));
+
+       next = generator.next(data);
+       debugger;
        var result = next;
-       expect(next.value).toEqual(call(sendPersonalData, config, data.value));
+       expect(next.value).toEqual(call(sendPersonalData, config, data));
 
        next = generator.next(next);
        expect(next.value).toEqual(put(result))
