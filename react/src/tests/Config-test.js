@@ -128,9 +128,7 @@ describe("Config reducers", () => {
         given_name: '',
         surname: '',
         display_name: '',
-        language: '',
-        is_fetching: false,
-        failed: false,
+        language: ''
     },
     config : {
         is_configured : false,

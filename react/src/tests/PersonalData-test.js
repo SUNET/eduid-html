@@ -51,13 +51,10 @@ describe("Personal Data Actions", () => {
       name: 'Pablo',
       language: 'en'
     };
-    const data_error = {
-      name: 'Pablo',
-      language: 'en'
-    };
+
     const expectedAction = {
       type: actions.CHANGE_USERDATA,
-      payload: data_error
+      payload: data
     };
     expect(actions.changeUserdata(data)).toEqual(expectedAction);
   });
@@ -82,20 +79,15 @@ describe("Personal Data Actions", () => {
 
 });
 
-
-const middlewares = [ thunkMiddleware ];
-const mockStore = configureStore(middlewares);
-
-
 describe("Reducers", () => {
 
   const mockState = {
     is_fetching: false,
     failed: false,
-    given_name: '',
-    surname: '',
-    display_name: '',
-    language: '',
+    given_name: 'John',
+    surname: 'Smith',
+    display_name: 'John',
+    language: 'en',
   };
 
     it("Receives a GET_USERDATA action", () => {
@@ -110,10 +102,10 @@ describe("Reducers", () => {
       {
         is_fetching: true,
         failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: ''
+        given_name: 'John',
+        surname: 'Smith',
+        display_name: 'John',
+        language: 'en'
       }
     );
   });
@@ -150,11 +142,11 @@ it("Receives a GET_USERDATA_FAIL action", () => {
       {
         is_fetching: false,
         failed: true,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: '',
-        error: 'Bad error',
+        given_name: 'John',
+        surname: 'Smith',
+        display_name: 'John',
+        language: 'en',
+        error: 'Bad error'
       }
     );
   });
@@ -164,17 +156,21 @@ it("Receives a CHANGE_USERDATA action", () => {
       personalDataReducer(
         mockState,
         {
-          type: actions.CHANGE_USERDATA
+          type: actions.CHANGE_USERDATA,
+          payload: {
+              given_name: 'Jonna',
+              display_name: 'Jonna'
+          }
         }
       )
     ).toEqual(
       {
         is_fetching: false,
         failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: ''
+        given_name: 'Jonna',
+        surname: 'Smith',
+        display_name: 'Jonna',
+        language: 'en'
       }
     );
   });
@@ -191,10 +187,10 @@ it("Receives a POST_USERDATA action", () => {
       {
         is_fetching: true,
         failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: ''
+        given_name: 'John',
+        surname: 'Smith',
+        display_name: 'John',
+        language: 'en'
       }
     );
   });
@@ -210,7 +206,7 @@ it("Receives a POST_USERDATA_SUCCESS action", () => {
     ).toEqual(
       {
         is_fetching: false,
-        failed: false,
+        failed: false
       }
     );
   });
@@ -231,10 +227,10 @@ it("Receives a POST_USERDATA_FAIL action", () => {
       {
         is_fetching: false,
         failed: true,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: '',
+        given_name: 'John',
+        surname: 'Smith',
+        display_name: 'John',
+        language: 'en',
         error: "Bad error"
       }
     );
@@ -267,12 +263,10 @@ function setupComponent() {
         given_name: '',
         surname: '',
         display_name: '',
-        language: '',
-        is_fetching: false,
-        failed: false,
+        language: ''
     },
     config : {
-        is_configured : false,
+        is_configured : true,
         is_fetching: false,
         failed: false,
         PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
@@ -281,15 +275,15 @@ function setupComponent() {
 const getState = () => mockState;
 
 import {requestPersonalData, savePersonalData, fetchPersonalData, sendPersonalData} from '../sagas/PersonalData';
-import { put, call } from "redux-saga/effects";
+import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
     it("Sagas requestPersonalData", () => {
 
-       const generator = requestPersonalData(getState);
+       const generator = requestPersonalData();
 
-       let next = generator.next(actions.getUserdata());
+       let next = generator.next();
        expect(next.value).toEqual(put(actions.getUserdata()));
 
        const config = {
@@ -301,20 +295,20 @@ describe("Async component", () => {
        expect(next.value).toEqual(call(fetchPersonalData, config));
 
        const userdata = call(fetchPersonalData, config);
-       next = generator.next(next.value);
+       next = generator.next(userdata);
        expect(next.value).toEqual(put(userdata));
     });
 
     it("Sagas savePersonalData", () => {
 
-       const generator = savePersonalData(getState);
+       const generator = savePersonalData();
 
        let next = generator.next();
 
-       const config = next.value;
-
-       const data = generator.next(config);
-
+       // const config = next.value;
+       const data = generator.next(mockState.config);
+       const test = select(mockState => mockState.config)
+       expect(data).toEqual(select(mockState => mockState.config));
        next = generator.next(data.value);
        var result = next;
        expect(next.value).toEqual(call(sendPersonalData, config, data.value));
@@ -436,27 +430,12 @@ describe("PersonalData Container", () => {
 
     fetchMock.post('http://localhost/services/personal-data/user',
        {
-        type: actions.POST_USERDATA_SUCCESS
+        type: actions.POST_USERDATA_SUCCESS,
       });
     expect(dispatch.calls.length).toEqual(0);
     wrapper.find('#personal-data-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
   });
 
-
-  it("Click and Save", () => {
-
-    fetchMock.post('http://localhost/services/personal-data/user',
-       {
-        type: actions.POST_USERDATA_SUCCESS},
-        {type: actions.POST_USERDATA_SUCCESS,
-        payload: {language: 'en', given_name: 'Pablo'}
-      });
-
-
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#personal-data-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
-  });
 });
 

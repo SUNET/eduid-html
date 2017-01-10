@@ -5,7 +5,6 @@ import Emails from 'components/Emails';
 import * as actions from "actions/Emails";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
 import emailsReducer from "reducers/Emails";
 
 describe("Email Actions", () => {
@@ -146,6 +145,9 @@ describe("Reducers", () => {
         mockState,
         {
           type: actions.GET_EMAILS_SUCCESS,
+          payload:{
+            email:'johnsmith@example.com'
+          }
         }
       )
     ).toEqual(
@@ -162,7 +164,7 @@ describe("Reducers", () => {
         },
         confirming: '',
         emails: [],
-        email: '',
+        email:'johnsmith@example.com',
       }
     );
   });
@@ -200,6 +202,9 @@ describe("Reducers", () => {
         mockState,
         {
           type: actions.CHANGE_EMAIL,
+          payload:{
+              email:'johnsmith@example.com'
+          }
         }
       )
     ).toEqual(
@@ -216,7 +221,7 @@ describe("Reducers", () => {
         },
         confirming: '',
         emails: [],
-        email: '',
+        email: 'johnsmith@example.com',
       }
     );
   });
@@ -463,11 +468,9 @@ const state = {
           message: ''
         },
     },
-    confirming: '',
     config : {
         EMAILS_URL: 'test/localhost',
         email: 'email@localhost.com',
-        confirming: ''
     }
 };
 
@@ -480,28 +483,31 @@ describe("Async component", () => {
 
        const generator = requestEmails();
 
-       let next = generator.next(actions.getEmails());
+       let next = generator.next();
        expect(next.value).toEqual(put(actions.getEmails()));
 
-        next = generator.next(state);
-        next.value.SELECT.selector = function (state) {
+        next = generator.next();
+
+        const mockGetState = function (state) {
             return state.config;
         };
 
-        const config = state => state.config.EMAILS_URL;
+        // const config = state => state.config.EMAILS_URL;
+
         expect(next.value).toEqual(select(state => state.config));
 
-        const emails = generator.next(fetchEmails(config));
-        expect(emails.value.CALL.args[0]).toEqual(fetchEmails(config));
+        const emails = generator.next(state.config);
+        expect(emails).toEqual(call(fetchEmails,config));
 
-        next = generator.next(emails);
-        expect(next.value).toEqual(put(emails));
+        const email = 'john@example.com'
+        next = generator.next(email);
+        expect(next.value).toEqual(put(email));
     });
 
     it("Sagas saveEmail", () => {
 
-       const generator = saveEmail(getState);
-       let next = generator.next(getState);
+       const generator = saveEmail();
+       let next = generator.next();
        next.value.SELECT.selector = function (state) {
             return state;
        };
@@ -612,15 +618,6 @@ describe("Emails Container", () => {
             emails: [],
             email: '',
         },
-        is_fetching: true,
-      resending: {
-        is_fetching: false,
-        emails: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: '',
-      },
       config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
     });
 
@@ -657,7 +654,7 @@ describe("Emails Container", () => {
 
   it("Clicks", () => {
 
-    fetchMock.post('http://localhost/profile/undefinednew',
+    fetchMock.post('http://localhost/profile/email',
        {
         type: actions.POST_EMAIL
       });
