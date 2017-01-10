@@ -492,12 +492,14 @@ describe("Async component", () => {
             return state.config;
         };
 
-        // const config = state => state.config.EMAILS_URL;
+        const config = state => state.config;
 
-        expect(next.value).toEqual(select(state => state.config));
+        // expect(next.value).toEqual(select(state => state.config));
 
-        const emails = generator.next(state.config);
-        expect(emails).toEqual(call(fetchEmails,config));
+        const emails = generator.next(config);
+
+        const test = call(fetchEmails,config)
+        expect(emails.value).toEqual(call(fetchEmails,config));
 
         const email = 'john@example.com'
         next = generator.next(email);

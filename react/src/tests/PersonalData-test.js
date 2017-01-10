@@ -314,7 +314,7 @@ describe("Async component", () => {
        // expect(data).toEqual(select(mockState => mockState.config));
 
        next = generator.next(data);
-       debugger;
+
        var result = next;
        expect(next.value).toEqual(call(sendPersonalData, config, data));
 
