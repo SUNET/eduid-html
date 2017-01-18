@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "218b0aba57b9032d5456"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "846df6fb3f528964b26d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -591,7 +591,7 @@
 	
 	var _initApp2 = _interopRequireDefault(_initApp);
 	
-	var _OpenidConnect = __webpack_require__(1073);
+	var _OpenidConnect = __webpack_require__(1074);
 	
 	var _OpenidConnect2 = _interopRequireDefault(_OpenidConnect);
 	
@@ -33443,7 +33443,13 @@
 	      });
 	    case actions.STOP_CONFIRMATION:
 	      return _extends({}, state, {
-	        confirming: ''
+	        confirming: '',
+	        resending: {
+	          is_fetching: false,
+	          failed: false,
+	          error: {},
+	          message: ''
+	        }
 	      });
 	    case actions.START_RESEND_EMAIL_CODE:
 	      return _extends({}, state, {
@@ -56426,7 +56432,8 @@
 /* 1070 */,
 /* 1071 */,
 /* 1072 */,
-/* 1073 */
+/* 1073 */,
+/* 1074 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56437,7 +56444,7 @@
 	
 	var _reactRedux = __webpack_require__(496);
 	
-	var _OpenidConnect = __webpack_require__(1074);
+	var _OpenidConnect = __webpack_require__(1075);
 	
 	var _OpenidConnect2 = _interopRequireDefault(_OpenidConnect);
 	
@@ -56485,7 +56492,7 @@
 	;
 
 /***/ },
-/* 1074 */
+/* 1075 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56506,7 +56513,7 @@
 	
 	var _EduIDButton2 = _interopRequireDefault(_EduIDButton);
 	
-	__webpack_require__(1075);
+	__webpack_require__(1076);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -56593,13 +56600,13 @@
 	;
 
 /***/ },
-/* 1075 */
+/* 1076 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(1076);
+	var content = __webpack_require__(1077);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(1064)(content, {});
@@ -56608,8 +56615,8 @@
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(1076, function() {
-				var newContent = __webpack_require__(1076);
+			module.hot.accept(1077, function() {
+				var newContent = __webpack_require__(1077);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -56619,7 +56626,7 @@
 	}
 
 /***/ },
-/* 1076 */
+/* 1077 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(1063)();

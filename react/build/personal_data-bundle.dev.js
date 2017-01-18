@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "218b0aba57b9032d5456"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "846df6fb3f528964b26d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -33338,7 +33338,13 @@
 	      });
 	    case actions.STOP_CONFIRMATION:
 	      return _extends({}, state, {
-	        confirming: ''
+	        confirming: '',
+	        resending: {
+	          is_fetching: false,
+	          failed: false,
+	          error: {},
+	          message: ''
+	        }
 	      });
 	    case actions.START_RESEND_EMAIL_CODE:
 	      return _extends({}, state, {
@@ -37337,14 +37343,6 @@
 	    return { value: '' };
 	  },
 	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.state.value === '') {
-	      if (nextProps.initialValue) {
-	        this.setState({ value: nextProps.initialValue });
-	      }
-	    }
-	  },
-	
 	  getValidationState: function getValidationState() {
 	    if (this.props.validation !== undefined) {
 	      return this.props.validation(this.state.value);
@@ -37388,6 +37386,7 @@
 	        this.props.help
 	      );
 	    }
+	
 	    return _react2.default.createElement(
 	      _reactBootstrap.FormGroup,
 	      { controlId: this.props.name,
@@ -37397,7 +37396,7 @@
 	        _reactBootstrap.FormControl,
 	        { componentClass: this.props.componentClass,
 	          type: this.props.type,
-	          value: this.state.value,
+	          value: this.props.initialValue,
 	          placeholder: this.props.placeholder,
 	          onChange: this.handleChange },
 	        children

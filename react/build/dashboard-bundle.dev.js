@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "218b0aba57b9032d5456"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "846df6fb3f528964b26d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -41102,7 +41102,13 @@
 	      });
 	    case actions.STOP_CONFIRMATION:
 	      return _extends({}, state, {
-	        confirming: ''
+	        confirming: '',
+	        resending: {
+	          is_fetching: false,
+	          failed: false,
+	          error: {},
+	          message: ''
+	        }
 	      });
 	    case actions.START_RESEND_EMAIL_CODE:
 	      return _extends({}, state, {
@@ -45101,14 +45107,6 @@
 	    return { value: '' };
 	  },
 	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.state.value === '') {
-	      if (nextProps.initialValue) {
-	        this.setState({ value: nextProps.initialValue });
-	      }
-	    }
-	  },
-	
 	  getValidationState: function getValidationState() {
 	    if (this.props.validation !== undefined) {
 	      return this.props.validation(this.state.value);
@@ -45152,6 +45150,7 @@
 	        this.props.help
 	      );
 	    }
+	
 	    return _react2.default.createElement(
 	      _reactBootstrap.FormGroup,
 	      { controlId: this.props.name,
@@ -45161,7 +45160,7 @@
 	        _reactBootstrap.FormControl,
 	        { componentClass: this.props.componentClass,
 	          type: this.props.type,
-	          value: this.state.value,
+	          value: this.props.initialValue,
 	          placeholder: this.props.placeholder,
 	          onChange: this.handleChange },
 	        children
@@ -64467,10 +64466,19 @@
 	            dispatch((0, _Emails3.startResendEmailCode)());
 	        },
 	        handleStartConfirmation: function handleStartConfirmation(e) {
-	            var data = {
-	                identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
-	                email: e.target.parentNode.parentNode.getAttribute('data-object')
-	            };
+	            var data = {};
+	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
+	                data = {
+	                    identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
+	                    email: e.target.parentNode.parentNode.getAttribute('data-object')
+	                };
+	            } else {
+	                data = {
+	                    identifier: e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier'),
+	                    email: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+	                };
+	            }
+	
 	            dispatch((0, _Emails3.startConfirmation)(data));
 	        },
 	        handleStopConfirmation: function handleStopConfirmation(e) {
@@ -64478,7 +64486,9 @@
 	        },
 	        handleConfirm: function handleConfirm(e) {
 	            var data = {
-	                code: window.getElementById('email-confirm-code').value
+	                code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
+	                // code: window.getElementById('email-confirm-code').value,
+	                // XXX email: e.target.parentNode.parentNode.getAttribute('data-object')
 	            };
 	        }
 	    };
@@ -64540,7 +64550,7 @@
 	
 	var _ConfirmModal2 = _interopRequireDefault(_ConfirmModal);
 	
-	__webpack_require__(1071);
+	__webpack_require__(1072);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -64820,6 +64830,10 @@
 	
 	var _EduIDButton2 = _interopRequireDefault(_EduIDButton);
 	
+	var _EduIDAlert = __webpack_require__(1071);
+	
+	var _EduIDAlert2 = _interopRequireDefault(_EduIDAlert);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ConfirmModal = _react2.default.createClass({
@@ -64835,21 +64849,15 @@
 	
 	    if (this.props.is_fetching) spinning = true;
 	    if (this.props.resending.is_fetching) spinning = true;
+	
 	    if (this.props.resending.failed) {
-	      msg = this.props.l10n(this.props.resending.error.form);
-	      alertElem = _react2.default.createElement(
-	        _reactBootstrap.Alert,
-	        { bsStyle: 'danger' },
-	        msg
-	      );
+	      msg = this.props.l10n(this.props.resending.error);
+	      alertElem = _react2.default.createElement(_EduIDAlert2.default, { levelMessage: 'danger', Msg: msg });
 	    }
+	
 	    if (this.props.resending.message) {
 	      msg = this.props.l10n(this.props.resending.message, { email: this.props.confirming });
-	      alertElem = _react2.default.createElement(
-	        _reactBootstrap.Alert,
-	        { bsStyle: 'warning' },
-	        msg
-	      );
+	      alertElem = _react2.default.createElement(_EduIDAlert2.default, { levelMessage: 'warning', Msg: msg });
 	    }
 	
 	    return _react2.default.createElement(
@@ -64950,10 +64958,87 @@
 /* 1071 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(301);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactBootstrap = __webpack_require__(809);
+	
+	var _i18nMessages = __webpack_require__(807);
+	
+	var _i18nMessages2 = _interopRequireDefault(_i18nMessages);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var EduIDAlert = _react2.default.createClass({
+	  displayName: 'EduIDAlert',
+	  getInitialState: function getInitialState() {
+	    return {
+	      alertVisible: true
+	    };
+	  },
+	  render: function render() {
+	    if (this.state.alertVisible) {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Alert,
+	        { bsStyle: this.props.levelMessage, onDismiss: this.handleAlertDismiss },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.Msg
+	        )
+	      );
+	    }
+	
+	    return (
+	      //   <Button onClick={this.handleAlertShow}>Show Alert</Button>
+	      _react2.default.createElement('div', null)
+	    );
+	  },
+	  handleAlertDismiss: function handleAlertDismiss() {
+	    this.setState({ alertVisible: false });
+	  },
+	  handleAlertShow: function handleAlertShow() {
+	    this.setState({ alertVisible: true });
+	  }
+	});
+	
+	EduIDAlert.propTypes = {
+	  Msg: _react.PropTypes.object,
+	  levelMessage: _react.PropTypes.string
+	};
+	
+	var _default = (0, _i18nMessages2.default)(EduIDAlert);
+	
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+	
+	  __REACT_HOT_LOADER__.register(EduIDAlert, 'EduIDAlert', '/home/piglesias/Nordunet/eduid-html/react/src/components/EduIDAlert.js');
+	
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/home/piglesias/Nordunet/eduid-html/react/src/components/EduIDAlert.js');
+	}();
+
+	;
+
+/***/ },
+/* 1072 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(1072);
+	var content = __webpack_require__(1073);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(1064)(content, {});
@@ -64962,8 +65047,8 @@
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(1072, function() {
-				var newContent = __webpack_require__(1072);
+			module.hot.accept(1073, function() {
+				var newContent = __webpack_require__(1073);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -64973,7 +65058,7 @@
 	}
 
 /***/ },
-/* 1072 */
+/* 1073 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(1063)();
