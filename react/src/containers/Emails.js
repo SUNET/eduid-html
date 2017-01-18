@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Emails from 'components/Emails';
 import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode } from "actions/Emails";
 
-
 const mapStateToProps = (state, props) => {
   return {
     emails: state.emails.emails,
@@ -30,18 +29,29 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(startResendEmailCode());
     },
     handleStartConfirmation: function (e) {
-        const data = {
-            identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
-            email: e.target.parentNode.parentNode.getAttribute('data-object')
-        };
+        let data = {}
+        if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
+            data = {
+                identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
+                email: e.target.parentNode.parentNode.getAttribute('data-object')
+            };
+        }else{
+           data = {
+                identifier: e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier'),
+                email: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+            };
+        }
+
         dispatch(startConfirmation(data));
+
     },
     handleStopConfirmation: function (e) {
         dispatch(stopConfirmation());
     },
     handleConfirm: function (e) {
         const data = {
-            code: window.getElementById('email-confirm-code').value,
+            code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
+            // code: window.getElementById('email-confirm-code').value,
             // XXX email: e.target.parentNode.parentNode.getAttribute('data-object')
         };
     },
