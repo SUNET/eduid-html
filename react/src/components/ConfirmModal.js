@@ -5,6 +5,7 @@ import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-b
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
+import EduiDAlert from 'components/EduIDAlert';
 
 
 let ConfirmModal = React.createClass({
@@ -16,13 +17,15 @@ let ConfirmModal = React.createClass({
 
     if (this.props.is_fetching) spinning = true;
     if (this.props.resending.is_fetching) spinning = true;
+
     if (this.props.resending.failed) {
-      msg= this.props.l10n(this.props.resending.error.form);
-      alertElem = ( <Alert bsStyle="danger">{msg}</Alert> );
+      msg= this.props.l10n(this.props.resending.error);
+      alertElem = ( <EduiDAlert levelMessage="danger" Msg={msg}></EduiDAlert> );
     }
+
     if (this.props.resending.message) {
       msg = this.props.l10n(this.props.resending.message, {email: this.props.confirming});
-      alertElem = ( <Alert bsStyle="warning">{msg}</Alert> );
+      alertElem = ( <EduiDAlert levelMessage="warning" Msg={msg}></EduiDAlert>);
     }
 
     return (
