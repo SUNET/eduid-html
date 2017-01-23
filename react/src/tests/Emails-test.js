@@ -518,7 +518,7 @@ describe("Async component", () => {
 
        const data = {
                 email: state.emails.email,
-                confirmed: false,
+                verified: false,
                 primary: false
               };
 
