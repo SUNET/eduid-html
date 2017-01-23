@@ -16,6 +16,7 @@ const emailsData = {
     confirming: '',
     emails: [],
     email: '',
+    code: '',
 };
 
 
@@ -107,10 +108,61 @@ let emailsReducer = (state=emailsData, action) => {
           message: ''
         }
       };
+    case actions.START_VERIFY:
+        return {
+          ...state,
+          code: action.payload.code
+        }
+    case actions.START_VERIFY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+    case actions.POST_EMAIL_REMOVE:
+      return {
+        ...state,
+        email: action.payload.email,
+        is_fetching: true
+      };
+    case actions.POST_EMAIL_REMOVE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_EMAIL_REMOVE_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+    case actions.POST_EMAIL_PRIMARY:
+      return {
+        ...state,
+        email: action.payload.email,
+        is_fetching: true
+      }
+    case actions.POST_EMAIL_PRIMARY_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_EMAIL_PRIMARY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+      };
     default:
       return state;
   }
 };
-
 export default emailsReducer;
 

@@ -9,8 +9,7 @@ const TableList = React.createClass({
   render: function () {
 
     let rows = [],
-        spinning = false;
-
+    spinning = false;
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {
           if (entry.primary) {
@@ -24,19 +23,21 @@ const TableList = React.createClass({
                         <span className="text-muted">{this.props.l10n('tl.remove')}</span>
                     </td>
                 </tr>);
-          } else if (entry.confirmed) {
+          } else if (entry.verified) {
             return (<tr className="emailrow"
                         data-identifier={index}
                         data-object={entry.email}
                         key={entry.email}>
                     <td className="identifier">{entry.email}</td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="link">
-                            {this.props.l10n('tl.make_primary')}
+                        <EduIDButton bsStyle="link"
+                        onClick={this.props.handleMakePrimaryEmail}>
+                                    {this.props.l10n('tl.make_primary')}
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="link">
+                        <EduIDButton bsStyle="link"
+                        onClick={this.props.handleRemoveEmail}>
                             {this.props.l10n('tl.remove')}
                         </EduIDButton>
                     </td>
@@ -54,7 +55,8 @@ const TableList = React.createClass({
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="link">
+                        <EduIDButton bsStyle="link"
+                                     onClick={this.props.handleRemoveEmail}>
                             {this.props.l10n('tl.remove')}
                         </EduIDButton>
                     </td>
@@ -76,7 +78,9 @@ const TableList = React.createClass({
 
 TableList.propTypes = {
     entries: PropTypes.array,
-    handleStartConfirmation: PropTypes.func
+    handleStartConfirmation: PropTypes.func,
+    handleRemoveEmail: PropTypes.func,
+    handleMakePrimaryEmail: PropTypes.func
 }
 
 export default i18n(TableList);

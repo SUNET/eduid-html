@@ -43,15 +43,17 @@ let ConfirmModal = React.createClass({
 
                 <Modal.Body>
                     {alertElem}
-                    <TextControl name={this.props.inputId}
-                                 placeholder={this.props.placeholder}
-                                 componentClass='input'
-                                 type='text' />
-                    {this.props.l10n('cm.lost_code')}
-                    <a href="#" onClick={this.props.handleResendCode}
-                       className="resend-code">
-                        {this.props.l10n('cm.resend_code')}
-                    </a>
+                    <div id="email-confirmation-code">
+                        <TextControl name={this.props.inputId}
+                                     placeholder={this.props.placeholder}
+                                     componentClass='input'
+                                     type='text' />
+                        {this.props.l10n('cm.lost_code')}
+                        <a href="#" onClick={this.props.handleResendCode}
+                           className="resend-code">
+                            {this.props.l10n('cm.resend_code')}
+                        </a>
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
