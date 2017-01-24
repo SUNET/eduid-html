@@ -11,7 +11,6 @@ import EduiDAlert from 'components/EduIDAlert';
 let ConfirmModal = React.createClass({
 
   render: function () {
-
     let spinning = false,
         msgid, msg, alertElem;
 
@@ -19,7 +18,7 @@ let ConfirmModal = React.createClass({
     if (this.props.resending.is_fetching) spinning = true;
 
     if (this.props.resending.failed) {
-      msg= this.props.l10n(this.props.resending.error);
+      msg= this.props.l10n(this.props.resending.error.form);
       alertElem = ( <EduiDAlert levelMessage="danger" Msg={msg}></EduiDAlert> );
     }
 
@@ -57,9 +56,6 @@ let ConfirmModal = React.createClass({
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="finish-button">
-                         {this.props.l10n('cm.finish')}
-                    </Button>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal}>
                          {this.props.l10n('cm.cancel')}
