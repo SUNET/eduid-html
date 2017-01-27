@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Mobile from 'components/Mobile';
-import { postEmail, changeMobile, startResendMobileCode, startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
+import { postMobile, changeMobile, startResendMobileCode, startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
 
 
 const mapStateToProps = (state, props) => {
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleChange: function (e) {
         const data = {
-            email: e.target.value
+            mobile: e.target.value
         };
         dispatch(changeMobile(data));
     },
