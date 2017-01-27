@@ -22,6 +22,7 @@ import * as emailActions from "actions/Emails";
 import * as openidActions from "actions/OpenidConnect";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
+import { requestMobile } from "sagas/Mobile"
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 
@@ -44,6 +45,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestMobile),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
     takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
