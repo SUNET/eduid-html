@@ -36,7 +36,112 @@ let mobileReducer = (state=mobileData, action) => {
         is_fetching: false,
         failed: true
       };
-        default:
+    case actions.CHANGE_MOBILE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case actions.START_CONFIRMATION:
+      return {
+        ...state,
+        confirming: action.payload.email
+      };
+    case actions.STOP_CONFIRMATION:
+      return {
+        ...state,
+        confirming: '',
+       resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+      };
+    case actions.START_RESEND_MOBILE_CODE:
+      return {
+        ...state,
+        resending: {
+          is_fetching: true,
+          failed: false,
+          error: {},
+          message: ''
+        }
+      };
+    case actions.START_RESEND_MOBILE_CODE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: 'mobile.resend_success'
+        }
+      };
+    case actions.START_RESEND_MOBILE_CODE_FAIL:
+      return {
+        ...state,
+        resending: {
+          is_fetching: false,
+          failed: true,
+          error: action.payload.error,
+          message: ''
+        }
+      };
+    case actions.START_VERIFY:
+        return {
+          ...state,
+          code: action.payload.code
+        }
+    case actions.START_VERIFY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+
+    case actions.POST_MOBILE_REMOVE:
+      return {
+        ...state,
+        email: action.payload.mobile,
+        is_fetching: true
+      };
+    case actions.POST_MOBILE_REMOVE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_MOBILE_REMOVE_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+    case actions.POST_MOBILE_PRIMARY:
+      return {
+        ...state,
+        email: action.payload.email,
+        is_fetching: true
+      }
+    case actions.POST_MOBILE_PRIMARY_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_MOBILE_PRIMARY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+      };
+    default:
       return state;
   }
 };

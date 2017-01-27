@@ -17,6 +17,9 @@ let Mobile = React.createClass({
     return (
         <div className="emailsview-form-container ">
             <TableList entries={this.props.mobiles}
+                       handleStartConfirmation={this.props.handleStartConfirmation}
+                       handleRemoveEmail={this.props.handleRemoveEmail}
+                       handleMakePrimaryEmail={this.props.handleMakePrimaryEmail}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
               <form id="emailsview-form"
@@ -30,13 +33,13 @@ let Mobile = React.createClass({
                   <EduIDButton bsStyle="primary"
                                id="email-button"
                           onClick={this.props.handleAdd}>
-                      {this.props.l10n('emails.button_add')}
+                      {this.props.l10n('mobile.button_add')}
                   </EduIDButton>
                 </fieldset>
               </form>
             </div>
             <ConfirmModal
-                // title={this.props.l10n('mobile.confirm_title', {mobile: this.props.confirming})}
+                // title={this.pfarops.l10n('mobile.confirm_title', {mobile: this.props.confirming})}
                 placeholder={this.props.l10n('mobile.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}

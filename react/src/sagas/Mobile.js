@@ -50,3 +50,100 @@ export function sendMobile (config, data) {
     .then(checkStatus)
     .then(response => response.json())
 }
+
+export function* requestResendMobileCode () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                mobile: state.mobile.confirming
+              };
+        const resp = yield call(requestResend, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.resendMobileCodeFail(error.toString()));
+    }
+}
+
+export function requestResend (config, data) {
+    return window.fetch(config.MOBILE_URL + 'resend-code', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestVerifyMobile () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                mobile: state.mobile.confirming,
+                code: state.mobile.code
+              };
+        const resp = yield call(requestVerify, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.startVerifyFail(error.toString()));
+    }
+}
+
+export function requestVerify (config, data) {
+    return window.fetch(config.MOBILE_URL + 'verify', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestRemoveMobile () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                email: state.emails.email,
+              };
+        const resp = yield call(requestRemove, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.startRemoveFail(error.toString()));
+    }
+}
+
+export function requestRemove (config, data) {
+    return window.fetch(config.MOBILE_URL + 'remove', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestMakePrimaryEmail () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                email: state.emails.email,
+              };
+        const resp = yield call(requestMakePrimary, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.makePrimaryFail(error.toString()));
+    }
+}
+
+export function requestMakePrimary (config, data) {
+    return window.fetch(config.MOBILE_URL + 'primary', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
