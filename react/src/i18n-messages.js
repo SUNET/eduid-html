@@ -210,6 +210,31 @@ const msgs = {
           id="pd.language"
           defaultMessage={`Language`} />),
 
+    /************************/
+    /* Mobile ***************/
+    /************************/
+
+    'mobile.resend_success': (values) => (
+        <FormattedMessage
+            id="mobile.resend_success"
+            defaultMessage={`New code successfully sent to {mobile}`}
+            values={values} />),
+
+    'mobile.email_label': (
+        <FormattedMessage
+            id="mobile.mobile"
+            defaultMessage={`mobile`} />),
+
+    'mobile.button_add': (
+        <FormattedMessage
+          id="mobile.button_add"
+          defaultMessage={`Add`} />),
+
+    'mobile.confirm_title': (values) => (
+        <FormattedMessage
+          id="mobile.confirm_email_title"
+          defaultMessage={`Check your email inbox for {mobile} for further instructions`}
+          values={values} />),
 
 };
 

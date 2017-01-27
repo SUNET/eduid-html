@@ -80,6 +80,22 @@
     "defaultMessage": "Language"
   },
   {
+    "id": "mobile.resend_success",
+    "defaultMessage": "New code successfully sent to {mobile}"
+  },
+  {
+    "id": "mobile.mobile",
+    "defaultMessage": "mobile"
+  },
+  {
+    "id": "mobile.button_add",
+    "defaultMessage": "Add"
+  },
+  {
+    "id": "mobile.confirm_email_title",
+    "defaultMessage": "Check your email inbox for {mobile} for further instructions"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
