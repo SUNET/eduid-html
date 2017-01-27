@@ -7,7 +7,7 @@ import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
 import ConfirmModal from 'components/ConfirmModal';
 
-import 'style/Emails.scss';
+import 'style/Mobile.scss';
 
 
 let Mobile = React.createClass({
