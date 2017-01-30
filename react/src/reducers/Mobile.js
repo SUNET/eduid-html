@@ -41,10 +41,27 @@ let mobileReducer = (state=mobileData, action) => {
         ...state,
         ...action.payload
       };
+    case actions.POST_MOBILE:
+      return {
+        ...state,
+        is_fetching: true
+      };
+    case actions.POST_MOBILE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_MOBILE_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+      };
     case actions.START_CONFIRMATION:
       return {
         ...state,
-        confirming: action.payload.email
+        confirming: action.payload.mobile
       };
     case actions.STOP_CONFIRMATION:
       return {
@@ -105,7 +122,7 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_REMOVE:
       return {
         ...state,
-        email: action.payload.mobile,
+        mobile: action.payload.mobile,
         is_fetching: true
       };
     case actions.POST_MOBILE_REMOVE_SUCCESS:
@@ -120,12 +137,11 @@ let mobileReducer = (state=mobileData, action) => {
         is_fetching: false,
         failed: true,
         error: action.payload.error,
-
       };
     case actions.POST_MOBILE_PRIMARY:
       return {
         ...state,
-        email: action.payload.email,
+        mobile: action.payload.mobile,
         is_fetching: true
       }
     case actions.POST_MOBILE_PRIMARY_SUCCESS:

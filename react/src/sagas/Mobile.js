@@ -104,7 +104,7 @@ export function* requestRemoveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                email: state.emails.email,
+                mobile: state.mobile.mobile,
               };
         const resp = yield call(requestRemove, state.config, data);
         yield put(resp);
@@ -124,11 +124,11 @@ export function requestRemove (config, data) {
     .then(response => response.json())
 }
 
-export function* requestMakePrimaryEmail () {
+export function* requestMakePrimaryMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                email: state.emails.email,
+                mobile: state.mobile.mobile,
               };
         const resp = yield call(requestMakePrimary, state.config, data);
         yield put(resp);
