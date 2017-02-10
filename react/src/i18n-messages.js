@@ -87,6 +87,11 @@ const msgs = {
     /* Generic Messages *****/
     /************************/
 
+    'Not a valid email address.': (
+        <FormattedMessage
+            id="Not a valid email address."
+            defaultMessage={`Not a valid email address.`} />),
+
     'out_of_sync': (
         <FormattedMessage
             id="out_of_sync"
@@ -97,6 +102,10 @@ const msgs = {
           id="button_save"
           defaultMessage={`Save`} />),
 
+    'faq_link': (
+        <FormattedMessage
+            id="faq_link"
+            defaultMessage={`For more information see the `} />),
     /************************/
     /* ConfirmModal *********/
     /************************/
@@ -129,6 +138,36 @@ const msgs = {
     /************************/
     /* TABLE LIST ***********/
     /************************/
+    'phone.phone_duplicated': (
+        <FormattedMessage
+            id="phone_duplicated"
+            defaultMessage={`Added number is duplicated`} />),
+
+    'phone.phone_format': (
+        <FormattedMessage
+            id="phone_format"
+            defaultMessage={`Invalid telephone number. It must be a valid Swedish number, or written
+                            using international notation, starting with '+' and followed by 10-20 digits.`} />),
+
+    'mail_duplicated': (
+        <FormattedMessage
+            id="mail_duplicated"
+            defaultMessage={`Added email is duplicated`} />),
+
+    'phones.cannot_remove_unique': (
+    <FormattedMessage
+            id="phone_cannot_remove_unique"
+            defaultMessage={`You can not delete the unique phone`} />),
+
+    'emails.cannot_remove_unique': (
+    <FormattedMessage
+            id="emails_cannot_remove_unique"
+            defaultMessage={`You can not delete the unique email`} />),
+
+    'emails.cannot_remove_primary': (
+    <FormattedMessage
+            id="emails.cannot_remove_primary"
+            defaultMessage={`You can not delete the primary email`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -173,9 +212,20 @@ const msgs = {
 
     'emails.confirm_title': (values) => (
         <FormattedMessage
-          id="emails.confirm_email_title"
+          id="emails.confirm_title"
           defaultMessage={`Check your email inbox for {email} for further instructions`}
           values={values} />),
+
+    'emails.long_description': (
+        <FormattedMessage
+          id="emails.long_description"
+          defaultMessage={`You can connect one or more email addresses with your eduID 
+          account and select one to be your primary email address.`} />),
+
+    'emails.main_title': (
+        <FormattedMessage
+          id="emails.main_title"
+          defaultMessage={`Email addresses`} />),
 
     /************************/
     /* OIDC *****************/
@@ -210,6 +260,17 @@ const msgs = {
           id="pd.language"
           defaultMessage={`Language`} />),
 
+    'pd.long_description': (
+        <FormattedMessage
+          id="pd.long_description"
+          defaultMessage={`This information is sent to service providers
+           when you log in using eduID in order to personalize those services for you.`} />),
+
+    'pd.main_title': (
+        <FormattedMessage
+          id="pd.main_title"
+          defaultMessage={`Personal information`} />),
+
     /************************/
     /* Mobile ***************/
     /************************/
@@ -217,7 +278,7 @@ const msgs = {
     'mobile.resend_success': (values) => (
         <FormattedMessage
             id="mobile.resend_success"
-            defaultMessage={`New code successfully sent to {mobile}`}
+            defaultMessage={`New code successfully sent to {email}`}
             values={values} />),
 
     'mobile.email_label': (
@@ -232,10 +293,20 @@ const msgs = {
 
     'mobile.confirm_title': (values) => (
         <FormattedMessage
-          id="mobile.confirm_email_title"
-          defaultMessage={`Check your email inbox for {mobile} for further instructions`}
+          id="mobile.confirm_title"
+          defaultMessage={`Check your mobile inbox for {phone} for further instructions`}
           values={values} />),
 
+    'phones.long_description': (
+        <FormattedMessage
+          id="phones.long_description"
+          defaultMessage={`You can connect one or more mobile phone numbers with
+           your eduID account, and select which one is the primary one.`} />),
+
+    'phones.main_title': (
+        <FormattedMessage
+          id="phones.main_title"
+          defaultMessage={`Mobile phone numbers`} />),
 };
 
 const unformatted = defineMessages({
@@ -243,5 +314,10 @@ const unformatted = defineMessages({
         id: "emails.confirm_email_placeholder",
         defaultMessage: `Email confirmation code`,
         description: "Placeholder for email text input"
+    },
+    'mobile.placeholder': {
+        id: "mobile.confirm_mobile_placeholder",
+        defaultMessage: `Phone confirmation code`,
+        description: "Placeholder for phone text input"
     },
 });
