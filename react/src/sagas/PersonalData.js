@@ -33,7 +33,8 @@ export function* savePersonalData () {
     try {
         const config = yield select(state => state.config);
         const data = yield select(state =>  ({
-            ...state.personal_data
+            ...state.personal_data,
+            csrf_token: state.personal_data.csrf_token
         }));
         delete data.is_fetching;
         delete data.failed;
