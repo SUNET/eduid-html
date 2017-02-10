@@ -1,7 +1,8 @@
 
 import { connect } from 'react-redux';
 import Emails from 'components/Emails';
-import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
+import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode,
+        finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -48,13 +49,16 @@ const mapDispatchToProps = (dispatch, props) => {
     handleStopConfirmation: function (e) {
         dispatch(stopConfirmation());
     },
+    handleFinishConfirmation: function (e) {
+        dispatch(finishConfirmation());
+    },
     handleConfirm: function (e) {
         const data = {
             code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
         };
         dispatch(startVerify(data))
     },
-    handleRemoveEmail: function (e) {
+    handleRemove: function (e) {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
@@ -67,7 +71,7 @@ const mapDispatchToProps = (dispatch, props) => {
         }
         dispatch(startRemove(data))
     },
-    handleMakePrimaryEmail: (e) => {
+    handleMakePrimary: (e) => {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
