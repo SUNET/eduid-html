@@ -1,16 +1,17 @@
 
 import { connect } from 'react-redux';
 import Mobile from 'components/Mobile';
-import { postMobile, changeMobile, startResendMobileCode, startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
+import { makePrimary, postMobile, changeMobile, startResendMobileCode, finishConfirmation,
+         startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
 
 
 const mapStateToProps = (state, props) => {
   return {
-    mobiles: state.mobile.mobiles,
-    is_fetching: state.mobile.is_fetching,
-    errorMsg: state.mobile.error,
-    confirming: state.mobile.confirming,
-    resending: state.mobile.resending,
+    phones: state.phones.phones,
+    is_fetching: state.phones.is_fetching,
+    errorMsg: state.phones.error,
+    confirming: state.phones.confirming,
+    resending: state.phones.resending,
   }
 };
 
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleChange: function (e) {
         const data = {
-            mobile: e.target.value
+            phone: e.target.value
         };
         dispatch(changeMobile(data));
     },
@@ -34,12 +35,12 @@ const mapDispatchToProps = (dispatch, props) => {
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
                 identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
-                mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.getAttribute('data-object')
             };
         }else{
            data = {
                 identifier: e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier'),
-                mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
             };
         }
 
@@ -48,34 +49,37 @@ const mapDispatchToProps = (dispatch, props) => {
     handleStopConfirmation: function (e) {
         dispatch(stopConfirmation());
     },
+    handleFinishConfirmation: function (e) {
+        dispatch(finishConfirmation());
+    },
     handleConfirm: function (e) {
         const data = {
-            code: document.body.querySelectorAll('#mobile-confirmation-code input')[0].value
+            code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
         };
         dispatch(startVerify(data))
     },
-    handleRemoveMobile: function (e) {
+    handleRemove: function (e) {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
-                mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.getAttribute('data-object')
             };
         }else{
            data = {
-                mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
             };
         }
         dispatch(startRemove(data))
     },
-    handleMakePrimaryMobile: (e) => {
+    handleMakePrimary: (e) => {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
-                mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.getAttribute('data-object')
             };
         }else{
            data = {
-                mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
             };
         }
         dispatch(makePrimary(data))

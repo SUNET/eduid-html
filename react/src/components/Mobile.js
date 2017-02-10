@@ -16,10 +16,16 @@ let Mobile = React.createClass({
 
     return (
         <div className="mobileview-form-container ">
-            <TableList entries={this.props.mobiles}
+              <div className="intro">
+              <h4>{this.props.l10n('phones.main_title')}</h4>
+                <p>{this.props.l10n('phones.long_description')}</p>
+                <p>{this.props.l10n('faq_link')}
+                <a href="https://www.eduid.se/faq.html">FAQ</a></p>
+          </div>
+            <TableList entries={this.props.phones}
                        handleStartConfirmation={this.props.handleStartConfirmation}
-                       handleRemoveMobile={this.props.handleRemoveMobile}
-                       handleMakePrimaryMobile={this.props.handleMakePrimaryMobile}
+                       handleRemove={this.props.handleRemove}
+                       handleMakePrimary={this.props.handleMakePrimary}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
               <form id="mobilesview-form"
@@ -29,7 +35,8 @@ let Mobile = React.createClass({
                   <TextControl name="mobile"
                                label={this.props.l10n('mobile.mobile_label')}
                                componentClass="input"
-                               type="text"/>
+                               type="text"
+                               handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
                                id="mobile-button"
                           onClick={this.props.handleAdd}>
@@ -39,9 +46,10 @@ let Mobile = React.createClass({
               </form>
             </div>
             <ConfirmModal
-                title={this.props.l10n('mobile.confirm_title', {mobile: this.props.confirming})}
+                title={this.props.l10n('mobile.confirm_title', {phone: this.props.confirming})}
                 placeholder={this.props.l10n('mobile.placeholder')}
                 showModal={Boolean(this.props.confirming)}
+                finishModal={this.props.handleFinishConfirmation}
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
@@ -53,8 +61,8 @@ let Mobile = React.createClass({
 });
 
 Mobile.propTypes = {
-  mobile: PropTypes.array,
-  errorMsg: PropTypes.string,
+  phones: PropTypes.array,
+  errorMsg: PropTypes.object,
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleChange: PropTypes.func,

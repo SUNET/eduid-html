@@ -12,7 +12,7 @@ const mobileData = {
       message: ''
     },
     confirming: '',
-    mobiles: [],
+    phones: [],
     mobile: '',
     code: '',
 }
@@ -57,12 +57,25 @@ let mobileReducer = (state=mobileData, action) => {
         ...state,
         is_fetching: false,
         failed: true,
+        error: action.payload.error,
       };
     case actions.START_CONFIRMATION:
       return {
         ...state,
-        confirming: action.payload.mobile
+        confirming: action.payload.phone,
+        is_fetching: true
       };
+
+    case actions.FINISH_CONFIRMATION:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false,
+        confirmation: '',
+        confirming: '',
+        code: '',
+      };
+
     case actions.STOP_CONFIRMATION:
       return {
         ...state,
@@ -108,8 +121,18 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.START_VERIFY:
         return {
           ...state,
-          code: action.payload.code
-        }
+          code: action.payload.code,
+          is_fetching: true,
+        };
+
+    case actions.POST_PHONE_VERIFY_SUCCESS:
+        return {
+            ...state,
+            ...state.payload,
+            is_fetching: true,
+            phones: action.payload.phones
+        };
+
     case actions.START_VERIFY_FAIL:
       return {
         ...state,
@@ -122,10 +145,10 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_REMOVE:
       return {
         ...state,
-        mobile: action.payload.mobile,
+        mobile: action.payload.phone,
         is_fetching: true
       };
-    case actions.POST_MOBILE_REMOVE_SUCCESS:
+    case actions.POST_PHONE_REMOVE_SUCCESS:
       return {
         ...state,
         ...action.payload,
@@ -141,7 +164,7 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_PRIMARY:
       return {
         ...state,
-        mobile: action.payload.mobile,
+        phone: action.payload.phone,
         is_fetching: true
       }
     case actions.POST_MOBILE_PRIMARY_SUCCESS:

@@ -1,23 +1,25 @@
 export const GET_MOBILES = 'GET_MOBILES';
-export const GET_MOBILES_SUCCESS = 'GET_MOBILES_SUCCESS';
+export const GET_MOBILES_SUCCESS = 'GET_PHONE_ALL_SUCCESS';
 export const GET_MOBILES_FAIL = 'GET_MOBILES_FAIL';
-export const CHANGE_MOBILES = 'CHANGE_MOBILES';
-export const POST_MOBILES = 'POST_MOBILES';
-export const POST_MOBILES_SUCCESS = 'POST_MOBILES_NEW_SUCCESS';
-export const POST_MOBILES_FAIL = 'POST_MOBILES_FAIL';
+export const CHANGE_MOBILE = 'CHANGE_MOBILE';
+export const POST_MOBILE = 'POST_MOBILE';
+export const POST_MOBILE_SUCCESS = 'POST_PHONE_NEW_SUCCESS';
+export const POST_MOBILE_FAIL = 'POST_PHONE_NEW_FAIL';
 export const START_CONFIRMATION = 'START_CONFIRMATION';
 export const STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 export const START_RESEND_MOBILE_CODE = 'START_RESEND_MOBILE_CODE';
-export const START_RESEND_MOBILE_CODE_SUCCESS = 'START_RESEND_MOBILE_CODE_SUCCESS';
+export const START_RESEND_MOBILE_CODE_SUCCESS = 'POST_PHONE_RESEND_CODE_SUCCESS';
 export const START_RESEND_MOBILE_CODE_FAIL = 'START_RESEND_MOBILE_CODE_FAIL';
 export const START_VERIFY = 'START_VERIFY';
 export const START_VERIFY_FAIL = 'START_VERIFY_FAIL';
+export const POST_PHONE_VERIFY_SUCCESS = 'POST_PHONE_VERIFY_SUCCESS';
 export const POST_MOBILE_REMOVE = 'POST_MOBILE_REMOVE';
-export const POST_MOBILE_REMOVE_SUCCESS = 'POST_MOBILE_REMOVE_SUCCESS';
-export const POST_MOBILE_REMOVE_FAIL = 'POST_MOBILE_REMOVE_FAIL';
+export const POST_PHONE_REMOVE_SUCCESS = 'POST_PHONE_REMOVE_SUCCESS';
+export const POST_MOBILE_REMOVE_FAIL = 'POST_PHONE_REMOVE_FAIL';
 export const POST_MOBILE_PRIMARY = 'POST_MOBILE_PRIMARY'
-export const POST_MOBILE_PRIMARY_SUCCESS = 'POST_MOBILE_PRIMARY_SUCCESS'
+export const POST_MOBILE_PRIMARY_SUCCESS = 'POST_PHONE_PRIMARY_SUCCESS'
 export const POST_MOBILE_PRIMARY_FAIL = 'POST_MOBILE_PRIMARY_FAIL'
+export const FINISH_CONFIRMATION = 'FINISH_CONFIRMATION'
 
 export function getMobiles () {
   return {
@@ -34,22 +36,28 @@ export function getMobilesFail (err) {
 
 export function changeMobile (data) {
   return {
-    type: CHANGE_MOBILES,
+    type: CHANGE_MOBILE,
     payload: data
   };
 }
 
 export function postMobile () {
   return {
-    type: POST_MOBILES
+    type: POST_MOBILE
   };
 }
 
 export function postMobileFail (err) {
   return {
-    type: POST_MOBILES_FAIL,
+    type: POST_MOBILE_FAIL,
     error: true,
     payload: new Error(err)
+  };
+}
+
+export function finishConfirmation() {
+  return {
+    type: FINISH_CONFIRMATION
   };
 }
 

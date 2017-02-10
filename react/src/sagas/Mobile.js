@@ -9,8 +9,8 @@ export function* requestMobile () {
     try {
         yield put(actions.getMobiles());
         const config = yield select(state => state.config);
-        const mobiles = yield call(fetchMobiles, config);
-        yield put(mobiles);
+        const phones = yield call(fetchMobiles, config);
+        yield put(phones);
     } catch(error) {
         yield put(actions.getMobilesFail(error.toString()));
     }
@@ -29,14 +29,17 @@ export function* saveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                mobile: state.mobile.mobile,
+                number: state.phones.phone,
                 verified: false,
-                primary: false
+                primary: false,
+                csrf_token: state.emails.csrf_token
               };
+
         const mobiles = yield call(sendMobile, state.config, data);
+
         yield put(mobiles);
     } catch(error) {
-        yield put(actions.postMobilesFail(error.toString()));
+        yield put(actions.postMobileFail(error.toString()));
     }
 }
 
@@ -55,7 +58,8 @@ export function* requestResendMobileCode () {
     try {
         const state = yield select(state => state),
               data = {
-                mobile: state.mobile.confirming
+                number: state.phones.confirming,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestResend, state.config, data);
         yield put(resp);
@@ -79,8 +83,9 @@ export function* requestVerifyMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                mobile: state.mobile.confirming,
-                code: state.mobile.code
+                number: state.phones.confirming,
+                code: state.phones.code,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestVerify, state.config, data);
         yield put(resp);
@@ -104,7 +109,8 @@ export function* requestRemoveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                mobile: state.mobile.mobile,
+                number: state.phones.mobile,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
         yield put(resp);
@@ -128,7 +134,8 @@ export function* requestMakePrimaryMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                mobile: state.mobile.mobile,
+                number: state.phones.phone,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);
         yield put(resp);
