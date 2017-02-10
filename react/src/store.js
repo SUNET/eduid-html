@@ -11,7 +11,7 @@ const eduIDApp = combineReducers({
   personal_data: personalDataReducer,
   emails: emailsReducer,
   openid_data: openidConnectReducer,
-  mobile: mobileReducer
+  phones: mobileReducer
 });
 
 export default eduIDApp;
