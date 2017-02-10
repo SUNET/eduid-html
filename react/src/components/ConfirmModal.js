@@ -24,9 +24,8 @@ let ConfirmModal = React.createClass({
 
     if (this.props.resending.message) {
       msg = this.props.l10n(this.props.resending.message, {email: this.props.confirming});
-      alertElem = ( <EduiDAlert levelMessage="warning" Msg={msg}></EduiDAlert>);
+      alertElem = ( <EduiDAlert className="help-block" levelMessage="warning" Msg={msg}></EduiDAlert>);
     }
-
     return (
       <div id="emailConfirmDialog"
            tabIndex="-1"
@@ -41,7 +40,9 @@ let ConfirmModal = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    {alertElem}
+                    <span className="help-block" id="alert">
+                         {alertElem}
+                    </span>
                     <div id="email-confirmation-code">
                         <TextControl name={this.props.inputId}
                                      placeholder={this.props.placeholder}
@@ -56,14 +57,18 @@ let ConfirmModal = React.createClass({
                 </Modal.Body>
 
                 <Modal.Footer>
+                    <Button className="finish-button"
+                            onClick={this.props.finishModal} >
+                         {this.props.l10n('cm.finish')}
+                    </Button>
                     <Button className="cancel-button"
-                            onClick={this.props.closeModal}>
+                            onClick={this.props.closeModal} >
                          {this.props.l10n('cm.cancel')}
                     </Button>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
                           spinning={spinning}
-                          onClick={this.props.handleConfirm}>
+                          onClick={this.props.handleConfirm} >
                         {this.props.l10n('cm.ok')}
                     </EduIDButton>
                 </Modal.Footer>
@@ -81,6 +86,7 @@ ConfirmModal.propTypes = {
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleResendCode: PropTypes.func,
+  finishModal: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
   errorMsg: PropTypes.string,
