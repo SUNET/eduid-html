@@ -1,11 +1,19 @@
 [
   {
+    "id": "Not a valid email address.",
+    "defaultMessage": "Not a valid email address."
+  },
+  {
     "id": "out_of_sync",
     "defaultMessage": "User data is out of sync. Reload page to re-sync."
   },
   {
     "id": "button_save",
     "defaultMessage": "Save"
+  },
+  {
+    "id": "faq_link",
+    "defaultMessage": "For more information see the"
   },
   {
     "id": "cm.lost_code",
@@ -26,6 +34,30 @@
   {
     "id": "cm.cancel",
     "defaultMessage": "CANCEL"
+  },
+  {
+    "id": "phone_duplicated",
+    "defaultMessage": "Added number is duplicated"
+  },
+  {
+    "id": "phone_format",
+    "defaultMessage": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits."
+  },
+  {
+    "id": "mail_duplicated",
+    "defaultMessage": "Added email is duplicated"
+  },
+  {
+    "id": "phone_cannot_remove_unique",
+    "defaultMessage": "You can not delete the unique phone"
+  },
+  {
+    "id": "emails_cannot_remove_unique",
+    "defaultMessage": "You can not delete the unique email"
+  },
+  {
+    "id": "emails.cannot_remove_primary",
+    "defaultMessage": "You can not delete the primary email"
   },
   {
     "id": "tl.primary",
@@ -56,8 +88,16 @@
     "defaultMessage": "Add"
   },
   {
-    "id": "emails.confirm_email_title",
+    "id": "emails.confirm_title",
     "defaultMessage": "Check your email inbox for {email} for further instructions"
+  },
+  {
+    "id": "emails.long_description",
+    "defaultMessage": "You can connect one or more email addresses with your eduID \n          account and select one to be your primary email address."
+  },
+  {
+    "id": "emails.main_title",
+    "defaultMessage": "Email addresses"
   },
   {
     "id": "oc.get_qrcode",
@@ -80,8 +120,16 @@
     "defaultMessage": "Language"
   },
   {
+    "id": "pd.long_description",
+    "defaultMessage": "This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you."
+  },
+  {
+    "id": "pd.main_title",
+    "defaultMessage": "Personal information"
+  },
+  {
     "id": "mobile.resend_success",
-    "defaultMessage": "New code successfully sent to {mobile}"
+    "defaultMessage": "New code successfully sent to {email}"
   },
   {
     "id": "mobile.mobile",
@@ -92,12 +140,25 @@
     "defaultMessage": "Add"
   },
   {
-    "id": "mobile.confirm_email_title",
-    "defaultMessage": "Check your email inbox for {mobile} for further instructions"
+    "id": "mobile.confirm_title",
+    "defaultMessage": "Check your mobile inbox for {phone} for further instructions"
+  },
+  {
+    "id": "phones.long_description",
+    "defaultMessage": "You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one."
+  },
+  {
+    "id": "phones.main_title",
+    "defaultMessage": "Mobile phone numbers"
   },
   {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
+  },
+  {
+    "id": "mobile.confirm_mobile_placeholder",
+    "description": "Placeholder for phone text input",
+    "defaultMessage": "Phone confirmation code"
   }
 ]

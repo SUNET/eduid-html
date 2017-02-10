@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c33993524bbfdf05066f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d42263e8b62f57dcf026"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -13941,6 +13941,10 @@
 	
 	var emailActions = _interopRequireWildcard(_Emails);
 	
+	var _Mobile = __webpack_require__(559);
+	
+	var mobileActions = _interopRequireWildcard(_Mobile);
+	
 	var _OpenidConnect = __webpack_require__(557);
 	
 	var openidActions = _interopRequireWildcard(_OpenidConnect);
@@ -13949,7 +13953,9 @@
 	
 	var _Emails2 = __webpack_require__(564);
 	
-	var _Mobile = __webpack_require__(565);
+	var _Mobile2 = __webpack_require__(565);
+	
+	var sagasMobile = _interopRequireWildcard(_Mobile2);
 	
 	var _Config2 = __webpack_require__(566);
 	
@@ -13986,7 +13992,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [(0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Mobile.requestMobile), (0, _reduxSaga.takeEvery)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeEvery)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeEvery)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeEvery)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail)];
+	          return [(0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile), (0, _reduxSaga.takeEvery)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeEvery)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeEvery)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeEvery)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeEvery)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeEvery)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile)];
 	
 	        case 2:
 	        case 'end':
@@ -40845,7 +40851,7 @@
 	  personal_data: _PersonalData2.default,
 	  emails: _Emails2.default,
 	  openid_data: _OpenidConnect2.default,
-	  mobile: _Mobile2.default
+	  phones: _Mobile2.default
 	});
 	
 	var _default = eduIDApp;
@@ -41106,11 +41112,13 @@
 	    case actions.POST_EMAIL_SUCCESS:
 	      return _extends({}, state, action.payload, {
 	        is_fetching: false
+	
 	      });
 	    case actions.POST_EMAIL_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
-	        failed: true
+	        failed: true,
+	        error: action.payload.error
 	      });
 	    case actions.START_CONFIRMATION:
 	      return _extends({}, state, {
@@ -41126,6 +41134,15 @@
 	          message: ''
 	        }
 	      });
+	
+	    case actions.FINISH_CONFIRMATION:
+	      return _extends({}, state, action.payload, {
+	        is_fetching: false,
+	        confirmation: '',
+	        confirming: '',
+	        code: ''
+	      });
+	
 	    case actions.START_RESEND_EMAIL_CODE:
 	      return _extends({}, state, {
 	        resending: {
@@ -41155,7 +41172,13 @@
 	      });
 	    case actions.START_VERIFY:
 	      return _extends({}, state, {
-	        code: action.payload.code
+	        code: action.payload.code,
+	        is_fetching: true
+	      });
+	    case actions.POST_EMAIL_VERIFY_SUCCESS:
+	      return _extends({}, state, state.payload, {
+	        is_fetching: false,
+	        emails: action.payload.emails
 	      });
 	    case actions.START_VERIFY_FAIL:
 	      return _extends({}, state, {
@@ -41178,7 +41201,6 @@
 	        is_fetching: false,
 	        failed: true,
 	        error: action.payload.error
-	
 	      });
 	    case actions.POST_EMAIL_PRIMARY:
 	      return _extends({}, state, {
@@ -41233,6 +41255,7 @@
 	exports.postEmailFail = postEmailFail;
 	exports.startConfirmation = startConfirmation;
 	exports.stopConfirmation = stopConfirmation;
+	exports.finishConfirmation = finishConfirmation;
 	exports.startResendEmailCode = startResendEmailCode;
 	exports.resendEmailCodeFail = resendEmailCodeFail;
 	exports.startVerify = startVerify;
@@ -41247,7 +41270,7 @@
 	var CHANGE_EMAIL = exports.CHANGE_EMAIL = 'CHANGE_EMAIL';
 	var POST_EMAIL = exports.POST_EMAIL = 'POST_EMAIL';
 	var POST_EMAIL_SUCCESS = exports.POST_EMAIL_SUCCESS = 'POST_EMAIL_NEW_SUCCESS';
-	var POST_EMAIL_FAIL = exports.POST_EMAIL_FAIL = 'POST_EMAIL_NEW__FAIL';
+	var POST_EMAIL_FAIL = exports.POST_EMAIL_FAIL = 'POST_EMAIL_NEW_FAIL';
 	var START_CONFIRMATION = exports.START_CONFIRMATION = 'START_CONFIRMATION';
 	var STOP_CONFIRMATION = exports.STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 	var START_RESEND_EMAIL_CODE = exports.START_RESEND_EMAIL_CODE = 'START_RESEND_EMAIL_CODE';
@@ -41255,12 +41278,14 @@
 	var START_RESEND_EMAIL_CODE_FAIL = exports.START_RESEND_EMAIL_CODE_FAIL = 'POST_EMAIL_RESEND_CODE_FAIL';
 	var START_VERIFY = exports.START_VERIFY = 'START_VERIFY';
 	var START_VERIFY_FAIL = exports.START_VERIFY_FAIL = 'START_VERIFY_FAIL';
+	var POST_EMAIL_VERIFY_SUCCESS = exports.POST_EMAIL_VERIFY_SUCCESS = 'POST_EMAIL_VERIFY_SUCCESS';
 	var POST_EMAIL_REMOVE = exports.POST_EMAIL_REMOVE = 'POST_EMAIL_REMOVE';
 	var POST_EMAIL_REMOVE_SUCCESS = exports.POST_EMAIL_REMOVE_SUCCESS = 'POST_EMAIL_REMOVE_SUCCESS';
 	var POST_EMAIL_REMOVE_FAIL = exports.POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL';
 	var POST_EMAIL_PRIMARY = exports.POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY';
 	var POST_EMAIL_PRIMARY_SUCCESS = exports.POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS';
 	var POST_EMAIL_PRIMARY_FAIL = exports.POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL';
+	var FINISH_CONFIRMATION = exports.FINISH_CONFIRMATION = 'FINISH_CONFIRMATION';
 	
 	function getEmails() {
 	  return {
@@ -41306,6 +41331,12 @@
 	function stopConfirmation() {
 	  return {
 	    type: STOP_CONFIRMATION
+	  };
+	}
+	
+	function finishConfirmation() {
+	  return {
+	    type: FINISH_CONFIRMATION
 	  };
 	}
 	
@@ -41402,6 +41433,8 @@
 	
 	  __REACT_HOT_LOADER__.register(START_VERIFY_FAIL, 'START_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
+	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_SUCCESS, 'POST_EMAIL_VERIFY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE, 'POST_EMAIL_REMOVE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE_SUCCESS, 'POST_EMAIL_REMOVE_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
@@ -41413,6 +41446,8 @@
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_SUCCESS, 'POST_EMAIL_PRIMARY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_FAIL, 'POST_EMAIL_PRIMARY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(FINISH_CONFIRMATION, 'FINISH_CONFIRMATION', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(getEmails, 'getEmails', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -41427,6 +41462,8 @@
 	  __REACT_HOT_LOADER__.register(startConfirmation, 'startConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(stopConfirmation, 'stopConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(finishConfirmation, 'finishConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(startResendEmailCode, 'startResendEmailCode', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -41777,7 +41814,7 @@
 	    message: ''
 	  },
 	  confirming: '',
-	  mobiles: [],
+	  phones: [],
 	  mobile: '',
 	  code: ''
 	};
@@ -41813,12 +41850,23 @@
 	    case actions.POST_MOBILE_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
-	        failed: true
+	        failed: true,
+	        error: action.payload.error
 	      });
 	    case actions.START_CONFIRMATION:
 	      return _extends({}, state, {
-	        confirming: action.payload.mobile
+	        confirming: action.payload.phone,
+	        is_fetching: true
 	      });
+	
+	    case actions.FINISH_CONFIRMATION:
+	      return _extends({}, state, action.payload, {
+	        is_fetching: false,
+	        confirmation: '',
+	        confirming: '',
+	        code: ''
+	      });
+	
 	    case actions.STOP_CONFIRMATION:
 	      return _extends({}, state, {
 	        confirming: '',
@@ -41858,8 +41906,16 @@
 	      });
 	    case actions.START_VERIFY:
 	      return _extends({}, state, {
-	        code: action.payload.code
+	        code: action.payload.code,
+	        is_fetching: true
 	      });
+	
+	    case actions.POST_PHONE_VERIFY_SUCCESS:
+	      return _extends({}, state, state.payload, {
+	        is_fetching: true,
+	        phones: action.payload.phones
+	      });
+	
 	    case actions.START_VERIFY_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
@@ -41870,10 +41926,10 @@
 	
 	    case actions.POST_MOBILE_REMOVE:
 	      return _extends({}, state, {
-	        mobile: action.payload.mobile,
+	        mobile: action.payload.phone,
 	        is_fetching: true
 	      });
-	    case actions.POST_MOBILE_REMOVE_SUCCESS:
+	    case actions.POST_PHONE_REMOVE_SUCCESS:
 	      return _extends({}, state, action.payload, {
 	        is_fetching: false
 	      });
@@ -41885,7 +41941,7 @@
 	      });
 	    case actions.POST_MOBILE_PRIMARY:
 	      return _extends({}, state, {
-	        mobile: action.payload.mobile,
+	        phone: action.payload.phone,
 	        is_fetching: true
 	      });
 	    case actions.POST_MOBILE_PRIMARY_SUCCESS:
@@ -41934,6 +41990,7 @@
 	exports.changeMobile = changeMobile;
 	exports.postMobile = postMobile;
 	exports.postMobileFail = postMobileFail;
+	exports.finishConfirmation = finishConfirmation;
 	exports.stopConfirmation = stopConfirmation;
 	exports.startConfirmation = startConfirmation;
 	exports.startResendMobileCode = startResendMobileCode;
@@ -41945,25 +42002,27 @@
 	exports.makePrimary = makePrimary;
 	exports.makePrimaryFail = makePrimaryFail;
 	var GET_MOBILES = exports.GET_MOBILES = 'GET_MOBILES';
-	var GET_MOBILES_SUCCESS = exports.GET_MOBILES_SUCCESS = 'GET_MOBILES_SUCCESS';
+	var GET_MOBILES_SUCCESS = exports.GET_MOBILES_SUCCESS = 'GET_PHONE_ALL_SUCCESS';
 	var GET_MOBILES_FAIL = exports.GET_MOBILES_FAIL = 'GET_MOBILES_FAIL';
-	var CHANGE_MOBILES = exports.CHANGE_MOBILES = 'CHANGE_MOBILES';
-	var POST_MOBILES = exports.POST_MOBILES = 'POST_MOBILES';
-	var POST_MOBILES_SUCCESS = exports.POST_MOBILES_SUCCESS = 'POST_MOBILES_NEW_SUCCESS';
-	var POST_MOBILES_FAIL = exports.POST_MOBILES_FAIL = 'POST_MOBILES_FAIL';
+	var CHANGE_MOBILE = exports.CHANGE_MOBILE = 'CHANGE_MOBILE';
+	var POST_MOBILE = exports.POST_MOBILE = 'POST_MOBILE';
+	var POST_MOBILE_SUCCESS = exports.POST_MOBILE_SUCCESS = 'POST_PHONE_NEW_SUCCESS';
+	var POST_MOBILE_FAIL = exports.POST_MOBILE_FAIL = 'POST_PHONE_NEW_FAIL';
 	var START_CONFIRMATION = exports.START_CONFIRMATION = 'START_CONFIRMATION';
 	var STOP_CONFIRMATION = exports.STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 	var START_RESEND_MOBILE_CODE = exports.START_RESEND_MOBILE_CODE = 'START_RESEND_MOBILE_CODE';
-	var START_RESEND_MOBILE_CODE_SUCCESS = exports.START_RESEND_MOBILE_CODE_SUCCESS = 'START_RESEND_MOBILE_CODE_SUCCESS';
+	var START_RESEND_MOBILE_CODE_SUCCESS = exports.START_RESEND_MOBILE_CODE_SUCCESS = 'POST_PHONE_RESEND_CODE_SUCCESS';
 	var START_RESEND_MOBILE_CODE_FAIL = exports.START_RESEND_MOBILE_CODE_FAIL = 'START_RESEND_MOBILE_CODE_FAIL';
 	var START_VERIFY = exports.START_VERIFY = 'START_VERIFY';
 	var START_VERIFY_FAIL = exports.START_VERIFY_FAIL = 'START_VERIFY_FAIL';
+	var POST_PHONE_VERIFY_SUCCESS = exports.POST_PHONE_VERIFY_SUCCESS = 'POST_PHONE_VERIFY_SUCCESS';
 	var POST_MOBILE_REMOVE = exports.POST_MOBILE_REMOVE = 'POST_MOBILE_REMOVE';
-	var POST_MOBILE_REMOVE_SUCCESS = exports.POST_MOBILE_REMOVE_SUCCESS = 'POST_MOBILE_REMOVE_SUCCESS';
-	var POST_MOBILE_REMOVE_FAIL = exports.POST_MOBILE_REMOVE_FAIL = 'POST_MOBILE_REMOVE_FAIL';
+	var POST_PHONE_REMOVE_SUCCESS = exports.POST_PHONE_REMOVE_SUCCESS = 'POST_PHONE_REMOVE_SUCCESS';
+	var POST_MOBILE_REMOVE_FAIL = exports.POST_MOBILE_REMOVE_FAIL = 'POST_PHONE_REMOVE_FAIL';
 	var POST_MOBILE_PRIMARY = exports.POST_MOBILE_PRIMARY = 'POST_MOBILE_PRIMARY';
-	var POST_MOBILE_PRIMARY_SUCCESS = exports.POST_MOBILE_PRIMARY_SUCCESS = 'POST_MOBILE_PRIMARY_SUCCESS';
+	var POST_MOBILE_PRIMARY_SUCCESS = exports.POST_MOBILE_PRIMARY_SUCCESS = 'POST_PHONE_PRIMARY_SUCCESS';
 	var POST_MOBILE_PRIMARY_FAIL = exports.POST_MOBILE_PRIMARY_FAIL = 'POST_MOBILE_PRIMARY_FAIL';
+	var FINISH_CONFIRMATION = exports.FINISH_CONFIRMATION = 'FINISH_CONFIRMATION';
 	
 	function getMobiles() {
 	  return {
@@ -41980,22 +42039,28 @@
 	
 	function changeMobile(data) {
 	  return {
-	    type: CHANGE_MOBILES,
+	    type: CHANGE_MOBILE,
 	    payload: data
 	  };
 	}
 	
 	function postMobile() {
 	  return {
-	    type: POST_MOBILES
+	    type: POST_MOBILE
 	  };
 	}
 	
 	function postMobileFail(err) {
 	  return {
-	    type: POST_MOBILES_FAIL,
+	    type: POST_MOBILE_FAIL,
 	    error: true,
 	    payload: new Error(err)
+	  };
+	}
+	
+	function finishConfirmation() {
+	  return {
+	    type: FINISH_CONFIRMATION
 	  };
 	}
 	
@@ -42082,13 +42147,13 @@
 	
 	  __REACT_HOT_LOADER__.register(GET_MOBILES_FAIL, 'GET_MOBILES_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
-	  __REACT_HOT_LOADER__.register(CHANGE_MOBILES, 'CHANGE_MOBILES', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	  __REACT_HOT_LOADER__.register(CHANGE_MOBILE, 'CHANGE_MOBILE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
-	  __REACT_HOT_LOADER__.register(POST_MOBILES, 'POST_MOBILES', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	  __REACT_HOT_LOADER__.register(POST_MOBILE, 'POST_MOBILE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
-	  __REACT_HOT_LOADER__.register(POST_MOBILES_SUCCESS, 'POST_MOBILES_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	  __REACT_HOT_LOADER__.register(POST_MOBILE_SUCCESS, 'POST_MOBILE_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
-	  __REACT_HOT_LOADER__.register(POST_MOBILES_FAIL, 'POST_MOBILES_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	  __REACT_HOT_LOADER__.register(POST_MOBILE_FAIL, 'POST_MOBILE_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(START_CONFIRMATION, 'START_CONFIRMATION', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
@@ -42104,9 +42169,11 @@
 	
 	  __REACT_HOT_LOADER__.register(START_VERIFY_FAIL, 'START_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
+	  __REACT_HOT_LOADER__.register(POST_PHONE_VERIFY_SUCCESS, 'POST_PHONE_VERIFY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_REMOVE, 'POST_MOBILE_REMOVE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
-	  __REACT_HOT_LOADER__.register(POST_MOBILE_REMOVE_SUCCESS, 'POST_MOBILE_REMOVE_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	  __REACT_HOT_LOADER__.register(POST_PHONE_REMOVE_SUCCESS, 'POST_PHONE_REMOVE_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_REMOVE_FAIL, 'POST_MOBILE_REMOVE_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
@@ -42115,6 +42182,8 @@
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_PRIMARY_SUCCESS, 'POST_MOBILE_PRIMARY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_PRIMARY_FAIL, 'POST_MOBILE_PRIMARY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	
+	  __REACT_HOT_LOADER__.register(FINISH_CONFIRMATION, 'FINISH_CONFIRMATION', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(getMobiles, 'getMobiles', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
@@ -42125,6 +42194,8 @@
 	  __REACT_HOT_LOADER__.register(postMobile, 'postMobile', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(postMobileFail, 'postMobileFail', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
+	
+	  __REACT_HOT_LOADER__.register(finishConfirmation, 'finishConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(stopConfirmation, 'stopConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Mobile.js');
 	
@@ -42245,7 +42316,9 @@
 	                    config = _context2.sent;
 	                    _context2.next = 6;
 	                    return (0, _effects.select)(function (state) {
-	                        return _extends({}, state.personal_data);
+	                        return _extends({}, state.personal_data, {
+	                            csrf_token: state.personal_data.csrf_token
+	                        });
 	                    });
 	
 	                case 6:
@@ -42932,7 +43005,8 @@
 	                    data = {
 	                        email: state.emails.email,
 	                        verified: false,
-	                        primary: false
+	                        primary: false,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context2.next = 7;
 	                    return (0, _effects.call)(sendEmail, state.config, data);
@@ -42986,7 +43060,8 @@
 	                case 3:
 	                    state = _context3.sent;
 	                    data = {
-	                        email: state.emails.confirming
+	                        email: state.emails.confirming,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context3.next = 7;
 	                    return (0, _effects.call)(requestResend, state.config, data);
@@ -43041,7 +43116,8 @@
 	                    state = _context4.sent;
 	                    data = {
 	                        email: state.emails.confirming,
-	                        code: state.emails.code
+	                        code: state.emails.code,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context4.next = 7;
 	                    return (0, _effects.call)(requestVerify, state.config, data);
@@ -43095,7 +43171,8 @@
 	                case 3:
 	                    state = _context5.sent;
 	                    data = {
-	                        email: state.emails.email
+	                        email: state.emails.email,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context5.next = 7;
 	                    return (0, _effects.call)(requestRemove, state.config, data);
@@ -43149,7 +43226,8 @@
 	                case 3:
 	                    state = _context6.sent;
 	                    data = {
-	                        email: state.emails.email
+	                        email: state.emails.email,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context6.next = 7;
 	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
@@ -43257,7 +43335,7 @@
 	var _marked = [requestMobile, saveMobile, requestResendMobileCode, requestVerifyMobile, requestRemoveMobile, requestMakePrimaryMobile].map(regeneratorRuntime.mark);
 	
 	function requestMobile() {
-	    var config, mobiles;
+	    var config, phones;
 	    return regeneratorRuntime.wrap(function requestMobile$(_context) {
 	        while (1) {
 	            switch (_context.prev = _context.next) {
@@ -43278,9 +43356,9 @@
 	                    return (0, _effects.call)(fetchMobiles, config);
 	
 	                case 8:
-	                    mobiles = _context.sent;
+	                    phones = _context.sent;
 	                    _context.next = 11;
-	                    return (0, _effects.put)(mobiles);
+	                    return (0, _effects.put)(phones);
 	
 	                case 11:
 	                    _context.next = 17;
@@ -43324,9 +43402,10 @@
 	                case 3:
 	                    state = _context2.sent;
 	                    data = {
-	                        mobile: state.mobile.mobile,
+	                        number: state.phones.phone,
 	                        verified: false,
-	                        primary: false
+	                        primary: false,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context2.next = 7;
 	                    return (0, _effects.call)(sendMobile, state.config, data);
@@ -43344,7 +43423,7 @@
 	                    _context2.prev = 12;
 	                    _context2.t0 = _context2["catch"](0);
 	                    _context2.next = 16;
-	                    return (0, _effects.put)(actions.postMobilesFail(_context2.t0.toString()));
+	                    return (0, _effects.put)(actions.postMobileFail(_context2.t0.toString()));
 	
 	                case 16:
 	                case "end":
@@ -43380,7 +43459,8 @@
 	                case 3:
 	                    state = _context3.sent;
 	                    data = {
-	                        mobile: state.mobile.confirming
+	                        number: state.phones.confirming,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context3.next = 7;
 	                    return (0, _effects.call)(requestResend, state.config, data);
@@ -43434,8 +43514,9 @@
 	                case 3:
 	                    state = _context4.sent;
 	                    data = {
-	                        mobile: state.mobile.confirming,
-	                        code: state.mobile.code
+	                        number: state.phones.confirming,
+	                        code: state.phones.code,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context4.next = 7;
 	                    return (0, _effects.call)(requestVerify, state.config, data);
@@ -43489,7 +43570,8 @@
 	                case 3:
 	                    state = _context5.sent;
 	                    data = {
-	                        mobile: state.mobile.mobile
+	                        number: state.phones.mobile,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context5.next = 7;
 	                    return (0, _effects.call)(requestRemove, state.config, data);
@@ -43543,7 +43625,8 @@
 	                case 3:
 	                    state = _context6.sent;
 	                    data = {
-	                        mobile: state.mobile.mobile
+	                        number: state.phones.phone,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context6.next = 7;
 	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
@@ -45866,6 +45949,30 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
+	        'div',
+	        { className: 'intro' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.l10n('pd.main_title')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('pd.long_description')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('faq_link'),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.eduid.se/faq.html' },
+	            'FAQ'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
 	        'form',
 	        { id: 'personaldataview-form',
 	          className: 'form-horizontal',
@@ -45895,6 +46002,7 @@
 	            initialValue: this.props.language,
 	            label: this.props.l10n('pd.language'),
 	            componentClass: 'select',
+	            value: this.props.language,
 	            options: this.props.langs,
 	            handleChange: this.props.handleChange }),
 	          _react2.default.createElement(
@@ -46067,6 +46175,10 @@
 	    /* Generic Messages *****/
 	    /************************/
 	
+	    'Not a valid email address.': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'Not a valid email address.',
+	        defaultMessage: 'Not a valid email address.' }),
+	
 	    'out_of_sync': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'out_of_sync',
 	        defaultMessage: 'User data is out of sync. Reload page to re-sync.' }),
@@ -46075,6 +46187,9 @@
 	        id: 'button_save',
 	        defaultMessage: 'Save' }),
 	
+	    'faq_link': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'faq_link',
+	        defaultMessage: 'For more information see the ' }),
 	    /************************/
 	    /* ConfirmModal *********/
 	    /************************/
@@ -46102,6 +46217,29 @@
 	    /************************/
 	    /* TABLE LIST ***********/
 	    /************************/
+	    'phone.phone_duplicated': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'phone_duplicated',
+	        defaultMessage: 'Added number is duplicated' }),
+	
+	    'phone.phone_format': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'phone_format',
+	        defaultMessage: 'Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with \'+\' and followed by 10-20 digits.' }),
+	
+	    'mail_duplicated': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'mail_duplicated',
+	        defaultMessage: 'Added email is duplicated' }),
+	
+	    'phones.cannot_remove_unique': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'phone_cannot_remove_unique',
+	        defaultMessage: 'You can not delete the unique phone' }),
+	
+	    'emails.cannot_remove_unique': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails_cannot_remove_unique',
+	        defaultMessage: 'You can not delete the unique email' }),
+	
+	    'emails.cannot_remove_primary': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.cannot_remove_primary',
+	        defaultMessage: 'You can not delete the primary email' }),
 	
 	    "tl.primary": _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'tl.primary',
@@ -46140,10 +46278,18 @@
 	
 	    'emails.confirm_title': function emailsConfirm_title(values) {
 	        return _react2.default.createElement(_reactIntl.FormattedMessage, {
-	            id: 'emails.confirm_email_title',
+	            id: 'emails.confirm_title',
 	            defaultMessage: 'Check your email inbox for {email} for further instructions',
 	            values: values });
 	    },
+	
+	    'emails.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.long_description',
+	        defaultMessage: 'You can connect one or more email addresses with your eduID \n          account and select one to be your primary email address.' }),
+	
+	    'emails.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.main_title',
+	        defaultMessage: 'Email addresses' }),
 	
 	    /************************/
 	    /* OIDC *****************/
@@ -46173,6 +46319,14 @@
 	        id: 'pd.language',
 	        defaultMessage: 'Language' }),
 	
+	    'pd.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'pd.long_description',
+	        defaultMessage: 'This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you.' }),
+	
+	    'pd.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'pd.main_title',
+	        defaultMessage: 'Personal information' }),
+	
 	    /************************/
 	    /* Mobile ***************/
 	    /************************/
@@ -46180,7 +46334,7 @@
 	    'mobile.resend_success': function mobileResend_success(values) {
 	        return _react2.default.createElement(_reactIntl.FormattedMessage, {
 	            id: 'mobile.resend_success',
-	            defaultMessage: 'New code successfully sent to {mobile}',
+	            defaultMessage: 'New code successfully sent to {email}',
 	            values: values });
 	    },
 	
@@ -46194,17 +46348,28 @@
 	
 	    'mobile.confirm_title': function mobileConfirm_title(values) {
 	        return _react2.default.createElement(_reactIntl.FormattedMessage, {
-	            id: 'mobile.confirm_email_title',
-	            defaultMessage: 'Check your email inbox for {mobile} for further instructions',
+	            id: 'mobile.confirm_title',
+	            defaultMessage: 'Check your mobile inbox for {phone} for further instructions',
 	            values: values });
-	    }
+	    },
 	
+	    'phones.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'phones.long_description',
+	        defaultMessage: 'You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one.' }),
+	
+	    'phones.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'phones.main_title',
+	        defaultMessage: 'Mobile phone numbers' })
 	};
 	
 	var unformatted = (0, _reactIntl.defineMessages)({
 	    'emails.placeholder': {
 	        'id': 'emails.confirm_email_placeholder',
 	        'defaultMessage': 'Email confirmation code'
+	    },
+	    'mobile.placeholder': {
+	        'id': 'mobile.confirm_mobile_placeholder',
+	        'defaultMessage': 'Phone confirmation code'
 	    }
 	});
 	;
@@ -46271,9 +46436,12 @@
 	  render: function render() {
 	    var children = void 0,
 	        label = void 0,
-	        help = void 0;
+	        help = void 0,
+	        options = void 0;
 	    if (this.props.componentClass === 'select' && this.props.options) {
-	      children = this.props.options.map(function (opt) {
+	      options = this.props.options;
+	      options.unshift(["None", "Choose language"]);
+	      children = options.map(function (opt) {
 	        return _react2.default.createElement(
 	          'option',
 	          { key: opt[0],
@@ -46311,7 +46479,7 @@
 	          onChange: this.handleChange },
 	        children
 	      ),
-	      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
+	      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, { className: '' }),
 	      help
 	    );
 	  }
@@ -65144,7 +65312,7 @@
 	        spinning = _props.spinning,
 	        other = _objectWithoutProperties(_props, ['spinning']),
 	        classes = spinning && 'active has-spinner' || 'has-spinner',
-	        disabled = spinning && true || false;
+	        disabled = false;
 	
 	    return _react2.default.createElement(
 	      _reactBootstrap.Button,
@@ -65562,7 +65730,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  /*  background-color: $blue; */ }\n", ""]);
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  /*  background-color: $blue; */ }\n\n@media only screen and (min-width: 992px) {\n  label {\n    text-align: left !important;\n    display: block;\n    margin-bottom: 5px !important;\n    color: #6d6d6d !important;\n    font-family: 'Roboto-Regular'; }\n  .form-group {\n    float: left !important;\n    width: 46% !important;\n    margin-right: 2% !important;\n    margin-left: 0% !important; }\n  .form-control {\n    font-size: 14px;\n    line-height: 1.42857143 !important;\n    color: #555 !important;\n    border: 1px solid #ccc !important; }\n  .form-control-feedback {\n    top: 39px !important;\n    right: 8px !important; }\n  #personal-data-button {\n    margin-top: 20px; } }\n\n@media (max-width: 767px) {\n  .form-group .form-control-feedback {\n    top: 32px !important;\n    right: 11px !important; }\n  #personal-data-button {\n    margin-left: auto !important;\n    margin-right: auto !important;\n    margin-top: 20px !important;\n    display: block !important; } }\n\n.form-control-feedback {\n  top: 39px !important;\n  right: 15px !important; }\n", ""]);
 	
 	// exports
 
@@ -65630,13 +65798,16 @@
 	        handleStopConfirmation: function handleStopConfirmation(e) {
 	            dispatch((0, _Emails3.stopConfirmation)());
 	        },
+	        handleFinishConfirmation: function handleFinishConfirmation(e) {
+	            dispatch((0, _Emails3.finishConfirmation)());
+	        },
 	        handleConfirm: function handleConfirm(e) {
 	            var data = {
 	                code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
 	            };
 	            dispatch((0, _Emails3.startVerify)(data));
 	        },
-	        handleRemoveEmail: function handleRemoveEmail(e) {
+	        handleRemove: function handleRemove(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
@@ -65649,7 +65820,7 @@
 	            }
 	            dispatch((0, _Emails3.startRemove)(data));
 	        },
-	        handleMakePrimaryEmail: function handleMakePrimaryEmail(e) {
+	        handleMakePrimary: function handleMakePrimary(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
@@ -65734,10 +65905,34 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'emailsview-form-container ' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'intro' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.l10n('emails.main_title')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('emails.long_description')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('faq_link'),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.eduid.se/faq.html' },
+	            'FAQ'
+	          )
+	        )
+	      ),
 	      _react2.default.createElement(_TableList2.default, { entries: this.props.emails,
 	        handleStartConfirmation: this.props.handleStartConfirmation,
-	        handleRemoveEmail: this.props.handleRemoveEmail,
-	        handleMakePrimaryEmail: this.props.handleMakePrimaryEmail,
+	        handleRemove: this.props.handleRemove,
+	        handleMakePrimary: this.props.handleMakePrimary,
 	        errorMsg: this.props.errorMsg }),
 	      _react2.default.createElement(
 	        'div',
@@ -65769,6 +65964,7 @@
 	        title: this.props.l10n('emails.confirm_title', { email: this.props.confirming }),
 	        placeholder: this.props.l10n('emails.placeholder'),
 	        showModal: Boolean(this.props.confirming),
+	        finishModal: this.props.handleFinishConfirmation,
 	        closeModal: this.props.handleStopConfirmation,
 	        handleResendCode: this.props.handleResend,
 	        handleConfirm: this.props.handleConfirm,
@@ -65779,8 +65975,9 @@
 	});
 	
 	Emails.propTypes = {
+	  longDescription: _react.PropTypes.string,
 	  emails: _react.PropTypes.array,
-	  errorMsg: _react.PropTypes.string,
+	  errorMsg: _react.PropTypes.object,
 	  confirming: _react.PropTypes.string,
 	  resending: _react.PropTypes.object,
 	  handleChange: _react.PropTypes.func,
@@ -65845,26 +66042,36 @@
 	
 	        var rows = [],
 	            alertElem = void 0,
-	            msg = void 0;
-	
+	            msg = void 0,
+	            key = void 0;
 	        if (this.props.errorMsg) {
-	            msg = this.props.l10n(this.props.errorMsg);
-	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { levelMessage: 'warning', Msg: msg });
+	            if (this.props.errorMsg.number) {
+	                msg = this.props.l10n(this.props.errorMsg.number);
+	            } else if (this.props.errorMsg.email) {
+	                msg = this.props.l10n(this.props.errorMsg.email);
+	            } else {
+	                msg = this.props.l10n(this.props.errorMsg.form);
+	            }
+	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { className: 'help-block', levelMessage: 'warning', Msg: msg });
 	        }
-	
 	        if (this.props.entries) {
 	            rows = this.props.entries.map(function (entry, index) {
+	                if (entry.number) {
+	                    key = entry.number;
+	                } else {
+	                    key = entry.email;
+	                }
 	                if (entry.primary) {
 	                    return _react2.default.createElement(
 	                        'tr',
 	                        { className: 'emailrow',
 	                            'data-identifier': index,
-	                            'data-object': entry.email,
+	                            'data-object': key,
 	                            key: entry.email },
 	                        _react2.default.createElement(
 	                            'td',
 	                            { className: 'identifier' },
-	                            entry.email
+	                            key
 	                        ),
 	                        _react2.default.createElement(
 	                            'td',
@@ -65881,7 +66088,7 @@
 	                            _react2.default.createElement(
 	                                _EduIDButton2.default,
 	                                { className: 'text-muted', bsStyle: 'link',
-	                                    onClick: _this.props.handleRemoveEmail },
+	                                    onClick: _this.props.handleRemove },
 	                                _this.props.l10n('tl.remove')
 	                            )
 	                        )
@@ -65891,12 +66098,12 @@
 	                        'tr',
 	                        { className: 'emailrow',
 	                            'data-identifier': index,
-	                            'data-object': entry.email,
-	                            key: entry.email },
+	                            'data-object': key,
+	                            key: key },
 	                        _react2.default.createElement(
 	                            'td',
 	                            { className: 'identifier' },
-	                            entry.email
+	                            key
 	                        ),
 	                        _react2.default.createElement(
 	                            'td',
@@ -65904,7 +66111,7 @@
 	                            _react2.default.createElement(
 	                                _EduIDButton2.default,
 	                                { bsStyle: 'link',
-	                                    onClick: _this.props.handleMakePrimaryEmail },
+	                                    onClick: _this.props.handleMakePrimary },
 	                                _this.props.l10n('tl.make_primary')
 	                            )
 	                        ),
@@ -65914,7 +66121,7 @@
 	                            _react2.default.createElement(
 	                                _EduIDButton2.default,
 	                                { bsStyle: 'link',
-	                                    onClick: _this.props.handleRemoveEmail },
+	                                    onClick: _this.props.handleRemove },
 	                                _this.props.l10n('tl.remove')
 	                            )
 	                        )
@@ -65924,12 +66131,12 @@
 	                        'tr',
 	                        { className: 'emailrow',
 	                            'data-identifier': index,
-	                            'data-object': entry.email,
-	                            key: entry.email },
+	                            'data-object': key,
+	                            key: key },
 	                        _react2.default.createElement(
 	                            'td',
 	                            { className: 'identifier' },
-	                            entry.email
+	                            key
 	                        ),
 	                        _react2.default.createElement(
 	                            'td',
@@ -65947,7 +66154,7 @@
 	                            _react2.default.createElement(
 	                                _EduIDButton2.default,
 	                                { bsStyle: 'link',
-	                                    onClick: _this.props.handleRemoveEmail },
+	                                    onClick: _this.props.handleRemove },
 	                                _this.props.l10n('tl.remove')
 	                            )
 	                        )
@@ -65959,8 +66166,8 @@
 	            'div',
 	            { className: 'table-responsive' },
 	            _react2.default.createElement(
-	                'div',
-	                { id: 'alert' },
+	                'span',
+	                { className: 'help-block', id: 'alert' },
 	                alertElem
 	            ),
 	            _react2.default.createElement(
@@ -65979,9 +66186,9 @@
 	TableList.propTypes = {
 	    entries: _react.PropTypes.array,
 	    handleStartConfirmation: _react.PropTypes.func,
-	    handleRemoveEmail: _react.PropTypes.func,
-	    handleMakePrimaryEmail: _react.PropTypes.func,
-	    errorMsg: _react.PropTypes.string
+	    handleRemove: _react.PropTypes.func,
+	    handleMakePrimary: _react.PropTypes.func,
+	    errorMsg: _react.PropTypes.object
 	};
 	
 	var _default = (0, _i18nMessages2.default)(TableList);
@@ -66036,8 +66243,8 @@
 	        _reactBootstrap.Alert,
 	        { bsStyle: this.props.levelMessage, onDismiss: this.handleAlertDismiss },
 	        _react2.default.createElement(
-	          'h4',
-	          null,
+	          'p',
+	          { className: 'text-danger' },
 	          this.props.Msg
 	        )
 	      );
@@ -66132,9 +66339,8 @@
 	
 	        if (this.props.resending.message) {
 	            msg = this.props.l10n(this.props.resending.message, { email: this.props.confirming });
-	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { levelMessage: 'warning', Msg: msg });
+	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { className: 'help-block', levelMessage: 'warning', Msg: msg });
 	        }
-	
 	        return _react2.default.createElement(
 	            'div',
 	            { id: 'emailConfirmDialog',
@@ -66158,7 +66364,11 @@
 	                _react2.default.createElement(
 	                    _reactBootstrap.Modal.Body,
 	                    null,
-	                    alertElem,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'help-block', id: 'alert' },
+	                        alertElem
+	                    ),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { id: 'email-confirmation-code' },
@@ -66178,6 +66388,12 @@
 	                _react2.default.createElement(
 	                    _reactBootstrap.Modal.Footer,
 	                    null,
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Button,
+	                        { className: 'finish-button',
+	                            onClick: this.props.finishModal },
+	                        this.props.l10n('cm.finish')
+	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Button,
 	                        { className: 'cancel-button',
@@ -66205,6 +66421,7 @@
 	    confirming: _react.PropTypes.string,
 	    resending: _react.PropTypes.object,
 	    handleResendCode: _react.PropTypes.func,
+	    finishModal: _react.PropTypes.func,
 	    closeModal: _react.PropTypes.func,
 	    showModal: _react.PropTypes.bool,
 	    errorMsg: _react.PropTypes.string,
@@ -66263,7 +66480,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  /*  background-color: $blue; */ }\n", ""]);
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\n@media only screen and (min-width: 992px) {\n  #email-confirmation-code div {\n    float: none !important;\n    width: 100% !important; }\n  #email-confirmation-code .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  body {\n    /*  background-color: $blue; */ } }\n\n@media (max-width: 992px) {\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; } }\n\n@media (max-width: 767px) {\n  #emails-form .form-control-feedback {\n    top: 8px !important;\n    right: 11px !important; }\n  #personal-data-button {\n    margin-left: auto !important;\n    margin-right: auto !important;\n    margin-top: 20px !important;\n    display: block !important; } }\n\n.nobutton {\n  text-transform: uppercase;\n  font-weight: bold; }\n\n.help-block .alert {\n  border: 2px solid #a94442 !important;\n  background-color: transparent !important; }\n", ""]);
 	
 	// exports
 
@@ -66290,11 +66507,11 @@
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
 	    return {
-	        mobiles: state.mobile.mobiles,
-	        is_fetching: state.mobile.is_fetching,
-	        errorMsg: state.mobile.error,
-	        confirming: state.mobile.confirming,
-	        resending: state.mobile.resending
+	        phones: state.phones.phones,
+	        is_fetching: state.phones.is_fetching,
+	        errorMsg: state.phones.error,
+	        confirming: state.phones.confirming,
+	        resending: state.phones.resending
 	    };
 	};
 	
@@ -66305,7 +66522,7 @@
 	        },
 	        handleChange: function handleChange(e) {
 	            var data = {
-	                mobile: e.target.value
+	                phone: e.target.value
 	            };
 	            dispatch((0, _Mobile3.changeMobile)(data));
 	        },
@@ -66317,12 +66534,12 @@
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
 	                    identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
-	                    mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            } else {
 	                data = {
 	                    identifier: e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier'),
-	                    mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            }
 	
@@ -66331,37 +66548,40 @@
 	        handleStopConfirmation: function handleStopConfirmation(e) {
 	            dispatch((0, _Mobile3.stopConfirmation)());
 	        },
+	        handleFinishConfirmation: function handleFinishConfirmation(e) {
+	            dispatch((0, _Mobile3.finishConfirmation)());
+	        },
 	        handleConfirm: function handleConfirm(e) {
 	            var data = {
-	                code: document.body.querySelectorAll('#mobile-confirmation-code input')[0].value
+	                code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
 	            };
 	            dispatch((0, _Mobile3.startVerify)(data));
 	        },
-	        handleRemoveMobile: function handleRemoveMobile(e) {
+	        handleRemove: function handleRemove(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
-	                    mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            } else {
 	                data = {
-	                    mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            }
 	            dispatch((0, _Mobile3.startRemove)(data));
 	        },
-	        handleMakePrimaryMobile: function handleMakePrimaryMobile(e) {
+	        handleMakePrimary: function handleMakePrimary(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
-	                    mobile: e.target.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            } else {
 	                data = {
-	                    mobile: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
+	                    phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
 	                };
 	            }
-	            dispatch(makePrimary(data));
+	            dispatch((0, _Mobile3.makePrimary)(data));
 	        }
 	    };
 	};
@@ -66435,10 +66655,34 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'mobileview-form-container ' },
-	      _react2.default.createElement(_TableList2.default, { entries: this.props.mobiles,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'intro' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.l10n('phones.main_title')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('phones.long_description')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('faq_link'),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.eduid.se/faq.html' },
+	            'FAQ'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(_TableList2.default, { entries: this.props.phones,
 	        handleStartConfirmation: this.props.handleStartConfirmation,
-	        handleRemoveMobile: this.props.handleRemoveMobile,
-	        handleMakePrimaryMobile: this.props.handleMakePrimaryMobile,
+	        handleRemove: this.props.handleRemove,
+	        handleMakePrimary: this.props.handleMakePrimary,
 	        errorMsg: this.props.errorMsg }),
 	      _react2.default.createElement(
 	        'div',
@@ -66454,7 +66698,8 @@
 	            _react2.default.createElement(_TextControl2.default, { name: 'mobile',
 	              label: this.props.l10n('mobile.mobile_label'),
 	              componentClass: 'input',
-	              type: 'text' }),
+	              type: 'text',
+	              handleChange: this.props.handleChange }),
 	            _react2.default.createElement(
 	              _EduIDButton2.default,
 	              { bsStyle: 'primary',
@@ -66466,9 +66711,10 @@
 	        )
 	      ),
 	      _react2.default.createElement(_ConfirmModal2.default, {
-	        title: this.props.l10n('mobile.confirm_title', { mobile: this.props.confirming }),
+	        title: this.props.l10n('mobile.confirm_title', { phone: this.props.confirming }),
 	        placeholder: this.props.l10n('mobile.placeholder'),
 	        showModal: Boolean(this.props.confirming),
+	        finishModal: this.props.handleFinishConfirmation,
 	        closeModal: this.props.handleStopConfirmation,
 	        handleResendCode: this.props.handleResend,
 	        handleConfirm: this.props.handleConfirm,
@@ -66479,8 +66725,8 @@
 	});
 	
 	Mobile.propTypes = {
-	  mobile: _react.PropTypes.array,
-	  errorMsg: _react.PropTypes.string,
+	  phones: _react.PropTypes.array,
+	  errorMsg: _react.PropTypes.object,
 	  confirming: _react.PropTypes.string,
 	  resending: _react.PropTypes.object,
 	  handleChange: _react.PropTypes.func,
@@ -66543,7 +66789,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\nbody {\n  /*  background-color: $blue; */ }\n", ""]);
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\n@media only screen and (min-width: 992px) {\n  #mobile-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  body {\n    /*  background-color: $blue; */ } }\n\n@media only screen and (min-width: 992px) {\n  .nobutton {\n    text-transform: uppercase;\n    font-weight: bold; }\n  #email-confirmation-code div {\n    float: none !important;\n    width: 100% !important; }\n  #email-confirmation-code .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; } }\n\n@media (max-width: 767px) {\n  #mobile-form .form-control-feedback {\n    top: 8px !important;\n    right: 11px !important; } }\n\n.emailrow .text-muted {\n  padding: 0 25px !important; }\n", ""]);
 	
 	// exports
 
