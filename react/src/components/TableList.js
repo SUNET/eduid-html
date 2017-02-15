@@ -47,8 +47,7 @@ const TableList = React.createClass({
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
-                        <EduIDButton bsStyle="link"
-                        onClick={this.props.handleRemoveEmail}>
+                        <EduIDButton bsStyle="link" >
                             {this.props.l10n('tl.remove')}
                         </EduIDButton>
                     </td>
