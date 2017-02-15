@@ -16,10 +16,16 @@ let Emails = React.createClass({
 
     return (
         <div className="emailsview-form-container ">
+              <div className="intro">
+               <h4>{this.props.l10n('emails.main_title')}</h4>
+                 <p>{this.props.l10n('emails.long_description')}</p>
+                 <p>{this.props.l10n('faq_link')}
+                 <a href="https://www.eduid.se/faq.html">FAQ</a></p>
+           </div>
             <TableList entries={this.props.emails}
                        handleStartConfirmation={this.props.handleStartConfirmation}
-                       handleRemoveEmail={this.props.handleRemoveEmail}
-                       handleMakePrimaryEmail={this.props.handleMakePrimaryEmail}
+                       handleRemove={this.props.handleRemove}
+                       handleMakePrimary={this.props.handleMakePrimary}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
               <form id="emailsview-form"
@@ -44,6 +50,7 @@ let Emails = React.createClass({
                 placeholder={this.props.l10n('emails.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
+                finishModal={this.props.handleFinishConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
                 resending={this.props.resending}
@@ -54,8 +61,9 @@ let Emails = React.createClass({
 });
 
 Emails.propTypes = {
+  longDescription: PropTypes.string,
   emails: PropTypes.array,
-  errorMsg: PropTypes.string,
+  errorMsg: PropTypes.object,
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleChange: PropTypes.func,

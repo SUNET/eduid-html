@@ -31,7 +31,8 @@ export function* saveEmail () {
               data = {
                 email: state.emails.email,
                 verified: false,
-                primary: false
+                primary: false,
+                csrf_token: state.emails.csrf_token
               };
         const emails = yield call(sendEmail, state.config, data);
         yield put(emails);
@@ -55,7 +56,8 @@ export function* requestResendEmailCode () {
     try {
         const state = yield select(state => state),
               data = {
-                email: state.emails.confirming
+                email: state.emails.confirming,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestResend, state.config, data);
         yield put(resp);
@@ -80,7 +82,8 @@ export function* requestVerifyEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.confirming,
-                code: state.emails.code
+                code: state.emails.code,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestVerify, state.config, data);
         yield put(resp);
@@ -105,6 +108,7 @@ export function* requestRemoveEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.email,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
         yield put(resp);
@@ -129,6 +133,7 @@ export function* requestMakePrimaryEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.email,
+                csrf_token: state.emails.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);
         yield put(resp);

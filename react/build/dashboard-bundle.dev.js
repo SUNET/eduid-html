@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b07cfe659c192509d649"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "113a34f64f760a8ec5bd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -41095,7 +41095,8 @@
 	    case actions.POST_EMAIL_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
-	        failed: true
+	        failed: true,
+	        error: action.payload.error
 	      });
 	    case actions.START_CONFIRMATION:
 	      return _extends({}, state, {
@@ -41110,6 +41111,13 @@
 	          error: {},
 	          message: ''
 	        }
+	      });
+	    case actions.FINISH_CONFIRMATION:
+	      return _extends({}, state, action.payload, {
+	        is_fetching: false,
+	        confirmation: '',
+	        confirming: '',
+	        code: ''
 	      });
 	    case actions.START_RESEND_EMAIL_CODE:
 	      return _extends({}, state, {
@@ -41140,7 +41148,13 @@
 	      });
 	    case actions.START_VERIFY:
 	      return _extends({}, state, {
-	        code: action.payload.code
+	        code: action.payload.code,
+	        is_fetching: true
+	      });
+	    case actions.POST_EMAIL_VERIFY_SUCCESS:
+	      return _extends({}, state, state.payload, {
+	        is_fetching: false,
+	        emails: action.payload.emails
 	      });
 	    case actions.START_VERIFY_FAIL:
 	      return _extends({}, state, {
@@ -41218,6 +41232,7 @@
 	exports.postEmailFail = postEmailFail;
 	exports.startConfirmation = startConfirmation;
 	exports.stopConfirmation = stopConfirmation;
+	exports.finishConfirmation = finishConfirmation;
 	exports.startResendEmailCode = startResendEmailCode;
 	exports.resendEmailCodeFail = resendEmailCodeFail;
 	exports.startVerify = startVerify;
@@ -41232,7 +41247,7 @@
 	var CHANGE_EMAIL = exports.CHANGE_EMAIL = 'CHANGE_EMAIL';
 	var POST_EMAIL = exports.POST_EMAIL = 'POST_EMAIL';
 	var POST_EMAIL_SUCCESS = exports.POST_EMAIL_SUCCESS = 'POST_EMAIL_NEW_SUCCESS';
-	var POST_EMAIL_FAIL = exports.POST_EMAIL_FAIL = 'POST_EMAIL_NEW__FAIL';
+	var POST_EMAIL_FAIL = exports.POST_EMAIL_FAIL = 'POST_EMAIL_NEW_FAIL';
 	var START_CONFIRMATION = exports.START_CONFIRMATION = 'START_CONFIRMATION';
 	var STOP_CONFIRMATION = exports.STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 	var START_RESEND_EMAIL_CODE = exports.START_RESEND_EMAIL_CODE = 'START_RESEND_EMAIL_CODE';
@@ -41240,12 +41255,14 @@
 	var START_RESEND_EMAIL_CODE_FAIL = exports.START_RESEND_EMAIL_CODE_FAIL = 'POST_EMAIL_RESEND_CODE_FAIL';
 	var START_VERIFY = exports.START_VERIFY = 'START_VERIFY';
 	var START_VERIFY_FAIL = exports.START_VERIFY_FAIL = 'START_VERIFY_FAIL';
+	var POST_EMAIL_VERIFY_SUCCESS = exports.POST_EMAIL_VERIFY_SUCCESS = 'POST_EMAIL_VERIFY_SUCCESS';
 	var POST_EMAIL_REMOVE = exports.POST_EMAIL_REMOVE = 'POST_EMAIL_REMOVE';
 	var POST_EMAIL_REMOVE_SUCCESS = exports.POST_EMAIL_REMOVE_SUCCESS = 'POST_EMAIL_REMOVE_SUCCESS';
 	var POST_EMAIL_REMOVE_FAIL = exports.POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL';
 	var POST_EMAIL_PRIMARY = exports.POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY';
 	var POST_EMAIL_PRIMARY_SUCCESS = exports.POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS';
 	var POST_EMAIL_PRIMARY_FAIL = exports.POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL';
+	var FINISH_CONFIRMATION = exports.FINISH_CONFIRMATION = 'FINISH_CONFIRMATION';
 	
 	function getEmails() {
 	  return {
@@ -41291,6 +41308,12 @@
 	function stopConfirmation() {
 	  return {
 	    type: STOP_CONFIRMATION
+	  };
+	}
+	
+	function finishConfirmation() {
+	  return {
+	    type: FINISH_CONFIRMATION
 	  };
 	}
 	
@@ -41387,6 +41410,8 @@
 	
 	  __REACT_HOT_LOADER__.register(START_VERIFY_FAIL, 'START_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
+	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_SUCCESS, 'POST_EMAIL_VERIFY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE, 'POST_EMAIL_REMOVE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE_SUCCESS, 'POST_EMAIL_REMOVE_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
@@ -41398,6 +41423,8 @@
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_SUCCESS, 'POST_EMAIL_PRIMARY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_FAIL, 'POST_EMAIL_PRIMARY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(FINISH_CONFIRMATION, 'FINISH_CONFIRMATION', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(getEmails, 'getEmails', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -41412,6 +41439,8 @@
 	  __REACT_HOT_LOADER__.register(startConfirmation, 'startConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(stopConfirmation, 'stopConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(finishConfirmation, 'finishConfirmation', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(startResendEmailCode, 'startResendEmailCode', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -42515,7 +42544,8 @@
 	                    data = {
 	                        email: state.emails.email,
 	                        verified: false,
-	                        primary: false
+	                        primary: false,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context2.next = 7;
 	                    return (0, _effects.call)(sendEmail, state.config, data);
@@ -42569,7 +42599,8 @@
 	                case 3:
 	                    state = _context3.sent;
 	                    data = {
-	                        email: state.emails.confirming
+	                        email: state.emails.confirming,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context3.next = 7;
 	                    return (0, _effects.call)(requestResend, state.config, data);
@@ -42624,7 +42655,8 @@
 	                    state = _context4.sent;
 	                    data = {
 	                        email: state.emails.confirming,
-	                        code: state.emails.code
+	                        code: state.emails.code,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context4.next = 7;
 	                    return (0, _effects.call)(requestVerify, state.config, data);
@@ -42678,7 +42710,8 @@
 	                case 3:
 	                    state = _context5.sent;
 	                    data = {
-	                        email: state.emails.email
+	                        email: state.emails.email,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context5.next = 7;
 	                    return (0, _effects.call)(requestRemove, state.config, data);
@@ -42732,7 +42765,8 @@
 	                case 3:
 	                    state = _context6.sent;
 	                    data = {
-	                        email: state.emails.email
+	                        email: state.emails.email,
+	                        csrf_token: state.emails.csrf_token
 	                    };
 	                    _context6.next = 7;
 	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
@@ -64793,13 +64827,16 @@
 	        handleStopConfirmation: function handleStopConfirmation(e) {
 	            dispatch((0, _Emails3.stopConfirmation)());
 	        },
+	        handleFinishConfirmation: function handleFinishConfirmation(e) {
+	            dispatch((0, _Emails3.finishConfirmation)());
+	        },
 	        handleConfirm: function handleConfirm(e) {
 	            var data = {
 	                code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
 	            };
 	            dispatch((0, _Emails3.startVerify)(data));
 	        },
-	        handleRemoveEmail: function handleRemoveEmail(e) {
+	        handleRemove: function handleRemove(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
@@ -64812,7 +64849,7 @@
 	            }
 	            dispatch((0, _Emails3.startRemove)(data));
 	        },
-	        handleMakePrimaryEmail: function handleMakePrimaryEmail(e) {
+	        handleMakePrimary: function handleMakePrimary(e) {
 	            var data = {};
 	            if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null) {
 	                data = {
@@ -64897,10 +64934,34 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'emailsview-form-container ' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'intro' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.l10n('emails.main_title')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('emails.long_description')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('faq_link'),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.eduid.se/faq.html' },
+	            'FAQ'
+	          )
+	        )
+	      ),
 	      _react2.default.createElement(_TableList2.default, { entries: this.props.emails,
 	        handleStartConfirmation: this.props.handleStartConfirmation,
-	        handleRemoveEmail: this.props.handleRemoveEmail,
-	        handleMakePrimaryEmail: this.props.handleMakePrimaryEmail,
+	        handleRemove: this.props.handleRemove,
+	        handleMakePrimary: this.props.handleMakePrimary,
 	        errorMsg: this.props.errorMsg }),
 	      _react2.default.createElement(
 	        'div',
@@ -64933,6 +64994,7 @@
 	        placeholder: this.props.l10n('emails.placeholder'),
 	        showModal: Boolean(this.props.confirming),
 	        closeModal: this.props.handleStopConfirmation,
+	        finishModal: this.props.handleFinishConfirmation,
 	        handleResendCode: this.props.handleResend,
 	        handleConfirm: this.props.handleConfirm,
 	        resending: this.props.resending,
@@ -64942,8 +65004,9 @@
 	});
 	
 	Emails.propTypes = {
+	  longDescription: _react.PropTypes.string,
 	  emails: _react.PropTypes.array,
-	  errorMsg: _react.PropTypes.string,
+	  errorMsg: _react.PropTypes.object,
 	  confirming: _react.PropTypes.string,
 	  resending: _react.PropTypes.object,
 	  handleChange: _react.PropTypes.func,
