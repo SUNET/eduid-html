@@ -16,7 +16,6 @@ let PersonalData = React.createClass({
 
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
-
     return (
         <div>
           <form id="personaldataview-form"
@@ -48,6 +47,7 @@ let PersonalData = React.createClass({
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
               <EduIDButton bsStyle="primary"
+                      id="personal-data-button"
                       spinning={spinning}
                       onClick={this.props.handleSave}>
                     {this.props.l10n('button_save')}

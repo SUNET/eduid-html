@@ -16,6 +16,7 @@ const emailsData = {
     confirming: '',
     emails: [],
     email: '',
+    code: '',
 };
 
 
@@ -68,12 +69,23 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.STOP_CONFIRMATION:
       return {
         ...state,
-        confirming: ''
+        confirming: '',
+       resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
       };
     case actions.START_RESEND_EMAIL_CODE:
       return {
         ...state,
-        resending: {is_fetching: true}
+        resending: {
+          is_fetching: true,
+          failed: false,
+          error: {},
+          message: ''
+        }
       };
     case actions.START_RESEND_EMAIL_CODE_SUCCESS:
       return {
@@ -92,13 +104,65 @@ let emailsReducer = (state=emailsData, action) => {
         resending: {
           is_fetching: false,
           failed: true,
-          error: action.payload.error
+          error: action.payload.error,
+          message: ''
         }
+      };
+    case actions.START_VERIFY:
+        return {
+          ...state,
+          code: action.payload.code
+        }
+    case actions.START_VERIFY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+    case actions.POST_EMAIL_REMOVE:
+      return {
+        ...state,
+        email: action.payload.email,
+        is_fetching: true
+      };
+    case actions.POST_EMAIL_REMOVE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_EMAIL_REMOVE_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+
+      };
+    case actions.POST_EMAIL_PRIMARY:
+      return {
+        ...state,
+        email: action.payload.email,
+        is_fetching: true
+      }
+    case actions.POST_EMAIL_PRIMARY_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false
+      };
+    case actions.POST_EMAIL_PRIMARY_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
       };
     default:
       return state;
   }
 };
-
 export default emailsReducer;
 

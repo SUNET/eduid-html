@@ -17,7 +17,10 @@ let Emails = React.createClass({
     return (
         <div className="emailsview-form-container ">
             <TableList entries={this.props.emails}
-                       handleStartConfirmation={this.props.handleStartConfirmation} />
+                       handleStartConfirmation={this.props.handleStartConfirmation}
+                       handleRemoveEmail={this.props.handleRemoveEmail}
+                       handleMakePrimaryEmail={this.props.handleMakePrimaryEmail}
+                       errorMsg={this.props.errorMsg} />
             <div className="form-content">
               <form id="emailsview-form"
                     className="form-horizontal"
@@ -29,6 +32,7 @@ let Emails = React.createClass({
                                type="text"
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
+                               id="email-button"
                           onClick={this.props.handleAdd}>
                       {this.props.l10n('emails.button_add')}
                   </EduIDButton>
@@ -58,7 +62,8 @@ Emails.propTypes = {
   handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
   handleStartConfirmation: PropTypes.func,
-  handleStopConfirmation: PropTypes.func
+  handleStopConfirmation: PropTypes.func,
+  handleRemoveEmail: PropTypes.func
 }
 
 export default i18n(Emails);

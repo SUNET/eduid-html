@@ -5,24 +5,26 @@ import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-b
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
+import EduiDAlert from 'components/EduIDAlert';
 
 
 let ConfirmModal = React.createClass({
 
   render: function () {
-
     let spinning = false,
         msgid, msg, alertElem;
 
     if (this.props.is_fetching) spinning = true;
     if (this.props.resending.is_fetching) spinning = true;
+
     if (this.props.resending.failed) {
       msg= this.props.l10n(this.props.resending.error.form);
-      alertElem = ( <Alert bsStyle="danger">{msg}</Alert> );
+      alertElem = ( <EduiDAlert levelMessage="danger" Msg={msg}></EduiDAlert> );
     }
+
     if (this.props.resending.message) {
       msg = this.props.l10n(this.props.resending.message, {email: this.props.confirming});
-      alertElem = ( <Alert bsStyle="warning">{msg}</Alert> );
+      alertElem = ( <EduiDAlert levelMessage="warning" Msg={msg}></EduiDAlert>);
     }
 
     return (
@@ -40,21 +42,20 @@ let ConfirmModal = React.createClass({
 
                 <Modal.Body>
                     {alertElem}
-                    <TextControl name={this.props.inputId}
-                                 placeholder={this.props.placeholder}
-                                 componentClass='input'
-                                 type='text' />
-                    {this.props.l10n('cm.lost_code')}
-                    <a href="#" onClick={this.props.handleResendCode}
-                       className="resend-code">
-                        {this.props.l10n('cm.resend_code')}
-                    </a>
+                    <div id="email-confirmation-code">
+                        <TextControl name={this.props.inputId}
+                                     placeholder={this.props.placeholder}
+                                     componentClass='input'
+                                     type='text' />
+                        {this.props.l10n('cm.lost_code')}
+                        <a href="#" onClick={this.props.handleResendCode}
+                           className="resend-code">
+                            {this.props.l10n('cm.resend_code')}
+                        </a>
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="finish-button">
-                         {this.props.l10n('cm.finish')}
-                    </Button>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal}>
                          {this.props.l10n('cm.cancel')}

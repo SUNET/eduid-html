@@ -9,14 +9,6 @@ const TextControl = React.createClass({
     return { value: '' };
   },
 
-  componentWillReceiveProps: function (nextProps) {
-    if (this.state.value === '') {
-      if (nextProps.initialValue) {
-        this.setState({ value: nextProps.initialValue });
-      }
-    }
-  },
-
   getValidationState: function () {
     if (this.props.validation !== undefined) {
       return this.props.validation(this.state.value);
@@ -52,13 +44,14 @@ const TextControl = React.createClass({
     if (this.props.help) {
         help = <HelpBlock>{this.props.help}</HelpBlock>;
     }
+
     return (
         <FormGroup controlId={this.props.name}
                    validationState={this.getValidationState()}>
           {label}
           <FormControl componentClass={this.props.componentClass}
                        type={this.props.type}
-                       value={this.state.value}
+                       value={this.props.initialValue}
                        placeholder={this.props.placeholder}
                        onChange={this.handleChange}>
             {children}

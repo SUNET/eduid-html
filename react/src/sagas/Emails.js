@@ -16,7 +16,7 @@ export function* requestEmails () {
     }
 }
 
-function fetchEmails (config) {
+export function fetchEmails (config) {
     return window.fetch(config.EMAILS_URL + 'all', {
         credentials: 'include',
         headers: ajaxHeaders
@@ -30,7 +30,7 @@ export function* saveEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.email,
-                confirmed: false,
+                verified: false,
                 primary: false
               };
         const emails = yield call(sendEmail, state.config, data);
@@ -40,7 +40,7 @@ export function* saveEmail () {
     }
 }
 
-function sendEmail (config, data) {
+export function sendEmail (config, data) {
     return window.fetch(config.EMAILS_URL + 'new', {
       method: 'post',
       credentials: 'include',
@@ -64,8 +64,81 @@ export function* requestResendEmailCode () {
     }
 }
 
-function requestResend (config, data) {
+export function requestResend (config, data) {
     return window.fetch(config.EMAILS_URL + 'resend-code', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestVerifyEmail () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                email: state.emails.confirming,
+                code: state.emails.code
+              };
+        const resp = yield call(requestVerify, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.startVerifyFail(error.toString()));
+    }
+}
+
+export function requestVerify (config, data) {
+    return window.fetch(config.EMAILS_URL + 'verify', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestRemoveEmail () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                email: state.emails.email,
+              };
+        const resp = yield call(requestRemove, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.startRemoveFail(error.toString()));
+    }
+}
+
+export function requestRemove (config, data) {
+    return window.fetch(config.EMAILS_URL + 'remove', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function* requestMakePrimaryEmail () {
+    try {
+        const state = yield select(state => state),
+              data = {
+                email: state.emails.email,
+              };
+        const resp = yield call(requestMakePrimary, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(actions.makePrimaryFail(error.toString()));
+    }
+}
+
+export function requestMakePrimary (config, data) {
+    return window.fetch(config.EMAILS_URL + 'primary', {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,
