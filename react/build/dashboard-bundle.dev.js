@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "113a34f64f760a8ec5bd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e95c887fe9f61adf572"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -41857,7 +41857,9 @@
 	                    config = _context2.sent;
 	                    _context2.next = 6;
 	                    return (0, _effects.select)(function (state) {
-	                        return _extends({}, state.personal_data);
+	                        return _extends({}, state.personal_data, {
+	                            csrf_token: state.personal_data.csrf_token
+	                        });
 	                    });
 	
 	                case 6:
@@ -45089,6 +45091,30 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
+	        'div',
+	        { className: 'intro' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          this.props.l10n('pd.main_title')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('pd.long_description')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.l10n('faq_link'),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.eduid.se/faq.html' },
+	            'FAQ'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
 	        'form',
 	        { id: 'personaldataview-form',
 	          className: 'form-horizontal',
@@ -45118,6 +45144,7 @@
 	            initialValue: this.props.language,
 	            label: this.props.l10n('pd.language'),
 	            componentClass: 'select',
+	            value: this.props.language,
 	            options: this.props.langs,
 	            handleChange: this.props.handleChange }),
 	          _react2.default.createElement(

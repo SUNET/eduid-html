@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "113a34f64f760a8ec5bd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e95c887fe9f61adf572"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -34198,7 +34198,9 @@
 	                    config = _context2.sent;
 	                    _context2.next = 6;
 	                    return (0, _effects.select)(function (state) {
-	                        return _extends({}, state.personal_data);
+	                        return _extends({}, state.personal_data, {
+	                            csrf_token: state.personal_data.csrf_token
+	                        });
 	                    });
 	
 	                case 6:

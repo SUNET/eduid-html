@@ -18,6 +18,12 @@ let PersonalData = React.createClass({
     if (this.props.is_fetching) spinning = true;
     return (
         <div>
+            <div className="intro">
+              <h4>{this.props.l10n('pd.main_title')}</h4>
+                <p>{this.props.l10n('pd.long_description')}</p>
+                <p>{this.props.l10n('faq_link')}
+                <a href="https://www.eduid.se/faq.html">FAQ</a></p>
+          </div>
           <form id="personaldataview-form"
                 className="form-horizontal"
                 role="form">
@@ -44,6 +50,7 @@ let PersonalData = React.createClass({
                            initialValue={this.props.language}
                            label={this.props.l10n('pd.language')}
                            componentClass="select"
+                           value={this.props.language}
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
               <EduIDButton bsStyle="primary"
