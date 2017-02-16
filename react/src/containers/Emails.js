@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch, props) => {
         };
         dispatch(startVerify(data))
     },
-    handleRemove: function (e) {
+    handleRemoveEmail: function (e) {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch, props) => {
         }
         dispatch(startRemove(data))
     },
-    handleMakePrimary: (e) => {
+    handleMakePrimaryEmail: (e) => {
         let data = {}
         if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
             data = {

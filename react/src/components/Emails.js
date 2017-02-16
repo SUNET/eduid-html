@@ -24,8 +24,8 @@ let Emails = React.createClass({
            </div>
             <TableList entries={this.props.emails}
                        handleStartConfirmation={this.props.handleStartConfirmation}
-                       handleRemove={this.props.handleRemove}
-                       handleMakePrimary={this.props.handleMakePrimary}
+                       handleRemoveEmail={this.props.handleRemoveEmail}
+                       handleMakePrimaryEmail={this.props.handleMakePrimaryEmail}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
               <form id="emailsview-form"
