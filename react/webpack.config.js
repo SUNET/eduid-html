@@ -13,7 +13,7 @@ module.exports = {
       // "only" prevents reload on syntax errors:
       // hot: 'webpack/hot/only-dev-server',
       personal_data: './src/entry-points/personal-data',
-      dashboard: './src/entry-points/dashboard-tabbed-form',
+      dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
       openid_connect: './src/entry-points/openid-connect'
     },
     output: {
@@ -35,7 +35,7 @@ module.exports = {
       loaders: [
         {
           test: /\.js$/,
-          loaders: ['react-hot', 'babel-loader'],
+          loaders: ['babel-loader'],
           exclude: /node_modules/,
         },
         {

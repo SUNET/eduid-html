@@ -10,13 +10,22 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware, { take, takeEvery } from 'redux-saga'
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware } from "redux";
 import eduIDApp from "./store";
-import { fetchConfig } from "actions/Config";
+import * as configActions from "actions/Config";
+import * as pdataActions from "actions/PersonalData";
+import * as emailActions from "actions/Emails";
+import * as openidActions from "actions/OpenidConnect";
+import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
+import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
+import { requestConfig } from "sagas/Config";
+import { requestOpenidQRcode } from "sagas/OpenidConnect";
+
+/* i18n */
 
 const language = navigator.languages
                    ? navigator.languages[0]
@@ -28,12 +37,44 @@ const messages = require('../i18n/l10n/' + lang_code)
 
 addLocaleData(locale);
 
+/* Sagas */
+
+function* rootSaga() {
+  yield [
+    takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeEvery(pdataActions.POST_USERDATA, savePersonalData),
+    takeEvery(emailActions.POST_EMAIL, saveEmail),
+    takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
+    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
+    takeEvery(emailActions.START_VERIFY, requestVerifyEmail),
+    takeEvery(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
+    takeEvery(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail)
+
+  ];
+}
+
+const sagaMiddleware = createSagaMiddleware();
+
+/* Store */
+
 export const store = createStore(
         eduIDApp,
         applyMiddleware(
-            thunkMiddleware,
+            sagaMiddleware,
             createLogger()
             ));
+
+sagaMiddleware.run(rootSaga);
+
+/* render app */
+
+const getConfig = function () {
+    if (!store.getState().config.is_configured) {
+        store.dispatch(configActions.getConfig());
+    }
+};
 
 const init_app = function (component, target) {
   let app = ( <Provider store={store}>
@@ -42,7 +83,7 @@ const init_app = function (component, target) {
                 </IntlProvider>
               </Provider> );
 
-  ReactDOM.render(app, target, () => store.dispatch(fetchConfig()));
+  ReactDOM.render(app, target, getConfig);
 };
 
 export default init_app;

@@ -34,103 +34,6 @@ describe("Config Actions", () => {
   });
 });
 
-
-const middlewares = [ thunkMiddleware ];
-const mockStore = configureStore(middlewares);
-
-describe("Config async actions", () => {
-
-  afterEach(() => {
-    fetchMock.restore()
-  });
-
-  it("Fetch config and dispatch action with result", (done) => {
-
-    fetchMock.get('/services/jsconfig/config',
-       {
-        type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
-        payload: {param1: 'value 1'}
-      });
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      {type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
-       payload: {
-         param1: 'value 1'
-       }
-      }
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-
-  it("Try to fetch config but find server error", (done) => {
-
-    fetchMock.get('/services/jsconfig/config', 500);
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      {
-        type: actions.GET_JSCONFIG_CONFIG_FAIL,
-        error: true,
-        payload: {
-          error: 'Error: Internal Server Error',
-          message: 'Error: Internal Server Error'
-        }
-      }
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-
-  it("Try to fetch config but server returns error", (done) => {
-
-    const errorResponse = {
-        type: actions.GET_JSCONFIG_CONFIG_FAIL,
-        error: true,
-        payload: {
-          error: 'Terrible Error',
-          message: 'Terrible Error'
-        }
-      };
-
-    fetchMock.get('/services/jsconfig/config', errorResponse);
-
-    const expectedActions = [
-      {type: actions.GET_JSCONFIG_CONFIG},
-      errorResponse
-    ];
-
-    const store = mockStore({
-      config: {param1: 'no value'},
-      openid_data: {qr_img: 'old code', qr_code: 'old nonce'}
-    });
-
-    store.dispatch(actions.fetchConfig())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        done();
-      });
-  });
-});
-
-
 describe("Config reducers", () => {
 
   const mockState = {
@@ -151,6 +54,7 @@ describe("Config reducers", () => {
       {
         param1: 'old value',
         is_fetching: true,
+        is_configured: false,
         failed: false
       }
     );
@@ -169,7 +73,8 @@ describe("Config reducers", () => {
       {
         param1: 'new value',
         is_fetching: false,
-        failed: false
+        failed: false,
+        is_configured: true,
       }
     );
   });
@@ -192,6 +97,7 @@ describe("Config reducers", () => {
         param1: 'old value',
         is_fetching: false,
         failed: true,
+        is_configured: false,
       }
     );
   });
@@ -213,4 +119,42 @@ describe("Config reducers", () => {
       }
     );
   });
+});
+
+ const mockState = {
+    personal_data: {
+        is_fetching: false,
+        failed: false,
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: ''
+    },
+    config : {
+        is_configured : false,
+        is_fetching: false,
+        failed: false,
+        PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+    }
+  };
+const getState = () => mockState;
+
+import {requestConfig, fetchConfig} from '../sagas/Config';
+import { put, call } from "redux-saga/effects";
+
+describe("Async component", () => {
+
+    it("Sagas requestConfig", () => {
+
+       const generator = requestConfig(getState);
+
+       const url = '/services/jsconfig/config';
+       let next = generator.next(url);
+       expect(next.value).toEqual(call(fetchConfig, url));
+
+       const config = next.value;
+       next = generator.next(next.value);
+       expect(next.value).toEqual(put(config));
+    });
+
 });

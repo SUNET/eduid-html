@@ -1,7 +1,7 @@
 
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
 
+import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 
 //  XXX this interferes with the bootstrap in eduid-html
@@ -12,11 +12,6 @@ import 'style/OpenidConnect.scss';
 let OpenidConnect = React.createClass({
 
   render: function () {
-    // i18n messages
-    const get_qrcode_button = (
-            <FormattedMessage
-              id="oc.get_qrcode"
-              defaultMessage={`CONFIRM USING SE-LEG`} />);
     let spinning = false;
 
     if (this.props.is_fetching) spinning = true;
@@ -32,7 +27,7 @@ let OpenidConnect = React.createClass({
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       onClick={this.props.handleGetQRCode}>
-                    {get_qrcode_button}
+                    {this.props.l10n('oc.get_qrcode')}
               </EduIDButton>
             </fieldset>
           </form>
@@ -55,5 +50,4 @@ OpenidConnect.propTypes = {
   handleGetQRCode: PropTypes.func
 }
 
-export default OpenidConnect;
-
+export default i18n(OpenidConnect);

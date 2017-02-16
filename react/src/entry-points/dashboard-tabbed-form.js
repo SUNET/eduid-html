@@ -4,8 +4,10 @@
 import React from 'react';
 import init_app from "../init-app";
 import PersonalDataContainer from 'containers/PersonalData';
+import EmailsContainer from 'containers/Emails';
 
-let app = <PersonalDataContainer />;
+let personalDataApp = <PersonalDataContainer />;
+let emailsApp = <EmailsContainer />;
 
 
 if (window.tabbedform === undefined) {
@@ -33,7 +35,9 @@ var TabbedForm = function (container) {
 
     var get_form = function (url, target) {
           if (url === 'personaldata') {
-            init_app(app, target.get(0));
+            init_app(personalDataApp, target.get(0));
+          } else if (url === 'emails') {
+            init_app(emailsApp, target.get(0));
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
