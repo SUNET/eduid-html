@@ -5,7 +5,7 @@ export const GET_EMAILS_FAIL = 'GET_EMAIL_ALL_FAIL';
 export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 export const POST_EMAIL = 'POST_EMAIL';
 export const POST_EMAIL_SUCCESS = 'POST_EMAIL_NEW_SUCCESS';
-export const POST_EMAIL_FAIL = 'POST_EMAIL_NEW__FAIL';
+export const POST_EMAIL_FAIL = 'POST_EMAIL_NEW_FAIL';
 export const START_CONFIRMATION = 'START_CONFIRMATION';
 export const STOP_CONFIRMATION = 'STOP_CONFIRMATION';
 export const START_RESEND_EMAIL_CODE = 'START_RESEND_EMAIL_CODE'
@@ -13,13 +13,14 @@ export const START_RESEND_EMAIL_CODE_SUCCESS = 'POST_EMAIL_RESEND_CODE_SUCCESS'
 export const START_RESEND_EMAIL_CODE_FAIL = 'POST_EMAIL_RESEND_CODE_FAIL'
 export const START_VERIFY = 'START_VERIFY'
 export const START_VERIFY_FAIL = 'START_VERIFY_FAIL'
+export const POST_EMAIL_VERIFY_SUCCESS = 'POST_EMAIL_VERIFY_SUCCESS'
 export const POST_EMAIL_REMOVE = 'POST_EMAIL_REMOVE'
 export const POST_EMAIL_REMOVE_SUCCESS = 'POST_EMAIL_REMOVE_SUCCESS'
 export const POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL'
 export const POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY'
 export const POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS'
 export const POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL'
-
+export const FINISH_CONFIRMATION = 'FINISH_CONFIRMATION'
 
 export function getEmails () {
   return {
@@ -65,6 +66,12 @@ export function startConfirmation (data) {
 export function stopConfirmation () {
   return {
     type: STOP_CONFIRMATION
+  };
+}
+
+export function finishConfirmation() {
+  return {
+    type: FINISH_CONFIRMATION
   };
 }
 
