@@ -205,6 +205,11 @@ const msgs = {
             id="emails.email"
             defaultMessage={`Email`} />),
 
+    'emails.code_invalid': (
+        <FormattedMessage
+          id="emails.code_invalid"
+          defaultMessage={`The confirmation code is invalid, please try again or request a new code`} />),
+
     'emails.button_add': (
         <FormattedMessage
           id="emails.button_add"
