@@ -13,7 +13,6 @@ let ConfirmModal = React.createClass({
   render: function () {
     let spinning = false,
         msgid, msg, alertElem;
-
     if (this.props.is_fetching) spinning = true;
     if (this.props.resending.is_fetching) spinning = true;
 

@@ -19,7 +19,8 @@ const TableList = React.createClass({
         } else {
             msg = this.props.l10n(this.props.errorMsg.form);
         }
-      alertElem = ( <EduiDAlert className="help-block" levelMessage="warning" Msg={msg}></EduiDAlert>);
+
+      alertElem = ( <EduiDAlert className="help-block" levelMessage="danger" Msg={msg}></EduiDAlert>);
     }
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {

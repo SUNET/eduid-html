@@ -134,6 +134,19 @@ let emailsReducer = (state=emailsData, action) => {
           is_fetching: false,
           emails: action.payload.emails
       }
+    case actions.POST_EMAIL_VERIFY_FAIL:
+      return {
+          ...state,
+          ...state.payload,
+          is_fetching: false,
+          error: action.payload.error,
+          resending: {
+              is_fetching: false,
+              failed: true,
+              error: action.payload.error,
+              message: ''
+            },
+      };
     case actions.START_VERIFY_FAIL:
       return {
         ...state,
