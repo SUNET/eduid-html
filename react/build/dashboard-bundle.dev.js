@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d42263e8b62f57dcf026"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9b0efb859bbffb5f5077"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -41180,6 +41180,17 @@
 	        is_fetching: false,
 	        emails: action.payload.emails
 	      });
+	    case actions.POST_EMAIL_VERIFY_FAIL:
+	      return _extends({}, state, state.payload, {
+	        is_fetching: false,
+	        error: action.payload.error,
+	        resending: {
+	          is_fetching: false,
+	          failed: true,
+	          error: action.payload.error,
+	          message: ''
+	        }
+	      });
 	    case actions.START_VERIFY_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
@@ -41279,6 +41290,7 @@
 	var START_VERIFY = exports.START_VERIFY = 'START_VERIFY';
 	var START_VERIFY_FAIL = exports.START_VERIFY_FAIL = 'START_VERIFY_FAIL';
 	var POST_EMAIL_VERIFY_SUCCESS = exports.POST_EMAIL_VERIFY_SUCCESS = 'POST_EMAIL_VERIFY_SUCCESS';
+	var POST_EMAIL_VERIFY_FAIL = exports.POST_EMAIL_VERIFY_FAIL = 'POST_EMAIL_VERIFY_FAIL';
 	var POST_EMAIL_REMOVE = exports.POST_EMAIL_REMOVE = 'POST_EMAIL_REMOVE';
 	var POST_EMAIL_REMOVE_SUCCESS = exports.POST_EMAIL_REMOVE_SUCCESS = 'POST_EMAIL_REMOVE_SUCCESS';
 	var POST_EMAIL_REMOVE_FAIL = exports.POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL';
@@ -41434,6 +41446,8 @@
 	  __REACT_HOT_LOADER__.register(START_VERIFY_FAIL, 'START_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_SUCCESS, 'POST_EMAIL_VERIFY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_FAIL, 'POST_EMAIL_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE, 'POST_EMAIL_REMOVE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -46271,6 +46285,10 @@
 	    'emails.email_label': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'emails.email',
 	        defaultMessage: 'Email' }),
+	
+	    'emails.code_invalid': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.code_invalid',
+	        defaultMessage: 'The confirmation code is invalid, please try again or request a new code' }),
 	
 	    'emails.button_add': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'emails.button_add',
@@ -66052,7 +66070,8 @@
 	            } else {
 	                msg = this.props.l10n(this.props.errorMsg.form);
 	            }
-	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { className: 'help-block', levelMessage: 'warning', Msg: msg });
+	
+	            alertElem = _react2.default.createElement(_EduIDAlert2.default, { className: 'help-block', levelMessage: 'danger', Msg: msg });
 	        }
 	        if (this.props.entries) {
 	            rows = this.props.entries.map(function (entry, index) {
@@ -66239,12 +66258,13 @@
 	  },
 	  render: function render() {
 	    if (this.state.alertVisible) {
+	
 	      return _react2.default.createElement(
 	        _reactBootstrap.Alert,
 	        { bsStyle: this.props.levelMessage, onDismiss: this.handleAlertDismiss },
 	        _react2.default.createElement(
 	          'p',
-	          { className: 'text-danger' },
+	          { className: this.props.levelMessage },
 	          this.props.Msg
 	        )
 	      );
@@ -66328,7 +66348,6 @@
 	            msgid = void 0,
 	            msg = void 0,
 	            alertElem = void 0;
-	
 	        if (this.props.is_fetching) spinning = true;
 	        if (this.props.resending.is_fetching) spinning = true;
 	
@@ -66480,7 +66499,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\n@media only screen and (min-width: 992px) {\n  #email-confirmation-code div {\n    float: none !important;\n    width: 100% !important; }\n  #email-confirmation-code .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  body {\n    /*  background-color: $blue; */ } }\n\n@media (max-width: 992px) {\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; } }\n\n@media (max-width: 767px) {\n  #emails-form .form-control-feedback {\n    top: 8px !important;\n    right: 11px !important; }\n  #personal-data-button {\n    margin-left: auto !important;\n    margin-right: auto !important;\n    margin-top: 20px !important;\n    display: block !important; } }\n\n.nobutton {\n  text-transform: uppercase;\n  font-weight: bold; }\n\n.help-block .alert {\n  border: 2px solid #a94442 !important;\n  background-color: transparent !important; }\n", ""]);
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\n@media only screen and (min-width: 992px) {\n  #email-confirmation-code div {\n    float: none !important;\n    width: 100% !important; }\n  #email-confirmation-code .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; }\n  body {\n    /*  background-color: $blue; */ } }\n\n@media (max-width: 992px) {\n  #emails-form .form-control-feedback {\n    top: 6px !important;\n    right: 6px !important; } }\n\n@media (max-width: 767px) {\n  #emails-form .form-control-feedback {\n    top: 8px !important;\n    right: 11px !important; }\n  #personal-data-button {\n    margin-left: auto !important;\n    margin-right: auto !important;\n    margin-top: 20px !important;\n    display: block !important; } }\n\n.nobutton {\n  text-transform: uppercase;\n  font-weight: bold; }\n\n.help-block .alert-warning {\n  border: 2px solid #faebcc !important;\n  background-color: transparent !important; }\n", ""]);
 	
 	// exports
 

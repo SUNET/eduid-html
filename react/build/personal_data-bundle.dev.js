@@ -63,7 +63,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d42263e8b62f57dcf026"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9b0efb859bbffb5f5077"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/
@@ -33408,6 +33408,17 @@
 	        is_fetching: false,
 	        emails: action.payload.emails
 	      });
+	    case actions.POST_EMAIL_VERIFY_FAIL:
+	      return _extends({}, state, state.payload, {
+	        is_fetching: false,
+	        error: action.payload.error,
+	        resending: {
+	          is_fetching: false,
+	          failed: true,
+	          error: action.payload.error,
+	          message: ''
+	        }
+	      });
 	    case actions.START_VERIFY_FAIL:
 	      return _extends({}, state, {
 	        is_fetching: false,
@@ -33507,6 +33518,7 @@
 	var START_VERIFY = exports.START_VERIFY = 'START_VERIFY';
 	var START_VERIFY_FAIL = exports.START_VERIFY_FAIL = 'START_VERIFY_FAIL';
 	var POST_EMAIL_VERIFY_SUCCESS = exports.POST_EMAIL_VERIFY_SUCCESS = 'POST_EMAIL_VERIFY_SUCCESS';
+	var POST_EMAIL_VERIFY_FAIL = exports.POST_EMAIL_VERIFY_FAIL = 'POST_EMAIL_VERIFY_FAIL';
 	var POST_EMAIL_REMOVE = exports.POST_EMAIL_REMOVE = 'POST_EMAIL_REMOVE';
 	var POST_EMAIL_REMOVE_SUCCESS = exports.POST_EMAIL_REMOVE_SUCCESS = 'POST_EMAIL_REMOVE_SUCCESS';
 	var POST_EMAIL_REMOVE_FAIL = exports.POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL';
@@ -33662,6 +33674,8 @@
 	  __REACT_HOT_LOADER__.register(START_VERIFY_FAIL, 'START_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_SUCCESS, 'POST_EMAIL_VERIFY_SUCCESS', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
+	
+	  __REACT_HOT_LOADER__.register(POST_EMAIL_VERIFY_FAIL, 'POST_EMAIL_VERIFY_FAIL', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_REMOVE, 'POST_EMAIL_REMOVE', '/home/piglesias/Nordunet/eduid-html/react/src/actions/Emails.js');
 	
@@ -38499,6 +38513,10 @@
 	    'emails.email_label': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'emails.email',
 	        defaultMessage: 'Email' }),
+	
+	    'emails.code_invalid': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.code_invalid',
+	        defaultMessage: 'The confirmation code is invalid, please try again or request a new code' }),
 	
 	    'emails.button_add': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'emails.button_add',
