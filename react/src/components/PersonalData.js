@@ -18,7 +18,7 @@ let PersonalData = React.createClass({
     if (this.props.is_fetching) spinning = true;
     return (
         <div>
-            <div className="intro">
+          <div className="intro">
               <h4>{this.props.l10n('pd.main_title')}</h4>
                 <p>{this.props.l10n('pd.long_description')}</p>
                 <p>{this.props.l10n('faq_link')}

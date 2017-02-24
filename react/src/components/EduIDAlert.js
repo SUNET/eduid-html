@@ -13,9 +13,10 @@ const EduIDAlert = React.createClass({
 
   render() {
     if (this.state.alertVisible) {
+
       return (
         <Alert bsStyle={this.props.levelMessage} onDismiss={this.handleAlertDismiss}>
-          <h4>{this.props.Msg}</h4>
+          <p className={this.props.levelMessage}>{this.props.Msg}</p>
         </Alert>
       );
     }

@@ -25,10 +25,12 @@ const TextControl = React.createClass({
   },
 
   render: function () {
-    let children, label, help;
+    let children, label, help, options;
     if ((this.props.componentClass === 'select') &&
         (this.props.options)) {
-      children = this.props.options.map(opt => {
+      options = this.props.options
+      options.unshift(["None", "Choose language"])
+      children = options.map(opt => {
         return (<option key={opt[0]}
                         value={opt[0]}>
                   {opt[1]}
@@ -56,7 +58,7 @@ const TextControl = React.createClass({
                        onChange={this.handleChange}>
             {children}
           </FormControl>
-          <FormControl.Feedback />
+          <FormControl.Feedback className=""/>
           {help}
         </FormGroup>
     );

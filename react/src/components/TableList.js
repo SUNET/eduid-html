@@ -9,21 +9,32 @@ const TableList = React.createClass({
 
   render: function () {
     let rows = [],
-         alertElem, msg;
-
+         alertElem, msg,
+         key;
     if (this.props.errorMsg) {
-      msg = this.props.l10n(this.props.errorMsg);
-      alertElem = ( <EduiDAlert levelMessage="warning" Msg={msg}></EduiDAlert>);
+        if (this.props.errorMsg.number) {
+            msg = this.props.l10n(this.props.errorMsg.number);
+        } else if (this.props.errorMsg.email) {
+            msg = this.props.l10n(this.props.errorMsg.email);
+        } else {
+            msg = this.props.l10n(this.props.errorMsg.form);
+        }
+
+      alertElem = ( <EduiDAlert className="help-block" levelMessage="danger" Msg={msg}></EduiDAlert>);
     }
-      
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {
+          if (entry.number) {
+            key = entry.number
+          } else {
+            key = entry.email
+          }
           if (entry.primary) {
             return (<tr className="emailrow"
                         data-identifier={index}
-                        data-object={entry.email}
+                        data-object={key}
                         key={entry.email}>
-                    <td className="identifier">{entry.email}</td>
+                    <td className="identifier">{key}</td>
                     <td className="non-identifier">
                         <span className="nobutton">{this.props.l10n('tl.primary')}</span>
                     </td>
@@ -36,18 +47,18 @@ const TableList = React.createClass({
           } else if (entry.verified) {
             return (<tr className="emailrow"
                         data-identifier={index}
-                        data-object={entry.email}
-                        key={entry.email}>
-                    <td className="identifier">{entry.email}</td>
+                        data-object={key}
+                        key={key}>
+                    <td className="identifier">{key}</td>
                     <td className="non-identifier">
                         <EduIDButton bsStyle="link"
-                        onClick={this.props.handleMakePrimaryEmail}>
+                        onClick={this.props.handleMakePrimary}>
                                     {this.props.l10n('tl.make_primary')}
                         </EduIDButton>
                     </td>
                     <td className="non-identifier">
                         <EduIDButton bsStyle="link"
-                        onClick={this.props.handleRemoveEmail}>
+                        onClick={this.props.handleRemove}>
                             {this.props.l10n('tl.remove')}
                         </EduIDButton>
                     </td>
@@ -55,9 +66,9 @@ const TableList = React.createClass({
           } else {
             return (<tr className="emailrow"
                         data-identifier={index}
-                        data-object={entry.email}
-                        key={entry.email}>
-                    <td className="identifier">{entry.email}</td>
+                        data-object={key}
+                        key={key}>
+                    <td className="identifier">{key}</td>
                     <td className="non-identifier">
                         <EduIDButton bsStyle="link"
                                      onClick={this.props.handleStartConfirmation}>
@@ -66,7 +77,7 @@ const TableList = React.createClass({
                     </td>
                     <td className="non-identifier">
                         <EduIDButton bsStyle="link"
-                                     onClick={this.props.handleRemoveEmail}>
+                                     onClick={this.props.handleRemove}>
                             {this.props.l10n('tl.remove')}
                         </EduIDButton>
                     </td>
@@ -76,9 +87,9 @@ const TableList = React.createClass({
     }
     return (
         <div className="table-responsive">
-              <div id="alert">
+              <span className="help-block" id="alert">
                          {alertElem}
-                    </div>
+              </span>
             <table className="table table-striped table-form">
                 <tbody>
                     {rows}
@@ -92,9 +103,9 @@ const TableList = React.createClass({
 TableList.propTypes = {
     entries: PropTypes.array,
     handleStartConfirmation: PropTypes.func,
-    handleRemoveEmail: PropTypes.func,
-    handleMakePrimaryEmail: PropTypes.func,
-    errorMsg: PropTypes.string,
+    handleRemove: PropTypes.func,
+    handleMakePrimary: PropTypes.func,
+    errorMsg: PropTypes.object,
 }
 
 export default i18n(TableList);

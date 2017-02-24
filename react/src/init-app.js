@@ -19,9 +19,11 @@ import eduIDApp from "./store";
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
+import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
+import * as sagasMobile from "sagas/Mobile"
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 
@@ -44,14 +46,19 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
+    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
     takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
-    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(emailActions.START_VERIFY, requestVerifyEmail),
     takeEvery(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
-    takeEvery(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail)
-
+    takeEvery(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail),
+    takeEvery(mobileActions.POST_MOBILE, sagasMobile.saveMobile),
+    takeEvery(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile),
+    takeEvery(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile),
+    takeEvery(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
+    takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
   ];
 }
 
