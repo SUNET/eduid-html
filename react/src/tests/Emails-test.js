@@ -90,6 +90,73 @@ describe("Email Actions", () => {
         expect(actions.resendEmailCodeFail(err)).toEqual(expectedAction);
    });
 
+  it("Should start the verify process", () => {
+      const data = {
+          email: "john@gmail.com",
+          identifier: "1"
+      };
+       const expectedAction = {
+           type: actions.START_VERIFY,
+           payload: data
+       };
+
+       expect(actions.startVerify(data)).toEqual(expectedAction);
+   });
+
+   it("Should fail when start the verify process ", () => {
+        const err = 'Bad error';
+        const expectedAction = {
+          type: actions.START_VERIFY_FAIL,
+          error: true,
+          payload: new Error(err)
+        };
+        expect(actions.startVerifyFail(err)).toEqual(expectedAction);
+   });
+
+    it("Should start remove process ", () => {
+        const data = {
+          email: "john@gmail.com",
+          identifier: "1"
+        };
+        const expectedAction = {
+          type: actions.POST_EMAIL_REMOVE,
+          payload: data
+        };
+        expect(actions.startRemove(data)).toEqual(expectedAction);
+   });
+
+    it("Should fail when start the remove process ", () => {
+        const err = 'Bad error';
+        const expectedAction = {
+          type: actions.POST_EMAIL_REMOVE_FAIL,
+          error: true,
+          payload: new Error(err)
+        };
+        expect(actions.startRemoveFail(err)).toEqual(expectedAction);
+   });
+
+    it("Should start the make primary process", () => {
+        const data = {
+          email: "john@gmail.com",
+          identifier: "1"
+        };
+        const expectedAction = {
+          type: actions.POST_EMAIL_PRIMARY,
+          payload: data
+        };
+        expect(actions.makePrimary(data)).toEqual(expectedAction);
+   });
+
+    it("Should fail when start the primary process ", () => {
+        const err = 'Bad error';
+        const expectedAction = {
+          type: actions.POST_EMAIL_PRIMARY_FAIL,
+          error: true,
+          payload: new Error(err)
+        };
+        expect(actions.makePrimaryFail(err)).toEqual(expectedAction);
+   });
+
 });
 
 describe("Reducers", () => {
@@ -449,6 +516,249 @@ it("Receives a START_RESEND_EMAIL_CODE_FAIL action", () => {
     );
   });
 
+ it("Receives a START_VERIFY action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.START_VERIFY,
+          payload: {
+              code: '123456789',
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+        code: '123456789',
+      }
+    );
+  });
+
+it("Receives a START_VERIFY_FAIL action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.START_VERIFY_FAIL,
+           payload: {
+              error: {error:"Bad error"},
+         }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: {error:"Bad error"},
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+      }
+    );
+  });
+
+ it("Receives a POST_EMAIL_REMOVE_CODE action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_REMOVE,
+          payload:{
+              email: 'john@gmail.com'
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: 'john@gmail.com',
+      }
+    );
+  });
+
+it("Receives a POST_EMAIL_REMOVE_SUCCESS action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_REMOVE_SUCCESS,
+            message: 'emails.resend_success'
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+      }
+    );
+  });
+
+it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_REMOVE_FAIL,
+           payload: {
+              error: {error:"Bad error"},
+         }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: {error:"Bad error"},
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+      }
+    );
+  });
+
+
+
+
+
+
+ it("Receives a POST_EMAIL_PRIMARY action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_PRIMARY,
+          payload:{
+              email: 'john@gmail.com'
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: 'john@gmail.com',
+      }
+    );
+  });
+
+it("Receives a POST_EMAIL_PRIMARY_SUCCESS action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_PRIMARY_SUCCESS,
+            message: 'emails.resend_success'
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+      }
+    );
+  });
+
+it("Receives a POST_EMAIL_PRIMARY_FAIL action", () => {
+    expect(
+      emailsReducer(
+        mockState,
+        {
+          type: actions.POST_EMAIL_PRIMARY_FAIL,
+           payload: {
+              error: {error:"Bad error"},
+         }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: {error:"Bad error"},
+        message: '',
+        resending: {
+          is_fetching: false,
+          failed: false,
+          error: {},
+          message: ''
+        },
+        confirming: '',
+        emails: [],
+        email: '',
+      }
+    );
+  });
+
+
 });
 
 const getState = () => state;
@@ -474,7 +784,9 @@ const state = {
     }
 };
 
-import { requestEmails, fetchEmails, requestResend, requestResendEmailCode, saveEmail, sendEmail } from 'sagas/Emails';
+import { requestEmails, fetchEmails, requestResend, requestResendEmailCode, saveEmail, sendEmail,
+         requestVerifyEmail, requestVerify, requestRemoveEmail, requestRemove, requestMakePrimaryEmail,
+         requestMakePrimary } from 'sagas/Emails';
 import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
@@ -547,6 +859,73 @@ describe("Async component", () => {
         const resp = generator.next(state);
 
         expect(resp.value).toEqual(call(requestResend, state.config, data));
+
+        next = generator.next(resp.value);
+        expect(next.value).toEqual(put(resp.value));
+    });
+
+    it("Sagas requestVerifyEmail", () => {
+
+       const generator = requestVerifyEmail(getState);
+       let next = generator.next();
+
+       // next.value.SELECT.selector = function (state) {
+       //      return state;
+       // };
+       // expect(next.value).toEqual(select(state => state));
+
+        const data = {
+                email: state.emails.confirming,
+                code: state.emails.code
+              };
+
+        const resp = generator.next(state);
+
+        expect(resp.value).toEqual(call(requestVerify, state.config, data));
+
+        next = generator.next(resp.value);
+        expect(next.value).toEqual(put(resp.value));
+    });
+
+    it("Sagas requestRemoveEmail", () => {
+
+       const generator = requestRemoveEmail(getState);
+       let next = generator.next();
+
+       // next.value.SELECT.selector = function (state) {
+       //      return state;
+       // };
+       // expect(next.value).toEqual(select(state => state));
+
+        const data = {
+                email: state.emails.confirming
+              };
+
+        const resp = generator.next(state);
+
+        expect(resp.value).toEqual(call(requestRemove, state.config, data));
+
+        next = generator.next(resp.value);
+        expect(next.value).toEqual(put(resp.value));
+    });
+
+    it("Sagas requestRemoveEmail", () => {
+
+       const generator = requestMakePrimaryEmail(getState);
+       let next = generator.next();
+
+       // next.value.SELECT.selector = function (state) {
+       //      return state;
+       // };
+       // expect(next.value).toEqual(select(state => state));
+
+        const data = {
+                email: state.emails.confirming
+              };
+
+        const resp = generator.next(state);
+
+        expect(resp.value).toEqual(call(requestMakePrimary, state.config, data));
 
         next = generator.next(resp.value);
         expect(next.value).toEqual(put(resp.value));

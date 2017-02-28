@@ -54,6 +54,7 @@ let emailsReducer = (state=emailsData, action) => {
         ...state,
         ...action.payload,
         is_fetching: false
+
       };
     case actions.POST_EMAIL_FAIL:
       return {
@@ -78,7 +79,7 @@ let emailsReducer = (state=emailsData, action) => {
           message: ''
         },
       };
-      case actions.FINISH_CONFIRMATION:
+    case actions.FINISH_CONFIRMATION:
       return {
         ...state,
         ...action.payload,
@@ -130,6 +131,19 @@ let emailsReducer = (state=emailsData, action) => {
           ...state.payload,
           is_fetching: false,
           emails: action.payload.emails
+      }
+    case actions.POST_EMAIL_VERIFY_FAIL:
+      return {
+          ...state,
+          ...state.payload,
+          is_fetching: false,
+          error: action.payload.error,
+          resending: {
+              is_fetching: false,
+              failed: true,
+              error: action.payload.error,
+              message: ''
+            },
       };
     case actions.START_VERIFY_FAIL:
       return {
@@ -157,7 +171,6 @@ let emailsReducer = (state=emailsData, action) => {
         is_fetching: false,
         failed: true,
         error: action.payload.error,
-
       };
     case actions.POST_EMAIL_PRIMARY:
       return {
