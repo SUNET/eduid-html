@@ -312,6 +312,26 @@ const msgs = {
         <FormattedMessage
           id="phones.main_title"
           defaultMessage={`Mobile phone numbers`} />),
+
+    /***********************/
+    /* Nins ****************/
+    /***********************/
+
+    'nins.long_description': (
+        <FormattedMessage
+          id="nins.long_description"
+          defaultMessage={`Some service providers (e.g. Antagning.se) require a confirmed identity.`} />),
+
+    'nins.main_title': (
+        <FormattedMessage
+          id="nins.main_title"
+          defaultMessage={`National identity number`} />),
+
+    'nins.instructions': (
+        <FormattedMessage
+          id="nins.instructions"
+          defaultMessage={`Add your Swedish national identity number and initiate the 
+          confirmation process using one of the buttons below.`} />),
 };
 
 const unformatted = defineMessages({

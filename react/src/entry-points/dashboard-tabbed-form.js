@@ -5,10 +5,13 @@ import React from 'react';
 import init_app from "../init-app";
 import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
-import MobileContainer from 'containers/Mobile'
+import MobileContainer from 'containers/Mobile';
+import NinsContainter from 'containers/Nins';
+
 let personalDataApp = <PersonalDataContainer />;
 let emailsApp = <EmailsContainer />;
 let mobileApp = <MobileContainer />;
+let ninsApp = <NinsContainter />;
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -39,7 +42,9 @@ var TabbedForm = function (container) {
           } else if (url === 'emails') {
             init_app(emailsApp, target.get(0));
           } else if (url === 'mobiles') {
-              init_app(mobileApp, target.get(0));
+            init_app(mobileApp, target.get(0));
+          } else if (url == 'nins') {
+            init_app(ninsApp, target.get(0));
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');

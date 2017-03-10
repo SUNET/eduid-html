@@ -156,6 +156,18 @@
     "defaultMessage": "Mobile phone numbers"
   },
   {
+    "id": "nins.long_description",
+    "defaultMessage": "Some service providers (e.g. Antagning.se) require a confirmed identity."
+  },
+  {
+    "id": "nins.main_title",
+    "defaultMessage": "National identity number"
+  },
+  {
+    "id": "nins.instructions",
+    "defaultMessage": "Add your Swedish national identity number and initiate the \n          confirmation process using one of the buttons below."
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
