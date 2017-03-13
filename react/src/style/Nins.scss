@@ -1,8 +1,27 @@
 
 @import '../variables.scss';
 
+@media only screen and (min-width: 992px) {
 
-body {
-/*  background-color: $blue; */
+  #nins-form .form-control-feedback {
+    top: 6px !important;
+    right: 6px !important;
+  }
+
+}
+
+@media (max-width: 992px) {
+  #nins-form .form-control-feedback {
+    top: 6px !important;
+    right: 6px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #nins-form .form-control-feedback {
+    top: 8px !important;
+    right: 11px !important;
+  }
+
 }
 
