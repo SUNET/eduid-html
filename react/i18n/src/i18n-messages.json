@@ -168,6 +168,14 @@
     "defaultMessage": "Add your Swedish national identity number and initiate the \n          confirmation process using one of the buttons below."
   },
   {
+    "id": "nins.mobile_suscription",
+    "defaultMessage": "Phone suscription"
+  },
+  {
+    "id": "nins.letter",
+    "defaultMessage": "Physical letter"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
