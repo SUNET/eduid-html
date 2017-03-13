@@ -332,6 +332,16 @@ const msgs = {
           id="nins.instructions"
           defaultMessage={`Add your Swedish national identity number and initiate the 
           confirmation process using one of the buttons below.`} />),
+
+    'nins.mobile_suscription': (
+        <FormattedMessage
+          id="nins.mobile_suscription"
+          defaultMessage={`Phone suscription`} />),
+
+    'nins.letter': (
+        <FormattedMessage
+          id="nins.letter"
+          defaultMessage={` Physical letter`} />),
 };
 
 const unformatted = defineMessages({

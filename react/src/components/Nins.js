@@ -26,20 +26,33 @@ let Nins = React.createClass({
                 <p>{this.props.l10n('nins.instructions')}</p>
 
           </div>
-          <fieldset id="emails-form" className="tabpane">
+          <fieldset id="nins-form" className="tabpane nins-fieldset">
             <TextControl name="nin"
                          componentClass="input"
                          type="text"
+                         placeholder="yyyymmddnnnn"
                          handleChange={this.props.handleChange} />
           </fieldset>
           <OpenidConnect />
+          <EduIDButton bsStyle="primary"
+                               id="mobile-suscription-button"
+                               onClick={this.props.handlePhoneSuscription}>
+                      {this.props.l10n('nins.mobile_suscription')}
+          </EduIDButton><br/><br/>
+
+          <EduIDButton bsStyle="primary"
+                               id="letter-suscription-button"
+                               onClick={this.props.handleLetter}>
+                      {this.props.l10n('nins.letter')}
+          </EduIDButton>
         </div>
     );
   }
 });
 
 Nins.propTypes = {
-
+    handlePhoneSuscription: PropTypes.func,
+    handleLetter: PropTypes.func,
 }
 
 export default i18n(Nins);

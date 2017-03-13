@@ -1,8 +1,7 @@
 
 import { connect } from 'react-redux';
 import Nins from 'components/Nins';
-import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode,
-        finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
+import { postmobilesuscription, postLetter } from "actions/Nins";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -17,6 +16,32 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+    handlePhoneSuscription: (e) => {
+        let data = {};
+        if(e.target.parentNode.getElementsByTagName('input')[0] == undefined) {
+          data = {
+            nins: e.target.parentNode.parentNode.getElementsByTagName('input')[0].value
+          }
+        } else {
+          data = {
+            nins: e.target.parentNode.getElementsByTagName('input')[0].value
+          }
+        }
+        dispatch(postmobilesuscription(data));
+    },
+    handleLetter: (e) => {
+        let data = {};
+        if(e.target.parentNode.getElementsByTagName('input')[0] == undefined) {
+          data = {
+            nins: e.target.parentNode.parentNode.getElementsByTagName('input')[0].value
+          }
+        } else {
+          data = {
+            nins: e.target.parentNode.getElementsByTagName('input')[0].value
+          }
+        }
+        dispatch(postLetter(data));
+    },
   }
 };
 
