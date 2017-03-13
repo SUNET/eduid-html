@@ -4,7 +4,7 @@ import expect, { createSpy, spyOn, isSpy } from "expect";
 import * as actions from "actions/Mobile";
 import mobileReducer from "reducers/Mobile";
 
-describe("Email Actions", () => {
+describe("Mobile Actions", () => {
 
     it("Should get the mobile numbers ", () => {
        const expectedAction = {
@@ -23,13 +23,13 @@ describe("Email Actions", () => {
         expect(actions.getMobilesFail(err)).toEqual(expectedAction);
     });
 
-    it("Should change the emails ", () => {
+    it("Should change the mobile ", () => {
        const data = {
            'mobile': 612123123,
            'text': 'texting'
        };
        const expectedAction = {
-           type: actions.CHANGE_MOBILES,
+           type: actions.CHANGE_MOBILE,
            payload: data
        };
        expect(actions.changeMobile(data)).toEqual(expectedAction);
@@ -37,7 +37,7 @@ describe("Email Actions", () => {
 
    it("Should post the mobile ", () => {
        const expectedAction = {
-           type: actions.POST_MOBILES
+           type: actions.POST_MOBILE
        };
        expect(actions.postMobile()).toEqual(expectedAction);
    });
@@ -45,7 +45,7 @@ describe("Email Actions", () => {
    it("Should fail when trying to post the mobile", () => {
         const err = 'Bad error';
         const expectedAction = {
-          type: actions.POST_MOBILES_FAIL,
+          type: actions.POST_MOBILE_FAIL,
           error: true,
           payload: new Error(err)
         };
@@ -305,7 +305,7 @@ it("Receives a POST_MOBILE action", () => {
       )
     ).toEqual(
       {
-        is_fetching: false,
+        is_fetching: true,
         failed: false,
         error: '',
         message: '',
@@ -357,13 +357,16 @@ it("Receives a POST_MOBILE action", () => {
         mockState,
         {
           type: actions.POST_MOBILE_FAIL,
+            payload: {
+              error: {error:"Bad error"},
+         }
         }
       )
     ).toEqual(
       {
         is_fetching: false,
         failed: true,
-        error: '',
+        error: {error:"Bad error"},
         message: '',
         resending: {
           is_fetching: false,
@@ -386,13 +389,13 @@ it("Receives a START_CONFIRMATION action", () => {
         {
           type: actions.START_CONFIRMATION,
           payload: {
-              mobile: 999123123,
+              phone: 999123123,
          }
         }
       )
     ).toEqual(
       {
-        is_fetching: false,
+        is_fetching: true,
         failed: false,
         error: '',
         message: '',
@@ -541,7 +544,7 @@ it("Receives a START_VERIFY action", () => {
       )
     ).toEqual(
       {
-        is_fetching: false,
+        is_fetching: true,
         failed: false,
         error: '',
         message: '',
@@ -597,7 +600,7 @@ it("Receives a POST_MOBILE_REMOVE action", () => {
         {
           type: actions.POST_MOBILE_REMOVE,
           payload:{
-              mobile: 999123123,
+              phone: 999123123,
           }
         }
       )
@@ -689,7 +692,7 @@ it("Receives a POST_MOBILE_REMOVE_FAIL action", () => {
         {
           type: actions.POST_MOBILE_PRIMARY,
           payload:{
-              mobile: 999123123
+              phone: 999123123
           }
         }
       )
@@ -776,11 +779,12 @@ it("Receives a POST_MOBILE_PRIMARY_FAIL action", () => {
 })
 const getState = () => state;
 const state = {
-    mobile: {
+    phones: {
         is_fetching: true,
         failed: false,
         error: '',
         message: '',
+        csrf_token: '123456789',
         resending: {
           is_fetching: false,
           failed: false,
@@ -788,7 +792,7 @@ const state = {
           message: ''
         },
         confirming: '',
-        mobiles: [],
+        phones: [],
         mobile: '',
         code: '',
      },
@@ -842,9 +846,10 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
        const data = {
-                mobile: state.mobile.mobile,
+                number: state.phones.mobile,
                 verified: false,
-                primary: false
+                primary: false,
+                csrf_token: state.phones.csrf_token
               };
 
        const mobiles = generator.next(state);
@@ -866,7 +871,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                mobile: state.mobile.confirming
+                number: state.phones.confirming,
+                csrf_token: state.phones.csrf_token
               };
 
         const resp = generator.next(state);
@@ -888,8 +894,9 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                mobile: state.mobile.confirming,
-                code: state.mobile.code
+                number: state.phones.confirming,
+                code: state.phones.code,
+                csrf_token: state.phones.csrf_token
               };
 
         const resp = generator.next(state);
@@ -911,7 +918,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                mobile: state.mobile.confirming
+                number: state.phones.confirming,
+                csrf_token: state.phones.csrf_token
               };
         const resp = generator.next(state);
 
@@ -933,7 +941,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                mobile: state.mobile.mobile,
+                number: state.phones.mobile,
+                csrf_token: state.phones.csrf_token
               };
 
         const resp = generator.next(state);
@@ -991,7 +1000,7 @@ const fakeStore = (state) => ({
 });
 
 
-describe("Emails Container", () => {
+describe("Mobile Container", () => {
   let fulltext,
     mobile,
     fulldom,
@@ -1002,7 +1011,7 @@ describe("Emails Container", () => {
 
  beforeEach(() => {
     const store = fakeStore({
-        mobile: {
+        phones: {
             is_fetching: true,
             failed: false,
             error: '',

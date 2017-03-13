@@ -353,13 +353,16 @@ describe("Reducers", () => {
         mockState,
         {
           type: actions.POST_EMAIL_FAIL,
+            payload: {
+                error: {error: "Bad error"},
+            }
         }
       )
     ).toEqual(
       {
         is_fetching: false,
         failed: true,
-        error: '',
+        error: {error:"Bad error"},
         message: '',
         resending: {
           is_fetching: false,
@@ -529,7 +532,7 @@ it("Receives a START_RESEND_EMAIL_CODE_FAIL action", () => {
       )
     ).toEqual(
       {
-        is_fetching: false,
+        is_fetching: true,
         failed: false,
         error: '',
         message: '',
@@ -771,6 +774,7 @@ const state = {
         confirming: '',
         emails: [],
         email: '',
+        csrf_token: '123456789',
         resending: {
           is_fetching: false,
           failed: false,
@@ -831,7 +835,8 @@ describe("Async component", () => {
        const data = {
                 email: state.emails.email,
                 verified: false,
-                primary: false
+                primary: false,
+                csrf_token: state.emails.csrf_token
               };
 
        const emails = generator.next(state);
@@ -853,7 +858,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                email: state.emails.confirming
+                email: state.emails.confirming,
+                csrf_token: state.emails.csrf_token
               };
 
         const resp = generator.next(state);
@@ -876,7 +882,8 @@ describe("Async component", () => {
 
         const data = {
                 email: state.emails.confirming,
-                code: state.emails.code
+                code: state.emails.code,
+                csrf_token: state.emails.csrf_token
               };
 
         const resp = generator.next(state);
@@ -898,7 +905,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                email: state.emails.confirming
+                email: state.emails.confirming,
+                csrf_token: state.emails.csrf_token
               };
 
         const resp = generator.next(state);
@@ -909,7 +917,7 @@ describe("Async component", () => {
         expect(next.value).toEqual(put(resp.value));
     });
 
-    it("Sagas requestRemoveEmail", () => {
+    it("Sagas requestMakePrimaryEmail", () => {
 
        const generator = requestMakePrimaryEmail(getState);
        let next = generator.next();
@@ -920,7 +928,8 @@ describe("Async component", () => {
        // expect(next.value).toEqual(select(state => state));
 
         const data = {
-                email: state.emails.confirming
+                email: state.emails.confirming,
+                csrf_token: state.emails.csrf_token
               };
 
         const resp = generator.next(state);
