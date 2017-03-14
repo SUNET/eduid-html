@@ -7,11 +7,13 @@ import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import NinsContainter from 'containers/Nins';
+import SecurityContainer from 'containers/Security';
 
 let personalDataApp = <PersonalDataContainer />;
 let emailsApp = <EmailsContainer />;
 let mobileApp = <MobileContainer />;
 let ninsApp = <NinsContainter />;
+let securityApp = <SecurityContainter />;
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -44,7 +46,9 @@ var TabbedForm = function (container) {
           } else if (url === 'mobiles') {
             init_app(mobileApp, target.get(0));
           } else if (url == 'nins') {
-            init_app(ninsApp, target.get(0));
+              init_app(ninsApp, target.get(0));
+          } else if (url == 'security') {
+              init_app(securityApp, target.get(0));
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
