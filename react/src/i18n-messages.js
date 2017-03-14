@@ -342,6 +342,40 @@ const msgs = {
         <FormattedMessage
           id="nins.letter"
           defaultMessage={` Physical letter`} />),
+
+    /***********************/
+    /* Security ************/
+    /***********************/
+
+    'security.long_description': (
+        <FormattedMessage
+          id="security.long_description"
+          defaultMessage={`Your eduID account password can be changed below.`} />),
+
+    'security.main_title': (
+        <FormattedMessage
+          id="security.main_title"
+          defaultMessage={`Security`} />),
+
+    'security.credential': (
+        <FormattedMessage
+          id="security.credential"
+          defaultMessage={`Credential`} />),
+
+    'security.creation_date': (
+        <FormattedMessage
+          id="security.creation_date"
+          defaultMessage={`Creation date`} />),
+
+    'security.last_used': (
+        <FormattedMessage
+          id="security.last_used"
+          defaultMessage={`Last used`} />),
+
+    'security.change_password': (
+        <FormattedMessage
+          id="security.change_password"
+          defaultMessage={`Change password`} />),
 };
 
 const unformatted = defineMessages({
