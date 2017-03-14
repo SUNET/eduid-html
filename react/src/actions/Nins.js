@@ -17,7 +17,7 @@ export function postmobilesuscriptionFail (err) {
     type: POST_MOBILE_SUSCRIPTION_FAIL,
     error: true,
     payload: {
-      error: err,
+      error: new Error(err),
       message: err
     }
   };
@@ -36,7 +36,7 @@ export function postLetterFail (err) {
     type: POST_LETTER_FAIL,
     error: true,
     payload: {
-      error: err,
+      error: new Error(err),
       message: err
     }
   };

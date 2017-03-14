@@ -6,6 +6,7 @@ const nins = {
     is_fetching: false,
     failed: false,
     error: "",
+    nin: "",
     // as default, a gif with a single pixel.
 };
 
@@ -20,6 +21,7 @@ let NinsReducer = (state=nins, action) => {
       };
     case actions.POST_MOBILE_SUSCRIPTION_SUCCESS:
       return {
+        ...state,
         ...action.payload,
         is_fetching: false,
         failed: false
@@ -31,8 +33,6 @@ let NinsReducer = (state=nins, action) => {
         failed: true,
         error: action.payload.message
       };
-    default:
-      return state;
     case actions.POST_LETTER:
       return {
         ...state,
@@ -41,6 +41,7 @@ let NinsReducer = (state=nins, action) => {
       };
     case actions.POST_LETTER_SUCCESS:
       return {
+        ...state,
         ...action.payload,
         is_fetching: false,
         failed: false
