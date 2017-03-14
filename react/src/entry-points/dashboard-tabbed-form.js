@@ -13,7 +13,7 @@ let personalDataApp = <PersonalDataContainer />;
 let emailsApp = <EmailsContainer />;
 let mobileApp = <MobileContainer />;
 let ninsApp = <NinsContainter />;
-let securityApp = <SecurityContainter />;
+let securityApp = <SecurityContainer />;
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
