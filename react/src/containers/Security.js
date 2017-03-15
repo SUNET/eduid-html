@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Security from 'components/Security';
-import { changepassword, removeAccount, stopConfirmation, startConfirmation } from "actions/Security";
+import { changepassword, removeAccount, stopConfirmation, startConfirmation, startConfirmationPassword, stopConfirmationPassword } from "actions/Security";
 
 
 const mapStateToProps = (state, props) => {
@@ -11,7 +11,8 @@ const mapStateToProps = (state, props) => {
      last_used:  state.security.last_used,
      is_fetching: state.security.is_fetching,
      errorMsg: state.security.error,
-     confirming: state.security.confirming
+     confirming: state.security.confirming,
+     change_password: state.security.change_password,
   }
 };
 
@@ -34,6 +35,15 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleStopConfirmation: function (e) {
         dispatch(stopConfirmation());
+    },
+     handleStartConfirmationPassword: function (e) {
+        let data = {}
+
+        dispatch(startConfirmationPassword(data));
+
+    },
+    handleStopConfirmationPassword: function (e) {
+        dispatch(stopConfirmationPassword());
     },
   }
 

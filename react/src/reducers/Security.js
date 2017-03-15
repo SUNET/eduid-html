@@ -11,11 +11,22 @@ const security = {
     csrf_token: '',
     error: '',
     confirming: false,
+    change_password: false,
 };
 
 
 let securityReducer = (state=security, action) => {
   switch (action.type) {
+    case actions.START_CHANGE_PASSWORD:
+        return {
+        ...state,
+        change_password: true,
+      };
+    case actions.STOP_CHANGE_PASSWORD:
+      return {
+        ...state,
+        change_password: false,
+      };
     case actions.POST_CHANGE_PASSWORD:
       return {
         ...state,

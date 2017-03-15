@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
+import GenericConfirmModal from 'components/GenericConfirmModal';
 
 //  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -38,7 +39,7 @@ let Security = React.createClass({
           <EduIDButton bsStyle="primary"
                       id="security-change-button"
                       spinning={spinning}
-                      onClick={this.props.handleSave}>
+                      onClick={this.props.handleStartConfirmationPassword}>
                     {this.props.l10n('security.change_password')}
           </EduIDButton>
           <div className="second-block">
@@ -53,12 +54,18 @@ let Security = React.createClass({
                         {this.props.l10n('security.delete_account')}
               </EduIDButton>
           </div>
+          <GenericConfirmModal
+          title={this.props.l10n('security.confirm_title')}
+                showModal={this.props.change_password}
+                closeModal={this.props.handleStopConfirmationPassword}
+                finishModal={this.props.handleChange}
+                change_password={this.props.change_password}
+          />
           <DeleteModal
                 title={this.props.l10n('security.confirm_title')}
                 showModal={this.props.confirming}
                 closeModal={this.props.handleStopConfirmation}
                 handleConfirm={this.props.handleConfirm}
-                resending={this.props.resending}
                 confirming={this.props.confirming} />
         </div>
     );

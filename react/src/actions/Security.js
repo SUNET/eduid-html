@@ -6,6 +6,22 @@ export const POST_DELETE_ACCOUNT_SUCCESS = 'POST_DELETE_ACCOUNT_SUCCESS';
 export const POST_DELETE_ACCOUNT_FAIL = 'POST_DELETE_ACCOUNT_FAIL';
 export const STOP_DELETE_ACCOUNT = 'STOP_DELETE_ACCOUNT';
 export const START_DELETE_ACCOUNT = 'START_DELETE_ACCOUNT';
+export const START_CHANGE_PASSWORD = 'START_CHANGE_PASSWORD';
+export const STOP_CHANGE_PASSWORD = 'STOP_CHANGE_PASSWORD';
+
+
+export function startConfirmationPassword (data) {
+  return {
+    type: START_CHANGE_PASSWORD,
+    payload: data
+  };
+}
+
+export function stopConfirmationPassword () {
+  return {
+    type: STOP_CHANGE_PASSWORD
+  };
+}
 
 export function changepassword (data) {
   return {
