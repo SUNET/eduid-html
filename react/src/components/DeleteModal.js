@@ -16,7 +16,7 @@ let DeleteModal = React.createClass({
     // if (this.props.resending.is_fetching) spinning = true;
 
     return (
-      <div id="emailConfirmDialog"
+      <div id="securityDeleteDialog"
            tabIndex="-1"
            role="dialog"
            aria-labelledby="askDialogPrompt"
