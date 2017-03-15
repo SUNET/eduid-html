@@ -135,6 +135,11 @@ const msgs = {
             id="cm.cancel"
             defaultMessage={`CANCEL`} />),
 
+    'cm.accept': (
+        <FormattedMessage
+          id="cm.accept"
+          defaultMessage={`ACCEPT`} />),
+
     /************************/
     /* TABLE LIST ***********/
     /************************/
@@ -414,10 +419,16 @@ const msgs = {
           defaultMessage={`Note that for security reasons if you choose to delete your account,
                            you will be asked to log in again.`} />),
 
+    'security.change_info': (
+        <FormattedMessage
+          id="security.change_info"
+          defaultMessage={`For security reasons we will ask you to log in again before changing your password.`} />),
+
     'security.confirm_button': (
         <FormattedMessage
           id="security.confirm_button"
           defaultMessage={`Confirm deletion of eduID account`} />),
+
 };
 
 const unformatted = defineMessages({
