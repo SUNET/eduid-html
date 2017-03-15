@@ -376,6 +376,48 @@ const msgs = {
         <FormattedMessage
           id="security.change_password"
           defaultMessage={`Change password`} />),
+
+    'security.account_description': (
+        <FormattedMessage
+          id="security.account_description"
+          defaultMessage={`Use the button below to permanently delete your eduID account.`} />),
+
+    'security.account_title': (
+        <FormattedMessage
+          id="security.account_title"
+          defaultMessage={`Account deletion`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.confirm_title': (
+        <FormattedMessage
+          id="security.confirm_title"
+          defaultMessage={`Delete account`} />),
+
+    'security.modal_info': (
+        <FormattedMessage
+          id="security.modal_info"
+          defaultMessage={`Are you sure that you wish to delete your eduID account? This action will
+                           permanently remove all the data associated with the account from our database. `} />),
+
+    'security.modal_notes': (
+        <FormattedMessage
+          id="security.modal_notes"
+          defaultMessage={`Note that for security reasons if you choose to delete your account,
+                           you will be asked to log in again.`} />),
+
+    'security.confirm_button': (
+        <FormattedMessage
+          id="security.confirm_button"
+          defaultMessage={`Confirm deletion of eduID account`} />),
 };
 
 const unformatted = defineMessages({

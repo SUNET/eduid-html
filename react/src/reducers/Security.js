@@ -10,6 +10,7 @@ const security = {
     last_used: '',
     csrf_token: '',
     error: '',
+    confirming: false,
 };
 
 
@@ -35,17 +36,27 @@ let securityReducer = (state=security, action) => {
         failed: true,
         error: action.payload.error
       };
+    case actions.START_DELETE_ACCOUNT:
+        return {
+        ...state,
+        confirming: true,
+      };
+    case actions.STOP_DELETE_ACCOUNT:
+      return {
+        ...state,
+        confirming: false,
+      };
     case actions.POST_DELETE_ACCOUNT:
       return {
         ...state,
         is_fetching: true,
-        failed: false
+        failed: false,
       };
     case actions.POST_DELETE_ACCOUNT_SUCCESS:
       return {
         ...action.payload,
         is_fetching: false,
-        failed: false
+        failed: false,
       };
     case actions.POST_DELETE_ACCOUNT_FAIL:
       return {

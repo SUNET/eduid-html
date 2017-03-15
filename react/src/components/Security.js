@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import DeleteModal from 'components/DeleteModal';
 
 //  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -12,16 +13,15 @@ import 'style/Security.scss';
 let Security = React.createClass({
 
   render: function () {
-
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
     return (
         <div>
           <div className="intro">
               <h4>{this.props.l10n('security.main_title')}</h4>
-                <p>{this.props.l10n('security.long_description')}</p>
+              <p>{this.props.l10n('security.long_description')}</p>
           </div>
-          <table class="security-table">
+          <table className="table table-bordered table-form passwords">
               <tbody>
                 <tr>
                     <th>{this.props.l10n('security.credential')}</th>
@@ -40,8 +40,27 @@ let Security = React.createClass({
                       spinning={spinning}
                       onClick={this.props.handleSave}>
                     {this.props.l10n('security.change_password')}
+          </EduIDButton>
+          <div className="second-block">
+              <div className="intro">
+                 <h4>{this.props.l10n('security.account_title')}</h4>
+                 <p>{this.props.l10n('security.account_description')}</p>
+              </div>
+              <EduIDButton className="btn btn-danger"
+                           id="delete-button"
+                           spinning={spinning}
+                           onClick={this.props.handleStartConfirmation}>
+                        {this.props.l10n('security.delete_account')}
               </EduIDButton>
           </div>
+          <DeleteModal
+                title={this.props.l10n('security.confirm_title')}
+                showModal={this.props.confirming}
+                closeModal={this.props.handleStopConfirmation}
+                handleConfirm={this.props.handleConfirm}
+                resending={this.props.resending}
+                confirming={this.props.confirming} />
+        </div>
     );
   }
 });
