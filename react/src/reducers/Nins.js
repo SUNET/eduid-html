@@ -7,6 +7,7 @@ const nins = {
     failed: false,
     error: "",
     nin: "",
+    confirming: '',
     // as default, a gif with a single pixel.
 };
 
