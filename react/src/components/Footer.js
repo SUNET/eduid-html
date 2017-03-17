@@ -1,11 +1,7 @@
 
 import React, { PropTypes } from 'react';
-import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
-import EduIDButton from 'components/EduIDButton';
-import EduiDAlert from 'components/EduIDAlert';
 
 
 let Footer = React.createClass({
