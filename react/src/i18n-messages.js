@@ -135,6 +135,11 @@ const msgs = {
             id="cm.cancel"
             defaultMessage={`CANCEL`} />),
 
+    'cm.accept': (
+        <FormattedMessage
+          id="cm.accept"
+          defaultMessage={`ACCEPT`} />),
+
     /************************/
     /* TABLE LIST ***********/
     /************************/
@@ -312,6 +317,118 @@ const msgs = {
         <FormattedMessage
           id="phones.main_title"
           defaultMessage={`Mobile phone numbers`} />),
+
+    /***********************/
+    /* Nins ****************/
+    /***********************/
+
+    'nins.long_description': (
+        <FormattedMessage
+          id="nins.long_description"
+          defaultMessage={`Some service providers (e.g. Antagning.se) require a confirmed identity.`} />),
+
+    'nins.main_title': (
+        <FormattedMessage
+          id="nins.main_title"
+          defaultMessage={`National identity number`} />),
+
+    'nins.instructions': (
+        <FormattedMessage
+          id="nins.instructions"
+          defaultMessage={`Add your Swedish national identity number and initiate the 
+          confirmation process using one of the buttons below.`} />),
+
+    'nins.mobile_suscription': (
+        <FormattedMessage
+          id="nins.mobile_suscription"
+          defaultMessage={`Phone suscription`} />),
+
+    'nins.letter': (
+        <FormattedMessage
+          id="nins.letter"
+          defaultMessage={` Physical letter`} />),
+
+    /***********************/
+    /* Security ************/
+    /***********************/
+
+    'security.long_description': (
+        <FormattedMessage
+          id="security.long_description"
+          defaultMessage={`Your eduID account password can be changed below.`} />),
+
+    'security.main_title': (
+        <FormattedMessage
+          id="security.main_title"
+          defaultMessage={`Security`} />),
+
+    'security.credential': (
+        <FormattedMessage
+          id="security.credential"
+          defaultMessage={`Credential`} />),
+
+    'security.creation_date': (
+        <FormattedMessage
+          id="security.creation_date"
+          defaultMessage={`Creation date`} />),
+
+    'security.last_used': (
+        <FormattedMessage
+          id="security.last_used"
+          defaultMessage={`Last used`} />),
+
+    'security.change_password': (
+        <FormattedMessage
+          id="security.change_password"
+          defaultMessage={`Change password`} />),
+
+    'security.account_description': (
+        <FormattedMessage
+          id="security.account_description"
+          defaultMessage={`Use the button below to permanently delete your eduID account.`} />),
+
+    'security.account_title': (
+        <FormattedMessage
+          id="security.account_title"
+          defaultMessage={`Account deletion`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.confirm_title': (
+        <FormattedMessage
+          id="security.confirm_title"
+          defaultMessage={`Delete account`} />),
+
+    'security.modal_info': (
+        <FormattedMessage
+          id="security.modal_info"
+          defaultMessage={`Are you sure that you wish to delete your eduID account? This action will
+                           permanently remove all the data associated with the account from our database. `} />),
+
+    'security.modal_notes': (
+        <FormattedMessage
+          id="security.modal_notes"
+          defaultMessage={`Note that for security reasons if you choose to delete your account,
+                           you will be asked to log in again.`} />),
+
+    'security.change_info': (
+        <FormattedMessage
+          id="security.change_info"
+          defaultMessage={`For security reasons we will ask you to log in again before changing your password.`} />),
+
+    'security.confirm_button': (
+        <FormattedMessage
+          id="security.confirm_button"
+          defaultMessage={`Confirm deletion of eduID account`} />),
+
 };
 
 const unformatted = defineMessages({
