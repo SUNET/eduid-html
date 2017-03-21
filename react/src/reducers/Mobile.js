@@ -5,6 +5,7 @@ const mobileData = {
     failed: false,
     error: '',
     message: '',
+    csrf_token: '',
     resending: {
       is_fetching: false,
       failed: false,
@@ -164,7 +165,7 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_PRIMARY:
       return {
         ...state,
-        phone: action.payload.phone,
+        mobile: action.payload.phone,
         is_fetching: true
       }
     case actions.POST_MOBILE_PRIMARY_SUCCESS:
