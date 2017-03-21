@@ -21,6 +21,8 @@ import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
 import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
+import * as ninsActions from "actions/Nins";
+
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile"
