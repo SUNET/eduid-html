@@ -25,9 +25,10 @@ import * as ninsActions from "actions/Nins";
 
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
-import * as sagasMobile from "sagas/Mobile"
+import * as sagasMobile from "sagas/Mobile";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
+import * as sagasNins from "sagas/Nins";
 
 /* i18n */
 
@@ -61,6 +62,7 @@ function* rootSaga() {
     takeEvery(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile),
     takeEvery(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
     takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
+    takeEvery(ninsActions.POST_LETTER, sagasNins.postLetter),
   ];
 }
 
