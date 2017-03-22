@@ -50,6 +50,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasNins.requestNinState),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
@@ -63,6 +64,7 @@ function* rootSaga() {
     takeEvery(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
     takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeEvery(ninsActions.POST_LETTER, sagasNins.postLetter),
+    takeEvery(ninsActions.VERIFY_LETTER_CODE, sagasNins.verifyLetterCode),
   ];
 }
 

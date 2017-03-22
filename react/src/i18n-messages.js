@@ -341,7 +341,32 @@ const msgs = {
     'nins.letter': (
         <FormattedMessage
           id="nins.letter"
-          defaultMessage={` Physical letter`} />),
+          defaultMessage={`Physical letter`} />),
+
+    'nins.letter_link': (
+        <FormattedMessage
+          id="nins.letter_link"
+          defaultMessage={`Confirm using letter`} />),
+
+    'nins.modal_title': (
+        <FormattedMessage
+          id="nins.modal_title"
+          defaultMessage={`Enter code received by letter`} />),
+
+    'nins.placeholder': (
+        <FormattedMessage
+          id="nins.placeholder"
+          defaultMessage={`Enter confirmation code`} />),
+
+    'nins.content_text': (
+        <FormattedMessage
+          id="nins.content_text"
+          defaultMessage={`A letter has already been sent to your official postal
+           address. The code enclosed will expire on 2017-03-22. After that date you
+            can restart the process if the letter was lost.
+            
+            If you have received the letter, please enter the enclosed code below and 
+            click "Ok"`} />),
 };
 
 const unformatted = defineMessages({
