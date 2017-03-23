@@ -353,23 +353,26 @@ const msgs = {
           id="nins.modal_title"
           defaultMessage={`Enter code received by letter`} />),
 
-    'nins.placeholder': (
+    'nins.content_text_first': (
         <FormattedMessage
-          id="nins.placeholder"
-          defaultMessage={`Enter confirmation code`} />),
-
-    'nins.content_text': (
-        <FormattedMessage
-          id="nins.content_text"
+          id="nins.content_text_first"
           defaultMessage={`A letter has already been sent to your official postal
            address. The code enclosed will expire on 2017-03-22. After that date you
-            can restart the process if the letter was lost.
-            
-            If you have received the letter, please enter the enclosed code below and 
+            can restart the process if the letter was lost.`} />),
+
+    'nins.content_text_second': (
+        <FormattedMessage
+          id="nins.content_text_second"
+          defaultMessage={`If you have received the letter, please enter the enclosed code below and 
             click "Ok"`} />),
 };
 
 const unformatted = defineMessages({
+    'nins.placeholder': {
+        id: "emails.confirm_nins_placeholder",
+        defaultMessage: `Nins confirmation code`,
+        description: "Placeholder for nin text input"
+    },
     'emails.placeholder': {
         id: "emails.confirm_email_placeholder",
         defaultMessage: `Email confirmation code`,

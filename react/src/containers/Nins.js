@@ -11,6 +11,9 @@ const mapStateToProps = (state, props) => {
     confirming: state.nins.confirming,
     resending: state.nins.resending,
     verifying: state.nins.verifying,
+    request_letter: state.nins.request_letter,
+    failed: state.nins.failed,
+    error: state.nins.error,
   }
 };
 

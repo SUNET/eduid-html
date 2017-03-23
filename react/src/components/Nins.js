@@ -8,6 +8,7 @@ import TableList from 'components/TableList';
 import ConfirmModal from 'components/ConfirmModal';
 import OpenidConnect from 'components/OpenidConnect';
 import CodeModal from 'components/CodeModal';
+import EduiDAlert from 'components/EduIDAlert';
 
 import 'style/Nins.scss';
 
@@ -15,6 +16,14 @@ import 'style/Nins.scss';
 let Nins = React.createClass({
 
   render: function () {
+    let msg, alertElem, letter;
+    if (this.props.request_letter) {
+        alertElem = ( <EduiDAlert levelMessage="danger" Msg={this.props.errorMsg}></EduiDAlert> );
+    }
+
+    if (this.props.letter_sent){
+        letter = this.props.letter_sent;
+    }
     if (this.props.letter_sent) {
         return (
             <div className="ninsview-form-container ">
@@ -27,7 +36,7 @@ let Nins = React.createClass({
               </div>
                 <div className="ninsview-table">
                     <div>{this.props.letter_sent}</div>
-                    <div>{this.props.letter_sent}</div>
+                    <div>"TODO MOBILE"</div>
                     <div>
                         <EduIDButton bsStyle="link"
                             onClick={this.props.handleStartCodeConfirmation}>
@@ -36,12 +45,15 @@ let Nins = React.createClass({
                     <div><a href="#"></a></div>
                 </div>
                 <CodeModal
-                    content_text = {this.props.l10n('nins.content_text')}
+                    content_text_first = {this.props.l10n('nins.content_text_first')}
+                    content_text_second = {this.props.l10n('nins.content_text_second')}
                     title= {this.props.l10n('nins.modal_title')}
                     placeholder={this.props.l10n('nins.placeholder')}
                     showModal={this.props.verifying}
                     closeModal={this.props.handleStopCodeConfirmation}
-                    handleConfirm={this.props.verifyCode} />
+                    handleConfirm={this.props.verifyCode}
+                    failed={this.props.failed}
+                    error={this.props.error}/>
             </div>
         );
     }
@@ -56,6 +68,9 @@ let Nins = React.createClass({
                 <p>{this.props.l10n('nins.instructions')}</p>
 
           </div>
+           <span className="help-block" id="alert">
+                         {alertElem}
+                    </span>
           <fieldset id="nins-form" className="tabpane nins-fieldset">
             <TextControl name="nin"
                          componentClass="input"
@@ -87,6 +102,8 @@ Nins.propTypes = {
     verifyCode: PropTypes.func,
     letter_sent: PropTypes.string,
     verifying: PropTypes.bool,
+    errorMsg: PropTypes.string,
+    placeholder: PropTypes.string,
 }
 
 export default i18n(Nins);

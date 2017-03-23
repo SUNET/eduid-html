@@ -11,6 +11,7 @@ const nins = {
     letter_sent: "",
     code: "",
     verifying: false,
+    request_letter: false,
     // as default, a gif with a single pixel.
 };
 
@@ -60,6 +61,7 @@ let NinsReducer = (state=nins, action) => {
       return {
         ...state,
         is_fetching: true,
+        request_letter: true,
         failed: false
       };
     case actions.POST_LETTER_SUCCESS:
@@ -67,14 +69,16 @@ let NinsReducer = (state=nins, action) => {
         ...state,
         ...action.payload,
         is_fetching: false,
+        request_letter: true,
         failed: false
       };
     case actions.POST_LETTER_FAIL:
       return {
         ...state,
         is_fetching: false,
+        request_letter: true,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error.nin[0]
       };
     case actions.START_CODE_VERIFY:
       return {
@@ -106,9 +110,18 @@ let NinsReducer = (state=nins, action) => {
         failed: false,
         verifying: false,
       };
+    case actions.VERIFY_LETTER_CODE_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false,
+        verifying: true,
+        failed: true,
+        error: action.payload.message
+      };
     default:
       return state;
-  }
+  };
  };
 
 export default NinsReducer;

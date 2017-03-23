@@ -12,7 +12,13 @@ let CodeModal = React.createClass({
 
   render: function () {
     let spinning = false;
+    let msgid, msg, alertElem;
     if (this.props.is_fetching) spinning = true;
+
+    if (this.props.failed) {
+      msg= this.props.error;
+      alertElem = ( <EduiDAlert levelMessage="danger" Msg={msg}></EduiDAlert> );
+    }
 
     return (
       <div id="ninConfirmDialog"
@@ -28,9 +34,13 @@ let CodeModal = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
+                    <span className="help-block" id="alert">
+                         {alertElem}
+                    </span>
                     <div className="modal-text">
-                    {this.props.content_text}
-
+                    {this.props.content_text_first}
+                    <br/><br/>
+                    {this.props.content_text_second}
                     <div id="nin-confirmation-code">
                         <TextControl name={this.props.inputId}
                                      placeholder={this.props.placeholder}
@@ -66,7 +76,8 @@ CodeModal.propTypes = {
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
   errorMsg: PropTypes.string,
-  is_fetching: PropTypes.bool
+  is_fetching: PropTypes.bool,
+  failed: PropTypes.bool,
 }
 
 export default i18n(CodeModal);
