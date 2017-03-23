@@ -1,18 +1,16 @@
 
 import { connect } from 'react-redux';
 import Security from 'components/Security';
-import { changepassword, removeAccount, stopConfirmation, startConfirmation, startConfirmationPassword, stopConfirmationPassword } from "actions/Security";
+import { changepassword, removeAccount, stopConfirmation, startConfirmation,
+         startConfirmationPassword,
+         stopConfirmationPassword } from "actions/Security";
 
 
 const mapStateToProps = (state, props) => {
   return {
-     credential: state.security.credential,
-     creation_date: state.security.creation_date,
-     last_used:  state.security.last_used,
+     credentials: state.security.credentials,
      is_fetching: state.security.is_fetching,
      errorMsg: state.security.error,
-     confirming: state.security.confirming,
-     change_password: state.security.change_password,
   }
 };
 

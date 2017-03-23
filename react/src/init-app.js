@@ -24,10 +24,13 @@ import * as openidActions from "actions/OpenidConnect";
 import * as ninsActions from "actions/Nins";
 
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
-import { requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail } from "sagas/Emails";
+import { requestEmails, saveEmail, requestResendEmailCode,
+         requestVerifyEmail, requestRemoveEmail,
+         requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile"
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
+import { requestCredentials } from "sagas/Security";
 
 /* i18n */
 
@@ -49,6 +52,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(emailActions.POST_EMAIL, saveEmail),

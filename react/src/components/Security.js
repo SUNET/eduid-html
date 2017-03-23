@@ -6,15 +6,22 @@ import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
 import GenericConfirmModal from 'components/GenericConfirmModal';
 
-//  XXX this interferes with the bootstrap in eduid-html
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/Security.scss';
 
 
 let Security = React.createClass({
 
   render: function () {
-    let spinning = false;
+    let spinning = false,
+        creds_table = this.props.credentials.map((cred, index) => {
+            return (<tr>
+                        <td>{cred.credential_type}</td>
+                        <td>{cred.created_ts}</td>
+                        <td>{cred.success_ts}</td>
+                    </tr>
+            );
+        }, this);
+
     if (this.props.is_fetching) spinning = true;
     return (
         <div>
@@ -29,11 +36,7 @@ let Security = React.createClass({
                     <th>{this.props.l10n('security.creation_date')}</th>
                     <th>{this.props.l10n('security.last_used')}</th>
                 </tr>
-                <tr>
-                    <td>{this.props.credential}</td>
-                    <td>{this.props.creation_date}</td>
-                    <td>{this.props.last_used}</td>
-                </tr>
+                {creds_table}
               </tbody>
           </table>
           <EduIDButton bsStyle="primary"
@@ -73,7 +76,7 @@ let Security = React.createClass({
 });
 
 Security.propTypes = {
-  credential: PropTypes.string,
+  credentials: PropTypes.array,
   creation_date: PropTypes.string,
   last_used: PropTypes.string,
   language: PropTypes.string,

@@ -36,6 +36,10 @@
     "defaultMessage": "CANCEL"
   },
   {
+    "id": "cm.accept",
+    "defaultMessage": "ACCEPT"
+  },
+  {
     "id": "phone_duplicated",
     "defaultMessage": "Added number is duplicated"
   },
@@ -174,6 +178,62 @@
   {
     "id": "nins.letter",
     "defaultMessage": "Physical letter"
+  },
+  {
+    "id": "security.long_description",
+    "defaultMessage": "Your eduID account password can be changed below."
+  },
+  {
+    "id": "security.main_title",
+    "defaultMessage": "Security"
+  },
+  {
+    "id": "security.credential",
+    "defaultMessage": "Credential"
+  },
+  {
+    "id": "security.creation_date",
+    "defaultMessage": "Creation date"
+  },
+  {
+    "id": "security.last_used",
+    "defaultMessage": "Last used"
+  },
+  {
+    "id": "security.change_password",
+    "defaultMessage": "Change password"
+  },
+  {
+    "id": "security.account_description",
+    "defaultMessage": "Use the button below to permanently delete your eduID account."
+  },
+  {
+    "id": "security.account_title",
+    "defaultMessage": "Account deletion"
+  },
+  {
+    "id": "security.delete_account",
+    "defaultMessage": "Delete eduID account"
+  },
+  {
+    "id": "security.confirm_title",
+    "defaultMessage": "Delete account"
+  },
+  {
+    "id": "security.modal_info",
+    "defaultMessage": "Are you sure that you wish to delete your eduID account? This action will\n                           permanently remove all the data associated with the account from our database."
+  },
+  {
+    "id": "security.modal_notes",
+    "defaultMessage": "Note that for security reasons if you choose to delete your account,\n                           you will be asked to log in again."
+  },
+  {
+    "id": "security.change_info",
+    "defaultMessage": "For security reasons we will ask you to log in again before changing your password."
+  },
+  {
+    "id": "security.confirm_button",
+    "defaultMessage": "Confirm deletion of eduID account"
   },
   {
     "id": "emails.confirm_email_placeholder",
