@@ -1,0 +1,51 @@
+
+@import '../variables.scss';
+
+.ninsview-table div {
+  display: inline-block;
+  padding: 10px;
+}
+
+.ninsview-table {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #629c92;
+  background-color: #bbded9!important;
+}
+
+.form-group {
+  width: 100% !important;
+  float: none !important;
+}
+#nin-confirmation-code .form-control-feedback{
+  top: 8px !important;
+  font-family: 'Glyphicons Halflings';
+}
+.modal-text span {
+  font-size: 16px;
+  font-family: 'Roboto-Regular';
+}
+@media only screen and (min-width: 992px) {
+
+  #nins-form .form-control-feedback {
+    top: 6px !important;
+    right: 6px !important;
+  }
+
+}
+
+@media (max-width: 992px) {
+  #nins-form .form-control-feedback {
+    top: 6px !important;
+    right: 6px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #nins-form .form-control-feedback {
+    top: 8px !important;
+    right: 11px !important;
+  }
+
+}
+

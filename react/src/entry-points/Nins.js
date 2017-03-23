@@ -3,15 +3,10 @@
 
 import React from 'react';
 import init_app from "../init-app";
-import PersonalDataContainer from 'containers/PersonalData';
-import EmailsContainer from 'containers/Emails';
-import MobileContainer from 'containers/Mobile';
-import NinsContainter from 'containers/Nins';
+import Nins from 'containers/Nins';
 
-let personalDataApp = <PersonalDataContainer />;
-let emailsApp = <EmailsContainer />;
-let mobileApp = <MobileContainer />;
-let ninsApp = <NinsContainter />;
+let app = <Nins />;
+
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -37,38 +32,35 @@ var TabbedForm = function (container) {
     "use strict";
 
     var get_form = function (url, target) {
-          if (url === 'personaldata') {
-            init_app(personalDataApp, target.get(0));
-          } else if (url === 'emails') {
-            init_app(emailsApp, target.get(0));
-          } else if (url === 'mobiles') {
-            init_app(mobileApp, target.get(0));
-          } else if (url == 'nins') {
-            init_app(ninsApp, target.get(0));
-          } else {
-            $.get(url + '/', {}, function (data, status_text, xhr) {
-                var loc = xhr.getResponseHeader('X-Relocate');
-                if (loc) {
-                      document.location = loc;
-                };
-                target.html(data);
-                $('div.tab-pane.active button.btn-primary').enable(false);
-                target.initDeformCallbacks();
-                deform.processCallbacks();
-                $('div.tab-pane.active button.btn-primary').enable(true);
+          $.get(url + '/', {}, function (data, status_text, xhr) {
+              var loc = xhr.getResponseHeader('X-Relocate');
+              if (loc) {
+                    document.location = loc;
+              };
+              target.html(data);
+              $('div.tab-pane.active button.btn-primary').enable(false);
+              target.initDeformCallbacks();
+              deform.processCallbacks();
+              $('div.tab-pane.active button.btn-primary').enable(true);
 
-                container.find("a[data-toggle=tooltip]").tooltip();
-                container.find("button[data-toggle=tooltip]").tooltip();
-                container.find("label[data-toggle=tooltip]").tooltip();
-
-            }, 'html').fail(function (xhr) {
-                if (xhr.status == 401) {
-                    $('body').trigger('communication-error-permissions');
-                } else {
-                    $('body').trigger('communication-error');
+              container.find("a[data-toggle=tooltip]").tooltip();
+              container.find("button[data-toggle=tooltip]").tooltip();
+              container.find("label[data-toggle=tooltip]").tooltip();
+              if (url === "nins") {
+                const root = document.getElementById('nins-root'),
+                      form = root.previousElementSibling;
+                if (!form.classList.contains('hidden')) {
+                  init_app(app, root);
                 }
-            });
-          }
+              }
+
+          }, 'html').fail(function (xhr) {
+              if (xhr.status == 401) {
+                  $('body').trigger('communication-error-permissions');
+              } else {
+                  $('body').trigger('communication-error');
+              }
+          });
         },
 
         initialize_nav_tabs = function () {
@@ -92,6 +84,7 @@ var TabbedForm = function (container) {
             initialize_nav_tabs();
 
             window.forms_helper_functions.initialize_pending_actions();
+
 
             $('body').bind('formready', function () {
                 // callbacks
@@ -119,3 +112,4 @@ var TabbedForm = function (container) {
 };
 
 $(document).ready(new TabbedForm($('.tabbable')));
+

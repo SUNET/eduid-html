@@ -312,9 +312,67 @@ const msgs = {
         <FormattedMessage
           id="phones.main_title"
           defaultMessage={`Mobile phone numbers`} />),
+
+    /***********************/
+    /* Nins ****************/
+    /***********************/
+
+    'nins.long_description': (
+        <FormattedMessage
+          id="nins.long_description"
+          defaultMessage={`Some service providers (e.g. Antagning.se) require a confirmed identity.`} />),
+
+    'nins.main_title': (
+        <FormattedMessage
+          id="nins.main_title"
+          defaultMessage={`National identity number`} />),
+
+    'nins.instructions': (
+        <FormattedMessage
+          id="nins.instructions"
+          defaultMessage={`Add your Swedish national identity number and initiate the 
+          confirmation process using one of the buttons below.`} />),
+
+    'nins.mobile_suscription': (
+        <FormattedMessage
+          id="nins.mobile_suscription"
+          defaultMessage={`Phone suscription`} />),
+
+    'nins.letter': (
+        <FormattedMessage
+          id="nins.letter"
+          defaultMessage={`Physical letter`} />),
+
+    'nins.letter_link': (
+        <FormattedMessage
+          id="nins.letter_link"
+          defaultMessage={`Confirm using letter`} />),
+
+    'nins.modal_title': (
+        <FormattedMessage
+          id="nins.modal_title"
+          defaultMessage={`Enter code received by letter`} />),
+
+    'nins.content_text_first': (
+        <FormattedMessage
+          id="nins.content_text_first"
+          defaultMessage={`A letter has already been sent to your official postal
+           address. The code enclosed will expire on 2017-03-22. After that date you
+            can restart the process if the letter was lost.`} />),
+
+    'nins.content_text_second': (
+        <FormattedMessage
+          id="nins.content_text_second"
+          defaultMessage={`If you have received the letter, please enter the enclosed code below and 
+            click "Ok"`} />),
 };
 
 const unformatted = defineMessages({
+    'nins.placeholder': {
+        id: "emails.confirm_nins_placeholder",
+        defaultMessage: `Nins confirmation code`,
+        description: "Placeholder for nin text input"
+    },
     'emails.placeholder': {
         id: "emails.confirm_email_placeholder",
         defaultMessage: `Email confirmation code`,
