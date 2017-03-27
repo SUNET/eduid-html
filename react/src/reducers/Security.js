@@ -10,6 +10,7 @@ const security = {
     csrf_token: '',
     credentials: [],
     code: '',
+    confirming_change: false,
 };
 
 
@@ -31,6 +32,29 @@ let securityReducer = (state=security, action) => {
         ...state,
         is_fetching: false,
         failed: true
+      };
+    case actions.START_CHANGE_PASSWORD:
+      return {
+        ...state,
+        confirming_change: true
+      };
+    case actions.STOP_CHANGE_PASSWORD:
+      return {
+        ...state,
+        confirming_change: false
+      };
+    case actions.GET_CHANGE_PASSWORD:
+      return {
+        ...state,
+        confirming_change: false,
+        is_fetching: true
+      };
+    case actions.GET_CHANGE_PASSWORD_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.message
       };
     default:
       return state;

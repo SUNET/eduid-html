@@ -1,7 +1,8 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders } from "sagas/common";
-import { getCredentials, getCredentialsFail } from "actions/Security";
+import { getCredentials, getCredentialsFail,
+         stopConfirmationPassword, getPasswordChangeFail } from "actions/Security";
 
 
 
@@ -24,5 +25,23 @@ export function fetchCredentials(config) {
     })
     .then(checkStatus)
     .then(response => response.json())
+}
+
+
+export function* requestPasswordChange () {
+    try {
+        yield put(stopConfirmationPassword());
+        const config = yield select(state => state.config),
+              tsURL = config.TOKEN_SERVICE_URL,
+              chpassURL = tsURL + '/chpass',
+              secURL = config.SECURITY_URL,
+              nextURL = secURL + '/password-change',
+              url = chpassURL + '?next=' + nextURL;
+
+        window.location = url;
+
+    } catch(error) {
+        yield put(getPasswordChangeFail(error.toString()));
+    }
 }
 

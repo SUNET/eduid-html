@@ -1,12 +1,12 @@
 
 
 export const GET_CREDENTIALS = 'GET_CREDENTIALS';
-export const GET_CREDENTIALS_SUCCESS = 'GET_SECURITY_USER_SUCCESS';
-export const GET_CREDENTIALS_FAIL = 'GET_SECURITY_USER_FAIL';
+export const GET_CREDENTIALS_SUCCESS = 'GET_SECURITY_CREDENTIALS_SUCCESS';
+export const GET_CREDENTIALS_FAIL = 'GET_SECURITY_CREDENTIALS_FAIL';
 
-export const POST_CHANGE_PASSWORD = 'POST_CHANGE_PASSWORD';
-export const POST_CHANGE_PASSWORD_SUCCESS = 'POST_CHANGE_PASSWORD_SUCCESS';
-export const POST_CHANGE_PASSWORD_FAIL = 'POST_CHANGE_PASSWORD_FAIL';
+export const GET_CHANGE_PASSWORD = 'GET_CHANGE_PASSWORD';
+export const GET_CHANGE_PASSWORD_SUCCESS = 'GET_CHANGE_PASSWORD_SUCCESS';
+export const GET_CHANGE_PASSWORD_FAIL = 'GET_CHANGE_PASSWORD_FAIL';
 export const POST_DELETE_ACCOUNT = 'POST_DELETE_ACCOUNT';
 export const POST_DELETE_ACCOUNT_SUCCESS = 'POST_DELETE_ACCOUNT_SUCCESS';
 export const POST_DELETE_ACCOUNT_FAIL = 'POST_DELETE_ACCOUNT_FAIL';
@@ -31,10 +31,9 @@ export function getCredentialsFail (err) {
 }
 
 
-export function startConfirmationPassword (data) {
+export function startConfirmationPassword () {
   return {
     type: START_CHANGE_PASSWORD,
-    payload: data
   };
 }
 
@@ -44,16 +43,15 @@ export function stopConfirmationPassword () {
   };
 }
 
-export function changepassword (data) {
+export function confirmPasswordChange () {
   return {
-    type: POST_CHANGE_PASSWORD,
-    payload: data
+    type: GET_CHANGE_PASSWORD
   };
 }
 
-export function changepasswordFail (err) {
+export function getPasswordChangeFail (err) {
   return {
-    type: POST_CHANGE_PASSWORD_FAIL,
+    type: GET_CHANGE_PASSWORD_FAIL,
     error: true,
     payload: {
       error: new Error(err),

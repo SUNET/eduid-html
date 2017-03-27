@@ -14,7 +14,7 @@ let Security = React.createClass({
   render: function () {
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
-            return (<tr>
+            return (<tr key="{index}">
                         <td>{cred.credential_type}</td>
                         <td>{cred.created_ts}</td>
                         <td>{cred.success_ts}</td>
@@ -58,10 +58,10 @@ let Security = React.createClass({
               </EduIDButton>
           </div>
           <GenericConfirmModal
-          title={this.props.l10n('security.confirm_title')}
-                showModal={this.props.change_password}
+                title={this.props.l10n('security.confirm_title')}
+                showModal={this.props.confirming_change}
                 closeModal={this.props.handleStopConfirmationPassword}
-                finishModal={this.props.handleChange}
+                finishModal={this.props.handleConfirmationPassword}
                 change_password={this.props.change_password}
           />
           <DeleteModal
@@ -82,7 +82,11 @@ Security.propTypes = {
   language: PropTypes.string,
   langs: PropTypes.array,
   errorMsg: PropTypes.string,
-  is_fetching: PropTypes.bool
+  is_fetching: PropTypes.bool,
+  confirming_change: PropTypes.bool,
+  handleStartConfirmationPassword: PropTypes.func,
+  handleStopConfirmationPassword: PropTypes.func,
+  handleConfirmationPassword: PropTypes.func,
 }
 
 export default i18n(Security);

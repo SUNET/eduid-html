@@ -11,9 +11,6 @@ import EduiDAlert from 'components/EduIDAlert';
 let GenericConfirmModal = React.createClass({
 
   render: function () {
-    let spinning = false;
-    // if (this.props.is_fetching) spinning = true;
-    // if (this.props.resending.is_fetching) spinning = true;
 
     return (
       <div id="securityConfirmDialog"
@@ -36,7 +33,6 @@ let GenericConfirmModal = React.createClass({
                 <Modal.Footer>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
-                          spinning={spinning}
                           onClick={this.props.finishModal} >
                         {this.props.l10n('cm.accept')}
                     </EduIDButton>
