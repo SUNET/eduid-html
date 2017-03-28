@@ -34,8 +34,8 @@ export function* requestPasswordChange () {
         const config = yield select(state => state.config),
               tsURL = config.TOKEN_SERVICE_URL,
               chpassURL = tsURL + '/chpass',
-              secURL = config.SECURITY_URL,
-              nextURL = secURL + '/password-change',
+              dashURL = config.DASHBOARD_URL,
+              nextURL = dashURL + '/#chpass',
               url = chpassURL + '?next=' + nextURL;
 
         window.location = url;

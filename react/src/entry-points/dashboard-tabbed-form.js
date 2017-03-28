@@ -8,12 +8,14 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import NinsContainter from 'containers/Nins';
 import SecurityContainer from 'containers/Security';
+import ChangePasswordContainer from 'containers/ChangePassword';
 
 let personalDataApp = <PersonalDataContainer />;
 let emailsApp = <EmailsContainer />;
 let mobileApp = <MobileContainer />;
 let ninsApp = <NinsContainter />;
 let securityApp = <SecurityContainer />;
+let chpassApp = <ChangePasswordContainer />;
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -49,6 +51,8 @@ var TabbedForm = function (container) {
               init_app(ninsApp, target.get(0));
           } else if (url == 'security') {
               init_app(securityApp, target.get(0));
+          } else if (url == 'chpass') {
+              init_app(chpassApp, target.parent().parent().get(0));
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
@@ -113,6 +117,8 @@ var TabbedForm = function (container) {
 
             if (opentab === undefined || opentab === "") {
                 container.find('.nav-tabs a.main-nav-tabs').first().click();
+            } else if (opentab === 'chpass') {
+                get_form(opentab, $("#profile-content-area"));
             } else {
                 window.forms_helper_functions.initialize_verification(opentab);
             }

@@ -7,6 +7,7 @@ import openidConnectReducer from 'reducers/OpenidConnect';
 import mobileReducer from 'reducers/Mobile';
 import ninsReducer from 'reducers/Nins';
 import securityReducer from 'reducers/Security';
+import chpassReducer from 'reducers/ChangePassword';
 
 const eduIDApp = combineReducers({
   config: configReducer,
@@ -16,6 +17,7 @@ const eduIDApp = combineReducers({
   phones: mobileReducer,
   nins: ninsReducer,
   security: securityReducer,
+  chpass: chpassReducer,
 });
 
 export default eduIDApp;
