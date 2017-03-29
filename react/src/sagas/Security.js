@@ -36,7 +36,7 @@ export function* requestPasswordChange () {
               chpassURL = tsURL + '/chpass',
               dashURL = config.DASHBOARD_URL,
               nextURL = dashURL + '/#chpass',
-              url = chpassURL + '?next=' + nextURL;
+              url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 
         window.location = url;
 
@@ -44,4 +44,3 @@ export function* requestPasswordChange () {
         yield put(getPasswordChangeFail(error.toString()));
     }
 }
-

@@ -11,7 +11,33 @@ import 'style/ChangePassword.scss';
 
 let ChangePassword = React.createClass({
 
+
+  validateCustomPass: function () {},
+  validateSuggestedPass: function () {},
+
   render: function () {
+    let form = (<FormGroup controlId="custom-password-form"
+                           validationState={this.validateSuggestedPass()}>
+                  <TextControl name="suggested_password"
+                           label={this.props.l10n('chpass.suggested_password')}
+                           componentClass="input"
+                           value={this.props.suggested_password}
+                           type="text" />
+                </FormGroup>);
+    if (this.props.choose_custom) {
+        form = (<FormGroup controlId="custom-password-form"
+                           validationState={this.validateCustomPass()}>
+                  <TextControl name="custom_password"
+                               label={this.props.l10n('chpass.custom_password')}
+                               componentClass="input"
+                               type="text" />
+
+                  <TextControl name="custom_password_repeat"
+                               label={this.props.l10n('chpass.repeat_password')}
+                               componentClass="input"
+                               type="text" />
+                </FormGroup>);
+    }
     return (
         <div id="changePasswordDialog"
              className="well">
@@ -39,23 +65,9 @@ let ChangePassword = React.createClass({
                   <ControlLabel>
                     {this.props.l10n('chpass.use-custom-label')}
                   </ControlLabel>
+                  <Checkbox onClick={this.props.handleChoice} />
               </FormGroup>
-
-              <TextControl name="suggested_password"
-                           label={this.props.l10n('chpass.suggested_password')}
-                           componentClass="input"
-                           type="text" />
-
-              <TextControl name="custom_password"
-                           label={this.props.l10n('chpass.custom_password')}
-                           componentClass="input"
-                           type="text" />
-
-              <TextControl name="custom_password_repeat"
-                           label={this.props.l10n('chpass.repeat_password')}
-                           componentClass="input"
-                           type="text" />
-
+              {form}
             </fieldset>
           </form>
         </div>
@@ -64,6 +76,7 @@ let ChangePassword = React.createClass({
 });
 
 ChangePassword.propTypes = {
+  choose_custom: PropTypes.bool,
   errorMsg: PropTypes.string,
 }
 

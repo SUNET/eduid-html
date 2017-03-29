@@ -9,7 +9,7 @@ const chpass = {
     message: '',
     csrf_token: '',
     suggested_password: '',
-    custom_choice: false,
+    choose_custom: false,
 };
 
 
@@ -31,6 +31,16 @@ let chpassReducer = (state=chpass, action) => {
         ...state,
         is_fetching: false,
         failed: true
+      };
+    case actions.CHOOSE_SUGGESTED_PASSWORD:
+      return {
+        ...state,
+        choose_custom: false
+      };
+    case actions.CHOOSE_CUSTOM_PASSWORD:
+      return {
+        ...state,
+        choose_custom: true
       };
     default:
       return state;
