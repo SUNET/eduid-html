@@ -96,6 +96,7 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
     "whatwg-fetch": "^1.0.0",
-    "yargs": "^4.1.0"
+    "yargs": "^4.1.0",
+    "zxcvbn": "^4.4.2"
   }
 }

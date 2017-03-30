@@ -3,7 +3,7 @@ import { checkStatus, ajaxHeaders } from "sagas/common";
 import * as actions from "actions/ChangePassword";
 
 
-export function* requestCustomPassword () {
+export function* requestSuggestedPassword () {
     try {
         yield put(actions.getSuggestedPassword());
         const config = yield select(state => state.config);

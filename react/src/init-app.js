@@ -31,8 +31,8 @@ import { requestEmails, saveEmail, requestResendEmailCode,
 import * as sagasMobile from "sagas/Mobile"
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
-import { requestCredentials, requestPasswordChange,
-         requestCustomPassword} from "sagas/Security";
+import { requestCredentials, requestPasswordChange } from "sagas/Security";
+import { requestSuggestedPassword} from "sagas/ChangePassword";
 
 /* i18n */
 
@@ -55,6 +55,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
@@ -89,8 +90,6 @@ sagaMiddleware.run(rootSaga);
 const getConfig = function () {
     if (!store.getState().config.is_configured) {
         store.dispatch(configActions.getConfig());
-    } else if (!store.getState().security.changing_password) {
-        store.dispatch(requestCustomPassword());
     }
 };
 

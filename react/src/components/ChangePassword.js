@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import { Checkbox, FormGroup, ControlLabel } from 'react-bootstrap';
+import { zxcvbn } from 'zxcvbn';
 
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
@@ -11,22 +12,39 @@ import 'style/ChangePassword.scss';
 
 let ChangePassword = React.createClass({
 
+  componentDidMount: function () {
+    let pwbar_options = {
+      ui: {
+        //verdicts: ["Too weak", "Halfway", "Almost", "Strong"],
+        showVerdicts: false,
+        scores: [required_entropy * 0.25,
+                 required_entropy * 0.5,
+                 required_entropy * 0.75,
+                 required_entropy],
+        bootstrap2: false
+      },
+      pwbar_options.common: {
+        zxcvbn: true,
+        usernameField: 'eduid'   // make zxcvbn give negative score to the word eduID
+      }
+    };
+    this.props.get_input('custom_password').pwstrength(pwbar_options);
 
-  validateCustomPass: function () {},
-  validateSuggestedPass: function () {},
+    // Set up triggers on change events
+    var triggers = "change focusout keyup onpaste paste mouseleave";
+    this.props.get_input('custom_password').on(triggers, this.props.checkCustomPassword);
+    this.props.get_input('repeated_password').on(triggers, this.props.checkRepeatedPassword);
+  },
 
   render: function () {
-    let form = (<FormGroup controlId="custom-password-form"
-                           validationState={this.validateSuggestedPass()}>
-                  <TextControl name="suggested_password"
-                           label={this.props.l10n('chpass.suggested_password')}
-                           componentClass="input"
-                           value={this.props.suggested_password}
-                           type="text" />
-                </FormGroup>);
+
+    let form, helpCustom,
+        spinning = false;
+
+    if (this.props.is_fetching) spinning = true;
+
     if (this.props.choose_custom) {
-        form = (<FormGroup controlId="custom-password-form"
-                           validationState={this.validateCustomPass()}>
+        form = (<div>
                   <TextControl name="custom_password"
                                label={this.props.l10n('chpass.custom_password')}
                                componentClass="input"
@@ -36,9 +54,26 @@ let ChangePassword = React.createClass({
                                label={this.props.l10n('chpass.repeat_password')}
                                componentClass="input"
                                type="text" />
-                </FormGroup>);
+                </div>);
+        helpCustom = (
+            <div className='password-format'
+                 dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>
+            </div>);
+    } else {
+        form = (<TextControl name="suggested_password"
+                             label={this.props.l10n('chpass.suggested_password')}
+                             componentClass="input"
+                             initialValue={this.props.suggested_password}
+                             type="text" />);
+        helpCustom = "";
     }
+
     return (
+      <div>
+        <h3>
+            {this.props.l10n('chpass.title-general')}
+        </h3>
+
         <div id="changePasswordDialog"
              className="well">
 
@@ -46,15 +81,10 @@ let ChangePassword = React.createClass({
             {this.props.l10n('chpass.help-text-general')}
             </p>
 
-            <div className='password-format'>
-            {this.props.l10n('chpass.help-text-newpass')}
-            </div>
-
+          {helpCustom}
 
           <form id="passwordsview-form"
-                className="form-horizontal"
                 role="form">
-            <fieldset id="chpass-form-fieldset" className="tabpane">
 
               <TextControl name="old_password"
                            label={this.props.l10n('chpass.old_password')}
@@ -68,9 +98,15 @@ let ChangePassword = React.createClass({
                   <Checkbox onClick={this.props.handleChoice} />
               </FormGroup>
               {form}
-            </fieldset>
+              <EduIDButton className="btn btn-primary"
+                           id="chpass-button"
+                           spinning={spinning}
+                           onClick={this.props.handleStartPasswordChange}>
+                        {this.props.l10n('chpass.change-password')}
+              </EduIDButton>
           </form>
         </div>
+      </div>
     );
   }
 });
@@ -81,4 +117,8 @@ ChangePassword.propTypes = {
 }
 
 export default i18n(ChangePassword);
+
+
+
+
 

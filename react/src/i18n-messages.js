@@ -429,6 +429,45 @@ const msgs = {
           id="security.confirm_button"
           defaultMessage={`Confirm deletion of eduID account`} />),
 
+    'chpass.suggested_password': (
+        <FormattedMessage
+          id="chpass.suggested_password"
+          defaultMessage={`Suggested password`} />),
+
+   'chpass.custom_password': (
+        <FormattedMessage
+          id="chpass.custom_password"
+          defaultMessage={`Custom password`} />),
+
+   'chpass.repeat_password': (
+        <FormattedMessage
+          id="chpass.repeat_password"
+          defaultMessage={`Repeat your custom password`} />),
+
+   'chpass.help-text-general': (
+        <FormattedMessage
+          id="chpass.help-text-general"
+          defaultMessage={`You can change your current password using this form. A strong password has been generated for you. You can accept the generated password by clicking "Change password" or you can opt to choose your own password using the checkbox.`} />),
+
+   'chpass.old_password': (
+        <FormattedMessage
+          id="chpass.old_password"
+          defaultMessage={`Current password`} />),
+
+   'chpass.use-custom-label': (
+        <FormattedMessage
+          id="chpass.use-custom-label"
+          defaultMessage={`Use my own password`} />),
+
+   'chpass.title-general': (
+        <FormattedMessage
+          id="chpass.title-general"
+          defaultMessage={`Change your password`} />),
+
+   'chpass.change-password': (
+        <FormattedMessage
+          id="chpass.change-password"
+          defaultMessage={`Change password`} />),
 };
 
 const unformatted = defineMessages({
@@ -441,5 +480,16 @@ const unformatted = defineMessages({
         id: "mobile.confirm_mobile_placeholder",
         defaultMessage: `Phone confirmation code`,
         description: "Placeholder for phone text input"
+    },
+    'chpass.help-text-newpass': {
+        id: "chpass.help-text-newpass",
+        defaultMessage: `<p>Choose a strong password. Some tips:</p>
+            <ul>
+	            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>
+	            <li>Add digits somewhere else than at the end of the password</li>
+                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>
+	            <li>Spaces are ignored</li>
+            </ul>`,
+        description: "help text for custom password"
     },
 });

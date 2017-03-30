@@ -236,6 +236,38 @@
     "defaultMessage": "Confirm deletion of eduID account"
   },
   {
+    "id": "chpass.suggested_password",
+    "defaultMessage": "Suggested password"
+  },
+  {
+    "id": "chpass.custom_password",
+    "defaultMessage": "Custom password"
+  },
+  {
+    "id": "chpass.repeat_password",
+    "defaultMessage": "Repeat your custom password"
+  },
+  {
+    "id": "chpass.help-text-general",
+    "defaultMessage": "You can change your current password using this form. A strong password has been generated for you. You can accept the generated password by clicking \"Change password\" or you can opt to choose your own password using the checkbox."
+  },
+  {
+    "id": "chpass.old_password",
+    "defaultMessage": "Current password"
+  },
+  {
+    "id": "chpass.use-custom-label",
+    "defaultMessage": "Use my own password"
+  },
+  {
+    "id": "chpass.title-general",
+    "defaultMessage": "Change your password"
+  },
+  {
+    "id": "chpass.change-password",
+    "defaultMessage": "Change password"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
@@ -244,5 +276,10 @@
     "id": "mobile.confirm_mobile_placeholder",
     "description": "Placeholder for phone text input",
     "defaultMessage": "Phone confirmation code"
+  },
+  {
+    "id": "chpass.help-text-newpass",
+    "description": "help text for custom password",
+    "defaultMessage": "<p>Choose a strong password. Some tips:</p>\n            <ul>\n\t            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>\n\t            <li>Add digits somewhere else than at the end of the password</li>\n                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>\n\t            <li>Spaces are ignored</li>\n            </ul>"
   }
 ]

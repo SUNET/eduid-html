@@ -15,7 +15,7 @@ let Security = React.createClass({
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             return (<tr key="{index}">
-                        <td>{cred.credential_type}</td>
+                        <td>{this.props.l10n(cred.credential_type)}</td>
                         <td>{cred.created_ts}</td>
                         <td>{cred.success_ts}</td>
                     </tr>
