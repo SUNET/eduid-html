@@ -6,6 +6,7 @@ import { zxcvbn } from 'zxcvbn';
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
+import PasswordField from 'components/PasswordField';
 
 import 'style/ChangePassword.scss';
 
@@ -17,10 +18,10 @@ let ChangePassword = React.createClass({
       ui: {
         //verdicts: ["Too weak", "Halfway", "Almost", "Strong"],
         showVerdicts: false,
-        scores: [required_entropy * 0.25,
-                 required_entropy * 0.5,
-                 required_entropy * 0.75,
-                 required_entropy],
+        scores: [this.props.password_entropy * 0.25,
+                 this.props.password_entropy * 0.5,
+                 this.props.password_entropy * 0.75,
+                 this.props.password_entropy],
         bootstrap2: false
       },
       common: {
@@ -28,12 +29,10 @@ let ChangePassword = React.createClass({
         usernameField: 'eduid'   // make zxcvbn give negative score to the word eduID
       }
     };
-    this.props.get_input('custom_password').pwstrength(pwbar_options);
 
     // Set up triggers on change events
     var triggers = "change focusout keyup onpaste paste mouseleave";
-    this.props.get_input('custom_password').on(triggers, this.props.checkCustomPassword);
-    this.props.get_input('repeated_password').on(triggers, this.props.checkRepeatedPassword);
+    // this.props.get_input('repeated_password').on(triggers, this.props.checkRepeatedPassword);
   },
 
   render: function () {
@@ -44,17 +43,7 @@ let ChangePassword = React.createClass({
     if (this.props.is_fetching) spinning = true;
 
     if (this.props.choose_custom) {
-        form = (<div>
-                  <TextControl name="custom_password"
-                               label={this.props.l10n('chpass.custom_password')}
-                               componentClass="input"
-                               type="text" />
-
-                  <TextControl name="custom_password_repeat"
-                               label={this.props.l10n('chpass.repeat_password')}
-                               componentClass="input"
-                               type="text" />
-                </div>);
+        form = (<PasswordField />);
         helpCustom = (
             <div className='password-format'
                  dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>

@@ -6,9 +6,9 @@ import * as actions from 'actions/ChangePassword'
 
 const mapStateToProps = (state, props) => {
   let userInput = [];
-  userInput.add(state.personal_data.given_name);
-  userInput.add(state.personal_data.surname);
-  userInput.add(state.personal_data.display_name);
+  userInput.push(state.personal_data.given_name);
+  userInput.push(state.personal_data.surname);
+  userInput.push(state.personal_data.display_name);
   userInput.concat(state.emails.emails);
   return {
     is_fetching: state.chpass.is_fetching,
@@ -35,8 +35,9 @@ const mapDispatchToProps = (dispatch, props) => {
     validateSuggestedPass: function () {},
 
     get_input: function (name) {
+        const pwdialog = document.querySelector("#changePasswordDialog");
         // return an input container from jQuery
-        return pwdialog.find("input[name=" + name + "]");
+        return pwdialog.querySelector("input[name=" + name + "]");
     },
 
     get_password: function (name) {
@@ -50,8 +51,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
 
     checkCustomPassword: function () {
-      const pwdialog = document.querySelector("#changePasswordDialog"),
-            custom_password = get_password('custom_password'),
+      const custom_password = get_password('custom_password'),
             repeated_password = get_password('repeated_password'),
             suggested_password = $('.suggested-password').html().split(' ').join(''),
             messages = [],
@@ -69,8 +69,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
 
     checkRepeatedPassword: function () {
-      const pwdialog = document.querySelector("#changePasswordDialog"),
-            custom_password = get_password('custom_password'),
+      const custom_password = get_password('custom_password'),
             repeated_password = get_password('repeated_password'),
             messages = [],
             repeated_password_field = get_input("repeated_password");

@@ -66,6 +66,7 @@ const TextControl = React.createClass({
 });
 
 TextControl.PropTypes = {
+  name: PropTypes.string,
   label: PropTypes.string,
   componentClass: PropTypes.string.isRequired,
   type: PropTypes.string,
