@@ -54,7 +54,7 @@ export default function i18n(WrappedComponent, options = {}) {
                 } else if (unformatted[msgid] !== undefined) {
                     return this.context.intl.formatMessage(unformatted[msgid], values);
                 } else {
-                    return 'UNKNOWN MESSAGE ID'
+                    return 'UNKNOWN MESSAGE ID (' + msgid + ')';
                 }
             };
 
