@@ -23,7 +23,7 @@ let ChangePassword = React.createClass({
                  required_entropy],
         bootstrap2: false
       },
-      pwbar_options.common: {
+      common: {
         zxcvbn: true,
         usernameField: 'eduid'   // make zxcvbn give negative score to the word eduID
       }

@@ -56,11 +56,9 @@ const mapDispatchToProps = (dispatch, props) => {
             suggested_password = $('.suggested-password').html().split(' ').join(''),
             messages = [],
             password_field = get_input("custom_password"),
-            verdict;
+            verdict = zxcvbn(custom_password, ["eduid"].concat(props.user_input));
 
       password_field.val(custom_password);  // properly remove spaces for pwcheck
-
-      verdict = zxcvbn(custom_password, ["eduid"].concat(props.user_input)),
 
       if (custom_password !== suggested_password &&
             (verdict.entropy < props.password_entropy)) {
