@@ -23,6 +23,7 @@ import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
 import * as ninsActions from "actions/Nins";
 import * as securityActions from "actions/Security";
+import * as pwActions from "actions/ChangePassword";
 
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
@@ -32,7 +33,7 @@ import * as sagasMobile from "sagas/Mobile"
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange } from "sagas/Security";
-import { requestSuggestedPassword} from "sagas/ChangePassword";
+import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 
 /* i18n */
 
@@ -69,6 +70,7 @@ function* rootSaga() {
     takeEvery(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
     takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeEvery(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
+    takeEvery(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
   ];
 }
 

@@ -23,3 +23,35 @@ export function fetchSuggestedPassword(config) {
     .then(checkStatus)
     .then(response => response.json())
 }
+
+
+export function* postPasswordChange () {
+    try {
+        yield put(actions.startPasswordChange());
+        const state = yield select(state => state),
+              config = state.config,
+              data = {
+                old_password: state.chpass.old_password,
+                new_password: state.chpass.new_password,
+                csrf_token: state.chpass.csrf_token
+              };
+        const change = yield call(postPassword, config, data);
+        yield put(change);
+    } catch(error) {
+        yield put(actions.postPasswordChangeFail(error.toString()));
+    }
+}
+
+
+export function postPassword(config, data) {
+    console.log('AAAAAAAAAAAAAAAAAAAA')
+    console.log(data)
+    return window.fetch(config.SECURITY_URL + '/post-password', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}

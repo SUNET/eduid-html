@@ -1,4 +1,5 @@
 
+import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import ChangePassword from 'components/ChangePassword';
 import * as actions from 'actions/ChangePassword'
@@ -10,10 +11,12 @@ const mapStateToProps = (state, props) => {
   userInput.push(state.personal_data.surname);
   userInput.push(state.personal_data.display_name);
   userInput.concat(state.emails.emails);
+  const is_fetching = state.chpass.is_fetching || state.security.is_fetching;
   return {
-    is_fetching: state.chpass.is_fetching,
+    is_fetching: is_fetching,
     choose_custom: state.chpass.choose_custom,
     suggested_password: state.chpass.suggested_password,
+    new_password: state.chpass.new_password,
     password_entropy: state.config.PASSWORD_ENTROPY,
     password_length: state.config.PASSWORD_LENGTH,
     user_input: userInput,
@@ -27,60 +30,32 @@ const mapDispatchToProps = (dispatch, props) => {
       if (e.target.checked) {
         dispatch(actions.chooseCustomPassword());
       } else {
-        dispatch(actions.chooseSuggestedPassword());
+        dispatch(actions.chooseSuggestedPassword(props.suggested_password));
       }
     },
 
-    validateCustomPass: function () {},
-    validateSuggestedPass: function () {},
-
-    get_input: function (name) {
-        const pwdialog = document.querySelector("#changePasswordDialog");
-        // return an input container from jQuery
-        return pwdialog.querySelector("input[name=" + name + "]");
+    handlePassword: function (password) {
+      if (password) {
+        dispatch(actions.validCustomPassword(password));
+      } else {
+        dispatch(actions.passwordNotReady(this.props.l10n('chpass.pw_not_ready')));
+      }
     },
 
-    get_password: function (name) {
-        // remove spaces from passwords, just like vccs-client does
-        const passwd = get_input(name).val();
-        if (passwd !== undefined) {
-            return passwd.split(' ').join('');
+    handleStartPasswordChange: function (event) {
+      event.preventDefault();
+      const oldPassword = this.oldPwField.state.value;
+      let newPassword = '';
+      if (this.props.choose_custom) {
+        if (this.props.new_password) {
+          newPassword = this.props.new_password;
         } else {
-            return '';
+          dispatch(actions.passwordNotReady(this.props.l10n('chpass.pw_not_ready')));
         }
-    },
-
-    checkCustomPassword: function () {
-      const custom_password = get_password('custom_password'),
-            repeated_password = get_password('repeated_password'),
-            suggested_password = $('.suggested-password').html().split(' ').join(''),
-            messages = [],
-            password_field = get_input("custom_password"),
-            verdict = zxcvbn(custom_password, ["eduid"].concat(props.user_input));
-
-      password_field.val(custom_password);  // properly remove spaces for pwcheck
-
-      if (custom_password !== suggested_password &&
-            (verdict.entropy < props.password_entropy)) {
-          messages.push(props.l10n('chpass.msg_stronger'));
+      } else {
+        newPassword =  ReactDom.findDOMNode(this.suggestedPwField).value.split(' ').join('');
       }
-      //error_messages(repeated_password_field, messages);
-      checkRepeatedPassword();
-    },
-
-    checkRepeatedPassword: function () {
-      const custom_password = get_password('custom_password'),
-            repeated_password = get_password('repeated_password'),
-            messages = [],
-            repeated_password_field = get_input("repeated_password");
-
-      repeated_password_field.val(repeated_password);  // properly remove spaces for pwcheck
-
-      if (repeated_password != custom_password) {
-          messages.push(props.l10n('chpass.msg_again'));
-      }
-      pwequality_errors = messages.length;
-      //error_messages(repeated_password_field, messages);
+      dispatch(actions.postPasswordChange(oldPassword, newPassword));
     },
   }
 };

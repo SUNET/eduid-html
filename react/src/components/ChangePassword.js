@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDom from 'react-dom';
 
 import { Checkbox, FormGroup, ControlLabel } from 'react-bootstrap';
 import { zxcvbn } from 'zxcvbn';
@@ -13,37 +14,20 @@ import 'style/ChangePassword.scss';
 
 let ChangePassword = React.createClass({
 
-  componentDidMount: function () {
-    let pwbar_options = {
-      ui: {
-        //verdicts: ["Too weak", "Halfway", "Almost", "Strong"],
-        showVerdicts: false,
-        scores: [this.props.password_entropy * 0.25,
-                 this.props.password_entropy * 0.5,
-                 this.props.password_entropy * 0.75,
-                 this.props.password_entropy],
-        bootstrap2: false
-      },
-      common: {
-        zxcvbn: true,
-        usernameField: 'eduid'   // make zxcvbn give negative score to the word eduID
-      }
-    };
-
-    // Set up triggers on change events
-    var triggers = "change focusout keyup onpaste paste mouseleave";
-    // this.props.get_input('repeated_password').on(triggers, this.props.checkRepeatedPassword);
-  },
-
   render: function () {
 
-    let form, helpCustom,
+    let form,
+        helpCustom = "",
         spinning = false;
 
     if (this.props.is_fetching) spinning = true;
 
     if (this.props.choose_custom) {
-        form = (<PasswordField />);
+        form = (<PasswordField user_input={this.props.user_input}
+                               entropy={this.props.password_entropy}
+                               ref={(field) => {this.pwField = field}}
+                               handlePassword={this.props.handlePassword.bind(this)}
+                               />);
         helpCustom = (
             <div className='password-format'
                  dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>
@@ -53,8 +37,8 @@ let ChangePassword = React.createClass({
                              label={this.props.l10n('chpass.suggested_password')}
                              componentClass="input"
                              initialValue={this.props.suggested_password}
+                             ref={(field) => {this.suggestedPwField = field}}
                              type="text" />);
-        helpCustom = "";
     }
 
     return (
@@ -78,6 +62,7 @@ let ChangePassword = React.createClass({
               <TextControl name="old_password"
                            label={this.props.l10n('chpass.old_password')}
                            componentClass="input"
+                           ref={(field) => {this.oldPwField = field}}
                            type="text" />
 
               <FormGroup controlId="use-custom-password">
@@ -90,7 +75,7 @@ let ChangePassword = React.createClass({
               <EduIDButton className="btn btn-primary"
                            id="chpass-button"
                            spinning={spinning}
-                           onClick={this.props.handleStartPasswordChange}>
+                           onClick={this.props.handleStartPasswordChange.bind(this)}>
                         {this.props.l10n('chpass.change-password')}
               </EduIDButton>
           </form>
@@ -103,6 +88,7 @@ let ChangePassword = React.createClass({
 ChangePassword.propTypes = {
   choose_custom: PropTypes.bool,
   errorMsg: PropTypes.string,
+  password_entropy: PropTypes.number,
 }
 
 export default i18n(ChangePassword);
