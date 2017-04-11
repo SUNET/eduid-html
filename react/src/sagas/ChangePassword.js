@@ -33,7 +33,7 @@ export function* postPasswordChange () {
               data = {
                 old_password: state.chpass.old_password,
                 new_password: state.chpass.new_password,
-                csrf_token: state.chpass.csrf_token
+                csrf_token: state.security.csrf_token
               };
         const change = yield call(postPassword, config, data);
         yield put(change);
@@ -44,9 +44,7 @@ export function* postPasswordChange () {
 
 
 export function postPassword(config, data) {
-    console.log('AAAAAAAAAAAAAAAAAAAA')
-    console.log(data)
-    return window.fetch(config.SECURITY_URL + '/post-password', {
+    return window.fetch(config.SECURITY_URL + '/change-password', {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,

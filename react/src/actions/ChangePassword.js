@@ -11,7 +11,8 @@ export const POST_PASSWORD_CHANGE = 'POST_PASSWORD_CHANGE';
 export const PASSWORD_NOT_READY = 'PASSWORD_NOT_READY';
 export const VALID_CUSTOM_PASSWORD = 'VALID_CUSTOM_PASSWORD';
 export const START_PASSWORD_CHANGE = 'START_PASSWORD_CHANGE';
-export const POST_PASSWORD_CHANGE_FAIL = 'POST_PASSWORD_CHANGE_FAIL';
+export const POST_SECURITY_CHANGE_PASSWORD_SUCCESS = 'POST_SECURITY_CHANGE_PASSWORD_SUCCESS';
+export const POST_SECURITY_CHANGE_PASSWORD_FAIL = 'POST_SECURITY_CHANGE_PASSWORD_FAIL';
 
 
 export function getSuggestedPassword () {
@@ -80,7 +81,7 @@ export function startPasswordChange () {
 
 export function postPasswordChangeFail (err) {
   return {
-    type: POST_PASSWORD_CHANGE_FAIL,
+    type: POST_SECURITY_CHANGE_PASSWORD_FAIL,
     error: true,
     payload: new Error(err)
   };

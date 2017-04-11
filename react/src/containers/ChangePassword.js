@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch, props) => {
           dispatch(actions.passwordNotReady(this.props.l10n('chpass.pw_not_ready')));
         }
       } else {
-        newPassword =  ReactDom.findDOMNode(this.suggestedPwField).value.split(' ').join('');
+        newPassword =  this.props.suggested_password;
       }
       dispatch(actions.postPasswordChange(oldPassword, newPassword));
     },

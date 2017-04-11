@@ -71,7 +71,14 @@ let chpassReducer = (state=chpass, action) => {
         is_fetching: true,
         failed: false,
       };
-    case actions.POST_PASSWORD_CHANGE_FAIL:
+    case actions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        is_fetching: false,
+        failed: false
+      };
+    case actions.POST_SECURITY_CHANGE_PASSWORD_FAIL:
       return {
         ...state,
         is_fetching: false,

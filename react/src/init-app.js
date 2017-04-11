@@ -8,9 +8,9 @@
  */
 
 
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom';
-import createSagaMiddleware, { take, takeEvery } from 'redux-saga'
+import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
