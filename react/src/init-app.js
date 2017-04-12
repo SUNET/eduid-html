@@ -7,9 +7,11 @@
  * it with the redux store.
  */
 
-
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Router from 'react-router';  
+import routes from 'routes';
+
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
@@ -95,14 +97,15 @@ const getConfig = function () {
     }
 };
 
-const init_app = function (component, target) {
-  let app = ( <Provider store={store}>
-                <IntlProvider locale={ lang_code } messages={ messages }>
-                  {component}
-                </IntlProvider>
-              </Provider> );
-
-  ReactDOM.render(app, target, getConfig);
+const init_app = function (target) {
+  Router.run(routes, function (Handler) {
+    const app = ( <Provider store={store}>
+                    <IntlProvider locale={ lang_code } messages={ messages }>
+                      <Handler />
+                    </IntlProvider>
+                  </Provider> );
+    React.render(app, target);
+  });
 };
 
 export default init_app;
