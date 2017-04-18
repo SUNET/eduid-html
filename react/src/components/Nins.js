@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -11,9 +12,9 @@ import OpenidConnect from 'components/OpenidConnect';
 import 'style/Nins.scss';
 
 
-let Nins = React.createClass({
+class Nins extends Component {
 
-  render: function () {
+  render () {
 
     return (
         <div className="ninsview-form-container ">
@@ -48,7 +49,7 @@ let Nins = React.createClass({
         </div>
     );
   }
-});
+}
 
 Nins.propTypes = {
     handlePhoneSuscription: PropTypes.func,

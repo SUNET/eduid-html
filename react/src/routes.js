@@ -8,26 +8,33 @@
  */
 
 
-import React from 'react';
-import Router, { DefaultRoute, Route } from 'react-router';
+import React, { Component } from 'react';
+import { Router, Route } from 'react-router-dom';
 
-import App from 'components/App';
-import PersonalData from 'components/PersonalData';
-import Emails from 'components/Emails';
-import Mobile from 'components/Mobile';
-import Security from 'components/Security';
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
+
+import PersonalData from 'containers/PersonalData';
+import Emails from 'containers/Emails';
+import Mobile from 'containers/Mobile';
+import Security from 'containers/Security';
 
 
 // configure available routes in conjunction with configuredReactPanels  in
 // init-app.js
-var routes = (  
-    <Route name="profile" path="/" handler={App}>
-           <DefaultRoute handler={PersonalData} />
-           <Route name="personaldata" handler={PersonalData} />
-           <Route name="#emails" handler={Emails} />
-           <Route name="phones" handler={Mobile} />
-           <Route name="security" handler={Security} />
-    </Route>
-)
+class App extends Component {
+  render() {
+    return (
+    <Router history={history}>
+      <div>
+           <Route path="/" component={PersonalData} />
+           <Route path="/personaldata" component={PersonalData} />
+           <Route path="/emails"       component={Emails} />
+           <Route path="/phones"        component={Mobile} />
+           <Route path="/security"      component={Security} />
+      </div>
+    </Router>
+  )}
+}
 
-export default routes;
+export default App;

@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
@@ -8,9 +9,9 @@ import EduIDButton from 'components/EduIDButton';
 import EduiDAlert from 'components/EduIDAlert';
 
 
-let ConfirmModal = React.createClass({
+class ConfirmModal extends Component {
 
-  render: function () {
+  render () {
     let spinning = false,
         msgid, msg, alertElem;
     if (this.props.is_fetching) spinning = true;
@@ -76,7 +77,7 @@ let ConfirmModal = React.createClass({
       </div>
     );
   }
-});
+}
 
 ConfirmModal.propTypes = {
   title: PropTypes.object,

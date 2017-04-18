@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -9,9 +10,9 @@ import GenericConfirmModal from 'components/GenericConfirmModal';
 import 'style/Security.scss';
 
 
-let Security = React.createClass({
+class Security extends Component {
 
-  render: function () {
+  render () {
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             return (<tr key="{index}">
@@ -73,7 +74,7 @@ let Security = React.createClass({
         </div>
     );
   }
-});
+}
 
 Security.propTypes = {
   credentials: PropTypes.array,

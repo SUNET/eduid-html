@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 
 import { Checkbox, FormGroup, ControlLabel } from 'react-bootstrap';
@@ -12,9 +13,9 @@ import PasswordField from 'components/PasswordField';
 import 'style/ChangePassword.scss';
 
 
-let ChangePassword = React.createClass({
+class ChangePassword extends Component {
 
-  render: function () {
+  render () {
 
     let form,
         helpCustom = "",
@@ -83,7 +84,7 @@ let ChangePassword = React.createClass({
       </div>
     );
   }
-});
+}
 
 ChangePassword.propTypes = {
   choose_custom: PropTypes.bool,

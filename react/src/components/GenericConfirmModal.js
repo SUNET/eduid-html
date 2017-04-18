@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
@@ -8,9 +9,9 @@ import EduIDButton from 'components/EduIDButton';
 import EduiDAlert from 'components/EduIDAlert';
 
 
-let GenericConfirmModal = React.createClass({
+class GenericConfirmModal extends Component {
 
-  render: function () {
+  render () {
 
     return (
       <div id="securityConfirmDialog"
@@ -46,7 +47,7 @@ let GenericConfirmModal = React.createClass({
       </div>
     );
   }
-});
+}
 
 GenericConfirmModal.propTypes = {
   title: PropTypes.object,

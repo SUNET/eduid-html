@@ -2,7 +2,9 @@
 // Inspired by react-intl's `injectIntl()` HOC factory function implementation:
 // https://github.com/yahoo/react-intl
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import invariant from 'invariant';
 import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 

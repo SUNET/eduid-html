@@ -26,15 +26,15 @@ jQuery.fn.initDeformCallbacks = function () {
 
 // this  is temporal until all panels are in use
 // configure this in combination with routes.js
-const configuredReactPanels = ['personalData', 'emails', 'mobiles', 'security']
+const configuredReactPanels = ['personaldata', 'emails', 'mobiles', 'security']
 
 var TabbedForm = function (container) {
     "use strict";
 
     var get_form = function (url, target) {
           if (configuredReactPanels.indexOf(url) > -1) {
-            init_app(target.get(0));
-            window.location = url;
+            const app = init_app(target.get(0));
+            console.log(app);
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');

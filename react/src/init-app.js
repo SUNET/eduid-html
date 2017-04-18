@@ -10,7 +10,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
-import routes from 'routes';
+import App from 'routes';
 
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
@@ -31,7 +31,7 @@ import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
-import * as sagasMobile from "sagas/Mobile"
+import * as sagasMobile from "sagas/Mobile";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange } from "sagas/Security";
@@ -98,14 +98,13 @@ const getConfig = function () {
 };
 
 const init_app = function (target) {
-  Router.run(routes, function (Handler) {
     const app = ( <Provider store={store}>
                     <IntlProvider locale={ lang_code } messages={ messages }>
-                      <Handler />
+                      <App />
                     </IntlProvider>
                   </Provider> );
-    React.render(app, target);
-  });
+    ReactDOM.render(app, target, getConfig);
+    return app;
 };
 
 export default init_app;

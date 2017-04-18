@@ -1,12 +1,14 @@
-import React, { PropTypes } from 'react';
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { Button, Glyphicon } from 'react-bootstrap';
 import 'style/EduIDButton.scss';
 
 
-const EduIDButton = React.createClass({
+class EduIDButton extends Component {
 
-  render:  function () {
+  render () {
     const { spinning, ...other } = this.props,
           classes = spinning && 'active has-spinner' || 'has-spinner',
           // TODO: Fix this line to disable button when is not necesasry
@@ -21,7 +23,7 @@ const EduIDButton = React.createClass({
         </Button>
     );
   }
-});
+}
 
 EduIDButton.PropTypes = {
   spinning: PropTypes.string.bool

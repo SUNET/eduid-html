@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -9,9 +10,9 @@ import EduIDButton from 'components/EduIDButton';
 import 'style/OpenidConnect.scss';
 
 
-let OpenidConnect = React.createClass({
+class OpenidConnect extends Component {
 
-  render: function () {
+  render () {
     let spinning = false;
 
     if (this.props.is_fetching) spinning = true;
@@ -40,7 +41,7 @@ let OpenidConnect = React.createClass({
         </div>
     );
   }
-});
+}
 
 OpenidConnect.propTypes = {
   qr_img: PropTypes.string,

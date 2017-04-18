@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -10,9 +11,9 @@ import ConfirmModal from 'components/ConfirmModal';
 import 'style/Mobile.scss';
 
 
-let Mobile = React.createClass({
+class Mobile extends Component {
 
-  render: function () {
+  render () {
 
     return (
         <div className="mobileview-form-container ">
@@ -58,7 +59,7 @@ let Mobile = React.createClass({
         </div>
     );
   }
-});
+}
 
 Mobile.propTypes = {
   phones: PropTypes.array,
