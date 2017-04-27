@@ -10,7 +10,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
-import App from 'routes';
+import Routing from 'routes';
 
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
@@ -100,7 +100,7 @@ const getConfig = function () {
 const init_app = function (target) {
     const app = ( <Provider store={store}>
                     <IntlProvider locale={ lang_code } messages={ messages }>
-                      <App />
+                      <Routing />
                     </IntlProvider>
                   </Provider> );
     ReactDOM.render(app, target, getConfig);

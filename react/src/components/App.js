@@ -1,14 +1,7 @@
-var React = require('react');  
-var RouteHandler = require('react-router').RouteHandler;
+import React from 'react';
 
-
-let App = React.createClass({
-
-  render: function () {
-    return (
-      <RouteHandler />
-    );
-  }
-});
-
-export default App;
+export const App = ( { children } ) => (
+  <div>
+    { children }
+  </div>
+)

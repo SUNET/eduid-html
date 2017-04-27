@@ -9,10 +9,9 @@
 
 
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route, IndexRoute } from 'react-router-dom';
 
-import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
+import App from 'components/App';
 
 import PersonalData from 'containers/PersonalData';
 import Emails from 'containers/Emails';
@@ -20,21 +19,25 @@ import Mobile from 'containers/Mobile';
 import Security from 'containers/Security';
 
 
-// configure available routes in conjunction with configuredReactPanels  in
+// configure available routes in conjunction with configuredReactPanels in
 // init-app.js
-class App extends Component {
+class Routing extends Component {
   render() {
     return (
-    <Router history={history}>
+    <BrowserRouter>
       <div>
-           <Route path="/" component={PersonalData} />
-           <Route path="/personaldata" component={PersonalData} />
-           <Route path="/emails"       component={Emails} />
-           <Route path="/phones"        component={Mobile} />
-           <Route path="/security"      component={Security} />
+        <Route path="/" component={App}>
+          <IndexRoute component={PersonalData} />
+          <div>
+          <Route path="/personaldata" component={PersonalData} />
+          <Route path="emails"       component={Emails} />
+          <Route path="#phones"        component={Mobile} />
+          <Route path="/#security"      component={Security} />
+          </div>
+        </Route>
       </div>
-    </Router>
+    </BrowserRouter>
   )}
 }
 
-export default App;
+export default Routing;
