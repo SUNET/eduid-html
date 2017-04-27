@@ -29,10 +29,10 @@ export function* saveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                number: state.phones.phone,
+                number: state.phones.mobile,
                 verified: false,
                 primary: false,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.phones.csrf_token
               };
 
         const mobiles = yield call(sendMobile, state.config, data);
@@ -59,7 +59,7 @@ export function* requestResendMobileCode () {
         const state = yield select(state => state),
               data = {
                 number: state.phones.confirming,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.phones.csrf_token
               };
         const resp = yield call(requestResend, state.config, data);
         yield put(resp);
@@ -85,7 +85,7 @@ export function* requestVerifyMobile () {
               data = {
                 number: state.phones.confirming,
                 code: state.phones.code,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.phones.csrf_token
               };
         const resp = yield call(requestVerify, state.config, data);
         yield put(resp);
@@ -110,7 +110,7 @@ export function* requestRemoveMobile () {
         const state = yield select(state => state),
               data = {
                 number: state.phones.mobile,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.phones.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
         yield put(resp);
@@ -134,8 +134,8 @@ export function* requestMakePrimaryMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                number: state.phones.phone,
-                csrf_token: state.emails.csrf_token
+                number: state.phones.mobile,
+                csrf_token: state.phones.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);
         yield put(resp);
