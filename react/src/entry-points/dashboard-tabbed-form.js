@@ -2,7 +2,9 @@
 /*global $, console, alert, deform */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import init_app from "../init-app";
+import { Link } from 'react-router';
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -73,6 +75,10 @@ var TabbedForm = function (container) {
                     parent().addClass('active');
 
                 get_form(url, $(".tab-pane.active"));
+            });
+            configuredReactPanels.forEach(function (url) {
+              const link = (<Link to={url} activeClassName="active" >{url}</Link>);
+              ReactDOM.render(link, document.getElementById('main-nav-tab-' + url));
             });
         },
 

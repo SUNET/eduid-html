@@ -10,7 +10,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
-import Routing from 'routes';
+import Routing from 'components/routes';
 
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
