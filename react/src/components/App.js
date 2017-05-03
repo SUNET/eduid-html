@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
@@ -14,11 +14,19 @@ const components = {
 }
 
 
-const App = ( { params } ) => {
-  const url = params.filter,
-        component = components[url];
 
-  return (<component />);
-};
+
+class App extends Component {
+
+  render () {
+      if (this.props.location.hash !== undefined) {
+          const url = this.props.location.hash.substring(1),
+                component = components[url];
+          return (<component />);
+      }
+
+      return (<PersonalDataContainer />);
+  }
+}
 
 export default App;

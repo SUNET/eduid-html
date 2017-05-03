@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import init_app from "../init-app";
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -36,7 +36,8 @@ var TabbedForm = function (container) {
     var get_form = function (url, target) {
           if (configuredReactPanels.indexOf(url) > -1) {
             const app = init_app(target.get(0));
-            console.log(app);
+            window.eduid_app = app;
+            initialize_nav_tabs();
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
@@ -76,10 +77,13 @@ var TabbedForm = function (container) {
 
                 get_form(url, $(".tab-pane.active"));
             });
-            configuredReactPanels.forEach(function (url) {
-              const link = (<Link to={url} activeClassName="active" >{url}</Link>);
-              ReactDOM.render(link, document.getElementById('main-nav-tab-' + url));
-            });
+            if ((window.eduid_app !== undefined) && (window.eduid_app.context !== undefined)) {
+              configuredReactPanels.forEach(function (url) {
+                const link = (<Link to={url} activeClassName="active" >{url}</Link>);
+                link.context.router = window.eduid_app.context.router;
+                ReactDOM.render(link, document.getElementById('main-nav-tab-' + url));
+              });
+            }
         },
 
         initialize = function () {

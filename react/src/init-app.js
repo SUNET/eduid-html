@@ -10,7 +10,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
-import Routing from 'components/routes';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import App from 'components/App';
 
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
@@ -97,10 +100,16 @@ const getConfig = function () {
     }
 };
 
+import PersonalDataContainer from 'containers/PersonalData';
+
 const init_app = function (target) {
     const app = ( <Provider store={store}>
                     <IntlProvider locale={ lang_code } messages={ messages }>
-                      <Routing />
+                        <BrowserRouter>
+                          <Route path="/" component={PersonalDataContainer}>
+                            <Route path="/:panel" component={App} />
+                          </Route>
+                        </BrowserRouter>
                     </IntlProvider>
                   </Provider> );
     ReactDOM.render(app, target, getConfig);
