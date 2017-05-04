@@ -11,9 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
 
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import App from 'components/App';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
@@ -39,6 +37,11 @@ import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
+
+import PersonalDataContainer from 'containers/PersonalData';
+import EmailsContainer from 'containers/Emails';
+import MobileContainer from 'containers/Mobile';
+import SecurityContainer from 'containers/Security';
 
 /* i18n */
 
@@ -100,15 +103,24 @@ const getConfig = function () {
     }
 };
 
-import PersonalDataContainer from 'containers/PersonalData';
-
 const init_app = function (target) {
     const app = ( <Provider store={store}>
                     <IntlProvider locale={ lang_code } messages={ messages }>
                         <BrowserRouter>
-                          <Route path="/" component={PersonalDataContainer}>
-                            <Route path="/:panel" component={App} />
-                          </Route>
+                          <div>
+                            <Route exact path="/profile/" component={PersonalDataContainer} />
+                            <Route exact path="/profile/personaldata" component={PersonalDataContainer} />
+                            <Route exact path="/profile/emails" component={EmailsContainer} />
+                            <Route exact path="/profile/mobiles" component={MobileContainer} />
+                            <Route exact path="/profile/security" component={SecurityContainer} />
+
+                            <ul role="nav" className="hidden">
+                              <li><Link to="/profile/personaldata" id="personaldata-router-link">Personal Data</Link></li>
+                              <li><Link to="/profile/emails" id="emails-router-link">Emails</Link></li>
+                              <li><Link to="/profile/mobiles" id="mobiles-router-link">Phones</Link></li>
+                              <li><Link to="/profile/security" id="security-router-link">Security</Link></li>
+                            </ul>
+                          </div>
                         </BrowserRouter>
                     </IntlProvider>
                   </Provider> );

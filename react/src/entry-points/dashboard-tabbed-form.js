@@ -35,9 +35,9 @@ var TabbedForm = function (container) {
 
     var get_form = function (url, target) {
           if (configuredReactPanels.indexOf(url) > -1) {
-            const app = init_app(target.get(0));
-            window.eduid_app = app;
-            initialize_nav_tabs();
+            init_app(target.get(0));
+            const link = document.getElementById(url + '-router-link');
+            link.click();
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
@@ -77,13 +77,6 @@ var TabbedForm = function (container) {
 
                 get_form(url, $(".tab-pane.active"));
             });
-            if ((window.eduid_app !== undefined) && (window.eduid_app.context !== undefined)) {
-              configuredReactPanels.forEach(function (url) {
-                const link = (<Link to={url} activeClassName="active" >{url}</Link>);
-                link.context.router = window.eduid_app.context.router;
-                ReactDOM.render(link, document.getElementById('main-nav-tab-' + url));
-              });
-            }
         },
 
         initialize = function () {
