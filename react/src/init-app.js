@@ -17,7 +17,7 @@ import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
@@ -84,14 +84,19 @@ function* rootSaga() {
 
 const sagaMiddleware = createSagaMiddleware();
 
+/* for redux dev tools */
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 /* Store */
 
 export const store = createStore(
         eduIDApp,
-        applyMiddleware(
-            sagaMiddleware,
-            createLogger()
-            ));
+        composeEnhancers(
+          applyMiddleware(
+              sagaMiddleware,
+              createLogger()
+              )));
 
 sagaMiddleware.run(rootSaga);
 
