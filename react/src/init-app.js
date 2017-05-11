@@ -113,17 +113,30 @@ const init_app = function (target) {
                     <IntlProvider locale={ lang_code } messages={ messages }>
                         <BrowserRouter>
                           <div>
-                            <Route exact path="/profile/" component={PersonalDataContainer} />
-                            <Route exact path="/profile/personaldata" component={PersonalDataContainer} />
-                            <Route exact path="/profile/emails" component={EmailsContainer} />
-                            <Route exact path="/profile/mobiles" component={MobileContainer} />
-                            <Route exact path="/profile/security" component={SecurityContainer} />
+                            <Route exact path="/profile/" render={props => {
+                              switch (props.location.hash.split('#')[1]) {
+                                  case 'personaldata':
+                                      return (<PersonalDataContainer />);
+                                      break;
+                                  case 'emails':
+                                      return (<EmailsContainer />);
+                                      break;
+                                  case 'mobiles':
+                                      return (<MobileContainer />);
+                                      break;
+                                  case 'security':
+                                      return (<SecurityContainer />);
+                                      break;
+                                default:
+                                      return (<PersonalDataContainer />);
+                              }
+                            }}/>
 
                             <ul role="nav" className="hidden">
-                              <li><Link to="/profile/personaldata" id="personaldata-router-link">Personal Data</Link></li>
-                              <li><Link to="/profile/emails" id="emails-router-link">Emails</Link></li>
-                              <li><Link to="/profile/mobiles" id="mobiles-router-link">Phones</Link></li>
-                              <li><Link to="/profile/security" id="security-router-link">Security</Link></li>
+                              <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
+                              <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
+                              <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
+                              <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
                             </ul>
                           </div>
                         </BrowserRouter>
