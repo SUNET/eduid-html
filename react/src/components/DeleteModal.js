@@ -35,7 +35,7 @@ class DeleteModal extends Component {
                         <p>{this.props.l10n('security.modal_notes')}</p>
                          <EduIDButton className="btn btn-danger btn-default"
                               spinning={spinning}
-                              onClick={this.props.handleRemove} >
+                              onClick={this.props.handleConfirm} >
                             {this.props.l10n('security.confirm_button')}
                         </EduIDButton>
                     </div>
@@ -55,11 +55,10 @@ class DeleteModal extends Component {
 
 DeleteModal.propTypes = {
   title: PropTypes.object,
-  handleRemove: PropTypes.func,
-  closeModal: PropTypes.func,
   showModal: PropTypes.bool,
+  closeModal: PropTypes.func,
+  handleConfirm: PropTypes.func,
   is_fetching: PropTypes.bool,
-  confirming: PropTypes.bool,
 }
 
 export default i18n(DeleteModal);

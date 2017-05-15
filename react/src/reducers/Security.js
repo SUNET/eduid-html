@@ -11,6 +11,8 @@ const security = {
     credentials: [],
     code: '',
     confirming_change: false,
+    confirming_deletion: false,
+    location: '',
 };
 
 
@@ -50,6 +52,36 @@ let securityReducer = (state=security, action) => {
         is_fetching: true
       };
     case actions.GET_CHANGE_PASSWORD_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.message
+      };
+    case actions.START_DELETE_ACCOUNT:
+      return {
+        ...state,
+        confirming_deletion: true
+      };
+    case actions.STOP_DELETE_ACCOUNT:
+      return {
+        ...state,
+        confirming_deletion: false
+      };
+    case actions.POST_DELETE_ACCOUNT:
+      return {
+        ...state,
+        confirming_deletion: false
+      };
+    case actions.POST_DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        confirming_deletion: false,
+        is_fetching: false,
+        failed: false,
+        location: action.payload.location
+      };
+    case actions.POST_DELETE_ACCOUNT_FAIL:
       return {
         ...state,
         is_fetching: false,

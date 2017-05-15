@@ -2,7 +2,8 @@
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders } from "sagas/common";
 import { getCredentials, getCredentialsFail,
-         stopConfirmationPassword, getPasswordChangeFail } from "actions/Security";
+         stopConfirmationPassword, getPasswordChangeFail,
+         postConfirmDeletion, removeAccountFail  } from "actions/Security";
 
 
 
@@ -43,4 +44,31 @@ export function* requestPasswordChange () {
     } catch(error) {
         yield put(getPasswordChangeFail(error.toString()));
     }
+}
+
+
+export function* postDeleteAccount () {
+    try {
+        yield put(postConfirmDeletion());
+        const state = yield select(state => state);
+        const data = {
+            csrf_token: state.security.csrf_token
+        };
+        const resp = yield call(deleteAccount, state.config, data);
+        yield put(resp);
+    } catch(error) {
+        yield put(removeAccountFail(error.toString()));
+    }
+}
+
+
+export function deleteAccount(config, data) {
+    return window.fetch(config.SECURITY_URL + '/terminate-account', {
+      method: 'post',
+      credentials: 'include',
+      headers: ajaxHeaders,
+      body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
 }

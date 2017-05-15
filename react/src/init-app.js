@@ -35,7 +35,7 @@ import { requestEmails, saveEmail, requestResendEmailCode,
 import * as sagasMobile from "sagas/Mobile";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
-import { requestCredentials, requestPasswordChange } from "sagas/Security";
+import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 
 import PersonalDataContainer from 'containers/PersonalData';
@@ -79,6 +79,7 @@ function* rootSaga() {
     takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeEvery(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeEvery(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
+    takeEvery(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
   ];
 }
 

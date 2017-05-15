@@ -13,6 +13,10 @@ import 'style/Security.scss';
 class Security extends Component {
 
   render () {
+    if (this.props.redirect_to !== '') {
+        document.location = this.props.redirect_to;
+        return
+    }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             return (<tr key="{index}">
@@ -54,23 +58,23 @@ class Security extends Component {
               <EduIDButton className="btn btn-danger"
                            id="delete-button"
                            spinning={spinning}
-                           onClick={this.props.handleStartConfirmation}>
+                           onClick={this.props.handleStartConfirmationDeletion}>
                         {this.props.l10n('security.delete_account')}
               </EduIDButton>
           </div>
           <GenericConfirmModal
-                title={this.props.l10n('security.confirm_title')}
+                title={this.props.l10n('security.confirm_title_chpass')}
                 showModal={this.props.confirming_change}
                 closeModal={this.props.handleStopConfirmationPassword}
                 finishModal={this.props.handleConfirmationPassword}
                 change_password={this.props.change_password}
           />
           <DeleteModal
-                title={this.props.l10n('security.confirm_title')}
-                showModal={this.props.confirming}
-                closeModal={this.props.handleStopConfirmation}
-                handleConfirm={this.props.handleConfirm}
-                confirming={this.props.confirming} />
+                title={this.props.l10n('security.confirm_title_deletion')}
+                showModal={this.props.confirming_deletion}
+                closeModal={this.props.handleStopConfirmationDeletion}
+                handleConfirm={this.props.handleConfirmationDeletion}
+          />
         </div>
     );
   }
@@ -88,6 +92,10 @@ Security.propTypes = {
   handleStartConfirmationPassword: PropTypes.func,
   handleStopConfirmationPassword: PropTypes.func,
   handleConfirmationPassword: PropTypes.func,
+  confirming_deletion: PropTypes.bool,
+  handleStartConfirmationDeletion: PropTypes.func,
+  handleStopConfirmationDeletion: PropTypes.func,
+  handleConfirmationDeletion: PropTypes.func,
 }
 
 export default i18n(Security);
