@@ -105,7 +105,7 @@ TableList.propTypes = {
     handleStartConfirmation: PropTypes.func,
     handleRemove: PropTypes.func,
     handleMakePrimary: PropTypes.func,
-    errorMsg: PropTypes.object,
+    errorMsg: PropTypes.string,
 }
 
 export default i18n(TableList);

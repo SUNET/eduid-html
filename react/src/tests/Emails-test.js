@@ -7,6 +7,14 @@ import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import emailsReducer from "reducers/Emails";
 
+import EmailsContainer from "containers/Emails";
+import { Provider } from 'react-redux';
+import { IntlProvider, addLocaleData } from 'react-intl';
+
+const messages = require('../../i18n/l10n/en');
+addLocaleData('react-intl/locale-data/en');
+
+
 describe("Email Actions", () => {
    it("Should get the emails ", () => {
        const expectedAction = {
@@ -669,10 +677,6 @@ it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
   });
 
 
-
-
-
-
  it("Receives a POST_EMAIL_PRIMARY action", () => {
     expect(
       emailsReducer(
@@ -952,8 +956,9 @@ function setupComponent() {
     handleChange: createSpy(),
   };
 
-  const wrapper = shallow(<Emails {...props} />)
-
+  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
+                             <Emails {...props} />
+                          </IntlProvider>)
   return {
     props,
     wrapper,
@@ -971,12 +976,6 @@ describe("Emails Component", () => {
     });
 });
 
-import EmailsContainer from "containers/Emails";
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
-
-const messages = require('../../i18n/l10n/en');
-addLocaleData('react-intl/locale-data/en');
 
 const fakeStore = (state) => ({
   default: () => {},

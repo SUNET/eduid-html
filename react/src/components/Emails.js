@@ -64,7 +64,7 @@ let Emails = React.createClass({
 Emails.propTypes = {
   longDescription: PropTypes.string,
   emails: PropTypes.array,
-  errorMsg: PropTypes.object,
+  errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleChange: PropTypes.func,
