@@ -33,7 +33,9 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         is_fetching: false,
-        failed: true
+        failed: true,
+        error: action.payload.error,
+        message: action.payload.message
       };
     case actions.START_CHANGE_PASSWORD:
       return {
@@ -56,7 +58,8 @@ let securityReducer = (state=security, action) => {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error,
+        message: action.payload.message
       };
     case actions.START_DELETE_ACCOUNT:
       return {
@@ -71,6 +74,8 @@ let securityReducer = (state=security, action) => {
     case actions.POST_DELETE_ACCOUNT:
       return {
         ...state,
+        is_fetching: true,
+        failed: false,
         confirming_deletion: false
       };
     case actions.POST_DELETE_ACCOUNT_SUCCESS:
@@ -86,7 +91,8 @@ let securityReducer = (state=security, action) => {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error,
+        message: action.payload.message
       };
     default:
       return state;

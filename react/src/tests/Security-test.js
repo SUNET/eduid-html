@@ -105,3 +105,357 @@ describe("Security Actions", () => {
     expect(actions.removeAccountFail(err)).toEqual(expectedAction);
   });
 });
+
+describe("Reducers", () => {
+
+  const mockState = {
+    is_fetching: false,
+    failed: false,
+    error: '',
+    message: '',
+    csrf_token: '',
+    credentials: [],
+    code: '',
+    confirming_change: false,
+    confirming_deletion: false,
+    location: ''
+  };
+
+  it("Receives a GET_CREDENTIALS action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_CREDENTIALS
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a GET_CREDENTIALS_SUCCESS action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_CREDENTIALS_SUCCESS
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a GET_CREDENTIALS_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_CREDENTIALS_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: error,
+        message: err,
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a START_CHANGE_PASSWORD action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_CHANGE_PASSWORD
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: true,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a STOP_CHANGE_PASSWORD action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.STOP_CHANGE_PASSWORD
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a GET_CHANGE_PASSWORD action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_CHANGE_PASSWORD
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a GET_CHANGE_PASSWORD_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_CHANGE_PASSWORD_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: error,
+        message: err,
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a START_DELETE_ACCOUNT action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_DELETE_ACCOUNT
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: true,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a STOP_DELETE_ACCOUNT action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.STOP_DELETE_ACCOUNT
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a POST_DELETE_ACCOUNT action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_DELETE_ACCOUNT
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a POST_DELETE_ACCOUNT action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_DELETE_ACCOUNT
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: true,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+  it("Receives a POST_DELETE_ACCOUNT_SUCCESS action", () => {
+    const location = 'dummy-location';
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_DELETE_ACCOUNT_SUCCESS,
+          payload: {
+            location: location
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: location
+      }
+    );
+  });
+
+  it("Receives a POST_DELETE_ACCOUNT_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_DELETE_ACCOUNT_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: true,
+        error: error,
+        message: err,
+        csrf_token: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: ''
+      }
+    );
+  });
+
+});
