@@ -28,7 +28,10 @@ export function getCredentialsFail (err) {
   return {
     type: GET_CREDENTIALS_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: {
+      error: new Error(err),
+      message: err
+    }
   };
 }
 
