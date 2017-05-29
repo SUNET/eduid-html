@@ -12,6 +12,15 @@ import * as actions from "actions/OpenidConnect";
 import openidConnectReducer from "reducers/OpenidConnect";
 import OpenidConnect from 'components/OpenidConnect'
 
+import { Provider } from 'react-redux';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import OpenidConnectContainer from "containers/OpenidConnect";
+
+const messages = require('../../i18n/l10n/en')
+addLocaleData('react-intl/locale-data/en');
+
+
+
 describe("OIDC Actions", () => {
 
   it("should create an action to trigger fetching a qrcode", () => {
@@ -131,14 +140,16 @@ function setupComponent() {
     handleGetQRCode: createSpy(),
     qr_img: 'code',
     qr_code: 'nonce'
-  }
+  };
 
-  const wrapper = shallow(<OpenidConnect {...props} />)
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+                              <OpenidConnect {...props} />
+                          </IntlProvider>);
 
   return {
     props,
     wrapper
-  }
+  };
 }
 
 describe("OpenidConnect Component", () => {
@@ -165,15 +176,8 @@ describe("OpenidConnect Component", () => {
     expect(props.handleGetQRCode.calls.length).toEqual(0);
     button.props().onClick();
     expect(props.handleGetQRCode.calls.length).toEqual(1);
-  });
+  })
 });
-
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import OpenidConnectContainer from "containers/OpenidConnect";
-
-const messages = require('../../i18n/l10n/en')
-addLocaleData('react-intl/locale-data/en');
 
 
 const fakeStore = (state) => ({

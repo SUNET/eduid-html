@@ -11,12 +11,40 @@ import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 import personalDataReducer from "reducers/PersonalData";
 
+import {requestPersonalData, savePersonalData, fetchPersonalData, sendPersonalData} from '../sagas/PersonalData';
+import { put, call, select } from "redux-saga/effects";
+
+import { Provider } from 'react-redux';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import PersonalDataContainer from "containers/PersonalData";
+
+const messages = require('../../i18n/l10n/en');
+addLocaleData('react-intl/locale-data/en');
+
+
+const mockState = {
+  personal_data: {
+      is_fetching: false,
+      failed: false,
+      given_name: '',
+      surname: '',
+      display_name: '',
+      language: ''
+  },
+  config : {
+      is_configured : true,
+      is_fetching: false,
+      failed: false,
+      PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+  }
+};
+
 
 describe("Personal Data Actions", () => {
 
   it("Should get the data user for personal data", () => {
     const expectedAction = {
-          type: actions.GET_USERDATA,
+          type: actions.GET_USERDATA
     };
     expect(actions.getUserdata()).toEqual(expectedAction);
   });
@@ -245,37 +273,20 @@ function setupComponent() {
     display_name: '',
     language: '',
     handleSave: createSpy(),
-    handleChange: createSpy(),
-  }
+    handleChange: createSpy()
+  };
 
-  const wrapper = shallow(<PersonalData {...props} />)
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+                              <PersonalData {...props} />
+                          </IntlProvider>);
 
   return {
     props,
-    wrapper,
-  }
+    wrapper
+  };
 }
 
-  const mockState = {
-    personal_data: {
-        is_fetching: false,
-        failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: ''
-    },
-    config : {
-        is_configured : true,
-        is_fetching: false,
-        failed: false,
-        PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
-    }
-  };
 const getState = () => mockState;
-
-import {requestPersonalData, savePersonalData, fetchPersonalData, sendPersonalData} from '../sagas/PersonalData';
-import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
@@ -331,13 +342,12 @@ describe("PersonalData Component", () => {
     const { wrapper, props } = setupComponent(),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
-          language = wrapper.find('TextControl[name="language"]'),
-          surname = wrapper.find('TextControl[name="surname"]'),
-          given_name = wrapper.find('TextControl[name="given_name"]'),
-          display_name = wrapper.find('TextControl[name="display_name"]'),
+          language = wrapper.find("#language"),
+          surname = wrapper.find("#surname"'),
+          given_name = wrapper.find("#given_name"),
+          display_name = wrapper.find("#display_name"),
           button = wrapper.find('#personal-data-button');
 
-    expect(form.hasClass('form-horizontal')).toBeTruthy();
     expect(form.contains(fieldset.get(0))).toBeTruthy();
     expect(fieldset.hasClass('tabpane')).toBeTruthy();
     expect(fieldset.contains(language.get(0))).toBeTruthy();
@@ -355,14 +365,6 @@ describe("PersonalData Component", () => {
   });
 
 });
-
-
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import PersonalDataContainer from "containers/PersonalData";
-
-const messages = require('../../i18n/l10n/en');
-addLocaleData('react-intl/locale-data/en');
 
 const fakeStore = (state) => ({
   default: () => {},

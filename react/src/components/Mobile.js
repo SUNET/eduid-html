@@ -63,7 +63,7 @@ class Mobile extends Component {
 
 Mobile.propTypes = {
   phones: PropTypes.array,
-  errorMsg: PropTypes.object,
+  errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleChange: PropTypes.func,

@@ -3,6 +3,20 @@ import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import * as actions from "actions/Mobile";
 import mobileReducer from "reducers/Mobile";
+import { requestMobile, fetchMobiles, saveMobile, sendMobile, requestRemoveMobile,
+         requestVerifyMobile, requestVerify, requestResendMobileCode, requestRemove,
+        requestMakePrimaryMobile, requestMakePrimary, requestResend } from 'sagas/Mobile';
+import { put, call, select } from "redux-saga/effects";
+
+import Mobile from 'components/Mobile';
+import MobileContainer from "containers/Mobile";
+import { Provider } from 'react-redux';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import fetchMock from 'fetch-mock';
+
+const messages = require('../../i18n/l10n/en');
+addLocaleData('react-intl/locale-data/en');
+
 
 describe("Mobile Actions", () => {
 
@@ -802,11 +816,6 @@ const state = {
     }
 };
 
-import { requestMobile, fetchMobiles, saveMobile, sendMobile, requestRemoveMobile,
-         requestVerifyMobile, requestVerify, requestResendMobileCode, requestRemove,
-        requestMakePrimaryMobile, requestMakePrimary, requestResend } from 'sagas/Mobile';
-import { put, call, select } from "redux-saga/effects";
-
 describe("Async component", () => {
 
     it("Sagas requestMobile", () => {
@@ -955,8 +964,6 @@ describe("Async component", () => {
 
 });
 
-import Mobile from 'components/Mobile';
-
 
 function setupComponent() {
   const props = {
@@ -965,7 +972,9 @@ function setupComponent() {
     handleChange: createSpy(),
   };
 
-  const wrapper = shallow(<Mobile {...props} />)
+  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
+                              <Mobile {...props} />
+                          </IntlProvider>)
 
   return {
     props,
@@ -983,14 +992,6 @@ describe("Mobile Component", () => {
             email = wrapper.find('TextControl[name="mobile"]');
     });
 });
-
-import MobileContainer from "containers/Mobile";
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import fetchMock from 'fetch-mock';
-
-const messages = require('../../i18n/l10n/en');
-addLocaleData('react-intl/locale-data/en');
 
 const fakeStore = (state) => ({
   default: () => {},
