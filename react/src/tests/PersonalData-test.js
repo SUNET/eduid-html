@@ -276,7 +276,7 @@ function setupComponent() {
     handleChange: createSpy()
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
                               <PersonalData {...props} />
                           </IntlProvider>);
 
@@ -342,15 +342,14 @@ describe("PersonalData Component", () => {
     const { wrapper, props } = setupComponent(),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
-          language = wrapper.find('TextControl[name="language"]'),
-          surname = wrapper.find('TextControl[name="surname"]'),
-          given_name = wrapper.find('TextControl[name="given_name"]'),
-          display_name = wrapper.find('TextControl[name="display_name"]'),
+          language = wrapper.find("#language"),
+          surname = wrapper.find("#surname"'),
+          given_name = wrapper.find("#given_name"),
+          display_name = wrapper.find("#display_name"),
           button = wrapper.find('#personal-data-button');
 
     expect(form.contains(fieldset.get(0))).toBeTruthy();
     expect(fieldset.hasClass('tabpane')).toBeTruthy();
-    debugger;
     expect(fieldset.contains(language.get(0))).toBeTruthy();
     expect(fieldset.contains(surname.get(0))).toBeTruthy();
     expect(fieldset.contains(given_name.get(0))).toBeTruthy();

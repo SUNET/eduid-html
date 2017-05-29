@@ -142,7 +142,7 @@ function setupComponent() {
     qr_code: 'nonce'
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
                               <OpenidConnect {...props} />
                           </IntlProvider>);
 
