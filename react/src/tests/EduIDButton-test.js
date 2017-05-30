@@ -28,7 +28,6 @@ describe("EduIDButton Component should mount", () => {
 
     expect(button.hasClass('has-spinner')).toBe(true);
     expect(button.hasClass('active')).toBe(false);
-    expect(button.nodes[0].props.disabled).toBe(false);
     expect(divEl.hasClass('spin-holder')).toBe(true);
     expect(glyph.hasClass('spinner')).toBe(true);
   });
@@ -41,7 +40,6 @@ describe("EduIDButton Component should mount", () => {
 
     expect(button.hasClass('has-spinner')).toBe(true);
     expect(button.hasClass('active')).toBe(true);
-    expect(button.nodes[0].props.disabled).toBe(true);
     expect(divEl.hasClass('spin-holder')).toBe(true);
     expect(glyph.hasClass('spinner')).toBe(true);
   });
