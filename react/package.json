@@ -52,6 +52,7 @@
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
+    "babel-runtime": "^6.23.0",
     "babel-plugin-react-intl": "^2.1.3",
     "babel-plugin-transform-flow-strip-types": "^6.14.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
