@@ -54,6 +54,7 @@ export function* postDeleteAccount () {
         const data = {
             csrf_token: state.security.csrf_token
         };
+        debugger;
         const resp = yield call(deleteAccount, state.config, data);
         yield put(resp);
     } catch(error) {
@@ -63,6 +64,7 @@ export function* postDeleteAccount () {
 
 
 export function deleteAccount(config, data) {
+    debugger;
     return window.fetch(config.SECURITY_URL + '/terminate-account', {
       method: 'post',
       credentials: 'include',

@@ -1,12 +1,21 @@
 
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
+import { put, select, call } from "redux-saga/effects";
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import Security from 'components/Security';
 import * as actions from "actions/Security";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
+
+import { requestCredentials, fetchCredentials,
+  requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
+
+import { IntlProvider, addLocaleData } from 'react-intl';
+
+const messages = require('../../i18n/l10n/en');
+addLocaleData('react-intl/locale-data/en');
 
 
 describe("Security Actions", () => {
@@ -456,6 +465,80 @@ describe("Reducers", () => {
         location: ''
       }
     );
+  });
+});
+
+const mockState = {
+  security: {
+    location: 'dummy-location',
+    csrf_token: 'csrf-token'
+  },
+  config: { SECURITY_URL: 'dummy-url'}
+};
+
+describe("Async component", () => {
+
+  it("Sagas requestCredentials", () => {
+
+    const generator = requestCredentials();
+
+    let next = generator.next();
+    expect(next.value).toEqual(put(actions.getCredentials()));
+
+    next = generator.next();
+    const config = state => state.config;
+    const credentials = generator.next(config);
+    expect(credentials.value).toEqual(call(fetchCredentials,config));
+
+    const mockCredentials = {
+      csrf_token: 'csrf-token',
+      payload: {
+        csrf_token: 'csrf-token',
+        credentials: [
+          {
+            credential_type: 'password',
+            created_ts: '',
+            success_ts: ''
+          }
+        ]
+      }
+    };
+    next = generator.next(mockCredentials);
+    expect(next.value).toEqual(put(mockCredentials));
+  });
+
+  it("Sagas requestPasswordChange", () => {
+
+    const generator = requestPasswordChange();
+
+    let next = generator.next();
+    expect(next.value).toEqual(put(actions.stopConfirmationPassword()));
+
+    window.onbeforeunload = createSpy();
+    next = generator.next();
+    const config = state => state.config;
+    generator.next(mockState.config);
+    expect(window.location.href).toEqual('http://localhost:9876/context.html');
+  });
+
+  it("Sagas postDeleteAccount", () => {
+
+    const generator = postDeleteAccount();
+    let next = generator.next();
+    expect(next.value).toEqual(put(actions.postConfirmDeletion()));
+
+    const get_state = state => state;
+    const state = generator.next(get_state);
+
+    const data = {
+        csrf_token: 'csrf-token'
+    };
+
+    const resp = generator.next(call(deleteAccount, state.config, data));
+    expect(resp.value).toEqual('hoooo');
+
+    const end = generator.next();
+    expect(end.value).toEqual(put(resp));
   });
 
 });
