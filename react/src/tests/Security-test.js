@@ -556,3 +556,125 @@ describe("Async component", () => {
   });
 
 });
+
+
+function setupComponent() {
+  const props = {
+    credentials: [],
+    creation_date: '',
+    last_used: '',
+    language: '',
+    langs: [],
+    errorMsg: '',
+    is_fetching: false,
+    confirming_change: false,
+    confirming_deletion: false,
+    handleStartConfirmationPassword: createSpy(),
+    handleStopConfirmationPassword: createSpy(),
+    handleConfirmationPassword: createSpy(),
+    handleStartConfirmationDeletion: createSpy(),
+    handleStopConfirmationDeletion: createSpy(),
+    handleConfirmationDeletion: createSpy(),
+  };
+
+  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
+                             <Security {...props} />
+                          </IntlProvider>)
+  return {
+    props,
+    wrapper,
+  }
+}
+
+describe("Security Component", () => {
+
+    it("Renders", () => {
+        const {wrapper, props} = setupComponent(),
+            form = wrapper.find('form'),
+            fieldset = wrapper.find('fieldset'),
+            email = wrapper.find('TextControl[name="security"]');
+        // TODO: not finished
+    });
+});
+
+
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: createSpy(),
+  subscribe: createSpy(),
+  getState: () => ({ ...state })
+});
+
+
+describe("Security Container", () => {
+  let fulltext,
+    email,
+    fulldom,
+    language,
+    mockProps,
+    wrapper,
+    dispatch;
+
+ beforeEach(() => {
+    const store = fakeStore({
+        emails: {
+            is_fetching: false,
+            failed: false,
+            error: '',
+            message: '',
+            resending: {
+              is_fetching: false,
+              failed: false,
+              error: {},
+              message: ''
+            },
+            confirming: '',
+            emails: [],
+            email: '',
+        },
+      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
+    });
+
+    mockProps = {
+        email: 'test@localhost.com',
+        language: 'en'
+    };
+
+
+
+    wrapper = mount(
+        <IntlProvider locale={'en'} messages={messages}>
+          <Provider store={store}>
+            <SecurityContainer {...mockProps}/>
+          </Provider>
+        </IntlProvider>
+    );
+    fulldom = wrapper.find(SecurityContainer);
+    fulltext = wrapper.find(SecurityContainer).text();
+    email = wrapper.find(SecurityContainer).props().email;
+    language = wrapper.find(SecurityContainer).props().language;
+    dispatch = store.dispatch;
+  });
+
+
+  afterEach(() => {
+    fetchMock.restore()
+  });
+
+  it("Renders test", () => {
+      expect(language).toEqual('en');
+      expect(email).toEqual('test@localhost.com');
+  });
+
+  it("Clicks", () => {
+
+    fetchMock.post('http://localhost/profile/email',
+       {
+        type: actions.POST_EMAIL
+      });
+    expect(dispatch.calls.length).toEqual(0);
+    wrapper.find('#email-button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+  });
+
+});
