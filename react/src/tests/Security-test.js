@@ -473,7 +473,11 @@ const mockState = {
     location: 'dummy-location',
     csrf_token: 'csrf-token'
   },
-  config: { SECURITY_URL: 'dummy-url'}
+  config: {
+    DASHBOARD_URL: '/dummy-dash-url',
+    TOKEN_SERVICE_URL: '/dummy-tok-url',
+    SECURITY_URL: '/dummy-sec-url'
+  }
 };
 
 describe("Async component", () => {
@@ -509,16 +513,23 @@ describe("Async component", () => {
 
   it("Sagas requestPasswordChange", () => {
 
-    const generator = requestPasswordChange();
+    const oldLoc = window.location.href;
+    let mockWindow = {
+      location:{
+        href: oldLoc
+      }
+    };
+
+    const generator = requestPasswordChange(mockWindow);
 
     let next = generator.next();
     expect(next.value).toEqual(put(actions.stopConfirmationPassword()));
 
-    window.onbeforeunload = createSpy();
     next = generator.next();
-    const config = state => state.config;
+    expect(next.value.SELECT.args).toEqual([]);
+
     generator.next(mockState.config);
-    expect(window.location.href).toEqual('http://localhost:9876/context.html');
+    expect(mockWindow.location.href).toEqual('/dummy-tok-url/chpass?next=%2Fdummy-dash-url%2F%23chpass');
   });
 
   it("Sagas postDeleteAccount", () => {
@@ -527,18 +538,21 @@ describe("Async component", () => {
     let next = generator.next();
     expect(next.value).toEqual(put(actions.postConfirmDeletion()));
 
-    const get_state = state => state;
-    const state = generator.next(get_state);
+    next = generator.next();
+    expect(next.value.SELECT.args).toEqual([]);
 
     const data = {
         csrf_token: 'csrf-token'
     };
 
-    const resp = generator.next(call(deleteAccount, state.config, data));
-    expect(resp.value).toEqual('hoooo');
+    next = generator.next(mockState);
+    expect(next.value).toEqual(call(deleteAccount, mockState.config, data));
 
-    const end = generator.next();
-    expect(end.value).toEqual(put(resp));
+    const mockAction = {
+      type: "POST_SECURITY_TERMINATE_ACCOUNT_SUCCESS"
+    };
+    const end = generator.next(mockAction);
+    expect(end.value).toEqual(put(mockAction));
   });
 
 });
