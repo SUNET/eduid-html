@@ -108,6 +108,22 @@
     "defaultMessage": "CONFIRM USING SE-LEG"
   },
   {
+    "id": "ocf.request_data",
+    "defaultMessage": "CONFIRM USING FREJA EID"
+  },
+  {
+    "id": "ocf.open_app",
+    "defaultMessage": "OPEN FREJA EID"
+  },
+  {
+    "id": "ocf.not_on_mobile_title",
+    "defaultMessage": "Tip"
+  },
+  {
+    "id": "ocf.not_on_mobile_message",
+    "defaultMessage": "If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud."
+  },
+  {
     "id": "pd.given_name",
     "defaultMessage": "Given Name"
   },
