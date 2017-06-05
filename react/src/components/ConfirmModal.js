@@ -80,7 +80,6 @@ class ConfirmModal extends Component {
 }
 
 ConfirmModal.propTypes = {
-  title: PropTypes.object,
   placeholder: PropTypes.string,
   handleConfirm: PropTypes.func,
   confirming: PropTypes.string,

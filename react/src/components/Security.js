@@ -14,7 +14,7 @@ class Security extends Component {
 
   render () {
     if (this.props.redirect_to !== '') {
-        document.location = this.props.redirect_to;
+        window.location.href = this.props.redirect_to;
         return
     }
     let spinning = false,

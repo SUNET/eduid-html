@@ -4,10 +4,13 @@ import { shallow, mount, render } from 'enzyme';
 import { put, select, call } from "redux-saga/effects";
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import Security from 'components/Security';
+import DeleteModal from 'components/DeleteModal';
+import SecurityContainer from 'containers/Security';
 import * as actions from "actions/Security";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
+import { Provider } from 'react-redux';
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
@@ -590,10 +593,11 @@ describe("Security Component", () => {
 
     it("Renders", () => {
         const {wrapper, props} = setupComponent(),
-            form = wrapper.find('form'),
-            fieldset = wrapper.find('fieldset'),
-            email = wrapper.find('TextControl[name="security"]');
-        // TODO: not finished
+            table = wrapper.find('table.passwords'),
+            buttonChange = wrapper.find('EduIDButton#security-change-button'),
+            buttonDelete = wrapper.find('EduIDButton#delete-button'),
+            modalChange = wrapper.find('GenericConfirmModal'),
+            modalDelete = wrapper.find('DeleteModal');
     });
 });
 
@@ -607,52 +611,50 @@ const fakeStore = (state) => ({
 
 
 describe("Security Container", () => {
-  let fulltext,
-    email,
+  let mockProps,
     fulldom,
     language,
-    mockProps,
-    wrapper,
+    getWrapper,
     dispatch;
 
- beforeEach(() => {
+  beforeEach(() => {
     const store = fakeStore({
-        emails: {
+        security: {
             is_fetching: false,
             failed: false,
             error: '',
             message: '',
-            resending: {
-              is_fetching: false,
-              failed: false,
-              error: {},
-              message: ''
-            },
-            confirming: '',
-            emails: [],
-            email: '',
+            csrf_token: '',
+            credentials: [],
+            code: '',
+            confirming_change: false,
+            confirming_deletion: false,
+            location: '',
         },
-      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
+      config: {
+        SECURITY_URL: '/dummy-sec-url',
+        DASHBOARD_URL: '/dummy-dash-url',
+        TOKEN_SERVICE_URL: '/dummy-tok-url'
+      },
     });
 
     mockProps = {
-        email: 'test@localhost.com',
+        credentials: [],
         language: 'en'
     };
 
-
-
-    wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
-            <SecurityContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
-    );
-    fulldom = wrapper.find(SecurityContainer);
-    fulltext = wrapper.find(SecurityContainer).text();
-    email = wrapper.find(SecurityContainer).props().email;
-    language = wrapper.find(SecurityContainer).props().language;
+    getWrapper = function (props=mockProps) {
+      const wrapper = mount(
+          <IntlProvider locale={'en'} messages={messages}>
+            <Provider store={store}>
+              <SecurityContainer {...props}/>
+            </Provider>
+          </IntlProvider>
+      );
+      return wrapper;
+    };
+    fulldom = getWrapper().find(SecurityContainer);
+    language = getWrapper().find(SecurityContainer).props().language;
     dispatch = store.dispatch;
   });
 
@@ -663,18 +665,47 @@ describe("Security Container", () => {
 
   it("Renders test", () => {
       expect(language).toEqual('en');
-      expect(email).toEqual('test@localhost.com');
   });
 
-  it("Clicks", () => {
+  it("Clicks change", () => {
 
-    fetchMock.post('http://localhost/profile/email',
-       {
-        type: actions.POST_EMAIL
-      });
     expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#email-button').props().onClick();
+    getWrapper().find('#security-change-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
   });
 
+  it("Clicks delete", () => {
+
+    expect(dispatch.calls.length).toEqual(0);
+    getWrapper().find('#delete-button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+  });
+
+  it("Clicks confirm delete", () => {
+
+    fetchMock.post('/dummy-sec-url',
+       {
+        type: actions.POST_DELETE_ACCOUNT
+      });
+
+    const newProps = {
+        credentials: [],
+        language: 'en',
+        handleConfirmationDeletion: createSpy(),
+        confirming_deletion: true
+    };
+
+    expect(dispatch.calls.length).toEqual(0);
+    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(0);
+    const modal = getWrapper(newProps).find('DeleteModal'),
+          wrapped = modal.node,
+          mountedModal = mount(<IntlProvider locale={'en'} messages={messages}>
+                                   <DeleteModal {...wrapped.props} />
+                               </IntlProvider>);
+    
+    debugger;
+    mountedModal.find('#confirm-delete-account-button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(1);
+  });
 });

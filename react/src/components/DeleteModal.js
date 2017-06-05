@@ -8,6 +8,7 @@ import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 import EduiDAlert from 'components/EduIDAlert';
 
+const ModalBody = Modal.Body;
 
 class DeleteModal extends Component {
 
@@ -29,17 +30,18 @@ class DeleteModal extends Component {
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>
+                <ModalBody>
                     <div id="delete-account">
                         <p>{this.props.l10n('security.modal_info')}</p>
                         <p>{this.props.l10n('security.modal_notes')}</p>
                          <EduIDButton className="btn btn-danger btn-default"
+                              id="confirm-delete-account-button"
                               spinning={spinning}
                               onClick={this.props.handleConfirm} >
                             {this.props.l10n('security.confirm_button')}
                         </EduIDButton>
                     </div>
-                </Modal.Body>
+                </ModalBody>
                 <Modal.Footer>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal} >
@@ -54,7 +56,7 @@ class DeleteModal extends Component {
 }
 
 DeleteModal.propTypes = {
-  title: PropTypes.object,
+  title: PropTypes.any,
   showModal: PropTypes.bool,
   closeModal: PropTypes.func,
   handleConfirm: PropTypes.func,
