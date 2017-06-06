@@ -25,7 +25,10 @@ export function getSuggestedPasswordFail (err) {
   return {
     type: GET_SUGGESTED_PASSWORD_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: {
+      error: new Error(err),
+      message: err
+    }
   };
 }
 
@@ -57,7 +60,10 @@ export function passwordNotReady (msg) {
   return {
     type: PASSWORD_NOT_READY,
     error: true,
-    payload: msg
+    payload: {
+      error: new Error(msg),
+      message: msg
+    }
   };
 }
 
@@ -83,7 +89,10 @@ export function postPasswordChangeFail (err) {
   return {
     type: POST_SECURITY_CHANGE_PASSWORD_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: {
+      error: new Error(err),
+      message: err
+    }
   };
 }
 
