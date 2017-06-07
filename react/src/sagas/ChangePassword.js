@@ -28,12 +28,12 @@ export function fetchSuggestedPassword(config) {
 export function* postPasswordChange () {
     try {
         yield put(actions.startPasswordChange());
-        const state = yield select(state => state),
-              config = state.config,
+        const state = yield select(state => state);
+        const config = state.config,
               data = {
                 old_password: state.chpass.old_password,
                 new_password: state.chpass.new_password,
-                csrf_token: state.security.csrf_token
+                csrf_token: state.chpass.csrf_token
               };
         const change = yield call(postPassword, config, data);
         yield put(change);

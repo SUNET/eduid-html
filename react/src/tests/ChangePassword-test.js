@@ -56,7 +56,7 @@ describe("ChangePassword Actions", () => {
      const expectedAction = {
              type: actions.CHOOSE_CUSTOM_PASSWORD
            };
-     expect(actions.chooseCustomPassword(passwd)).toEqual(expectedAction);
+     expect(actions.chooseCustomPassword()).toEqual(expectedAction);
   });
 
   it("Valid custom password", () => {
@@ -65,7 +65,7 @@ describe("ChangePassword Actions", () => {
              type: actions.VALID_CUSTOM_PASSWORD,
              payload: passwd
            };
-     expect(actions.validCustomPassword()).toEqual(expectedAction);
+     expect(actions.validCustomPassword(passwd)).toEqual(expectedAction);
   });
 
   it("Action password not ready", () => {
@@ -111,7 +111,7 @@ describe("ChangePassword Actions", () => {
                 message: err
               }
            };
-     expect(actions.postPasswordChange(err)).toEqual(expectedAction);
+     expect(actions.postPasswordChangeFail(err)).toEqual(expectedAction);
   });
 
 });
@@ -132,7 +132,7 @@ describe("Reducers", () => {
 
   it("Receives a GET_SUGGESTED_PASSWORD action", () => {
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.GET_SUGGESTED_PASSWORD
@@ -154,13 +154,17 @@ describe("Reducers", () => {
   });
 
   it("Receives a GET_SUGGESTED_PASSWORD_SUCCESS action", () => {
-    const suggested = '2345';
+    const suggested = '2345',
+          csrf_token = 'csrf-token';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.GET_SUGGESTED_PASSWORD_SUCCESS,
-          payload: suggested
+          payload: {
+            suggested_password: suggested,
+            csrf_token: csrf_token
+          }
         }
       )
     ).toEqual(
@@ -169,7 +173,7 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
+        csrf_token: csrf_token,
         suggested_password: suggested,
         old_password: '',
         new_password: '',
@@ -181,7 +185,7 @@ describe("Reducers", () => {
   it("Receives a GET_SUGGESTED_PASSWORD_FAIL action", () => {
     const err = 'Bad error';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.GET_SUGGESTED_PASSWORD_FAIL,
@@ -210,7 +214,7 @@ describe("Reducers", () => {
   it("Receives a CHOOSE_SUGGESTED_PASSWORD action", () => {
     const passwd = '1234';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.CHOOSE_SUGGESTED_PASSWORD,
@@ -234,7 +238,7 @@ describe("Reducers", () => {
 
   it("Receives a CHOOSE_CUSTOM_PASSWORD action", () => {
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.CHOOSE_CUSTOM_PASSWORD
@@ -258,7 +262,7 @@ describe("Reducers", () => {
   it("Receives a VALID_CUSTOM_PASSWORD action", () => {
     const passwd = '1234';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.VALID_CUSTOM_PASSWORD,
@@ -284,7 +288,7 @@ describe("Reducers", () => {
     const passwd1 = '1234',
           passwd2 = '5678';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.POST_PASSWORD_CHANGE,
@@ -298,7 +302,7 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: false,
-        error: err,
+        error: '',
         message: '',
         csrf_token: '',
         suggested_password: '',
@@ -311,7 +315,7 @@ describe("Reducers", () => {
 
   it("Receives a START_PASSWORD_CHANGE action", () => {
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.START_PASSWORD_CHANGE
@@ -321,7 +325,7 @@ describe("Reducers", () => {
       {
         is_fetching: true,
         failed: false,
-        error: err,
+        error: '',
         message: '',
         csrf_token: '',
         suggested_password: '',
@@ -335,7 +339,7 @@ describe("Reducers", () => {
   it("Receives a POST_SECURITY_CHANGE_PASSWORD_SUCCESS action", () => {
     const msg = 'message';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS,
@@ -348,7 +352,7 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: false,
-        error: err,
+        error: '',
         message: msg,
         csrf_token: '',
         suggested_password: '',
@@ -362,7 +366,7 @@ describe("Reducers", () => {
   it("Receives a POST_SECURITY_CHANGE_PASSWORD_FAIL action", () => {
     const err = 'Error';
     expect(
-      securityReducer(
+      chpassReducer(
         mockState,
         {
           type: actions.POST_SECURITY_CHANGE_PASSWORD_FAIL,
@@ -378,7 +382,7 @@ describe("Reducers", () => {
         is_fetching: false,
         failed: true,
         error: err,
-        message: msg,
+        message: '',
         csrf_token: '',
         suggested_password: '',
         old_password: '',
@@ -394,8 +398,8 @@ const mockState = {
   chpass: {
     csrf_token: 'csrf-token',
     suggested_password: '',
-    old_password: '',
-    new_password: '',
+    old_password: 'old-pw',
+    new_password: 'new-pw',
     choose_custom: false,
   },
   config: {
@@ -412,7 +416,7 @@ describe("Async component", () => {
     const generator = requestSuggestedPassword();
 
     let next = generator.next();
-    expect(next.value).toEqual(put(actions.getSuggestedPaswsword()));
+    expect(next.value).toEqual(put(actions.getSuggestedPassword()));
 
     next = generator.next();
     const config = state => state.config;
@@ -437,14 +441,14 @@ describe("Async component", () => {
     expect(next.value).toEqual(put(actions.startPasswordChange()));
 
     next = generator.next();
-    const state = state => state;
-    next = generator.next(state);
+
     const data = {
       csrf_token: 'csrf-token',
       old_password: 'old-pw',
       new_password: 'new-pw'
     };
-    expect(next.value).toEqual(call(postPassword, state.config, data));
+    next = generator.next(mockState);
+    expect(next.value).toEqual(call(postPassword, mockState.config, data));
 
     const mockCredentials = {
       csrf_token: 'csrf-token',
@@ -530,6 +534,9 @@ describe("ChangePassword Container", () => {
     const store = fakeStore({
         security: {
             is_fetching: false,
+        },
+        chpass: {
+            is_fetching: false,
             failed: false,
             error: '',
             message: '',
@@ -544,6 +551,14 @@ describe("ChangePassword Container", () => {
             DASHBOARD_URL: '/dummy-dash-url',
             TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
+        personal_data: {
+            given_name: 'given-name',
+            surname: 'surname',
+            display_name: 'display-name'
+        },
+        emails: {
+            emails: []
+        }
     });
 
     mockProps = {
@@ -551,10 +566,7 @@ describe("ChangePassword Container", () => {
         choose_custom: false,
         user_input: '',
         errorMsg: '',
-        password_entropy: 0,
-        handlePassword: createSpy(),
-        handleChoice: createSpy(),
-        handleStartPasswordChange: createSpy()
+        password_entropy: 0
     };
 
     getWrapper = function (props=mockProps) {
@@ -586,10 +598,8 @@ describe("ChangePassword Container", () => {
           props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
     wrapper.find('#chpass-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(1);
   });
 
   it("Clicks change custom", () => {
@@ -598,10 +608,7 @@ describe("ChangePassword Container", () => {
             choose_custom: true,
             user_input: '',
             errorMsg: '',
-            password_entropy: 0,
-            handlePassword: createSpy(),
-            handleChoice: createSpy(),
-            handleStartPasswordChange: createSpy()
+            password_entropy: 0
           },
           wrapper = getWrapper(newProps),
           props = wrapper.find('ChangePassword').props();
