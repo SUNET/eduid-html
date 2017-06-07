@@ -28,6 +28,8 @@ class ChangePassword extends Component {
                                entropy={this.props.password_entropy}
                                ref={(field) => {this.pwField = field}}
                                handlePassword={this.props.handlePassword.bind(this)}
+                               name="custom-password-field-one"
+                               name_repeat="custom-password-field-two"
                                />);
         helpCustom = (
             <div className='password-format'
@@ -87,9 +89,14 @@ class ChangePassword extends Component {
 }
 
 ChangePassword.propTypes = {
+  is_fetching: PropTypes.bool,
   choose_custom: PropTypes.bool,
+  user_input: PropTypes.string,
   errorMsg: PropTypes.string,
   password_entropy: PropTypes.number,
+  handlePassword: PropTypes.func,
+  handleChoice: PropTypes.func,
+  handleStartPasswordChange: PropTypes.func,
 }
 
 export default i18n(ChangePassword);

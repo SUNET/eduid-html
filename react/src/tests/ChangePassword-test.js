@@ -12,7 +12,8 @@ import configureStore from 'redux-mock-store';
 import chpassReducer from "reducers/ChangePassword";
 import { Provider } from 'react-redux';
 
-import {  } from 'sagas/ChangePassword';
+import { requestSuggestedPassword, postPasswordChange,
+         fetchSuggestedPassword, postPassword} from 'sagas/ChangePassword';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
 
@@ -177,27 +178,16 @@ describe("Reducers", () => {
     );
   });
 
-
-
-
-
-
-
-
-
-  // por aqui
-
-  it("Receives a GET_CREDENTIALS_FAIL action", () => {
-    const err = 'Error',
-          error = new Error(err);
+  it("Receives a GET_SUGGESTED_PASSWORD_FAIL action", () => {
+    const err = 'Bad error';
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_CREDENTIALS_FAIL,
+          type: actions.GET_SUGGESTED_PASSWORD_FAIL,
           error: true,
           payload: {
-            error: error,
+            error: new Error(err),
             message: err
           }
         }
@@ -206,24 +196,25 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: true,
-        error: error,
-        message: err,
+        error: '',
+        message: '',
         csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
+        suggested_password: '',
+        old_password: '',
+        new_password: '',
+        choose_custom: false,
       }
     );
   });
 
-  it("Receives a START_CHANGE_PASSWORD action", () => {
+  it("Receives a CHOOSE_SUGGESTED_PASSWORD action", () => {
+    const passwd = '1234';
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.START_CHANGE_PASSWORD
+          type: actions.CHOOSE_SUGGESTED_PASSWORD,
+          payload: passwd
         }
       )
     ).toEqual(
@@ -233,21 +224,20 @@ describe("Reducers", () => {
         error: '',
         message: '',
         csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: true,
-        confirming_deletion: false,
-        location: ''
+        suggested_password: '',
+        old_password: '',
+        new_password: passwd,
+        choose_custom: false,
       }
     );
   });
 
-  it("Receives a STOP_CHANGE_PASSWORD action", () => {
+  it("Receives a CHOOSE_CUSTOM_PASSWORD action", () => {
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.STOP_CHANGE_PASSWORD
+          type: actions.CHOOSE_CUSTOM_PASSWORD
         }
       )
     ).toEqual(
@@ -257,50 +247,128 @@ describe("Reducers", () => {
         error: '',
         message: '',
         csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
+        suggested_password: '',
+        old_password: '',
+        new_password: '',
+        choose_custom: true,
       }
     );
   });
 
-  it("Receives a GET_CHANGE_PASSWORD action", () => {
+  it("Receives a VALID_CUSTOM_PASSWORD action", () => {
+    const passwd = '1234';
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_CHANGE_PASSWORD
+          type: actions.VALID_CUSTOM_PASSWORD,
+          payload: passwd
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        csrf_token: '',
+        suggested_password: '',
+        old_password: '',
+        new_password: passwd,
+        choose_custom: false,
+      }
+    );
+  });
+
+  it("Receives a POST_PASSWORD_CHANGE action", () => {
+    const passwd1 = '1234',
+          passwd2 = '5678';
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_PASSWORD_CHANGE,
+          payload: {
+            old: passwd1,
+            next: passwd2
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: err,
+        message: '',
+        csrf_token: '',
+        suggested_password: '',
+        old_password: passwd1,
+        new_password: passwd2,
+        choose_custom: false,
+      }
+    );
+  });
+
+  it("Receives a START_PASSWORD_CHANGE action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_PASSWORD_CHANGE
         }
       )
     ).toEqual(
       {
         is_fetching: true,
         failed: false,
-        error: '',
+        error: err,
         message: '',
         csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
+        suggested_password: '',
+        old_password: '',
+        new_password: '',
+        choose_custom: false,
       }
     );
   });
 
-  it("Receives a GET_CHANGE_PASSWORD_FAIL action", () => {
-    const err = 'Error',
-          error = new Error(err);
+  it("Receives a POST_SECURITY_CHANGE_PASSWORD_SUCCESS action", () => {
+    const msg = 'message';
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_CHANGE_PASSWORD_FAIL,
+          type: actions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS,
+          payload: {
+            message: msg
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: err,
+        message: msg,
+        csrf_token: '',
+        suggested_password: '',
+        old_password: '',
+        new_password: '',
+        choose_custom: false,
+      }
+    );
+  });
+
+  it("Receives a POST_SECURITY_CHANGE_PASSWORD_FAIL action", () => {
+    const err = 'Error';
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_SECURITY_CHANGE_PASSWORD_FAIL,
           error: true,
           payload: {
-            error: error,
+            error: new Error(err),
             message: err
           }
         }
@@ -309,178 +377,26 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: true,
-        error: error,
-        message: err,
+        error: err,
+        message: msg,
         csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
+        suggested_password: '',
+        old_password: '',
+        new_password: '',
+        choose_custom: false,
       }
     );
   });
 
-  it("Receives a START_DELETE_ACCOUNT action", () => {
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.START_DELETE_ACCOUNT
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: false,
-        error: '',
-        message: '',
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: true,
-        location: ''
-      }
-    );
-  });
-
-  it("Receives a STOP_DELETE_ACCOUNT action", () => {
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.STOP_DELETE_ACCOUNT
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: false,
-        error: '',
-        message: '',
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
-      }
-    );
-  });
-
-  it("Receives a POST_DELETE_ACCOUNT action", () => {
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.POST_DELETE_ACCOUNT
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: true,
-        failed: false,
-        error: '',
-        message: '',
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
-      }
-    );
-  });
-
-  it("Receives a POST_DELETE_ACCOUNT action", () => {
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.POST_DELETE_ACCOUNT
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: true,
-        failed: false,
-        error: '',
-        message: '',
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
-      }
-    );
-  });
-
-  it("Receives a POST_DELETE_ACCOUNT_SUCCESS action", () => {
-    const location = 'dummy-location';
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.POST_DELETE_ACCOUNT_SUCCESS,
-          payload: {
-            location: location
-          }
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: false,
-        error: '',
-        message: '',
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: location
-      }
-    );
-  });
-
-  it("Receives a POST_DELETE_ACCOUNT_FAIL action", () => {
-    const err = 'Error',
-          error = new Error(err);
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.POST_DELETE_ACCOUNT_FAIL,
-          error: true,
-          payload: {
-            error: error,
-            message: err
-          }
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: true,
-        error: error,
-        message: err,
-        csrf_token: '',
-        credentials: [],
-        code: '',
-        confirming_change: false,
-        confirming_deletion: false,
-        location: ''
-      }
-    );
-  });
 });
 
 const mockState = {
-  security: {
-    location: 'dummy-location',
-    csrf_token: 'csrf-token'
+  chpass: {
+    csrf_token: 'csrf-token',
+    suggested_password: '',
+    old_password: '',
+    new_password: '',
+    choose_custom: false,
   },
   config: {
     DASHBOARD_URL: '/dummy-dash-url',
@@ -491,17 +407,44 @@ const mockState = {
 
 describe("Async component", () => {
 
-  it("Sagas requestCredentials", () => {
+  it("Sagas requestSuggestedPassword", () => {
 
-    const generator = requestCredentials();
+    const generator = requestSuggestedPassword();
 
     let next = generator.next();
-    expect(next.value).toEqual(put(actions.getCredentials()));
+    expect(next.value).toEqual(put(actions.getSuggestedPaswsword()));
 
     next = generator.next();
     const config = state => state.config;
-    const credentials = generator.next(config);
-    expect(credentials.value).toEqual(call(fetchCredentials,config));
+    const suggested = generator.next(config);
+    expect(suggested.value).toEqual(call(fetchSuggestedPassword, config));
+
+    const mockSuggested = {
+      payload: {
+        csrf_token: 'csrf-token',
+        suggested_password: '1234'
+      }
+    };
+    next = generator.next(mockSuggested);
+    expect(next.value).toEqual(put(mockSuggested));
+  });
+
+  it("Sagas postPasswordChange", () => {
+
+    const generator = postPasswordChange();
+
+    let next = generator.next();
+    expect(next.value).toEqual(put(actions.startPasswordChange()));
+
+    next = generator.next();
+    const state = state => state;
+    next = generator.next(state);
+    const data = {
+      csrf_token: 'csrf-token',
+      old_password: 'old-pw',
+      new_password: 'new-pw'
+    };
+    expect(next.value).toEqual(call(postPassword, state.config, data));
 
     const mockCredentials = {
       csrf_token: 'csrf-token',
@@ -519,71 +462,19 @@ describe("Async component", () => {
     next = generator.next(mockCredentials);
     expect(next.value).toEqual(put(mockCredentials));
   });
-
-  it("Sagas requestPasswordChange", () => {
-
-    const oldLoc = window.location.href;
-    let mockWindow = {
-      location:{
-        href: oldLoc
-      }
-    };
-
-    const generator = requestPasswordChange(mockWindow);
-
-    let next = generator.next();
-    expect(next.value).toEqual(put(actions.stopConfirmationPassword()));
-
-    next = generator.next();
-    expect(next.value.SELECT.args).toEqual([]);
-
-    generator.next(mockState.config);
-    expect(mockWindow.location.href).toEqual('/dummy-tok-url/chpass?next=%2Fdummy-dash-url%2F%23chpass');
-  });
-
-  it("Sagas postDeleteAccount", () => {
-
-    const generator = postDeleteAccount();
-    let next = generator.next();
-    expect(next.value).toEqual(put(actions.postConfirmDeletion()));
-
-    next = generator.next();
-    expect(next.value.SELECT.args).toEqual([]);
-
-    const data = {
-        csrf_token: 'csrf-token'
-    };
-
-    next = generator.next(mockState);
-    expect(next.value).toEqual(call(deleteAccount, mockState.config, data));
-
-    const mockAction = {
-      type: "POST_SECURITY_TERMINATE_ACCOUNT_SUCCESS"
-    };
-    const end = generator.next(mockAction);
-    expect(end.value).toEqual(put(mockAction));
-  });
-
 });
 
 
-function setupComponent() {
+function setupComponent(custom=false) {
   const props = {
-    credentials: [],
-    creation_date: '',
-    last_used: '',
-    language: '',
-    langs: [],
-    errorMsg: '',
     is_fetching: false,
-    confirming_change: false,
-    confirming_deletion: false,
-    handleStartConfirmationPassword: createSpy(),
-    handleStopConfirmationPassword: createSpy(),
-    handleConfirmationPassword: createSpy(),
-    handleStartConfirmationDeletion: createSpy(),
-    handleStopConfirmationDeletion: createSpy(),
-    handleConfirmationDeletion: createSpy(),
+    choose_custom: custom,
+    user_input: '',
+    errorMsg: '',
+    password_entropy: 0,
+    handlePassword: createSpy(),
+    handleChoice: createSpy(),
+    handleStartPasswordChange: createSpy()
   };
 
   const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
@@ -595,15 +486,27 @@ function setupComponent() {
   }
 }
 
-describe("ChangePassword Component", () => {
+describe("ChangePassword Component suggested", () => {
 
     it("Renders", () => {
         const {wrapper, props} = setupComponent(),
-            table = wrapper.find('table.passwords'),
-            buttonChange = wrapper.find('EduIDButton#security-change-button'),
-            buttonDelete = wrapper.find('EduIDButton#delete-button'),
-            modalChange = wrapper.find('GenericConfirmModal'),
-            modalDelete = wrapper.find('DeleteModal');
+            form = wrapper.find('form#passwordsview-form'),
+            inputOldPassword = wrapper.find('TextControl[name="old_password"]'),
+            checkBoxCustom = wrapper.find('CheckBox'),
+            inputSuggested = wrapper.find('TextControl[name="suggested_password"]'),
+            button = wrapper.find('EduIDButton');
+    });
+});
+
+describe("ChangePassword Component custom", () => {
+
+    it("Renders", () => {
+        const {wrapper, props} = setupComponent(true),
+            form = wrapper.find('form#passwordsview-form'),
+            inputOldPassword = wrapper.find('TextControl[name="old_password"]'),
+            checkBoxCustom = wrapper.find('CheckBox'),
+            inputCustom = wrapper.find('PasswordField'),
+            button = wrapper.find('EduIDButton');
     });
 });
 
@@ -619,7 +522,7 @@ const fakeStore = (state) => ({
 describe("ChangePassword Container", () => {
   let mockProps,
     fulldom,
-    language,
+    chooseCustom,
     getWrapper,
     dispatch;
 
@@ -631,36 +534,41 @@ describe("ChangePassword Container", () => {
             error: '',
             message: '',
             csrf_token: '',
-            credentials: [],
-            code: '',
-            confirming_change: false,
-            confirming_deletion: false,
-            location: '',
+            suggested_password: '',
+            old_password: '',
+            new_password: '',
+            choose_custom: false,
         },
-      config: {
-        SECURITY_URL: '/dummy-sec-url',
-        DASHBOARD_URL: '/dummy-dash-url',
-        TOKEN_SERVICE_URL: '/dummy-tok-url'
-      },
+        config: {
+            SECURITY_URL: '/dummy-sec-url',
+            DASHBOARD_URL: '/dummy-dash-url',
+            TOKEN_SERVICE_URL: '/dummy-tok-url'
+        },
     });
 
     mockProps = {
-        credentials: [],
-        language: 'en'
+        is_fetching: false,
+        choose_custom: false,
+        user_input: '',
+        errorMsg: '',
+        password_entropy: 0,
+        handlePassword: createSpy(),
+        handleChoice: createSpy(),
+        handleStartPasswordChange: createSpy()
     };
 
     getWrapper = function (props=mockProps) {
       const wrapper = mount(
           <IntlProvider locale={'en'} messages={messages}>
             <Provider store={store}>
-              <SecurityContainer {...props}/>
+              <ChangePasswordContainer {...props}/>
             </Provider>
           </IntlProvider>
       );
       return wrapper;
     };
-    fulldom = getWrapper().find(SecurityContainer);
-    language = getWrapper().find(SecurityContainer).props().language;
+    fulldom = getWrapper().find(ChangePasswordContainer);
+    chooseCustom = getWrapper().find(ChangePasswordContainer).props().choose_custom;
     dispatch = store.dispatch;
   });
 
@@ -670,49 +578,64 @@ describe("ChangePassword Container", () => {
   });
 
   it("Renders test", () => {
-      expect(language).toEqual('en');
+      expect(chooseCustom).toEqual(false);
   });
 
-  it("Clicks change", () => {
+  it("Clicks change suggested", () => {
+    const wrapper = getWrapper(),
+          props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    getWrapper().find('#security-change-button').props().onClick();
+    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
+    wrapper.find('#chpass-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
+    expect(props.handleStartPasswordChange.calls.length).toEqual(1);
   });
 
-  it("Clicks delete", () => {
-
-    expect(dispatch.calls.length).toEqual(0);
-    getWrapper().find('#delete-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
-  });
-
-  it("Clicks confirm delete", () => {
-
-    fetchMock.post('/dummy-sec-url',
-       {
-        type: actions.POST_DELETE_ACCOUNT
-      });
-
+  it("Clicks change custom", () => {
     const newProps = {
-        credentials: [],
-        language: 'en',
-        handleConfirmationDeletion: createSpy(),
-        confirming_deletion: true
-    };
+            is_fetching: false,
+            choose_custom: true,
+            user_input: '',
+            errorMsg: '',
+            password_entropy: 0,
+            handlePassword: createSpy(),
+            handleChoice: createSpy(),
+            handleStartPasswordChange: createSpy()
+          },
+          wrapper = getWrapper(newProps),
+          props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(0);
-    const modal = getWrapper(newProps).find('DeleteModal'),
-          wrapped = modal.node,
-          mountedModal = mount(<IntlProvider locale={'en'} messages={messages}>
-                                   <DeleteModal {...wrapped.props} />
-                               </IntlProvider>);
-    
-    debugger;
-    mountedModal.find('#confirm-delete-account-button').props().onClick();
+    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
+    wrapper.find('#custom-password-field-one').value = '1234';
+    wrapper.find('#custom-password-field-two').value = '5678';
+    wrapper.find('#chpass-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
-    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(1);
+    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
+  });
+
+  it("Clicks change custom", () => {
+    const newProps = {
+            is_fetching: false,
+            choose_custom: true,
+            user_input: '',
+            errorMsg: '',
+            password_entropy: 0,
+            handlePassword: createSpy(),
+            handleChoice: createSpy(),
+            handleStartPasswordChange: createSpy()
+          },
+          wrapper = getWrapper(newProps),
+          props = wrapper.find('ChangePassword').props();
+
+    expect(dispatch.calls.length).toEqual(0);
+    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
+    wrapper.find('#custom-password-field-one').value = '1234';
+    wrapper.find('#custom-password-field-two').value = '1234';
+    wrapper.find('#chpass-button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+    expect(props.handleStartPasswordChange.calls.length).toEqual(1);
   });
 });
 

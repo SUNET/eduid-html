@@ -703,7 +703,6 @@ describe("Security Container", () => {
                                    <DeleteModal {...wrapped.props} />
                                </IntlProvider>);
     
-    debugger;
     mountedModal.find('#confirm-delete-account-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
     expect(newProps.handleConfirmationDeletion.calls.length).toEqual(1);
