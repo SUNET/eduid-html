@@ -612,13 +612,15 @@ const fakeStore = (state) => ({
 
 describe("Security Container", () => {
   let mockProps,
-    fulldom,
     language,
     getWrapper,
-    dispatch;
+    dispatch,
+    store;
 
   beforeEach(() => {
-    const store = fakeStore({
+
+    const getState = function (deleting) {
+      return {
         security: {
             is_fetching: false,
             failed: false,
@@ -628,22 +630,26 @@ describe("Security Container", () => {
             credentials: [],
             code: '',
             confirming_change: false,
-            confirming_deletion: false,
+            confirming_deletion: deleting,
             location: '',
         },
-      config: {
-        SECURITY_URL: '/dummy-sec-url',
-        DASHBOARD_URL: '/dummy-dash-url',
-        TOKEN_SERVICE_URL: '/dummy-tok-url'
-      },
-    });
+        config: {
+          SECURITY_URL: '/dummy-sec-url',
+          DASHBOARD_URL: '/dummy-dash-url',
+          TOKEN_SERVICE_URL: '/dummy-tok-url'
+        },
+      }
+    };
 
     mockProps = {
         credentials: [],
         language: 'en'
     };
 
-    getWrapper = function (props=mockProps) {
+    getWrapper = function (deleting=false, props=mockProps) {
+      store = fakeStore(getState(deleting));
+      dispatch = store.dispatch;
+
       const wrapper = mount(
           <IntlProvider locale={'en'} messages={messages}>
             <Provider store={store}>
@@ -653,9 +659,7 @@ describe("Security Container", () => {
       );
       return wrapper;
     };
-    fulldom = getWrapper().find(SecurityContainer);
     language = getWrapper().find(SecurityContainer).props().language;
-    dispatch = store.dispatch;
   });
 
 
@@ -691,20 +695,14 @@ describe("Security Container", () => {
     const newProps = {
         credentials: [],
         language: 'en',
-        handleConfirmationDeletion: createSpy(),
         confirming_deletion: true
     };
 
     expect(dispatch.calls.length).toEqual(0);
-    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(0);
-    const modal = getWrapper(newProps).find('DeleteModal'),
-          wrapped = modal.node,
-          mountedModal = mount(<IntlProvider locale={'en'} messages={messages}>
-                                   <DeleteModal {...wrapped.props} />
-                               </IntlProvider>);
-    
+    getWrapper(true, newProps).find('DeleteModal');
+
+    debugger;
     mountedModal.find('#confirm-delete-account-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
-    expect(newProps.handleConfirmationDeletion.calls.length).toEqual(1);
   });
 });

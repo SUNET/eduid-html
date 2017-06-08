@@ -45,17 +45,21 @@ const mapDispatchToProps = (dispatch, props) => {
     handleStartPasswordChange: function (event) {
       event.preventDefault();
       const oldPassword = this.oldPwField.state.value;
-      let newPassword = '';
-      if (this.props.choose_custom) {
-        if (this.props.new_password) {
-          newPassword = this.props.new_password;
-        } else {
-          dispatch(actions.passwordNotReady(this.props.l10n('chpass.pw_not_ready')));
-        }
+      if (!oldPassword) {
+        dispatch(actions.passwordNotReady(this.props.l10n('chpass.no_old_pw')));
       } else {
-        newPassword =  this.props.suggested_password;
+        let newPassword = '';
+        if (this.props.choose_custom) {
+          if (this.props.new_password) {
+            newPassword = this.props.new_password;
+          } else {
+            dispatch(actions.passwordNotReady(this.props.l10n('chpass.pw_not_ready')));
+          }
+        } else {
+          newPassword =  this.props.suggested_password;
+        }
+        dispatch(actions.postPasswordChange(oldPassword, newPassword));
       }
-      dispatch(actions.postPasswordChange(oldPassword, newPassword));
     },
   }
 };

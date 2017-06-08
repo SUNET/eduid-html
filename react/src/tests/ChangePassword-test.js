@@ -528,10 +528,17 @@ describe("ChangePassword Container", () => {
     fulldom,
     chooseCustom,
     getWrapper,
-    dispatch;
+    dispatch,
+    store;
+
+    const mockEvent = {
+            preventDefault: () => {}
+          };
 
   beforeEach(() => {
-    const store = fakeStore({
+
+    const getState = function (custom) {
+      return {
         security: {
             is_fetching: false,
         },
@@ -541,10 +548,10 @@ describe("ChangePassword Container", () => {
             error: '',
             message: '',
             csrf_token: '',
-            suggested_password: '',
+            suggested_password: 'abcd',
             old_password: '',
-            new_password: '',
-            choose_custom: false,
+            new_password: 'defg',
+            choose_custom: custom
         },
         config: {
             SECURITY_URL: '/dummy-sec-url',
@@ -559,17 +566,23 @@ describe("ChangePassword Container", () => {
         emails: {
             emails: []
         }
-    });
+      }
+    };
 
     mockProps = {
         is_fetching: false,
         choose_custom: false,
+        suggested_password: 'abcd',
+        new_password: 'defg',
         user_input: '',
         errorMsg: '',
         password_entropy: 0
     };
 
-    getWrapper = function (props=mockProps) {
+    getWrapper = function (custom=false, props=mockProps) {
+      const state = getState(custom);
+      store = fakeStore(state);
+      dispatch = store.dispatch;
       const wrapper = mount(
           <IntlProvider locale={'en'} messages={messages}>
             <Provider store={store}>
@@ -581,7 +594,6 @@ describe("ChangePassword Container", () => {
     };
     fulldom = getWrapper().find(ChangePasswordContainer);
     chooseCustom = getWrapper().find(ChangePasswordContainer).props().choose_custom;
-    dispatch = store.dispatch;
   });
 
 
@@ -598,51 +610,52 @@ describe("ChangePassword Container", () => {
           props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#chpass-button').props().onClick();
+    wrapper.find('TextControl').node.state.value = '1234';
+    wrapper.find('#chpass-button').props().onClick(mockEvent);
     expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.calls[0].arguments[0].type).toEqual(actions.POST_PASSWORD_CHANGE);
+    expect(dispatch.calls[0].arguments[0].payload.old).toEqual('1234');
+    expect(dispatch.calls[0].arguments[0].payload.next).toEqual('abcd');
   });
 
   it("Clicks change custom", () => {
     const newProps = {
             is_fetching: false,
             choose_custom: true,
+            new_password: 'abcd',
             user_input: '',
             errorMsg: '',
             password_entropy: 0
           },
-          wrapper = getWrapper(newProps),
+          wrapper = getWrapper(true, newProps),
           props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
-    wrapper.find('#custom-password-field-one').value = '1234';
-    wrapper.find('#custom-password-field-two').value = '5678';
-    wrapper.find('#chpass-button').props().onClick();
+    wrapper.find('TextControl').node.state.value = '1234';
+    wrapper.find('#chpass-button').props().onClick(mockEvent);
     expect(dispatch.calls.length).toEqual(1);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
+    expect(dispatch.calls[0].arguments[0].type).toEqual(actions.POST_PASSWORD_CHANGE);
+    expect(dispatch.calls[0].arguments[0].payload.old).toEqual('1234');
+    expect(dispatch.calls[0].arguments[0].payload.next).toEqual('defg');
   });
 
   it("Clicks change custom", () => {
     const newProps = {
             is_fetching: false,
             choose_custom: true,
+            new_password: '',
             user_input: '',
             errorMsg: '',
-            password_entropy: 0,
-            handlePassword: createSpy(),
-            handleChoice: createSpy(),
-            handleStartPasswordChange: createSpy()
+            password_entropy: 0
           },
-          wrapper = getWrapper(newProps),
+          wrapper = getWrapper(true, newProps),
           props = wrapper.find('ChangePassword').props();
 
     expect(dispatch.calls.length).toEqual(0);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(0);
-    wrapper.find('#custom-password-field-one').value = '1234';
-    wrapper.find('#custom-password-field-two').value = '1234';
-    wrapper.find('#chpass-button').props().onClick();
+    wrapper.find('TextControl').node.state.value = '1234';
+    wrapper.find('#chpass-button').props().onClick(mockEvent);
     expect(dispatch.calls.length).toEqual(1);
-    expect(props.handleStartPasswordChange.calls.length).toEqual(1);
+    expect(dispatch.calls[0].arguments[0].type).toEqual(actions.POST_PASSWORD_CHANGE);
   });
 });
 
