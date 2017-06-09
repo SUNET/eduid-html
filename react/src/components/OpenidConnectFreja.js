@@ -1,5 +1,6 @@
 
 import React, { PropTypes } from 'react';
+import withUserAgent from 'react-useragent';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -12,8 +13,9 @@ import 'style/OpenidConnect.scss';
 let OpenidConnectFreja = React.createClass({
 
   render: function () {
+    const supportedDevices = ['AndroidOS', 'iOS'];
+    const isMobile = supportedDevices.includes(this.props.ua.os);
 
-    const isMobile = window.innerWidth <= 500;
     if (!isMobile) {
       return (
         <div>
@@ -73,4 +75,4 @@ OpenidConnectFreja.propTypes = {
   handleOpenFrejaApp: PropTypes.func
 };
 
-export default i18n(OpenidConnectFreja);
+export default withUserAgent(i18n(OpenidConnectFreja));

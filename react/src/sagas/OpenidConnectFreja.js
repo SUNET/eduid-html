@@ -7,7 +7,7 @@ import { postOpenidFrejaFail } from "actions/OpenidConnectFreja";
 export function* requestOpenidFrejaData () {
   try {
     let nin;
-    let pendingNin = document.querySelector('td[class=identifier]');  // I guess this will break if the user somehow has more than one pending NIN
+    let pendingNin = document.querySelector('td[class=identifier]');  // If a user has more than one unconfirmed NIN the first in the list will be picked
     // Check if there is a pending NIN before trying form input
     if (pendingNin) nin = pendingNin.textContent;
     if (!nin) {

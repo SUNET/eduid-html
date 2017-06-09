@@ -8,39 +8,38 @@ import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-import * as actions from "actions/OpenidConnect";
-import openidConnectReducer from "reducers/OpenidConnect";
-import OpenidConnect from 'components/OpenidConnect'
+import * as actions from "actions/OpenidConnectFreja";
+import openidConnectFrejaReducer from "reducers/OpenidConnectFreja";
+import OpenidConnectFreja from 'components/OpenidConnectFreja'
 
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import OpenidConnectContainer from "containers/OpenidConnect";
+import OpenidConnectFrejaContainer from "containers/OpenidConnectFreja";
 
-const messages = require('../../i18n/l10n/en')
+const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
 
+describe("OIDC Freja Actions", () => {
 
-describe("OIDC Actions", () => {
-
-  it("should create an action to trigger fetching a qrcode", () => {
+  it("should create an action to trigger fetching of request data", () => {
     const expectedAction = {
-      type: actions.POST_OIDC_PROOFING_PROOFING
+      type: actions.POST_OIDC_PROOFING_FREJA_PROOFING
     };
-    expect(actions.postOpenid()).toEqual(expectedAction);
+    expect(actions.postOpenidFreja()).toEqual(expectedAction);
   });
 
-  it("should create an action to signal an error fetching a qrcode", () => {
+  it("should create an action to signal an error fetching request data", () => {
     const err = 'Bad error';
     const expectedAction = {
-      type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
+      type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
       error: true,
       payload: {
         error: 'Bad error',
         message: 'Bad error'
       }
     };
-    expect(actions.postOpenidFail(err)).toEqual(expectedAction);
+    expect(actions.postOpenidFrejaFail(err)).toEqual(expectedAction);
   });
 });
 
@@ -49,53 +48,50 @@ describe("Reducers", () => {
   const mockState = {
     is_fetching: false,
     failed: false,
-    qr_img: "code",
-    qr_code: 'nonce'
+    iaRequestData: "",
   };
 
-  it("Receives a POST_OIDC_PROOFING_PROOFING action", () => {
+  it("Receives a POST_OIDC_PROOFING_FREJA_PROOFING action", () => {
     expect(
-      openidConnectReducer(
+      openidConnectFrejaReducer(
         mockState,
         {
-          type: actions.POST_OIDC_PROOFING_PROOFING
+          type: actions.POST_OIDC_PROOFING_FREJA_PROOFING
         }
       )
     ).toEqual(
       {
-        qr_img: "code",
-        qr_code: "nonce",
-        is_fetching: true,
+				is_fetching: true,
+				failed: false,
+				iaRequestData: "",
+      }
+    );
+  });
+
+  it("Receives a POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS action", () => {
+    expect(
+      openidConnectFrejaReducer(
+        mockState,
+        {
+          type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS,
+          payload: { iaRequestData: 'def456' }
+        }
+      )
+    ).toEqual(
+      {
+				is_fetching: false,
+				iaRequestData: "def456",
         failed: false
       }
     );
   });
 
-  it("Receives a POST_OIDC_PROOFING_PROOFING_SUCCESS action", () => {
+  it("Receives a POST_OIDC_PROOFING_FREJA_PROOFING_FAIL action", () => {
     expect(
-      openidConnectReducer(
+      openidConnectFrejaReducer(
         mockState,
         {
-          type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
-          payload: { qr_img: 'new code', qr_code: 'new nonce' }
-        }
-      )
-    ).toEqual(
-      {
-        qr_img: "new code",
-        qr_code: "new nonce",
-        is_fetching: false,
-        failed: false
-      }
-    );
-  });
-
-  it("Receives a POST_OIDC_PROOFING_PROOFING_FAIL action", () => {
-    expect(
-      openidConnectReducer(
-        mockState,
-        {
-          type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
+          type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
           error: true,
           payload: {
             error: "Bad error",
@@ -105,9 +101,8 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        qr_img: "code",
-        qr_code: "nonce",
-        is_fetching: false,
+				is_fetching: false,
+				iaRequestData: "",
         failed: true,
         error: "Bad error"
       }
@@ -116,7 +111,7 @@ describe("Reducers", () => {
 
   it("Receives a DUMMY action", () => {
     expect(
-      openidConnectReducer(
+      openidConnectFrejaReducer(
         mockState,
         {
           type: "DUMMY_ACTION",
@@ -127,8 +122,7 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: false,
-        qr_img: "code",
-        qr_code: "nonce"
+        iaRequestData: "",
       }
     );
   });
@@ -137,13 +131,12 @@ describe("Reducers", () => {
 
 function setupComponent() {
   const props = {
-    handleGetQRCode: createSpy(),
-    qr_img: 'code',
-    qr_code: 'nonce'
+    handleOpenFrejaApp: createSpy(),
+    iaRequestData: "abc123",
   };
 
   const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
-                              <OpenidConnect {...props} />
+                              <OpenidConnectFreja {...props} />
                           </IntlProvider>);
 
   return {
@@ -152,30 +145,24 @@ function setupComponent() {
   };
 }
 
-describe("OpenidConnect Component", () => {
+describe("OpenidConnectFreja Component", () => {
 
   it("Renders", () => {
     const { wrapper, props } = setupComponent(),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
-          button = wrapper.find('EduIDButton'),
-          divQrcode = wrapper.find('div#qrcode'),
-          img = wrapper.find('img'),
-          caption = wrapper.find('figcaption');
+          button = wrapper.find('EduIDButton');
 
     expect(form.hasClass('form-horizontal')).toBeTruthy();
     expect(form.contains(fieldset.get(0))).toBeTruthy();
     expect(fieldset.contains(button.get(0))).toBeTruthy();
-    expect(divQrcode.contains(img.get(0))).toBeTruthy();
 
     expect(form.props()).toContain({role: 'form'});
-    expect(fieldset.props()).toContain({id: 'openid-connect'});
-    expect(img.props()).toContain({src: 'code'});
-    expect(caption).toBeTruthy();
+    expect(fieldset.props()).toContain({id: 'openid-connect-freja'});
 
-    expect(props.handleGetQRCode.calls.length).toEqual(0);
+    expect(props.handleOpenFrejaApp.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleGetQRCode.calls.length).toEqual(1);
+    expect(props.handleOpenFrejaApp.calls.length).toEqual(1);
   })
 });
 
@@ -187,41 +174,36 @@ const fakeStore = (state) => ({
   getState: () => ({ ...state })
 });
 
-describe("OpenidConnect Container", () => {
+describe("OpenidConnectFreja Container", () => {
   let fulltext,
-      qrcode,
-      nonce,
+      iaRequestData,
       mockProps,
       wrapper,
       dispatch;
 
   beforeEach(() => {
     const store = fakeStore({
-      openid_data: {
+      openid_freja_data: {
         is_fetching: false,
         failed: false,
-        qr_img: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        qr_code: 'new nonce'
+        iaRequestData: 'abc123'
       },
-      config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
+      config: {OIDC_PROOFING_FREJA_URL: 'http://localhost/services/oidc-proofing/freja/proofing'},
     });
 
     mockProps = {
-      qr_img: 'data: old code',
-      qr_code: 'old nonce'
+      iaRequestData: 'abc123',
     };
 
     wrapper = mount(
         <IntlProvider locale={'en'} messages={messages}>
           <Provider store={store}>
-            <OpenidConnectContainer {...mockProps}/>
+            <OpenidConnectFrejaContainer {...mockProps}/>
           </Provider>
         </IntlProvider>
     );
 
-    fulltext = wrapper.find(OpenidConnectContainer).text();
-    qrcode = wrapper.find('img').props().src;
-    nonce = wrapper.find('figcaption').text();
+    fulltext = wrapper.find(OpenidConnectFrejaContainer).text();
     dispatch = store.dispatch;
   });
 
@@ -231,17 +213,19 @@ describe("OpenidConnect Container", () => {
   });
 
   it("Renders", () => {
-    expect(qrcode).toEqual('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-    expect(nonce).toEqual('new nonce');
+    expect(iaRequestData).toEqual('frejaeid://identify?iaRequestData=abc123');
   });
 
   it("Clicks", () => {
 
-    fetchMock.post('http://localhost/oidc',
+    fetchMock.post('http://localhost/services/oidc-proofing/freja/proofing',
        {
-        type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
-        payload: {qr_img: 'new code', qr_code: 'new nonce'}
+        type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS,
+        payload: {iaRequestData: 'abc123'}
       });
+
+    iaRequestData = wrapper.find('Button').props().href;
+    expect(iaRequestData).toEqual('frejaeid://identify?iaRequestData=abc123');
 
     expect(dispatch.calls.length).toEqual(0);
     wrapper.find('Button').props().onClick();
@@ -253,42 +237,41 @@ describe("OpenidConnect Container", () => {
 
 const state = {
 config : {
-    OIDC_PROOFING_URL: 'http://localhost/services/personal-data/user'
+    OIDC_PROOFING_FREJA_URL: 'http://localhost/services/oidc-proofing/freja/proofing'
 }
 };
 
-import {requestOpenidQRcode, fetchQRcode} from '../sagas/OpenidConnect';
+import {requestOpenidFrejaData, fetchFrejaData} from '../sagas/OpenidConnectFreja';
 import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
-    it("Sagas requestOpenidQRcode", () => {
+    it("Sagas requestOpenidFrejaData", () => {
 
-       const generator = requestOpenidQRcode();
+       const generator = requestOpenidFrejaData();
 
        let next = generator.next();
-       let debug = select(state => state.config.OIDC_PROOFING_URL);
+       let debug = select(state => state.config.OIDC_PROOFING_FREJA_URL);
        // WE need modfied the following selector due a problems with indent.
        // The test fails if we dont do that, previous selector:
        // function (state) {
 	   //                     return state.config.OIDC_PROOFING_URL;
 	   //                 }
        next.value.SELECT.selector = function (state) {
-	      return state.config.OIDC_PROOFING_URL;
-	    }
+         return state.config.OIDC_PROOFING_FREJA_URL;
+       };
 
        expect(next.value).toEqual(debug);
 
-       const oidcData = generator.next(next.value);
+       const oidcFrejaData = generator.next(next.value);
        const  data = {
                 'nin': 'testing'
               };
-       expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
+       expect(oidcFrejaData.value).toEqual(call(fetchFrejaData, debug, data));
 
-       next = generator.next(oidcData.value)
-       expect(next.value).toEqual(put(oidcData.value));
+       next = generator.next(oidcFrejaData.value);
+       expect(next.value).toEqual(put(oidcFrejaData.value));
 
     });
 
 });
-
