@@ -36,6 +36,7 @@ class DeleteModal extends Component {
                         <p>{this.props.l10n('security.modal_notes')}</p>
                          <EduIDButton className="btn btn-danger btn-default"
                               id="confirm-delete-account-button"
+                              ref={(button) => {this.deleteButton = button}}
                               spinning={spinning}
                               onClick={this.props.handleConfirm} >
                             {this.props.l10n('security.confirm_button')}

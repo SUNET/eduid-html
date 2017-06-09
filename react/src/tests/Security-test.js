@@ -683,6 +683,7 @@ describe("Security Container", () => {
     expect(dispatch.calls.length).toEqual(0);
     getWrapper().find('#delete-button').props().onClick();
     expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.calls[0].arguments[0].type).toEqual("START_DELETE_ACCOUNT");
   });
 
   it("Clicks confirm delete", () => {
@@ -699,10 +700,9 @@ describe("Security Container", () => {
     };
 
     expect(dispatch.calls.length).toEqual(0);
-    getWrapper(true, newProps).find('DeleteModal');
-
-    debugger;
-    mountedModal.find('#confirm-delete-account-button').props().onClick();
+    const deleteModal = getWrapper(true, newProps).find('DeleteModal');
+    deleteModal.node.deleteButton.props.onClick();
     expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.calls[0].arguments[0].type).toEqual('POST_DELETE_ACCOUNT');
   });
 });
