@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cb8f108732a7393c60f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "db2198e1973dc88aa95c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -48673,7 +48673,7 @@
 	        case 0:
 	          _context.prev = 0;
 	          nin = void 0;
-	          pendingNin = document.querySelector('td[class=identifier]'); // I guess this will break if the user somehow has more than one pending NIN
+	          pendingNin = document.querySelector('td[class=identifier]'); // If a user has more than one unconfirmed NIN the first in the list will be picked
 	          // Check if there is a pending NIN before trying form input
 	
 	          if (pendingNin) nin = pendingNin.textContent;
