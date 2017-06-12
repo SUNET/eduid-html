@@ -20,6 +20,13 @@ const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
 
+Object.defineProperty(navigator, "userAgent", {
+  get: function () {
+    return this.testUserAgent;
+  }
+});
+
+
 describe("OIDC Freja Actions", () => {
 
   it("should create an action to trigger fetching of request data", () => {
@@ -132,7 +139,7 @@ describe("Reducers", () => {
 function setupComponent() {
   const props = {
     handleOpenFrejaApp: createSpy(),
-    iaRequestData: "abc123",
+    iaRequestData: "",
   };
 
   const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
@@ -145,9 +152,11 @@ function setupComponent() {
   };
 }
 
-describe("OpenidConnectFreja Component", () => {
+describe("OpenidConnectFreja Component using a mobile device", () => {
 
   it("Renders", () => {
+    navigator.testUserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36"; // Mobile
+
     const { wrapper, props } = setupComponent(),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
@@ -160,12 +169,30 @@ describe("OpenidConnectFreja Component", () => {
     expect(form.props()).toContain({role: 'form'});
     expect(fieldset.props()).toContain({id: 'openid-connect-freja'});
 
+    expect(button.hasClass('btn')).toBeTruthy();
     expect(props.handleOpenFrejaApp.calls.length).toEqual(0);
     button.props().onClick();
     expect(props.handleOpenFrejaApp.calls.length).toEqual(1);
   })
 });
 
+describe("OpenidConnectFreja Component using a non mobile device", () => {
+
+  it("Renders", () => {
+    navigator.testUserAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0"; // Desktop
+
+    const { wrapper, props } = setupComponent(),
+          heading = wrapper.find('h4'),
+          msg = wrapper.find('p'),
+          button = wrapper.find('EduIDButton');
+
+    expect(heading.exists()).toBeTruthy();
+    expect(msg.exists()).toBeTruthy();
+
+    expect(button.exists()).toBeFalsy();
+
+  })
+});
 
 const fakeStore = (state) => ({
   default: () => {},
@@ -174,7 +201,62 @@ const fakeStore = (state) => ({
   getState: () => ({ ...state })
 });
 
-describe("OpenidConnectFreja Container", () => {
+describe("OpenidConnectFreja Container before initiated vetting", () => {
+
+  let fulltext,
+      mockProps,
+      wrapper,
+      dispatch;
+
+  beforeEach(() => {
+    navigator.testUserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36"; // Mobile
+    const store = fakeStore({
+      openid_freja_data: {
+        is_fetching: false,
+        failed: false,
+        iaRequestData: ''
+      },
+      config: {OIDC_PROOFING_FREJA_URL: 'http://localhost/services/oidc-proofing/freja/proofing'},
+    });
+
+    mockProps = {
+      iaRequestData: '',
+    };
+
+    wrapper = mount(
+        <IntlProvider locale={'en'} messages={messages}>
+          <Provider store={store}>
+            <OpenidConnectFrejaContainer {...mockProps}/>
+          </Provider>
+        </IntlProvider>
+    );
+
+    fulltext = wrapper.find(OpenidConnectFrejaContainer).text();
+    dispatch = store.dispatch;
+  });
+
+
+  afterEach(() => {
+    fetchMock.restore()
+  });
+
+  it("Clicks", () => {
+    fetchMock.post('http://localhost/services/oidc-proofing/freja/proofing',
+      {
+        type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
+        payload: {iaRequestData: 'abc123'}
+      });
+
+    expect(dispatch.calls.length).toEqual(0);
+    wrapper.find('Button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+  });
+
+});
+
+
+describe("OpenidConnectFreja Container after initiated vetting", () => {
+
   let fulltext,
       iaRequestData,
       mockProps,
@@ -182,6 +264,7 @@ describe("OpenidConnectFreja Container", () => {
       dispatch;
 
   beforeEach(() => {
+    navigator.testUserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36"; // Mobile
     const store = fakeStore({
       openid_freja_data: {
         is_fetching: false,
@@ -212,24 +295,9 @@ describe("OpenidConnectFreja Container", () => {
     fetchMock.restore()
   });
 
-  it("Renders", () => {
-    expect(iaRequestData).toEqual('frejaeid://identify?iaRequestData=abc123');
-  });
-
-  it("Clicks", () => {
-
-    fetchMock.post('http://localhost/services/oidc-proofing/freja/proofing',
-       {
-        type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS,
-        payload: {iaRequestData: 'abc123'}
-      });
-
+  it("Changes to link", () => {
     iaRequestData = wrapper.find('Button').props().href;
     expect(iaRequestData).toEqual('frejaeid://identify?iaRequestData=abc123');
-
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('Button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
   });
 
 });
@@ -260,7 +328,6 @@ describe("Async component", () => {
        next.value.SELECT.selector = function (state) {
          return state.config.OIDC_PROOFING_FREJA_URL;
        };
-
        expect(next.value).toEqual(debug);
 
        const oidcFrejaData = generator.next(next.value);

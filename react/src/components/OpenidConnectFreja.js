@@ -18,7 +18,7 @@ let OpenidConnectFreja = React.createClass({
 
     if (!isMobile) {
       return (
-        <div>
+        <div id="openid-connect-freja-tip">
           <h4>{this.props.l10n('ocf.not_on_mobile_title')}</h4>
           <p>{this.props.l10n('ocf.not_on_mobile_message')}</p>
         </div>

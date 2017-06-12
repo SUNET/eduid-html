@@ -9,7 +9,7 @@ const EduIDButton = React.createClass({
   render:  function () {
     const { spinning, ...other } = this.props,
           classes = spinning && 'active has-spinner' || 'has-spinner',
-          // TODO: Fix this line to disable button when is not necesasry
+          // TODO: Fix this line to disable button when is not necessary
           // disabled = spinning && true || false;
           disabled = false;
     return (
