@@ -431,6 +431,16 @@ const msgs = {
           id="security.confirm_button"
           defaultMessage={`Confirm deletion of eduID account`} />),
 
+    'security.password_credential_type': (
+        <FormattedMessage
+          id="security.password_credential_type"
+          defaultMessage={`Password`} />),
+
+    'security.confirm_title_chpass': (
+        <FormattedMessage
+          id="security.confirm_title_chpass"
+          defaultMessage={`Secure password change`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"

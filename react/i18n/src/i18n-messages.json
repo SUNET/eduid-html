@@ -236,6 +236,14 @@
     "defaultMessage": "Confirm deletion of eduID account"
   },
   {
+    "id": "security.password_credential_type",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "security.confirm_title_chpass",
+    "defaultMessage": "Secure password change"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
