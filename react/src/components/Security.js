@@ -67,7 +67,6 @@ class Security extends Component {
                 showModal={this.props.confirming_change}
                 closeModal={this.props.handleStopConfirmationPassword}
                 finishModal={this.props.handleConfirmationPassword}
-                change_password={this.props.change_password}
           />
           <DeleteModal
                 title={this.props.l10n('security.confirm_title_deletion')}

@@ -20,6 +20,7 @@ const mapStateToProps = (state, props) => {
     password_entropy: state.config.PASSWORD_ENTROPY,
     password_length: state.config.PASSWORD_LENGTH,
     user_input: userInput,
+    next_url: state.chpass.next_url
   }
 };
 

@@ -17,6 +17,11 @@ class ChangePassword extends Component {
 
   render () {
 
+    if (this.props.next_url !== '') {
+        window.location.href = this.props.next_url;
+        return
+    }
+
     let form,
         helpCustom = "",
         spinning = false;
@@ -92,6 +97,7 @@ ChangePassword.propTypes = {
   is_fetching: PropTypes.bool,
   choose_custom: PropTypes.bool,
   user_input: PropTypes.string,
+  next_url: PropTypes.string,
   errorMsg: PropTypes.string,
   password_entropy: PropTypes.number,
   handlePassword: PropTypes.func,
@@ -100,8 +106,3 @@ ChangePassword.propTypes = {
 }
 
 export default i18n(ChangePassword);
-
-
-
-
-

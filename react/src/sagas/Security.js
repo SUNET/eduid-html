@@ -29,7 +29,7 @@ export function fetchCredentials(config) {
 }
 
 
-export function* requestPasswordChange (window=window) {
+export function* requestPasswordChange (windou) {
     try {
         yield put(stopConfirmationPassword());
         const config = yield select(state => state.config),
@@ -39,7 +39,11 @@ export function* requestPasswordChange (window=window) {
               nextURL = dashURL + '/#chpass',
               url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 
-        window.location.href = url;
+        if (windou !== undefined && windou.location !== undefined) {
+            windou.location.href = url;
+        } else {
+            window.location.href = url;
+        }
 
     } catch(error) {
         yield put(getPasswordChangeFail(error.toString()));

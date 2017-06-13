@@ -43,6 +43,7 @@ import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
+import ChangePasswordContainer from 'containers/ChangePassword';
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 /* i18n */
@@ -131,6 +132,9 @@ const init_app = function (target) {
                                   case 'security':
                                       return (<SecurityContainer />);
                                       break;
+                                  case 'chpass':
+                                      return (<ChangePasswordContainer />);
+                                      break;
                                 default:
                                       return (<PersonalDataContainer />);
                               }
@@ -141,6 +145,7 @@ const init_app = function (target) {
                               <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
                               <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
                               <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
+                              <li><Link to="/profile/#chpass" id="chpass-router-link">Security</Link></li>
                             </ul>
                           </div>
                         </BrowserRouter>

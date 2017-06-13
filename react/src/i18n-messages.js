@@ -465,6 +465,11 @@ const msgs = {
           id="security.confirm_title_chpass"
           defaultMessage={`Secure password change`} />),
 
+    'security.confirm_title_deletion': (
+        <FormattedMessage
+          id="security.confirm_title_deletion"
+          defaultMessage={`Account deletion`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"
@@ -504,6 +509,46 @@ const msgs = {
         <FormattedMessage
           id="chpass.change-password"
           defaultMessage={`Change password`} />),
+
+   'chpass.no_old_pw': (
+        <FormattedMessage
+          id="chpass.no_old_pw"
+          defaultMessage={`Please enter the old password`} />),
+
+   'pwfield.enter_password': (
+        <FormattedMessage
+          id="pwfield.enter_password"
+          defaultMessage={`Enter password`} />),
+
+   'pwfield.repeat_password': (
+        <FormattedMessage
+          id="pwfield.repeat_password"
+          defaultMessage={`Repeat password`} />),
+
+   'pwfield.terrible': (
+        <FormattedMessage
+          id="pwfield.terrible"
+          defaultMessage={`Very weak password`} />),
+
+   'pwfield.weak': (
+        <FormattedMessage
+          id="pwfield.weak"
+          defaultMessage={`Weak password`} />),
+
+   'pwfield.good': (
+        <FormattedMessage
+          id="pwfield.good"
+          defaultMessage={`Fairly strong password`} />),
+
+   'pwfield.strong': (
+        <FormattedMessage
+          id="pwfield.strong"
+          defaultMessage={`Strong password`} />),
+
+   'pwfield.repeat_different': (
+        <FormattedMessage
+          id="pwfield.repeat_different"
+          defaultMessage={`Repeated pasword is different`} />),
 };
 
 const unformatted = defineMessages({

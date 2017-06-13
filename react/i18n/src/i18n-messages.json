@@ -260,6 +260,10 @@
     "defaultMessage": "Secure password change"
   },
   {
+    "id": "security.confirm_title_deletion",
+    "defaultMessage": "Account deletion"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
@@ -290,6 +294,38 @@
   {
     "id": "chpass.change-password",
     "defaultMessage": "Change password"
+  },
+  {
+    "id": "chpass.no_old_pw",
+    "defaultMessage": "Please enter the old password"
+  },
+  {
+    "id": "pwfield.enter_password",
+    "defaultMessage": "Enter password"
+  },
+  {
+    "id": "pwfield.repeat_password",
+    "defaultMessage": "Repeat password"
+  },
+  {
+    "id": "pwfield.terrible",
+    "defaultMessage": "Very weak password"
+  },
+  {
+    "id": "pwfield.weak",
+    "defaultMessage": "Weak password"
+  },
+  {
+    "id": "pwfield.good",
+    "defaultMessage": "Fairly strong password"
+  },
+  {
+    "id": "pwfield.strong",
+    "defaultMessage": "Strong password"
+  },
+  {
+    "id": "pwfield.repeat_different",
+    "defaultMessage": "Repeated pasword is different"
   },
   {
     "id": "emails.confirm_email_placeholder",
