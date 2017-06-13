@@ -249,6 +249,30 @@ const msgs = {
           defaultMessage={`CONFIRM USING SE-LEG`} />),
 
     /************************/
+    /* OIDC FREJA ***********/
+    /************************/
+
+    'ocf.request_data': (
+        <FormattedMessage
+          id="ocf.request_data"
+          defaultMessage={`CONFIRM USING FREJA EID`} />),
+
+    'ocf.open_app': (
+        <FormattedMessage
+          id="ocf.open_app"
+          defaultMessage={`OPEN FREJA EID`} />),
+
+    'ocf.not_on_mobile_title': (
+        <FormattedMessage
+          id="ocf.not_on_mobile_title"
+          defaultMessage={`Tip`} />),
+
+      'ocf.not_on_mobile_message': (
+        <FormattedMessage
+          id="ocf.not_on_mobile_message"
+          defaultMessage={`If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud.`} />),
+
+    /************************/
     /* PERSONAL DATA ********/
     /************************/
 

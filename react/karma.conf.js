@@ -18,7 +18,7 @@ webpackKarma.externals = {
   'react/lib/ReactContext': true
 };
 
-const nodebug = process.env.npm_lifecycle_script.indexOf('--debug') === -1
+const nodebug = process.env.npm_lifecycle_script.indexOf('--debug') === -1;
 
 if (nodebug) {
   webpackKarma.module.preLoaders = [

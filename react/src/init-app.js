@@ -28,6 +28,7 @@ import * as ninsActions from "actions/Nins";
 import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 
+import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
@@ -42,6 +43,7 @@ import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
+import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 /* i18n */
 
@@ -67,6 +69,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
+    takeEvery(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
     takeEvery(emailActions.POST_EMAIL, saveEmail),
     takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeEvery(emailActions.START_VERIFY, requestVerifyEmail),
