@@ -37,7 +37,7 @@ import * as sagasMobile from "sagas/Mobile";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
-import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
+import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
 
 import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
@@ -83,6 +83,7 @@ function* rootSaga() {
     takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeEvery(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeEvery(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
+    takeEvery(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
     takeEvery(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
   ];
 }
@@ -145,7 +146,7 @@ const init_app = function (target) {
                               <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
                               <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
                               <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
-                              <li><Link to="/profile/#chpass" id="chpass-router-link">Security</Link></li>
+                              <li><Link to="/profile/#chpass" id="chpass-router-link"> </Link></li>
                             </ul>
                           </div>
                         </BrowserRouter>

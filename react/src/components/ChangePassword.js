@@ -17,11 +17,6 @@ class ChangePassword extends Component {
 
   render () {
 
-    if (this.props.next_url !== '') {
-        window.location.href = this.props.next_url;
-        return
-    }
-
     let form,
         helpCustom = "",
         spinning = false;

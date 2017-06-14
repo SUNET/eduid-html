@@ -11,8 +11,7 @@ const chpass = {
     suggested_password: '',
     old_password: '',
     new_password: '',
-    choose_custom: false,
-    next_url: ''
+    choose_custom: false
 };
 
 
