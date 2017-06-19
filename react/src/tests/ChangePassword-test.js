@@ -183,7 +183,8 @@ describe("Reducers", () => {
   });
 
   it("Receives a GET_SUGGESTED_PASSWORD_FAIL action", () => {
-    const err = 'Bad error';
+    const errMsg = 'Bad error',
+          err = new Error(errMsg);
     expect(
       chpassReducer(
         mockState,
@@ -191,8 +192,8 @@ describe("Reducers", () => {
           type: actions.GET_SUGGESTED_PASSWORD_FAIL,
           error: true,
           payload: {
-            error: new Error(err),
-            message: err
+            error: err,
+            message: errMsg
           }
         }
       )
@@ -200,8 +201,8 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: true,
-        error: '',
-        message: '',
+        error: err,
+        message: errMsg,
         csrf_token: '',
         suggested_password: '',
         old_password: '',
@@ -406,6 +407,9 @@ const mockState = {
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
+  },
+  security: {
+    csrf_token: 'csrf-token'
   }
 };
 
@@ -473,7 +477,7 @@ function setupComponent(custom=false) {
   const props = {
     is_fetching: false,
     choose_custom: custom,
-    user_input: '',
+    user_input: [],
     errorMsg: '',
     password_entropy: 0,
     handlePassword: createSpy(),
@@ -574,7 +578,7 @@ describe("ChangePassword Container", () => {
         choose_custom: false,
         suggested_password: 'abcd',
         new_password: 'defg',
-        user_input: '',
+        user_input: [],
         errorMsg: '',
         password_entropy: 0
     };
@@ -623,7 +627,7 @@ describe("ChangePassword Container", () => {
             is_fetching: false,
             choose_custom: true,
             new_password: 'abcd',
-            user_input: '',
+            user_input: [],
             errorMsg: '',
             password_entropy: 0
           },
@@ -644,7 +648,7 @@ describe("ChangePassword Container", () => {
             is_fetching: false,
             choose_custom: true,
             new_password: '',
-            user_input: '',
+            user_input: [],
             errorMsg: '',
             password_entropy: 0
           },

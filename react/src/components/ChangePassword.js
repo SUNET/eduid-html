@@ -91,7 +91,7 @@ class ChangePassword extends Component {
 ChangePassword.propTypes = {
   is_fetching: PropTypes.bool,
   choose_custom: PropTypes.bool,
-  user_input: PropTypes.string,
+  user_input: PropTypes.array,
   next_url: PropTypes.string,
   errorMsg: PropTypes.string,
   password_entropy: PropTypes.number,
