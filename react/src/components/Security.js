@@ -17,6 +17,10 @@ class Security extends Component {
         window.location.href = this.props.redirect_to;
         return
     }
+    if (this.props.deleted) {
+        window.location.href = 'https://eduid.se';
+        return
+    }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             return (<tr key="{index}">
@@ -88,6 +92,7 @@ Security.propTypes = {
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   confirming_change: PropTypes.bool,
+  deleted: PropTypes.bool,
   handleStartConfirmationPassword: PropTypes.func,
   handleStopConfirmationPassword: PropTypes.func,
   handleConfirmationPassword: PropTypes.func,

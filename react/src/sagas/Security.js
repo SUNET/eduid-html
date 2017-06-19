@@ -3,7 +3,7 @@ import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders } from "sagas/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
-         postConfirmDeletion, removeAccountFail  } from "actions/Security";
+         postConfirmDeletion, accountRemovedFail  } from "actions/Security";
 
 
 
@@ -61,7 +61,7 @@ export function* postDeleteAccount () {
         const resp = yield call(deleteAccount, state.config, data);
         yield put(resp);
     } catch(error) {
-        yield put(removeAccountFail(error.toString()));
+        yield put(accountRemovedFail(error.toString()));
     }
 }
 

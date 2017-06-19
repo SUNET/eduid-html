@@ -14,6 +14,7 @@ const mapStateToProps = (state, props) => {
      is_fetching: state.security.is_fetching,
      errorMsg: state.security.error,
      redirect_to: state.security.location,
+     deleted: state.security.deleted
   }
 };
 

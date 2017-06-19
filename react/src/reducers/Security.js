@@ -13,6 +13,7 @@ const security = {
     confirming_change: false,
     confirming_deletion: false,
     location: '',
+    deleted: false
 };
 
 
@@ -87,6 +88,29 @@ let securityReducer = (state=security, action) => {
         location: action.payload.location
       };
     case actions.POST_DELETE_ACCOUNT_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: true,
+        error: action.payload.error,
+        message: action.payload.message
+      };
+    case actions.GET_DELETE_ACCOUNT:
+      return {
+        ...state,
+        is_fetching: true,
+        failed: false,
+        confirming_deletion: false
+      };
+    case actions.GET_DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        confirming_deletion: false,
+        is_fetching: false,
+        failed: false,
+        deleted: true
+      };
+    case actions.GET_DELETE_ACCOUNT_FAIL:
       return {
         ...state,
         is_fetching: false,

@@ -16,6 +16,9 @@ export const POST_DELETE_ACCOUNT = 'POST_DELETE_ACCOUNT';
 export const SEND_POST_DELETE_ACCOUNT = 'SEND_POST_DELETE_ACCOUNT';
 export const POST_DELETE_ACCOUNT_SUCCESS = 'POST_SECURITY_TERMINATE_ACCOUNT_SUCCESS';
 export const POST_DELETE_ACCOUNT_FAIL = 'POST_SECURITY_TERMINATE_ACCOUNT_FAIL';
+export const GET_DELETE_ACCOUNT = 'GET_SECURITY_ACCOUNT_TERMINATED';
+export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCESS';
+export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
 
 
 export function getCredentials () {
@@ -92,6 +95,17 @@ export function postConfirmDeletion () {
 export function removeAccountFail (err) {
   return {
     type: POST_DELETE_ACCOUNT_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function accountRemovedFail (err) {
+  return {
+    type: GET_DELETE_ACCOUNT_FAIL,
     error: true,
     payload: {
       error: new Error(err),
