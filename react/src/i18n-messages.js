@@ -345,36 +345,6 @@ const msgs = {
           defaultMessage={`Mobile phone numbers`} />),
 
     /***********************/
-    /* Nins ****************/
-    /***********************/
-
-    'nins.long_description': (
-        <FormattedMessage
-          id="nins.long_description"
-          defaultMessage={`Some service providers (e.g. Antagning.se) require a confirmed identity.`} />),
-
-    'nins.main_title': (
-        <FormattedMessage
-          id="nins.main_title"
-          defaultMessage={`National identity number`} />),
-
-    'nins.instructions': (
-        <FormattedMessage
-          id="nins.instructions"
-          defaultMessage={`Add your Swedish national identity number and initiate the 
-          confirmation process using one of the buttons below.`} />),
-
-    'nins.mobile_suscription': (
-        <FormattedMessage
-          id="nins.mobile_suscription"
-          defaultMessage={`Phone suscription`} />),
-
-    'nins.letter': (
-        <FormattedMessage
-          id="nins.letter"
-          defaultMessage={` Physical letter`} />),
-
-    /***********************/
     /* Security ************/
     /***********************/
 

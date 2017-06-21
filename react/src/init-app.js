@@ -24,7 +24,6 @@ import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
 import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
-import * as ninsActions from "actions/Nins";
 import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 
