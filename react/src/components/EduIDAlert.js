@@ -1,15 +1,17 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
 
-const EduIDAlert = React.createClass({
+
+class EduIDAlert extends Component {
   getInitialState() {
     return {
       alertVisible: true
     };
-  },
+  }
 
   render() {
     if (this.state.alertVisible) {
@@ -25,16 +27,16 @@ const EduIDAlert = React.createClass({
     //   <Button onClick={this.handleAlertShow}>Show Alert</Button>
         <div></div>
     );
-  },
+  }
 
   handleAlertDismiss() {
     this.setState({alertVisible: false});
-  },
+  }
 
   handleAlertShow() {
     this.setState({alertVisible: true});
   }
-});
+}
 
 
 EduIDAlert.propTypes = {

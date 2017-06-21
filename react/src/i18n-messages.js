@@ -2,7 +2,9 @@
 // Inspired by react-intl's `injectIntl()` HOC factory function implementation:
 // https://github.com/yahoo/react-intl
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import invariant from 'invariant';
 import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
@@ -54,7 +56,7 @@ export default function i18n(WrappedComponent, options = {}) {
                 } else if (unformatted[msgid] !== undefined) {
                     return this.context.intl.formatMessage(unformatted[msgid], values);
                 } else {
-                    return 'UNKNOWN MESSAGE ID'
+                    return 'UNKNOWN MESSAGE ID (' + msgid + ')';
                 }
             };
 
@@ -134,6 +136,11 @@ const msgs = {
         <FormattedMessage
             id="cm.cancel"
             defaultMessage={`CANCEL`} />),
+
+    'cm.accept': (
+        <FormattedMessage
+          id="cm.accept"
+          defaultMessage={`ACCEPT`} />),
 
     /************************/
     /* TABLE LIST ***********/
@@ -336,6 +343,182 @@ const msgs = {
         <FormattedMessage
           id="phones.main_title"
           defaultMessage={`Mobile phone numbers`} />),
+
+    /***********************/
+    /* Security ************/
+    /***********************/
+
+    'security.long_description': (
+        <FormattedMessage
+          id="security.long_description"
+          defaultMessage={`Your eduID account password can be changed below.`} />),
+
+    'security.main_title': (
+        <FormattedMessage
+          id="security.main_title"
+          defaultMessage={`Security`} />),
+
+    'security.credential': (
+        <FormattedMessage
+          id="security.credential"
+          defaultMessage={`Credential`} />),
+
+    'security.creation_date': (
+        <FormattedMessage
+          id="security.creation_date"
+          defaultMessage={`Creation date`} />),
+
+    'security.last_used': (
+        <FormattedMessage
+          id="security.last_used"
+          defaultMessage={`Last used`} />),
+
+    'security.change_password': (
+        <FormattedMessage
+          id="security.change_password"
+          defaultMessage={`Change password`} />),
+
+    'security.account_description': (
+        <FormattedMessage
+          id="security.account_description"
+          defaultMessage={`Use the button below to permanently delete your eduID account.`} />),
+
+    'security.account_title': (
+        <FormattedMessage
+          id="security.account_title"
+          defaultMessage={`Account deletion`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.delete_account': (
+        <FormattedMessage
+          id="security.delete_account"
+          defaultMessage={`Delete eduID account`} />),
+
+    'security.confirm_title': (
+        <FormattedMessage
+          id="security.confirm_title"
+          defaultMessage={`Delete account`} />),
+
+    'security.modal_info': (
+        <FormattedMessage
+          id="security.modal_info"
+          defaultMessage={`Are you sure that you wish to delete your eduID account? This action will
+                           permanently remove all the data associated with the account from our database. `} />),
+
+    'security.modal_notes': (
+        <FormattedMessage
+          id="security.modal_notes"
+          defaultMessage={`Note that for security reasons if you choose to delete your account,
+                           you will be asked to log in again.`} />),
+
+    'security.change_info': (
+        <FormattedMessage
+          id="security.change_info"
+          defaultMessage={`For security reasons we will ask you to log in again before changing your password.`} />),
+
+    'security.confirm_button': (
+        <FormattedMessage
+          id="security.confirm_button"
+          defaultMessage={`Confirm deletion of eduID account`} />),
+
+    'security.password_credential_type': (
+        <FormattedMessage
+          id="security.password_credential_type"
+          defaultMessage={`Password`} />),
+
+    'security.confirm_title_chpass': (
+        <FormattedMessage
+          id="security.confirm_title_chpass"
+          defaultMessage={`Secure password change`} />),
+
+    'security.confirm_title_deletion': (
+        <FormattedMessage
+          id="security.confirm_title_deletion"
+          defaultMessage={`Account deletion`} />),
+
+    'chpass.suggested_password': (
+        <FormattedMessage
+          id="chpass.suggested_password"
+          defaultMessage={`Suggested password`} />),
+
+   'chpass.custom_password': (
+        <FormattedMessage
+          id="chpass.custom_password"
+          defaultMessage={`Custom password`} />),
+
+   'chpass.repeat_password': (
+        <FormattedMessage
+          id="chpass.repeat_password"
+          defaultMessage={`Repeat your custom password`} />),
+
+   'chpass.help-text-general': (
+        <FormattedMessage
+          id="chpass.help-text-general"
+          defaultMessage={`You can change your current password using this form. A strong password has been generated for you. You can accept the generated password by clicking "Change password" or you can opt to choose your own password using the checkbox.`} />),
+
+   'chpass.old_password': (
+        <FormattedMessage
+          id="chpass.old_password"
+          defaultMessage={`Current password`} />),
+
+   'chpass.use-custom-label': (
+        <FormattedMessage
+          id="chpass.use-custom-label"
+          defaultMessage={`Use my own password`} />),
+
+   'chpass.title-general': (
+        <FormattedMessage
+          id="chpass.title-general"
+          defaultMessage={`Change your password`} />),
+
+   'chpass.change-password': (
+        <FormattedMessage
+          id="chpass.change-password"
+          defaultMessage={`Change password`} />),
+
+   'chpass.no_old_pw': (
+        <FormattedMessage
+          id="chpass.no_old_pw"
+          defaultMessage={`Please enter the old password`} />),
+
+   'pwfield.enter_password': (
+        <FormattedMessage
+          id="pwfield.enter_password"
+          defaultMessage={`Enter password`} />),
+
+   'pwfield.repeat_password': (
+        <FormattedMessage
+          id="pwfield.repeat_password"
+          defaultMessage={`Repeat password`} />),
+
+   'pwfield.terrible': (
+        <FormattedMessage
+          id="pwfield.terrible"
+          defaultMessage={`Very weak password`} />),
+
+   'pwfield.weak': (
+        <FormattedMessage
+          id="pwfield.weak"
+          defaultMessage={`Weak password`} />),
+
+   'pwfield.good': (
+        <FormattedMessage
+          id="pwfield.good"
+          defaultMessage={`Fairly strong password`} />),
+
+   'pwfield.strong': (
+        <FormattedMessage
+          id="pwfield.strong"
+          defaultMessage={`Strong password`} />),
+
+   'pwfield.repeat_different': (
+        <FormattedMessage
+          id="pwfield.repeat_different"
+          defaultMessage={`Repeated pasword is different`} />),
 };
 
 const unformatted = defineMessages({
@@ -348,5 +531,16 @@ const unformatted = defineMessages({
         id: "mobile.confirm_mobile_placeholder",
         defaultMessage: `Phone confirmation code`,
         description: "Placeholder for phone text input"
+    },
+    'chpass.help-text-newpass': {
+        id: "chpass.help-text-newpass",
+        defaultMessage: `<p>Choose a strong password. Some tips:</p>
+            <ul>
+	            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>
+	            <li>Add digits somewhere else than at the end of the password</li>
+                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>
+	            <li>Spaces are ignored</li>
+            </ul>`,
+        description: "help text for custom password"
     },
 });

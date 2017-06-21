@@ -11,6 +11,11 @@ import EmailsContainer from "containers/Emails";
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 
+import { requestEmails, fetchEmails, requestResend, requestResendEmailCode, saveEmail, sendEmail,
+         requestVerifyEmail, requestVerify, requestRemoveEmail, requestRemove, requestMakePrimaryEmail,
+         requestMakePrimary } from 'sagas/Emails';
+import { put, call, select } from "redux-saga/effects";
+
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
@@ -792,10 +797,6 @@ const state = {
     }
 };
 
-import { requestEmails, fetchEmails, requestResend, requestResendEmailCode, saveEmail, sendEmail,
-         requestVerifyEmail, requestVerify, requestRemoveEmail, requestRemove, requestMakePrimaryEmail,
-         requestMakePrimary } from 'sagas/Emails';
-import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
@@ -818,7 +819,6 @@ describe("Async component", () => {
 
         const emails = generator.next(config);
 
-        const test = call(fetchEmails,config)
         expect(emails.value).toEqual(call(fetchEmails,config));
 
         const email = 'john@example.com'

@@ -2,13 +2,9 @@
 /*global $, console, alert, deform */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import init_app from "../init-app";
-import PersonalDataContainer from 'containers/PersonalData';
-import EmailsContainer from 'containers/Emails';
-import MobileContainer from 'containers/Mobile'
-let personalDataApp = <PersonalDataContainer />;
-let emailsApp = <EmailsContainer />;
-let mobileApp = <MobileContainer />;
+import { Link } from 'react-router-dom';
 
 if (window.tabbedform === undefined) {
     window.tabbedform = {};
@@ -30,16 +26,18 @@ jQuery.fn.initDeformCallbacks = function () {
     }
 };
 
+// this  is temporal until all panels are in use
+// configure this in combination with routes.js
+const configuredReactPanels = ['personaldata', 'emails', 'mobiles', 'security', 'chpass']
+
 var TabbedForm = function (container) {
     "use strict";
 
     var get_form = function (url, target) {
-          if (url === 'personaldata') {
-            init_app(personalDataApp, target.get(0));
-          } else if (url === 'emails') {
-            init_app(emailsApp, target.get(0));
-          } else if (url === 'mobiles') {
-              init_app(mobileApp, target.get(0));
+          if (configuredReactPanels.indexOf(url) > -1) {
+            init_app(target.get(0));
+            const link = document.getElementById(url + '-router-link');
+            link.click();
           } else {
             $.get(url + '/', {}, function (data, status_text, xhr) {
                 var loc = xhr.getResponseHeader('X-Relocate');
@@ -104,6 +102,8 @@ var TabbedForm = function (container) {
 
             if (opentab === undefined || opentab === "") {
                 container.find('.nav-tabs a.main-nav-tabs').first().click();
+            } else if (opentab === 'chpass') {
+                get_form(opentab, $("#profile-content-area"));
             } else {
                 window.forms_helper_functions.initialize_verification(opentab);
             }

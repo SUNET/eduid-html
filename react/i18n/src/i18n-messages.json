@@ -36,6 +36,10 @@
     "defaultMessage": "CANCEL"
   },
   {
+    "id": "cm.accept",
+    "defaultMessage": "ACCEPT"
+  },
+  {
     "id": "phone_duplicated",
     "defaultMessage": "Added number is duplicated"
   },
@@ -172,6 +176,138 @@
     "defaultMessage": "Mobile phone numbers"
   },
   {
+    "id": "security.long_description",
+    "defaultMessage": "Your eduID account password can be changed below."
+  },
+  {
+    "id": "security.main_title",
+    "defaultMessage": "Security"
+  },
+  {
+    "id": "security.credential",
+    "defaultMessage": "Credential"
+  },
+  {
+    "id": "security.creation_date",
+    "defaultMessage": "Creation date"
+  },
+  {
+    "id": "security.last_used",
+    "defaultMessage": "Last used"
+  },
+  {
+    "id": "security.change_password",
+    "defaultMessage": "Change password"
+  },
+  {
+    "id": "security.account_description",
+    "defaultMessage": "Use the button below to permanently delete your eduID account."
+  },
+  {
+    "id": "security.account_title",
+    "defaultMessage": "Account deletion"
+  },
+  {
+    "id": "security.delete_account",
+    "defaultMessage": "Delete eduID account"
+  },
+  {
+    "id": "security.confirm_title",
+    "defaultMessage": "Delete account"
+  },
+  {
+    "id": "security.modal_info",
+    "defaultMessage": "Are you sure that you wish to delete your eduID account? This action will\n                           permanently remove all the data associated with the account from our database."
+  },
+  {
+    "id": "security.modal_notes",
+    "defaultMessage": "Note that for security reasons if you choose to delete your account,\n                           you will be asked to log in again."
+  },
+  {
+    "id": "security.change_info",
+    "defaultMessage": "For security reasons we will ask you to log in again before changing your password."
+  },
+  {
+    "id": "security.confirm_button",
+    "defaultMessage": "Confirm deletion of eduID account"
+  },
+  {
+    "id": "security.password_credential_type",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "security.confirm_title_chpass",
+    "defaultMessage": "Secure password change"
+  },
+  {
+    "id": "security.confirm_title_deletion",
+    "defaultMessage": "Account deletion"
+  },
+  {
+    "id": "chpass.suggested_password",
+    "defaultMessage": "Suggested password"
+  },
+  {
+    "id": "chpass.custom_password",
+    "defaultMessage": "Custom password"
+  },
+  {
+    "id": "chpass.repeat_password",
+    "defaultMessage": "Repeat your custom password"
+  },
+  {
+    "id": "chpass.help-text-general",
+    "defaultMessage": "You can change your current password using this form. A strong password has been generated for you. You can accept the generated password by clicking \"Change password\" or you can opt to choose your own password using the checkbox."
+  },
+  {
+    "id": "chpass.old_password",
+    "defaultMessage": "Current password"
+  },
+  {
+    "id": "chpass.use-custom-label",
+    "defaultMessage": "Use my own password"
+  },
+  {
+    "id": "chpass.title-general",
+    "defaultMessage": "Change your password"
+  },
+  {
+    "id": "chpass.change-password",
+    "defaultMessage": "Change password"
+  },
+  {
+    "id": "chpass.no_old_pw",
+    "defaultMessage": "Please enter the old password"
+  },
+  {
+    "id": "pwfield.enter_password",
+    "defaultMessage": "Enter password"
+  },
+  {
+    "id": "pwfield.repeat_password",
+    "defaultMessage": "Repeat password"
+  },
+  {
+    "id": "pwfield.terrible",
+    "defaultMessage": "Very weak password"
+  },
+  {
+    "id": "pwfield.weak",
+    "defaultMessage": "Weak password"
+  },
+  {
+    "id": "pwfield.good",
+    "defaultMessage": "Fairly strong password"
+  },
+  {
+    "id": "pwfield.strong",
+    "defaultMessage": "Strong password"
+  },
+  {
+    "id": "pwfield.repeat_different",
+    "defaultMessage": "Repeated pasword is different"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
@@ -180,5 +316,10 @@
     "id": "mobile.confirm_mobile_placeholder",
     "description": "Placeholder for phone text input",
     "defaultMessage": "Phone confirmation code"
+  },
+  {
+    "id": "chpass.help-text-newpass",
+    "description": "help text for custom password",
+    "defaultMessage": "<p>Choose a strong password. Some tips:</p>\n            <ul>\n\t            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>\n\t            <li>Add digits somewhere else than at the end of the password</li>\n                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>\n\t            <li>Spaces are ignored</li>\n            </ul>"
   }
 ]

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
@@ -66,6 +67,7 @@ const TextControl = React.createClass({
 });
 
 TextControl.PropTypes = {
+  name: PropTypes.string,
   label: PropTypes.string,
   componentClass: PropTypes.string.isRequired,
   type: PropTypes.string,

@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import EduiDAlert from 'components/EduIDAlert';
 
 
-const TableList = React.createClass({
+class TableList extends Component {
 
-  render: function () {
+  render () {
     let rows = [],
          alertElem, msg,
          key;
@@ -98,7 +99,7 @@ const TableList = React.createClass({
         </div>
     );
   }
-});
+}
 
 TableList.propTypes = {
     entries: PropTypes.array,

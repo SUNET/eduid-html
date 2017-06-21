@@ -12,7 +12,8 @@ var webpackProd = {
 delete webpackProd.entry.server;
 delete webpackProd.entry.hot;
 
-webpackProd.devtool = 'inline-source-map';
+//webpackProd.devtool = 'inline-source-map';
+delete webpackProd.devtool;
 
 webpackProd.output = {
   filename: '[name].js',

@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
@@ -10,9 +11,9 @@ import ConfirmModal from 'components/ConfirmModal';
 import 'style/Emails.scss';
 
 
-let Emails = React.createClass({
+class Emails extends Component {
 
-  render: function () {
+  render () {
 
     return (
         <div className="emailsview-form-container ">
@@ -59,7 +60,7 @@ let Emails = React.createClass({
         </div>
     );
   }
-});
+}
 
 Emails.propTypes = {
   longDescription: PropTypes.string,
