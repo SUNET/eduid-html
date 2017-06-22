@@ -25,8 +25,8 @@ class Security extends Component {
         creds_table = this.props.credentials.map((cred, index) => {
             return (<tr key="{index}">
                         <td>{this.props.l10n(cred.credential_type)}</td>
-                        <td>{cred.created_ts}</td>
-                        <td>{cred.success_ts}</td>
+                        <td>{new Date(cred.created_ts).toString()}</td>
+                        <td>{new Date(cred.success_ts).toString()}</td>
                     </tr>
             );
         }, this);
