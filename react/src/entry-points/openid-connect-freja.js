@@ -5,7 +5,7 @@ import React from 'react';
 import init_app from "../init-app";
 import OpenidConnectFrejaContainer from 'containers/OpenidConnectFreja';
 
-let app = <OpenidConnectFrejaContainer />;
+let component = <OpenidConnectFrejaContainer />;
 
 
 if (window.tabbedform === undefined) {
@@ -49,7 +49,7 @@ var TabbedForm = function (container) {
               if (url === "nins") {
                 const root = document.getElementById('openid-connect-root'),
                       form = root.previousElementSibling;
-                      init_app(app, root);
+                      init_app(root, component);
               }
 
           }, 'html').fail(function (xhr) {

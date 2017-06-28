@@ -113,46 +113,57 @@ const getConfig = function () {
     }
 };
 
-const init_app = function (target) {
-    const app = ( <Provider store={store}>
-                    <IntlProvider locale={ lang_code } messages={ messages }>
-                        <BrowserRouter>
-                          <div>
-                            <Route exact path="/profile/" render={props => {
-                              switch (props.location.hash.split('#')[1]) {
-                                  case 'personaldata':
-                                      return (<PersonalDataContainer />);
-                                      break;
-                                  case 'emails':
-                                      return (<EmailsContainer />);
-                                      break;
-                                  case 'mobiles':
-                                      return (<MobileContainer />);
-                                      break;
-                                  case 'security':
-                                      return (<SecurityContainer />);
-                                      break;
-                                  case 'chpass':
-                                      return (<ChangePasswordContainer />);
-                                      break;
-                                default:
-                                      return (<PersonalDataContainer />);
-                              }
-                            }}/>
-
-                            <ul role="nav" className="hidden">
-                              <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
-                              <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
-                              <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
-                              <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
-                              <li><Link to="/profile/#chpass" id="chpass-router-link"> </Link></li>
-                            </ul>
-                          </div>
-                        </BrowserRouter>
-                    </IntlProvider>
-                  </Provider> );
+const init_app = function (target, component) {
+  if (component) {
+    let app = (
+      <Provider store={store}>
+        <IntlProvider locale={ lang_code } messages={ messages }>
+          {component}
+        </IntlProvider>
+      </Provider>
+    );
     ReactDOM.render(app, target, getConfig);
-    return app;
+  } else {
+    const app = ( <Provider store={store}>
+      <IntlProvider locale={ lang_code } messages={ messages }>
+        <BrowserRouter>
+          <div>
+            <Route exact path="/profile/" render={props => {
+              switch (props.location.hash.split('#')[1]) {
+                case 'personaldata':
+                  return (<PersonalDataContainer />);
+                  break;
+                case 'emails':
+                  return (<EmailsContainer />);
+                  break;
+                case 'mobiles':
+                  return (<MobileContainer />);
+                  break;
+                case 'security':
+                  return (<SecurityContainer />);
+                  break;
+                case 'chpass':
+                  return (<ChangePasswordContainer />);
+                  break;
+                default:
+                  return (<PersonalDataContainer />);
+              }
+            }}/>
+
+            <ul role="nav" className="hidden">
+              <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
+              <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
+              <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
+              <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
+              <li><Link to="/profile/#chpass" id="chpass-router-link"> </Link></li>
+            </ul>
+          </div>
+        </BrowserRouter>
+      </IntlProvider>
+    </Provider> );
+    ReactDOM.render(app, target, getConfig);
+  }
+  return app;
 };
 
 export default init_app;
