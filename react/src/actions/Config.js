@@ -4,6 +4,7 @@ import { checkStatus, ajaxHeaders } from "actions/common";
 export const GET_JSCONFIG_CONFIG = 'GET_JSCONFIG_CONFIG';
 export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
 export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
+export const NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
 
 export function getConfig () {
   return {
@@ -23,3 +24,11 @@ export function getConfigFail (err) {
   };
 }
 
+export function newCsrfToken(token) {
+    return {
+        type: NEW_CSRF_TOKEN,
+        payload: {
+            token: token
+        }
+    };
+}

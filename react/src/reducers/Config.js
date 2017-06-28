@@ -4,6 +4,7 @@ import * as actions from "actions/Config";
 
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
+    csrf_token: '',
     is_configured: false,
     is_fetching: false,
     failed: false
@@ -33,10 +34,14 @@ let configReducer = (state=configData, action) => {
           is_fetching: false,
           failed: true
       };
+    case actions.NEW_CSRF_TOKEN:
+      return {
+          ...state,
+          ...action.payload
+      };
     default:
       return state;
   }
 };
 
 export default configReducer;
-
