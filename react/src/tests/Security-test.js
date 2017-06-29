@@ -125,7 +125,6 @@ describe("Reducers", () => {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     credentials: [],
     code: '',
     confirming_change: false,
@@ -147,7 +146,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -171,7 +169,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -202,7 +199,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -226,7 +222,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: true,
@@ -250,7 +245,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -274,7 +268,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -305,7 +298,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -329,7 +321,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -353,7 +344,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -377,7 +367,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -401,7 +390,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -429,7 +417,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -460,7 +447,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -474,9 +460,9 @@ describe("Reducers", () => {
 const mockState = {
   security: {
     location: 'dummy-location',
-    csrf_token: 'csrf-token'
   },
   config: {
+    csrf_token: 'csrf-token',
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
@@ -498,7 +484,6 @@ describe("Async component", () => {
     expect(credentials.value).toEqual(call(fetchCredentials,config));
 
     const mockCredentials = {
-      csrf_token: 'csrf-token',
       payload: {
         csrf_token: 'csrf-token',
         credentials: [
@@ -626,7 +611,6 @@ describe("Security Container", () => {
             failed: false,
             error: '',
             message: '',
-            csrf_token: '',
             credentials: [],
             code: '',
             confirming_change: false,
@@ -634,9 +618,10 @@ describe("Security Container", () => {
             location: '',
         },
         config: {
-          SECURITY_URL: '/dummy-sec-url',
-          DASHBOARD_URL: '/dummy-dash-url',
-          TOKEN_SERVICE_URL: '/dummy-tok-url'
+            csrf_token: '',
+            SECURITY_URL: '/dummy-sec-url',
+            DASHBOARD_URL: '/dummy-dash-url',
+            TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
       }
     };

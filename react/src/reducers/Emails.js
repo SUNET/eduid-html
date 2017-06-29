@@ -7,7 +7,6 @@ const emailsData = {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     resending: {
       is_fetching: false,
       failed: false,

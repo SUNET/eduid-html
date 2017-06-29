@@ -4,7 +4,6 @@ import * as actions from "actions/Config";
 
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
-    csrf_token: '',
     is_configured: false,
     is_fetching: false,
     failed: false

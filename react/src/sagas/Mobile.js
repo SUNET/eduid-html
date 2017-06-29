@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/Mobile";
 
 
@@ -10,6 +10,7 @@ export function* requestMobile () {
         yield put(actions.getMobiles());
         const config = yield select(state => state.config);
         const phones = yield call(fetchMobiles, config);
+        yield put(putCsrfToken(phones));
         yield put(phones);
     } catch(error) {
         yield put(actions.getMobilesFail(error.toString()));
@@ -32,12 +33,12 @@ export function* saveMobile () {
                 number: state.phones.mobile,
                 verified: false,
                 primary: false,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
-        const mobiles = yield call(sendMobile, state.config, data);
-
-        yield put(mobiles);
+        const phones = yield call(sendMobile, state.config, data);
+        yield put(putCsrfToken(phones));
+        yield put(phones);
     } catch(error) {
         yield put(actions.postMobileFail(error.toString()));
     }
@@ -59,9 +60,10 @@ export function* requestResendMobileCode () {
         const state = yield select(state => state),
               data = {
                 number: state.phones.confirming,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestResend, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.resendMobileCodeFail(error.toString()));
@@ -85,9 +87,10 @@ export function* requestVerifyMobile () {
               data = {
                 number: state.phones.confirming,
                 code: state.phones.code,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestVerify, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.startVerifyFail(error.toString()));
@@ -110,9 +113,10 @@ export function* requestRemoveMobile () {
         const state = yield select(state => state),
               data = {
                 number: state.phones.mobile,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.startRemoveFail(error.toString()));
@@ -135,9 +139,10 @@ export function* requestMakePrimaryMobile () {
         const state = yield select(state => state),
               data = {
                 number: state.phones.mobile,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.makePrimaryFail(error.toString()));

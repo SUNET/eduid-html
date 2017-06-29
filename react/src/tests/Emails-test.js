@@ -783,7 +783,6 @@ const state = {
         confirming: '',
         emails: [],
         email: '',
-        csrf_token: '123456789',
         resending: {
           is_fetching: false,
           failed: false,
@@ -792,6 +791,7 @@ const state = {
         },
     },
     config : {
+        csrf_token: '123456789',
         EMAILS_URL: 'test/localhost',
         email: 'email@localhost.com',
     }
@@ -840,7 +840,7 @@ describe("Async component", () => {
                 email: state.emails.email,
                 verified: false,
                 primary: false,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
        const emails = generator.next(state);
@@ -863,7 +863,7 @@ describe("Async component", () => {
 
         const data = {
                 email: state.emails.confirming,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);
@@ -887,7 +887,7 @@ describe("Async component", () => {
         const data = {
                 email: state.emails.confirming,
                 code: state.emails.code,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);
@@ -910,7 +910,7 @@ describe("Async component", () => {
 
         const data = {
                 email: state.emails.confirming,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);
@@ -933,7 +933,7 @@ describe("Async component", () => {
 
         const data = {
                 email: state.emails.confirming,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);

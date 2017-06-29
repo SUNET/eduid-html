@@ -32,6 +32,7 @@ const mockState = {
       language: ''
   },
   config : {
+      csrf_token: '',
       is_configured : true,
       is_fetching: false,
       failed: false,

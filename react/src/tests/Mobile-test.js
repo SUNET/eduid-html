@@ -798,7 +798,6 @@ const state = {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '123456789',
         resending: {
           is_fetching: false,
           failed: false,
@@ -811,6 +810,7 @@ const state = {
         code: '',
      },
     config : {
+        csrf_token: '123456789',
         MOBILE_URL: 'test/localhost',
         mobile: 999123456,
     }
@@ -858,7 +858,7 @@ describe("Async component", () => {
                 number: state.phones.mobile,
                 verified: false,
                 primary: false,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
        const mobiles = generator.next(state);
@@ -881,7 +881,7 @@ describe("Async component", () => {
 
         const data = {
                 number: state.phones.confirming,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);
@@ -905,7 +905,7 @@ describe("Async component", () => {
         const data = {
                 number: state.phones.confirming,
                 code: state.phones.code,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);
@@ -928,7 +928,7 @@ describe("Async component", () => {
 
         const data = {
                 number: state.phones.confirming,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = generator.next(state);
 
@@ -951,7 +951,7 @@ describe("Async component", () => {
 
         const data = {
                 number: state.phones.mobile,
-                csrf_token: state.phones.csrf_token
+                csrf_token: state.config.csrf_token
               };
 
         const resp = generator.next(state);

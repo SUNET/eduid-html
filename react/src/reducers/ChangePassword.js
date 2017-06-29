@@ -7,7 +7,6 @@ const chpass = {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     suggested_password: '',
     old_password: '',
     new_password: '',

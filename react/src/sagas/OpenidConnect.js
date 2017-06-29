@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import { postOpenidFail } from "actions/OpenidConnect";
 
 
@@ -19,6 +19,7 @@ export function* requestOpenidQRcode () {
             yield put(postOpenidFail('Error: No NIN entered'));
         } else {
             const oidcData = yield call(fetchQRcode, openid_url, data);
+            yield put(putCsrfToken(oidcData));
             yield put(oidcData);
         }
     } catch(error) {
