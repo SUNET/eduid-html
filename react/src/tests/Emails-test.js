@@ -819,11 +819,26 @@ describe("Async component", () => {
 
         const emails = generator.next(config);
 
-        expect(emails.value).toEqual(call(fetchEmails,config));
+        expect(emails.value).toEqual(call(fetchEmails, config));
 
-        const email = 'john@example.com'
-        next = generator.next(email);
-        expect(next.value).toEqual(put(email));
+        const action = {
+          type: 'GET_EMAIL_ALL_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas saveEmail", () => {
@@ -846,9 +861,25 @@ describe("Async component", () => {
        const emails = generator.next(state);
        expect(emails.value).toEqual(call(sendEmail, state.config, data));
 
-       const email = 'john@example.com'
-       next = generator.next(email);
-       expect(next.value).toEqual(put(email));
+        const action = {
+          type: actions.POST_EMAIL_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestResendEmailCode", () => {
@@ -870,8 +901,25 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestResend, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.START_RESEND_EMAIL_CODE_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestVerifyEmail", () => {
@@ -894,8 +942,25 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestVerify, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_EMAIL_VERIFY_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestRemoveEmail", () => {
@@ -917,8 +982,25 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestRemove, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_EMAIL_REMOVE_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestMakePrimaryEmail", () => {
@@ -940,8 +1022,25 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestMakePrimary, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_EMAIL_PRIMARY_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            emails: [
+              {
+                email: 'john@example.com',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
 });

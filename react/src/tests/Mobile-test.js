@@ -839,9 +839,25 @@ describe("Async component", () => {
 
         expect(mobiles.value).toEqual(call(fetchMobiles,config));
 
-        const mobile = 999123456
-        next = generator.next(mobile);
-        expect(next.value).toEqual(put(mobile));
+
+        const action = {
+          type: actions.GET_MOBILES_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas saveMobile", () => {
@@ -864,9 +880,24 @@ describe("Async component", () => {
        const mobiles = generator.next(state);
        expect(mobiles.value).toEqual(call(sendMobile, state.config, data));
 
-       const mobile = 999123456
-       next = generator.next(mobile);
-       expect(next.value).toEqual(put(mobile));
+        const action = {
+          type: actions.POST_MOBILE_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestResendMobileCode", () => {
@@ -888,8 +919,24 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestResend, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.START_RESEND_MOBILE_CODE_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestVerifyMobile", () => {
@@ -912,8 +959,24 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestVerify, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_PHONE_VERIFY_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestRemoveMobile", () => {
@@ -934,9 +997,24 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestRemove, state.config, data));
 
-        next = generator.next(resp.value);
-
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_PHONE_REMOVE_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
     it("Sagas requestMakePrimaryMobile", () => {
@@ -958,8 +1036,24 @@ describe("Async component", () => {
 
         expect(resp.value).toEqual(call(requestMakePrimary, state.config, data));
 
-        next = generator.next(resp.value);
-        expect(next.value).toEqual(put(resp.value));
+        const action = {
+          type: actions.POST_MOBILE_PRIMARY_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            phones: [
+              {
+                number: '999123456',
+                verified: false,
+                primary: false
+              }
+            ]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
     });
 
 });
