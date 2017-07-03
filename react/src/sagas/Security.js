@@ -57,7 +57,7 @@ export function* postDeleteAccount () {
         yield put(postConfirmDeletion());
         const state = yield select(state => state);
         const data = {
-            csrf_token: state.security.csrf_token
+            csrf_token: state.config.csrf_token
         };
         const resp = yield call(deleteAccount, state.config, data);
         yield put(putCsrfToken(resp));

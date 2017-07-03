@@ -285,7 +285,7 @@ describe("Async component", () => {
               };
        expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
 
-       const = action = {
+       const action = {
          type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
          payload: {
              qr_img: 'new code',

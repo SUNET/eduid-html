@@ -920,7 +920,7 @@ describe("Async component", () => {
         expect(resp.value).toEqual(call(requestResend, state.config, data));
 
         const action = {
-          type: actions.START_RESEND_MOBILE_CODE_SUCCESS',
+          type: actions.START_RESEND_MOBILE_CODE_SUCCESS,
           payload: {
             csrf_token: 'csrf-token',
             phones: [
