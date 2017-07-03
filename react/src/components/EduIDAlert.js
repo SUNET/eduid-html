@@ -7,10 +7,9 @@ import i18n from 'i18n-messages';
 
 
 class EduIDAlert extends Component {
-  getInitialState() {
-    return {
-      alertVisible: true
-    };
+  constructor(props) {
+    super(props);
+    this.state = {alertVisible: true}
   }
 
   render() {

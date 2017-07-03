@@ -114,8 +114,9 @@ const getConfig = function () {
 };
 
 const init_app = function (target, component) {
+  let app;
   if (component) {
-    let app = (
+    app = (
       <Provider store={store}>
         <IntlProvider locale={ lang_code } messages={ messages }>
           {component}
@@ -124,7 +125,7 @@ const init_app = function (target, component) {
     );
     ReactDOM.render(app, target, getConfig);
   } else {
-    const app = ( <Provider store={store}>
+    app = ( <Provider store={store}>
       <IntlProvider locale={ lang_code } messages={ messages }>
         <BrowserRouter>
           <div>
