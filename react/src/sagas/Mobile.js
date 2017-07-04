@@ -30,7 +30,7 @@ export function* saveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                number: state.phones.mobile,
+                number: state.phones.phone,
                 verified: false,
                 primary: false,
                 csrf_token: state.config.csrf_token

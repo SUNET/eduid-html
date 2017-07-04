@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(changeMobile(data));
     },
     handleResend: function (e) {
+        e.preventDefault();
         dispatch(startResendMobileCode());
     },
     handleStartConfirmation: function (e) {

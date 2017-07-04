@@ -28,7 +28,7 @@ export function newCsrfToken(token) {
     return {
         type: NEW_CSRF_TOKEN,
         payload: {
-            token: token
+            csrf_token: token
         }
     };
 }

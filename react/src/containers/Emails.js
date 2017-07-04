@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(changeEmail(data));
     },
     handleResend: function (e) {
+        e.preventDefault();
         dispatch(startResendEmailCode());
     },
     handleStartConfirmation: function (e) {
