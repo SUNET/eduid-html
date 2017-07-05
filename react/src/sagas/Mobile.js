@@ -112,7 +112,7 @@ export function* requestRemoveMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                number: state.phones.mobile,
+                number: state.phones.phone,
                 csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
@@ -138,7 +138,7 @@ export function* requestMakePrimaryMobile () {
     try {
         const state = yield select(state => state),
               data = {
-                number: state.phones.mobile,
+                number: state.phones.phone,
                 csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);

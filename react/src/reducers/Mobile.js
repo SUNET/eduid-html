@@ -71,7 +71,6 @@ let mobileReducer = (state=mobileData, action) => {
         ...state,
         ...action.payload,
         is_fetching: false,
-        confirmation: '',
         confirming: '',
         code: '',
       };
