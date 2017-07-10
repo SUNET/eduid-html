@@ -26,6 +26,7 @@ import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
 import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
+import * as ninActions from "actions/Nins";
 
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
@@ -37,6 +38,7 @@ import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
+import { requestNins } from "sagas/Nins";
 
 import PersonalDataContainer from 'containers/PersonalData';
 import EmailsContainer from 'containers/Emails';
@@ -67,6 +69,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
     takeEvery(pdataActions.POST_USERDATA, savePersonalData),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeEvery(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),

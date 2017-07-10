@@ -18,7 +18,7 @@ export function* requestPersonalData () {
 
 
 export function fetchPersonalData (config) {
-    return window.fetch(config.PERSONAL_DATA_URL, {
+    return window.fetch(config.PERSONAL_DATA_URL + 'user', {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',
@@ -46,7 +46,7 @@ export function* savePersonalData () {
 }
 
 export function sendPersonalData (config, data) {
-    return window.fetch(config.PERSONAL_DATA_URL, {
+    return window.fetch(config.PERSONAL_DATA_URL + 'user', {
       method: 'post',
       credentials: 'include',
       headers: ajaxHeaders,
