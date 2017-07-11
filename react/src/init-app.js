@@ -10,15 +10,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
-
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
 import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";
+
 import eduIDApp from "./store";
+
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
@@ -27,25 +27,28 @@ import * as openidActions from "actions/OpenidConnect";
 import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
-
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
+
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
-import * as sagasMobile from "sagas/Mobile";
+import { requestMobile, saveMobile, requestResendMobileCode,
+         requestVerifyMobile, requestRemoveMobile,
+         requestMakePrimaryMobile } from "sagas/Mobile";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
 import { requestNins } from "sagas/Nins";
+import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 import PersonalDataContainer from 'containers/PersonalData';
+import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
-import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 /* i18n */
 
@@ -66,7 +69,7 @@ function* rootSaga() {
     takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
+    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestMobile),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
@@ -78,11 +81,11 @@ function* rootSaga() {
     takeEvery(emailActions.START_VERIFY, requestVerifyEmail),
     takeEvery(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
     takeEvery(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail),
-    takeEvery(mobileActions.POST_MOBILE, sagasMobile.saveMobile),
-    takeEvery(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile),
-    takeEvery(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile),
-    takeEvery(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
-    takeEvery(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
+    takeEvery(mobileActions.POST_MOBILE, saveMobile),
+    takeEvery(mobileActions.POST_MOBILE_REMOVE, requestRemoveMobile),
+    takeEvery(mobileActions.POST_MOBILE_PRIMARY, requestMakePrimaryMobile),
+    takeEvery(mobileActions.START_RESEND_MOBILE_CODE, requestResendMobileCode),
+    takeEvery(mobileActions.START_VERIFY, requestVerifyMobile),
     takeEvery(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeEvery(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
     takeEvery(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
@@ -117,8 +120,9 @@ const getConfig = function () {
 };
 
 const init_app = function (target, component) {
+  let app;
   if (component) {
-    let app = (
+    app = (
       <Provider store={store}>
         <IntlProvider locale={ lang_code } messages={ messages }>
           {component}
@@ -127,7 +131,7 @@ const init_app = function (target, component) {
     );
     ReactDOM.render(app, target, getConfig);
   } else {
-    const app = ( <Provider store={store}>
+    app = ( <Provider store={store}>
       <IntlProvider locale={ lang_code } messages={ messages }>
         <BrowserRouter>
           <div>
@@ -135,6 +139,9 @@ const init_app = function (target, component) {
               switch (props.location.hash.split('#')[1]) {
                 case 'personaldata':
                   return (<PersonalDataContainer />);
+                  break;
+                case 'nins':
+                  return (<NinsContainer />);
                   break;
                 case 'emails':
                   return (<EmailsContainer />);
@@ -155,6 +162,7 @@ const init_app = function (target, component) {
 
             <ul role="nav" className="hidden">
               <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
+              <li><Link to="/profile/#nins" id="nins-router-link">Nins</Link></li>
               <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
               <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
               <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>

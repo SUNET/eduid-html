@@ -28,4 +28,3 @@ const OpenidConnectContainer = connect(
 )(OpenidConnect);
 
 export default OpenidConnectContainer;
-

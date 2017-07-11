@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
+import vettingRegistry from "vetting-registry";
 
 import 'style/Nins.scss';
 
@@ -13,13 +14,16 @@ class Nins extends Component {
 
   render () {
     const creds_table = this.props.nins.map((nin, index) => {
-            return (<tr key="{index}">
+            return (<tr key={index}>
                         <td>{nin.number}</td>
                         <td>{nin.verified}</td>
                         <td>{nin.primary}</td>
                     </tr>
             );
-        }, this);
+          }),
+          vetting_buttons = vettingRegistry.map((comp, index) => {
+            return (<div key={index}>{comp}</div>);
+          });
 
     return (
         <div>
@@ -53,6 +57,7 @@ class Nins extends Component {
                            handleChange={this.props.handleChange} />
             </fieldset>
           </form>
+          {vetting_buttons}
         </div>
     );
   }
