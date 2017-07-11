@@ -1,5 +1,5 @@
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/ChangePassword";
 
 
@@ -8,6 +8,7 @@ export function* requestSuggestedPassword () {
         yield put(actions.getSuggestedPassword());
         const config = yield select(state => state.config);
         const suggested = yield call(fetchSuggestedPassword, config);
+        yield put(putCsrfToken(suggested));
         yield put(suggested);
     } catch(error) {
         yield put(actions.getSuggestedPasswordFail(error.toString()));
@@ -33,9 +34,10 @@ export function* postPasswordChange () {
               data = {
                 old_password: state.chpass.old_password,
                 new_password: state.chpass.new_password,
-                csrf_token: state.security.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const change = yield call(postPassword, config, data);
+        yield put(putCsrfToken(change));
         yield put(change);
     } catch(error) {
         yield put(actions.postPasswordChangeFail(error.toString()));

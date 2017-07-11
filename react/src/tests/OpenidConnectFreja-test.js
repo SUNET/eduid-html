@@ -336,9 +336,18 @@ describe("Async component", () => {
               };
        expect(oidcFrejaData.value).toEqual(call(fetchFrejaData, debug, data));
 
-       next = generator.next(oidcFrejaData.value);
-       expect(next.value).toEqual(put(oidcFrejaData.value));
-
+       const action = {
+         type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS,
+         payload: {
+             iaRequestData: 'def456',
+             csrf_token: 'csrf-token'
+         }
+       }
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
 });

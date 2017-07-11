@@ -33,10 +33,14 @@ let configReducer = (state=configData, action) => {
           is_fetching: false,
           failed: true
       };
+    case actions.NEW_CSRF_TOKEN:
+      return {
+          ...state,
+          ...action.payload
+      };
     default:
       return state;
   }
 };
 
 export default configReducer;
-

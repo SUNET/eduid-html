@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail  } from "actions/Security";
@@ -12,6 +12,7 @@ export function* requestCredentials () {
         yield put(getCredentials());
         const config = yield select(state => state.config);
         const credentials = yield call(fetchCredentials, config);
+        yield put(putCsrfToken(credentials));
         yield put(credentials);
     } catch(error) {
         yield put(getCredentialsFail(error.toString()));
@@ -29,7 +30,7 @@ export function fetchCredentials(config) {
 }
 
 
-export function* requestPasswordChange (windou) {
+export function* requestPasswordChange (win) {
     try {
         yield put(stopConfirmationPassword());
         const config = yield select(state => state.config),
@@ -39,8 +40,8 @@ export function* requestPasswordChange (windou) {
               nextURL = dashURL + '/#chpass',
               url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 
-        if (windou !== undefined && windou.location !== undefined) {
-            windou.location.href = url;
+        if (win !== undefined && win.location !== undefined) {
+            win.location.href = url;
         } else {
             window.location.href = url;
         }
@@ -56,9 +57,10 @@ export function* postDeleteAccount () {
         yield put(postConfirmDeletion());
         const state = yield select(state => state);
         const data = {
-            csrf_token: state.security.csrf_token
+            csrf_token: state.config.csrf_token
         };
         const resp = yield call(deleteAccount, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(accountRemovedFail(error.toString()));

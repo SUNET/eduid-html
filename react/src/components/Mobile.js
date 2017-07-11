@@ -15,6 +15,8 @@ class Mobile extends Component {
 
   render () {
 
+    let spinning = false;
+    if (this.props.is_fetching) spinning = true;
     return (
         <div className="mobileview-form-container ">
               <div className="intro">
@@ -40,7 +42,8 @@ class Mobile extends Component {
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
                                id="mobile-button"
-                          onClick={this.props.handleAdd}>
+                               spinning={spinning}
+                               onClick={this.props.handleAdd}>
                       {this.props.l10n('mobile.button_add')}
                   </EduIDButton>
                 </fieldset>

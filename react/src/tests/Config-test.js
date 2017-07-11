@@ -37,6 +37,7 @@ describe("Config Actions", () => {
 describe("Config reducers", () => {
 
   const mockState = {
+    csrf_token: '',
     is_fetching: false,
     failed: false,
     param1: 'old value'
@@ -52,6 +53,7 @@ describe("Config reducers", () => {
       )
     ).toEqual(
       {
+        csrf_token: '',
         param1: 'old value',
         is_fetching: true,
         is_configured: false,
@@ -66,11 +68,15 @@ describe("Config reducers", () => {
         mockState,
         {
           type: actions.GET_JSCONFIG_CONFIG_SUCCESS,
-          payload: { param1: 'new value' }
+          payload: {
+            csrf_token: '',
+            param1: 'new value',
+          }
         }
       )
     ).toEqual(
       {
+        csrf_token: '',
         param1: 'new value',
         is_fetching: false,
         failed: false,
@@ -94,6 +100,7 @@ describe("Config reducers", () => {
       )
     ).toEqual(
       {
+        csrf_token: '',
         param1: 'old value',
         is_fetching: false,
         failed: true,
@@ -113,6 +120,7 @@ describe("Config reducers", () => {
       )
     ).toEqual(
       {
+        csrf_token: '',
         is_fetching: false,
         failed: false,
         param1: 'old value'
@@ -131,6 +139,7 @@ describe("Config reducers", () => {
         language: ''
     },
     config : {
+        csrf_token: '',
         is_configured : false,
         is_fetching: false,
         failed: false,
