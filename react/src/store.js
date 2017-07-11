@@ -9,6 +9,7 @@ import mobileReducer from 'reducers/Mobile';
 import securityReducer from 'reducers/Security';
 import chpassReducer from 'reducers/ChangePassword';
 import ninsReducer from 'reducers/Nins';
+import letterProofingReducer from 'reducers/LetterProofing';
 
 const eduIDApp = combineReducers({
   config: configReducer,
@@ -20,7 +21,8 @@ const eduIDApp = combineReducers({
   chpass: chpassReducer,
   openid_freja_data: openidConnectFrejaReducer,
   phones: mobileReducer,
-  nins: ninsReducer
+  nins: ninsReducer,
+  letter_proofing: letterProofingReducer
 });
 
 export default eduIDApp;
