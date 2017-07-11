@@ -138,7 +138,7 @@ describe("Reducers", () => {
 
 function setupComponent() {
   const props = {
-    handleOpenFrejaApp: createSpy(),
+    handleInitializeFrejaProofing: createSpy(),
     iaRequestData: "",
   };
 
@@ -170,9 +170,9 @@ describe("OpenidConnectFreja Component using a mobile device", () => {
     expect(fieldset.props()).toContain({id: 'openid-connect-freja'});
 
     expect(button.hasClass('btn')).toBeTruthy();
-    expect(props.handleOpenFrejaApp.calls.length).toEqual(0);
+    expect(props.handleInitializeFrejaProofing.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleOpenFrejaApp.calls.length).toEqual(1);
+    expect(props.handleInitializeFrejaProofing.calls.length).toEqual(1);
   })
 });
 
@@ -309,14 +309,14 @@ config : {
 }
 };
 
-import {requestOpenidFrejaData, fetchFrejaData} from '../sagas/OpenidConnectFreja';
+import {requestOpenidFrejaData, initializeOpenidFrejaData, fetchFrejaData} from '../sagas/OpenidConnectFreja';
 import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
-    it("Sagas requestOpenidFrejaData", () => {
+    it("Sagas initializeOpenidFrejaData", () => {
 
-       const generator = requestOpenidFrejaData();
+       const generator = initializeOpenidFrejaData();
 
        let next = generator.next();
        let debug = select(state => state.config.OIDC_PROOFING_FREJA_URL);

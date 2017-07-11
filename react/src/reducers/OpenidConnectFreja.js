@@ -3,10 +3,10 @@ import * as actions from "actions/OpenidConnectFreja";
 
 
 const openidFrejaData = {
-    is_fetching: false,
-    failed: false,
-    error: "",
-    iaRequestData: "",
+  is_fetching: false,
+  failed: false,
+  error: "",
+  iaRequestData: "",
 };
 
 let openidConnectFrejaReducer = (state=openidFrejaData, action) => {

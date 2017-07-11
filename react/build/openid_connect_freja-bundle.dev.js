@@ -65,7 +65,13 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
+<<<<<<< Updated upstream
 /******/ 	var hotCurrentHash = "a7f258f6b112adc1de89"; // eslint-disable-line no-unused-vars
+||||||| merged common ancestors
+/******/ 	var hotCurrentHash = "c555c7753383e6192514"; // eslint-disable-line no-unused-vars
+=======
+/******/ 	var hotCurrentHash = "2609178ef24052aebc67"; // eslint-disable-line no-unused-vars
+>>>>>>> Stashed changes
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -593,7 +599,13 @@
 	
 	var _initApp2 = _interopRequireDefault(_initApp);
 	
+<<<<<<< Updated upstream
 	var _OpenidConnectFreja = __webpack_require__(1172);
+||||||| merged common ancestors
+	var _OpenidConnectFreja = __webpack_require__(1305);
+=======
+	var _OpenidConnectFreja = __webpack_require__(1302);
+>>>>>>> Stashed changes
 	
 	var _OpenidConnectFreja2 = _interopRequireDefault(_OpenidConnectFreja);
 	
@@ -24777,8 +24789,17 @@
 	var language = navigator.languages ? navigator.languages[0] : navigator.language || navigator.userLanguage;
 	
 	var lang_code = language.substring(0, 2);
+<<<<<<< Updated upstream
 	var locale = __webpack_require__(928)("./" + lang_code);
 	var messages = __webpack_require__(1164)("./" + lang_code);
+||||||| merged common ancestors
+	var locale = __webpack_require__(1061)("./" + lang_code);
+	var messages = __webpack_require__(1297)("./" + lang_code);
+=======
+	var locale = __webpack_require__(1061)("./" + lang_code);
+	//const messages = require('../i18n/l10n/' + lang_code);
+	var messages = __webpack_require__(1297);
+>>>>>>> Stashed changes
 	
 	(0, _reactIntl.addLocaleData)(locale);
 	
@@ -24790,7 +24811,13 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
+<<<<<<< Updated upstream
 	          return [(0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Security2.requestCredentials), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeLatest)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeLatest)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeLatest)(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, _OpenidConnectFreja2.requestOpenidFrejaData), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeLatest)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeLatest)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeLatest)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeLatest)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile), (0, _reduxSaga.takeLatest)(securityActions.GET_CHANGE_PASSWORD, _Security2.requestPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_PASSWORD_CHANGE, _ChangePassword2.postPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, _ChangePassword2.backToHome), (0, _reduxSaga.takeLatest)(securityActions.POST_DELETE_ACCOUNT, _Security2.postDeleteAccount)];
+||||||| merged common ancestors
+	          return [(0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Security2.requestCredentials), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeEvery)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeEvery)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeEvery)(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, _OpenidConnectFreja2.requestOpenidFrejaData), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeEvery)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeEvery)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeEvery)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeEvery)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile), (0, _reduxSaga.takeEvery)(securityActions.GET_CHANGE_PASSWORD, _Security2.requestPasswordChange), (0, _reduxSaga.takeEvery)(pwActions.POST_PASSWORD_CHANGE, _ChangePassword2.postPasswordChange), (0, _reduxSaga.takeEvery)(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, _ChangePassword2.backToHome), (0, _reduxSaga.takeEvery)(securityActions.POST_DELETE_ACCOUNT, _Security2.postDeleteAccount)];
+=======
+	          return [(0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Security2.requestCredentials), (0, _reduxSaga.takeEvery)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeEvery)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeEvery)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeEvery)(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, _OpenidConnectFreja2.initializeOpenidFrejaData), (0, _reduxSaga.takeEvery)(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, _OpenidConnectFreja2.requestOpenidFrejaData), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeEvery)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeEvery)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeEvery)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeEvery)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeEvery)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeEvery)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile), (0, _reduxSaga.takeEvery)(securityActions.GET_CHANGE_PASSWORD, _Security2.requestPasswordChange), (0, _reduxSaga.takeEvery)(pwActions.POST_PASSWORD_CHANGE, _ChangePassword2.postPasswordChange), (0, _reduxSaga.takeEvery)(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, _ChangePassword2.backToHome), (0, _reduxSaga.takeEvery)(securityActions.POST_DELETE_ACCOUNT, _Security2.postDeleteAccount)];
+>>>>>>> Stashed changes
 	
 	        case 2:
 	        case 'end':
@@ -44949,9 +44976,13 @@
 	    /* OIDC FREJA ***********/
 	    /************************/
 	
-	    'ocf.request_data': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.request_data',
-	        defaultMessage: 'CONFIRM USING FREJA EID' }),
+	    'ocf.initialize_proofing': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'ocf.initialize_proofing',
+	        defaultMessage: 'CONFIRM USING ATG OMBUD' }),
+	
+	    'ocf.initialize_proofing_help_text': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
+	        id: 'ocf.initialize_proofing_help_text',
+	        defaultMessage: 'To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed on your device.' }),
 	
 	    'ocf.open_app': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'ocf.open_app',
@@ -44961,9 +44992,9 @@
 	        id: 'ocf.not_on_mobile_title',
 	        defaultMessage: 'Tip' }),
 	
-	    'ocf.not_on_mobile_message': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    'ocf.not_on_mobile_message': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
 	        id: 'ocf.not_on_mobile_message',
-	        defaultMessage: 'If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud.' }),
+	        defaultMessage: 'If you switch to a mobile device with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed you will be able to verify your account at your closest ATG Ombud.' }),
 	
 	    /************************/
 	    /* PERSONAL DATA ********/
@@ -67833,6 +67864,7 @@
 	
 	var _regenerator2 = _interopRequireDefault(_regenerator);
 	
+	exports.initializeOpenidFrejaData = initializeOpenidFrejaData;
 	exports.requestOpenidFrejaData = requestOpenidFrejaData;
 	exports.fetchFrejaData = fetchFrejaData;
 	
@@ -67842,13 +67874,17 @@
 	
 	var _OpenidConnectFreja = __webpack_require__(651);
 	
+	var actions = _interopRequireWildcard(_OpenidConnectFreja);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [requestOpenidFrejaData].map(_regenerator2.default.mark);
+	var _marked = [initializeOpenidFrejaData, requestOpenidFrejaData].map(_regenerator2.default.mark);
 	
-	function requestOpenidFrejaData() {
+	function initializeOpenidFrejaData() {
 	  var nin, pendingNin, inputNin, openid_freja_url, data, oidcFrejaData;
-	  return _regenerator2.default.wrap(function requestOpenidFrejaData$(_context) {
+	  return _regenerator2.default.wrap(function initializeOpenidFrejaData$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
@@ -67889,7 +67925,7 @@
 	          }
 	
 	          _context.next = 13;
-	          return (0, _effects.put)((0, _OpenidConnectFreja.postOpenidFrejaFail)('Error: No NIN entered'));
+	          return (0, _effects.put)(actions.postOpenidFrejaFail('Error: No NIN entered'));
 	
 	        case 13:
 	          _context.next = 22;
@@ -67915,8 +67951,16 @@
 	        case 24:
 	          _context.prev = 24;
 	          _context.t0 = _context["catch"](0);
+<<<<<<< Updated upstream
 	          _context.next = 28;
 	          return (0, _effects.put)((0, _OpenidConnectFreja.postOpenidFrejaFail)(_context.t0.toString()));
+||||||| merged common ancestors
+	          _context.next = 26;
+	          return (0, _effects.put)((0, _OpenidConnectFreja.postOpenidFrejaFail)(_context.t0.toString()));
+=======
+	          _context.next = 26;
+	          return (0, _effects.put)(actions.postOpenidFrejaFail(_context.t0.toString()));
+>>>>>>> Stashed changes
 	
 	        case 28:
 	        case "end":
@@ -67926,13 +67970,59 @@
 	  }, _marked[0], this, [[0, 24]]);
 	}
 	
+	function requestOpenidFrejaData() {
+	  var openid_freja_url, oidcFrejaData;
+	  return _regenerator2.default.wrap(function requestOpenidFrejaData$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          _context2.prev = 0;
+	          _context2.next = 3;
+	          return (0, _effects.select)(function (state) {
+	            return state.config.OIDC_PROOFING_FREJA_URL;
+	          });
+	
+	        case 3:
+	          openid_freja_url = _context2.sent;
+	
+	          console.log('Checking for existing opaque data');
+	          _context2.next = 7;
+	          return (0, _effects.call)(fetchFrejaData, openid_freja_url);
+	
+	        case 7:
+	          oidcFrejaData = _context2.sent;
+	          _context2.next = 10;
+	          return (0, _effects.put)(oidcFrejaData);
+	
+	        case 10:
+	          _context2.next = 16;
+	          break;
+	
+	        case 12:
+	          _context2.prev = 12;
+	          _context2.t0 = _context2["catch"](0);
+	          _context2.next = 16;
+	          return (0, _effects.put)(actions.getOpenidFrejaFail(_context2.t0.toString()));
+	
+	        case 16:
+	        case "end":
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[0, 12]]);
+	}
+	
 	function fetchFrejaData(url, data) {
-	  return __webpack_provided_window_dot_fetch(url, {
+	  var options = {
 	    credentials: 'include',
-	    method: 'POST',
 	    headers: _common.ajaxHeaders,
-	    body: JSON.stringify(data)
-	  }).then(_common.checkStatus).then(function (response) {
+	    method: 'GET'
+	  };
+	  if (data) {
+	    options['body'] = JSON.stringify(data);
+	    options['method'] = 'POST';
+	  }
+	  return __webpack_provided_window_dot_fetch(url, options).then(_common.checkStatus).then(function (response) {
 	    return response.json();
 	  });
 	}
@@ -67943,7 +68033,15 @@
 	    return;
 	  }
 	
+<<<<<<< Updated upstream
 	  __REACT_HOT_LOADER__.register(requestOpenidFrejaData, "requestOpenidFrejaData", "/home/eperez/src/git/eduid-html/react/src/sagas/OpenidConnectFreja.js");
+||||||| merged common ancestors
+	  __REACT_HOT_LOADER__.register(requestOpenidFrejaData, "requestOpenidFrejaData", "/root/react/src/sagas/OpenidConnectFreja.js");
+=======
+	  __REACT_HOT_LOADER__.register(initializeOpenidFrejaData, "initializeOpenidFrejaData", "/root/react/src/sagas/OpenidConnectFreja.js");
+	
+	  __REACT_HOT_LOADER__.register(requestOpenidFrejaData, "requestOpenidFrejaData", "/root/react/src/sagas/OpenidConnectFreja.js");
+>>>>>>> Stashed changes
 	
 	  __REACT_HOT_LOADER__.register(fetchFrejaData, "fetchFrejaData", "/home/eperez/src/git/eduid-html/react/src/sagas/OpenidConnectFreja.js");
 	}();
@@ -70083,6 +70181,7 @@
 
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1164 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -70124,14 +70223,102 @@
 
 /***/ }),
 /* 1167 */
+||||||| merged common ancestors
+/* 1297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./en": 1298,
+		"./en.json": 1298,
+		"./es": 1299,
+		"./es.json": 1299,
+		"./sv": 1300,
+		"./sv.json": 1300
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 1297;
+
+
+/***/ }),
+/* 1298 */
+/***/ (function(module, exports) {
+
+	module.exports = {};
+
+/***/ }),
+/* 1299 */
 /***/ (function(module, exports) {
 
 	module.exports = {
+		"greeting.welcome_message": "spanská hola"
+	};
+
+/***/ }),
+/* 1300 */
+=======
+/* 1297 */
+>>>>>>> Stashed changes
+/***/ (function(module, exports) {
+
+	module.exports = {
+		"Not a valid email address.": "Not a valid email address.",
+		"button_save": "Spara",
+		"chpass.change-password": "Change password",
+		"chpass.custom_password": "Custom password",
+		"chpass.help-text-general": "You can change your current password using this form. A strong password has been generated for you. You can accept the generated password by clicking \"Change password\" or you can opt to choose your own password using the checkbox.",
+		"chpass.help-text-newpass": "<p>Choose a strong password. Some tips:</p>\n            <ul>\n\t            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>\n\t            <li>Add digits somewhere else than at the end of the password</li>\n                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>\n\t            <li>Spaces are ignored</li>\n            </ul>",
+		"chpass.no_old_pw": "Please enter the old password",
+		"chpass.old_password": "Current password",
+		"chpass.repeat_password": "Repeat your custom password",
+		"chpass.suggested_password": "Suggested password",
+		"chpass.title-general": "Change your password",
+		"chpass.use-custom-label": "Use my own password",
+		"cm.accept": "ACCEPT",
+		"cm.cancel": "CANCEL",
+		"cm.finish": "FINISH",
+		"cm.lost_code": "Lost your confirmation code?",
+		"cm.ok": "OK",
+		"cm.resend_code": "Resend confirmation code",
+		"emails.button_add": "Add",
+		"emails.cannot_remove_primary": "You can not delete the primary email",
+		"emails.code_invalid": "The confirmation code is invalid, please try again or request a new code",
+		"emails.confirm_email_placeholder": "Email confirmation code",
+		"emails.confirm_title": "Check your email inbox for {email} for further instructions",
+		"emails.email": "Email",
+		"emails.long_description": "You can connect one or more email addresses with your eduID \n          account and select one to be your primary email address.",
+		"emails.main_title": "Email addresses",
+		"emails.resend_success": "New code successfully sent to {email}",
+		"emails_cannot_remove_unique": "You can not delete the unique email",
+		"faq_link": "For more information see the",
 		"greeting.welcome_message": "Hej!",
-		"pd.given_name": "Förnamn",
-		"pd.surname": "Efternamn",
+		"mail_duplicated": "Added email is duplicated",
+		"mobile.button_add": "Add",
+		"mobile.confirm_mobile_placeholder": "Phone confirmation code",
+		"mobile.confirm_title": "Check your mobile inbox for {phone} for further instructions",
+		"mobile.mobile": "mobile",
+		"mobile.resend_success": "New code successfully sent to {email}",
+		"oc.get_qrcode": "BEKRÄFTA MED SE-LEG",
+		"oc.nin_required_msg": "Skriv in ett personnummer för att verifera med se-leg",
+		"ocf.initialize_proofing": "BEKRÄFTA VIA ATG-OMBUD",
+		"ocf.initialize_proofing_help_text": "Du behöver <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID-appen</a> för att kunna bekräfta ditt konto via ATG-ombud.",
+		"ocf.not_on_mobile_message": "Om du byter till en mobil enhet med <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID-appen</a> installerad så kan du bekräfta dig hos ett ATG-ombud.",
+		"ocf.not_on_mobile_title": "Tips",
+		"ocf.open_app": "ÖPPNA FREJA EID",
+		"out_of_sync": "User data is out of sync. Reload page to re-sync.",
 		"pd.display_name": "Visningsnamn",
+		"pd.given_name": "Förnamn",
 		"pd.language": "Språk",
+<<<<<<< Updated upstream
 		"button_save": "Spara",
 		"oc.get_qrcode": "BEKRÄFTA MED SE-LEG",
 		"oc.nin_required_msg": "Skriv in ett personnummer för att verifera med se-leg"
@@ -70141,12 +70328,72 @@
 /* 1168 */,
 /* 1169 */,
 /* 1170 */
+||||||| merged common ancestors
+		"button_save": "Spara",
+		"oc.get_qrcode": "BEKRÄFTA MED SE-LEG",
+		"oc.nin_required_msg": "Skriv in ett personnummer för att verifera med se-leg"
+	};
+
+/***/ }),
+/* 1301 */,
+/* 1302 */,
+/* 1303 */
+=======
+		"pd.long_description": "This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you.",
+		"pd.main_title": "Personal information",
+		"pd.surname": "Efternamn",
+		"phone_cannot_remove_unique": "You can not delete the unique phone",
+		"phone_duplicated": "Added number is duplicated",
+		"phone_format": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits.",
+		"phones.long_description": "You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one.",
+		"phones.main_title": "Mobile phone numbers",
+		"pwfield.enter_password": "Enter password",
+		"pwfield.good": "Fairly strong password",
+		"pwfield.repeat_different": "Repeated pasword is different",
+		"pwfield.repeat_password": "Repeat password",
+		"pwfield.strong": "Strong password",
+		"pwfield.terrible": "Very weak password",
+		"pwfield.weak": "Weak password",
+		"security.account_description": "Use the button below to permanently delete your eduID account.",
+		"security.account_title": "Account deletion",
+		"security.change_info": "For security reasons we will ask you to log in again before changing your password.",
+		"security.change_password": "Change password",
+		"security.confirm_button": "Confirm deletion of eduID account",
+		"security.confirm_title": "Delete account",
+		"security.confirm_title_chpass": "Secure password change",
+		"security.confirm_title_deletion": "Account deletion",
+		"security.creation_date": "Creation date",
+		"security.credential": "Credential",
+		"security.delete_account": "Delete eduID account",
+		"security.last_used": "Last used",
+		"security.long_description": "Your eduID account password can be changed below.",
+		"security.main_title": "Security",
+		"security.modal_info": "Are you sure that you wish to delete your eduID account? This action will\n                           permanently remove all the data associated with the account from our database.",
+		"security.modal_notes": "Note that for security reasons if you choose to delete your account,\n                           you will be asked to log in again.",
+		"security.password_credential_type": "Password",
+		"tl.make_primary": "MAKE PRIMARY",
+		"tl.pending": "PENDING CONFIRMATION",
+		"tl.primary": "PRIMARY",
+		"tl.remove": "REMOVE"
+	};
+
+/***/ }),
+/* 1298 */,
+/* 1299 */,
+/* 1300 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
+<<<<<<< Updated upstream
 	var content = __webpack_require__(1171);
+||||||| merged common ancestors
+	var content = __webpack_require__(1304);
+=======
+	var content = __webpack_require__(1301);
+>>>>>>> Stashed changes
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(893)(content, {});
@@ -70155,8 +70402,16 @@
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
+<<<<<<< Updated upstream
 			module.hot.accept(1171, function() {
 				var newContent = __webpack_require__(1171);
+||||||| merged common ancestors
+			module.hot.accept(1304, function() {
+				var newContent = __webpack_require__(1304);
+=======
+			module.hot.accept(1301, function() {
+				var newContent = __webpack_require__(1301);
+>>>>>>> Stashed changes
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -70166,7 +70421,13 @@
 	}
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1171 */
+||||||| merged common ancestors
+/* 1304 */
+=======
+/* 1301 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(892)();
@@ -70180,7 +70441,13 @@
 
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1172 */
+||||||| merged common ancestors
+/* 1305 */
+=======
+/* 1302 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70191,7 +70458,13 @@
 	
 	var _reactRedux = __webpack_require__(552);
 	
+<<<<<<< Updated upstream
 	var _OpenidConnectFreja = __webpack_require__(1173);
+||||||| merged common ancestors
+	var _OpenidConnectFreja = __webpack_require__(1306);
+=======
+	var _OpenidConnectFreja = __webpack_require__(1303);
+>>>>>>> Stashed changes
 	
 	var _OpenidConnectFreja2 = _interopRequireDefault(_OpenidConnectFreja);
 	
@@ -70209,8 +70482,11 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 	  return {
-	    handleOpenFrejaApp: function handleOpenFrejaApp(e) {
+	    handleInitializeFrejaProofing: function handleInitializeFrejaProofing(e) {
 	      dispatch((0, _OpenidConnectFreja3.postOpenidFreja)());
+	    },
+	    handleFetchFrejaProofing: function handleFetchFrejaProofing(e) {
+	      dispatch((0, _OpenidConnectFreja3.getOpenidFreja)());
 	    }
 	  };
 	};
@@ -70238,7 +70514,13 @@
 	;
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1173 */
+||||||| merged common ancestors
+/* 1306 */
+=======
+/* 1303 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70251,7 +70533,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+<<<<<<< Updated upstream
 	var _reactUseragent = __webpack_require__(1174);
+||||||| merged common ancestors
+	var _reactUseragent = __webpack_require__(1307);
+=======
+	var _reactUseragent = __webpack_require__(1304);
+>>>>>>> Stashed changes
 	
 	var _reactUseragent2 = _interopRequireDefault(_reactUseragent);
 	
@@ -70263,13 +70551,23 @@
 	
 	var _EduIDButton2 = _interopRequireDefault(_EduIDButton);
 	
+<<<<<<< Updated upstream
 	__webpack_require__(1170);
+||||||| merged common ancestors
+	__webpack_require__(1303);
+=======
+	__webpack_require__(1300);
+>>>>>>> Stashed changes
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var OpenidConnectFreja = _react2.default.createClass({
 	  displayName: 'OpenidConnectFreja',
 	
+	
+	  componentDidMount: function componentDidMount() {
+	    this.props.handleFetchFrejaProofing();
+	  },
 	
 	  render: function render() {
 	    var supportedDevices = ['AndroidOS', 'iOS'];
@@ -70345,8 +70643,13 @@
 	              _EduIDButton2.default,
 	              { bsStyle: 'primary',
 	                spinning: spinning,
-	                onClick: this.props.handleOpenFrejaApp },
-	              this.props.l10n('ocf.request_data')
+	                onClick: this.props.handleInitializeFrejaProofing },
+	              this.props.l10n('ocf.initialize_proofing')
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { 'class': 'help-block' },
+	              this.props.l10n('ocf.initialize_proofing_help_text')
 	            )
 	          )
 	        )
@@ -70363,7 +70666,7 @@
 	  iaRequestData: _react.PropTypes.string,
 	  errorMsg: _react.PropTypes.string,
 	  is_fetching: _react.PropTypes.bool,
-	  handleOpenFrejaApp: _react.PropTypes.func
+	  handleInitializeFrejaProofing: _react.PropTypes.func
 	};
 	
 	var _default = (0, _reactUseragent2.default)((0, _i18nMessages2.default)(OpenidConnectFreja));
@@ -70384,7 +70687,13 @@
 	;
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1174 */
+||||||| merged common ancestors
+/* 1307 */
+=======
+/* 1304 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70401,7 +70710,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+<<<<<<< Updated upstream
 	var _mobileDetect = __webpack_require__(1175);
+||||||| merged common ancestors
+	var _mobileDetect = __webpack_require__(1308);
+=======
+	var _mobileDetect = __webpack_require__(1305);
+>>>>>>> Stashed changes
 	
 	var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 	
@@ -70450,7 +70765,13 @@
 	exports.default = withUserAgent;
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1175 */
+||||||| merged common ancestors
+/* 1308 */
+=======
+/* 1305 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 	// THIS FILE IS GENERATED - DO NOT EDIT!
@@ -71436,7 +71757,13 @@
 	    if (typeof module !== 'undefined' && module.exports) {
 	        return function (factory) { module.exports = factory(); };
 	    } else if (true) {
+<<<<<<< Updated upstream
 	        return __webpack_require__(1176);
+||||||| merged common ancestors
+	        return __webpack_require__(1309);
+=======
+	        return __webpack_require__(1306);
+>>>>>>> Stashed changes
 	    } else if (typeof window !== 'undefined') {
 	        return function (factory) { window.MobileDetect = factory(); };
 	    } else {
@@ -71446,7 +71773,13 @@
 	})());
 
 /***/ }),
+<<<<<<< Updated upstream
 /* 1176 */
+||||||| merged common ancestors
+/* 1309 */
+=======
+/* 1306 */
+>>>>>>> Stashed changes
 /***/ (function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };

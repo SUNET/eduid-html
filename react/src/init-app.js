@@ -43,7 +43,7 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
-import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
+import { requestOpenidFrejaData, initializeOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 /* i18n */
 
@@ -53,7 +53,7 @@ const language = navigator.languages
 
 const lang_code = language.substring(0,2);
 const locale = require('react-intl/locale-data/' + lang_code);
-const messages = require('../i18n/l10n/' + lang_code)
+const messages = require('../i18n/l10n/' + lang_code);
 
 addLocaleData(locale);
 
@@ -70,6 +70,7 @@ function* rootSaga() {
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
     takeLatest(emailActions.POST_EMAIL, saveEmail),
     takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeLatest(emailActions.START_VERIFY, requestVerifyEmail),

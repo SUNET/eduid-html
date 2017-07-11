@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import OpenidConnectFreja from 'components/OpenidConnectFreja';
-import { postOpenidFreja } from "actions/OpenidConnectFreja";
+import { postOpenidFreja, getOpenidFreja } from "actions/OpenidConnectFreja";
 
 
 const mapStateToProps = (state, props) => {
@@ -14,8 +14,11 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleOpenFrejaApp: function (e) {
+    handleInitializeFrejaProofing: function (e) {
       dispatch(postOpenidFreja());
+    },
+    handleFetchFrejaProofing: function (e) {
+      dispatch(getOpenidFreja());
     }
   }
 };

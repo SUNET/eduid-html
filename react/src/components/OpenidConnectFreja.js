@@ -12,6 +12,10 @@ import 'style/OpenidConnect.scss';
 
 let OpenidConnectFreja = React.createClass({
 
+  componentDidMount: function () {
+    this.props.handleFetchFrejaProofing();
+  },
+
   render: function () {
     const supportedDevices = ['AndroidOS', 'iOS'];
     const isMobile = supportedDevices.includes(this.props.ua.os);
@@ -57,9 +61,10 @@ let OpenidConnectFreja = React.createClass({
               <br />
               <EduIDButton bsStyle="primary"
                            spinning={spinning}
-                           onClick={this.props.handleOpenFrejaApp}>
-                {this.props.l10n('ocf.request_data')}
+                           onClick={this.props.handleInitializeFrejaProofing}>
+                {this.props.l10n('ocf.initialize_proofing')}
               </EduIDButton>
+              <p class="help-block">{this.props.l10n('ocf.initialize_proofing_help_text')}</p>
             </fieldset>
           </form>
         </div>
@@ -72,7 +77,7 @@ OpenidConnectFreja.propTypes = {
   iaRequestData: PropTypes.string,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
-  handleOpenFrejaApp: PropTypes.func
+  handleInitializeFrejaProofing: PropTypes.func
 };
 
 export default withUserAgent(i18n(OpenidConnectFreja));

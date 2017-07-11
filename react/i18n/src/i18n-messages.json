@@ -112,8 +112,12 @@
     "defaultMessage": "CONFIRM USING SE-LEG"
   },
   {
-    "id": "ocf.request_data",
-    "defaultMessage": "CONFIRM USING FREJA EID"
+    "id": "ocf.initialize_proofing",
+    "defaultMessage": "CONFIRM USING ATG OMBUD"
+  },
+  {
+    "id": "ocf.initialize_proofing_help_text",
+    "defaultMessage": "To use this option you need to have the <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID app</a> installed on your device."
   },
   {
     "id": "ocf.open_app",
@@ -125,7 +129,7 @@
   },
   {
     "id": "ocf.not_on_mobile_message",
-    "defaultMessage": "If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud."
+    "defaultMessage": "If you switch to a mobile device with <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID app</a> installed you will be able to verify your account at your closest ATG Ombud."
   },
   {
     "id": "pd.given_name",

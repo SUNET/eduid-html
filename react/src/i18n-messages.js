@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import invariant from 'invariant';
-import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, defineMessages, injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 function getDisplayName(Component) {
     return Component.displayName || Component.name || 'Component';
@@ -252,10 +252,15 @@ const msgs = {
     /* OIDC FREJA ***********/
     /************************/
 
-    'ocf.request_data': (
+    'ocf.initialize_proofing': (
         <FormattedMessage
-          id="ocf.request_data"
-          defaultMessage={`CONFIRM USING FREJA EID`} />),
+          id="ocf.initialize_proofing"
+          defaultMessage={`CONFIRM USING ATG OMBUD`} />),
+
+    'ocf.initialize_proofing_help_text': (
+        <FormattedHTMLMessage
+          id="ocf.initialize_proofing_help_text"
+          defaultMessage={`To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed on your device.`} />),
 
     'ocf.open_app': (
         <FormattedMessage
@@ -268,9 +273,9 @@ const msgs = {
           defaultMessage={`Tip`} />),
 
       'ocf.not_on_mobile_message': (
-        <FormattedMessage
+        <FormattedHTMLMessage
           id="ocf.not_on_mobile_message"
-          defaultMessage={`If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud.`} />),
+          defaultMessage={`If you switch to a mobile device with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed you will be able to verify your account at your closest ATG Ombud.`} />),
 
     /************************/
     /* PERSONAL DATA ********/
