@@ -7,7 +7,6 @@ const security = {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     credentials: [],
     code: '',
     confirming_change: false,

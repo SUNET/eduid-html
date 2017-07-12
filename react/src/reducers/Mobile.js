@@ -5,7 +5,6 @@ const mobileData = {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     resending: {
       is_fetching: false,
       failed: false,
@@ -14,7 +13,7 @@ const mobileData = {
     },
     confirming: '',
     phones: [],
-    mobile: '',
+    phone: '',
     code: '',
 }
 
@@ -72,7 +71,6 @@ let mobileReducer = (state=mobileData, action) => {
         ...state,
         ...action.payload,
         is_fetching: false,
-        confirmation: '',
         confirming: '',
         code: '',
       };
@@ -146,7 +144,7 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_REMOVE:
       return {
         ...state,
-        mobile: action.payload.phone,
+        phone: action.payload.phone,
         is_fetching: true
       };
     case actions.POST_PHONE_REMOVE_SUCCESS:
@@ -165,7 +163,7 @@ let mobileReducer = (state=mobileData, action) => {
     case actions.POST_MOBILE_PRIMARY:
       return {
         ...state,
-        mobile: action.payload.phone,
+        phone: action.payload.phone,
         is_fetching: true
       }
     case actions.POST_MOBILE_PRIMARY_SUCCESS:

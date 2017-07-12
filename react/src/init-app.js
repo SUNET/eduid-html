@@ -11,7 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import createSagaMiddleware, { take, takeEvery } from 'redux-saga';
+import createSagaMiddleware, { takeLatest } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -66,30 +66,30 @@ addLocaleData(locale);
 
 function* rootSaga() {
   yield [
-    takeEvery(configActions.GET_JSCONFIG_CONFIG, requestConfig),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestMobile),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
-    takeEvery(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
-    takeEvery(pdataActions.POST_USERDATA, savePersonalData),
-    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
-    takeEvery(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
-    takeEvery(emailActions.POST_EMAIL, saveEmail),
-    takeEvery(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
-    takeEvery(emailActions.START_VERIFY, requestVerifyEmail),
-    takeEvery(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
-    takeEvery(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail),
-    takeEvery(mobileActions.POST_MOBILE, saveMobile),
-    takeEvery(mobileActions.POST_MOBILE_REMOVE, requestRemoveMobile),
-    takeEvery(mobileActions.POST_MOBILE_PRIMARY, requestMakePrimaryMobile),
-    takeEvery(mobileActions.START_RESEND_MOBILE_CODE, requestResendMobileCode),
-    takeEvery(mobileActions.START_VERIFY, requestVerifyMobile),
-    takeEvery(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
-    takeEvery(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
-    takeEvery(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
-    takeEvery(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG, requestConfig),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestMobile),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
+    takeLatest(pdataActions.POST_USERDATA, savePersonalData),
+    takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
+    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
+    takeLatest(emailActions.POST_EMAIL, saveEmail),
+    takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
+    takeLatest(emailActions.START_VERIFY, requestVerifyEmail),
+    takeLatest(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
+    takeLatest(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail),
+    takeLatest(mobileActions.POST_MOBILE, saveMobile),
+    takeLatest(mobileActions.POST_MOBILE_REMOVE, requestRemoveMobile),
+    takeLatest(mobileActions.POST_MOBILE_PRIMARY, requestMakePrimaryMobile),
+    takeLatest(mobileActions.START_RESEND_MOBILE_CODE, requestResendMobileCode),
+    takeLatest(mobileActions.START_VERIFY, requestVerifyMobile),
+    takeLatest(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
+    takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
+    takeLatest(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
+    takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
   ];
 }
 

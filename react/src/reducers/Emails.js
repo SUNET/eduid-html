@@ -7,7 +7,6 @@ const emailsData = {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     resending: {
       is_fetching: false,
       failed: false,
@@ -85,7 +84,6 @@ let emailsReducer = (state=emailsData, action) => {
         ...state,
         ...action.payload,
         is_fetching: false,
-        confirmation: '',
         confirming: '',
         code: '',
       };
@@ -129,7 +127,6 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.POST_EMAIL_VERIFY_SUCCESS:
       return {
           ...state,
-          ...state.payload,
           is_fetching: false,
           emails: action.payload.emails
       }

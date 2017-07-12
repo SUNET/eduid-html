@@ -15,6 +15,8 @@ class Emails extends Component {
 
   render () {
 
+    let spinning = false;
+    if (this.props.is_fetching) spinning = true;
     return (
         <div className="emailsview-form-container ">
           <div className="intro">
@@ -40,7 +42,8 @@ class Emails extends Component {
                                handleChange={this.props.handleChange} />
                   <EduIDButton bsStyle="primary"
                                id="email-button"
-                          onClick={this.props.handleAdd}>
+                               spinning={spinning}
+                               onClick={this.props.handleAdd}>
                       {this.props.l10n('emails.button_add')}
                   </EduIDButton>
                 </fieldset>
@@ -52,7 +55,6 @@ class Emails extends Component {
                 showModal={Boolean(this.props.confirming)}
                 finishModal={this.props.handleFinishConfirmation}
                 closeModal={this.props.handleStopConfirmation}
-                finishModal={this.props.handleFinishConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
                 resending={this.props.resending}

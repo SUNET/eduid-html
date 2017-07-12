@@ -125,7 +125,6 @@ describe("Reducers", () => {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     credentials: [],
     code: '',
     confirming_change: false,
@@ -147,7 +146,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -171,7 +169,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -202,7 +199,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -226,7 +222,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: true,
@@ -250,7 +245,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -274,7 +268,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -305,7 +298,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -329,7 +321,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -353,7 +344,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -377,7 +367,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -401,7 +390,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -429,7 +417,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -460,7 +447,6 @@ describe("Reducers", () => {
         failed: true,
         error: error,
         message: err,
-        csrf_token: '',
         credentials: [],
         code: '',
         confirming_change: false,
@@ -474,9 +460,9 @@ describe("Reducers", () => {
 const mockState = {
   security: {
     location: 'dummy-location',
-    csrf_token: 'csrf-token'
   },
   config: {
+    csrf_token: 'csrf-token',
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
@@ -487,31 +473,34 @@ describe("Async component", () => {
 
   it("Sagas requestCredentials", () => {
 
-    const generator = requestCredentials();
+      const generator = requestCredentials();
 
-    let next = generator.next();
-    expect(next.value).toEqual(put(actions.getCredentials()));
+      let next = generator.next();
+      expect(next.value).toEqual(put(actions.getCredentials()));
 
-    next = generator.next();
-    const config = state => state.config;
-    const credentials = generator.next(config);
-    expect(credentials.value).toEqual(call(fetchCredentials,config));
+      next = generator.next();
+      const config = state => state.config;
+      const credentials = generator.next(config);
+      expect(credentials.value).toEqual(call(fetchCredentials,config));
 
-    const mockCredentials = {
-      csrf_token: 'csrf-token',
-      payload: {
-        csrf_token: 'csrf-token',
-        credentials: [
-          {
-            credential_type: 'password',
-            created_ts: '',
-            success_ts: ''
-          }
-        ]
+      const action = {
+        type: actions.GET_CREDENTIALS_SUCCESS,
+        payload: {
+          csrf_token: 'csrf-token',
+          credentials: [
+            {
+              credential_type: 'password',
+              created_ts: '',
+              success_ts: ''
+            }
+          ]
+        }
       }
-    };
-    next = generator.next(mockCredentials);
-    expect(next.value).toEqual(put(mockCredentials));
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
   });
 
   it("Sagas requestPasswordChange", () => {
@@ -551,11 +540,18 @@ describe("Async component", () => {
     next = generator.next(mockState);
     expect(next.value).toEqual(call(deleteAccount, mockState.config, data));
 
-    const mockAction = {
-      type: "POST_SECURITY_TERMINATE_ACCOUNT_SUCCESS"
-    };
-    const end = generator.next(mockAction);
-    expect(end.value).toEqual(put(mockAction));
+
+      const action = {
+        type: actions.POST_DELETE_ACCOUNT_SUCCESS,
+        payload: {
+          csrf_token: 'csrf-token',
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
   });
 
 });
@@ -626,7 +622,6 @@ describe("Security Container", () => {
             failed: false,
             error: '',
             message: '',
-            csrf_token: '',
             credentials: [],
             code: '',
             confirming_change: false,
@@ -634,9 +629,10 @@ describe("Security Container", () => {
             location: '',
         },
         config: {
-          SECURITY_URL: '/dummy-sec-url',
-          DASHBOARD_URL: '/dummy-dash-url',
-          TOKEN_SERVICE_URL: '/dummy-tok-url'
+            csrf_token: '',
+            SECURITY_URL: '/dummy-sec-url',
+            DASHBOARD_URL: '/dummy-dash-url',
+            TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
       }
     };

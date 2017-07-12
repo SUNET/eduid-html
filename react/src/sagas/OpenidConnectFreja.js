@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import { postOpenidFrejaFail } from "actions/OpenidConnectFreja";
 
 
@@ -31,6 +31,7 @@ export function* requestOpenidFrejaData () {
         yield put(postOpenidFrejaFail('Error: No NIN entered'));
     } else {
         const oidcFrejaData = yield call(fetchFrejaData, openid_freja_url, data);
+        yield put(putCsrfToken(oidcFrejaData));
         yield put(oidcFrejaData);
     }
   } catch(error) {

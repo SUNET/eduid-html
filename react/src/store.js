@@ -12,17 +12,16 @@ import ninsReducer from 'reducers/Nins';
 import letterProofingReducer from 'reducers/LetterProofing';
 
 const eduIDApp = combineReducers({
+  chpass: chpassReducer,
   config: configReducer,
-  personal_data: personalDataReducer,
   emails: emailsReducer,
   openid_data: openidConnectReducer,
-  phones: mobileReducer,
-  security: securityReducer,
-  chpass: chpassReducer,
   openid_freja_data: openidConnectFrejaReducer,
+  personal_data: personalDataReducer,
   phones: mobileReducer,
   nins: ninsReducer,
-  letter_proofing: letterProofingReducer
+  letter_proofing: letterProofingReducer,
+  security: securityReducer
 });
 
 export default eduIDApp;

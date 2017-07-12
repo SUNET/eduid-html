@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import { getUserdata, getUserdataFail, postUserdataFail } from "actions/PersonalData";
 
 
@@ -10,6 +10,7 @@ export function* requestPersonalData () {
         yield put(getUserdata());
         const config = yield select(state => state.config);
         const userdata = yield call(fetchPersonalData, config);
+        yield put(putCsrfToken(userdata));
         yield put(userdata);
     } catch(error) {
         yield put(getUserdataFail(error.toString()));
@@ -34,11 +35,12 @@ export function* savePersonalData () {
         const config = yield select(state => state.config);
         const data = yield select(state =>  ({
             ...state.personal_data,
-            csrf_token: state.personal_data.csrf_token
+            csrf_token: state.config.csrf_token
         }));
         delete data.is_fetching;
         delete data.failed;
         const resp = yield call(sendPersonalData, config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(postUserdataFail(error.toString()));

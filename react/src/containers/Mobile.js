@@ -28,21 +28,15 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(changeMobile(data));
     },
     handleResend: function (e) {
+        e.preventDefault();
         dispatch(startResendMobileCode());
     },
     handleStartConfirmation: function (e) {
-        let data = {}
-        if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
-            data = {
-                identifier: e.target.parentNode.parentNode.getAttribute('data-identifier'),
-                phone: e.target.parentNode.parentNode.getAttribute('data-object')
-            };
-        }else{
-           data = {
-                identifier: e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier'),
-                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
-            };
-        }
+        const dataNode = e.target.closest("tr.emailrow"),
+              data = {
+                  identifier: dataNode.getAttribute('data-identifier'),
+                  phone: dataNode.getAttribute('data-object')
+              };
 
         dispatch(startConfirmation(data));
     },
@@ -59,29 +53,17 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(startVerify(data))
     },
     handleRemove: function (e) {
-        let data = {}
-        if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
-            data = {
-                phone: e.target.parentNode.parentNode.getAttribute('data-object')
-            };
-        }else{
-           data = {
-                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
-            };
-        }
+        const dataNode = e.target.closest("tr.emailrow"),
+              data = {
+                  phone: dataNode.getAttribute('data-object')
+              };
         dispatch(startRemove(data))
     },
     handleMakePrimary: (e) => {
-        let data = {}
-        if (e.target.parentNode.parentNode.parentNode.getAttribute('data-identifier') == null){
-            data = {
-                phone: e.target.parentNode.parentNode.getAttribute('data-object')
-            };
-        }else{
-           data = {
-                phone: e.target.parentNode.parentNode.parentNode.getAttribute('data-object')
-            };
-        }
+        const dataNode = e.target.closest("tr.emailrow"),
+              data = {
+                  phone: dataNode.getAttribute('data-object')
+              };
         dispatch(makePrimary(data))
     }
   }
