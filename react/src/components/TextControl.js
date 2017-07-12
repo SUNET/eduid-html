@@ -29,8 +29,8 @@ const TextControl = React.createClass({
     let children, label, help, options;
     if ((this.props.componentClass === 'select') &&
         (this.props.options)) {
-      options = this.props.options
-      options.unshift(["None", "Choose language"])
+      options = this.props.options.slice();
+      options.unshift(["None", "Choose language"]);
       children = options.map(opt => {
         return (<option key={opt[0]}
                         value={opt[0]}>
