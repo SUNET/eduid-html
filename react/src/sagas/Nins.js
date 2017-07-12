@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders } from "actions/common";
 import { getNins, getNinsFail  } from "actions/Nins";
 
 
