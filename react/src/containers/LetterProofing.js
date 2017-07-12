@@ -1,11 +1,12 @@
 
 import { connect } from 'react-redux';
 import LetterProofingButton from 'components/LetterProofing';
-import { postLetterProofing } from "actions/LetterProofing";
+import { startPostLetterProofing, stopPostLetterProofing } from "actions/LetterProofing";
 
 
 const mapStateToProps = (state, props) => {
   return {
+    confirmingLetter: state.letter_proofing.confirmingLetter,
     is_fetching: state.letter_proofing.is_fetching,
     errorMsg: state.letter_proofing.error
   }
@@ -15,7 +16,10 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
-      dispatch(postLetterProofing());
+      dispatch(startPostLetterProofing());
+    },
+    handleStopConfirmationLetter: function (e) {
+      dispatch(stopPostLetterProofing());
     }
   }
 };

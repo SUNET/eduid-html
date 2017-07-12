@@ -332,6 +332,18 @@
     "defaultMessage": "Add your Swedish national identity number and initiate the confirmation process using one of the buttons below."
   },
   {
+    "id": "letter.letter_button_text",
+    "defaultMessage": "Confirm using letter"
+  },
+  {
+    "id": "letter.confirm_title",
+    "defaultMessage": "Send code to your official postal address"
+  },
+  {
+    "id": "letter.confirm_text",
+    "defaultMessage": "When you click on the \"Send\" button a letter with a verification code will be sent to your official postal address."
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"

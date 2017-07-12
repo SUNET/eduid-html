@@ -3,6 +3,7 @@ import * as actions from "actions/LetterProofing";
 
 
 const letterData = {
+    confirmingLetter: false,
     is_fetching: false,
     failed: false,
     error: ""
@@ -11,6 +12,20 @@ const letterData = {
 
 let letterProofingReducer = (state=letterData, action) => {
   switch (action.type) {
+    case actions.START_LETTER_PROOFING:
+      return {
+        ...state,
+        confirmingLetter: true,
+        is_fetching: false,
+        failed: false
+      };
+    case actions.STOP_LETTER_PROOFING:
+      return {
+        ...state,
+        confirmingLetter: false,
+        is_fetching: false,
+        failed: false
+      };
     case actions.POST_LETTER_PROOFING_PROOFING:
       return {
         ...state,

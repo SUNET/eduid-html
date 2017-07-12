@@ -67,10 +67,12 @@ class Security extends Component {
               </EduIDButton>
           </div>
           <GenericConfirmModal
+                modalId="securityConfirmDialog"
                 title={this.props.l10n('security.confirm_title_chpass')}
+                mainText={this.props.l10n('security.change_info')}
                 showModal={this.props.confirming_change}
                 closeModal={this.props.handleStopConfirmationPassword}
-                finishModal={this.props.handleConfirmationPassword}
+                acceptModal={this.props.handleConfirmationPassword}
           />
           <DeleteModal
                 title={this.props.l10n('security.confirm_title_deletion')}

@@ -554,6 +554,26 @@ const msgs = {
           id="nins.help_text"
           defaultMessage={`Add your Swedish national identity number and initiate the confirmation process using one of the buttons below.`} />),
 
+    /************************/
+    /* Letter proofing ******/
+    /************************/
+
+   'letter.letter_button_text': (
+        <FormattedMessage
+          id="letter.letter_button_text"
+          defaultMessage={`Confirm using letter`} />),
+
+   'letter.confirm_title': (
+        <FormattedMessage
+          id="letter.confirm_title"
+          defaultMessage={`Send code to your official postal address`} />),
+
+   'letter.confirm_text': (
+        <FormattedMessage
+          id="letter.confirm_text"
+          defaultMessage={`When you click on the "Send" button a letter with a verification code will be sent to your official postal address.`} />),
+
+
 };
 
 const unformatted = defineMessages({
