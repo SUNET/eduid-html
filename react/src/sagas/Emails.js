@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "sagas/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/Emails";
 
 
@@ -10,6 +10,7 @@ export function* requestEmails () {
         yield put(actions.getEmails());
         const config = yield select(state => state.config);
         const emails = yield call(fetchEmails, config);
+        yield put(putCsrfToken(emails));
         yield put(emails);
     } catch(error) {
         yield put(actions.getEmailsFail(error.toString()));
@@ -32,9 +33,10 @@ export function* saveEmail () {
                 email: state.emails.email,
                 verified: false,
                 primary: false,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const emails = yield call(sendEmail, state.config, data);
+        yield put(putCsrfToken(emails));
         yield put(emails);
     } catch(error) {
         yield put(actions.postEmailFail(error.toString()));
@@ -57,9 +59,10 @@ export function* requestResendEmailCode () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.confirming,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestResend, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.resendEmailCodeFail(error.toString()));
@@ -83,9 +86,10 @@ export function* requestVerifyEmail () {
               data = {
                 email: state.emails.confirming,
                 code: state.emails.code,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestVerify, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.startVerifyFail(error.toString()));
@@ -108,9 +112,10 @@ export function* requestRemoveEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.email,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.startRemoveFail(error.toString()));
@@ -133,9 +138,10 @@ export function* requestMakePrimaryEmail () {
         const state = yield select(state => state),
               data = {
                 email: state.emails.email,
-                csrf_token: state.emails.csrf_token
+                csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestMakePrimary, state.config, data);
+        yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
         yield put(actions.makePrimaryFail(error.toString()));

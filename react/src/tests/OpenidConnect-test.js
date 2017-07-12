@@ -285,9 +285,20 @@ describe("Async component", () => {
               };
        expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
 
-       next = generator.next(oidcData.value)
-       expect(next.value).toEqual(put(oidcData.value));
+       const action = {
+         type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
+         payload: {
+             qr_img: 'new code',
+             qr_code: 'new nonce',
+             csrf_token: 'csrf-token'
+         }
+       }
 
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));
     });
 
 });

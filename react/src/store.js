@@ -11,16 +11,15 @@ import chpassReducer from 'reducers/ChangePassword';
 import ninsReducer from 'reducers/Nins';
 
 const eduIDApp = combineReducers({
+  chpass: chpassReducer,
   config: configReducer,
-  personal_data: personalDataReducer,
   emails: emailsReducer,
   openid_data: openidConnectReducer,
-  phones: mobileReducer,
-  security: securityReducer,
-  chpass: chpassReducer,
   openid_freja_data: openidConnectFrejaReducer,
+  personal_data: personalDataReducer,
   phones: mobileReducer,
-  nins: ninsReducer
+  nins: ninsReducer,
+  security: securityReducer
 });
 
 export default eduIDApp;

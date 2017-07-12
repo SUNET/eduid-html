@@ -32,6 +32,7 @@ const mockState = {
       language: ''
   },
   config : {
+      csrf_token: '',
       is_configured : true,
       is_fetching: false,
       failed: false,
@@ -305,9 +306,21 @@ describe("Async component", () => {
        next = generator.next(config);
        expect(next.value).toEqual(call(fetchPersonalData, config));
 
-       const userdata = call(fetchPersonalData, config);
-       next = generator.next(userdata);
-       expect(next.value).toEqual(put(userdata));
+       const action = {
+         type: actions.GET_USERDATA_SUCCESS,
+         payload: {
+           csrf_token: 'csrf-token',
+           given_name: '',
+           surname: '',
+           display_name: '',
+           language: ''
+         }
+       }
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));      
     });
 
     it("Sagas savePersonalData", () => {
@@ -329,9 +342,21 @@ describe("Async component", () => {
        var result = next;
        expect(next.value).toEqual(call(sendPersonalData, config, data));
 
-       next = generator.next(next);
-       expect(next.value).toEqual(put(result))
-
+       const action = {
+         type: actions.POST_USERDATA_SUCCESS,
+         payload: {
+           csrf_token: 'csrf-token',
+           given_name: '',
+           surname: '',
+           display_name: '',
+           language: ''
+         }
+       }
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       next = generator.next();
+       delete(action.payload.csrf_token);
+       expect(next.value).toEqual(put(action));      
     });
 
 });

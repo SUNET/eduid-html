@@ -123,7 +123,6 @@ describe("Reducers", () => {
     failed: false,
     error: '',
     message: '',
-    csrf_token: '',
     suggested_password: '',
     old_password: '',
     new_password: '',
@@ -144,7 +143,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -154,16 +152,14 @@ describe("Reducers", () => {
   });
 
   it("Receives a GET_SUGGESTED_PASSWORD_SUCCESS action", () => {
-    const suggested = '2345',
-          csrf_token = 'csrf-token';
+    const suggested = '2345';
     expect(
       chpassReducer(
         mockState,
         {
           type: actions.GET_SUGGESTED_PASSWORD_SUCCESS,
           payload: {
-            suggested_password: suggested,
-            csrf_token: csrf_token
+            suggested_password: suggested
           }
         }
       )
@@ -173,7 +169,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: csrf_token,
         suggested_password: suggested,
         old_password: '',
         new_password: '',
@@ -203,7 +198,6 @@ describe("Reducers", () => {
         failed: true,
         error: err,
         message: errMsg,
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -228,7 +222,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: passwd,
@@ -251,7 +244,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -276,7 +268,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: passwd,
@@ -305,7 +296,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: passwd1,
         new_password: passwd2,
@@ -328,7 +318,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -355,7 +344,6 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: msg,
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -384,7 +372,6 @@ describe("Reducers", () => {
         failed: true,
         error: err,
         message: '',
-        csrf_token: '',
         suggested_password: '',
         old_password: '',
         new_password: '',
@@ -397,19 +384,16 @@ describe("Reducers", () => {
 
 const mockState = {
   chpass: {
-    csrf_token: 'csrf-token',
     suggested_password: '',
     old_password: 'old-pw',
     new_password: 'new-pw',
     choose_custom: false,
   },
   config: {
+    csrf_token: 'csrf-token',
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
-  },
-  security: {
-    csrf_token: 'csrf-token'
   }
 };
 
@@ -431,9 +415,15 @@ describe("Async component", () => {
       payload: {
         csrf_token: 'csrf-token',
         suggested_password: '1234'
-      }
-    };
+        }
+      },
+    processed = {
+      payload: {
+        suggested_password: '1234'
+        }
+      };
     next = generator.next(mockSuggested);
+    next = generator.next(processed);
     expect(next.value).toEqual(put(mockSuggested));
   });
 
@@ -454,8 +444,7 @@ describe("Async component", () => {
     next = generator.next(mockState);
     expect(next.value).toEqual(call(postPassword, mockState.config, data));
 
-    const mockCredentials = {
-      csrf_token: 'csrf-token',
+    let mockCredentials = {
       payload: {
         csrf_token: 'csrf-token',
         credentials: [
@@ -467,6 +456,8 @@ describe("Async component", () => {
         ]
       }
     };
+    next = generator.next(mockCredentials);
+    delete(mockCredentials.payload.csrf_token);
     next = generator.next(mockCredentials);
     expect(next.value).toEqual(put(mockCredentials));
   });
@@ -551,13 +542,13 @@ describe("ChangePassword Container", () => {
             failed: false,
             error: '',
             message: '',
-            csrf_token: '',
             suggested_password: 'abcd',
             old_password: '',
             new_password: 'defg',
             choose_custom: custom
         },
         config: {
+            csrf_token: '',
             SECURITY_URL: '/dummy-sec-url',
             DASHBOARD_URL: '/dummy-dash-url',
             TOKEN_SERVICE_URL: '/dummy-tok-url'
