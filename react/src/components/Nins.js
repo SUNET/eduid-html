@@ -52,6 +52,7 @@ class Nins extends Component {
               <TextControl name="norEduPersonNin"
                            placeholder="yyyymmddnnnn"
                            initialValue={this.props.nin}
+                           validation={this.props.validateNin}
                            componentClass="input"
                            type="text"
                            handleChange={this.props.handleChange} />
@@ -64,7 +65,10 @@ class Nins extends Component {
 }
 
 Nins.propTypes = {
-  nins: PropTypes.array
+  nin: PropTypes.string,
+  nins: PropTypes.array,
+  validateNin: PropTypes.func,
+  handleChange: PropTypes.func,
 }
 
 export default i18n(Nins);

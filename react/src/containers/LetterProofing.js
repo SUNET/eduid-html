@@ -7,6 +7,7 @@ import { startPostLetterProofing, stopPostLetterProofing } from "actions/LetterP
 const mapStateToProps = (state, props) => {
   return {
     confirmingLetter: state.letter_proofing.confirmingLetter,
+    valid_nin: state.nins.valid_nin,
     is_fetching: state.letter_proofing.is_fetching,
     errorMsg: state.letter_proofing.error
   }

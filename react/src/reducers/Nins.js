@@ -7,6 +7,8 @@ const nins = {
     failed: false,
     error: '',
     message: '',
+    valid_nin: false,
+    nin: '',
     nins: []
 };
 
@@ -31,6 +33,20 @@ let ninsReducer = (state=nins, action) => {
         failed: true,
         error: action.payload.error,
         message: action.payload.message
+      };
+    case actions.VALID_NIN:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: false,
+        valid_nin: true
+      };
+    case actions.INVALID_NIN:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: false,
+        valid_nin: false
       };
     default:
       return state;
