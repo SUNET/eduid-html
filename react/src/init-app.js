@@ -43,7 +43,7 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
-import { requestOpenidFrejaData, initializeOpenidFrejaData } from "sagas/OpenidConnectFreja";
+import { requestOpenidFrejaData, initializeOpenidFrejaData, checkNINAndShowModal } from "sagas/OpenidConnectFreja";
 
 /* i18n */
 
@@ -69,8 +69,9 @@ function* rootSaga() {
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
-    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, initializeOpenidFrejaData),
     takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, checkNINAndShowModal),
     takeLatest(emailActions.POST_EMAIL, saveEmail),
     takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeLatest(emailActions.START_VERIFY, requestVerifyEmail),
