@@ -26,6 +26,7 @@ function valid_nin(value) {
 const mapStateToProps = (state, props) => {
   return {
      nins: state.nins.nins,
+     proofing_methods: state.config.PROOFING_METHODS,
      is_fetching: state.nins.is_fetching,
      message: state.nins.message
   }

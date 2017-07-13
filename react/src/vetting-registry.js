@@ -5,10 +5,10 @@ import OpenidConnectFrejaContainer from "containers/OpenidConnectFreja";
 import LetterProofingContainer from "containers/LetterProofing";
 
 
-let vettingRegistry = [
-    <LetterProofingContainer />,
-    <OpenidConnectContainer />,
-    <OpenidConnectFrejaContainer />
-];
+let vettingRegistry = {
+  letter: <LetterProofingContainer />,
+  oidc: <OpenidConnectContainer />,
+  oidc_freja: <OpenidConnectFrejaContainer />
+};
 
 export default vettingRegistry
