@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import LetterProofingButton from 'components/LetterProofing';
-import { startPostLetterProofing, stopPostLetterProofing } from "actions/LetterProofing";
+import * as actions from "actions/LetterProofing";
 
 
 const mapStateToProps = (state, props) => {
@@ -20,10 +20,13 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
-      dispatch(startPostLetterProofing());
+      dispatch(actions.startPostLetterProofing());
     },
     handleStopConfirmationLetter: function (e) {
-      dispatch(stopPostLetterProofing());
+      dispatch(actions.stopPostLetterProofing());
+    },
+    handleConfirmationLetter: function (e) {
+      dispatch(actions.postLetterProofing());
     }
   }
 };

@@ -29,6 +29,12 @@ let letterProofingReducer = (state=letterData, action) => {
     case actions.POST_LETTER_PROOFING_PROOFING:
       return {
         ...state,
+        is_fetching: false,
+        failed: false
+      };
+    case actions.WAIT_LETTER_PROOFING_PROOFING:
+      return {
+        ...state,
         is_fetching: true,
         failed: false
       };
@@ -51,4 +57,3 @@ let letterProofingReducer = (state=letterData, action) => {
 };
 
 export default letterProofingReducer;
-

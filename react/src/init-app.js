@@ -28,6 +28,7 @@ import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
+import * as letterActions from "actions/LetterProofing";
 
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
@@ -42,6 +43,7 @@ import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sa
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
 import { requestNins } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
+import { sendLetterProofing } from "sagas/LetterProofing";
 
 import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
@@ -90,6 +92,7 @@ function* rootSaga() {
     takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
     takeLatest(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
     takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
+    takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterProofing),
   ];
 }
 
