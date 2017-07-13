@@ -332,16 +332,16 @@
     "defaultMessage": "Add your Swedish national identity number and initiate the confirmation process using one of the buttons below."
   },
   {
+    "id": "nins.invalid_nin",
+    "defaultMessage": "Invalid NIN"
+  },
+  {
+    "id": "nins.valid_nin",
+    "defaultMessage": "Valid NIN"
+  },
+  {
     "id": "letter.letter_button_text",
     "defaultMessage": "Confirm using letter"
-  },
-  {
-    "id": "letter.confirm_title",
-    "defaultMessage": "Send code to your official postal address"
-  },
-  {
-    "id": "letter.confirm_text",
-    "defaultMessage": "When you click on the \"Send\" button a letter with a verification code will be sent to your official postal address."
   },
   {
     "id": "emails.confirm_email_placeholder",
@@ -357,5 +357,15 @@
     "id": "chpass.help-text-newpass",
     "description": "help text for custom password",
     "defaultMessage": "<p>Choose a strong password. Some tips:</p>\n            <ul>\n\t            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>\n\t            <li>Add digits somewhere else than at the end of the password</li>\n                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>\n\t            <li>Spaces are ignored</li>\n            </ul>"
+  },
+  {
+    "id": "letter.confirm_title",
+    "description": "Title for letter proofing confirm dialog",
+    "defaultMessage": "Send code to your official postal address"
+  },
+  {
+    "id": "letter.confirm_text",
+    "description": "Text for letter proofing confirm dialog",
+    "defaultMessage": "When you click on the \"Send\" button a letter with a verification code will be sent to your official postal address."
   }
 ]

@@ -23,7 +23,8 @@ class Nins extends Component {
           }),
           vettingButtons = this.props.proofing_methods.map((key, index) => {
             return (<div key={index}>{vettingRegistry[key]}</div>);
-          });
+          }),
+          invalidNinText = (this.props.valid_nin) ? this.props.l10n('nins.valid_nin') : this.props.l10n('nins.invalid_nin');
 
     return (
         <div>
@@ -55,6 +56,7 @@ class Nins extends Component {
                            validation={this.props.validateNin}
                            componentClass="input"
                            type="text"
+                           help={invalidNinText}
                            handleChange={this.props.handleChange} />
             </fieldset>
           </form>
@@ -67,6 +69,7 @@ class Nins extends Component {
 Nins.propTypes = {
   nin: PropTypes.string,
   nins: PropTypes.array,
+  valid_nin: PropTypes.bool,
   validateNin: PropTypes.func,
   handleChange: PropTypes.func,
   proofing_methods: PropTypes.array

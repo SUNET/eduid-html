@@ -44,7 +44,7 @@ const TextControl = React.createClass({
             {this.props.label}
           </ControlLabel>);
     }
-    if (this.props.help) {
+    if (this.props.help && this.state.value) {
         help = <HelpBlock>{this.props.help}</HelpBlock>;
     }
 

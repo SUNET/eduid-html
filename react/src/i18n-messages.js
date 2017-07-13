@@ -554,6 +554,16 @@ const msgs = {
           id="nins.help_text"
           defaultMessage={`Add your Swedish national identity number and initiate the confirmation process using one of the buttons below.`} />),
 
+   'nins.invalid_nin': (
+        <FormattedMessage
+          id="nins.invalid_nin"
+          defaultMessage={`Invalid NIN`} />),
+
+   'nins.valid_nin': (
+        <FormattedMessage
+          id="nins.valid_nin"
+          defaultMessage={`Valid NIN`} />),
+
     /************************/
     /* Letter proofing ******/
     /************************/
@@ -562,18 +572,6 @@ const msgs = {
         <FormattedMessage
           id="letter.letter_button_text"
           defaultMessage={`Confirm using letter`} />),
-
-   'letter.confirm_title': (
-        <FormattedMessage
-          id="letter.confirm_title"
-          defaultMessage={`Send code to your official postal address`} />),
-
-   'letter.confirm_text': (
-        <FormattedMessage
-          id="letter.confirm_text"
-          defaultMessage={`When you click on the "Send" button a letter with a verification code will be sent to your official postal address.`} />),
-
-
 };
 
 const unformatted = defineMessages({
@@ -597,5 +595,15 @@ const unformatted = defineMessages({
 	            <li>Spaces are ignored</li>
             </ul>`,
         description: "help text for custom password"
+    },
+    'letter.confirm_title': {
+        id: "letter.confirm_title",
+        defaultMessage: `Send code to your official postal address`,
+        description: "Title for letter proofing confirm dialog"
+    },
+    'letter.confirm_text': {
+        id: "letter.confirm_text",
+        defaultMessage: `When you click on the "Send" button a letter with a verification code will be sent to your official postal address.`,
+        description: "Text for letter proofing confirm dialog"
     },
 });

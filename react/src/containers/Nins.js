@@ -1,6 +1,7 @@
 
 import { connect } from 'react-redux';
 import Nins from 'components/Nins';
+import * as actions from "actions/Nins";
 
 
 function valid_nin(value) {
@@ -27,6 +28,7 @@ const mapStateToProps = (state, props) => {
   return {
      nins: state.nins.nins,
      proofing_methods: state.config.PROOFING_METHODS,
+     valid_nin: state.nins.valid_nin,
      is_fetching: state.nins.is_fetching,
      message: state.nins.message
   }
@@ -45,9 +47,9 @@ const mapDispatchToProps = (dispatch, props) => {
       handleChange: function (e) {
           const value = e.target.value;
           if (valid_nin(value)) {
-              dispatch(validNin(value));
+              dispatch(actions.validNin(value));
           } else {
-              dispatch(invalidNin());
+              dispatch(actions.invalidNin());
           }
       }
   }
