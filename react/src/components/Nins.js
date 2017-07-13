@@ -21,8 +21,8 @@ class Nins extends Component {
                     </tr>
             );
           }),
-          vetting_buttons = vettingRegistry.map((comp, index) => {
-            return (<div key={index}>{comp}</div>);
+          vettingButtons = this.props.proofing_methods.map((key, index) => {
+            return (<div key={index}>{vettingRegistry[key]}</div>);
           });
 
     return (
@@ -57,14 +57,15 @@ class Nins extends Component {
                            handleChange={this.props.handleChange} />
             </fieldset>
           </form>
-          {vetting_buttons}
+          {vettingButtons}
         </div>
     );
   }
 }
 
 Nins.propTypes = {
-  nins: PropTypes.array
+  nins: PropTypes.array,
+  proofing_methods: PropTypes.array
 }
 
 export default i18n(Nins);

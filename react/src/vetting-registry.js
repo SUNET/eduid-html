@@ -4,9 +4,9 @@ import OpenidConnectContainer from "containers/OpenidConnect";
 import OpenidConnectFrejaContainer from "containers/OpenidConnectFreja";
 
 
-let vettingRegistry = [
-    <OpenidConnectContainer />,
-    <OpenidConnectFrejaContainer />
-];
+let vettingRegistry = {
+  oidc: <OpenidConnectContainer />,
+  oidc_freja: <OpenidConnectFrejaContainer />
+};
 
 export default vettingRegistry
