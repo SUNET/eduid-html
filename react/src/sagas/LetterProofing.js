@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import * as actions from "actions/LetterProofing";
 
 
 export function* sendLetterProofing () {
@@ -20,7 +21,7 @@ export function* sendLetterProofing () {
     }
 }
 
-export function fetchLetterProofing (config) {
+export function fetchLetterProofing (config, data) {
     return window.fetch(config.LETTER_PROOFING_URL, {
       method: 'post',
       credentials: 'include',

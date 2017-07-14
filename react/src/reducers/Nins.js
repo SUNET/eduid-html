@@ -39,6 +39,7 @@ let ninsReducer = (state=nins, action) => {
         ...state,
         is_fetching: false,
         failed: false,
+        nin: action.payload.nin,
         valid_nin: true
       };
     case actions.INVALID_NIN:
