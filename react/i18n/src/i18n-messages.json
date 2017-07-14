@@ -16,14 +16,6 @@
     "defaultMessage": "For more information see the"
   },
   {
-    "id": "cm.lost_code",
-    "defaultMessage": "Lost your confirmation code?"
-  },
-  {
-    "id": "cm.resend_code",
-    "defaultMessage": "Resend confirmation code"
-  },
-  {
     "id": "cm.ok",
     "defaultMessage": "OK"
   },
@@ -359,13 +351,28 @@
     "defaultMessage": "<p>Choose a strong password. Some tips:</p>\n            <ul>\n\t            <li>Use upper- and lowercase characters (preferably not in the beginning or end)</li>\n\t            <li>Add digits somewhere else than at the end of the password</li>\n                <li>Add special characters, such as &#64; &#36; &#92; &#43; &#95; &#37;</li>\n\t            <li>Spaces are ignored</li>\n            </ul>"
   },
   {
-    "id": "letter.confirm_title",
-    "description": "Title for letter proofing confirm dialog",
-    "defaultMessage": "Send code to your official postal address"
+    "id": "cm.lost_code",
+    "description": "Lost code problem description",
+    "defaultMessage": "Lost your confirmation code?"
   },
   {
-    "id": "letter.confirm_text",
+    "id": "cm.resend_code",
+    "description": "Lost code problem solution",
+    "defaultMessage": "Resend confirmation code"
+  },
+  {
+    "id": "letter.confirm_title",
+    "description": "Title for letter proofing confirm dialog",
+    "defaultMessage": "Confirm identity with code sent by letter"
+  },
+  {
+    "id": "letter.lost_code",
     "description": "Text for letter proofing confirm dialog",
-    "defaultMessage": "When you click on the \"Send\" button a letter with a verification code will be sent to your official postal address."
+    "defaultMessage": "When you click on the \"Send code\" link a letter with a verification code will be sent to your official postal address."
+  },
+  {
+    "id": "letter.send_code",
+    "description": "Text for letter code resend button",
+    "defaultMessage": "Send code"
   }
 ]

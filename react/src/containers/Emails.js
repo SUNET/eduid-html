@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleConfirm: function (e) {
         const data = {
-            code: document.body.querySelectorAll('#email-confirmation-code input')[0].value
+            code: document.body.querySelectorAll('#emailConfirmDialog input')[0].value
         };
         dispatch(startVerify(data))
     },

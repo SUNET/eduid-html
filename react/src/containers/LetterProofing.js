@@ -11,7 +11,9 @@ const mapStateToProps = (state, props) => {
   return {
     confirmingLetter: confirmingLetter,
     valid_nin: state.nins.valid_nin,
+    nin: state.nins.nin,
     is_fetching: state.letter_proofing.is_fetching,
+    resending: state.letter_proofing.resending,
     errorMsg: state.letter_proofing.error
   }
 };
@@ -26,7 +28,13 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.stopPostLetterProofing());
     },
     handleConfirmationLetter: function (e) {
-      dispatch(actions.postLetterProofing());
+      dispatch(actions.postSendLetterProofing());
+    },
+    sendConfirmationLetter: function (e) {
+        const data = {
+            code: document.body.querySelectorAll('#letterConfirmDialog input')[0].value
+        };
+      dispatch(actions.postLetterProofing(code));
     }
   }
 };

@@ -27,7 +27,7 @@ class ConfirmModal extends Component {
       alertElem = ( <EduiDAlert className="help-block" levelMessage="warning" Msg={msg}></EduiDAlert>);
     }
     return (
-      <div id="emailConfirmDialog"
+      <div id={this.props.modalId}
            tabIndex="-1"
            role="dialog"
            aria-labelledby="askDialogPrompt"
@@ -48,10 +48,10 @@ class ConfirmModal extends Component {
                                      placeholder={this.props.placeholder}
                                      componentClass='input'
                                      type='text' />
-                        {this.props.l10n('cm.lost_code')}
+                        {this.props.resendHelp}
                         <a href="#" onClick={this.props.handleResendCode}
                            className="resend-code">
-                            {this.props.l10n('cm.resend_code')}
+                            {this.props.resendText}
                         </a>
                     </div>
                 </Modal.Body>

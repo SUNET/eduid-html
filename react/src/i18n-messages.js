@@ -112,16 +112,6 @@ const msgs = {
     /* ConfirmModal *********/
     /************************/
 
-    'cm.lost_code': (
-        <FormattedMessage
-            id="cm.lost_code"
-            defaultMessage={`Lost your confirmation code?`} />),
-
-    'cm.resend_code': (
-        <FormattedMessage
-            id="cm.resend_code"
-            defaultMessage={`Resend confirmation code`} />),
-
     'cm.ok': (
         <FormattedMessage
             id="cm.ok"
@@ -596,14 +586,29 @@ const unformatted = defineMessages({
             </ul>`,
         description: "help text for custom password"
     },
+    'cm.lost_code': {
+        id: "cm.lost_code",
+        defaultMessage: `Lost your confirmation code?`,
+        description: "Lost code problem description"
+    },
+    'cm.resend_code': {
+        id: "cm.resend_code",
+        defaultMessage: `Resend confirmation code`,
+        description: "Lost code problem solution"
+    },
     'letter.confirm_title': {
         id: "letter.confirm_title",
-        defaultMessage: `Send code to your official postal address`,
+        defaultMessage: `Confirm identity with code sent by letter`,
         description: "Title for letter proofing confirm dialog"
     },
-    'letter.confirm_text': {
-        id: "letter.confirm_text",
-        defaultMessage: `When you click on the "Send" button a letter with a verification code will be sent to your official postal address.`,
+    'letter.lost_code': {
+        id: "letter.lost_code",
+        defaultMessage: `When you click on the "Send code" link a letter with a verification code will be sent to your official postal address.`,
         description: "Text for letter proofing confirm dialog"
+    },
+    'letter.send_code': {
+        id: "letter.send_code",
+        defaultMessage: `Send code`,
+        description: "Text for letter code resend button"
     },
 });

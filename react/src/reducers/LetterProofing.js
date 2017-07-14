@@ -6,7 +6,13 @@ const letterData = {
     confirmingLetter: false,
     is_fetching: false,
     failed: false,
-    error: ""
+    error: "",
+    resending: {
+      is_fetching: false,
+      failed: false,
+      error: {},
+      message: ''
+    },
 };
 
 
@@ -26,30 +32,67 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false
       };
-    case actions.POST_LETTER_PROOFING_PROOFING:
+    case actions.POST_LETTER_PROOFING_CODE:
       return {
         ...state,
         is_fetching: false,
-        failed: false
+        failed: false,
+        resending: {
+            is_fetching: false,
+            failed: false
+        }
       };
     case actions.WAIT_LETTER_PROOFING_PROOFING:
       return {
         ...state,
-        is_fetching: true,
-        failed: false
+        is_fetching: false,
+        failed: false,
+        resending: {
+            is_fetching: true,
+            failed: false
+        }
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
       return {
         ...action.payload,
         is_fetching: false,
-        failed: false
+        failed: false,
+        resending: {
+            is_fetching: false,
+            failed: false
+        }
       };
     case actions.POST_LETTER_PROOFING_PROOFING_FAIL:
       return {
         ...state,
         is_fetching: false,
+        failed: false,
+        resending: {
+            is_fetching: false,
+            failed: true,
+            message: action.payload.message
+        }
+      };
+    case actions.POST_LETTER_PROOFING_PROOFING:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: false,
+        code: action.payload.code,
+        resending: {
+            is_fetching: true,
+            failed: false
+        }
+      };
+    case actions.POST_LETTER_PROOFING_CODE_FAIL:
+      return {
+        ...state,
+        is_fetching: false,
         failed: true,
-        error: action.payload.message
+        resending: {
+            is_fetching: false,
+            failed: true,
+        }
       };
     default:
       return state;

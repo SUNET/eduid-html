@@ -50,7 +50,10 @@ class Emails extends Component {
               </form>
             </div>
             <ConfirmModal
+                modalId="emailConfirmDialog"
                 title={this.props.l10n('emails.confirm_title', {email: this.props.confirming})}
+                resendHelp={this.props.l10n('cm.lost_code')}
+                resendText={this.props.l10n('cm.resend_code')}
                 placeholder={this.props.l10n('emails.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 finishModal={this.props.handleFinishConfirmation}
