@@ -19,7 +19,6 @@ export const POST_MOBILE_REMOVE_FAIL = 'POST_PHONE_REMOVE_FAIL';
 export const POST_MOBILE_PRIMARY = 'POST_MOBILE_PRIMARY'
 export const POST_MOBILE_PRIMARY_SUCCESS = 'POST_PHONE_PRIMARY_SUCCESS'
 export const POST_MOBILE_PRIMARY_FAIL = 'POST_PHONE_PRIMARY_FAIL'
-export const FINISH_CONFIRMATION = 'FINISH_CONFIRMATION_PHONE'
 
 export function getMobiles () {
   return {
@@ -52,12 +51,6 @@ export function postMobileFail (err) {
     type: POST_MOBILE_FAIL,
     error: true,
     payload: new Error(err)
-  };
-}
-
-export function finishConfirmation() {
-  return {
-    type: FINISH_CONFIRMATION
   };
 }
 

@@ -13,18 +13,12 @@ class ConfirmModal extends Component {
 
   render () {
     let spinning = false,
-        msgid, msg, alertElem;
+        msg, msgClass, alertElem;
     if (this.props.is_fetching) spinning = true;
-    if (this.props.resending.is_fetching) spinning = true;
 
-    if (this.props.resending.failed) {
-      msg= this.props.l10n(this.props.resending.error.form);
-      alertElem = ( <EduiDAlert levelMessage="danger" Msg={msg}></EduiDAlert> );
-    }
-
-    if (this.props.resending.message) {
-      msg = this.props.l10n(this.props.resending.message, {email: this.props.confirming});
-      alertElem = ( <EduiDAlert className="help-block" levelMessage="warning" Msg={msg}></EduiDAlert>);
+    if (this.props.message) {
+      msg = this.props.l10n(this.props.message, this.props.messageArgs);
+      alertElem = ( <EduiDAlert className="help-block" levelMessage={this.props.levelMessage} Msg={msg}></EduiDAlert>);
     }
     return (
       <div id={this.props.modalId}
@@ -57,10 +51,6 @@ class ConfirmModal extends Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="finish-button"
-                            onClick={this.props.finishModal} >
-                         {this.props.l10n('cm.finish')}
-                    </Button>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal} >
                          {this.props.l10n('cm.cancel')}
@@ -83,9 +73,7 @@ ConfirmModal.propTypes = {
   placeholder: PropTypes.string,
   handleConfirm: PropTypes.func,
   confirming: PropTypes.string,
-  resending: PropTypes.object,
   handleResendCode: PropTypes.func,
-  finishModal: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
   errorMsg: PropTypes.string,

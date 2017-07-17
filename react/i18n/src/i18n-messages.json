@@ -371,8 +371,13 @@
     "defaultMessage": "When you click on the \"Send code\" link a letter with a verification code will be sent to your official postal address."
   },
   {
-    "id": "letter.send_code",
+    "id": "letter.resend_code",
     "description": "Text for letter code resend button",
     "defaultMessage": "Send code"
+  },
+  {
+    "id": "letter.placeholder",
+    "description": "Placeholder for letter proofing text input",
+    "defaultMessage": "Letter confirmation code"
   }
 ]

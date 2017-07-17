@@ -606,9 +606,14 @@ const unformatted = defineMessages({
         defaultMessage: `When you click on the "Send code" link a letter with a verification code will be sent to your official postal address.`,
         description: "Text for letter proofing confirm dialog"
     },
-    'letter.send_code': {
-        id: "letter.send_code",
+    'letter.resend_code': {
+        id: "letter.resend_code",
         defaultMessage: `Send code`,
         description: "Text for letter code resend button"
+    },
+    'letter.placeholder': {
+        id: "letter.placeholder",
+        defaultMessage: `Letter confirmation code`,
+        description: "Placeholder for letter proofing text input"
     },
 });

@@ -79,14 +79,6 @@ let emailsReducer = (state=emailsData, action) => {
           message: ''
         },
       };
-    case actions.FINISH_CONFIRMATION:
-      return {
-        ...state,
-        ...action.payload,
-        is_fetching: false,
-        confirming: '',
-        code: '',
-      };
     case actions.START_RESEND_EMAIL_CODE:
       return {
         ...state,

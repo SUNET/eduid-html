@@ -66,15 +66,6 @@ let mobileReducer = (state=mobileData, action) => {
         is_fetching: true
       };
 
-    case actions.FINISH_CONFIRMATION:
-      return {
-        ...state,
-        ...action.payload,
-        is_fetching: false,
-        confirming: '',
-        code: '',
-      };
-
     case actions.STOP_CONFIRMATION:
       return {
         ...state,

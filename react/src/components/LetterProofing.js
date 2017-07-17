@@ -16,6 +16,21 @@ class LetterProofingButton extends Component {
 
     if (this.props.is_fetching) spinning = true;
 
+    let message = '',
+        messageArgs = {},
+        levelMessage = 'success';
+
+    if (this.props.letter_sent) {
+        message = 'letter.letter_sent_msg';
+        messageArgs = {letter_sent: this.props.letter_sent,
+                       letter_expires: this.props.letter_expires};
+        levelMessage = 'success';
+    } else if (this.props.resending.failed) {
+        message = this.props.resending.message;
+        messageArgs = {};
+        levelMessage = 'error';
+    }
+
     return (
         <div>
           <form id="letter-proofing-form"
@@ -38,18 +53,21 @@ class LetterProofingButton extends Component {
                 resendText={this.props.l10n('letter.resend_code')}
                 placeholder={this.props.l10n('letter.placeholder')}
                 showModal={this.props.confirmingLetter}
-                finishModal={this.props.handleStopConfirmationLetter}
                 closeModal={this.props.handleStopConfirmationLetter}
                 handleResendCode={this.props.handleConfirmationLetter}
                 handleConfirm={this.props.sendConfirmationLetter}
-                resending={this.props.resending}
-                confirming={this.props.nin} />
+                message={message}
+                messageArgs={messageArgs}
+                LevelMessage={levelMessage} />
         </div>
     );
   }
 }
 
 LetterProofingButton.propTypes = {
+  errorMsg: PropTypes.string,
+  letter_sent: PropTypes.string,
+  letter_expires: PropTypes.string,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   confirmingLetter: PropTypes.bool,

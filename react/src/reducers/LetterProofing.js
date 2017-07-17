@@ -4,6 +4,9 @@ import * as actions from "actions/LetterProofing";
 
 const letterData = {
     confirmingLetter: false,
+    letter_sent: '',
+    letter_expires: '',
+    letter_expired: false,
     is_fetching: false,
     failed: false,
     error: "",
@@ -38,6 +41,7 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false,
         resending: {
+            ...state.resending,
             is_fetching: false,
             failed: false
         }
@@ -48,16 +52,19 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false,
         resending: {
+            ...state.resending,
             is_fetching: true,
             failed: false
         }
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
       return {
+        ...state,
         ...action.payload,
         is_fetching: false,
         failed: false,
         resending: {
+            ...state.resending,
             is_fetching: false,
             failed: false
         }
@@ -68,6 +75,7 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false,
         resending: {
+            ...state.resending,
             is_fetching: false,
             failed: true,
             message: action.payload.message
@@ -80,6 +88,7 @@ let letterProofingReducer = (state=letterData, action) => {
         failed: false,
         code: action.payload.code,
         resending: {
+            ...state.resending,
             is_fetching: true,
             failed: false
         }
@@ -90,8 +99,10 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: true,
         resending: {
+            ...state.resending,
             is_fetching: false,
             failed: true,
+            message: action.payload.message
         }
       };
     default:
