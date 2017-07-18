@@ -42,12 +42,14 @@ export function* initializeOpenidFrejaData () {
     console.log('Getting opaque data for NIN: ' + state.openid_freja_data.nin);
 
     if (state.openid_freja_data.nin === "") {
-        yield put(actions.postOpenidFrejaFail('Error: No NIN entered'));
+        yield put(actions.postOpenidFrejaFail('ocf.error_missing_nin'));
     } else {
         const oidcFrejaData = yield call(fetchFrejaData, openid_freja_url, data);
         yield put(putCsrfToken(oidcFrejaData));
         yield put(oidcFrejaData);
-        yield window.location.href = "frejaeid://identify?iaRequestData=" + state.iaRequestData;
+        if (oidcFrejaData.iaRequestData) {
+          yield window.location.href = "frejaeid://identify?iaRequestData=" + oidcFrejaData.iaRequestData;
+        }
     }
   } catch(error) {
       yield put(actions.postOpenidFrejaFail(error.toString()));

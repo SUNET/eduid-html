@@ -4,7 +4,7 @@ import withUserAgent from 'react-useragent';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
-import { ButtonGroup, Button, Modal, HelpBlock, Alert, ListGroup, ListGroupItem, Well, } from 'react-bootstrap';
+import { ButtonGroup, Button, Modal, HelpBlock, Alert, FormGroup, Well, } from 'react-bootstrap';
 
 //  XXX this interferes with the bootstrap in eduid-html
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -27,11 +27,12 @@ let OpenidConnectFreja = React.createClass({
       </Well>
     );
 
-    let spinning = false, alertElem, errorElem, notOnMobileMsg, frejaButton, buttonGroup;
+    let spinning = false, validationState = null, alertElem, errorElem, notOnMobileMsg, frejaButton, showModalButton, buttonGroup;
     if (this.props.is_fetching) spinning = true;
     if (this.props.errorMsg) {
       alertElem = <Alert bsStyle="warning">{this.props.l10n(this.props.errorMsg)}</Alert>;
-      errorElem = <HelpBlock validationState="error">{this.props.l10n(this.props.errorMsg)}</HelpBlock>;
+      errorElem = <HelpBlock>{this.props.l10n(this.props.errorMsg)}</HelpBlock>;
+      validationState = "error"
     }
 
     if (!isMobile) {
@@ -74,6 +75,13 @@ let OpenidConnectFreja = React.createClass({
       )
     }
 
+    showModalButton = (
+      <Button bsStyle="primary"
+              onClick={this.props.handleShowModal}>
+        {this.props.l10n('ocf.initialize_proofing')}
+        </Button>
+    );
+
     return (
       <div>
         <div id="frejaInfoDialog"
@@ -104,11 +112,13 @@ let OpenidConnectFreja = React.createClass({
 
           </Modal>
         </div>
-        {errorElem}
-        <Button bsStyle="primary"
-                onClick={this.props.handleShowModal}>
-          {this.props.l10n('ocf.initialize_proofing')}
-          </Button>
+        <FormGroup validationState={validationState}>
+          {errorElem}
+          <Button bsStyle="primary"
+              onClick={this.props.handleShowModal}>
+            {this.props.l10n('ocf.initialize_proofing')}
+            </Button>
+        </FormGroup>
       </div>
     );
   }

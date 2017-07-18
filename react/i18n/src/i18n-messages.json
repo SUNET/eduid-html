@@ -40,6 +40,10 @@
     "defaultMessage": "ACCEPT"
   },
   {
+    "id": "cm.close",
+    "defaultMessage": "CLOSE"
+  },
+  {
     "id": "phone_duplicated",
     "defaultMessage": "Added number is duplicated"
   },
@@ -113,23 +117,59 @@
   },
   {
     "id": "ocf.initialize_proofing",
-    "defaultMessage": "CONFIRM USING ATG OMBUD"
+    "defaultMessage": "CONFIRM USING FREJA EID"
   },
   {
     "id": "ocf.initialize_proofing_help_text",
     "defaultMessage": "To use this option you need to have the <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID app</a> installed on your device."
   },
   {
+    "id": "ocf.modal_title",
+    "defaultMessage": "Confirm using Freja eID"
+  },
+  {
+    "id": "ocf.freja_instructions_title",
+    "defaultMessage": "How to confirm your account using Freja eID"
+  },
+  {
+    "id": "ocf.freja_instructions_step_1",
+    "defaultMessage": "Install the Freja eID app on your mobile device."
+  },
+  {
+    "id": "ocf.freja_instructions_step_2",
+    "defaultMessage": "Register and confirm an e-mail address using the app."
+  },
+  {
+    "id": "ocf.freja_instructions_step_3",
+    "defaultMessage": "Return here and click the link at the bottom of the page. The app will open."
+  },
+  {
+    "id": "ocf.freja_instructions_step_4",
+    "defaultMessage": "Follow the instructions in the app to verify your identity."
+  },
+  {
+    "id": "ocf.freja_instructions_install_link",
+    "defaultMessage": "I need to install Freja eID"
+  },
+  {
     "id": "ocf.open_app",
-    "defaultMessage": "OPEN FREJA EID"
+    "defaultMessage": "I have Freja eID installed"
   },
   {
     "id": "ocf.not_on_mobile_title",
-    "defaultMessage": "Tip"
+    "defaultMessage": "Not using your phone?"
   },
   {
     "id": "ocf.not_on_mobile_message",
-    "defaultMessage": "If you switch to a mobile device with <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID app</a> installed you will be able to verify your account at your closest ATG Ombud."
+    "defaultMessage": "You need to switch to a mobile device with <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID</a> installed before you will be able to confirm your account using Freja eID."
+  },
+  {
+    "id": "ocf.error_missing_nin",
+    "defaultMessage": "Please add a national identity number and try again"
+  },
+  {
+    "id": "ocf.error_unknown_error",
+    "defaultMessage": "Temporary technical difficulties, please try again later"
   },
   {
     "id": "pd.given_name",

@@ -30,7 +30,7 @@ let openidConnectFrejaReducer = (state=openidFrejaData, action) => {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error
       };
     case actions.POST_OIDC_PROOFING_FREJA_PROOFING:
       return {
@@ -49,7 +49,7 @@ let openidConnectFrejaReducer = (state=openidFrejaData, action) => {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error
       };
     case actions.SHOW_OIDC_FREJA_MODAL:
       return {
@@ -60,13 +60,14 @@ let openidConnectFrejaReducer = (state=openidFrejaData, action) => {
       return {
         ...state,
         nin: action.payload.nin,
+        error: null,
         showModal: true,
       };
     case actions.SHOW_OIDC_FREJA_MODAL_FAIL:
       return {
         ...state,
         failed: true,
-        error: action.payload.message
+        error: action.payload.error
       };
     case actions.HIDE_OIDC_FREJA_MODAL:
       return {
