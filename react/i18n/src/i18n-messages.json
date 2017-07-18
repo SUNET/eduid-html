@@ -332,6 +332,18 @@
     "defaultMessage": "Valid NIN"
   },
   {
+    "id": "nins.confirmed_nin",
+    "defaultMessage": "NIN (Confirmed)"
+  },
+  {
+    "id": "nins.unconfirmed_nin",
+    "defaultMessage": "Unconfirmed NIN"
+  },
+  {
+    "id": "nins.button_delete",
+    "defaultMessage": "Remove"
+  },
+  {
     "id": "letter.letter_button_text",
     "defaultMessage": "Confirm using letter"
   },

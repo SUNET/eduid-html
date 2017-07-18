@@ -6,7 +6,8 @@ export const POST_LETTER_PROOFING_CODE = 'POST_LETTER_PROOFING_CODE';
 export const WAIT_LETTER_PROOFING_PROOFING = 'WAIT_LETTER_PROOFING_PROOFING';
 export const POST_LETTER_PROOFING_PROOFING_SUCCESS = 'POST_LETTER_PROOFING_PROOFING_SUCCESS';
 export const POST_LETTER_PROOFING_PROOFING_FAIL = 'POST_LETTER_PROOFING_PROOFING_FAIL';
-export const POST_LETTER_PROOFING_CODE_FAIL = 'POST_LETTER_PROOFING_CODE_FAIL';
+export const POST_LETTER_PROOFING_CODE_FAIL = 'POST_LETTER_PROOFING_VERIFY_CODE_FAIL';
+export const POST_LETTER_PROOFING_CODE_SUCCESS = 'POST_LETTER_PROOFING_VERIFY_CODE_SUCCESS';
 
 
 export function stopPostLetterProofing () {
@@ -27,11 +28,11 @@ export function postSendLetterProofing () {
   };
 }
 
-export function postLetterProofing (code) {
+export function postLetterProofing (data) {
   return {
     type: POST_LETTER_PROOFING_PROOFING,
     payload: {
-        code: code
+        code: data.code
     }
   };
 }

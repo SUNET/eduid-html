@@ -64,6 +64,7 @@ class Mobile extends Component {
             </div>
             <ConfirmModal
                 modalId="phoneConfirmDialog"
+                controlId="phoneConfirmDialogControl"
                 title={this.props.l10n('mobile.confirm_title', {phone: this.props.confirming})}
                 resendHelp={this.props.l10n('cm.lost_code')}
                 resendText={this.props.l10n('cm.resend_code')}
@@ -72,6 +73,7 @@ class Mobile extends Component {
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
+                is_fetching={this.props.resending.is_fetching}
                 message={message}
                 messageArgs={messageArgs}
                 LevelMessage={levelMessage} />

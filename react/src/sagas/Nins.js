@@ -1,6 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import { getNins, getNinsFail  } from "actions/Nins";
 
 
@@ -9,6 +9,7 @@ export function* requestNins () {
         yield put(getNins());
         const config = yield select(state => state.config);
         const nins = yield call(fetchNins, config);
+        yield put(putCsrfToken(nins));
         yield put(nins);
     } catch(error) {
         yield put(getNinsFail(error.toString()));

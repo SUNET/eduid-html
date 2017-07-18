@@ -4,12 +4,14 @@ import * as actions from "actions/LetterProofing";
 
 const letterData = {
     confirmingLetter: false,
+    code: '',
     letter_sent: '',
     letter_expires: '',
     letter_expired: false,
     is_fetching: false,
     failed: false,
     error: "",
+    message: '',
     resending: {
       is_fetching: false,
       failed: false,
@@ -91,6 +93,19 @@ let letterProofingReducer = (state=letterData, action) => {
             ...state.resending,
             is_fetching: true,
             failed: false
+        }
+      };
+    case actions.POST_LETTER_PROOFING_CODE_SUCCESS:
+      return {
+        ...state,
+        is_fetching: false,
+        failed: false,
+        confirmingLetter: false,
+        message: action.payload.message,
+        resending: {
+            ...state.resending,
+            is_fetching: false,
+            failed: false,
         }
       };
     case actions.POST_LETTER_PROOFING_CODE_FAIL:

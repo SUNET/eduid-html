@@ -37,7 +37,6 @@ export function* sendLetterCode () {
     try {
         const state = yield select(state => state),
               data = {
-                nin: state.nins.nin,
                 code: state.letter_proofing.code,
                 csrf_token: state.config.csrf_token
               };

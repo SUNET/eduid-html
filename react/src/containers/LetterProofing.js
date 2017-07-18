@@ -13,6 +13,8 @@ const mapStateToProps = (state, props) => {
     valid_nin: state.nins.valid_nin,
     nin: state.nins.nin,
     is_fetching: state.letter_proofing.is_fetching,
+    message: state.letter_proofing.message,
+    errMsg: state.letter_proofing.errMsg,
     resending: state.letter_proofing.resending,
     letter_sent: state.letter_proofing.letter_sent,
     letter_expires: state.letter_proofing.letter_expires,
@@ -36,9 +38,9 @@ const mapDispatchToProps = (dispatch, props) => {
     sendConfirmationLetter: function (e) {
       e.preventDefault();
         const data = {
-            code: document.body.querySelectorAll('#letterConfirmDialog input')[0].value
+            code: document.getElementById('letterConfirmDialogControl').value
         };
-      dispatch(actions.postLetterProofing(code));
+      dispatch(actions.postLetterProofing(data));
     }
   }
 };

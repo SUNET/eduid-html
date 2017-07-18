@@ -64,6 +64,7 @@ class Emails extends Component {
             </div>
             <ConfirmModal
                 modalId="emailConfirmDialog"
+                controlId="emailConfirmDialogControl"
                 title={this.props.l10n('emails.confirm_title', {email: this.props.confirming})}
                 resendHelp={this.props.l10n('cm.lost_code')}
                 resendText={this.props.l10n('cm.resend_code')}
@@ -72,6 +73,7 @@ class Emails extends Component {
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
+                is_fetching={this.props.resending.is_fetching}
                 message={message}
                 messageArgs={messageArgs}
                 LevelMessage={levelMessage} />

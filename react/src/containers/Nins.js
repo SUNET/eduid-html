@@ -51,6 +51,8 @@ const mapDispatchToProps = (dispatch, props) => {
           } else {
               dispatch(actions.invalidNin());
           }
+      },
+      handleDelete: function (e) {
       }
   }
 };

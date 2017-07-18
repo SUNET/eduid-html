@@ -554,6 +554,21 @@ const msgs = {
           id="nins.valid_nin"
           defaultMessage={`Valid NIN`} />),
 
+   'nins.confirmed_nin': (
+        <FormattedMessage
+          id="nins.confirmed_nin"
+          defaultMessage={`NIN (Confirmed)`} />),
+
+   'nins.unconfirmed_nin': (
+        <FormattedMessage
+          id="nins.unconfirmed_nin"
+          defaultMessage={`Unconfirmed NIN`} />),
+
+   'nins.button_delete': (
+        <FormattedMessage
+          id="nins.button_delete"
+          defaultMessage={`Remove`} />),
+
     /************************/
     /* Letter proofing ******/
     /************************/

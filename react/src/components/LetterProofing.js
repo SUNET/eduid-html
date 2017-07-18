@@ -48,6 +48,7 @@ class LetterProofingButton extends Component {
           </form>
           <ConfirmModal
                 modalId="letterConfirmDialog"
+                inputId="letterConfirmDialogControl"
                 title={this.props.l10n('letter.confirm_title')}
                 resendHelp={this.props.l10n('letter.lost_code')}
                 resendText={this.props.l10n('letter.resend_code')}
@@ -56,6 +57,7 @@ class LetterProofingButton extends Component {
                 closeModal={this.props.handleStopConfirmationLetter}
                 handleResendCode={this.props.handleConfirmationLetter}
                 handleConfirm={this.props.sendConfirmationLetter}
+                is_fetching={this.props.resending.is_fetching}
                 message={message}
                 messageArgs={messageArgs}
                 LevelMessage={levelMessage} />

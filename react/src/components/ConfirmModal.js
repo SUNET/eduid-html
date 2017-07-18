@@ -39,6 +39,7 @@ class ConfirmModal extends Component {
                     </span>
                     <div id="email-confirmation-code">
                         <TextControl name={this.props.inputId}
+                                     controlId={this.props.inputId}
                                      placeholder={this.props.placeholder}
                                      componentClass='input'
                                      type='text' />

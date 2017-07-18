@@ -13,18 +13,67 @@ import 'style/Nins.scss';
 class Nins extends Component {
 
   render () {
-    const creds_table = this.props.nins.map((nin, index) => {
-            return (<tr key={index}>
-                        <td>{nin.number}</td>
-                        <td>{nin.verified}</td>
-                        <td>{nin.primary}</td>
-                    </tr>
-            );
-          }),
-          vettingButtons = this.props.proofing_methods.map((key, index) => {
+    let ninStatus = 'nonin',
+        credsTable = '',
+        vettingButtons = this.props.proofing_methods.map((key, index) => {
             return (<div key={index}>{vettingRegistry[key]}</div>);
-          }),
-          invalidNinText = (this.props.valid_nin) ? this.props.l10n('nins.valid_nin') : this.props.l10n('nins.invalid_nin');
+        }),
+        invalidNinText = '',
+        ninInput = '',
+        spinning = false;
+    if (this.props.nins.length) {
+        if (this.props.nins[0].verified) {
+            ninStatus = 'verified';
+        } else {
+            ninStatus = 'unverified';
+        }
+    }
+    if (ninStatus === 'nonin') {
+        ninInput = (
+            <div>
+              <p>{this.props.l10n('nins.help_text')}</p>
+              <form id="nins-form"
+                    role="form">
+                <fieldset id="nins-form" className="tabpane">
+                  <TextControl name="norEduPersonNin"
+                               placeholder="yyyymmddnnnn"
+                               initialValue={this.props.nin}
+                               validation={this.props.validateNin}
+                               componentClass="input"
+                               type="text"
+                               help={invalidNinText}
+                               handleChange={this.props.handleChange} />
+                </fieldset>
+              </form>
+            </div>
+        );
+        invalidNinText = (this.props.valid_nin) ? this.props.l10n('nins.valid_nin') : this.props.l10n('nins.invalid_nin');
+    } else if (ninStatus === 'unverified') {
+        credsTable = (
+            <div>
+              <p><strong>{this.props.l10n('nins.unconfirmed_nin')}</strong></p>
+              <p>
+                <span>{this.props.nins[0].number}</span>
+                  <EduIDButton bsStyle="primary"
+                               id="email-button"
+                               spinning={spinning}
+                               onClick={this.props.handleDelete}>
+                      {this.props.l10n('nins.button_delete')}
+                  </EduIDButton>
+              </p>
+            </div>
+        );
+    } else if (ninStatus === 'verified') {
+        credsTable = (
+            <div>
+              <p><strong>{this.props.l10n('nins.confirmed_nin')}</strong></p>
+              <p>
+                <span>{this.props.nins[0].number}</span>
+              </p>
+            </div>
+        );
+        vettingButtons = '';
+    }
 
     return (
         <div>
@@ -33,33 +82,9 @@ class Nins extends Component {
                 <p>{this.props.l10n('nins.justification')}</p>
                 <p>{this.props.l10n('faq_link')}
                 <a href="https://www.eduid.se/faq.html">FAQ</a></p>
-
-                  <table className="table table-bordered table-form nins">
-                      <tbody>
-                        <tr>
-                            <th>{this.props.l10n('nins.nin')}</th>
-                            <th>{this.props.l10n('nins.verified')}</th>
-                            <th>{this.props.l10n('nins.primary')}</th>
-                        </tr>
-                        {creds_table}
-                      </tbody>
-                  </table>
-
-                <p>{this.props.l10n('nins.help_text')}</p>
+                {credsTable}
           </div>
-          <form id="nins-form"
-                role="form">
-            <fieldset id="nins-form" className="tabpane">
-              <TextControl name="norEduPersonNin"
-                           placeholder="yyyymmddnnnn"
-                           initialValue={this.props.nin}
-                           validation={this.props.validateNin}
-                           componentClass="input"
-                           type="text"
-                           help={invalidNinText}
-                           handleChange={this.props.handleChange} />
-            </fieldset>
-          </form>
+          {ninInput}
           {vettingButtons}
         </div>
     );
@@ -72,6 +97,7 @@ Nins.propTypes = {
   valid_nin: PropTypes.bool,
   validateNin: PropTypes.func,
   handleChange: PropTypes.func,
+  handleDelete: PropTypes.func,
   proofing_methods: PropTypes.array
 }
 
