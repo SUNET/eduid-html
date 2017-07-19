@@ -37,7 +37,6 @@ class Nins extends Component {
                 <fieldset id="nins-form" className="tabpane">
                   <TextControl name="norEduPersonNin"
                                placeholder="yyyymmddnnnn"
-                               initialValue={this.props.nin}
                                validation={this.props.validateNin}
                                componentClass="input"
                                type="text"
@@ -55,7 +54,7 @@ class Nins extends Component {
               <p>
                 <span>{this.props.nins[0].number}</span>
                   <EduIDButton bsStyle="primary"
-                               id="email-button"
+                               id="email-remove-button"
                                spinning={spinning}
                                onClick={this.props.handleDelete}>
                       {this.props.l10n('nins.button_delete')}
@@ -69,6 +68,12 @@ class Nins extends Component {
               <p><strong>{this.props.l10n('nins.confirmed_nin')}</strong></p>
               <p>
                 <span>{this.props.nins[0].number}</span>
+                  <EduIDButton bsStyle="primary"
+                               id="email-remove-button"
+                               spinning={spinning}
+                               onClick={this.props.handleDelete}>
+                      {this.props.l10n('nins.button_delete')}
+                  </EduIDButton>
               </p>
             </div>
         );

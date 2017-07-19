@@ -41,7 +41,7 @@ import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
-import { requestNins } from "sagas/Nins";
+import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
 
@@ -94,6 +94,7 @@ function* rootSaga() {
     takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
     takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterProofing),
     takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterCode),
+    takeLatest(ninActions.POST_NIN_REMOVE, requestRemoveNin),
   ];
 }
 
