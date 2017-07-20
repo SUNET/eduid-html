@@ -47,8 +47,8 @@ export function* initializeOpenidFrejaData () {
         const oidcFrejaData = yield call(fetchFrejaData, openid_freja_url, data);
         yield put(putCsrfToken(oidcFrejaData));
         yield put(oidcFrejaData);
-        if (oidcFrejaData.iaRequestData) {
-          yield window.location.href = "frejaeid://identify?iaRequestData=" + oidcFrejaData.iaRequestData;
+        if (oidcFrejaData.payload.iaRequestData) {
+          yield window.location.href = "frejaeid://identify?iaRequestData=" + oidcFrejaData.payload.iaRequestData;
         }
     }
   } catch(error) {
