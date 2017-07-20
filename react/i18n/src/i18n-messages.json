@@ -16,6 +16,14 @@
     "defaultMessage": "For more information see the"
   },
   {
+    "id": "Missing error message",
+    "defaultMessage": "Missing error message"
+  },
+  {
+    "id": "nin needs to be formatted as 18|19|20yymmddxxxx",
+    "defaultMessage": "National identity number needs to be in the form of yyyymmddxxxx"
+  },
+  {
     "id": "cm.lost_code",
     "defaultMessage": "Lost your confirmation code?"
   },
@@ -137,7 +145,7 @@
   },
   {
     "id": "ocf.freja_instructions_step_2",
-    "defaultMessage": "Register and confirm an e-mail address using the app."
+    "defaultMessage": "Open the app and follow the instructions to reach Freja eID+ status."
   },
   {
     "id": "ocf.freja_instructions_step_3",
@@ -145,7 +153,7 @@
   },
   {
     "id": "ocf.freja_instructions_step_4",
-    "defaultMessage": "Follow the instructions in the app to verify your identity."
+    "defaultMessage": "Approve that Freja eID sends you national identity number to eduID. Done."
   },
   {
     "id": "ocf.freja_instructions_install_link",

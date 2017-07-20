@@ -5,7 +5,7 @@ import * as actions from "actions/OpenidConnectFreja";
 const openidFrejaData = {
   is_fetching: false,
   failed: false,
-  error: "",
+  error: null,
   iaRequestData: "",
   showModal: false,
   nin: "",

@@ -10,7 +10,7 @@ const mapStateToProps = (state, props) => {
     is_fetching: state.openid_freja_data.is_fetching,
     nin: state.openid_freja_data.nin,
     showModal: state.openid_freja_data.showModal,
-    errorMsg: state.openid_freja_data.error
+    error: state.openid_freja_data.error,
   }
 };
 

@@ -11,6 +11,24 @@ import { ButtonGroup, Button, Modal, HelpBlock, Alert, FormGroup, Well, } from '
 import 'style/OpenidConnect.scss';
 
 
+function getErrorMessage(errorObj, optionalKeys) {
+  /*
+  Loop through the error object in search for known keys that hold error messages.
+  The order is optionalKeys before commonKeys.
+  */
+  let commonKeys = ['l10n_message', 'message', 'csrf_token'];
+  let keys = optionalKeys || [];
+  keys = keys.concat(commonKeys);
+  for (let key of keys)  {
+    for (let objKey of Object.keys(errorObj)) {
+      if (Object.is(key, objKey)) {
+        return errorObj[key]
+      }
+    }
+  }
+  return 'Missing error message'
+}
+
 let OpenidConnectFreja = React.createClass({
 
   render: function () {
@@ -29,9 +47,10 @@ let OpenidConnectFreja = React.createClass({
 
     let spinning = false, validationState = null, alertElem, errorElem, notOnMobileMsg, frejaButton, showModalButton, buttonGroup;
     if (this.props.is_fetching) spinning = true;
-    if (this.props.errorMsg) {
-      alertElem = <Alert bsStyle="warning">{this.props.l10n(this.props.errorMsg)}</Alert>;
-      errorElem = <HelpBlock>{this.props.l10n(this.props.errorMsg)}</HelpBlock>;
+    if (this.props.error) {
+      let errorMsg = getErrorMessage(this.props.error, ['nin']);
+      alertElem = <Alert bsStyle="warning">{this.props.l10n(errorMsg)}</Alert>;
+      errorElem = <HelpBlock>{this.props.l10n(errorMsg)}</HelpBlock>;
       validationState = "error"
     }
 

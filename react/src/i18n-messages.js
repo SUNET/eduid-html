@@ -108,6 +108,17 @@ const msgs = {
         <FormattedMessage
             id="faq_link"
             defaultMessage={`For more information see the `} />),
+
+    'Missing error message': (
+        <FormattedMessage
+            id="Missing error message"
+            defaultMessage={`Missing error message`} />),
+
+    'nin needs to be formatted as 18|19|20yymmddxxxx': (
+        <FormattedMessage
+            id="nin needs to be formatted as 18|19|20yymmddxxxx"
+            defaultMessage={`National identity number needs to be in the form of yyyymmddxxxx`} />),
+
     /************************/
     /* ConfirmModal *********/
     /************************/
@@ -285,7 +296,7 @@ const msgs = {
     'ocf.freja_instructions_step_2': (
         <FormattedMessage
           id="ocf.freja_instructions_step_2"
-          defaultMessage={`Register and confirm an e-mail address using the app.`} />),
+          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ status.`} />),
 
     'ocf.freja_instructions_step_3': (
         <FormattedMessage
@@ -295,7 +306,7 @@ const msgs = {
     'ocf.freja_instructions_step_4': (
         <FormattedMessage
           id="ocf.freja_instructions_step_4"
-          defaultMessage={`Follow the instructions in the app to verify your identity.`} />),
+          defaultMessage={`Approve that Freja eID sends you national identity number to eduID. Done.`} />),
 
     'ocf.freja_instructions_install_link': (
         <FormattedMessage
