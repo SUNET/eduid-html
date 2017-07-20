@@ -569,6 +569,11 @@ const msgs = {
           id="nins.button_delete"
           defaultMessage={`Remove`} />),
 
+   'nins.only_one_to_verify': (
+        <FormattedMessage
+          id="nins.only_one_to_verify"
+          defaultMessage={`You can only have one unverified NIN to verify it. Please remove the unwanted ones.`} />),
+
     /************************/
     /* Letter proofing ******/
     /************************/

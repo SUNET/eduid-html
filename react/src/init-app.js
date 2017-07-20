@@ -11,7 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import createSagaMiddleware, { takeLatest } from 'redux-saga';
+import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -95,6 +95,9 @@ function* rootSaga() {
     takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterProofing),
     takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterCode),
     takeLatest(ninActions.POST_NIN_REMOVE, requestRemoveNin),
+    takeEvery(letterActions.STOP_LETTER_PROOFING, requestNins),
+    takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
+    takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
   ];
 }
 

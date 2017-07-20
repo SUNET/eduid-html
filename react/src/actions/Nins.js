@@ -5,8 +5,8 @@ export const GET_NINS_FAIL = 'GET_PERSONAL_DATA_NINS_FAIL';
 export const VALID_NIN = 'VALID_NIN';
 export const INVALID_NIN = 'INVALID_NIN';
 export const POST_NIN_REMOVE = 'POST_NIN_REMOVE'
-export const POST_NIN_REMOVE_SUCCESS = 'POST_NIN_REMOVE_SUCCESS'
-export const POST_NIN_REMOVE_FAIL = 'POST_NIN_REMOVE_FAIL'
+export const POST_NIN_REMOVE_SUCCESS = 'POST_LETTER_PROOFING_REMOVE_NIN_SUCCESS'
+export const POST_NIN_REMOVE_FAIL = 'POST_LETTER_PROOFING_REMOVE_NIN_FAIL'
 
 
 export function getNins () {
@@ -41,9 +41,12 @@ export function invalidNin () {
   };
 }
 
-export function startRemove () {
+export function startRemove (nin) {
   return {
-    type: POST_NIN_REMOVE
+    type: POST_NIN_REMOVE,
+    payload: {
+      nin: nin
+    }
   };
 }
 

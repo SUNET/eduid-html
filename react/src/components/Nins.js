@@ -20,12 +20,14 @@ class Nins extends Component {
         }),
         invalidNinText = '',
         ninInput = '',
-        spinning = false;
+        spinning = false,
+        verifiedNin = '';
     if (this.props.nins.length) {
-        if (this.props.nins[0].verified) {
+        ninStatus = 'unverified';
+        const nins = this.props.nins.filter((nin) => nin.verified);
+        if (nins.length === 1) {
             ninStatus = 'verified';
-        } else {
-            ninStatus = 'unverified';
+            verifiedNin = nins[0].number;
         }
     }
     if (ninStatus === 'nonin') {
@@ -48,32 +50,36 @@ class Nins extends Component {
         );
         invalidNinText = (this.props.valid_nin) ? this.props.l10n('nins.valid_nin') : this.props.l10n('nins.invalid_nin');
     } else if (ninStatus === 'unverified') {
-        credsTable = (
-            <div>
-              <p><strong>{this.props.l10n('nins.unconfirmed_nin')}</strong></p>
-              <p>
-                <span>{this.props.nins[0].number}</span>
-                  <EduIDButton bsStyle="primary"
-                               id="email-remove-button"
+        const ninList = (this.props.nins.map( (nin, index) => {
+            return (
+               <div className="nin-holder" key={index} data-ninnumber={nin.number}>
+                  <strong>{nin.number}</strong>
+                  <EduIDButton bsStyle="danger"
+                               id={'button-rm-nin-'+nin.number}
+                               className="btn-xs"
                                spinning={spinning}
                                onClick={this.props.handleDelete}>
                       {this.props.l10n('nins.button_delete')}
                   </EduIDButton>
-              </p>
+               </div>
+            );
+        }));
+        credsTable = (
+            <div>
+              <p><strong>{this.props.l10n('nins.unconfirmed_nin')}</strong></p>
+              {ninList}
             </div>
         );
+        if (this.props.nins.length > 1) {
+            vettingButtons = this.props.l10n('nins.only_one_to_verify');
+        }
+
     } else if (ninStatus === 'verified') {
         credsTable = (
             <div>
               <p><strong>{this.props.l10n('nins.confirmed_nin')}</strong></p>
               <p>
-                <span>{this.props.nins[0].number}</span>
-                  <EduIDButton bsStyle="primary"
-                               id="email-remove-button"
-                               spinning={spinning}
-                               onClick={this.props.handleDelete}>
-                      {this.props.l10n('nins.button_delete')}
-                  </EduIDButton>
+                <span>{verifiedNin}</span>
               </p>
             </div>
         );

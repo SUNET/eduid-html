@@ -344,6 +344,10 @@
     "defaultMessage": "Remove"
   },
   {
+    "id": "nins.only_one_to_verify",
+    "defaultMessage": "You can only have one unverified NIN to verify it. Please remove the unwanted ones."
+  },
+  {
     "id": "letter.letter_button_text",
     "defaultMessage": "Confirm using letter"
   },

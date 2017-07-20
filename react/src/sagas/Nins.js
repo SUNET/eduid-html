@@ -31,7 +31,7 @@ export function* requestRemoveNin () {
     try {
         const state = yield select(state => state),
               data = {
-                nin: state.nins.nin,
+                nin: state.nins.rmNin,
                 csrf_token: state.config.csrf_token
               };
         const resp = yield call(requestRemove, state.config, data);
