@@ -10,7 +10,9 @@ export const POST_OIDC_PROOFING_FREJA_PROOFING_FAIL = 'POST_OIDC_PROOFING_FREJA_
 export const SHOW_OIDC_FREJA_MODAL = 'SHOW_OIDC_FREJA_MODAL';
 export const SHOW_OIDC_FREJA_MODAL_SUCCESS = 'SHOW_OIDC_FREJA_MODAL_SUCCESS';
 export const SHOW_OIDC_FREJA_MODAL_FAIL = 'SHOW_OIDC_FREJA_MODAL_FAIL';
+
 export const HIDE_OIDC_FREJA_MODAL = 'HIDE_OIDC_FREJA_MODAL';
+export const HIDE_OIDC_FREJA_MODAL_SUCCESS = 'HIDE_OIDC_FREJA_MODAL_SUCCESS';
 
 
 export function getOpenidFreja () {
@@ -79,5 +81,11 @@ export function showOpenidFrejaModalFail (l10nMessage) {
 export function hideOpenidFrejaModal () {
     return {
       type: HIDE_OIDC_FREJA_MODAL
+  };
+}
+
+export function hideOpenidFrejaModalSuccess () {
+    return {
+      type: HIDE_OIDC_FREJA_MODAL_SUCCESS
   };
 }

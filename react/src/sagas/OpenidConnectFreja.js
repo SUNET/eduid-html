@@ -3,7 +3,7 @@ import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/OpenidConnectFreja";
 
-export function* checkNINAndShowModal () {
+export function* checkNINAndShowFrejaModal () {
   try {
     let nin;
     let pendingNin = document.querySelector('td[class=identifier]');  // If a user has more than one unconfirmed NIN the first in the list will be picked
@@ -27,6 +27,12 @@ export function* checkNINAndShowModal () {
       console.log(error.toString());
       yield put(actions.showOpenidFrejaModalFail('ocf.error_unknown_error'));
   }
+}
+
+// Used for reloading page until we remove the old ui
+export function* closeFrejaModal () {
+  yield put(actions.hideOpenidFrejaModalSuccess());
+  yield window.location.reload(true);
 }
 
 export function* initializeOpenidFrejaData () {

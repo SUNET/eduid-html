@@ -35,7 +35,7 @@ let OpenidConnectFreja = React.createClass({
     const supportedDevices = ['AndroidOS', 'iOS'];
     const isMobile = supportedDevices.includes(this.props.ua.os);
     const freja_instructions = (
-      <Well>
+      <Well id="openid-connect-freja-instructions">
         <ol>
           <li>{this.props.l10n('ocf.freja_instructions_step_1')}</li>
           <li>{this.props.l10n('ocf.freja_instructions_step_2')}</li>
@@ -56,14 +56,14 @@ let OpenidConnectFreja = React.createClass({
 
     if (!isMobile) {
       notOnMobileMsg = (
-        <div id="openid-connect-freja-tip">
+        <div id="openid-connect-freja-not-on-mobile">
           <h4>{this.props.l10n('ocf.not_on_mobile_title')}</h4>
           <p>{this.props.l10n('ocf.not_on_mobile_message')}</p>
         </div>
       );
     } else {
       frejaButton = (
-          <EduIDButton bsStyle="link btn-large"
+          <EduIDButton bsStyle="link"
                        spinning={spinning}
                        onClick={this.props.handleInitializeFrejaProofing}>
             {this.props.l10n('ocf.open_app')}
@@ -71,7 +71,7 @@ let OpenidConnectFreja = React.createClass({
       );
       if (this.props.iaRequestData) {
         frejaButton = (
-          <EduIDButton bsStyle="link btn-large"
+          <EduIDButton bsStyle="link"
                        spinning={spinning}
                        href={"frejaeid://identify?iaRequestData=" + this.props.iaRequestData}>
             {this.props.l10n('ocf.open_app')}
@@ -80,7 +80,7 @@ let OpenidConnectFreja = React.createClass({
       }
       buttonGroup = (
         <ButtonGroup vertical block>
-          <Button bsStyle="link btn-large"
+          <Button bsStyle="link"
                   href="https://www.verisec.com/sv/autentisering/frejaeid/"
                   target="_blank">
             {this.props.l10n('ocf.freja_instructions_install_link')}
@@ -96,14 +96,15 @@ let OpenidConnectFreja = React.createClass({
 
     showModalButton = (
       <Button bsStyle="primary"
+              id="openid-connect-freja-show-modal"
               onClick={this.props.handleShowModal}>
-        {this.props.l10n('ocf.initialize_proofing')}
-        </Button>
+            {this.props.l10n('ocf.initialize_proofing')}
+      </Button>
     );
 
     return (
       <div>
-        <div id="frejaInfoDialog"
+        <div id="openid-connect-freja-info-dialog"
              tabIndex="-1"
              role="dialog"
              aria-labelledby="askDialogPrompt"
@@ -111,7 +112,7 @@ let OpenidConnectFreja = React.createClass({
              data-backdrop="true">
 
 
-          <Modal show={this.props.showModal}>
+          <Modal show={this.props.showModal} id="openid-connect-freja-modal">
             <Modal.Header>
               <Modal.Title>{this.props.l10n('ocf.modal_title')}</Modal.Title>
             </Modal.Header>
@@ -124,6 +125,7 @@ let OpenidConnectFreja = React.createClass({
 
             <Modal.Footer>
               <Button className="finish-button"
+                      id="openid-connect-freja-hide-modal"
                       onClick={this.props.handleHideModal}>
                 {this.props.l10n('cm.close')}
               </Button>
@@ -133,10 +135,7 @@ let OpenidConnectFreja = React.createClass({
         </div>
         <FormGroup validationState={validationState}>
           {errorElem}
-          <Button bsStyle="primary"
-              onClick={this.props.handleShowModal}>
-            {this.props.l10n('ocf.initialize_proofing')}
-            </Button>
+          {showModalButton}
         </FormGroup>
       </div>
     );
