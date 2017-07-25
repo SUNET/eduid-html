@@ -121,11 +121,11 @@
   },
   {
     "id": "oc.get_qrcode",
-    "defaultMessage": "CONFIRM USING SE-LEG"
+    "defaultMessage": "SE-LEG"
   },
   {
     "id": "ocf.initialize_proofing",
-    "defaultMessage": "CONFIRM USING FREJA EID"
+    "defaultMessage": "FREJA EID"
   },
   {
     "id": "ocf.initialize_proofing_help_text",

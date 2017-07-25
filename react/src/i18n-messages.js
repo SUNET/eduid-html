@@ -262,7 +262,7 @@ const msgs = {
     'oc.get_qrcode': (
         <FormattedMessage
           id="oc.get_qrcode"
-          defaultMessage={`CONFIRM USING SE-LEG`} />),
+          defaultMessage={`SE-LEG`} />),
 
     /************************/
     /* OIDC FREJA ***********/
@@ -271,7 +271,7 @@ const msgs = {
     'ocf.initialize_proofing': (
         <FormattedMessage
           id="ocf.initialize_proofing"
-          defaultMessage={`CONFIRM USING FREJA EID`} />),
+          defaultMessage={`FREJA EID`} />),
 
     'ocf.initialize_proofing_help_text': (
         <FormattedHTMLMessage
