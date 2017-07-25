@@ -31,6 +31,10 @@ function getErrorMessage(errorObj, optionalKeys) {
 
 let OpenidConnectFreja = React.createClass({
 
+  shouldComponentUpdate: function () {
+    return !!this.props.proofing_methods.includes('oidc_freja');
+  },
+
   render: function () {
     const supportedDevices = ['AndroidOS', 'iOS'];
     const isMobile = supportedDevices.includes(this.props.ua.os);
