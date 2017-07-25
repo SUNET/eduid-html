@@ -28,7 +28,7 @@ jQuery.fn.initDeformCallbacks = function () {
 
 // this  is temporal until all panels are in use
 // configure this in combination with routes.js
-const configuredReactPanels = ['personaldata', 'emails', 'mobiles', 'security', 'chpass']
+const configuredReactPanels = ['personaldata', 'nins', 'emails', 'mobiles', 'security', 'chpass']
 
 var TabbedForm = function (container) {
     "use strict";

@@ -585,6 +585,41 @@ const msgs = {
         <FormattedMessage
           id="pwfield.repeat_different"
           defaultMessage={`Repeated pasword is different`} />),
+
+    /************************/
+    /* Nins *****************/
+    /************************/
+
+   'nins.main_title': (
+        <FormattedMessage
+          id="nins.main_title"
+          defaultMessage={`National identity number`} />),
+
+   'nins.justification': (
+        <FormattedMessage
+          id="nins.justification"
+          defaultMessage={`Some service providers (e.g. Antagning.se) require a confirmed identity.`} />),
+
+   'nins.nin': (
+        <FormattedMessage
+          id="nins.nin"
+          defaultMessage={"Number"} />),
+
+   'nins.verified': (
+        <FormattedMessage
+          id="nins.verified"
+          defaultMessage={`Verified`} />),
+
+   'nins.primary': (
+        <FormattedMessage
+          id="nins.primary"
+          defaultMessage={`Primary`} />),
+
+   'nins.help_text': (
+        <FormattedMessage
+          id="nins.help_text"
+          defaultMessage={`Add your Swedish national identity number and initiate the confirmation process using one of the buttons below.`} />),
+
 };
 
 const unformatted = defineMessages({

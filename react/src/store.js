@@ -8,6 +8,7 @@ import openidConnectFrejaReducer from 'reducers/OpenidConnectFreja';
 import mobileReducer from 'reducers/Mobile';
 import securityReducer from 'reducers/Security';
 import chpassReducer from 'reducers/ChangePassword';
+import ninsReducer from 'reducers/Nins';
 
 const eduIDApp = combineReducers({
   chpass: chpassReducer,
@@ -17,6 +18,7 @@ const eduIDApp = combineReducers({
   openid_freja_data: openidConnectFrejaReducer,
   personal_data: personalDataReducer,
   phones: mobileReducer,
+  nins: ninsReducer,
   security: securityReducer
 });
 

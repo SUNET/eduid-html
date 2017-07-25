@@ -26,7 +26,7 @@ import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
 import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
-
+import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
@@ -37,8 +37,11 @@ import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
+import { requestNins } from "sagas/Nins";
+import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 
 import PersonalDataContainer from 'containers/PersonalData';
+import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
@@ -67,6 +70,7 @@ function* rootSaga() {
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, initializeOpenidFrejaData),
@@ -137,6 +141,9 @@ const init_app = function (target, component) {
                 case 'personaldata':
                   return (<PersonalDataContainer />);
                   break;
+                case 'nins':
+                  return (<NinsContainer />);
+                  break;
                 case 'emails':
                   return (<EmailsContainer />);
                   break;
@@ -156,6 +163,7 @@ const init_app = function (target, component) {
 
             <ul role="nav" className="hidden">
               <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
+              <li><Link to="/profile/#nins" id="nins-router-link">Nins</Link></li>
               <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
               <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
               <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
