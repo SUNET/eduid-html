@@ -33,20 +33,18 @@ import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile";
+import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
 import { requestNins } from "sagas/Nins";
-import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
-
 import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
-import { requestOpenidFrejaData, initializeOpenidFrejaData, checkNINAndShowFrejaModal, closeFrejaModal } from "sagas/OpenidConnectFreja";
 
 /* i18n */
 
@@ -73,10 +71,10 @@ function* rootSaga() {
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
-    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, initializeOpenidFrejaData),
-    takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
-    takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, checkNINAndShowFrejaModal),
-    takeLatest(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, closeFrejaModal),
+    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
+    takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal),
+    takeLatest(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, sagasOpenidFreja.closeFrejaModal),
     takeLatest(emailActions.POST_EMAIL, saveEmail),
     takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeLatest(emailActions.START_VERIFY, requestVerifyEmail),

@@ -31,11 +31,19 @@ function getErrorMessage(errorObj, optionalKeys) {
 
 let OpenidConnectFreja = React.createClass({
 
-  shouldComponentUpdate: function () {
-    return !!this.props.proofing_methods.includes('oidc_freja');
-  },
-
   render: function () {
+    // Wait for config to load before rendering, is there a better way?
+    try {
+      if (!this.props.proofing_methods.includes('oidc_freja')) {
+        // Do not render anything
+        return null
+      }
+    } catch (e) {
+      if (e instanceof TypeError) {
+       return null
+      }
+    }
+
     const supportedDevices = ['AndroidOS', 'iOS'];
     const isMobile = supportedDevices.includes(this.props.ua.os);
     const freja_instructions = (
