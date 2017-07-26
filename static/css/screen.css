@@ -1001,6 +1001,10 @@ div#footer span.langselector {
         transform: rotate(-45deg);
 
     }
+
+    .text-xs-center {
+        text-align: center;
+    }
 }
 
 @media only screen and (min-width: 768px) {

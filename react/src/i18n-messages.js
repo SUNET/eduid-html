@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import invariant from 'invariant';
-import { intlShape, defineMessages, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, defineMessages, injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 function getDisplayName(Component) {
     return Component.displayName || Component.name || 'Component';
@@ -108,6 +108,17 @@ const msgs = {
         <FormattedMessage
             id="faq_link"
             defaultMessage={`For more information see the `} />),
+
+    'Missing error message': (
+        <FormattedMessage
+            id="Missing error message"
+            defaultMessage={`Missing error message`} />),
+
+    'nin needs to be formatted as 18|19|20yymmddxxxx': (
+        <FormattedMessage
+            id="nin needs to be formatted as 18|19|20yymmddxxxx"
+            defaultMessage={`National identity number needs to be in the form of yyyymmddxxxx`} />),
+
     /************************/
     /* ConfirmModal *********/
     /************************/
@@ -141,6 +152,11 @@ const msgs = {
         <FormattedMessage
           id="cm.accept"
           defaultMessage={`ACCEPT`} />),
+
+    'cm.close': (
+        <FormattedMessage
+          id="cm.close"
+          defaultMessage={`CLOSE`} />),
 
     /************************/
     /* TABLE LIST ***********/
@@ -246,31 +262,81 @@ const msgs = {
     'oc.get_qrcode': (
         <FormattedMessage
           id="oc.get_qrcode"
-          defaultMessage={`CONFIRM USING SE-LEG`} />),
+          defaultMessage={`SE-LEG`} />),
 
     /************************/
     /* OIDC FREJA ***********/
     /************************/
 
-    'ocf.request_data': (
+    'ocf.initialize_proofing': (
         <FormattedMessage
-          id="ocf.request_data"
-          defaultMessage={`CONFIRM USING FREJA EID`} />),
+          id="ocf.initialize_proofing"
+          defaultMessage={`FREJA EID`} />),
+
+    'ocf.initialize_proofing_help_text': (
+        <FormattedHTMLMessage
+          id="ocf.initialize_proofing_help_text"
+          defaultMessage={`To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed on your device.`} />),
+
+    'ocf.modal_title': (
+        <FormattedMessage
+          id="ocf.modal_title"
+          defaultMessage={`Confirm using Freja eID`} />),
+
+    'ocf.freja_instructions_title': (
+        <FormattedMessage
+          id="ocf.freja_instructions_title"
+          defaultMessage={`How to confirm your account using Freja eID`} />),
+
+    'ocf.freja_instructions_step_1': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_1"
+          defaultMessage={`Install the Freja eID app on your mobile device.`} />),
+
+    'ocf.freja_instructions_step_2': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_2"
+          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ status.`} />),
+
+    'ocf.freja_instructions_step_3': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_3"
+          defaultMessage={`Return here and click the link at the bottom of the page. The app will open.`} />),
+
+    'ocf.freja_instructions_step_4': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_4"
+          defaultMessage={`Approve that Freja eID sends you national identity number to eduID. Done.`} />),
+
+    'ocf.freja_instructions_install_link': (
+        <FormattedMessage
+          id="ocf.freja_instructions_install_link"
+          defaultMessage={`I need to install Freja eID`} />),
 
     'ocf.open_app': (
         <FormattedMessage
           id="ocf.open_app"
-          defaultMessage={`OPEN FREJA EID`} />),
+          defaultMessage={`I have Freja eID installed`} />),
 
     'ocf.not_on_mobile_title': (
         <FormattedMessage
           id="ocf.not_on_mobile_title"
-          defaultMessage={`Tip`} />),
+          defaultMessage={`Not using your phone?`} />),
 
-      'ocf.not_on_mobile_message': (
-        <FormattedMessage
+    'ocf.not_on_mobile_message': (
+        <FormattedHTMLMessage
           id="ocf.not_on_mobile_message"
-          defaultMessage={`If you switch to a mobile device with Freja eID-app installed you will be able to verify your account at your closest ATG Ombud.`} />),
+          defaultMessage={`You need to switch to a mobile device with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
+
+    'ocf.error_missing_nin': (
+        <FormattedMessage
+          id="ocf.error_missing_nin"
+          defaultMessage={`Please add a national identity number and try again`} />),
+
+    'ocf.error_unknown_error': (
+        <FormattedMessage
+          id="ocf.error_unknown_error"
+          defaultMessage={`Temporary technical difficulties, please try again later`} />),
 
     /************************/
     /* PERSONAL DATA ********/

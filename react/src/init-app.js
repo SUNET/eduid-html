@@ -10,15 +10,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
+
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 import createSagaMiddleware, { takeLatest } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";
-
 import eduIDApp from "./store";
-
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
@@ -28,21 +28,17 @@ import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
-
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
-import { requestMobile, saveMobile, requestResendMobileCode,
-         requestVerifyMobile, requestRemoveMobile,
-         requestMakePrimaryMobile } from "sagas/Mobile";
+import * as sagasMobile from "sagas/Mobile";
+import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
 import { requestNins } from "sagas/Nins";
-import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
-
 import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
@@ -58,7 +54,7 @@ const language = navigator.languages
 
 const lang_code = language.substring(0,2);
 const locale = require('react-intl/locale-data/' + lang_code);
-const messages = require('../i18n/l10n/' + lang_code)
+const messages = require('../i18n/l10n/' + lang_code);
 
 addLocaleData(locale);
 
@@ -69,23 +65,26 @@ function* rootSaga() {
     takeLatest(configActions.GET_JSCONFIG_CONFIG, requestConfig),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestMobile),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
-    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
+    takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData),
+    takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal),
+    takeLatest(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, sagasOpenidFreja.closeFrejaModal),
     takeLatest(emailActions.POST_EMAIL, saveEmail),
     takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeLatest(emailActions.START_VERIFY, requestVerifyEmail),
     takeLatest(emailActions.POST_EMAIL_REMOVE, requestRemoveEmail),
     takeLatest(emailActions.POST_EMAIL_PRIMARY, requestMakePrimaryEmail),
-    takeLatest(mobileActions.POST_MOBILE, saveMobile),
-    takeLatest(mobileActions.POST_MOBILE_REMOVE, requestRemoveMobile),
-    takeLatest(mobileActions.POST_MOBILE_PRIMARY, requestMakePrimaryMobile),
-    takeLatest(mobileActions.START_RESEND_MOBILE_CODE, requestResendMobileCode),
-    takeLatest(mobileActions.START_VERIFY, requestVerifyMobile),
+    takeLatest(mobileActions.POST_MOBILE, sagasMobile.saveMobile),
+    takeLatest(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile),
+    takeLatest(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile),
+    takeLatest(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode),
+    takeLatest(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeLatest(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
     takeLatest(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
