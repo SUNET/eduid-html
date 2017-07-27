@@ -306,7 +306,7 @@ const msgs = {
     'ocf.freja_instructions_step_4': (
         <FormattedMessage
           id="ocf.freja_instructions_step_4"
-          defaultMessage={`Approve that Freja eID sends you national identity number to eduID. Done.`} />),
+          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done.`} />),
 
     'ocf.freja_instructions_install_link': (
         <FormattedMessage
@@ -326,7 +326,7 @@ const msgs = {
     'ocf.not_on_mobile_message': (
         <FormattedHTMLMessage
           id="ocf.not_on_mobile_message"
-          defaultMessage={`You need to switch to a mobile device with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
+          defaultMessage={`You need to switch to a mobile device (iOS or Android) with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
 
     'ocf.error_missing_nin': (
         <FormattedMessage
