@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d339f3b058fe838d116f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dd6e4f26914f30be9777"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -48934,6 +48934,18 @@
 	        id: 'nin needs to be formatted as 18|19|20yymmddxxxx',
 	        defaultMessage: 'National identity number needs to be in the form of yyyymmddxxxx' }),
 	
+	    'Temporary technical problems': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'Temporary technical problems',
+	        defaultMessage: 'Temporary technical problems, please try again later' }),
+	
+	    'No connection to authorization endpoint': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'No connection to authorization endpoint',
+	        defaultMessage: 'No connection to authorization endpoint, please try again later' }),
+	
+	    'CSRF failed to validate': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'CSRF failed to validate',
+	        defaultMessage: 'CSRF failed to validate, please reload the page' }),
+	
 	    /************************/
 	    /* ConfirmModal *********/
 	    /************************/
@@ -78679,7 +78691,11 @@
 
 	module.exports = {
 		"Missing error message": "Felmeddelande saknas",
+		"CSRF failed to validate": "CSRF-koden var fel, var god ladda om sidan",
 		"Not a valid email address.": "Ingen giltig mejladress.",
+		"nin needs to be formatted as 18|19|20yymmddxxxx": "Skriv in personnummeret med 12 siffror och försök igen",
+		"Temporary technical problems": "Temporärt tekniskt fel, var god försök senare",
+		"No connection to authorization endpoint": "Anslutningen till auktoriseringsservern misslyckades, var god försök senare",
 		"button_save": "Spara",
 		"cm.accept": "ACCEPTERA",
 		"cm.cancel": "AVBRYT",
