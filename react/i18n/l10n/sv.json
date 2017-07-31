@@ -1,6 +1,10 @@
 {
   "Missing error message": "Felmeddelande saknas",
+  "CSRF failed to validate": "CSRF-koden var fel, var god ladda om sidan",
   "Not a valid email address.": "Ingen giltig mejladress.",
+  "nin needs to be formatted as 18|19|20yymmddxxxx": "Skriv in personnummeret med 12 siffror och försök igen",
+  "Temporary technical problems": "Temporärt tekniskt fel, var god försök senare",
+  "No connection to authorization endpoint": "Anslutningen till auktoriseringsservern misslyckades, var god försök senare",
   "button_save": "Spara",
   "cm.accept": "ACCEPTERA",
   "cm.cancel": "AVBRYT",

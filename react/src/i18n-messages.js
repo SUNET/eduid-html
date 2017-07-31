@@ -119,6 +119,21 @@ const msgs = {
             id="nin needs to be formatted as 18|19|20yymmddxxxx"
             defaultMessage={`National identity number needs to be in the form of yyyymmddxxxx`} />),
 
+    'Temporary technical problems': (
+        <FormattedMessage
+            id="Temporary technical problems"
+            defaultMessage={`Temporary technical problems, please try again later`} />),
+
+    'No connection to authorization endpoint': (
+        <FormattedMessage
+            id="No connection to authorization endpoint"
+            defaultMessage={`No connection to authorization endpoint, please try again later`} />),
+
+    'CSRF failed to validate': (
+        <FormattedMessage
+            id="CSRF failed to validate"
+            defaultMessage={`CSRF failed to validate, please reload the page`} />),
+
     /************************/
     /* ConfirmModal *********/
     /************************/

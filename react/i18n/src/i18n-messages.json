@@ -24,6 +24,18 @@
     "defaultMessage": "National identity number needs to be in the form of yyyymmddxxxx"
   },
   {
+    "id": "Temporary technical problems",
+    "defaultMessage": "Temporary technical problems, please try again later"
+  },
+  {
+    "id": "No connection to authorization endpoint",
+    "defaultMessage": "No connection to authorization endpoint, please try again later"
+  },
+  {
+    "id": "CSRF failed to validate",
+    "defaultMessage": "CSRF failed to validate, please reload the page"
+  },
+  {
     "id": "cm.lost_code",
     "defaultMessage": "Lost your confirmation code?"
   },
