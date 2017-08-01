@@ -7,12 +7,12 @@ import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import * as actions from "actions/LetterProofing";
-import letterProofingReducer from "reducers/LetterProofing";
-import LetterProofing from 'components/LetterProofing'
-
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
+
+import * as actions from "actions/LetterProofing";
+import letterProofingReducer from "reducers/LetterProofing";
+import LetterProofingButton from 'components/LetterProofing'
 import LetterProofingContainer from "containers/LetterProofing";
 
 const messages = require('../../i18n/l10n/en');
@@ -285,4 +285,47 @@ describe("Reducers", () => {
     );
   });
 
+});
+
+
+
+function setupComponent() {
+  const props = {
+    handleLetterProofing: createSpy(),
+    sendConfirmationLetter: createSpy(),
+    handleConfirmationLetter: createSpy(),
+    handleStopConfirmationLetter: createSpy(),
+    resending: {
+        is_fetching: false,
+        failed: false
+    }
+  };
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+                              <LetterProofingButton {...props} />
+                          </IntlProvider>);
+  return {
+    props,
+    wrapper
+  };
+}
+
+describe("LetterProofingButton Component", () => {
+
+  it("Renders", () => {
+    const { wrapper, props } = setupComponent(),
+          form = wrapper.find('form'),
+          fieldset = wrapper.find('fieldset'),
+          button = wrapper.find('EduIDButton');
+
+    expect(form.hasClass('form-horizontal')).toBeTruthy();
+    expect(form.contains(fieldset.get(0))).toBeTruthy();
+    expect(fieldset.contains(button.get(0))).toBeTruthy();
+
+    expect(form.props()).toContain({role: 'form'});
+    expect(fieldset.props()).toContain({id: 'letter-proofing'});
+
+    expect(props.handleLetterProofing.calls.length).toEqual(0);
+    button.props().onClick();
+    expect(props.handleLetterProofing.calls.length).toEqual(1);
+  })
 });

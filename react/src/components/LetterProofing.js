@@ -67,12 +67,13 @@ class LetterProofingButton extends Component {
 }
 
 LetterProofingButton.propTypes = {
-  errorMsg: PropTypes.string,
   letter_sent: PropTypes.string,
   letter_expires: PropTypes.string,
+  resending: PropTypes.object,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   confirmingLetter: PropTypes.bool,
+  sendConfirmationLetter: PropTypes.func,
   handleLetterProofing: PropTypes.func,
   handleStopConfirmationLetter: PropTypes.func,
   handleConfirmationLetter: PropTypes.func
