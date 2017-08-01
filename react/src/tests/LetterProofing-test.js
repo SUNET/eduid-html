@@ -8,7 +8,7 @@ import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import * as actions from "actions/LetterProofing";
-import LetterProofingReducer from "reducers/LetterProofing";
+import letterProofingReducer from "reducers/LetterProofing";
 import LetterProofing from 'components/LetterProofing'
 
 import { Provider } from 'react-redux';
@@ -83,4 +83,206 @@ describe("Letter proofing Actions", () => {
     };
     expect(actions.postLetterCodeFail(err)).toEqual(expectedAction);
   });
+});
+
+describe("Reducers", () => {
+
+  const mockState = {
+    confirmingLetter: false,
+    code: '',
+    letter_sent: '',
+    letter_expires: '',
+    letter_expired: false,
+    is_fetching: false,
+    failed: false,
+    error: "",
+    message: '',
+    resending: {
+      is_fetching: false,
+      failed: false,
+      error: {},
+      message: ''
+    },
+  };
+
+  it("Receives a START_LETTER_PROOFING action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.START_LETTER_PROOFING
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          confirmingLetter: true
+      }
+    );
+  });
+
+  it("Receives a STOP_LETTER_PROOFING action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.STOP_LETTER_PROOFING
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          confirmingLetter: false
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_CODE action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.STOP_LETTER_PROOFING
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState
+      }
+    );
+  });
+
+  it("Receives a WAIT_LETTER_PROOFING_PROOFING action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.WAIT_LETTER_PROOFING_PROOFING
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          resending: {
+              ...mockState.resending,
+              is_fetching: true
+          }
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_PROOFING_SUCCESS action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.POST_LETTER_PROOFING_PROOFING_SUCCESS,
+          payload: {
+              message: 'success'
+          }
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          message: 'success'
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_PROOFING_FAIL action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.POST_LETTER_PROOFING_PROOFING_FAIL,
+          error: true,
+          payload: {
+              error: new Error('err'),
+              message: 'err'
+          }
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          resending: {
+              ...mockState.resending,
+              failed: true,
+              message: 'err'
+          }
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_PROOFING action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.POST_LETTER_PROOFING_PROOFING,
+          payload: {
+              code: 'dummy-code'
+          }
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          code: 'dummy-code',
+          resending: {
+              ...mockState.resending,
+              is_fetching: true,
+              failed: false
+          }
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_CODE_SUCCESS action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.POST_LETTER_PROOFING_CODE_SUCCESS,
+          payload: {
+              success: true,
+              message: 'success'
+          }
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          message: 'success'
+      }
+    );
+  });
+
+  it("Receives a POST_LETTER_PROOFING_CODE_FAIL action", () => {
+    expect(
+      letterProofingReducer(
+        mockState,
+        {
+          type: actions.POST_LETTER_PROOFING_CODE_FAIL,
+          error: true,
+          payload: {
+              error: new Error('err'),
+              message: 'err'
+          }
+        }
+      )
+    ).toEqual(
+      {
+          ...mockState,
+          failed: true,
+          resending: {
+              ...mockState.resending,
+              failed: true,
+              message: 'err'
+          }
+      }
+    );
+  });
+
 });
