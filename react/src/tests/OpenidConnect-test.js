@@ -261,44 +261,44 @@ import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
-    it("Sagas requestOpenidQRcode", () => {
+  it("Sagas requestOpenidQRcode", () => {
 
-       const generator = requestOpenidQRcode();
+    const generator = requestOpenidQRcode();
 
-       let next = generator.next();
-       let debug = select(state => state.config.OIDC_PROOFING_URL);
-       // WE need modfied the following selector due a problems with indent.
-       // The test fails if we dont do that, previous selector:
-       // function (state) {
-	   //                     return state.config.OIDC_PROOFING_URL;
-	   //                 }
-       next.value.SELECT.selector = function (state) {
-	      return state.config.OIDC_PROOFING_URL;
-	    }
+    let next = generator.next();
+    let debug = select(state => state.config.OIDC_PROOFING_URL);
+    // WE need modfied the following selector due a problems with indent.
+    // The test fails if we dont do that, previous selector:
+    // function (state) {
+    //                     return state.config.OIDC_PROOFING_URL;
+    //                 }
+    next.value.SELECT.selector = function (state) {
+      return state.config.OIDC_PROOFING_URL;
+    }
 
-       expect(next.value).toEqual(debug);
+    expect(next.value).toEqual(debug);
 
-       const oidcData = generator.next(next.value);
-       const  data = {
-                'nin': 'testing'
-              };
-       expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
+    const oidcData = generator.next(next.value);
+    const data = {
+      'nin': 'testing'
+    };
+    expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
 
-       const action = {
-         type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
-         payload: {
-             qr_img: 'new code',
-             qr_code: 'new nonce',
-             csrf_token: 'csrf-token'
-         }
-       }
+    const action = {
+      type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
+      payload: {
+        qr_img: 'new code',
+        qr_code: 'new nonce',
+        csrf_token: 'csrf-token'
+      }
+    }
 
-       next = generator.next(action);
-       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-       next = generator.next();
-       delete(action.payload.csrf_token);
-       expect(next.value).toEqual(put(action));
-    });
+    next = generator.next(action);
+    expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+    next = generator.next();
+    delete(action.payload.csrf_token);
+    expect(next.value).toEqual(put(action));
+  });
 
 });
 

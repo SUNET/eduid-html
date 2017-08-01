@@ -7,10 +7,29 @@ export const POST_OIDC_PROOFING_FREJA_PROOFING = 'POST_OIDC_PROOFING_FREJA_PROOF
 export const POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS = 'POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS';
 export const POST_OIDC_PROOFING_FREJA_PROOFING_FAIL = 'POST_OIDC_PROOFING_FREJA_PROOFING_FAIL';
 
+export const SHOW_OIDC_FREJA_MODAL = 'SHOW_OIDC_FREJA_MODAL';
+export const SHOW_OIDC_FREJA_MODAL_SUCCESS = 'SHOW_OIDC_FREJA_MODAL_SUCCESS';
+export const SHOW_OIDC_FREJA_MODAL_FAIL = 'SHOW_OIDC_FREJA_MODAL_FAIL';
+
+export const HIDE_OIDC_FREJA_MODAL = 'HIDE_OIDC_FREJA_MODAL';
+export const HIDE_OIDC_FREJA_MODAL_SUCCESS = 'HIDE_OIDC_FREJA_MODAL_SUCCESS';
+
 
 export function getOpenidFreja () {
   return {
     type: GET_OIDC_PROOFING_FREJA_PROOFING
+  };
+}
+
+export function getOpenidFrejaFail(l10nMessage) {
+  return {
+    type: GET_OIDC_PROOFING_FREJA_PROOFING_FAIL,
+    error: true,
+    payload: {
+      error: {
+        l10n_message: l10nMessage
+      },
+    }
   };
 }
 
@@ -20,24 +39,53 @@ export function postOpenidFreja () {
   };
 }
 
-export function getOpenidFrejaFail (err) {
-  return {
-    type: GET_OIDC_PROOFING_FREJA_PROOFING_FAIL,
-    error: true,
-    payload: {
-      error: err,
-      message: err
-    }
-  };
-}
-
-export function postOpenidFrejaFail (err) {
+export function postOpenidFrejaFail (l10nMessage) {
   return {
     type: POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
     error: true,
     payload: {
-      error: err,
-      message: err
+      error: {
+        l10n_message: l10nMessage
+      },
     }
+  };
+}
+
+export function showOpenidFrejaModal () {
+    return {
+      type: SHOW_OIDC_FREJA_MODAL,
+  };
+}
+
+export function showOpenidFrejaModalSuccess (nin) {
+    return {
+      type: SHOW_OIDC_FREJA_MODAL_SUCCESS,
+      payload: {
+        nin: nin,
+      }
+  };
+}
+
+export function showOpenidFrejaModalFail (l10nMessage) {
+  return {
+    type: SHOW_OIDC_FREJA_MODAL_FAIL,
+    error: true,
+    payload: {
+      error: {
+        l10n_message: l10nMessage
+      },
+    }
+  };
+}
+
+export function hideOpenidFrejaModal () {
+    return {
+      type: HIDE_OIDC_FREJA_MODAL
+  };
+}
+
+export function hideOpenidFrejaModalSuccess () {
+    return {
+      type: HIDE_OIDC_FREJA_MODAL_SUCCESS
   };
 }
