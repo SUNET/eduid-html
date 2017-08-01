@@ -50,8 +50,8 @@ class GenericConfirmModal extends Component {
 
 GenericConfirmModal.propTypes = {
   modalId: PropTypes.string,
-  title: PropTypes.string,
-  mainText: PropTypes.string,
+  title: PropTypes.any,
+  mainText: PropTypes.any,
   handleRemove: PropTypes.func,
   closeModal: PropTypes.func,
   acceptModal: PropTypes.func,

@@ -9,11 +9,14 @@ import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import { put, call, select } from "redux-saga/effects";
 
 import * as actions from "actions/LetterProofing";
 import letterProofingReducer from "reducers/LetterProofing";
 import LetterProofingButton from 'components/LetterProofing'
 import LetterProofingContainer from "containers/LetterProofing";
+import {sendLetterProofing, fetchLetterProofing,
+        sendLetterCode, fetchLetterCode } from '../sagas/LetterProofing';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -288,7 +291,6 @@ describe("Reducers", () => {
 });
 
 
-
 function setupComponent() {
   const props = {
     handleLetterProofing: createSpy(),
@@ -329,3 +331,159 @@ describe("LetterProofingButton Component", () => {
     expect(props.handleLetterProofing.calls.length).toEqual(1);
   })
 });
+
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: createSpy(),
+  subscribe: createSpy(),
+  getState: () => ({ ...state })
+});
+
+describe("LetterProofing Container", () => {
+  let mockProps,
+      wrapper,
+      buttontext,
+      dispatch;
+
+  beforeEach(() => {
+    const store = fakeStore({
+      letter_proofing: {
+        is_fetching: false,
+        failed: false,
+        message: '',
+        errMsg: '',
+        letter_sent: '',
+        resending: {
+            is_fetching: false,
+            failed: false
+        }
+      },
+      config: {LETTER_PROOFING_URL: 'http://localhost/letter'},
+      nins: {
+          valid_nin: false,
+          nin: 'dummy-nin'
+      }
+    });
+
+    mockProps = {
+        resending: {}
+    };
+
+    wrapper = mount(
+        <IntlProvider locale={'en'} messages={messages}>
+          <Provider store={store}>
+            <LetterProofingContainer {...mockProps}/>
+          </Provider>
+        </IntlProvider>
+    );
+
+    buttontext = wrapper.find('EduIDButton').text();
+    dispatch = store.dispatch;
+  });
+
+
+  afterEach(() => {
+    fetchMock.restore()
+  });
+
+  it("Renders", () => {
+    expect(buttontext).toEqual('Confirm using letter');
+  });
+
+  it("Clicks", () => {
+
+    fetchMock.post('http://localhost/letter',
+       {
+        type: actions.POST_LETTER_PROOFING_PROOFING_SUCCESS,
+        payload: {message: 'success'}
+      });
+
+    expect(dispatch.calls.length).toEqual(0);
+    wrapper.find('Button').props().onClick();
+    expect(dispatch.calls.length).toEqual(1);
+  });
+
+});
+
+
+const state = {
+    config : {
+        LETTER_PROOFING_URL: 'http://localhost/letter',
+        csrf_token: 'csrf-token'
+    },
+    nins: {
+        nin: 'dummy-nin'
+    },
+    letter_proofing: {
+        code: 'dummy-code'
+    }
+};
+
+describe("Async component", () => {
+
+    it("Sagas sendLetterProfing", () => {
+
+        const generator = sendLetterProofing();
+
+        let next = generator.next();
+        expect(next.value).toEqual(put(actions.waitLetterProofing()));
+
+        next = generator.next();
+
+        const mockGetState = function (state) {
+            return state.config;
+        };
+        const data = {
+            nin: 'dummy-nin',
+            csrf_token: 'csrf-token'
+        };
+
+        const resp = generator.next(state);
+        expect(resp.value).toEqual(call(fetchLetterProofing, state.config, data));
+
+        const action = {
+          type: 'POST_LETTER_PROOFING_PROOFING_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            message: 'success'
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+
+    it("Sagas sendLetterCode", () => {
+
+        const generator = sendLetterCode();
+
+        let next = generator.next();
+
+        const mockGetState = function (state) {
+            return state.config;
+        };
+        const data = {
+            code: 'dummy-code',
+            csrf_token: 'csrf-token'
+        };
+
+        const resp = generator.next(state);
+        expect(resp.value).toEqual(call(fetchLetterCode, state.config, data));
+
+        const action = {
+          type: 'POST_LETTER_PROOFING_CODE_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            message: 'success'
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+});
+
