@@ -368,8 +368,8 @@ describe("Nins Container", () => {
         type: actions.POST_NIN_REMOVE_SUCCESS,
       });
     expect(dispatch.calls.length).toEqual(0);
-    //wrapper.find('#button-rm-nin-196701100006').props().onClick();
-    //expect(dispatch.calls.length).toEqual(1);
+    wrapper.find('#button-rm-nin-196701100006').simulate('click');
+    expect(dispatch.calls.length).toEqual(1);
   });
 });
 
