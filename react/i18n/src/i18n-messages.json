@@ -36,14 +36,6 @@
     "defaultMessage": "CSRF failed to validate, please reload the page"
   },
   {
-    "id": "cm.lost_code",
-    "defaultMessage": "Lost your confirmation code?"
-  },
-  {
-    "id": "cm.resend_code",
-    "defaultMessage": "Resend confirmation code"
-  },
-  {
     "id": "cm.ok",
     "defaultMessage": "OK"
   },
