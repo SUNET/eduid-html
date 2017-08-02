@@ -12,7 +12,7 @@ export function* requestNins () {
         yield put(putCsrfToken(nins));
         yield put(nins);
     } catch(error) {
-        yield put(actions.getNinsFail(error.toString()));
+        yield put(actions.getNinsFail(error));
     }
 }
 
@@ -38,7 +38,7 @@ export function* requestRemoveNin () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startRemoveFail(error.toString()));
+        yield put(actions.startRemoveFail(error));
     }
 }
 

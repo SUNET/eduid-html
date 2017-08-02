@@ -20,8 +20,8 @@ export function getNinsFail (err) {
     type: GET_NINS_FAIL,
     error: true,
     payload: {
-      error: new Error(err),
-      message: err
+      error: err,
+      message: err.toString()
     }
   };
 }
@@ -54,6 +54,9 @@ export function startRemoveFail (err) {
   return {
     type: POST_NIN_REMOVE_FAIL,
     error: true,
-    payload: new Error(err)
+    payload: {
+      error: err,
+      message: err.toString()
+    }
   };
 }
