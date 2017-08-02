@@ -296,3 +296,155 @@ describe("Nins Component", () => {
     expect(fieldset.props()).toContain({id: 'nins-form'});
   });
 });
+
+
+
+
+const fakeStore = (state) => ({
+    default: () => {},
+    dispatch: createSpy(),
+    subscribe: createSpy(),
+    getState: () => ({ ...state })
+});
+
+describe("Nins Container", () => {
+  let mockProps,
+    wrapper,
+    ninlist,
+    dispatch;
+
+  beforeEach(() => {
+    const store = fakeStore({
+      nins: {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        valid_nin: true,
+        nins: [{number: '196701100006', verified: false, primary: false},
+               {number: '196701110005', verified: false, primary: false}],
+        nin:'',
+        rmNin: ''
+      },
+      config: {
+        LETTER_PROOFING_URL: 'http://localhost/services/letter-proofing/',
+        PROOFING_METHODS: []
+      }
+    });
+
+    mockProps = {
+      nins: [],
+      nin: '',
+      valid_nin: true,
+      proofing_methods: [],
+      is_fetching: false,
+      message: ''
+    };
+
+    wrapper = mount(
+        <IntlProvider locale={'en'} messages={messages}>
+          <Provider store={store}>
+            <NinsContainer {...mockProps}/>
+          </Provider>
+        </IntlProvider>
+    );
+    ninlist = wrapper.find('.nin-holder');
+    dispatch = store.dispatch;
+  });
+
+
+  afterEach(() => {
+    fetchMock.restore()
+  });
+
+  it("Renders", () => {
+      expect(ninlist.length).toEqual(2);
+  });
+
+  it("Clicks", () => {
+
+    fetchMock.post('http://localhost/services/letter-proofing/remove-nin',
+       {
+        type: actions.POST_NIN_REMOVE_SUCCESS,
+      });
+    expect(dispatch.calls.length).toEqual(0);
+    //wrapper.find('#button-rm-nin-196701100006').props().onClick();
+    //expect(dispatch.calls.length).toEqual(1);
+  });
+});
+
+const mockState = {
+    config : {
+        LETTER_PROOFING_URL: 'http://localhost/services/letter-proofing/',
+        PROOFING_METHODS: [],
+        csrf_token: 'csrf-token'
+    },
+    nins: {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        valid_nin: true,
+        nins: [],
+        nin:'',
+        rmNin: ''
+    }
+};
+
+describe("Async component", () => {
+
+    it("Sagas requestNins", () => {
+
+        const generator = sagas.requestNins();
+
+        let next = generator.next();
+        expect(next.value).toEqual(put(actions.getNins()));
+
+        generator.next();
+        const resp = generator.next(mockState.config);
+        expect(resp.value).toEqual(call(sagas.fetchNins, mockState.config));
+
+        const action = {
+          type: actions.GET_NINS_SUCCESS,
+          payload: {
+            csrf_token: 'csrf-token',
+            nins: [{number: '196701100006', verified: false, primary: false},
+                   {number: '196701110005', verified: false, primary: false}]
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+
+    it("Sagas requestRemoveNin", () => {
+
+        const generator = sagas.requestRemoveNin(),
+              nin = '196701100006';
+        mockState.nins.rmNin = nin;
+        let next = generator.next(mockState);
+
+        const data = {
+            nin: nin,
+            csrf_token: 'csrf-token'
+        };
+
+        const resp = generator.next(mockState);
+        expect(resp.value).toEqual(call(sagas.requestRemove, mockState.config, data));
+
+        const action = {
+          type: 'POST_NIN_REMOVE_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            message: 'success'
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+});
