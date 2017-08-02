@@ -13,9 +13,6 @@ import * as actions from "actions/Nins";
 import ninsReducer from "reducers/Nins";
 import * as sagas from 'sagas/Nins';
 
-const messages = require('../../i18n/l10n/en');
-addLocaleData('react-intl/locale-data/en');
-
 
 describe("Nin Actions", () => {
    it("Should get the nins ", () => {
@@ -256,5 +253,46 @@ describe("Reducers", () => {
         error: err
       }
     );
+  });
+});
+
+
+const messages = require('../../i18n/l10n/en');
+addLocaleData('react-intl/locale-data/en');
+
+function setupComponent() {
+  const props = {
+    nins: [],
+    nin: '',
+    valid_nin: true,
+    proofing_methods: [],
+    validateNin: createSpy(),
+    handleChange: createSpy(),
+    handleDelete: createSpy()
+  };
+
+  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+                              <Nins {...props} />
+                          </IntlProvider>);
+  return {
+    props,
+    wrapper
+  };
+}
+
+describe("Nins Component", () => {
+
+  it("Renders", () => {
+    const { wrapper, props } = setupComponent(),
+          form = wrapper.find('form'),
+          ninInput = wrapper.find("#norEduPersonNin"),
+          fieldset = wrapper.find('fieldset');
+
+    expect(form.contains(fieldset.get(0))).toBeTruthy();
+    expect(fieldset.hasClass('tabpane')).toBeTruthy();
+    expect(fieldset.contains(ninInput.get(0))).toBeTruthy();
+
+    expect(form.props()).toContain({role: 'form'});
+    expect(fieldset.props()).toContain({id: 'nins-form'});
   });
 });
