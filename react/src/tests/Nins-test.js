@@ -80,3 +80,181 @@ describe("Nin Actions", () => {
      expect(actions.startRemoveFail(err)).toEqual(expectedAction);
    });
 });
+
+
+
+
+describe("Reducers", () => {
+
+  const mockState = {
+    is_fetching: false,
+    failed: false,
+    error: '',
+    message: '',
+    nins: [],
+    nin: '',
+    rmNin: '',
+    valid_nin: true
+  };
+
+  it("Receives a GET_NINS action", () => {
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.GET_NINS
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        is_fetching: true
+      }
+    );
+  });
+
+  it("Receives a GET_NINS_SUCCESS action", () => {
+    const nins = [{number: 'nin-number'}];
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.GET_NINS_SUCCESS,
+          payload: {
+            nins: nins
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        nins: nins,
+        nin: 'nin-number'
+      }
+    );
+  });
+
+  it("Receives a GET_NINS_FAIL action", () => {
+    const err = new Error('get nins error');
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.GET_NINS_FAIL,
+          error: true,
+          payload: {
+            error: err,
+            message: err.toString()
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        failed: true,
+        error: err,
+        message: err.toString()
+      }
+    );
+  });
+
+  it("Receives a VALID_NIN action", () => {
+    const nin = 'valid-nin';
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.VALID_NIN,
+          payload: {
+            nin: nin
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        nin: nin
+      }
+    );
+  });
+
+  it("Receives an INVALID_NIN action", () => {
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.INVALID_NIN,
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        valid_nin: false
+      }
+    );
+  });
+
+  it("Receives a POST_NIN_REMOVE action", () => {
+    const nin = 'valid-nin';
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.POST_NIN_REMOVE,
+          payload: {
+            nin: nin
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        is_fetching: true,
+        rmNin: nin
+      }
+    );
+  });
+
+  it("Receives a POST_NIN_REMOVE_SUCCESS action", () => {
+    const nins = [{number: 'valid-nin'}];
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.POST_NIN_REMOVE_SUCCESS,
+          payload: {
+            nins: nins
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        nins: nins
+      }
+    );
+  });
+
+  it("Receives a POST_NIN_REMOVE_FAIL action", () => {
+    const err = new Error('rm nin error');
+    expect(
+      ninsReducer(
+        mockState,
+        {
+          type: actions.POST_NIN_REMOVE_FAIL,
+          error: true,
+          payload: {
+            error: err,
+            message: err.toString()
+          }
+        }
+      )
+    ).toEqual(
+      {
+        ...mockState,
+        failed: true,
+        error: err
+      }
+    );
+  });
+});
