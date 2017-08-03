@@ -14,10 +14,9 @@ class GenericConfirmModal extends Component {
   render () {
 
     return (
-      <div id="securityConfirmDialog"
+      <div id={this.props.modalId}
            tabIndex="-1"
            role="dialog"
-           aria-labelledby="askDialogPrompt"
            aria-hidden="true"
            data-backdrop="true">
 
@@ -27,14 +26,14 @@ class GenericConfirmModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div id="delete-account">
-                        <p>{this.props.l10n('security.change_info')}</p>
+                    <div>
+                        <p>{this.props.mainText}</p>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
-                          onClick={this.props.finishModal} >
+                          onClick={this.props.acceptModal} >
                         {this.props.l10n('cm.accept')}
                     </EduIDButton>
                     <Button className="cancel-button"
@@ -50,9 +49,12 @@ class GenericConfirmModal extends Component {
 }
 
 GenericConfirmModal.propTypes = {
+  modalId: PropTypes.string,
+  title: PropTypes.any,
+  mainText: PropTypes.any,
   handleRemove: PropTypes.func,
   closeModal: PropTypes.func,
-  finishModal: PropTypes.func,
+  acceptModal: PropTypes.func,
   showModal: PropTypes.bool,
   is_fetching: PropTypes.bool,
   confirming: PropTypes.bool,

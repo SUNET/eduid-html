@@ -12,8 +12,7 @@ import ReactDOM from 'react-dom';
 import Router from 'react-router';  
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
-import createSagaMiddleware, { takeLatest } from 'redux-saga';
+import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -28,6 +27,8 @@ import * as securityActions from "actions/Security";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
+import * as letterActions from "actions/LetterProofing";
+
 import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
 import { requestEmails, saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
@@ -38,7 +39,10 @@ import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
-import { requestNins } from "sagas/Nins";
+import { requestNins, requestRemoveNin } from "sagas/Nins";
+import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
+import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
+
 import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
@@ -89,6 +93,12 @@ function* rootSaga() {
     takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
     takeLatest(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
     takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
+    takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterProofing),
+    takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterCode),
+    takeLatest(ninActions.POST_NIN_REMOVE, requestRemoveNin),
+    takeEvery(letterActions.STOP_LETTER_PROOFING, requestNins),
+    takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
+    takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
   ];
 }
 

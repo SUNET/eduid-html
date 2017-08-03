@@ -10,12 +10,9 @@ class EduIDButton extends Component {
 
   render () {
     const { spinning, ...other } = this.props,
-          classes = spinning && 'active has-spinner' || 'has-spinner',
-          // TODO: Fix this line to disable button when is not necessary
-          // disabled = spinning && true || false;
-          disabled = false;
+          classes = spinning && 'active has-spinner' || 'has-spinner';
     return (
-        <Button className={classes} disabled={disabled} {...other}>
+        <Button className={classes} disabled={spinning} {...other}>
             {this.props.children}
           <div className="spin-holder">
             <Glyphicon className="spinner" glyph="refresh" />

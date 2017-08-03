@@ -287,8 +287,6 @@ function setupComponent() {
   };
 }
 
-const getState = () => mockState;
-
 describe("Async component", () => {
 
     it("Sagas requestPersonalData", () => {

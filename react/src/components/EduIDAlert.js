@@ -39,7 +39,7 @@ class EduIDAlert extends Component {
 
 
 EduIDAlert.propTypes = {
-  Msg: PropTypes.object,
+  Msg: PropTypes.string,
   levelMessage: PropTypes.string
 }
 

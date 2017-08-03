@@ -21,7 +21,6 @@ export const POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL'
 export const POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY'
 export const POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS'
 export const POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL'
-export const FINISH_CONFIRMATION = 'FINISH_CONFIRMATION_EMAIL'
 
 export function getEmails () {
   return {
@@ -67,12 +66,6 @@ export function startConfirmation (data) {
 export function stopConfirmation () {
   return {
     type: STOP_CONFIRMATION
-  };
-}
-
-export function finishConfirmation() {
-  return {
-    type: FINISH_CONFIRMATION
   };
 }
 

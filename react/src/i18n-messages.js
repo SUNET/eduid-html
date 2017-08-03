@@ -138,16 +138,6 @@ const msgs = {
     /* ConfirmModal *********/
     /************************/
 
-    'cm.lost_code': (
-        <FormattedMessage
-            id="cm.lost_code"
-            defaultMessage={`Lost your confirmation code?`} />),
-
-    'cm.resend_code': (
-        <FormattedMessage
-            id="cm.resend_code"
-            defaultMessage={`Resend confirmation code`} />),
-
     'cm.ok': (
         <FormattedMessage
             id="cm.ok"
@@ -635,6 +625,44 @@ const msgs = {
           id="nins.help_text"
           defaultMessage={`Add your Swedish national identity number and initiate the confirmation process using one of the buttons below.`} />),
 
+   'nins.invalid_nin': (
+        <FormattedMessage
+          id="nins.invalid_nin"
+          defaultMessage={`Invalid NIN`} />),
+
+   'nins.valid_nin': (
+        <FormattedMessage
+          id="nins.valid_nin"
+          defaultMessage={`Valid NIN`} />),
+
+   'nins.confirmed_nin': (
+        <FormattedMessage
+          id="nins.confirmed_nin"
+          defaultMessage={`NIN (Confirmed)`} />),
+
+   'nins.unconfirmed_nin': (
+        <FormattedMessage
+          id="nins.unconfirmed_nin"
+          defaultMessage={`Unconfirmed NIN`} />),
+
+   'nins.button_delete': (
+        <FormattedMessage
+          id="nins.button_delete"
+          defaultMessage={`Remove`} />),
+
+   'nins.only_one_to_verify': (
+        <FormattedMessage
+          id="nins.only_one_to_verify"
+          defaultMessage={`You can only have one unverified NIN to verify it. Please remove the unwanted ones.`} />),
+
+    /************************/
+    /* Letter proofing ******/
+    /************************/
+
+   'letter.letter_button_text': (
+        <FormattedMessage
+          id="letter.letter_button_text"
+          defaultMessage={`Confirm using letter`} />),
 };
 
 const unformatted = defineMessages({
@@ -658,5 +686,35 @@ const unformatted = defineMessages({
 	            <li>Spaces are ignored</li>
             </ul>`,
         description: "help text for custom password"
+    },
+    'cm.lost_code': {
+        id: "cm.lost_code",
+        defaultMessage: `Lost your confirmation code?`,
+        description: "Lost code problem description"
+    },
+    'cm.resend_code': {
+        id: "cm.resend_code",
+        defaultMessage: `Resend confirmation code`,
+        description: "Lost code problem solution"
+    },
+    'letter.confirm_title': {
+        id: "letter.confirm_title",
+        defaultMessage: `Confirm identity with code sent by letter`,
+        description: "Title for letter proofing confirm dialog"
+    },
+    'letter.lost_code': {
+        id: "letter.lost_code",
+        defaultMessage: `When you click on the "Send code" link a letter with a verification code will be sent to your official postal address.`,
+        description: "Text for letter proofing confirm dialog"
+    },
+    'letter.resend_code': {
+        id: "letter.resend_code",
+        defaultMessage: `Send code`,
+        description: "Text for letter code resend button"
+    },
+    'letter.placeholder': {
+        id: "letter.placeholder",
+        defaultMessage: `Letter confirmation code`,
+        description: "Placeholder for letter proofing text input"
     },
 });

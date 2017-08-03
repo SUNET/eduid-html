@@ -9,6 +9,7 @@ import mobileReducer from 'reducers/Mobile';
 import securityReducer from 'reducers/Security';
 import chpassReducer from 'reducers/ChangePassword';
 import ninsReducer from 'reducers/Nins';
+import letterProofingReducer from 'reducers/LetterProofing';
 
 const eduIDApp = combineReducers({
   chpass: chpassReducer,
@@ -19,6 +20,7 @@ const eduIDApp = combineReducers({
   personal_data: personalDataReducer,
   phones: mobileReducer,
   nins: ninsReducer,
+  letter_proofing: letterProofingReducer,
   security: securityReducer
 });
 

@@ -7,7 +7,6 @@ import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
 import * as actions from "actions/OpenidConnect";
 import openidConnectReducer from "reducers/OpenidConnect";
 import OpenidConnect from 'components/OpenidConnect'

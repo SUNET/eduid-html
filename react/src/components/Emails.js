@@ -15,6 +15,19 @@ class Emails extends Component {
 
   render () {
 
+    let message = '',
+        messageArgs = {},
+        levelMessage = 'success';
+
+    if (this.props.resending.failed) {
+      message= this.props.l10n(this.props.resending.error.form);
+      levelMessage = 'error';
+    } else if (this.props.resending.message) {
+      message = this.props.resending.message;
+      messageArgs = {email: this.props.confirming};
+      levelMessage = 'success';
+    }
+
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
     return (
@@ -50,15 +63,20 @@ class Emails extends Component {
               </form>
             </div>
             <ConfirmModal
+                modalId="emailConfirmDialog"
+                controlId="emailConfirmDialogControl"
                 title={this.props.l10n('emails.confirm_title', {email: this.props.confirming})}
+                resendHelp={this.props.l10n('cm.lost_code')}
+                resendText={this.props.l10n('cm.resend_code')}
                 placeholder={this.props.l10n('emails.placeholder')}
                 showModal={Boolean(this.props.confirming)}
-                finishModal={this.props.handleFinishConfirmation}
                 closeModal={this.props.handleStopConfirmation}
                 handleResendCode={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
-                resending={this.props.resending}
-                confirming={this.props.confirming} />
+                is_fetching={this.props.resending.is_fetching}
+                message={message}
+                messageArgs={messageArgs}
+                LevelMessage={levelMessage} />
         </div>
     );
   }
