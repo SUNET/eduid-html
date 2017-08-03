@@ -385,7 +385,7 @@
   },
   {
     "id": "nins.help_text",
-    "defaultMessage": "Add your Swedish national identity number and initiate the confirmation process using one of the buttons below."
+    "defaultMessage": "Add your Swedish national identity number and initiate the confirmation process using one of the buttons below (the buttons are hidden until a valid identity number is entered)."
   },
   {
     "id": "nins.invalid_nin",

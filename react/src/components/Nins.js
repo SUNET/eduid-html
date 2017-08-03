@@ -31,6 +31,9 @@ class Nins extends Component {
         }
     }
     if (ninStatus === 'nonin') {
+        invalidNinText = (this.props.valid_nin) ?
+                           this.props.l10n('nins.valid_nin') :
+                           this.props.l10n('nins.invalid_nin');
         ninInput = (
             <div>
               <p>{this.props.l10n('nins.help_text')}</p>
@@ -48,7 +51,7 @@ class Nins extends Component {
               </form>
             </div>
         );
-        invalidNinText = (this.props.valid_nin) ? this.props.l10n('nins.valid_nin') : this.props.l10n('nins.invalid_nin');
+        vettingButtons = (this.props.nin && this.props.valid_nin) ? vettingButtons : '';
     } else if (ninStatus === 'unverified') {
         const ninList = (this.props.nins.map( (nin, index) => {
             return (
