@@ -1,25 +1,60 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
-import { getUserdata, getUserdataFail, postUserdataFail } from "actions/PersonalData";
+import { getAllUserdata, getAllUserdataFail, postUserdataFail } from "actions/PersonalData";
+import * as ninActions from "actions/Nins";
+import * as emailActions from "actions/Emails";
+import * as phoneActions from "actions/Mobile";
+import * as pdataActions from "actions/PersonalData";
 
 
-
-export function* requestPersonalData () {
+export function* requestAllPersonalData () {
     try {
-        yield put(getUserdata());
+        yield put(getAllUserdata());
         const config = yield select(state => state.config);
-        const userdata = yield call(fetchPersonalData, config);
+        let userdata = yield call(fetchAllPersonalData, config);
         yield put(putCsrfToken(userdata));
-        yield put(userdata);
+        if (userdata.type === pdataActions.GET_ALL_USERDATA_SUCCESS) {
+          const nins = userdata.payload.nins;
+          delete userdata.payload.nins;
+          const ninAction = {
+              type: ninActions.GET_NINS_SUCCESS,
+              payload: {
+                  nins: nins
+              }
+          };
+          const emails = userdata.payload.emails;
+          delete userdata.payload.emails;
+          const emailAction = {
+              type: emailActions.GET_EMAILS_SUCCESS,
+              payload: {
+                  emails: emails
+              }
+          };
+          const phones = userdata.payload.phones;
+          delete userdata.payload.phones;
+          const phoneAction = {
+              type: phoneActions.GET_MOBILES_SUCCESS,
+              payload: {
+                  phones: phones
+              }
+          };
+          yield put(ninAction);
+          yield put(emailAction);
+          yield put(phoneAction);
+          userdata.type = pdataActions.GET_USERDATA_SUCCESS;
+          yield put(userdata);
+        } else {
+          yield put(userdata);
+        }
     } catch(error) {
-        yield put(getUserdataFail(error.toString()));
+        yield put(getAllUserdataFail(error.toString()));
     }
 }
 
 
-export function fetchPersonalData (config) {
-    return window.fetch(config.PERSONAL_DATA_URL + 'user', {
+export function fetchAllPersonalData (config) {
+    return window.fetch(config.PERSONAL_DATA_URL + 'all-user-data', {
       // To automatically send cookies only for the current domain,
       // set credentials to 'same-origin'; use 'include' for CORS
       credentials: 'include',

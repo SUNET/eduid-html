@@ -20,23 +20,6 @@ addLocaleData('react-intl/locale-data/en');
 
 describe("Mobile Actions", () => {
 
-    it("Should get the mobile numbers ", () => {
-       const expectedAction = {
-           type: actions.GET_MOBILES
-       };
-       expect(actions.getMobiles()).toEqual(expectedAction);
-   });
-
-    it("Should fail when trying to get the mobile numbers", () => {
-        const err = 'Bad error';
-        const expectedAction = {
-          type: actions.GET_MOBILES_FAIL,
-          error: true,
-          payload: new Error(err)
-        };
-        expect(actions.getMobilesFail(err)).toEqual(expectedAction);
-    });
-
     it("Should change the mobile ", () => {
        const data = {
            'mobile': 612123123,
@@ -189,36 +172,6 @@ describe("", () => {
         code: '',
     };
 
-     it("Receives a GET_MOBILES action", () => {
-    expect(
-      mobileReducer(
-        mockState,
-        {
-          type: actions.GET_MOBILES,
-          is_fetching: true
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: true,
-        failed: false,
-        error: '',
-        message: '',
-        resending: {
-          is_fetching: false,
-          failed: false,
-          error: {},
-          message: ''
-        },
-        confirming: '',
-        mobiles: [],
-        phone: '',
-        code: '',
-      }
-    );
-  });
-
-
     it("Receives a GET_MOBILES_SUCCESS action", () => {
     expect(
       mobileReducer(
@@ -245,34 +198,6 @@ describe("", () => {
         confirming: '',
         mobiles: [],
         phone: 999123123,
-        code: '',
-      }
-    );
-  });
-
-    it("Receives a GET_MOBILES_FAIL action", () => {
-    expect(
-      mobileReducer(
-        mockState,
-        {
-          type: actions.GET_MOBILES_FAIL,
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: true,
-        error: '',
-        message: '',
-        resending: {
-          is_fetching: false,
-          failed: false,
-          error: {},
-          message: ''
-        },
-        confirming: '',
-        mobiles: [],
-        phone: '',
         code: '',
       }
     );
@@ -816,48 +741,6 @@ const state = {
 };
 
 describe("Async component", () => {
-
-    it("Sagas requestMobile", () => {
-
-       const generator = requestMobile();
-
-       let next = generator.next();
-       expect(next.value).toEqual(put(actions.getMobiles()));
-
-        next = generator.next();
-
-        const mockGetState = function (state) {
-            return state.config;
-        };
-
-        const config = state => state.config;
-
-        // expect(next.value).toEqual(select(state => state.config));
-
-        const mobiles = generator.next(config);
-
-        expect(mobiles.value).toEqual(call(fetchMobiles,config));
-
-
-        const action = {
-          type: actions.GET_MOBILES_SUCCESS,
-          payload: {
-            csrf_token: 'csrf-token',
-            phones: [
-              {
-                number: '999123456',
-                verified: false,
-                primary: false
-              }
-            ]
-          }
-        }
-        next = generator.next(action);
-        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-        next = generator.next();
-        delete(action.payload.csrf_token);
-        expect(next.value).toEqual(put(action));
-    });
 
     it("Sagas saveMobile", () => {
 

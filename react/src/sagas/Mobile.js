@@ -4,28 +4,6 @@ import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/Mobile";
 
 
-
-export function* requestMobile () {
-    try {
-        yield put(actions.getMobiles());
-        const config = yield select(state => state.config);
-        const phones = yield call(fetchMobiles, config);
-        yield put(putCsrfToken(phones));
-        yield put(phones);
-    } catch(error) {
-        yield put(actions.getMobilesFail(error.toString()));
-    }
-}
-
-export function fetchMobiles (config) {
-    return window.fetch(config.MOBILE_URL + 'all', {
-        credentials: 'include',
-        headers: ajaxHeaders
-    })
-    .then(checkStatus)
-    .then(response => response.json())
-}
-
 export function* saveMobile () {
     try {
         const state = yield select(state => state),

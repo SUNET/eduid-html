@@ -29,8 +29,8 @@ import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import * as letterActions from "actions/LetterProofing";
 
-import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
-import { requestEmails, saveEmail, requestResendEmailCode,
+import { requestAllPersonalData, savePersonalData } from "sagas/PersonalData";
+import { saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile";
@@ -67,12 +67,9 @@ addLocaleData(locale);
 function* rootSaga() {
   yield [
     takeLatest(configActions.GET_JSCONFIG_CONFIG, requestConfig),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestAllPersonalData),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),

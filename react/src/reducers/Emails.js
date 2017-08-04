@@ -22,22 +22,11 @@ const emailsData = {
 
 let emailsReducer = (state=emailsData, action) => {
   switch (action.type) {
-    case actions.GET_EMAILS:
-      return {
-        ...state,
-        is_fetching: true
-      };
     case actions.GET_EMAILS_SUCCESS:
       return {
         ...state,
         ...action.payload,
         is_fetching: false
-      };
-    case actions.GET_EMAILS_FAIL:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: true
       };
     case actions.CHANGE_EMAIL:
       return {

@@ -1,7 +1,5 @@
 
-export const GET_EMAILS = 'GET_EMAILS';
 export const GET_EMAILS_SUCCESS = 'GET_EMAIL_ALL_SUCCESS';
-export const GET_EMAILS_FAIL = 'GET_EMAIL_ALL_FAIL';
 export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 export const POST_EMAIL = 'POST_EMAIL';
 export const POST_EMAIL_SUCCESS = 'POST_EMAIL_NEW_SUCCESS';
@@ -21,19 +19,6 @@ export const POST_EMAIL_REMOVE_FAIL = 'POST_EMAIL_REMOVE_FAIL'
 export const POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY'
 export const POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS'
 export const POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL'
-
-export function getEmails () {
-  return {
-    type: GET_EMAILS,
-  };
-}
-
-export function getEmailsFail (err) {
-  return {
-    type: GET_EMAILS_FAIL, error: true,
-    payload: new Error(err)
-  };
-}
 
 export function changeEmail (data) {
   return {

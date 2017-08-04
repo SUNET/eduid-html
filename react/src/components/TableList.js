@@ -34,7 +34,7 @@ class TableList extends Component {
             return (<tr className="emailrow"
                         data-identifier={index}
                         data-object={key}
-                        key={entry.email}>
+                        key={key}>
                     <td className="identifier">{key}</td>
                     <td className="non-identifier">
                         <span className="nobutton">{this.props.l10n('tl.primary')}</span>
