@@ -12,6 +12,7 @@ module.exports = {
       // server: 'webpack-dev-server/client?http://localhost:8080',
       // "only" prevents reload on syntax errors:
       // hot: 'webpack/hot/only-dev-server',
+      index: './src/entry-points/index',
       personal_data: './src/entry-points/personal-data',
       dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
       openid_connect: './src/entry-points/openid-connect',
