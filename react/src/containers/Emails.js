@@ -5,9 +5,12 @@ import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResen
          finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
 
 const mapStateToProps = (state, props) => {
+  const pdata_fetching = state.personal_data ?
+                         state.personal_data.is_fetching :
+                         false;
   return {
     emails: state.emails.emails,
-    is_fetching: state.emails.is_fetching || state.personal_data.is_fetching,
+    is_fetching: state.emails.is_fetching || pdata_fetching,
     errorMsg: state.emails.error,
     confirming: state.emails.confirming,
     resending: state.emails.resending,

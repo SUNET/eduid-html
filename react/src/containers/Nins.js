@@ -25,12 +25,15 @@ function valid_nin(value) {
 }
 
 const mapStateToProps = (state, props) => {
+  const pdata_fetching = state.personal_data ?
+                         state.personal_data.is_fetching :
+                         false;
   return {
      nins: state.nins.nins,
      proofing_methods: state.config.PROOFING_METHODS,
      valid_nin: state.nins.valid_nin,
      nin: state.nins.nin,
-     is_fetching: state.nins.is_fetching || state.personal_data.is_fetching,
+     is_fetching: state.nins.is_fetching || pdata_fetching,
      message: state.nins.message
   }
 };
