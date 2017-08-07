@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7dbccb6fe9f609aa9462"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "85b00776a78eef470450"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24810,7 +24810,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [(0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestPersonalData), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Emails2.requestEmails), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Security2.requestCredentials), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Nins2.requestNins), (0, _reduxSaga.takeLatest)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeLatest)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeLatest)(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData), (0, _reduxSaga.takeLatest)(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData), (0, _reduxSaga.takeLatest)(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal), (0, _reduxSaga.takeLatest)(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, sagasOpenidFreja.closeFrejaModal), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeLatest)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeLatest)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeLatest)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeLatest)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile), (0, _reduxSaga.takeLatest)(securityActions.GET_CHANGE_PASSWORD, _Security2.requestPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_PASSWORD_CHANGE, _ChangePassword2.postPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, _ChangePassword2.backToHome), (0, _reduxSaga.takeLatest)(securityActions.POST_DELETE_ACCOUNT, _Security2.postDeleteAccount), (0, _reduxSaga.takeLatest)(letterActions.POST_LETTER_PROOFING_CODE, _LetterProofing2.sendLetterProofing), (0, _reduxSaga.takeLatest)(letterActions.POST_LETTER_PROOFING_PROOFING, _LetterProofing2.sendLetterCode), (0, _reduxSaga.takeLatest)(ninActions.POST_NIN_REMOVE, _Nins2.requestRemoveNin), (0, _reduxSaga.takeEvery)(letterActions.STOP_LETTER_PROOFING, _Nins2.requestNins), (0, _reduxSaga.takeEvery)(ninActions.POST_NIN_REMOVE_SUCCESS, _Nins2.requestNins), (0, _reduxSaga.takeEvery)(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, _Nins2.requestNins)];
+	          return [(0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG, _Config2.requestConfig), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _PersonalData2.requestAllPersonalData), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _Security2.requestCredentials), (0, _reduxSaga.takeLatest)(configActions.GET_JSCONFIG_CONFIG_SUCCESS, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeLatest)(configActions.GET_INITIAL_USERDATA, _PersonalData2.requestAllPersonalData), (0, _reduxSaga.takeLatest)(configActions.GET_INITIAL_USERDATA, _Security2.requestCredentials), (0, _reduxSaga.takeLatest)(configActions.GET_INITIAL_USERDATA, _ChangePassword2.requestSuggestedPassword), (0, _reduxSaga.takeLatest)(pdataActions.POST_USERDATA, _PersonalData2.savePersonalData), (0, _reduxSaga.takeLatest)(openidActions.POST_OIDC_PROOFING_PROOFING, _OpenidConnect2.requestOpenidQRcode), (0, _reduxSaga.takeLatest)(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData), (0, _reduxSaga.takeLatest)(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData), (0, _reduxSaga.takeLatest)(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal), (0, _reduxSaga.takeLatest)(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, sagasOpenidFreja.closeFrejaModal), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL, _Emails2.saveEmail), (0, _reduxSaga.takeLatest)(emailActions.START_RESEND_EMAIL_CODE, _Emails2.requestResendEmailCode), (0, _reduxSaga.takeLatest)(emailActions.START_VERIFY, _Emails2.requestVerifyEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_REMOVE, _Emails2.requestRemoveEmail), (0, _reduxSaga.takeLatest)(emailActions.POST_EMAIL_PRIMARY, _Emails2.requestMakePrimaryEmail), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE, sagasMobile.saveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_REMOVE, sagasMobile.requestRemoveMobile), (0, _reduxSaga.takeLatest)(mobileActions.POST_MOBILE_PRIMARY, sagasMobile.requestMakePrimaryMobile), (0, _reduxSaga.takeLatest)(mobileActions.START_RESEND_MOBILE_CODE, sagasMobile.requestResendMobileCode), (0, _reduxSaga.takeLatest)(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile), (0, _reduxSaga.takeLatest)(securityActions.GET_CHANGE_PASSWORD, _Security2.requestPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_PASSWORD_CHANGE, _ChangePassword2.postPasswordChange), (0, _reduxSaga.takeLatest)(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, _ChangePassword2.backToHome), (0, _reduxSaga.takeLatest)(securityActions.POST_DELETE_ACCOUNT, _Security2.postDeleteAccount), (0, _reduxSaga.takeLatest)(letterActions.POST_LETTER_PROOFING_CODE, _LetterProofing2.sendLetterProofing), (0, _reduxSaga.takeLatest)(letterActions.POST_LETTER_PROOFING_PROOFING, _LetterProofing2.sendLetterCode), (0, _reduxSaga.takeLatest)(ninActions.POST_NIN_REMOVE, _Nins2.requestRemoveNin), (0, _reduxSaga.takeEvery)(letterActions.STOP_LETTER_PROOFING, _Nins2.requestNins), (0, _reduxSaga.takeEvery)(ninActions.POST_NIN_REMOVE_SUCCESS, _Nins2.requestNins), (0, _reduxSaga.takeEvery)(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, _Nins2.requestNins)];
 	
 	        case 2:
 	        case 'end':
@@ -24826,9 +24826,36 @@
 	
 	var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 	
+	/* to load persisted state from local storage */
+	
+	var loadPersistedState = function loadPersistedState() {
+	  try {
+	    var serializedState = localStorage.getItem('eduid-state');
+	    if (serializedState === null) {
+	      return undefined;
+	    }
+	    return JSON.parse(serializedState);
+	  } catch (err) {
+	    return undefined;
+	  }
+	};
+	
+	var saveState = function saveState(state) {
+	  try {
+	    var serialized = JSON.stringify(state);
+	    localStorage.setItem('eduid-state', serialized);
+	  } catch (err) {
+	    console.log('Cannot save the state: ', err);
+	  }
+	};
+	
 	/* Store */
 	
-	var store = exports.store = (0, _redux.createStore)(_store2.default, composeEnhancers((0, _redux.applyMiddleware)(sagaMiddleware, (0, _reduxLogger2.default)())));
+	var store = exports.store = (0, _redux.createStore)(_store2.default, loadPersistedState(), composeEnhancers((0, _redux.applyMiddleware)(sagaMiddleware, (0, _reduxLogger2.default)())));
+	
+	store.subscribe(function () {
+	  saveState(store.getState());
+	});
 	
 	sagaMiddleware.run(rootSaga);
 	
@@ -24837,6 +24864,8 @@
 	var getConfig = function getConfig() {
 	  if (!store.getState().config.is_configured) {
 	    store.dispatch(configActions.getConfig());
+	  } else {
+	    store.dispatch(configActions.getInitialUserdata());
 	  }
 	};
 	
@@ -24975,6 +25004,10 @@
 	  __REACT_HOT_LOADER__.register(sagaMiddleware, 'sagaMiddleware', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(composeEnhancers, 'composeEnhancers', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
+	
+	  __REACT_HOT_LOADER__.register(loadPersistedState, 'loadPersistedState', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
+	
+	  __REACT_HOT_LOADER__.register(saveState, 'saveState', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(store, 'store', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
@@ -38605,17 +38638,17 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.GET_USERDATA:
-	      return (0, _extends3.default)({}, state, {
-	        is_fetching: true,
-	        failed: false
-	      });
 	    case actions.GET_USERDATA_SUCCESS:
 	      return (0, _extends3.default)({}, action.payload, {
 	        is_fetching: false,
 	        failed: false
 	      });
-	    case actions.GET_USERDATA_FAIL:
+	    case actions.GET_ALL_USERDATA:
+	      return (0, _extends3.default)({}, state, {
+	        is_fetching: true,
+	        failed: false
+	      });
+	    case actions.GET_ALL_USERDATA_FAIL:
 	      return (0, _extends3.default)({}, state, {
 	        is_fetching: false,
 	        failed: true,
@@ -39204,28 +39237,29 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getUserdata = getUserdata;
-	exports.getUserdataFail = getUserdataFail;
+	exports.getAllUserdata = getAllUserdata;
+	exports.getAllUserdataFail = getAllUserdataFail;
 	exports.changeUserdata = changeUserdata;
 	exports.postUserdata = postUserdata;
 	exports.postUserdataFail = postUserdataFail;
-	var GET_USERDATA = exports.GET_USERDATA = 'GET_USERDATA';
 	var GET_USERDATA_SUCCESS = exports.GET_USERDATA_SUCCESS = 'GET_PERSONAL_DATA_USER_SUCCESS';
-	var GET_USERDATA_FAIL = exports.GET_USERDATA_FAIL = 'GET_PERSONAL_DATA_USER_FAIL';
+	var GET_ALL_USERDATA = exports.GET_ALL_USERDATA = 'GET_ALL_USERDATA';
+	var GET_ALL_USERDATA_SUCCESS = exports.GET_ALL_USERDATA_SUCCESS = 'GET_PERSONAL_DATA_ALL_USER_DATA_SUCCESS';
+	var GET_ALL_USERDATA_FAIL = exports.GET_ALL_USERDATA_FAIL = 'GET_PERSONAL_DATA_ALL_USER_DATA_FAIL';
 	var CHANGE_USERDATA = exports.CHANGE_USERDATA = 'CHANGE_USERDATA';
 	var POST_USERDATA = exports.POST_USERDATA = 'POST_USERDATA';
 	var POST_USERDATA_SUCCESS = exports.POST_USERDATA_SUCCESS = 'POST_PERSONAL_DATA_USER_SUCCESS';
 	var POST_USERDATA_FAIL = exports.POST_USERDATA_FAIL = 'POST_PERSONAL_DATA_USER_FAIL';
 	
-	function getUserdata() {
+	function getAllUserdata() {
 	  return {
-	    type: GET_USERDATA
+	    type: GET_ALL_USERDATA
 	  };
 	}
 	
-	function getUserdataFail(err) {
+	function getAllUserdataFail(err) {
 	  return {
-	    type: GET_USERDATA_FAIL,
+	    type: GET_ALL_USERDATA_FAIL,
 	    error: true,
 	    payload: new Error(err)
 	  };
@@ -39258,11 +39292,13 @@
 	    return;
 	  }
 	
-	  __REACT_HOT_LOADER__.register(GET_USERDATA, 'GET_USERDATA', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
-	
 	  __REACT_HOT_LOADER__.register(GET_USERDATA_SUCCESS, 'GET_USERDATA_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
-	  __REACT_HOT_LOADER__.register(GET_USERDATA_FAIL, 'GET_USERDATA_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
+	  __REACT_HOT_LOADER__.register(GET_ALL_USERDATA, 'GET_ALL_USERDATA', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
+	
+	  __REACT_HOT_LOADER__.register(GET_ALL_USERDATA_SUCCESS, 'GET_ALL_USERDATA_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
+	
+	  __REACT_HOT_LOADER__.register(GET_ALL_USERDATA_FAIL, 'GET_ALL_USERDATA_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
 	  __REACT_HOT_LOADER__.register(CHANGE_USERDATA, 'CHANGE_USERDATA', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
@@ -39272,9 +39308,9 @@
 	
 	  __REACT_HOT_LOADER__.register(POST_USERDATA_FAIL, 'POST_USERDATA_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
-	  __REACT_HOT_LOADER__.register(getUserdata, 'getUserdata', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
+	  __REACT_HOT_LOADER__.register(getAllUserdata, 'getAllUserdata', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
-	  __REACT_HOT_LOADER__.register(getUserdataFail, 'getUserdataFail', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
+	  __REACT_HOT_LOADER__.register(getAllUserdataFail, 'getAllUserdataFail', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
 	  __REACT_HOT_LOADER__.register(changeUserdata, 'changeUserdata', '/home/eperez/src/git/eduid-html/react/src/actions/PersonalData.js');
 	
@@ -39329,18 +39365,9 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.GET_EMAILS:
-	      return (0, _extends3.default)({}, state, {
-	        is_fetching: true
-	      });
 	    case actions.GET_EMAILS_SUCCESS:
 	      return (0, _extends3.default)({}, state, action.payload, {
 	        is_fetching: false
-	      });
-	    case actions.GET_EMAILS_FAIL:
-	      return (0, _extends3.default)({}, state, {
-	        is_fetching: false,
-	        failed: true
 	      });
 	    case actions.CHANGE_EMAIL:
 	      return (0, _extends3.default)({}, state, action.payload);
@@ -39489,8 +39516,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getEmails = getEmails;
-	exports.getEmailsFail = getEmailsFail;
 	exports.changeEmail = changeEmail;
 	exports.postEmail = postEmail;
 	exports.postEmailFail = postEmailFail;
@@ -39504,9 +39529,7 @@
 	exports.startRemoveFail = startRemoveFail;
 	exports.makePrimary = makePrimary;
 	exports.makePrimaryFail = makePrimaryFail;
-	var GET_EMAILS = exports.GET_EMAILS = 'GET_EMAILS';
 	var GET_EMAILS_SUCCESS = exports.GET_EMAILS_SUCCESS = 'GET_EMAIL_ALL_SUCCESS';
-	var GET_EMAILS_FAIL = exports.GET_EMAILS_FAIL = 'GET_EMAIL_ALL_FAIL';
 	var CHANGE_EMAIL = exports.CHANGE_EMAIL = 'CHANGE_EMAIL';
 	var POST_EMAIL = exports.POST_EMAIL = 'POST_EMAIL';
 	var POST_EMAIL_SUCCESS = exports.POST_EMAIL_SUCCESS = 'POST_EMAIL_NEW_SUCCESS';
@@ -39526,19 +39549,6 @@
 	var POST_EMAIL_PRIMARY = exports.POST_EMAIL_PRIMARY = 'POST_EMAIL_PRIMARY';
 	var POST_EMAIL_PRIMARY_SUCCESS = exports.POST_EMAIL_PRIMARY_SUCCESS = 'POST_EMAIL_PRIMARY_SUCCESS';
 	var POST_EMAIL_PRIMARY_FAIL = exports.POST_EMAIL_PRIMARY_FAIL = 'POST_EMAIL_PRIMARY_FAIL';
-	
-	function getEmails() {
-	  return {
-	    type: GET_EMAILS
-	  };
-	}
-	
-	function getEmailsFail(err) {
-	  return {
-	    type: GET_EMAILS_FAIL, error: true,
-	    payload: new Error(err)
-	  };
-	}
 	
 	function changeEmail(data) {
 	  return {
@@ -39639,11 +39649,7 @@
 	    return;
 	  }
 	
-	  __REACT_HOT_LOADER__.register(GET_EMAILS, 'GET_EMAILS', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
-	
 	  __REACT_HOT_LOADER__.register(GET_EMAILS_SUCCESS, 'GET_EMAILS_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
-	
-	  __REACT_HOT_LOADER__.register(GET_EMAILS_FAIL, 'GET_EMAILS_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(CHANGE_EMAIL, 'CHANGE_EMAIL', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
 	
@@ -39682,10 +39688,6 @@
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_SUCCESS, 'POST_EMAIL_PRIMARY_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_EMAIL_PRIMARY_FAIL, 'POST_EMAIL_PRIMARY_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
-	
-	  __REACT_HOT_LOADER__.register(getEmails, 'getEmails', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
-	
-	  __REACT_HOT_LOADER__.register(getEmailsFail, 'getEmailsFail', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
 	
 	  __REACT_HOT_LOADER__.register(changeEmail, 'changeEmail', '/home/eperez/src/git/eduid-html/react/src/actions/Emails.js');
 	
@@ -39802,10 +39804,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.NEW_CSRF_TOKEN = exports.GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG = undefined;
+	exports.GET_INITIAL_USERDATA = exports.NEW_CSRF_TOKEN = exports.GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG = undefined;
 	exports.getConfig = getConfig;
 	exports.getConfigFail = getConfigFail;
 	exports.newCsrfToken = newCsrfToken;
+	exports.getInitialUserdata = getInitialUserdata;
 	
 	var _common = __webpack_require__(647);
 	
@@ -39813,6 +39816,7 @@
 	var GET_JSCONFIG_CONFIG_SUCCESS = exports.GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
 	var GET_JSCONFIG_CONFIG_FAIL = exports.GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 	var NEW_CSRF_TOKEN = exports.NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
+	var GET_INITIAL_USERDATA = exports.GET_INITIAL_USERDATA = 'GET_INITIAL_USERDATA';
 	
 	function getConfig() {
 	  return {
@@ -39839,6 +39843,12 @@
 	    }
 	  };
 	}
+	
+	function getInitialUserdata() {
+	  return {
+	    type: GET_INITIAL_USERDATA
+	  };
+	}
 	;
 	
 	var _temp = function () {
@@ -39854,11 +39864,15 @@
 	
 	  __REACT_HOT_LOADER__.register(NEW_CSRF_TOKEN, 'NEW_CSRF_TOKEN', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
 	
+	  __REACT_HOT_LOADER__.register(GET_INITIAL_USERDATA, 'GET_INITIAL_USERDATA', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
+	
 	  __REACT_HOT_LOADER__.register(getConfig, 'getConfig', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
 	
 	  __REACT_HOT_LOADER__.register(getConfigFail, 'getConfigFail', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
 	
 	  __REACT_HOT_LOADER__.register(newCsrfToken, 'newCsrfToken', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
+	
+	  __REACT_HOT_LOADER__.register(getInitialUserdata, 'getInitialUserdata', '/home/eperez/src/git/eduid-html/react/src/actions/Config.js');
 	}();
 
 	;
@@ -40358,18 +40372,9 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case actions.GET_MOBILES:
-	      return (0, _extends3.default)({}, state, {
-	        is_fetching: true
-	      });
 	    case actions.GET_MOBILES_SUCCESS:
 	      return (0, _extends3.default)({}, state, action.payload, {
 	        is_fetching: false
-	      });
-	    case actions.GET_MOBILES_FAIL:
-	      return (0, _extends3.default)({}, state, {
-	        is_fetching: false,
-	        failed: true
 	      });
 	    case actions.CHANGE_MOBILE:
 	      return (0, _extends3.default)({}, state, action.payload);
@@ -40511,8 +40516,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getMobiles = getMobiles;
-	exports.getMobilesFail = getMobilesFail;
 	exports.changeMobile = changeMobile;
 	exports.postMobile = postMobile;
 	exports.postMobileFail = postMobileFail;
@@ -40526,9 +40529,7 @@
 	exports.startRemoveFail = startRemoveFail;
 	exports.makePrimary = makePrimary;
 	exports.makePrimaryFail = makePrimaryFail;
-	var GET_MOBILES = exports.GET_MOBILES = 'GET_MOBILES';
 	var GET_MOBILES_SUCCESS = exports.GET_MOBILES_SUCCESS = 'GET_PHONE_ALL_SUCCESS';
-	var GET_MOBILES_FAIL = exports.GET_MOBILES_FAIL = 'GET_MOBILES_FAIL';
 	var CHANGE_MOBILE = exports.CHANGE_MOBILE = 'CHANGE_MOBILE';
 	var POST_MOBILE = exports.POST_MOBILE = 'POST_MOBILE';
 	var POST_MOBILE_SUCCESS = exports.POST_MOBILE_SUCCESS = 'POST_PHONE_NEW_SUCCESS';
@@ -40547,19 +40548,6 @@
 	var POST_MOBILE_PRIMARY = exports.POST_MOBILE_PRIMARY = 'POST_MOBILE_PRIMARY';
 	var POST_MOBILE_PRIMARY_SUCCESS = exports.POST_MOBILE_PRIMARY_SUCCESS = 'POST_PHONE_PRIMARY_SUCCESS';
 	var POST_MOBILE_PRIMARY_FAIL = exports.POST_MOBILE_PRIMARY_FAIL = 'POST_PHONE_PRIMARY_FAIL';
-	
-	function getMobiles() {
-	  return {
-	    type: GET_MOBILES
-	  };
-	}
-	
-	function getMobilesFail(err) {
-	  return {
-	    type: GET_MOBILES_FAIL, error: true,
-	    payload: new Error(err)
-	  };
-	}
 	
 	function changeMobile(data) {
 	  return {
@@ -40659,11 +40647,7 @@
 	    return;
 	  }
 	
-	  __REACT_HOT_LOADER__.register(GET_MOBILES, 'GET_MOBILES', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
-	
 	  __REACT_HOT_LOADER__.register(GET_MOBILES_SUCCESS, 'GET_MOBILES_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
-	
-	  __REACT_HOT_LOADER__.register(GET_MOBILES_FAIL, 'GET_MOBILES_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(CHANGE_MOBILE, 'CHANGE_MOBILE', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
 	
@@ -40700,10 +40684,6 @@
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_PRIMARY_SUCCESS, 'POST_MOBILE_PRIMARY_SUCCESS', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(POST_MOBILE_PRIMARY_FAIL, 'POST_MOBILE_PRIMARY_FAIL', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
-	
-	  __REACT_HOT_LOADER__.register(getMobiles, 'getMobiles', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
-	
-	  __REACT_HOT_LOADER__.register(getMobilesFail, 'getMobilesFail', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
 	
 	  __REACT_HOT_LOADER__.register(changeMobile, 'changeMobile', '/home/eperez/src/git/eduid-html/react/src/actions/Mobile.js');
 	
@@ -41861,8 +41841,8 @@
 	
 	var _regenerator2 = _interopRequireDefault(_regenerator);
 	
-	exports.requestPersonalData = requestPersonalData;
-	exports.fetchPersonalData = fetchPersonalData;
+	exports.requestAllPersonalData = requestAllPersonalData;
+	exports.fetchAllPersonalData = fetchAllPersonalData;
 	exports.savePersonalData = savePersonalData;
 	exports.sendPersonalData = sendPersonalData;
 	
@@ -41872,19 +41852,35 @@
 	
 	var _PersonalData = __webpack_require__(642);
 	
+	var pdataActions = _interopRequireWildcard(_PersonalData);
+	
+	var _Nins = __webpack_require__(659);
+	
+	var ninActions = _interopRequireWildcard(_Nins);
+	
+	var _Emails = __webpack_require__(644);
+	
+	var emailActions = _interopRequireWildcard(_Emails);
+	
+	var _Mobile = __webpack_require__(653);
+	
+	var phoneActions = _interopRequireWildcard(_Mobile);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [requestPersonalData, savePersonalData].map(_regenerator2.default.mark);
+	var _marked = [requestAllPersonalData, savePersonalData].map(_regenerator2.default.mark);
 	
-	function requestPersonalData() {
-	    var config, userdata;
-	    return _regenerator2.default.wrap(function requestPersonalData$(_context) {
+	function requestAllPersonalData() {
+	    var config, userdata, nins, ninAction, emails, emailAction, phones, phoneAction;
+	    return _regenerator2.default.wrap(function requestAllPersonalData$(_context) {
 	        while (1) {
 	            switch (_context.prev = _context.next) {
 	                case 0:
 	                    _context.prev = 0;
 	                    _context.next = 3;
-	                    return (0, _effects.put)((0, _PersonalData.getUserdata)());
+	                    return (0, _effects.put)((0, _PersonalData.getAllUserdata)());
 	
 	                case 3:
 	                    _context.next = 5;
@@ -41895,7 +41891,7 @@
 	                case 5:
 	                    config = _context.sent;
 	                    _context.next = 8;
-	                    return (0, _effects.call)(fetchPersonalData, config);
+	                    return (0, _effects.call)(fetchAllPersonalData, config);
 	
 	                case 8:
 	                    userdata = _context.sent;
@@ -41903,29 +41899,82 @@
 	                    return (0, _effects.put)((0, _common.putCsrfToken)(userdata));
 	
 	                case 11:
-	                    _context.next = 13;
+	                    if (!(userdata.type === pdataActions.GET_ALL_USERDATA_SUCCESS)) {
+	                        _context.next = 32;
+	                        break;
+	                    }
+	
+	                    nins = userdata.payload.nins;
+	
+	                    delete userdata.payload.nins;
+	                    ninAction = {
+	                        type: ninActions.GET_NINS_SUCCESS,
+	                        payload: {
+	                            nins: nins
+	                        }
+	                    };
+	                    emails = userdata.payload.emails;
+	
+	                    delete userdata.payload.emails;
+	                    emailAction = {
+	                        type: emailActions.GET_EMAILS_SUCCESS,
+	                        payload: {
+	                            emails: emails
+	                        }
+	                    };
+	                    phones = userdata.payload.phones;
+	
+	                    delete userdata.payload.phones;
+	                    phoneAction = {
+	                        type: phoneActions.GET_MOBILES_SUCCESS,
+	                        payload: {
+	                            phones: phones
+	                        }
+	                    };
+	                    _context.next = 23;
+	                    return (0, _effects.put)(ninAction);
+	
+	                case 23:
+	                    _context.next = 25;
+	                    return (0, _effects.put)(emailAction);
+	
+	                case 25:
+	                    _context.next = 27;
+	                    return (0, _effects.put)(phoneAction);
+	
+	                case 27:
+	                    userdata.type = pdataActions.GET_USERDATA_SUCCESS;
+	                    _context.next = 30;
 	                    return (0, _effects.put)(userdata);
 	
-	                case 13:
-	                    _context.next = 19;
+	                case 30:
+	                    _context.next = 34;
 	                    break;
 	
-	                case 15:
-	                    _context.prev = 15;
-	                    _context.t0 = _context["catch"](0);
-	                    _context.next = 19;
-	                    return (0, _effects.put)((0, _PersonalData.getUserdataFail)(_context.t0.toString()));
+	                case 32:
+	                    _context.next = 34;
+	                    return (0, _effects.put)(userdata);
 	
-	                case 19:
+	                case 34:
+	                    _context.next = 40;
+	                    break;
+	
+	                case 36:
+	                    _context.prev = 36;
+	                    _context.t0 = _context["catch"](0);
+	                    _context.next = 40;
+	                    return (0, _effects.put)((0, _PersonalData.getAllUserdataFail)(_context.t0.toString()));
+	
+	                case 40:
 	                case "end":
 	                    return _context.stop();
 	            }
 	        }
-	    }, _marked[0], this, [[0, 15]]);
+	    }, _marked[0], this, [[0, 36]]);
 	}
 	
-	function fetchPersonalData(config) {
-	    return __webpack_provided_window_dot_fetch(config.PERSONAL_DATA_URL + 'user', {
+	function fetchAllPersonalData(config) {
+	    return __webpack_provided_window_dot_fetch(config.PERSONAL_DATA_URL + 'all-user-data', {
 	        // To automatically send cookies only for the current domain,
 	        // set credentials to 'same-origin'; use 'include' for CORS
 	        credentials: 'include',
@@ -42008,9 +42057,9 @@
 	        return;
 	    }
 	
-	    __REACT_HOT_LOADER__.register(requestPersonalData, "requestPersonalData", "/home/eperez/src/git/eduid-html/react/src/sagas/PersonalData.js");
+	    __REACT_HOT_LOADER__.register(requestAllPersonalData, "requestAllPersonalData", "/home/eperez/src/git/eduid-html/react/src/sagas/PersonalData.js");
 	
-	    __REACT_HOT_LOADER__.register(fetchPersonalData, "fetchPersonalData", "/home/eperez/src/git/eduid-html/react/src/sagas/PersonalData.js");
+	    __REACT_HOT_LOADER__.register(fetchAllPersonalData, "fetchAllPersonalData", "/home/eperez/src/git/eduid-html/react/src/sagas/PersonalData.js");
 	
 	    __REACT_HOT_LOADER__.register(savePersonalData, "savePersonalData", "/home/eperez/src/git/eduid-html/react/src/sagas/PersonalData.js");
 	
@@ -42516,8 +42565,6 @@
 	
 	var _regenerator2 = _interopRequireDefault(_regenerator);
 	
-	exports.requestEmails = requestEmails;
-	exports.fetchEmails = fetchEmails;
 	exports.saveEmail = saveEmail;
 	exports.sendEmail = sendEmail;
 	exports.requestResendEmailCode = requestResendEmailCode;
@@ -42541,113 +42588,56 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [requestEmails, saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail].map(_regenerator2.default.mark);
+	var _marked = [saveEmail, requestResendEmailCode, requestVerifyEmail, requestRemoveEmail, requestMakePrimaryEmail].map(_regenerator2.default.mark);
 	
-	function requestEmails() {
-	    var config, emails;
-	    return _regenerator2.default.wrap(function requestEmails$(_context) {
+	function saveEmail() {
+	    var state, data, emails;
+	    return _regenerator2.default.wrap(function saveEmail$(_context) {
 	        while (1) {
 	            switch (_context.prev = _context.next) {
 	                case 0:
 	                    _context.prev = 0;
 	                    _context.next = 3;
-	                    return (0, _effects.put)(actions.getEmails());
-	
-	                case 3:
-	                    _context.next = 5;
-	                    return (0, _effects.select)(function (state) {
-	                        return state.config;
-	                    });
-	
-	                case 5:
-	                    config = _context.sent;
-	                    _context.next = 8;
-	                    return (0, _effects.call)(fetchEmails, config);
-	
-	                case 8:
-	                    emails = _context.sent;
-	                    _context.next = 11;
-	                    return (0, _effects.put)((0, _common.putCsrfToken)(emails));
-	
-	                case 11:
-	                    _context.next = 13;
-	                    return (0, _effects.put)(emails);
-	
-	                case 13:
-	                    _context.next = 19;
-	                    break;
-	
-	                case 15:
-	                    _context.prev = 15;
-	                    _context.t0 = _context["catch"](0);
-	                    _context.next = 19;
-	                    return (0, _effects.put)(actions.getEmailsFail(_context.t0.toString()));
-	
-	                case 19:
-	                case "end":
-	                    return _context.stop();
-	            }
-	        }
-	    }, _marked[0], this, [[0, 15]]);
-	}
-	
-	function fetchEmails(config) {
-	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'all', {
-	        credentials: 'include',
-	        headers: _common.ajaxHeaders
-	    }).then(_common.checkStatus).then(function (response) {
-	        return response.json();
-	    });
-	}
-	
-	function saveEmail() {
-	    var state, data, emails;
-	    return _regenerator2.default.wrap(function saveEmail$(_context2) {
-	        while (1) {
-	            switch (_context2.prev = _context2.next) {
-	                case 0:
-	                    _context2.prev = 0;
-	                    _context2.next = 3;
 	                    return (0, _effects.select)(function (state) {
 	                        return state;
 	                    });
 	
 	                case 3:
-	                    state = _context2.sent;
+	                    state = _context.sent;
 	                    data = {
 	                        email: state.emails.email,
 	                        verified: false,
 	                        primary: false,
 	                        csrf_token: state.config.csrf_token
 	                    };
-	                    _context2.next = 7;
+	                    _context.next = 7;
 	                    return (0, _effects.call)(sendEmail, state.config, data);
 	
 	                case 7:
-	                    emails = _context2.sent;
-	                    _context2.next = 10;
+	                    emails = _context.sent;
+	                    _context.next = 10;
 	                    return (0, _effects.put)((0, _common.putCsrfToken)(emails));
 	
 	                case 10:
-	                    _context2.next = 12;
+	                    _context.next = 12;
 	                    return (0, _effects.put)(emails);
 	
 	                case 12:
-	                    _context2.next = 18;
+	                    _context.next = 18;
 	                    break;
 	
 	                case 14:
-	                    _context2.prev = 14;
-	                    _context2.t0 = _context2["catch"](0);
-	                    _context2.next = 18;
-	                    return (0, _effects.put)(actions.postEmailFail(_context2.t0.toString()));
+	                    _context.prev = 14;
+	                    _context.t0 = _context["catch"](0);
+	                    _context.next = 18;
+	                    return (0, _effects.put)(actions.postEmailFail(_context.t0.toString()));
 	
 	                case 18:
 	                case "end":
-	                    return _context2.stop();
+	                    return _context.stop();
 	            }
 	        }
-	    }, _marked[1], this, [[0, 14]]);
+	    }, _marked[0], this, [[0, 14]]);
 	}
 	
 	function sendEmail(config, data) {
@@ -42663,7 +42653,66 @@
 	
 	function requestResendEmailCode() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestResendEmailCode$(_context3) {
+	    return _regenerator2.default.wrap(function requestResendEmailCode$(_context2) {
+	        while (1) {
+	            switch (_context2.prev = _context2.next) {
+	                case 0:
+	                    _context2.prev = 0;
+	                    _context2.next = 3;
+	                    return (0, _effects.select)(function (state) {
+	                        return state;
+	                    });
+	
+	                case 3:
+	                    state = _context2.sent;
+	                    data = {
+	                        email: state.emails.confirming,
+	                        csrf_token: state.config.csrf_token
+	                    };
+	                    _context2.next = 7;
+	                    return (0, _effects.call)(requestResend, state.config, data);
+	
+	                case 7:
+	                    resp = _context2.sent;
+	                    _context2.next = 10;
+	                    return (0, _effects.put)((0, _common.putCsrfToken)(resp));
+	
+	                case 10:
+	                    _context2.next = 12;
+	                    return (0, _effects.put)(resp);
+	
+	                case 12:
+	                    _context2.next = 18;
+	                    break;
+	
+	                case 14:
+	                    _context2.prev = 14;
+	                    _context2.t0 = _context2["catch"](0);
+	                    _context2.next = 18;
+	                    return (0, _effects.put)(actions.resendEmailCodeFail(_context2.t0.toString()));
+	
+	                case 18:
+	                case "end":
+	                    return _context2.stop();
+	            }
+	        }
+	    }, _marked[1], this, [[0, 14]]);
+	}
+	
+	function requestResend(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'resend-code', {
+	        method: 'post',
+	        credentials: 'include',
+	        headers: _common.ajaxHeaders,
+	        body: JSON.stringify(data)
+	    }).then(_common.checkStatus).then(function (response) {
+	        return response.json();
+	    });
+	}
+	
+	function requestVerifyEmail() {
+	    var state, data, resp;
+	    return _regenerator2.default.wrap(function requestVerifyEmail$(_context3) {
 	        while (1) {
 	            switch (_context3.prev = _context3.next) {
 	                case 0:
@@ -42677,10 +42726,11 @@
 	                    state = _context3.sent;
 	                    data = {
 	                        email: state.emails.confirming,
+	                        code: state.emails.code,
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context3.next = 7;
-	                    return (0, _effects.call)(requestResend, state.config, data);
+	                    return (0, _effects.call)(requestVerify, state.config, data);
 	
 	                case 7:
 	                    resp = _context3.sent;
@@ -42699,7 +42749,7 @@
 	                    _context3.prev = 14;
 	                    _context3.t0 = _context3["catch"](0);
 	                    _context3.next = 18;
-	                    return (0, _effects.put)(actions.resendEmailCodeFail(_context3.t0.toString()));
+	                    return (0, _effects.put)(actions.startVerifyFail(_context3.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -42709,8 +42759,8 @@
 	    }, _marked[2], this, [[0, 14]]);
 	}
 	
-	function requestResend(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'resend-code', {
+	function requestVerify(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'verify', {
 	        method: 'post',
 	        credentials: 'include',
 	        headers: _common.ajaxHeaders,
@@ -42720,9 +42770,9 @@
 	    });
 	}
 	
-	function requestVerifyEmail() {
+	function requestRemoveEmail() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestVerifyEmail$(_context4) {
+	    return _regenerator2.default.wrap(function requestRemoveEmail$(_context4) {
 	        while (1) {
 	            switch (_context4.prev = _context4.next) {
 	                case 0:
@@ -42735,12 +42785,11 @@
 	                case 3:
 	                    state = _context4.sent;
 	                    data = {
-	                        email: state.emails.confirming,
-	                        code: state.emails.code,
+	                        email: state.emails.email,
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context4.next = 7;
-	                    return (0, _effects.call)(requestVerify, state.config, data);
+	                    return (0, _effects.call)(requestRemove, state.config, data);
 	
 	                case 7:
 	                    resp = _context4.sent;
@@ -42759,7 +42808,7 @@
 	                    _context4.prev = 14;
 	                    _context4.t0 = _context4["catch"](0);
 	                    _context4.next = 18;
-	                    return (0, _effects.put)(actions.startVerifyFail(_context4.t0.toString()));
+	                    return (0, _effects.put)(actions.startRemoveFail(_context4.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -42769,8 +42818,8 @@
 	    }, _marked[3], this, [[0, 14]]);
 	}
 	
-	function requestVerify(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'verify', {
+	function requestRemove(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'remove', {
 	        method: 'post',
 	        credentials: 'include',
 	        headers: _common.ajaxHeaders,
@@ -42780,9 +42829,9 @@
 	    });
 	}
 	
-	function requestRemoveEmail() {
+	function requestMakePrimaryEmail() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestRemoveEmail$(_context5) {
+	    return _regenerator2.default.wrap(function requestMakePrimaryEmail$(_context5) {
 	        while (1) {
 	            switch (_context5.prev = _context5.next) {
 	                case 0:
@@ -42799,7 +42848,7 @@
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context5.next = 7;
-	                    return (0, _effects.call)(requestRemove, state.config, data);
+	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
 	
 	                case 7:
 	                    resp = _context5.sent;
@@ -42818,7 +42867,7 @@
 	                    _context5.prev = 14;
 	                    _context5.t0 = _context5["catch"](0);
 	                    _context5.next = 18;
-	                    return (0, _effects.put)(actions.startRemoveFail(_context5.t0.toString()));
+	                    return (0, _effects.put)(actions.makePrimaryFail(_context5.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -42826,65 +42875,6 @@
 	            }
 	        }
 	    }, _marked[4], this, [[0, 14]]);
-	}
-	
-	function requestRemove(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.EMAILS_URL + 'remove', {
-	        method: 'post',
-	        credentials: 'include',
-	        headers: _common.ajaxHeaders,
-	        body: JSON.stringify(data)
-	    }).then(_common.checkStatus).then(function (response) {
-	        return response.json();
-	    });
-	}
-	
-	function requestMakePrimaryEmail() {
-	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestMakePrimaryEmail$(_context6) {
-	        while (1) {
-	            switch (_context6.prev = _context6.next) {
-	                case 0:
-	                    _context6.prev = 0;
-	                    _context6.next = 3;
-	                    return (0, _effects.select)(function (state) {
-	                        return state;
-	                    });
-	
-	                case 3:
-	                    state = _context6.sent;
-	                    data = {
-	                        email: state.emails.email,
-	                        csrf_token: state.config.csrf_token
-	                    };
-	                    _context6.next = 7;
-	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
-	
-	                case 7:
-	                    resp = _context6.sent;
-	                    _context6.next = 10;
-	                    return (0, _effects.put)((0, _common.putCsrfToken)(resp));
-	
-	                case 10:
-	                    _context6.next = 12;
-	                    return (0, _effects.put)(resp);
-	
-	                case 12:
-	                    _context6.next = 18;
-	                    break;
-	
-	                case 14:
-	                    _context6.prev = 14;
-	                    _context6.t0 = _context6["catch"](0);
-	                    _context6.next = 18;
-	                    return (0, _effects.put)(actions.makePrimaryFail(_context6.t0.toString()));
-	
-	                case 18:
-	                case "end":
-	                    return _context6.stop();
-	            }
-	        }
-	    }, _marked[5], this, [[0, 14]]);
 	}
 	
 	function requestMakePrimary(config, data) {
@@ -42903,10 +42893,6 @@
 	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	        return;
 	    }
-	
-	    __REACT_HOT_LOADER__.register(requestEmails, "requestEmails", "/home/eperez/src/git/eduid-html/react/src/sagas/Emails.js");
-	
-	    __REACT_HOT_LOADER__.register(fetchEmails, "fetchEmails", "/home/eperez/src/git/eduid-html/react/src/sagas/Emails.js");
 	
 	    __REACT_HOT_LOADER__.register(saveEmail, "saveEmail", "/home/eperez/src/git/eduid-html/react/src/sagas/Emails.js");
 	
@@ -42946,8 +42932,6 @@
 	
 	var _regenerator2 = _interopRequireDefault(_regenerator);
 	
-	exports.requestMobile = requestMobile;
-	exports.fetchMobiles = fetchMobiles;
 	exports.saveMobile = saveMobile;
 	exports.sendMobile = sendMobile;
 	exports.requestResendMobileCode = requestResendMobileCode;
@@ -42971,113 +42955,56 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [requestMobile, saveMobile, requestResendMobileCode, requestVerifyMobile, requestRemoveMobile, requestMakePrimaryMobile].map(_regenerator2.default.mark);
+	var _marked = [saveMobile, requestResendMobileCode, requestVerifyMobile, requestRemoveMobile, requestMakePrimaryMobile].map(_regenerator2.default.mark);
 	
-	function requestMobile() {
-	    var config, phones;
-	    return _regenerator2.default.wrap(function requestMobile$(_context) {
+	function saveMobile() {
+	    var state, data, phones;
+	    return _regenerator2.default.wrap(function saveMobile$(_context) {
 	        while (1) {
 	            switch (_context.prev = _context.next) {
 	                case 0:
 	                    _context.prev = 0;
 	                    _context.next = 3;
-	                    return (0, _effects.put)(actions.getMobiles());
-	
-	                case 3:
-	                    _context.next = 5;
-	                    return (0, _effects.select)(function (state) {
-	                        return state.config;
-	                    });
-	
-	                case 5:
-	                    config = _context.sent;
-	                    _context.next = 8;
-	                    return (0, _effects.call)(fetchMobiles, config);
-	
-	                case 8:
-	                    phones = _context.sent;
-	                    _context.next = 11;
-	                    return (0, _effects.put)((0, _common.putCsrfToken)(phones));
-	
-	                case 11:
-	                    _context.next = 13;
-	                    return (0, _effects.put)(phones);
-	
-	                case 13:
-	                    _context.next = 19;
-	                    break;
-	
-	                case 15:
-	                    _context.prev = 15;
-	                    _context.t0 = _context["catch"](0);
-	                    _context.next = 19;
-	                    return (0, _effects.put)(actions.getMobilesFail(_context.t0.toString()));
-	
-	                case 19:
-	                case "end":
-	                    return _context.stop();
-	            }
-	        }
-	    }, _marked[0], this, [[0, 15]]);
-	}
-	
-	function fetchMobiles(config) {
-	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'all', {
-	        credentials: 'include',
-	        headers: _common.ajaxHeaders
-	    }).then(_common.checkStatus).then(function (response) {
-	        return response.json();
-	    });
-	}
-	
-	function saveMobile() {
-	    var state, data, phones;
-	    return _regenerator2.default.wrap(function saveMobile$(_context2) {
-	        while (1) {
-	            switch (_context2.prev = _context2.next) {
-	                case 0:
-	                    _context2.prev = 0;
-	                    _context2.next = 3;
 	                    return (0, _effects.select)(function (state) {
 	                        return state;
 	                    });
 	
 	                case 3:
-	                    state = _context2.sent;
+	                    state = _context.sent;
 	                    data = {
 	                        number: state.phones.phone,
 	                        verified: false,
 	                        primary: false,
 	                        csrf_token: state.config.csrf_token
 	                    };
-	                    _context2.next = 7;
+	                    _context.next = 7;
 	                    return (0, _effects.call)(sendMobile, state.config, data);
 	
 	                case 7:
-	                    phones = _context2.sent;
-	                    _context2.next = 10;
+	                    phones = _context.sent;
+	                    _context.next = 10;
 	                    return (0, _effects.put)((0, _common.putCsrfToken)(phones));
 	
 	                case 10:
-	                    _context2.next = 12;
+	                    _context.next = 12;
 	                    return (0, _effects.put)(phones);
 	
 	                case 12:
-	                    _context2.next = 18;
+	                    _context.next = 18;
 	                    break;
 	
 	                case 14:
-	                    _context2.prev = 14;
-	                    _context2.t0 = _context2["catch"](0);
-	                    _context2.next = 18;
-	                    return (0, _effects.put)(actions.postMobileFail(_context2.t0.toString()));
+	                    _context.prev = 14;
+	                    _context.t0 = _context["catch"](0);
+	                    _context.next = 18;
+	                    return (0, _effects.put)(actions.postMobileFail(_context.t0.toString()));
 	
 	                case 18:
 	                case "end":
-	                    return _context2.stop();
+	                    return _context.stop();
 	            }
 	        }
-	    }, _marked[1], this, [[0, 14]]);
+	    }, _marked[0], this, [[0, 14]]);
 	}
 	
 	function sendMobile(config, data) {
@@ -43093,7 +43020,66 @@
 	
 	function requestResendMobileCode() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestResendMobileCode$(_context3) {
+	    return _regenerator2.default.wrap(function requestResendMobileCode$(_context2) {
+	        while (1) {
+	            switch (_context2.prev = _context2.next) {
+	                case 0:
+	                    _context2.prev = 0;
+	                    _context2.next = 3;
+	                    return (0, _effects.select)(function (state) {
+	                        return state;
+	                    });
+	
+	                case 3:
+	                    state = _context2.sent;
+	                    data = {
+	                        number: state.phones.confirming,
+	                        csrf_token: state.config.csrf_token
+	                    };
+	                    _context2.next = 7;
+	                    return (0, _effects.call)(requestResend, state.config, data);
+	
+	                case 7:
+	                    resp = _context2.sent;
+	                    _context2.next = 10;
+	                    return (0, _effects.put)((0, _common.putCsrfToken)(resp));
+	
+	                case 10:
+	                    _context2.next = 12;
+	                    return (0, _effects.put)(resp);
+	
+	                case 12:
+	                    _context2.next = 18;
+	                    break;
+	
+	                case 14:
+	                    _context2.prev = 14;
+	                    _context2.t0 = _context2["catch"](0);
+	                    _context2.next = 18;
+	                    return (0, _effects.put)(actions.resendMobileCodeFail(_context2.t0.toString()));
+	
+	                case 18:
+	                case "end":
+	                    return _context2.stop();
+	            }
+	        }
+	    }, _marked[1], this, [[0, 14]]);
+	}
+	
+	function requestResend(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'resend-code', {
+	        method: 'post',
+	        credentials: 'include',
+	        headers: _common.ajaxHeaders,
+	        body: JSON.stringify(data)
+	    }).then(_common.checkStatus).then(function (response) {
+	        return response.json();
+	    });
+	}
+	
+	function requestVerifyMobile() {
+	    var state, data, resp;
+	    return _regenerator2.default.wrap(function requestVerifyMobile$(_context3) {
 	        while (1) {
 	            switch (_context3.prev = _context3.next) {
 	                case 0:
@@ -43107,10 +43093,11 @@
 	                    state = _context3.sent;
 	                    data = {
 	                        number: state.phones.confirming,
+	                        code: state.phones.code,
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context3.next = 7;
-	                    return (0, _effects.call)(requestResend, state.config, data);
+	                    return (0, _effects.call)(requestVerify, state.config, data);
 	
 	                case 7:
 	                    resp = _context3.sent;
@@ -43129,7 +43116,7 @@
 	                    _context3.prev = 14;
 	                    _context3.t0 = _context3["catch"](0);
 	                    _context3.next = 18;
-	                    return (0, _effects.put)(actions.resendMobileCodeFail(_context3.t0.toString()));
+	                    return (0, _effects.put)(actions.startVerifyFail(_context3.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -43139,8 +43126,8 @@
 	    }, _marked[2], this, [[0, 14]]);
 	}
 	
-	function requestResend(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'resend-code', {
+	function requestVerify(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'verify', {
 	        method: 'post',
 	        credentials: 'include',
 	        headers: _common.ajaxHeaders,
@@ -43150,9 +43137,9 @@
 	    });
 	}
 	
-	function requestVerifyMobile() {
+	function requestRemoveMobile() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestVerifyMobile$(_context4) {
+	    return _regenerator2.default.wrap(function requestRemoveMobile$(_context4) {
 	        while (1) {
 	            switch (_context4.prev = _context4.next) {
 	                case 0:
@@ -43165,12 +43152,11 @@
 	                case 3:
 	                    state = _context4.sent;
 	                    data = {
-	                        number: state.phones.confirming,
-	                        code: state.phones.code,
+	                        number: state.phones.phone,
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context4.next = 7;
-	                    return (0, _effects.call)(requestVerify, state.config, data);
+	                    return (0, _effects.call)(requestRemove, state.config, data);
 	
 	                case 7:
 	                    resp = _context4.sent;
@@ -43189,7 +43175,7 @@
 	                    _context4.prev = 14;
 	                    _context4.t0 = _context4["catch"](0);
 	                    _context4.next = 18;
-	                    return (0, _effects.put)(actions.startVerifyFail(_context4.t0.toString()));
+	                    return (0, _effects.put)(actions.startRemoveFail(_context4.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -43199,8 +43185,8 @@
 	    }, _marked[3], this, [[0, 14]]);
 	}
 	
-	function requestVerify(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'verify', {
+	function requestRemove(config, data) {
+	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'remove', {
 	        method: 'post',
 	        credentials: 'include',
 	        headers: _common.ajaxHeaders,
@@ -43210,9 +43196,9 @@
 	    });
 	}
 	
-	function requestRemoveMobile() {
+	function requestMakePrimaryMobile() {
 	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestRemoveMobile$(_context5) {
+	    return _regenerator2.default.wrap(function requestMakePrimaryMobile$(_context5) {
 	        while (1) {
 	            switch (_context5.prev = _context5.next) {
 	                case 0:
@@ -43229,7 +43215,7 @@
 	                        csrf_token: state.config.csrf_token
 	                    };
 	                    _context5.next = 7;
-	                    return (0, _effects.call)(requestRemove, state.config, data);
+	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
 	
 	                case 7:
 	                    resp = _context5.sent;
@@ -43248,7 +43234,7 @@
 	                    _context5.prev = 14;
 	                    _context5.t0 = _context5["catch"](0);
 	                    _context5.next = 18;
-	                    return (0, _effects.put)(actions.startRemoveFail(_context5.t0.toString()));
+	                    return (0, _effects.put)(actions.makePrimaryFail(_context5.t0.toString()));
 	
 	                case 18:
 	                case "end":
@@ -43256,65 +43242,6 @@
 	            }
 	        }
 	    }, _marked[4], this, [[0, 14]]);
-	}
-	
-	function requestRemove(config, data) {
-	    return __webpack_provided_window_dot_fetch(config.MOBILE_URL + 'remove', {
-	        method: 'post',
-	        credentials: 'include',
-	        headers: _common.ajaxHeaders,
-	        body: JSON.stringify(data)
-	    }).then(_common.checkStatus).then(function (response) {
-	        return response.json();
-	    });
-	}
-	
-	function requestMakePrimaryMobile() {
-	    var state, data, resp;
-	    return _regenerator2.default.wrap(function requestMakePrimaryMobile$(_context6) {
-	        while (1) {
-	            switch (_context6.prev = _context6.next) {
-	                case 0:
-	                    _context6.prev = 0;
-	                    _context6.next = 3;
-	                    return (0, _effects.select)(function (state) {
-	                        return state;
-	                    });
-	
-	                case 3:
-	                    state = _context6.sent;
-	                    data = {
-	                        number: state.phones.phone,
-	                        csrf_token: state.config.csrf_token
-	                    };
-	                    _context6.next = 7;
-	                    return (0, _effects.call)(requestMakePrimary, state.config, data);
-	
-	                case 7:
-	                    resp = _context6.sent;
-	                    _context6.next = 10;
-	                    return (0, _effects.put)((0, _common.putCsrfToken)(resp));
-	
-	                case 10:
-	                    _context6.next = 12;
-	                    return (0, _effects.put)(resp);
-	
-	                case 12:
-	                    _context6.next = 18;
-	                    break;
-	
-	                case 14:
-	                    _context6.prev = 14;
-	                    _context6.t0 = _context6["catch"](0);
-	                    _context6.next = 18;
-	                    return (0, _effects.put)(actions.makePrimaryFail(_context6.t0.toString()));
-	
-	                case 18:
-	                case "end":
-	                    return _context6.stop();
-	            }
-	        }
-	    }, _marked[5], this, [[0, 14]]);
 	}
 	
 	function requestMakePrimary(config, data) {
@@ -43333,10 +43260,6 @@
 	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	        return;
 	    }
-	
-	    __REACT_HOT_LOADER__.register(requestMobile, "requestMobile", "/home/eperez/src/git/eduid-html/react/src/sagas/Mobile.js");
-	
-	    __REACT_HOT_LOADER__.register(fetchMobiles, "fetchMobiles", "/home/eperez/src/git/eduid-html/react/src/sagas/Mobile.js");
 	
 	    __REACT_HOT_LOADER__.register(saveMobile, "saveMobile", "/home/eperez/src/git/eduid-html/react/src/sagas/Mobile.js");
 	
@@ -46175,7 +46098,7 @@
 	
 	    'ocf.initialize_proofing_help_text': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
 	        id: 'ocf.initialize_proofing_help_text',
-	        defaultMessage: 'To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID app</a> installed on your device.' }),
+	        defaultMessage: 'To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID app</a> installed on your device.' }),
 	
 	    'ocf.modal_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'ocf.modal_title',
@@ -46215,7 +46138,7 @@
 	
 	    'ocf.not_on_mobile_message': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
 	        id: 'ocf.not_on_mobile_message',
-	        defaultMessage: 'You need to switch to a mobile device (iOS or Android) with <a href="https://www.verisec.com/sv/autentisering/frejaeid/">Freja eID</a> installed before you will be able to confirm your account using Freja eID.' }),
+	        defaultMessage: 'You need to switch to a mobile device (iOS or Android) with <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.' }),
 	
 	    'ocf.error_missing_nin': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'ocf.error_missing_nin',
@@ -65009,12 +64932,13 @@
 	}
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
+	    var pdata_fetching = state.personal_data ? state.personal_data.is_fetching : false;
 	    return {
 	        nins: state.nins.nins,
 	        proofing_methods: state.config.PROOFING_METHODS,
 	        valid_nin: state.nins.valid_nin,
 	        nin: state.nins.nin,
-	        is_fetching: state.nins.is_fetching,
+	        is_fetching: state.nins.is_fetching || pdata_fetching,
 	        message: state.nins.message
 	    };
 	};
@@ -67682,9 +67606,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
+	    var pdata_fetching = state.personal_data ? state.personal_data.is_fetching : false;
 	    return {
 	        emails: state.emails.emails,
-	        is_fetching: state.emails.is_fetching,
+	        is_fetching: state.emails.is_fetching || pdata_fetching,
 	        errorMsg: state.emails.error,
 	        confirming: state.emails.confirming,
 	        resending: state.emails.resending
@@ -68047,7 +67972,7 @@
 	                            { className: 'emailrow',
 	                                'data-identifier': index,
 	                                'data-object': key,
-	                                key: entry.email },
+	                                key: key },
 	                            _react2.default.createElement(
 	                                'td',
 	                                { className: 'identifier' },
@@ -68250,9 +68175,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
+	    var pdata_fetching = state.personal_data ? state.personal_data.is_fetching : false;
 	    return {
 	        phones: state.phones.phones,
-	        is_fetching: state.phones.is_fetching,
+	        is_fetching: state.phones.is_fetching || pdata_fetching,
 	        errorMsg: state.phones.error,
 	        confirming: state.phones.confirming,
 	        resending: state.phones.resending
@@ -73762,9 +73688,9 @@
 		"ocf.freja_instructions_step_3": "Kom tillbaka hit och klicka på länken längst ner i rutan. Appen kommer att öppnas.",
 		"ocf.freja_instructions_step_4": "Godkänn i appen att Freja eID skickar din identitet till eduID. Klart.",
 		"ocf.initialize_proofing": "FREJA EID",
-		"ocf.initialize_proofing_help_text": "För att använda det här alternativet så behöver du installera <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID-appen</a>.",
+		"ocf.initialize_proofing_help_text": "För att använda det här alternativet så behöver du installera <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\" target=\"_blank\">Freja eID-appen</a>.",
 		"ocf.modal_title": "Verifiera med Freja eID",
-		"ocf.not_on_mobile_message": "Du måste använda en mobil (iOS eller Android) med <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\">Freja eID-appen</a> installerad för att kunna verifiera ditt konto med Freja eID.",
+		"ocf.not_on_mobile_message": "Du måste använda en mobil (iOS eller Android) med <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\" target=\"_blank\">Freja eID-appen</a> installerad för att kunna verifiera ditt konto med Freja eID.",
 		"ocf.not_on_mobile_title": "Använder du inte din mobil?",
 		"ocf.open_app": "Jag har Freja eID-appen installerad",
 		"out_of_sync": "Användardata ur synk. Var god ladda om sidan."
