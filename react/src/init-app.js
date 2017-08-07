@@ -70,6 +70,9 @@ function* rootSaga() {
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestAllPersonalData),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestAllPersonalData),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestCredentials),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestSuggestedPassword),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
@@ -107,7 +110,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /* to load persisted state from local storage */
 
-const loadPersistedState = (next) => (reducer, initialState, enhancer) => {
+const loadPersistedState = () => {
   try {
     const serializedState = localStorage.getItem('eduid-state');
     if (serializedState === null) {
@@ -130,14 +133,17 @@ const saveState = (state) => {
 
 /* Store */
 
-export let store = composeEnhancers(
-    applyMiddleware(
-        sagaMiddleware,
-        createLogger()
-        ),
-    loadPersistedState
-)(createStore)(eduIDApp);
 
+export const store = createStore(
+    eduIDApp,
+    loadPersistedState(),
+    composeEnhancers(
+      applyMiddleware(
+          sagaMiddleware,
+          createLogger()
+          )
+    )
+);
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -150,6 +156,8 @@ sagaMiddleware.run(rootSaga);
 const getConfig = function () {
     if (!store.getState().config.is_configured) {
         store.dispatch(configActions.getConfig());
+    } else {
+        store.dispatch(configActions.getInitialUserdata());
     }
 };
 
