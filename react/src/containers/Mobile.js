@@ -8,7 +8,7 @@ import { makePrimary, postMobile, changeMobile, startResendMobileCode, finishCon
 const mapStateToProps = (state, props) => {
   return {
     phones: state.phones.phones,
-    is_fetching: state.phones.is_fetching,
+    is_fetching: state.phones.is_fetching || state.personal_data.is_fetching,
     errorMsg: state.phones.error,
     confirming: state.phones.confirming,
     resending: state.phones.resending,

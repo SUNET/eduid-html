@@ -30,7 +30,7 @@ const mapStateToProps = (state, props) => {
      proofing_methods: state.config.PROOFING_METHODS,
      valid_nin: state.nins.valid_nin,
      nin: state.nins.nin,
-     is_fetching: state.nins.is_fetching,
+     is_fetching: state.nins.is_fetching || state.personal_data.is_fetching,
      message: state.nins.message
   }
 };
