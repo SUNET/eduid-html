@@ -7,6 +7,8 @@
  * it with the redux store.
  */
 
+import Cookies from "js-cookie";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
@@ -153,7 +155,17 @@ sagaMiddleware.run(rootSaga);
 
 /* render app */
 
+const checkAuthn = function () {
+    const cookieName = COOKIE_NAME,
+          cookie= Cookies.get(cookieName);
+    if (cookie === undefined) {
+        const next = document.location.href;
+        document.location.href = AUTHN_URL + '?next=' + next;
+    }
+};
+
 const getConfig = function () {
+    checkAuthn();
     if (!store.getState().config.is_configured) {
         store.dispatch(configActions.getConfig());
     } else {
