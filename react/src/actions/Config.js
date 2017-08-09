@@ -6,6 +6,7 @@ export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
 export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 export const NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
 export const GET_INITIAL_USERDATA = 'GET_INITIAL_USERDATA';
+export const SET_LANGUAGE = 'SET_LANGUAGE';
 
 export function getConfig () {
   return {
@@ -37,5 +38,15 @@ export function newCsrfToken(token) {
 export function getInitialUserdata () {
   return {
     type: GET_INITIAL_USERDATA
+  };
+}
+
+
+export function setLanguage (lang) {
+  return {
+    type: SET_LANGUAGE,
+    payload: {
+      language: lang
+    }
   };
 }

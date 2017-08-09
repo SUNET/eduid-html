@@ -52,18 +52,6 @@ import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 
-/* i18n */
-
-const language = navigator.languages
-                   ? navigator.languages[0]
-                   : (navigator.language || navigator.userLanguage);
-
-const lang_code = language.substring(0,2);
-const locale = require('react-intl/locale-data/' + lang_code);
-const messages = require('../i18n/l10n/' + lang_code);
-
-addLocaleData(locale);
-
 /* Sagas */
 
 function* rootSaga() {
@@ -153,7 +141,7 @@ store.subscribe(() => {
 
 sagaMiddleware.run(rootSaga);
 
-/* render app */
+/* authn */
 
 const checkAuthn = function () {
     const cookieName = EDUID_COOKIE_NAME,
@@ -164,6 +152,8 @@ const checkAuthn = function () {
     }
 };
 
+/* Get configuration */
+
 const getConfig = function () {
     checkAuthn();
     if (!store.getState().config.is_configured) {
@@ -173,8 +163,27 @@ const getConfig = function () {
     }
 };
 
+
+/* render app */
+
 const init_app = function (target, component) {
   let app;
+  /* i18n */
+  let lang_code;
+  const state = store.getState();
+  if (state.config.is_configured) {
+      lang_code = state.config.language;
+  } else {
+      const language = navigator.languages
+                         ? navigator.languages[0]
+                         : (navigator.language || navigator.userLanguage);
+      lang_code = language.substring(0,2);
+  }
+  const locale = require('react-intl/locale-data/' + lang_code);
+  const messages = require('../i18n/l10n/' + lang_code);
+
+  addLocaleData(locale);
+
   if (component) {
     app = (
       <Provider store={store}>

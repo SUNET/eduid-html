@@ -9,25 +9,29 @@ import i18n from 'i18n-messages';
 class Footer extends Component {
 
   render () {
+    let langElems;
+    if (this.props.is_configured) {
+        langElems = this.props.languages.map((lang, index) => {
+            if (lang[0] === this.props.language) {
+                return (<span className="langselector">
+                          <span>{lang[1]}</span>
+                        </span>);
+            } else {
+                return (<span className="langselector">
+                          <a onClick={this.props.changeLanguage}>{lang[1]}</a>
+                        </span>);
+            }
+        });
+    } else {
+        langElems = (<span />);
+    }
 
     return (<div id="footer">
                 <div className="container">
                     <p>
                       {"&copy; SUNET 2013-2017"}
                       <span className="pull-right">
-                        
-                            <span className="langselector">
-                                
-                                    <span></span>
-                                
-                            </span>
-                        
-                            <span className="langselector">
-                                
-                                    <span></span>
-                                
-                            </span>
-                        
+                        {langElems}
                       </span>
                     </p>
                 </div>
@@ -36,6 +40,8 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
+  language: PropTypes.string,
+  languages: PropTypes.array
 }
 
 export default i18n(Footer);
