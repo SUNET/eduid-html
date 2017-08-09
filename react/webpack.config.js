@@ -84,9 +84,11 @@ module.exports = {
         'Promise': 'exports?global.Promise!es6-promise',
         'window.fetch': 'exports?global.fetch!whatwg-fetch'
       }),
+      // Initial configuration
       new webpack.DefinePlugin({
-          'COOKIE_NAME': "'sessid'",
-          'AUTHN_URL': "'http://dashboard.eduid.docker:8080/services/authn/login'"
+          'EDUID_COOKIE_NAME': "'sessid'",
+          'EDUID_AUTHN_URL': "'http://dashboard.eduid.docker:8080/services/authn/login'",
+          'EDUID_CONFIG_URL': "'http://dashboard.eduid.docker:8080/services/js-config/config'"
       }),
       new webpack.NoErrorsPlugin()
     ],

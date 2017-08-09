@@ -156,11 +156,11 @@ sagaMiddleware.run(rootSaga);
 /* render app */
 
 const checkAuthn = function () {
-    const cookieName = COOKIE_NAME,
+    const cookieName = EDUID_COOKIE_NAME,
           cookie= Cookies.get(cookieName);
     if (cookie === undefined) {
         const next = document.location.href;
-        document.location.href = AUTHN_URL + '?next=' + next;
+        document.location.href = EDUID_AUTHN_URL + '?next=' + next;
     }
 };
 

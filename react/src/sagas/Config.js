@@ -7,7 +7,7 @@ import { getConfigFail } from "actions/Config";
 export function* requestConfig () {
     try {
         const input = document.getElementById('jsconfig_url'),
-              jsconfig_url = input ? input.value : '/services/jsconfig/config';
+              jsconfig_url = input ? input.value : EDUID_CONFIG_URL;
         console.log('Getting config from ' + jsconfig_url);
         const config = yield call(fetchConfig, jsconfig_url);
         yield put(config);
