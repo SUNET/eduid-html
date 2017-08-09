@@ -6,8 +6,6 @@ import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 
-//  XXX this interferes with the bootstrap in eduid-html
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/PersonalData.scss';
 
 

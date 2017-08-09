@@ -416,6 +416,26 @@
     "defaultMessage": "Confirm using letter"
   },
   {
+    "id": "header.students",
+    "defaultMessage": "Students"
+  },
+  {
+    "id": "header.technicicans",
+    "defaultMessage": "Technicians"
+  },
+  {
+    "id": "header.staff",
+    "defaultMessage": "Staff"
+  },
+  {
+    "id": "header.faq",
+    "defaultMessage": "FAQ"
+  },
+  {
+    "id": "header.logout",
+    "defaultMessage": "Logout"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"

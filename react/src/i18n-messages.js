@@ -663,6 +663,35 @@ const msgs = {
         <FormattedMessage
           id="letter.letter_button_text"
           defaultMessage={`Confirm using letter`} />),
+
+    /************************/
+    /* Header ******** ******/
+    /************************/
+
+   'header.students': (
+        <FormattedMessage
+          id="header.students"
+          defaultMessage={`Students`} />),
+
+   'header.technicians': (
+        <FormattedMessage
+          id="header.technicicans"
+          defaultMessage={`Technicians`} />),
+
+   'header.staff': (
+        <FormattedMessage
+          id="header.staff"
+          defaultMessage={`Staff`} />),
+
+   'header.faq': (
+        <FormattedMessage
+          id="header.faq"
+          defaultMessage={`FAQ`} />),
+
+   'header.logout': (
+        <FormattedMessage
+          id="header.logout"
+          defaultMessage={`Logout`} />),
 };
 
 const unformatted = defineMessages({

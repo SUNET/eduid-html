@@ -11,41 +11,41 @@ class Header extends Component {
   render () {
 
     return (
-      <header id="header" class="header">
-        <div class="logo"></div>
-        <nav class="navbar navbar-default" id="eduid-navbar">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">
-                <div id="eduid-logo-small" class="logo"></div>
+      <header id="header" className="header">
+        <div className="logo"></div>
+        <nav className="navbar navbar-default" id="eduid-navbar">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand" href="#">
+                <div id="eduid-logo-small" className="logo"></div>
               </a>
-              <span class="navbar-toggle collapsed" data-toggle="collapse" data-target="#eduid-menu" aria-expanded="false">
+              <span className="navbar-toggle collapsed" data-toggle="collapse" data-target="#eduid-menu" aria-expanded="false">
               </span>
             </div>
-            <div class="collapse navbar-collapse text-center" id="eduid-menu">
-              <ul  class="nav navbar-nav">
+            <div className="collapse navbar-collapse text-center" id="eduid-menu">
+              <ul  className="nav navbar-nav">
                 <li>
-                  <a href="">{this.props.l10n('main.students')}</a>
+                  <a href="">{this.props.l10n('header.students')}</a>
                 </li>
                 <li>
-                  <a href="">{this.props.l10n('main.technicians')}</a>
+                  <a href="">{this.props.l10n('header.technicians')}</a>
                 </li>
                 <li>
-                  <a href="">{this.props.l10n('main.staff')}</a>
+                  <a href="">{this.props.l10n('header.staff')}</a>
                 </li>
                 <li>
-                  <a href="">{this.props.l10n('main.faq')}</a>
+                  <a href="">{this.props.l10n('header.faq')}</a>
                 </li>
               </ul>
-              <div class="buttons nav navbar-nav navbar-right">
-                <div class="button log-out">
+              <div className="buttons nav navbar-nav navbar-right">
+                <div className="button log-out">
 
                   <form method="POST" action="" id="logout-form">
                     <button id="logout-button"
-                            class="button"
+                            className="button"
                             type="submit"
                             name="submit">
-                              {this.props.l10n('main.logout')}
+                              {this.props.l10n('header.logout')}
                     </button>
                     <input type="hidden" name="csrf" value="{'dummy-value'}" />
                   </form>
