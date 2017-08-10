@@ -4,6 +4,7 @@ import Main from 'components/Main';
 
 const mapStateToProps = (state, props) => {
   return {
+    language: state.config.language
   }
 };
 

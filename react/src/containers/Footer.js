@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import Footer from 'components/Footer';
 
-import setLanguage from "actions/Config";
+import { setLanguage } from "actions/Config";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -15,10 +15,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-      changeLanguage (lang) {
-          return (e) => {
-              dispatch(setLanguage(lang));
-          };
+      changeLanguage: function (e) {
+          const lang = e.target.closest('.langselector').dataset.lang;
+          dispatch(setLanguage(lang));
       }
   }
 };

@@ -168,32 +168,30 @@ const getConfig = function () {
 
 const init_app = function (target, component) {
   let app;
-  /* i18n */
-  let lang_code;
-  const state = store.getState();
-  if (state.config.is_configured) {
-      lang_code = state.config.language;
-  } else {
-      const language = navigator.languages
-                         ? navigator.languages[0]
-                         : (navigator.language || navigator.userLanguage);
-      lang_code = language.substring(0,2);
-  }
-  const locale = require('react-intl/locale-data/' + lang_code);
-  const messages = require('../i18n/l10n/' + lang_code);
-
-  addLocaleData(locale);
-
   if (component) {
     app = (
       <Provider store={store}>
-        <IntlProvider locale={ lang_code } messages={ messages }>
           {component}
-        </IntlProvider>
       </Provider>
     );
     ReactDOM.render(app, target, getConfig);
   } else {
+    /* i18n */
+    let lang_code;
+    const state = store.getState();
+    if (state.config.is_configured) {
+        lang_code = state.config.language;
+    } else {
+        const language = navigator.languages
+                           ? navigator.languages[0]
+                           : (navigator.language || navigator.userLanguage);
+        lang_code = language.substring(0,2);
+    }
+    const locale = require('react-intl/locale-data/' + lang_code);
+    const messages = require('../i18n/l10n/' + lang_code);
+
+    addLocaleData(locale);
+
     app = ( <Provider store={store}>
       <IntlProvider locale={ lang_code } messages={ messages }>
         <BrowserRouter>

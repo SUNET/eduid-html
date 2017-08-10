@@ -13,11 +13,13 @@ class Footer extends Component {
     if (this.props.is_configured) {
         langElems = this.props.languages.map((lang, index) => {
             if (lang[0] === this.props.language) {
-                return (<span className="langselector">
+                return (<span className="langselector" key={index}>
                           <span>{lang[1]}</span>
                         </span>);
             } else {
-                return (<span className="langselector">
+                return (<span className="langselector"
+                              data-lang={lang[0]}
+                              key={index}>
                           <a onClick={this.props.changeLanguage}>{lang[1]}</a>
                         </span>);
             }
