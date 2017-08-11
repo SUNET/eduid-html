@@ -11,6 +11,7 @@ const lang_code = language.substring(0,2);
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
     language: lang_code,
+    window_size: actions.getWindowSize(),
     is_configured: false,
     is_fetching: false,
     failed: false
@@ -47,6 +48,11 @@ let configReducer = (state=configData, action) => {
           ...action.payload
       };
     case actions.SET_LANGUAGE:
+      return {
+          ...state,
+          ...action.payload
+      };
+    case actions.RESIZE_WINDOW:
       return {
           ...state,
           ...action.payload

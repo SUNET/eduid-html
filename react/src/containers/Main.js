@@ -1,17 +1,21 @@
 
 import { connect } from 'react-redux';
 import Main from 'components/Main';
+import { resizeWindow } from "actions/Config";
 
 const mapStateToProps = (state, props) => {
-  return {
-    language: state.config.language
-  }
+    return {
+        language: state.config.language
+    }
 };
 
 
 const mapDispatchToProps = (dispatch, props) => {
-  return {
-  }
+    return {
+        handleWindowSizeChange (e) {
+            dispatch(resizeWindow());
+        }
+    }
 };
 
 const MainContainer = connect(

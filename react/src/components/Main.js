@@ -16,23 +16,25 @@ import 'style/Main.scss';
 
 class SubMain extends Component {
 
-  render () {
-    return (
-        <div>
-          <HeaderContainer />
-          <FooterContainer />
-        </div>
-    );
-  }
+    render () {
+        return (
+            <div>
+              <HeaderContainer />
+              <FooterContainer />
+            </div>
+        );
+    }
 }
 
-SubMain.propTypes = { };
-
-/* Dummy redux connection, just to internationalize */
+SubMain.propTypes = {
+    window_size: PropTypes.string
+};
 
 const SubMainContainer = connect(
-  (s, p) => ({}),
-  (d, p) => ({}),
+   (state, props) => ({
+        window_size: state.config.window_size
+    }),
+    (dispatch, props) => ({}),
 )(i18n(SubMain));
 
 
@@ -42,23 +44,31 @@ const SubMainContainer = connect(
 
 class Main extends Component {
 
-  render () {
-    const lang = this.props.language,
-          locale = require('react-intl/locale-data/' + lang),
-          messages = require('../../i18n/l10n/' + lang);
+    componentWillMount() {
+        window.addEventListener('resize', this.props.handleWindowSizeChange);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.props.handleWindowSizeChange);
+    }
 
-    addLocaleData(locale);
+    render () {
+        const lang = this.props.language,
+              locale = require('react-intl/locale-data/' + lang),
+              messages = require('../../i18n/l10n/' + lang);
 
-    return (
-      <IntlProvider locale={ lang } messages={ messages }>
-        <SubMainContainer />
-      </IntlProvider>
-    );
-  }
+        addLocaleData(locale);
+
+        return (
+          <IntlProvider locale={ lang } messages={ messages }>
+            <SubMainContainer />
+          </IntlProvider>
+        );
+    }
 }
 
 Main.propTypes = {
-  language: PropTypes.string,
+    language: PropTypes.string,
+    handleWindowSizeChange: PropTypes.func
 }
 
 export default Main;
