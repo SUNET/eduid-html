@@ -93,7 +93,7 @@ let OpenidConnectFreja = React.createClass({
       buttonGroup = (
         <ButtonGroup vertical block>
           <Button bsStyle="link"
-                  href="https://www.verisec.com/sv/autentisering/frejaeid/"
+                  href="https://frejaeid.com/skaffa-freja-eid/"
                   target="_blank">
             {this.props.l10n('ocf.freja_instructions_install_link')}
           </Button>

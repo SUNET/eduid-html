@@ -281,7 +281,7 @@ const msgs = {
     'ocf.initialize_proofing_help_text': (
         <FormattedHTMLMessage
           id="ocf.initialize_proofing_help_text"
-          defaultMessage={`To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID app</a> installed on your device.`} />),
+          defaultMessage={`To use this option you need to have the <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID app</a> installed on your device.`} />),
 
     'ocf.modal_title': (
         <FormattedMessage
@@ -331,7 +331,7 @@ const msgs = {
     'ocf.not_on_mobile_message': (
         <FormattedHTMLMessage
           id="ocf.not_on_mobile_message"
-          defaultMessage={`You need to switch to a mobile device (iOS or Android) with <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
+          defaultMessage={`You need to switch to a mobile device (iOS or Android) with <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
 
     'ocf.error_missing_nin': (
         <FormattedMessage
