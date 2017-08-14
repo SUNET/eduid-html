@@ -23,9 +23,9 @@
   "ocf.freja_instructions_step_3": "Kom tillbaka hit och klicka på länken längst ner i rutan. Appen kommer att öppnas.",
   "ocf.freja_instructions_step_4": "Godkänn i appen att Freja eID skickar din identitet till eduID. Klart.",
   "ocf.initialize_proofing": "FREJA EID",
-  "ocf.initialize_proofing_help_text": "För att använda det här alternativet så behöver du installera <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\" target=\"_blank\">Freja eID-appen</a>.",
+  "ocf.initialize_proofing_help_text": "För att använda det här alternativet så behöver du installera <a href=\"https://frejaeid.com/skaffa-freja-eid/\" target=\"_blank\">Freja eID-appen</a>.",
   "ocf.modal_title": "Verifiera med Freja eID",
-  "ocf.not_on_mobile_message": "Du måste använda en mobil (iOS eller Android) med <a href=\"https://www.verisec.com/sv/autentisering/frejaeid/\" target=\"_blank\">Freja eID-appen</a> installerad för att kunna verifiera ditt konto med Freja eID.",
+  "ocf.not_on_mobile_message": "Du måste använda en mobil (iOS eller Android) med <a href=\"https://frejaeid.com/skaffa-freja-eid/\" target=\"_blank\">Freja eID-appen</a> installerad för att kunna verifiera ditt konto med Freja eID.",
   "ocf.not_on_mobile_title": "Använder du inte din mobil?",
   "ocf.open_app": "Jag har Freja eID-appen installerad",
   "out_of_sync": "Användardata ur synk. Var god ladda om sidan."
