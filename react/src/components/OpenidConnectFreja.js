@@ -53,6 +53,7 @@ let OpenidConnectFreja = React.createClass({
           <li>{this.props.l10n('ocf.freja_instructions_step_2')}</li>
           <li>{this.props.l10n('ocf.freja_instructions_step_3')}</li>
           <li>{this.props.l10n('ocf.freja_instructions_step_4')}</li>
+          <li>{this.props.l10n('ocf.freja_instructions_step_5')}</li>
         </ol>
       </Well>
     );
