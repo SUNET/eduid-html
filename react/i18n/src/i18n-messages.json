@@ -149,7 +149,7 @@
   },
   {
     "id": "ocf.freja_instructions_step_2",
-    "defaultMessage": "Open the app and follow the instructions to reach Freja eID+ status (Plus)."
+    "defaultMessage": "Open the app and follow the instructions to reach Freja eID+ (Plus) status."
   },
   {
     "id": "ocf.freja_instructions_step_3",
@@ -161,7 +161,7 @@
   },
   {
     "id": "ocf.freja_instructions_step_5",
-    "defaultMessage": "Approve that Freja eID sends your identity to eduID. Done!."
+    "defaultMessage": "Approve that Freja eID sends your identity to eduID. Done!"
   },
   {
     "id": "ocf.freja_instructions_install_link",
