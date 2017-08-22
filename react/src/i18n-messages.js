@@ -316,7 +316,7 @@ const msgs = {
     'ocf.freja_instructions_step_5': (
         <FormattedMessage
           id="ocf.freja_instructions_step_5"
-          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done!.`} />),
+          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done!`} />),
 
     'ocf.freja_instructions_install_link': (
         <FormattedMessage
