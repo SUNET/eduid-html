@@ -301,17 +301,22 @@ const msgs = {
     'ocf.freja_instructions_step_2': (
         <FormattedMessage
           id="ocf.freja_instructions_step_2"
-          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ status.`} />),
+          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ status (Plus).`} />),
 
     'ocf.freja_instructions_step_3': (
         <FormattedMessage
           id="ocf.freja_instructions_step_3"
-          defaultMessage={`Return here and click the link at the bottom of the page. The app will open.`} />),
+          defaultMessage={`Bring your selected ID to an authorized agent and ask them to scan the QR-code in the Freja eID app. You can find an authorized agent in the Freja eID app's map.`} />),
 
     'ocf.freja_instructions_step_4': (
         <FormattedMessage
           id="ocf.freja_instructions_step_4"
-          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done.`} />),
+          defaultMessage={`Return here using your mobile phone and click the link at the bottom of the page. The app will open.`} />),
+
+    'ocf.freja_instructions_step_5': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_5"
+          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done!`} />),
 
     'ocf.freja_instructions_install_link': (
         <FormattedMessage
