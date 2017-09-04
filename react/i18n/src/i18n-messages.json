@@ -36,6 +36,38 @@
     "defaultMessage": "CSRF failed to validate, please reload the page"
   },
   {
+    "id": "main.profile_title",
+    "defaultMessage": "Profile"
+  },
+  {
+    "id": "main.personal_data",
+    "defaultMessage": "Personal Information"
+  },
+  {
+    "id": "main.nins",
+    "defaultMessage": "Confirm Identity"
+  },
+  {
+    "id": "main.emails",
+    "defaultMessage": "Email Addresses"
+  },
+  {
+    "id": "main.phones",
+    "defaultMessage": "Phone Numbers"
+  },
+  {
+    "id": "main.security",
+    "defaultMessage": "Security"
+  },
+  {
+    "id": "main.eduid_id",
+    "defaultMessage": "eduID identifier"
+  },
+  {
+    "id": "main.copyright",
+    "defaultMessage": "&copy; SUNET 2013-2017"
+  },
+  {
     "id": "cm.ok",
     "defaultMessage": "OK"
   },

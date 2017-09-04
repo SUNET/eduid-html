@@ -5,6 +5,7 @@ import { resizeWindow } from "actions/Config";
 
 const mapStateToProps = (state, props) => {
     return {
+        window_size: state.config.window_size,
         language: state.config.language,
         eppn: state.personal_data.eppn
     }

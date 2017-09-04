@@ -134,6 +134,50 @@ const msgs = {
             id="CSRF failed to validate"
             defaultMessage={`CSRF failed to validate, please reload the page`} />),
 
+    'main.profile_title': (
+        <FormattedMessage
+            id="main.profile_title"
+            defaultMessage={`Profile`} />),
+
+    'main.personal_data': (
+        <FormattedMessage
+            id="main.personal_data"
+            defaultMessage={`Personal Information`} />),
+
+    'main.nins': (
+        <FormattedMessage
+            id="main.nins"
+            defaultMessage={`Confirm Identity`} />),
+
+    'main.emails': (
+        <FormattedMessage
+            id="main.emails"
+            defaultMessage={`Email Addresses`} />),
+
+    'main.phones': (
+        <FormattedMessage
+            id="main.phones"
+            defaultMessage={`Phone Numbers`} />),
+
+    'main.security': (
+        <FormattedMessage
+            id="main.security"
+            defaultMessage={`Security`} />),
+
+    'main.eduid_id': (
+        <FormattedMessage
+            id="main.eduid_id"
+            defaultMessage={`eduID identifier`} />),
+
+    'main.copyright': (
+        <FormattedMessage
+            id="main.copyright"
+            defaultMessage={`&copy; SUNET 2013-2017`} />),
+
+    /************************/
+    /* Main *****************/
+    /************************/
+
     /************************/
     /* ConfirmModal *********/
     /************************/
