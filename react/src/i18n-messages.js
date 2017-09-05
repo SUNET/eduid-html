@@ -134,6 +134,11 @@ const msgs = {
             id="CSRF failed to validate"
             defaultMessage={`CSRF failed to validate, please reload the page`} />),
 
+    /************************/
+    /* Main *****************/
+    /************************/
+
+
     'main.profile_title': (
         <FormattedMessage
             id="main.profile_title"
@@ -173,10 +178,6 @@ const msgs = {
         <FormattedMessage
             id="main.copyright"
             defaultMessage={`&copy; SUNET 2013-2017`} />),
-
-    /************************/
-    /* Main *****************/
-    /************************/
 
     /************************/
     /* ConfirmModal *********/
