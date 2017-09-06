@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
 
@@ -11,7 +12,7 @@ class Notifications extends Component {
         return (<Alert key={index} bsStyle="danger">{err}</Alert>);
     });
 
-    if (! toShow) {
+    if (toShow.length === 0) {
         toShow = this.props.messages.map( (msg, index) => {
             return (<Alert key={index} bsStyle="success">{msg}</Alert>);
         });

@@ -15,6 +15,7 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
+import NotificationsContainer from 'containers/Notifications';
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/Main.scss';
@@ -22,11 +23,6 @@ import 'style/Main.scss';
 
 /* Dummy components, to be done */
 
-class MessagesArea extends Component {
-    render () {
-        return (<div>Messages Area</div>);
-    }
-}
 class PendingActions extends Component {
     render () {
         return (<div>Pending Actions</div>);
@@ -72,7 +68,7 @@ class SubMain extends Component {
                   <div className='profile-combo tabbable well row' id="profile-content-area">
                     <div className='col-md-3'>
                       <div className="profile-head">
-                        <MessagesArea />
+                        <NotificationsContainer />
                         <h3>{this.props.l10n('main.profile_title')}</h3>
                         <PendingActions />
                       </div>

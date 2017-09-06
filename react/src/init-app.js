@@ -20,6 +20,7 @@ import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
+import notifyAndDispatch from "./notify-middleware";
 import * as configActions from "actions/Config";
 import * as pdataActions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
@@ -130,6 +131,7 @@ export const store = createStore(
     composeEnhancers(
       applyMiddleware(
           sagaMiddleware,
+          notifyAndDispatch,
           createLogger()
           )
     )

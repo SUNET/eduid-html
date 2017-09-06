@@ -74,6 +74,7 @@ export function* savePersonalData () {
         }));
         delete data.is_fetching;
         delete data.failed;
+        delete data.eppn;
         const resp = yield call(sendPersonalData, config, data);
         yield put(putCsrfToken(resp));
         yield put(resp);
