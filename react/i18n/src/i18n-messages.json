@@ -156,6 +156,18 @@
     "defaultMessage": "Email addresses"
   },
   {
+    "id": "emails.get-success",
+    "defaultMessage": "Successfully retrieved Email addresses"
+  },
+  {
+    "id": "emails.duplicated",
+    "defaultMessage": "That email address is already in use, please choose another"
+  },
+  {
+    "id": "emails.save-success",
+    "defaultMessage": "Email address saved successfully"
+  },
+  {
     "id": "oc.get_qrcode",
     "defaultMessage": "SE-LEG"
   },
@@ -242,6 +254,18 @@
   {
     "id": "pd.main_title",
     "defaultMessage": "Personal information"
+  },
+  {
+    "id": "pd.all-data-success",
+    "defaultMessage": "Successfully retrieved Personal information"
+  },
+  {
+    "id": "pd.pdata-success",
+    "defaultMessage": "Successfully retrieved Personal information"
+  },
+  {
+    "id": "pd.save-success",
+    "defaultMessage": "Successfully saved Personal information"
   },
   {
     "id": "mobile.resend_success",
