@@ -36,6 +36,14 @@
     "defaultMessage": "CSRF failed to validate, please reload the page"
   },
   {
+    "id": "error_navet_task",
+    "defaultMessage": "Communication problem with Navet"
+  },
+  {
+    "id": "error_lookup_mobile_task",
+    "defaultMessage": "Problem looking up the phone number"
+  },
+  {
     "id": "main.profile_title",
     "defaultMessage": "Profile"
   },
@@ -168,6 +176,34 @@
     "defaultMessage": "Email address saved successfully"
   },
   {
+    "id": "emails.unconfirmed_address_not_primary",
+    "defaultMessage": "An unconfirmed mail address cannot be set as primary"
+  },
+  {
+    "id": "emails.primary-success",
+    "defaultMessage": "Email address successfully set as primary"
+  },
+  {
+    "id": "emails.code_expired_send_new",
+    "defaultMessage": "Expired verification code, sending another"
+  },
+  {
+    "id": "emails.verification-success",
+    "defaultMessage": "Successfully verified email address"
+  },
+  {
+    "id": "emails.cannot_remove_unique",
+    "defaultMessage": "You must have at least one email address"
+  },
+  {
+    "id": "emails.removal-success",
+    "defaultMessage": "Successfully removed email address"
+  },
+  {
+    "id": "emails.code-sent",
+    "defaultMessage": "Successfully sent verification code"
+  },
+  {
     "id": "oc.get_qrcode",
     "defaultMessage": "SE-LEG"
   },
@@ -292,6 +328,54 @@
     "defaultMessage": "Mobile phone numbers"
   },
   {
+    "id": "phones.get-success",
+    "defaultMessage": "Successfully retrieved phone numbers"
+  },
+  {
+    "id": "phones.duplicated",
+    "defaultMessage": "That phone number is already in use, please choose another"
+  },
+  {
+    "id": "phones.save-success",
+    "defaultMessage": "phone number saved successfully"
+  },
+  {
+    "id": "phones.unconfirmed_number_not_primary",
+    "defaultMessage": "An unconfirmed phone number cannot be set as primary"
+  },
+  {
+    "id": "phones.primary-success",
+    "defaultMessage": "phone number successfully set as primary"
+  },
+  {
+    "id": "phones.code_expired_send_new",
+    "defaultMessage": "Expired verification code, sending another"
+  },
+  {
+    "id": "phones.code_invalid",
+    "defaultMessage": "Invalid verification code"
+  },
+  {
+    "id": "phones.verification-success",
+    "defaultMessage": "Successfully verified phone number"
+  },
+  {
+    "id": "phones.cannot_remove_unique",
+    "defaultMessage": "You must have at least one phone number"
+  },
+  {
+    "id": "phones.cannot_remove_primary",
+    "defaultMessage": "You cannot remove your primary phone number"
+  },
+  {
+    "id": "phones.removal-success",
+    "defaultMessage": "Successfully removed phone number"
+  },
+  {
+    "id": "phones.code-sent",
+    "defaultMessage": "Successfully sent verification code"
+  },
+  {
     "id": "security.long_description",
     "defaultMessage": "Your eduID account password can be changed below."
   },
@@ -396,6 +480,18 @@
     "defaultMessage": "Please enter the old password"
   },
   {
+    "id": "chpass.no_reauthn",
+    "defaultMessage": "You must re-authenticate to change your password"
+  },
+  {
+    "id": "chpass.stale_reauthn",
+    "defaultMessage": "Stale re-authentication. Please re-initiate the process."
+  },
+  {
+    "id": "chpass.password-changed",
+    "defaultMessage": "Password successfully changed"
+  },
+  {
     "id": "pwfield.enter_password",
     "defaultMessage": "Enter password"
   },
@@ -472,8 +568,44 @@
     "defaultMessage": "You can only have one unverified NIN to verify it. Please remove the unwanted ones."
   },
   {
+    "id": "nins.success_removal",
+    "defaultMessage": "Successfully removed NIN"
+  },
+  {
+    "id": "nins.no-mobile-match",
+    "defaultMessage": "No phone number matching NIN"
+  },
+  {
     "id": "letter.letter_button_text",
     "defaultMessage": "Confirm using letter"
+  },
+  {
+    "id": "letter.no_state_found",
+    "defaultMessage": "No state found"
+  },
+  {
+    "id": "letter.already-sent",
+    "defaultMessage": "You have already been sent a verification letter"
+  },
+  {
+    "id": "letter.no-address-found",
+    "defaultMessage": "No postal address found"
+  },
+  {
+    "id": "letter.bad-postal-address",
+    "defaultMessage": "The postal address is incomprehensible"
+  },
+  {
+    "id": "letter.saved-unconfirmed",
+    "defaultMessage": "Saved unconfirmed NIN"
+  },
+  {
+    "id": "letter.wrong-code",
+    "defaultMessage": "Incorrect verification code"
+  },
+  {
+    "id": "letter.verification_success",
+    "defaultMessage": "Successfully verified NIN"
   },
   {
     "id": "header.students",

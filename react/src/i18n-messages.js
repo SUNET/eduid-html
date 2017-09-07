@@ -144,11 +144,6 @@ const msgs = {
           id="error_lookup_mobile_task"
           defaultMessage={`Problem looking up the phone number`} />),
 
-   'No connection to authorization endpoint': (
-        <FormattedMessage
-          id="No connection to authorization endpoint"
-          defaultMessage={`No connection to authorization endpoint`} />),
-
     /************************/
     /* Main *****************/
     /************************/
@@ -350,11 +345,6 @@ const msgs = {
           id="emails.code_expired_send_new"
           defaultMessage={`Expired verification code, sending another`} />),
 
-    'emails.code_invalid': (
-        <FormattedMessage
-          id="emails.code_invalid"
-          defaultMessage={`Invalid verification code`} />),
-
     'emails.verification-success': (
         <FormattedMessage
           id="emails.verification-success"
@@ -364,11 +354,6 @@ const msgs = {
         <FormattedMessage
           id="emails.cannot_remove_unique"
           defaultMessage={`You must have at least one email address`} />),
-
-    'emails.cannot_remove_primary': (
-        <FormattedMessage
-          id="emails.cannot_remove_primary"
-          defaultMessage={`You cannot remove your primary email address`} />),
 
     'emails.removal-success': (
         <FormattedMessage
@@ -755,6 +740,21 @@ const msgs = {
         <FormattedMessage
           id="chpass.no_old_pw"
           defaultMessage={`Please enter the old password`} />),
+
+   'chpass.no_reauthn': (
+        <FormattedMessage
+          id="chpass.no_reauthn"
+          defaultMessage={`You must re-authenticate to change your password`} />),
+
+   'chpass.stale_reauthn': (
+        <FormattedMessage
+          id="chpass.stale_reauthn"
+          defaultMessage={`Stale re-authentication. Please re-initiate the process.`} />),
+
+   'chpass.password-changed': (
+        <FormattedMessage
+          id="chpass.password-changed"
+          defaultMessage={`Password successfully changed`} />),
 
    'pwfield.enter_password': (
         <FormattedMessage
