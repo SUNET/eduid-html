@@ -38,10 +38,10 @@ let notificationsReducer = (state=notifications, action) => {
           return state;
       }
     case actions.RM_NOTIFICATION:
-      const msgs = state[action.payload.level],
-            newMsgs = msgs.slice().splice(msgs[action.payload.index], 1);
+      const msgs = state[action.payload.level].slice();
+      msgs.splice(msgs[action.payload.index], 1);
       let newState = {...state};
-      newState[action.payload.level] = newMsgs;
+      newState[action.payload.level] = msgs;
       return newState;
     default:
       return state;
