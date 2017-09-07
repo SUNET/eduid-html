@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Alert } from 'react-bootstrap';
 
 import i18n from 'i18n-messages';
+import 'style/Notifications.scss';
 
 
 class Notifications extends Component {

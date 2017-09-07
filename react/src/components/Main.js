@@ -68,7 +68,6 @@ class SubMain extends Component {
                   <div className='profile-combo tabbable well row' id="profile-content-area">
                     <div className='col-md-3'>
                       <div className="profile-head">
-                        <NotificationsContainer />
                         <h3>{this.props.l10n('main.profile_title')}</h3>
                         <PendingActions />
                       </div>
@@ -85,6 +84,7 @@ class SubMain extends Component {
                       </div>
                     </div>
                     <div className="tab-content info-container col-md-8 col-md-offset-1">
+                      <NotificationsContainer />
                       <Route exact path="/profile/" component={PersonalDataContainer} />
                       <Route path="/profile/personaldata" component={PersonalDataContainer} />
                       <Route path="/profile/nins" component={NinsContainer} />

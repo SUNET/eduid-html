@@ -28,7 +28,7 @@ let notificationsReducer = (state=notifications, action) => {
           };
         case "success":
           const messages = state.messages.slice();
-          messages.push(action.payload.message);
+          messages.unshift(action.payload.message);
           return {
             ...state,
             messages: messages
@@ -38,7 +38,7 @@ let notificationsReducer = (state=notifications, action) => {
       }
     case actions.RM_NOTIFICATION:
       const msgs = state[action.payload.level].slice();
-      msgs.splice(msgs[action.payload.index], 1);
+      msgs.splice(action.payload.index, 1);
       let newState = {...state};
       newState[action.payload.level] = msgs;
       return newState;
