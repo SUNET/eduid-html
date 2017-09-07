@@ -107,7 +107,14 @@ const loadPersistedState = () => {
     if (serializedState === null) {
       return undefined;
     }
-    return JSON.parse(serializedState);
+    return {
+        ...JSON.parse(serializedState),
+        notifications: {
+            errors: [],
+            warnings: [],
+            messages: []
+        }
+    };
   } catch (err) {
     return undefined;
   }
