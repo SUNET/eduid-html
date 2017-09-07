@@ -1,6 +1,7 @@
 
 import { connect } from 'react-redux';
 import Notifications from 'components/Notifications';
+import * as actions from 'actions/Notifications';
 
 const mapStateToProps = (state, props) => {
   return {
@@ -13,6 +14,12 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+      handleRMNotification (e) {
+          const note = e.target.closest('div.alert'),
+                level = note.dataset.level,
+                index = note.dataset.index;
+          dispatch(actions.eduidRMNotify(level, index));
+      }
   }
 };
 
