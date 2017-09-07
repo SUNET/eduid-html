@@ -11,6 +11,10 @@ const notifyAndDispatch = store => next => action => {
         } else if (action.payload && action.payload.message) {
             next(actions.eduidNotify(action.payload.message, 'success'));
         }
+        if (action.payload !== undefined) {
+            delete(action.payload.message);
+            delete(action.payload.errorMsg);
+        }
     }
     return next(action);
 };
