@@ -14,7 +14,7 @@ class Notifications extends Component {
                        data-level="errors"
                        data-index={index}
                        onDismiss={this.props.handleRMNotification}>
-                   {err}
+                   {this.props.l10n(err)}
                 </Alert>);
     });
 
@@ -25,7 +25,7 @@ class Notifications extends Component {
                            data-level="messages"
                            data-index={index}
                            onDismiss={this.props.handleRMNotification}>
-                       {msg}
+                       {this.props.l10n(msg)}
                     </Alert>);
         });
         toShow.concat( this.props.warnings.map( (warning, index) => {
@@ -34,7 +34,7 @@ class Notifications extends Component {
                            data-level="warnings"
                            data-index={index}
                            onDismiss={this.props.handleRMNotification}>
-                       {warning}
+                       {this.props.l10n(warning)}
                     </Alert>);
         }));
     }
