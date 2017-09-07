@@ -14,11 +14,10 @@ let notificationsReducer = (state=notifications, action) => {
     case actions.NEW_NOTIFICATION:
       switch (action.payload.level) {
         case "danger":
-          const errors = state.errors.slice();
-          errors.push(action.payload.message);
           return {
-            ...state,
-            errors: errors
+            messages: [],
+            warnings: [],
+            errors: [ action.payload.message ]
           };
         case "warning":
           const warnings = state.warnings.slice();
