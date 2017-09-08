@@ -29,8 +29,8 @@ import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import * as letterActions from "actions/LetterProofing";
 
-import { requestPersonalData, savePersonalData } from "sagas/PersonalData";
-import { requestEmails, saveEmail, requestResendEmailCode,
+import { requestAllPersonalData, savePersonalData } from "sagas/PersonalData";
+import { saveEmail, requestResendEmailCode,
          requestVerifyEmail, requestRemoveEmail,
          requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile";
@@ -67,12 +67,12 @@ addLocaleData(locale);
 function* rootSaga() {
   yield [
     takeLatest(configActions.GET_JSCONFIG_CONFIG, requestConfig),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestPersonalData),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestEmails),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, sagasMobile.requestMobile),
+    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestAllPersonalData),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
     takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestNins),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestAllPersonalData),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestCredentials),
+    takeLatest(configActions.GET_INITIAL_USERDATA, requestSuggestedPassword),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
@@ -108,15 +108,46 @@ const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+/* to load persisted state from local storage */
+
+const loadPersistedState = () => {
+  try {
+    const serializedState = localStorage.getItem('eduid-state');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serialized = JSON.stringify(state);
+    localStorage.setItem('eduid-state', serialized);
+  } catch (err) {
+    console.log('Cannot save the state: ', err);
+  }
+};
+
 /* Store */
 
+
 export const store = createStore(
-        eduIDApp,
-        composeEnhancers(
-          applyMiddleware(
-              sagaMiddleware,
-              createLogger()
-              )));
+    eduIDApp,
+    loadPersistedState(),
+    composeEnhancers(
+      applyMiddleware(
+          sagaMiddleware,
+          createLogger()
+          )
+    )
+);
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 sagaMiddleware.run(rootSaga);
 
@@ -125,6 +156,8 @@ sagaMiddleware.run(rootSaga);
 const getConfig = function () {
     if (!store.getState().config.is_configured) {
         store.dispatch(configActions.getConfig());
+    } else {
+        store.dispatch(configActions.getInitialUserdata());
     }
 };
 

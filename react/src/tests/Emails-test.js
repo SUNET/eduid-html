@@ -21,22 +21,6 @@ addLocaleData('react-intl/locale-data/en');
 
 
 describe("Email Actions", () => {
-   it("Should get the emails ", () => {
-       const expectedAction = {
-           type: actions.GET_EMAILS
-       };
-       expect(actions.getEmails()).toEqual(expectedAction);
-   });
-
-   it("Should fail when trying to get the emails", () => {
-    const err = 'Bad error';
-    const expectedAction = {
-      type: actions.GET_EMAILS_FAIL,
-      error: true,
-      payload: new Error(err)
-    };
-    expect(actions.getEmailsFail(err)).toEqual(expectedAction);
-  });
 
     it("Should change the emails ", () => {
        const data = {
@@ -190,36 +174,7 @@ describe("Reducers", () => {
     email: '',
 };
 
-    it("Receives a GET_EMAILS action", () => {
-    expect(
-      emailsReducer(
-        mockState,
-        {
-          type: actions.GET_EMAILS,
-          is_fetching: true
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: true,
-        failed: false,
-        error: '',
-        message: '',
-        resending: {
-          is_fetching: false,
-          failed: false,
-          error: {},
-          message: ''
-        },
-        confirming: '',
-        emails: [],
-        email: '',
-      }
-    );
-  });
-
-
-    it("Receives a GET_EMAILS_SUCCESS action", () => {
+  it("Receives a GET_EMAILS_SUCCESS action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -245,33 +200,6 @@ describe("Reducers", () => {
         confirming: '',
         emails: [],
         email:'johnsmith@example.com',
-      }
-    );
-  });
-
-    it("Receives a GET_EMAILS_FAIL action", () => {
-    expect(
-      emailsReducer(
-        mockState,
-        {
-          type: actions.GET_EMAILS_FAIL,
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: true,
-        error: '',
-        message: '',
-        resending: {
-          is_fetching: false,
-          failed: false,
-          error: {},
-          message: ''
-        },
-        confirming: '',
-        emails: [],
-        email: '',
       }
     );
   });
@@ -799,47 +727,6 @@ const state = {
 
 
 describe("Async component", () => {
-
-    it("Sagas requestEmails", () => {
-
-       const generator = requestEmails();
-
-       let next = generator.next();
-       expect(next.value).toEqual(put(actions.getEmails()));
-
-        next = generator.next();
-
-        const mockGetState = function (state) {
-            return state.config;
-        };
-
-        const config = state => state.config;
-
-        // expect(next.value).toEqual(select(state => state.config));
-
-        const emails = generator.next(config);
-
-        expect(emails.value).toEqual(call(fetchEmails, config));
-
-        const action = {
-          type: 'GET_EMAIL_ALL_SUCCESS',
-          payload: {
-            csrf_token: 'csrf-token',
-            emails: [
-              {
-                email: 'john@example.com',
-                verified: false,
-                primary: false
-              }
-            ]
-          }
-        }
-        next = generator.next(action);
-        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-        next = generator.next();
-        delete(action.payload.csrf_token);
-        expect(next.value).toEqual(put(action));
-    });
 
     it("Sagas saveEmail", () => {
 

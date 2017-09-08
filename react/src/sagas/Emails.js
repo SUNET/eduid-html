@@ -4,28 +4,6 @@ import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
 import * as actions from "actions/Emails";
 
 
-
-export function* requestEmails () {
-    try {
-        yield put(actions.getEmails());
-        const config = yield select(state => state.config);
-        const emails = yield call(fetchEmails, config);
-        yield put(putCsrfToken(emails));
-        yield put(emails);
-    } catch(error) {
-        yield put(actions.getEmailsFail(error.toString()));
-    }
-}
-
-export function fetchEmails (config) {
-    return window.fetch(config.EMAILS_URL + 'all', {
-        credentials: 'include',
-        headers: ajaxHeaders
-    })
-    .then(checkStatus)
-    .then(response => response.json())
-}
-
 export function* saveEmail () {
     try {
         const state = yield select(state => state),

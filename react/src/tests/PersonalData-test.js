@@ -6,12 +6,15 @@ import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import PersonalData from 'components/PersonalData';
 import * as actions from "actions/PersonalData";
+import * as emailActions from "actions/Emails";
+import * as phoneActions from "actions/Mobile";
+import * as ninActions from "actions/Nins";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 import personalDataReducer from "reducers/PersonalData";
 
-import {requestPersonalData, savePersonalData, fetchPersonalData, sendPersonalData} from '../sagas/PersonalData';
+import {requestAllPersonalData, savePersonalData, fetchAllPersonalData, sendPersonalData} from '../sagas/PersonalData';
 import { put, call, select } from "redux-saga/effects";
 
 import { Provider } from 'react-redux';
@@ -45,19 +48,19 @@ describe("Personal Data Actions", () => {
 
   it("Should get the data user for personal data", () => {
     const expectedAction = {
-          type: actions.GET_USERDATA
+          type: actions.GET_ALL_USERDATA
     };
-    expect(actions.getUserdata()).toEqual(expectedAction);
+    expect(actions.getAllUserdata()).toEqual(expectedAction);
   });
 
   it("Should fail when getting the data user for personal data", () => {
     const err = 'Bad error';
     const expectedAction = {
-      type: actions.GET_USERDATA_FAIL,
+      type: actions.GET_ALL_USERDATA_FAIL,
       error: true,
       payload: new Error(err)
     };
-    expect(actions.getUserdataFail(err)).toEqual(expectedAction);
+    expect(actions.getAllUserdataFail(err)).toEqual(expectedAction);
   });
 
   it("shouldn't update personal data user", () => {
@@ -119,12 +122,12 @@ describe("Reducers", () => {
     language: 'en',
   };
 
-    it("Receives a GET_USERDATA action", () => {
+    it("Receives a GET_ALL_USERDATA action", () => {
     expect(
       personalDataReducer(
         mockState,
         {
-          type: actions.GET_USERDATA
+          type: actions.GET_ALL_USERDATA
         }
       )
     ).toEqual(
@@ -155,12 +158,12 @@ describe("Reducers", () => {
     );
   });
 
-it("Receives a GET_USERDATA_FAIL action", () => {
+it("Receives a GET_ALL_USERDATA_FAIL action", () => {
     expect(
       personalDataReducer(
         mockState,
         {
-          type: actions.GET_USERDATA_FAIL,
+          type: actions.GET_ALL_USERDATA_FAIL,
           payload: {
           error: "Bad error",
           message: "Bad error"
@@ -289,12 +292,12 @@ function setupComponent() {
 
 describe("Async component", () => {
 
-    it("Sagas requestPersonalData", () => {
+    it("Sagas requestAllPersonalData", () => {
 
-       const generator = requestPersonalData();
+       const generator = requestAllPersonalData();
 
        let next = generator.next();
-       expect(next.value).toEqual(put(actions.getUserdata()));
+       expect(next.value).toEqual(put(actions.getAllUserdata()));
 
        const config = {
            PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
@@ -302,22 +305,61 @@ describe("Async component", () => {
        next = generator.next();
 
        next = generator.next(config);
-       expect(next.value).toEqual(call(fetchPersonalData, config));
+       expect(next.value).toEqual(call(fetchAllPersonalData, config));
 
-       const action = {
-         type: actions.GET_USERDATA_SUCCESS,
+       let action = {
+         type: actions.GET_ALL_USERDATA_SUCCESS,
          payload: {
            csrf_token: 'csrf-token',
+           given_name: '',
+           surname: '',
+           display_name: '',
+           language: '',
+           nins: [],
+           emails: [],
+           phones: []
+         }
+       }
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+
+       action = {
+         type: ninActions.GET_NINS_SUCCESS,
+         payload: {
+           nins: []
+         }
+       }
+       next = generator.next(action);
+       expect(next.value).toEqual(put(action));
+
+       action = {
+         type: emailActions.GET_EMAILS_SUCCESS,
+         payload: {
+           emails: []
+         }
+       }
+       next = generator.next(action);
+       expect(next.value).toEqual(put(action));
+
+       action = {
+         type: phoneActions.GET_MOBILES_SUCCESS,
+         payload: {
+           phones: []
+         }
+       }
+       next = generator.next(action);
+       expect(next.value).toEqual(put(action));
+
+       action = {
+         type: actions.GET_USERDATA_SUCCESS,
+         payload: {
            given_name: '',
            surname: '',
            display_name: '',
            language: ''
          }
        }
-       next = generator.next(action);
-       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
        next = generator.next();
-       delete(action.payload.csrf_token);
        expect(next.value).toEqual(put(action));      
     });
 

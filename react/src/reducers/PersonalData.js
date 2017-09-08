@@ -15,19 +15,19 @@ const personalData = {
 
 let personalDataReducer = (state=personalData, action) => {
   switch (action.type) {
-    case actions.GET_USERDATA:
-      return {
-        ...state,
-        is_fetching: true,
-        failed: false
-      };
     case actions.GET_USERDATA_SUCCESS:
       return {
         ...action.payload,
         is_fetching: false,
         failed: false
       };
-    case actions.GET_USERDATA_FAIL:
+    case actions.GET_ALL_USERDATA:
+      return {
+        ...state,
+        is_fetching: true,
+        failed: false
+      };
+    case actions.GET_ALL_USERDATA_FAIL:
       return {
         ...state,
         is_fetching: false,

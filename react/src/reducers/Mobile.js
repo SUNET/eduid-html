@@ -19,22 +19,11 @@ const mobileData = {
 
 let mobileReducer = (state=mobileData, action) => {
     switch (action.type) {
-    case actions.GET_MOBILES:
-      return {
-        ...state,
-        is_fetching: true
-      };
     case actions.GET_MOBILES_SUCCESS:
       return {
         ...state,
         ...action.payload,
         is_fetching: false
-      };
-    case actions.GET_MOBILES_FAIL:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: true
       };
     case actions.CHANGE_MOBILE:
       return {
