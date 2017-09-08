@@ -53,6 +53,7 @@ let OpenidConnectFreja = React.createClass({
           <li>{this.props.l10n('ocf.freja_instructions_step_2')}</li>
           <li>{this.props.l10n('ocf.freja_instructions_step_3')}</li>
           <li>{this.props.l10n('ocf.freja_instructions_step_4')}</li>
+          <li>{this.props.l10n('ocf.freja_instructions_step_5')}</li>
         </ol>
       </Well>
     );
@@ -93,7 +94,7 @@ let OpenidConnectFreja = React.createClass({
       buttonGroup = (
         <ButtonGroup vertical block>
           <Button bsStyle="link"
-                  href="https://www.verisec.com/sv/autentisering/frejaeid/"
+                  href="https://frejaeid.com/skaffa-freja-eid/"
                   target="_blank">
             {this.props.l10n('ocf.freja_instructions_install_link')}
           </Button>

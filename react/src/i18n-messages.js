@@ -281,7 +281,7 @@ const msgs = {
     'ocf.initialize_proofing_help_text': (
         <FormattedHTMLMessage
           id="ocf.initialize_proofing_help_text"
-          defaultMessage={`To use this option you need to have the <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID app</a> installed on your device.`} />),
+          defaultMessage={`To use this option you need to have the <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID app</a> installed on your device.`} />),
 
     'ocf.modal_title': (
         <FormattedMessage
@@ -301,17 +301,22 @@ const msgs = {
     'ocf.freja_instructions_step_2': (
         <FormattedMessage
           id="ocf.freja_instructions_step_2"
-          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ status.`} />),
+          defaultMessage={`Open the app and follow the instructions to reach Freja eID+ (Plus) status.`} />),
 
     'ocf.freja_instructions_step_3': (
         <FormattedMessage
           id="ocf.freja_instructions_step_3"
-          defaultMessage={`Return here and click the link at the bottom of the page. The app will open.`} />),
+          defaultMessage={`Bring your chosen form of ID to an authorized agent and ask them to scan the QR-code in the Freja eID app. There is a map function in the Freja eID app to help you locate your nearest agent.`} />),
 
     'ocf.freja_instructions_step_4': (
         <FormattedMessage
           id="ocf.freja_instructions_step_4"
-          defaultMessage={`Approve that Freja eID sends your identity to eduID. Done.`} />),
+          defaultMessage={`Return here using your mobile phone and click the link at the bottom of the page. The app will open.`} />),
+
+    'ocf.freja_instructions_step_5': (
+        <FormattedMessage
+          id="ocf.freja_instructions_step_5"
+          defaultMessage={`Approve that Freja eID sends your personal identity number to eduID. Done!`} />),
 
     'ocf.freja_instructions_install_link': (
         <FormattedMessage
@@ -331,7 +336,7 @@ const msgs = {
     'ocf.not_on_mobile_message': (
         <FormattedHTMLMessage
           id="ocf.not_on_mobile_message"
-          defaultMessage={`You need to switch to a mobile device (iOS or Android) with <a href="https://www.verisec.com/sv/autentisering/frejaeid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
+          defaultMessage={`You need to switch to a mobile device (iOS or Android) with <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.`} />),
 
     'ocf.error_missing_nin': (
         <FormattedMessage
