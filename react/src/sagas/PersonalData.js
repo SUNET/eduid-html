@@ -65,6 +65,30 @@ export function fetchAllPersonalData (config) {
 }
 
 
+function calculateProfileFilled (userdata) {
+    let max = 0, cur = 0;
+    if (userdata.personal_data) {
+        for (let attr in userdata.personal_data) {
+            if (attr !== 'csrf' && attr !== 'eppn') {
+                max += 1;
+                if (userdata.personal_data[attr] !== undefined) {
+                    cur += 1;
+                }
+            }
+        }
+    }
+    ['emails', 'phones', 'nins'].forEach( (tab) => {
+        if (userdata[tab]) {
+            max += 1;
+            if (userdata[tab][tab].length > 0) {
+                cur += 1;
+            }
+        }
+    });
+    return ( cur / max ) * 100;
+}
+
+
 export function* savePersonalData () {
     try {
         const config = yield select(state => state.config);
