@@ -7,6 +7,8 @@
  * it with the redux store.
  */
 
+import Cookies from "js-cookie";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';  
@@ -49,18 +51,6 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
-
-/* i18n */
-
-const language = navigator.languages
-                   ? navigator.languages[0]
-                   : (navigator.language || navigator.userLanguage);
-
-const lang_code = language.substring(0,2);
-const locale = require('react-intl/locale-data/' + lang_code);
-const messages = require('../i18n/l10n/' + lang_code);
-
-addLocaleData(locale);
 
 /* Sagas */
 
@@ -151,9 +141,21 @@ store.subscribe(() => {
 
 sagaMiddleware.run(rootSaga);
 
-/* render app */
+/* authn */
+
+const checkAuthn = function () {
+    const cookieName = EDUID_COOKIE_NAME,
+          cookie= Cookies.get(cookieName);
+    if (cookie === undefined) {
+        const next = document.location.href;
+        document.location.href = EDUID_AUTHN_URL + '?next=' + next;
+    }
+};
+
+/* Get configuration */
 
 const getConfig = function () {
+    checkAuthn();
     if (!store.getState().config.is_configured) {
         store.dispatch(configActions.getConfig());
     } else {
@@ -161,18 +163,35 @@ const getConfig = function () {
     }
 };
 
+
+/* render app */
+
 const init_app = function (target, component) {
   let app;
   if (component) {
     app = (
       <Provider store={store}>
-        <IntlProvider locale={ lang_code } messages={ messages }>
           {component}
-        </IntlProvider>
       </Provider>
     );
     ReactDOM.render(app, target, getConfig);
   } else {
+    /* i18n */
+    let lang_code;
+    const state = store.getState();
+    if (state.config.is_configured) {
+        lang_code = state.config.language;
+    } else {
+        const language = navigator.languages
+                           ? navigator.languages[0]
+                           : (navigator.language || navigator.userLanguage);
+        lang_code = language.substring(0,2);
+    }
+    const locale = require('react-intl/locale-data/' + lang_code);
+    const messages = require('../i18n/l10n/' + lang_code);
+
+    addLocaleData(locale);
+
     app = ( <Provider store={store}>
       <IntlProvider locale={ lang_code } messages={ messages }>
         <BrowserRouter>

@@ -2,8 +2,16 @@
 import * as actions from "actions/Config";
 
 
+const language = navigator.languages
+                   ? navigator.languages[0]
+                   : (navigator.language || navigator.userLanguage);
+
+const lang_code = language.substring(0,2);
+
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
+    language: lang_code,
+    window_size: actions.getWindowSize(),
     is_configured: false,
     is_fetching: false,
     failed: false
@@ -21,6 +29,7 @@ let configReducer = (state=configData, action) => {
       };
     case actions.GET_JSCONFIG_CONFIG_SUCCESS:
       return {
+          ...state, 
           ...action.payload,
           is_configured: true,
           is_fetching: false,
@@ -34,6 +43,16 @@ let configReducer = (state=configData, action) => {
           failed: true
       };
     case actions.NEW_CSRF_TOKEN:
+      return {
+          ...state,
+          ...action.payload
+      };
+    case actions.SET_LANGUAGE:
+      return {
+          ...state,
+          ...action.payload
+      };
+    case actions.RESIZE_WINDOW:
       return {
           ...state,
           ...action.payload

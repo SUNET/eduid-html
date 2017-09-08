@@ -6,6 +6,7 @@ const personalData = {
     is_fetching: false,
     failed: false,
     error: '',
+    eppn: '',
     given_name: '',
     surname: '',
     display_name: '',

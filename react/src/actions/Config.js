@@ -6,6 +6,8 @@ export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
 export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 export const NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
 export const GET_INITIAL_USERDATA = 'GET_INITIAL_USERDATA';
+export const SET_LANGUAGE = 'SET_LANGUAGE';
+export const RESIZE_WINDOW = 'RESIZE_WINDOW';
 
 export function getConfig () {
   return {
@@ -38,4 +40,36 @@ export function getInitialUserdata () {
   return {
     type: GET_INITIAL_USERDATA
   };
+}
+
+
+export function setLanguage (lang) {
+  return {
+    type: SET_LANGUAGE,
+    payload: {
+      language: lang
+    }
+  };
+}
+
+export function resizeWindow () {
+    return {
+        type: RESIZE_WINDOW,
+        payload: {
+            window_size: getWindowSize()
+        }
+    };
+}
+
+/* Helper functions */
+
+export function getWindowSize() {
+    if (window.innerWidth < 768) {
+        return 'xs';
+    } else if (window.innerWidth < 992) {
+        return 'sm';
+    } else if (window.innerWidth < 1200) {
+        return 'md';
+    }
+    return 'lg';
 }

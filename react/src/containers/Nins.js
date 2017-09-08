@@ -58,9 +58,6 @@ const mapDispatchToProps = (dispatch, props) => {
       },
       handleDelete: function (e) {
           const nin = e.target.closest('.nin-holder').dataset.ninnumber;
-          console.log(e.target.parentNode)
-          console.log(e.target.parentNode.parentNode)
-          console.log(e.target.parentNode.parentNode.parentNode)
           dispatch(actions.startRemove(nin));
       }
   }
