@@ -37,7 +37,7 @@ export function* requestPasswordChange (win) {
               tsURL = config.TOKEN_SERVICE_URL,
               chpassURL = tsURL + '/chpass',
               dashURL = config.DASHBOARD_URL,
-              nextURL = dashURL + '/#chpass',
+              nextURL = dashURL + '/chpass',
               url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 
         if (win !== undefined && win.location !== undefined) {

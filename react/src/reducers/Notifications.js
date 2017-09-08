@@ -30,8 +30,9 @@ let notificationsReducer = (state=notifications, action) => {
           const messages = state.messages.slice();
           messages.unshift(action.payload.message);
           return {
-            ...state,
-            messages: messages
+            messages: [ action.payload.message ],
+            warnings: [],
+            errors: []
           };
         default:
           return state;
