@@ -6,6 +6,7 @@ import * as ninActions from "actions/Nins";
 import * as emailActions from "actions/Emails";
 import * as phoneActions from "actions/Mobile";
 import * as pdataActions from "actions/PersonalData";
+import * as profileActions from "actions/Profile";
 
 
 export function* requestAllPersonalData () {
@@ -15,6 +16,8 @@ export function* requestAllPersonalData () {
         let userdata = yield call(fetchAllPersonalData, config);
         yield put(putCsrfToken(userdata));
         if (userdata.type === pdataActions.GET_ALL_USERDATA_SUCCESS) {
+          const filled = calculateProfileFilled(userdata);
+          yield put(profileActions.profileFilled(filled.max, filled.cur));
           const nins = userdata.payload.nins;
           delete userdata.payload.nins;
           const ninAction = {
@@ -66,26 +69,20 @@ export function fetchAllPersonalData (config) {
 
 
 function calculateProfileFilled (userdata) {
-    let max = 0, cur = 0;
-    if (userdata.personal_data) {
-        for (let attr in userdata.personal_data) {
-            if (attr !== 'csrf' && attr !== 'eppn') {
-                max += 1;
-                if (userdata.personal_data[attr] !== undefined) {
-                    cur += 1;
-                }
-            }
-        }
-    }
-    ['emails', 'phones', 'nins'].forEach( (tab) => {
-        if (userdata[tab]) {
-            max += 1;
-            if (userdata[tab][tab].length > 0) {
-                cur += 1;
-            }
+    let filled = {max: 0, cur: 0};
+    ['given_name', 'surname', 'display_name', 'language'].forEach( (pdata) => {
+        filled.max += 1;
+        if (userdata.payload[pdata]) {
+            filled.cur += 1;
         }
     });
-    return ( cur / max ) * 100;
+    ['emails', 'phones', 'nins'].forEach( (tab) => {
+        filled.max += 1;
+        if (userdata.payload[tab].length > 0) {
+            filled.cur += 1;
+        }
+    });
+    return filled;
 }
 
 

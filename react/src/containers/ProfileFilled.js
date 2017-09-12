@@ -4,6 +4,8 @@ import ProfileFilled from 'components/ProfileFilled';
 
 const mapStateToProps = (state, props) => {
   return {
+      max: state.profile.max,
+      cur: state.profile.cur
   }
 };
 

@@ -11,7 +11,7 @@ class ProfileFilled extends Component{
   render(){
     return(
       <div>
-          <meter max="4"
+          <meter max={this.props.max} value={this.props.cur}
                  id="profile-filled-meter"
                  ref="profileFilledMeter">
           </meter>
