@@ -134,6 +134,21 @@ const msgs = {
             id="CSRF failed to validate"
             defaultMessage={`CSRF failed to validate, please reload the page`} />),
 
+   'error_navet_task': (
+        <FormattedMessage
+          id="error_navet_task"
+          defaultMessage={`Communication problem with Navet`} />),
+
+   'error_lookup_mobile_task': (
+        <FormattedMessage
+          id="error_lookup_mobile_task"
+          defaultMessage={`Problem looking up the phone number`} />),
+
+    /************************/
+    /* Main *****************/
+    /************************/
+
+
     'main.profile_title': (
         <FormattedMessage
             id="main.profile_title"
@@ -173,10 +188,6 @@ const msgs = {
         <FormattedMessage
             id="main.copyright"
             defaultMessage={`&copy; SUNET 2013-2017`} />),
-
-    /************************/
-    /* Main *****************/
-    /************************/
 
     /************************/
     /* ConfirmModal *********/
@@ -304,6 +315,56 @@ const msgs = {
           id="emails.main_title"
           defaultMessage={`Email addresses`} />),
 
+    'emails.get-success': (
+        <FormattedMessage
+          id="emails.get-success"
+          defaultMessage={`Successfully retrieved Email addresses`} />),
+
+    'emails.duplicated': (
+        <FormattedMessage
+          id="emails.duplicated"
+          defaultMessage={`That email address is already in use, please choose another`} />),
+
+    'emails.save-success': (
+        <FormattedMessage
+          id="emails.save-success"
+          defaultMessage={`Email address saved successfully`} />),
+
+    'emails.unconfirmed_address_not_primary': (
+        <FormattedMessage
+          id="emails.unconfirmed_address_not_primary"
+          defaultMessage={`An unconfirmed mail address cannot be set as primary`} />),
+
+    'emails.primary-success': (
+        <FormattedMessage
+          id="emails.primary-success"
+          defaultMessage={`Email address successfully set as primary`} />),
+
+    'emails.code_expired_send_new': (
+        <FormattedMessage
+          id="emails.code_expired_send_new"
+          defaultMessage={`Expired verification code, sending another`} />),
+
+    'emails.verification-success': (
+        <FormattedMessage
+          id="emails.verification-success"
+          defaultMessage={`Successfully verified email address`} />),
+
+    'emails.cannot_remove_unique': (
+        <FormattedMessage
+          id="emails.cannot_remove_unique"
+          defaultMessage={`You must have at least one email address`} />),
+
+    'emails.removal-success': (
+        <FormattedMessage
+          id="emails.removal-success"
+          defaultMessage={`Successfully removed email address`} />),
+
+    'emails.code-sent': (
+        <FormattedMessage
+          id="emails.code-sent"
+          defaultMessage={`Successfully sent verification code`} />),
+
     /************************/
     /* OIDC *****************/
     /************************/
@@ -427,6 +488,21 @@ const msgs = {
           id="pd.main_title"
           defaultMessage={`Personal information`} />),
 
+    'pd.all-data-success': (
+        <FormattedMessage
+          id="pd.all-data-success"
+          defaultMessage={`Successfully retrieved Personal information`} />),
+
+    'pd.pdata-success': (
+        <FormattedMessage
+          id="pd.pdata-success"
+          defaultMessage={`Successfully retrieved Personal information`} />),
+
+    'pd.save-success': (
+        <FormattedMessage
+          id="pd.save-success"
+          defaultMessage={`Successfully saved Personal information`} />),
+
     /************************/
     /* Mobile ***************/
     /************************/
@@ -463,6 +539,66 @@ const msgs = {
         <FormattedMessage
           id="phones.main_title"
           defaultMessage={`Mobile phone numbers`} />),
+
+    'phones.get-success': (
+        <FormattedMessage
+          id="phones.get-success"
+          defaultMessage={`Successfully retrieved phone numbers`} />),
+
+    'phones.duplicated': (
+        <FormattedMessage
+          id="phones.duplicated"
+          defaultMessage={`That phone number is already in use, please choose another`} />),
+
+    'phones.save-success': (
+        <FormattedMessage
+          id="phones.save-success"
+          defaultMessage={`phone number saved successfully`} />),
+
+    'phones.unconfirmed_number_not_primary': (
+        <FormattedMessage
+          id="phones.unconfirmed_number_not_primary"
+          defaultMessage={`An unconfirmed phone number cannot be set as primary`} />),
+
+    'phones.primary-success': (
+        <FormattedMessage
+          id="phones.primary-success"
+          defaultMessage={`phone number successfully set as primary`} />),
+
+    'phones.code_expired_send_new': (
+        <FormattedMessage
+          id="phones.code_expired_send_new"
+          defaultMessage={`Expired verification code, sending another`} />),
+
+    'phones.code_invalid': (
+        <FormattedMessage
+          id="phones.code_invalid"
+          defaultMessage={`Invalid verification code`} />),
+
+    'phones.verification-success': (
+        <FormattedMessage
+          id="phones.verification-success"
+          defaultMessage={`Successfully verified phone number`} />),
+
+    'phones.cannot_remove_unique': (
+        <FormattedMessage
+          id="phones.cannot_remove_unique"
+          defaultMessage={`You must have at least one phone number`} />),
+
+    'phones.cannot_remove_primary': (
+        <FormattedMessage
+          id="phones.cannot_remove_primary"
+          defaultMessage={`You cannot remove your primary phone number`} />),
+
+    'phones.removal-success': (
+        <FormattedMessage
+          id="phones.removal-success"
+          defaultMessage={`Successfully removed phone number`} />),
+
+    'phones.code-sent': (
+        <FormattedMessage
+          id="phones.code-sent"
+          defaultMessage={`Successfully sent verification code`} />),
 
     /***********************/
     /* Security ************/
@@ -605,6 +741,21 @@ const msgs = {
           id="chpass.no_old_pw"
           defaultMessage={`Please enter the old password`} />),
 
+   'chpass.no_reauthn': (
+        <FormattedMessage
+          id="chpass.no_reauthn"
+          defaultMessage={`You must re-authenticate to change your password`} />),
+
+   'chpass.stale_reauthn': (
+        <FormattedMessage
+          id="chpass.stale_reauthn"
+          defaultMessage={`Stale re-authentication. Please re-initiate the process.`} />),
+
+   'chpass.password-changed': (
+        <FormattedMessage
+          id="chpass.password-changed"
+          defaultMessage={`Password successfully changed`} />),
+
    'pwfield.enter_password': (
         <FormattedMessage
           id="pwfield.enter_password"
@@ -704,6 +855,16 @@ const msgs = {
           id="nins.only_one_to_verify"
           defaultMessage={`You can only have one unverified NIN to verify it. Please remove the unwanted ones.`} />),
 
+   'nins.success_removal': (
+        <FormattedMessage
+          id="nins.success_removal"
+          defaultMessage={`Successfully removed NIN`} />),
+
+   'nins.no-mobile-match': (
+        <FormattedMessage
+          id="nins.no-mobile-match"
+          defaultMessage={`No phone number matching NIN`} />),
+
     /************************/
     /* Letter proofing ******/
     /************************/
@@ -712,6 +873,41 @@ const msgs = {
         <FormattedMessage
           id="letter.letter_button_text"
           defaultMessage={`Confirm using letter`} />),
+
+   'letter.no_state_found': (
+        <FormattedMessage
+          id="letter.no_state_found"
+          defaultMessage={`No state found`} />),
+
+   'letter.already-sent': (
+        <FormattedMessage
+          id="letter.already-sent"
+          defaultMessage={`You have already been sent a verification letter`} />),
+
+   'letter.no-address-found': (
+        <FormattedMessage
+          id="letter.no-address-found"
+          defaultMessage={`No postal address found`} />),
+
+   'letter.bad-postal-address': (
+        <FormattedMessage
+          id="letter.bad-postal-address"
+          defaultMessage={`The postal address is incomprehensible`} />),
+
+   'letter.saved-unconfirmed': (
+        <FormattedMessage
+          id="letter.saved-unconfirmed"
+          defaultMessage={`Saved unconfirmed NIN`} />),
+
+   'letter.wrong-code': (
+        <FormattedMessage
+          id="letter.wrong-code"
+          defaultMessage={`Incorrect verification code`} />),
+
+   'letter.verification_success': (
+        <FormattedMessage
+          id="letter.verification_success"
+          defaultMessage={`Successfully verified NIN`} />),
 
     /************************/
     /* Header ******** ******/

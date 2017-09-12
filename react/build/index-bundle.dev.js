@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "266f36b7ad66d4aac235"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "aa1b439902dbf789130f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24554,6 +24554,10 @@
 	});
 	exports.store = undefined;
 	
+	var _extends2 = __webpack_require__(482);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
 	var _regenerator = __webpack_require__(520);
 	
 	var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -24593,6 +24597,10 @@
 	var _store = __webpack_require__(641);
 	
 	var _store2 = _interopRequireDefault(_store);
+	
+	var _notifyMiddleware = __webpack_require__(665);
+	
+	var _notifyMiddleware2 = _interopRequireDefault(_notifyMiddleware);
 	
 	var _Config = __webpack_require__(647);
 	
@@ -24727,7 +24735,13 @@
 	    if (serializedState === null) {
 	      return undefined;
 	    }
-	    return JSON.parse(serializedState);
+	    return (0, _extends3.default)({}, JSON.parse(serializedState), {
+	      notifications: {
+	        errors: [],
+	        warnings: [],
+	        messages: []
+	      }
+	    });
 	  } catch (err) {
 	    return undefined;
 	  }
@@ -24744,7 +24758,7 @@
 	
 	/* Store */
 	
-	var store = exports.store = (0, _redux.createStore)(_store2.default, loadPersistedState(), composeEnhancers((0, _redux.applyMiddleware)(sagaMiddleware, (0, _reduxLogger2.default)())));
+	var store = exports.store = (0, _redux.createStore)(_store2.default, loadPersistedState(), composeEnhancers((0, _redux.applyMiddleware)(sagaMiddleware, _notifyMiddleware2.default, (0, _reduxLogger2.default)())));
 	
 	store.subscribe(function () {
 	  saveState(store.getState());
@@ -39189,6 +39203,10 @@
 	
 	var _LetterProofing2 = _interopRequireDefault(_LetterProofing);
 	
+	var _Notifications = __webpack_require__(663);
+	
+	var _Notifications2 = _interopRequireDefault(_Notifications);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var eduIDApp = (0, _redux.combineReducers)({
@@ -39201,6 +39219,7 @@
 	  phones: _Mobile2.default,
 	  nins: _Nins2.default,
 	  letter_proofing: _LetterProofing2.default,
+	  notifications: _Notifications2.default,
 	  security: _Security2.default
 	});
 	
@@ -41971,9 +41990,197 @@
 	;
 
 /***/ }),
-/* 663 */,
-/* 664 */,
-/* 665 */,
+/* 663 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends2 = __webpack_require__(482);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _Notifications = __webpack_require__(664);
+	
+	var actions = _interopRequireWildcard(_Notifications);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var notifications = {
+	  messages: [],
+	  warnings: [],
+	  errors: []
+	};
+	
+	var notificationsReducer = function notificationsReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : notifications;
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case actions.NEW_NOTIFICATION:
+	      switch (action.payload.level) {
+	        case "danger":
+	          return {
+	            messages: [],
+	            warnings: [],
+	            errors: [action.payload.message]
+	          };
+	        case "warning":
+	          var warnings = state.warnings.slice();
+	          warnings.push(action.payload.message);
+	          return (0, _extends3.default)({}, state, {
+	            warnings: warnings
+	          });
+	        case "success":
+	          var messages = state.messages.slice();
+	          messages.unshift(action.payload.message);
+	          return {
+	            messages: [action.payload.message],
+	            warnings: [],
+	            errors: []
+	          };
+	        default:
+	          return state;
+	      }
+	    case actions.RM_NOTIFICATION:
+	      var msgs = state[action.payload.level].slice();
+	      msgs.splice(action.payload.index, 1);
+	      var newState = (0, _extends3.default)({}, state);
+	      newState[action.payload.level] = msgs;
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	var _default = notificationsReducer;
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+	
+	  __REACT_HOT_LOADER__.register(notifications, "notifications", "/home/eperez/src/git/eduid-html/react/src/reducers/Notifications.js");
+	
+	  __REACT_HOT_LOADER__.register(notificationsReducer, "notificationsReducer", "/home/eperez/src/git/eduid-html/react/src/reducers/Notifications.js");
+	
+	  __REACT_HOT_LOADER__.register(_default, "default", "/home/eperez/src/git/eduid-html/react/src/reducers/Notifications.js");
+	}();
+
+	;
+
+/***/ }),
+/* 664 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.eduidNotify = eduidNotify;
+	exports.eduidRMNotify = eduidRMNotify;
+	var NEW_NOTIFICATION = exports.NEW_NOTIFICATION = 'NEW_NOTIFICATION';
+	var RM_NOTIFICATION = exports.RM_NOTIFICATION = 'RM_NOTIFICATION';
+	
+	function eduidNotify(msg, level) {
+	  return {
+	    type: NEW_NOTIFICATION,
+	    payload: {
+	      message: msg,
+	      level: level
+	    }
+	  };
+	}
+	
+	function eduidRMNotify(level, index) {
+	  return {
+	    type: RM_NOTIFICATION,
+	    payload: {
+	      level: level,
+	      index: index
+	    }
+	  };
+	}
+	;
+	
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+	
+	  __REACT_HOT_LOADER__.register(NEW_NOTIFICATION, 'NEW_NOTIFICATION', '/home/eperez/src/git/eduid-html/react/src/actions/Notifications.js');
+	
+	  __REACT_HOT_LOADER__.register(RM_NOTIFICATION, 'RM_NOTIFICATION', '/home/eperez/src/git/eduid-html/react/src/actions/Notifications.js');
+	
+	  __REACT_HOT_LOADER__.register(eduidNotify, 'eduidNotify', '/home/eperez/src/git/eduid-html/react/src/actions/Notifications.js');
+	
+	  __REACT_HOT_LOADER__.register(eduidRMNotify, 'eduidRMNotify', '/home/eperez/src/git/eduid-html/react/src/actions/Notifications.js');
+	}();
+
+	;
+
+/***/ }),
+/* 665 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _Notifications = __webpack_require__(664);
+	
+	var actions = _interopRequireWildcard(_Notifications);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var notifyAndDispatch = function notifyAndDispatch(store) {
+	    return function (next) {
+	        return function (action) {
+	            if (action.type !== actions.NEW_NOTIFICATION) {
+	                if (action.error && action.payload) {
+	                    var msg = action.payload.errorMsg || action.payload.message;
+	                    if (msg) {
+	                        next(actions.eduidNotify(msg, 'danger'));
+	                    }
+	                } else if (action.payload && action.payload.message) {
+	                    next(actions.eduidNotify(action.payload.message, 'success'));
+	                }
+	                if (action.payload !== undefined) {
+	                    delete action.payload.message;
+	                    delete action.payload.errorMsg;
+	                }
+	            }
+	            return next(action);
+	        };
+	    };
+	};
+	
+	var _default = notifyAndDispatch;
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	        return;
+	    }
+	
+	    __REACT_HOT_LOADER__.register(notifyAndDispatch, 'notifyAndDispatch', '/home/eperez/src/git/eduid-html/react/src/notify-middleware.js');
+	
+	    __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/notify-middleware.js');
+	}();
+
+	;
+
+/***/ }),
 /* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42160,34 +42367,35 @@
 	
 	                    delete data.is_fetching;
 	                    delete data.failed;
-	                    _context2.next = 11;
+	                    delete data.eppn;
+	                    _context2.next = 12;
 	                    return (0, _effects.call)(sendPersonalData, config, data);
 	
-	                case 11:
+	                case 12:
 	                    resp = _context2.sent;
-	                    _context2.next = 14;
+	                    _context2.next = 15;
 	                    return (0, _effects.put)((0, _common.putCsrfToken)(resp));
 	
-	                case 14:
-	                    _context2.next = 16;
+	                case 15:
+	                    _context2.next = 17;
 	                    return (0, _effects.put)(resp);
 	
-	                case 16:
-	                    _context2.next = 22;
+	                case 17:
+	                    _context2.next = 23;
 	                    break;
 	
-	                case 18:
-	                    _context2.prev = 18;
+	                case 19:
+	                    _context2.prev = 19;
 	                    _context2.t0 = _context2["catch"](0);
-	                    _context2.next = 22;
+	                    _context2.next = 23;
 	                    return (0, _effects.put)((0, _PersonalData.postUserdataFail)(_context2.t0.toString()));
 	
-	                case 22:
+	                case 23:
 	                case "end":
 	                    return _context2.stop();
 	            }
 	        }
-	    }, _marked[1], this, [[0, 18]]);
+	    }, _marked[1], this, [[0, 19]]);
 	}
 	
 	function sendPersonalData(config, data) {
@@ -44019,7 +44227,7 @@
 	                    tsURL = config.TOKEN_SERVICE_URL;
 	                    chpassURL = tsURL + '/chpass';
 	                    dashURL = config.DASHBOARD_URL;
-	                    nextURL = dashURL + '/#chpass';
+	                    nextURL = dashURL + '/chpass';
 	                    url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 	
 	
@@ -46121,6 +46329,18 @@
 	        id: 'CSRF failed to validate',
 	        defaultMessage: 'CSRF failed to validate, please reload the page' }),
 	
+	    'error_navet_task': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'error_navet_task',
+	        defaultMessage: 'Communication problem with Navet' }),
+	
+	    'error_lookup_mobile_task': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'error_lookup_mobile_task',
+	        defaultMessage: 'Problem looking up the phone number' }),
+	
+	    /************************/
+	    /* Main *****************/
+	    /************************/
+	
 	    'main.profile_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'main.profile_title',
 	        defaultMessage: 'Profile' }),
@@ -46152,10 +46372,6 @@
 	    'main.copyright': _react2.default.createElement(_reactIntl.FormattedMessage, {
 	        id: 'main.copyright',
 	        defaultMessage: '&copy; SUNET 2013-2017' }),
-	
-	    /************************/
-	    /* Main *****************/
-	    /************************/
 	
 	    /************************/
 	    /* ConfirmModal *********/
@@ -46262,181 +46478,151 @@
 	        id: 'emails.main_title',
 	        defaultMessage: 'Email addresses' }),
 	
-	    /************************/
-	    /* OIDC *****************/
-	    /************************/
+	    'emails.get-success': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.get-success',
+	        defaultMessage: 'Successfully retrieved Email addresses' }),
 	
-	    'oc.get_qrcode': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'oc.get_qrcode',
-	        defaultMessage: 'SE-LEG' }),
+	    'emails.duplicated': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.duplicated',
+	        defaultMessage: 'That email address is already in use, please choose another' }),
 	
-	    /************************/
-	    /* OIDC FREJA ***********/
-	    /************************/
+	    'emails.save-success': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.save-success',
+	        defaultMessage: 'Email address saved successfully' }),
 	
-	    'ocf.initialize_proofing': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.initialize_proofing',
-	        defaultMessage: 'FREJA EID' }),
+	    'emails.unconfirmed_address_not_primary': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.unconfirmed_address_not_primary',
+	        defaultMessage: 'An unconfirmed mail address cannot be set as primary' }),
 	
-	    'ocf.initialize_proofing_help_text': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
-	        id: 'ocf.initialize_proofing_help_text',
-	        defaultMessage: 'To use this option you need to have the <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID app</a> installed on your device.' }),
+	    'emails.primary-success': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.primary-success',
+	        defaultMessage: 'Email address successfully set as primary' }),
 	
-	    'ocf.modal_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.modal_title',
-	        defaultMessage: 'Confirm using Freja eID' }),
+	    'emails.code_expired_send_new': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.code_expired_send_new',
+	        defaultMessage: 'Expired verification code, sending another' }),
 	
-	    'ocf.freja_instructions_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_title',
-	        defaultMessage: 'How to confirm your account using Freja eID' }),
+	    'emails.verification-success': _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'emails.verification-success',
+	        defaultMessage: 'Successfully verified email address' })
 	
-	    'ocf.freja_instructions_step_1': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_step_1',
-	        defaultMessage: 'Install the Freja eID app on your mobile device.' }),
-	
-	    'ocf.freja_instructions_step_2': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_step_2',
-	        defaultMessage: 'Open the app and follow the instructions to reach Freja eID+ (Plus) status.' }),
-	
-	    'ocf.freja_instructions_step_3': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_step_3',
-	        defaultMessage: 'Bring your chosen form of ID to an authorized agent and ask them to scan the QR-code in the Freja eID app. There is a map function in the Freja eID app to help you locate your nearest agent.' }),
-	
-	    'ocf.freja_instructions_step_4': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_step_4',
-	        defaultMessage: 'Return here using your mobile phone and click the link at the bottom of the page. The app will open.' }),
-	
-	    'ocf.freja_instructions_step_5': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_step_5',
-	        defaultMessage: 'Approve that Freja eID sends your personal identity number to eduID. Done!' }),
-	
-	    'ocf.freja_instructions_install_link': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.freja_instructions_install_link',
-	        defaultMessage: 'I need to install Freja eID' }),
-	
-	    'ocf.open_app': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.open_app',
-	        defaultMessage: 'I have Freja eID installed' }),
-	
-	    'ocf.not_on_mobile_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.not_on_mobile_title',
-	        defaultMessage: 'Not using your phone?' }),
-	
-	    'ocf.not_on_mobile_message': _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
-	        id: 'ocf.not_on_mobile_message',
-	        defaultMessage: 'You need to switch to a mobile device (iOS or Android) with <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.' }),
-	
-	    'ocf.error_missing_nin': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.error_missing_nin',
-	        defaultMessage: 'Please add a national identity number and try again' }),
-	
-	    'ocf.error_unknown_error': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'ocf.error_unknown_error',
-	        defaultMessage: 'Temporary technical difficulties, please try again later' }),
-	
-	    /************************/
-	    /* PERSONAL DATA ********/
-	    /************************/
-	
-	    "pd.given_name": _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.given_name',
-	        defaultMessage: 'Given Name' }),
-	
-	    "pd.surname": _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.surname',
-	        defaultMessage: 'Surname' }),
-	
-	    "pd.display_name": _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.display_name',
-	        defaultMessage: 'Display Name' }),
-	
-	    "pd.language": _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.language',
-	        defaultMessage: 'Language' }),
-	
-	    'pd.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.long_description',
-	        defaultMessage: 'This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you.' }),
-	
-	    'pd.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'pd.main_title',
-	        defaultMessage: 'Personal information' }),
-	
-	    /************************/
-	    /* Mobile ***************/
-	    /************************/
-	
-	    'mobile.resend_success': function mobileResend_success(values) {
-	        return _react2.default.createElement(_reactIntl.FormattedMessage, {
-	            id: 'mobile.resend_success',
-	            defaultMessage: 'New code successfully sent to {email}',
-	            values: values });
-	    },
-	
-	    'mobile.email_label': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'mobile.mobile',
-	        defaultMessage: 'mobile' }),
-	
-	    'mobile.button_add': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'mobile.button_add',
-	        defaultMessage: 'Add' }),
-	
-	    'mobile.confirm_title': function mobileConfirm_title(values) {
-	        return _react2.default.createElement(_reactIntl.FormattedMessage, {
-	            id: 'mobile.confirm_title',
-	            defaultMessage: 'Check your mobile inbox for {phone} for further instructions',
-	            values: values });
-	    },
-	
-	    'phones.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'phones.long_description',
-	        defaultMessage: 'You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one.' }),
-	
-	    'phones.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'phones.main_title',
-	        defaultMessage: 'Mobile phone numbers' }),
-	
-	    /***********************/
-	    /* Security ************/
-	    /***********************/
-	
-	    'security.long_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.long_description',
-	        defaultMessage: 'Your eduID account password can be changed below.' }),
-	
-	    'security.main_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.main_title',
-	        defaultMessage: 'Security' }),
-	
-	    'security.credential': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.credential',
-	        defaultMessage: 'Credential' }),
-	
-	    'security.creation_date': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.creation_date',
-	        defaultMessage: 'Creation date' }),
-	
-	    'security.last_used': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.last_used',
-	        defaultMessage: 'Last used' }),
-	
-	    'security.change_password': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.change_password',
-	        defaultMessage: 'Change password' }),
-	
-	    'security.account_description': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.account_description',
-	        defaultMessage: 'Use the button below to permanently delete your eduID account.' }),
-	
-	    'security.account_title': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.account_title',
-	        defaultMessage: 'Account deletion' }),
-	
-	    'security.delete_account': _react2.default.createElement(_reactIntl.FormattedMessage, {
-	        id: 'security.delete_account',
-	        defaultMessage: 'Delete eduID account' })
-	
-	}, (0, _defineProperty3.default)(_msgs, 'security.delete_account', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	}, (0, _defineProperty3.default)(_msgs, 'emails.cannot_remove_unique', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'emails.cannot_remove_unique',
+	    defaultMessage: 'You must have at least one email address' })), (0, _defineProperty3.default)(_msgs, 'emails.removal-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'emails.removal-success',
+	    defaultMessage: 'Successfully removed email address' })), (0, _defineProperty3.default)(_msgs, 'emails.code-sent', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'emails.code-sent',
+	    defaultMessage: 'Successfully sent verification code' })), (0, _defineProperty3.default)(_msgs, 'oc.get_qrcode', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'oc.get_qrcode',
+	    defaultMessage: 'SE-LEG' })), (0, _defineProperty3.default)(_msgs, 'ocf.initialize_proofing', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.initialize_proofing',
+	    defaultMessage: 'FREJA EID' })), (0, _defineProperty3.default)(_msgs, 'ocf.initialize_proofing_help_text', _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
+	    id: 'ocf.initialize_proofing_help_text',
+	    defaultMessage: 'To use this option you need to have the <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID app</a> installed on your device.' })), (0, _defineProperty3.default)(_msgs, 'ocf.modal_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.modal_title',
+	    defaultMessage: 'Confirm using Freja eID' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_title',
+	    defaultMessage: 'How to confirm your account using Freja eID' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_step_1', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_step_1',
+	    defaultMessage: 'Install the Freja eID app on your mobile device.' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_step_2', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_step_2',
+	    defaultMessage: 'Open the app and follow the instructions to reach Freja eID+ (Plus) status.' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_step_3', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_step_3',
+	    defaultMessage: 'Bring your chosen form of ID to an authorized agent and ask them to scan the QR-code in the Freja eID app. There is a map function in the Freja eID app to help you locate your nearest agent.' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_step_4', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_step_4',
+	    defaultMessage: 'Return here using your mobile phone and click the link at the bottom of the page. The app will open.' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_step_5', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_step_5',
+	    defaultMessage: 'Approve that Freja eID sends your personal identity number to eduID. Done!' })), (0, _defineProperty3.default)(_msgs, 'ocf.freja_instructions_install_link', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.freja_instructions_install_link',
+	    defaultMessage: 'I need to install Freja eID' })), (0, _defineProperty3.default)(_msgs, 'ocf.open_app', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.open_app',
+	    defaultMessage: 'I have Freja eID installed' })), (0, _defineProperty3.default)(_msgs, 'ocf.not_on_mobile_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.not_on_mobile_title',
+	    defaultMessage: 'Not using your phone?' })), (0, _defineProperty3.default)(_msgs, 'ocf.not_on_mobile_message', _react2.default.createElement(_reactIntl.FormattedHTMLMessage, {
+	    id: 'ocf.not_on_mobile_message',
+	    defaultMessage: 'You need to switch to a mobile device (iOS or Android) with <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID</a> installed before you will be able to confirm your account using Freja eID.' })), (0, _defineProperty3.default)(_msgs, 'ocf.error_missing_nin', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.error_missing_nin',
+	    defaultMessage: 'Please add a national identity number and try again' })), (0, _defineProperty3.default)(_msgs, 'ocf.error_unknown_error', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'ocf.error_unknown_error',
+	    defaultMessage: 'Temporary technical difficulties, please try again later' })), (0, _defineProperty3.default)(_msgs, "pd.given_name", _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.given_name',
+	    defaultMessage: 'Given Name' })), (0, _defineProperty3.default)(_msgs, "pd.surname", _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.surname',
+	    defaultMessage: 'Surname' })), (0, _defineProperty3.default)(_msgs, "pd.display_name", _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.display_name',
+	    defaultMessage: 'Display Name' })), (0, _defineProperty3.default)(_msgs, "pd.language", _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.language',
+	    defaultMessage: 'Language' })), (0, _defineProperty3.default)(_msgs, 'pd.long_description', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.long_description',
+	    defaultMessage: 'This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you.' })), (0, _defineProperty3.default)(_msgs, 'pd.main_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.main_title',
+	    defaultMessage: 'Personal information' })), (0, _defineProperty3.default)(_msgs, 'pd.all-data-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.all-data-success',
+	    defaultMessage: 'Successfully retrieved Personal information' })), (0, _defineProperty3.default)(_msgs, 'pd.pdata-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.pdata-success',
+	    defaultMessage: 'Successfully retrieved Personal information' })), (0, _defineProperty3.default)(_msgs, 'pd.save-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'pd.save-success',
+	    defaultMessage: 'Successfully saved Personal information' })), (0, _defineProperty3.default)(_msgs, 'mobile.resend_success', function mobileResend_success(values) {
+	    return _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'mobile.resend_success',
+	        defaultMessage: 'New code successfully sent to {email}',
+	        values: values });
+	}), (0, _defineProperty3.default)(_msgs, 'mobile.email_label', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'mobile.mobile',
+	    defaultMessage: 'mobile' })), (0, _defineProperty3.default)(_msgs, 'mobile.button_add', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'mobile.button_add',
+	    defaultMessage: 'Add' })), (0, _defineProperty3.default)(_msgs, 'mobile.confirm_title', function mobileConfirm_title(values) {
+	    return _react2.default.createElement(_reactIntl.FormattedMessage, {
+	        id: 'mobile.confirm_title',
+	        defaultMessage: 'Check your mobile inbox for {phone} for further instructions',
+	        values: values });
+	}), (0, _defineProperty3.default)(_msgs, 'phones.long_description', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.long_description',
+	    defaultMessage: 'You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one.' })), (0, _defineProperty3.default)(_msgs, 'phones.main_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.main_title',
+	    defaultMessage: 'Mobile phone numbers' })), (0, _defineProperty3.default)(_msgs, 'phones.get-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.get-success',
+	    defaultMessage: 'Successfully retrieved phone numbers' })), (0, _defineProperty3.default)(_msgs, 'phones.duplicated', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.duplicated',
+	    defaultMessage: 'That phone number is already in use, please choose another' })), (0, _defineProperty3.default)(_msgs, 'phones.save-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.save-success',
+	    defaultMessage: 'phone number saved successfully' })), (0, _defineProperty3.default)(_msgs, 'phones.unconfirmed_number_not_primary', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.unconfirmed_number_not_primary',
+	    defaultMessage: 'An unconfirmed phone number cannot be set as primary' })), (0, _defineProperty3.default)(_msgs, 'phones.primary-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.primary-success',
+	    defaultMessage: 'phone number successfully set as primary' })), (0, _defineProperty3.default)(_msgs, 'phones.code_expired_send_new', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.code_expired_send_new',
+	    defaultMessage: 'Expired verification code, sending another' })), (0, _defineProperty3.default)(_msgs, 'phones.code_invalid', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.code_invalid',
+	    defaultMessage: 'Invalid verification code' })), (0, _defineProperty3.default)(_msgs, 'phones.verification-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.verification-success',
+	    defaultMessage: 'Successfully verified phone number' })), (0, _defineProperty3.default)(_msgs, 'phones.cannot_remove_unique', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.cannot_remove_unique',
+	    defaultMessage: 'You must have at least one phone number' })), (0, _defineProperty3.default)(_msgs, 'phones.cannot_remove_primary', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.cannot_remove_primary',
+	    defaultMessage: 'You cannot remove your primary phone number' })), (0, _defineProperty3.default)(_msgs, 'phones.removal-success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.removal-success',
+	    defaultMessage: 'Successfully removed phone number' })), (0, _defineProperty3.default)(_msgs, 'phones.code-sent', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'phones.code-sent',
+	    defaultMessage: 'Successfully sent verification code' })), (0, _defineProperty3.default)(_msgs, 'security.long_description', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.long_description',
+	    defaultMessage: 'Your eduID account password can be changed below.' })), (0, _defineProperty3.default)(_msgs, 'security.main_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.main_title',
+	    defaultMessage: 'Security' })), (0, _defineProperty3.default)(_msgs, 'security.credential', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.credential',
+	    defaultMessage: 'Credential' })), (0, _defineProperty3.default)(_msgs, 'security.creation_date', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.creation_date',
+	    defaultMessage: 'Creation date' })), (0, _defineProperty3.default)(_msgs, 'security.last_used', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.last_used',
+	    defaultMessage: 'Last used' })), (0, _defineProperty3.default)(_msgs, 'security.change_password', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.change_password',
+	    defaultMessage: 'Change password' })), (0, _defineProperty3.default)(_msgs, 'security.account_description', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.account_description',
+	    defaultMessage: 'Use the button below to permanently delete your eduID account.' })), (0, _defineProperty3.default)(_msgs, 'security.account_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.account_title',
+	    defaultMessage: 'Account deletion' })), (0, _defineProperty3.default)(_msgs, 'security.delete_account', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'security.delete_account',
+	    defaultMessage: 'Delete eduID account' })), (0, _defineProperty3.default)(_msgs, 'security.delete_account', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'security.delete_account',
 	    defaultMessage: 'Delete eduID account' })), (0, _defineProperty3.default)(_msgs, 'security.confirm_title', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'security.confirm_title',
@@ -46472,7 +46658,13 @@
 	    id: 'chpass.change-password',
 	    defaultMessage: 'Change password' })), (0, _defineProperty3.default)(_msgs, 'chpass.no_old_pw', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'chpass.no_old_pw',
-	    defaultMessage: 'Please enter the old password' })), (0, _defineProperty3.default)(_msgs, 'pwfield.enter_password', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    defaultMessage: 'Please enter the old password' })), (0, _defineProperty3.default)(_msgs, 'chpass.no_reauthn', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'chpass.no_reauthn',
+	    defaultMessage: 'You must re-authenticate to change your password' })), (0, _defineProperty3.default)(_msgs, 'chpass.stale_reauthn', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'chpass.stale_reauthn',
+	    defaultMessage: 'Stale re-authentication. Please re-initiate the process.' })), (0, _defineProperty3.default)(_msgs, 'chpass.password-changed', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'chpass.password-changed',
+	    defaultMessage: 'Password successfully changed' })), (0, _defineProperty3.default)(_msgs, 'pwfield.enter_password', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'pwfield.enter_password',
 	    defaultMessage: 'Enter password' })), (0, _defineProperty3.default)(_msgs, 'pwfield.repeat_password', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'pwfield.repeat_password',
@@ -46510,9 +46702,27 @@
 	    id: 'nins.button_delete',
 	    defaultMessage: 'Remove' })), (0, _defineProperty3.default)(_msgs, 'nins.only_one_to_verify', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'nins.only_one_to_verify',
-	    defaultMessage: 'You can only have one unverified NIN to verify it. Please remove the unwanted ones.' })), (0, _defineProperty3.default)(_msgs, 'letter.letter_button_text', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    defaultMessage: 'You can only have one unverified NIN to verify it. Please remove the unwanted ones.' })), (0, _defineProperty3.default)(_msgs, 'nins.success_removal', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'nins.success_removal',
+	    defaultMessage: 'Successfully removed NIN' })), (0, _defineProperty3.default)(_msgs, 'nins.no-mobile-match', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'nins.no-mobile-match',
+	    defaultMessage: 'No phone number matching NIN' })), (0, _defineProperty3.default)(_msgs, 'letter.letter_button_text', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'letter.letter_button_text',
-	    defaultMessage: 'Confirm using letter' })), (0, _defineProperty3.default)(_msgs, 'header.students', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    defaultMessage: 'Confirm using letter' })), (0, _defineProperty3.default)(_msgs, 'letter.no_state_found', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.no_state_found',
+	    defaultMessage: 'No state found' })), (0, _defineProperty3.default)(_msgs, 'letter.already-sent', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.already-sent',
+	    defaultMessage: 'You have already been sent a verification letter' })), (0, _defineProperty3.default)(_msgs, 'letter.no-address-found', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.no-address-found',
+	    defaultMessage: 'No postal address found' })), (0, _defineProperty3.default)(_msgs, 'letter.bad-postal-address', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.bad-postal-address',
+	    defaultMessage: 'The postal address is incomprehensible' })), (0, _defineProperty3.default)(_msgs, 'letter.saved-unconfirmed', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.saved-unconfirmed',
+	    defaultMessage: 'Saved unconfirmed NIN' })), (0, _defineProperty3.default)(_msgs, 'letter.wrong-code', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.wrong-code',
+	    defaultMessage: 'Incorrect verification code' })), (0, _defineProperty3.default)(_msgs, 'letter.verification_success', _react2.default.createElement(_reactIntl.FormattedMessage, {
+	    id: 'letter.verification_success',
+	    defaultMessage: 'Successfully verified NIN' })), (0, _defineProperty3.default)(_msgs, 'header.students', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'header.students',
 	    defaultMessage: 'Students' })), (0, _defineProperty3.default)(_msgs, 'header.technicians', _react2.default.createElement(_reactIntl.FormattedMessage, {
 	    id: 'header.technicicans',
@@ -68971,7 +69181,7 @@
 	    last_used: _propTypes2.default.string,
 	    language: _propTypes2.default.string,
 	    langs: _propTypes2.default.array,
-	    errorMsg: _propTypes2.default.string,
+	    errorMsg: _propTypes2.default.object,
 	    is_fetching: _propTypes2.default.bool,
 	    confirming_change: _propTypes2.default.bool,
 	    deleted: _propTypes2.default.bool,
@@ -73960,7 +74170,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _classCallCheck2 = __webpack_require__(680);
@@ -74029,6 +74239,10 @@
 	
 	var _ChangePassword2 = _interopRequireDefault(_ChangePassword);
 	
+	var _Notifications = __webpack_require__(1202);
+	
+	var _Notifications2 = _interopRequireDefault(_Notifications);
+	
 	__webpack_require__(1206);
 	
 	__webpack_require__(1213);
@@ -74037,247 +74251,226 @@
 	
 	/* Dummy components, to be done */
 	
-	var MessagesArea = function (_Component) {
-	    (0, _inherits3.default)(MessagesArea, _Component);
+	var PendingActions = function (_Component) {
+	  (0, _inherits3.default)(PendingActions, _Component);
 	
-	    function MessagesArea() {
-	        (0, _classCallCheck3.default)(this, MessagesArea);
-	        return (0, _possibleConstructorReturn3.default)(this, (MessagesArea.__proto__ || Object.getPrototypeOf(MessagesArea)).apply(this, arguments));
+	  function PendingActions() {
+	    (0, _classCallCheck3.default)(this, PendingActions);
+	    return (0, _possibleConstructorReturn3.default)(this, (PendingActions.__proto__ || Object.getPrototypeOf(PendingActions)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(PendingActions, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Pending Actions'
+	      );
 	    }
-	
-	    (0, _createClass3.default)(MessagesArea, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Messages Area'
-	            );
-	        }
-	    }]);
-	    return MessagesArea;
+	  }]);
+	  return PendingActions;
 	}(_react.Component);
 	
-	var PendingActions = function (_Component2) {
-	    (0, _inherits3.default)(PendingActions, _Component2);
+	var ProfileFIlled = function (_Component2) {
+	  (0, _inherits3.default)(ProfileFIlled, _Component2);
 	
-	    function PendingActions() {
-	        (0, _classCallCheck3.default)(this, PendingActions);
-	        return (0, _possibleConstructorReturn3.default)(this, (PendingActions.__proto__ || Object.getPrototypeOf(PendingActions)).apply(this, arguments));
+	  function ProfileFIlled() {
+	    (0, _classCallCheck3.default)(this, ProfileFIlled);
+	    return (0, _possibleConstructorReturn3.default)(this, (ProfileFIlled.__proto__ || Object.getPrototypeOf(ProfileFIlled)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(ProfileFIlled, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Profile filled'
+	      );
 	    }
-	
-	    (0, _createClass3.default)(PendingActions, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Pending Actions'
-	            );
-	        }
-	    }]);
-	    return PendingActions;
-	}(_react.Component);
-	
-	var ProfileFIlled = function (_Component3) {
-	    (0, _inherits3.default)(ProfileFIlled, _Component3);
-	
-	    function ProfileFIlled() {
-	        (0, _classCallCheck3.default)(this, ProfileFIlled);
-	        return (0, _possibleConstructorReturn3.default)(this, (ProfileFIlled.__proto__ || Object.getPrototypeOf(ProfileFIlled)).apply(this, arguments));
-	    }
-	
-	    (0, _createClass3.default)(ProfileFIlled, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Profile filled'
-	            );
-	        }
-	    }]);
-	    return ProfileFIlled;
+	  }]);
+	  return ProfileFIlled;
 	}(_react.Component);
 	
 	/* SubMain is the main component, before internationalization */
 	
-	var SubMain = function (_Component4) {
-	    (0, _inherits3.default)(SubMain, _Component4);
+	var SubMain = function (_Component3) {
+	  (0, _inherits3.default)(SubMain, _Component3);
 	
-	    function SubMain() {
-	        (0, _classCallCheck3.default)(this, SubMain);
-	        return (0, _possibleConstructorReturn3.default)(this, (SubMain.__proto__ || Object.getPrototypeOf(SubMain)).apply(this, arguments));
-	    }
+	  function SubMain() {
+	    (0, _classCallCheck3.default)(this, SubMain);
+	    return (0, _possibleConstructorReturn3.default)(this, (SubMain.__proto__ || Object.getPrototypeOf(SubMain)).apply(this, arguments));
+	  }
 	
-	    (0, _createClass3.default)(SubMain, [{
-	        key: 'render',
-	        value: function render() {
+	  (0, _createClass3.default)(SubMain, [{
+	    key: 'render',
+	    value: function render() {
 	
-	            var tabs = [{ id: 'personaldata', label: this.props.l10n('main.personal_data') }, { id: 'nins', label: this.props.l10n('main.nins') }, { id: 'emails', label: this.props.l10n('main.emails') }, { id: 'phones', label: this.props.l10n('main.phones') }, { id: 'security', label: this.props.l10n('main.security') }];
-	            var tabsElem = tabs.map(function (tab, index) {
-	                return _react2.default.createElement(
-	                    'li',
-	                    { key: index },
-	                    _react2.default.createElement(
-	                        _reactRouterDom.Link,
-	                        { className: 'main-nav-tabs',
-	                            to: '/profile/' + tab.id,
-	                            id: tab.id + '-router-link' },
-	                        tab.label
-	                    )
-	                );
-	            });
+	      var tabs = [{ id: 'personaldata', label: this.props.l10n('main.personal_data') }, { id: 'nins', label: this.props.l10n('main.nins') }, { id: 'emails', label: this.props.l10n('main.emails') }, { id: 'phones', label: this.props.l10n('main.phones') }, { id: 'security', label: this.props.l10n('main.security') }];
+	      var tabsElem = tabs.map(function (tab, index) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: index },
+	          _react2.default.createElement(
+	            _reactRouterDom.Link,
+	            { className: 'main-nav-tabs',
+	              to: '/profile/' + tab.id,
+	              id: tab.id + '-router-link' },
+	            tab.label
+	          )
+	        );
+	      });
 	
-	            return _react2.default.createElement(
-	                _reactRouterDom.BrowserRouter,
-	                null,
+	      return _react2.default.createElement(
+	        _reactRouterDom.BrowserRouter,
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'wrap container' },
+	          _react2.default.createElement(_Header2.default, null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container position-relative' },
+	            _react2.default.createElement(
+	              'noscript',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { id: 'no-script' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'wrap container' },
-	                    _react2.default.createElement(_Header2.default, null),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'container position-relative' },
-	                        _react2.default.createElement(
-	                            'noscript',
-	                            null,
-	                            _react2.default.createElement(
-	                                'div',
-	                                { id: 'no-script' },
-	                                _react2.default.createElement(
-	                                    'h3',
-	                                    null,
-	                                    this.props.l10n('main.noscript')
-	                                )
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { id: 'main-content-block' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'profile-combo tabbable well row', id: 'profile-content-area' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'col-md-3' },
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'profile-head' },
-	                                        _react2.default.createElement(MessagesArea, null),
-	                                        _react2.default.createElement(
-	                                            'h3',
-	                                            null,
-	                                            this.props.l10n('main.profile_title')
-	                                        ),
-	                                        _react2.default.createElement(PendingActions, null)
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'tabs-left hidden-xs', id: 'profile-menu-large' },
-	                                        _react2.default.createElement(
-	                                            'ul',
-	                                            { className: 'nav nav-tabs nav-stacked' },
-	                                            tabsElem,
-	                                            _react2.default.createElement(ProfileFIlled, null),
-	                                            _react2.default.createElement(
-	                                                'li',
-	                                                { id: 'profile-menu-eppn-li' },
-	                                                _react2.default.createElement(
-	                                                    'div',
-	                                                    { className: 'profile-menu-eppn' },
-	                                                    _react2.default.createElement(
-	                                                        'p',
-	                                                        { className: 'eppn-text-muted' },
-	                                                        this.props.l10n('main.eduid_id'),
-	                                                        ': ',
-	                                                        this.props.eppn
-	                                                    )
-	                                                )
-	                                            )
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'tab-content info-container col-md-8 col-md-offset-1' },
-	                                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/', component: _PersonalData2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/personaldata', component: _PersonalData2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/nins', component: _Nins2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/emails', component: _Emails2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/phones', component: _Mobile2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/security', component: _Security2.default }),
-	                                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/chpass', component: _ChangePassword2.default })
-	                                )
-	                            )
-	                        ),
-	                        _react2.default.createElement('div', { className: 'push' })
-	                    ),
-	                    _react2.default.createElement(_Footer2.default, null)
+	                  'h3',
+	                  null,
+	                  this.props.l10n('main.noscript')
 	                )
-	            );
-	        }
-	    }]);
-	    return SubMain;
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { id: 'main-content-block' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'profile-combo tabbable well row', id: 'profile-content-area' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'col-md-3' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'profile-head' },
+	                    _react2.default.createElement(
+	                      'h3',
+	                      null,
+	                      this.props.l10n('main.profile_title')
+	                    ),
+	                    _react2.default.createElement(PendingActions, null)
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'tabs-left hidden-xs', id: 'profile-menu-large' },
+	                    _react2.default.createElement(
+	                      'ul',
+	                      { className: 'nav nav-tabs nav-stacked' },
+	                      tabsElem,
+	                      _react2.default.createElement(ProfileFIlled, null),
+	                      _react2.default.createElement(
+	                        'li',
+	                        { id: 'profile-menu-eppn-li' },
+	                        _react2.default.createElement(
+	                          'div',
+	                          { className: 'profile-menu-eppn' },
+	                          _react2.default.createElement(
+	                            'p',
+	                            { className: 'eppn-text-muted' },
+	                            this.props.l10n('main.eduid_id'),
+	                            ': ',
+	                            this.props.eppn
+	                          )
+	                        )
+	                      )
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'tab-content info-container col-md-8 col-md-offset-1' },
+	                  _react2.default.createElement(_Notifications2.default, null),
+	                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/', component: _PersonalData2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/personaldata', component: _PersonalData2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/nins', component: _Nins2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/emails', component: _Emails2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/phones', component: _Mobile2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/security', component: _Security2.default }),
+	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/chpass', component: _ChangePassword2.default })
+	                )
+	              )
+	            ),
+	            _react2.default.createElement('div', { className: 'push' })
+	          ),
+	          _react2.default.createElement(_Footer2.default, null)
+	        )
+	      );
+	    }
+	  }]);
+	  return SubMain;
 	}(_react.Component);
 	
 	SubMain.propTypes = {
-	    window_size: _propTypes2.default.string,
-	    eppn: _propTypes2.default.string
+	  window_size: _propTypes2.default.string,
+	  eppn: _propTypes2.default.string
 	};
 	
 	var SubMainContainer = (0, _reactRedux.connect)(function (state, props) {
-	    return {
-	        window_size: state.config.window_size
-	    };
+	  return {
+	    window_size: state.config.window_size
+	  };
 	}, function (dispatch, props) {
-	    return {};
+	  return {};
 	})((0, _i18nMessages2.default)(SubMain));
 	
 	/* localize the internationalized SubMain component,
 	 * and wrap it with IntlProvider, to produce the final
 	 * Main Component */
 	
-	var Main = function (_Component5) {
-	    (0, _inherits3.default)(Main, _Component5);
+	var Main = function (_Component4) {
+	  (0, _inherits3.default)(Main, _Component4);
 	
-	    function Main() {
-	        (0, _classCallCheck3.default)(this, Main);
-	        return (0, _possibleConstructorReturn3.default)(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	  function Main() {
+	    (0, _classCallCheck3.default)(this, Main);
+	    return (0, _possibleConstructorReturn3.default)(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(Main, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      window.addEventListener('resize', this.props.handleWindowSizeChange);
 	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener('resize', this.props.handleWindowSizeChange);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var lang = this.props.language,
+	          locale = __webpack_require__(956)("./" + lang),
+	          messages = __webpack_require__(1192)("./" + lang);
 	
-	    (0, _createClass3.default)(Main, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {
-	            window.addEventListener('resize', this.props.handleWindowSizeChange);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            window.removeEventListener('resize', this.props.handleWindowSizeChange);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var lang = this.props.language,
-	                locale = __webpack_require__(956)("./" + lang),
-	                messages = __webpack_require__(1192)("./" + lang);
+	      (0, _reactIntl.addLocaleData)(locale);
 	
-	            (0, _reactIntl.addLocaleData)(locale);
-	
-	            return _react2.default.createElement(
-	                _reactIntl.IntlProvider,
-	                { locale: lang, messages: messages },
-	                _react2.default.createElement(SubMainContainer, null)
-	            );
-	        }
-	    }]);
-	    return Main;
+	      return _react2.default.createElement(
+	        _reactIntl.IntlProvider,
+	        { locale: lang, messages: messages },
+	        _react2.default.createElement(SubMainContainer, null)
+	      );
+	    }
+	  }]);
+	  return Main;
 	}(_react.Component);
 	
 	Main.propTypes = {
-	    language: _propTypes2.default.string,
-	    handleWindowSizeChange: _propTypes2.default.func
+	  language: _propTypes2.default.string,
+	  handleWindowSizeChange: _propTypes2.default.func
 	};
 	
 	var _default = Main;
@@ -74285,23 +74478,21 @@
 	;
 	
 	var _temp = function () {
-	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	        return;
-	    }
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
 	
-	    __REACT_HOT_LOADER__.register(MessagesArea, 'MessagesArea', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(PendingActions, 'PendingActions', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	
-	    __REACT_HOT_LOADER__.register(PendingActions, 'PendingActions', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(ProfileFIlled, 'ProfileFIlled', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	
-	    __REACT_HOT_LOADER__.register(ProfileFIlled, 'ProfileFIlled', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(SubMain, 'SubMain', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	
-	    __REACT_HOT_LOADER__.register(SubMain, 'SubMain', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(SubMainContainer, 'SubMainContainer', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	
-	    __REACT_HOT_LOADER__.register(SubMainContainer, 'SubMainContainer', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(Main, 'Main', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	
-	    __REACT_HOT_LOADER__.register(Main, 'Main', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
-	
-	    __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/components/Main.js');
 	}();
 
 	;
@@ -74707,10 +74898,238 @@
 	;
 
 /***/ }),
-/* 1202 */,
-/* 1203 */,
-/* 1204 */,
-/* 1205 */,
+/* 1202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _reactRedux = __webpack_require__(591);
+	
+	var _Notifications = __webpack_require__(1203);
+	
+	var _Notifications2 = _interopRequireDefault(_Notifications);
+	
+	var _Notifications3 = __webpack_require__(664);
+	
+	var actions = _interopRequireWildcard(_Notifications3);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, props) {
+	    return {
+	        messages: state.notifications.messages,
+	        warnings: state.notifications.warnings,
+	        errors: state.notifications.errors
+	    };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
+	    return {
+	        handleRMNotification: function handleRMNotification(e) {
+	            var note = e.target.closest('div.alert'),
+	                level = note.dataset.level,
+	                index = note.dataset.index;
+	            dispatch(actions.eduidRMNotify(level, index));
+	        }
+	    };
+	};
+	
+	var NotificationsContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Notifications2.default);
+	
+	var _default = NotificationsContainer;
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	        return;
+	    }
+	
+	    __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/home/eperez/src/git/eduid-html/react/src/containers/Notifications.js');
+	
+	    __REACT_HOT_LOADER__.register(mapDispatchToProps, 'mapDispatchToProps', '/home/eperez/src/git/eduid-html/react/src/containers/Notifications.js');
+	
+	    __REACT_HOT_LOADER__.register(NotificationsContainer, 'NotificationsContainer', '/home/eperez/src/git/eduid-html/react/src/containers/Notifications.js');
+	
+	    __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/containers/Notifications.js');
+	}();
+
+	;
+
+/***/ }),
+/* 1203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _classCallCheck2 = __webpack_require__(680);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(681);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(685);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(721);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(301);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(545);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _reactBootstrap = __webpack_require__(732);
+	
+	var _i18nMessages = __webpack_require__(729);
+	
+	var _i18nMessages2 = _interopRequireDefault(_i18nMessages);
+	
+	__webpack_require__(1204);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Notifications = function (_Component) {
+	    (0, _inherits3.default)(Notifications, _Component);
+	
+	    function Notifications() {
+	        (0, _classCallCheck3.default)(this, Notifications);
+	        return (0, _possibleConstructorReturn3.default)(this, (Notifications.__proto__ || Object.getPrototypeOf(Notifications)).apply(this, arguments));
+	    }
+	
+	    (0, _createClass3.default)(Notifications, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+	
+	            var toShow = this.props.errors.map(function (err, index) {
+	                return _react2.default.createElement(
+	                    _reactBootstrap.Alert,
+	                    { key: index,
+	                        bsStyle: 'danger',
+	                        'data-level': 'errors',
+	                        'data-index': index,
+	                        onDismiss: _this2.props.handleRMNotification },
+	                    _this2.props.l10n(err)
+	                );
+	            });
+	
+	            if (toShow.length === 0) {
+	                toShow = this.props.messages.map(function (msg, index) {
+	                    return _react2.default.createElement(
+	                        _reactBootstrap.Alert,
+	                        { key: index,
+	                            bsStyle: 'success',
+	                            'data-level': 'messages',
+	                            'data-index': index,
+	                            onDismiss: _this2.props.handleRMNotification },
+	                        _this2.props.l10n(msg)
+	                    );
+	                });
+	                toShow.concat(this.props.warnings.map(function (warning, index) {
+	                    return _react2.default.createElement(
+	                        _reactBootstrap.Alert,
+	                        { key: index,
+	                            bsStyle: 'warning',
+	                            'data-level': 'warnings',
+	                            'data-index': index,
+	                            onDismiss: _this2.props.handleRMNotification },
+	                        _this2.props.l10n(warning)
+	                    );
+	                }));
+	            }
+	
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'notifications-area' },
+	                toShow
+	            );
+	        }
+	    }]);
+	    return Notifications;
+	}(_react.Component);
+	
+	Notifications.propTypes = {
+	    messages: _propTypes2.default.array,
+	    warnings: _propTypes2.default.array,
+	    errors: _propTypes2.default.array
+	};
+	
+	var _default = (0, _i18nMessages2.default)(Notifications);
+	
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	        return;
+	    }
+	
+	    __REACT_HOT_LOADER__.register(Notifications, 'Notifications', '/home/eperez/src/git/eduid-html/react/src/components/Notifications.js');
+	
+	    __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/components/Notifications.js');
+	}();
+
+	;
+
+/***/ }),
+/* 1204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(1205);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(904)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(1205, function() {
+				var newContent = __webpack_require__(1205);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 1205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(903)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/*\n * Colors\n * ========================================================================== */\n/*\n * Typography\n * ========================================================================== */\ndiv#notifications-area {\n  height: 80px;\n  overflow: hidden; }\n", ""]);
+	
+	// exports
+
+
+/***/ }),
 /* 1206 */
 /***/ (function(module, exports, __webpack_require__) {
 

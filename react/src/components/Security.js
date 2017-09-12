@@ -91,7 +91,7 @@ Security.propTypes = {
   last_used: PropTypes.string,
   language: PropTypes.string,
   langs: PropTypes.array,
-  errorMsg: PropTypes.string,
+  errorMsg: PropTypes.object,
   is_fetching: PropTypes.bool,
   confirming_change: PropTypes.bool,
   deleted: PropTypes.bool,
