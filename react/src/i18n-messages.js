@@ -937,6 +937,30 @@ const msgs = {
         <FormattedMessage
           id="header.logout"
           defaultMessage={`Logout`} />),
+
+    /************************/
+    /* Header ******** ******/
+    /************************/
+
+   'pending.pdata': (
+        <FormattedMessage
+          id="pending.pdata"
+          defaultMessage={`Add personal information`} />),
+
+   'pending.emails': (
+        <FormattedMessage
+          id="pending.emails"
+          defaultMessage={`Add an email address`} />),
+
+   'pending.nins': (
+        <FormattedMessage
+          id="pending.nins"
+          defaultMessage={`Add a national identity number`} />),
+
+   'pending.phones': (
+        <FormattedMessage
+          id="pending.phones"
+          defaultMessage={`Add a phone number`} />),
 };
 
 const unformatted = defineMessages({

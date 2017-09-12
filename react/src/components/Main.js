@@ -17,18 +17,12 @@ import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 import NotificationsContainer from 'containers/Notifications';
 import ProfileFilledContainer from 'containers/ProfileFilled';
+import PendingActionsContainer from 'containers/PendingActions';
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/Main.scss';
 
 
-/* Dummy components, to be done */
-
-class PendingActions extends Component {
-    render () {
-        return (<div>Pending Actions</div>);
-    }
-}
 /* SubMain is the main component, before internationalization */
 
 class SubMain extends Component {
@@ -64,7 +58,7 @@ class SubMain extends Component {
                     <div className='col-md-3'>
                       <div className="profile-head">
                         <h3>{this.props.l10n('main.profile_title')}</h3>
-                        <PendingActions />
+                        <PendingActionsContainer />
                       </div>
                       <div className="tabs-left hidden-xs" id="profile-menu-large">
                         <ul className='nav nav-tabs nav-stacked'>

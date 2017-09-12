@@ -4,7 +4,8 @@ import * as actions from "actions/Profile";
 
 const profile = {
     max: 0,
-    cur: 0
+    cur: 0,
+    pending: []
 };
 
 
@@ -14,7 +15,8 @@ let profileReducer = (state=profile, action) => {
         return {
             ...state,
             max: action.payload.max,
-            cur: action.payload.cur
+            cur: action.payload.cur,
+            pending: action.payload.pending
         };
     default:
         return state;

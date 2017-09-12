@@ -2,12 +2,13 @@
 
 export const PROFILE_FILLED = 'PROFILE_FILLED';
 
-export function profileFilled (max, cur) {
+export function profileFilled (max, cur, pending) {
   return {
     type: PROFILE_FILLED,
     payload: {
         max: max,
-        cur: cur
+        cur: cur,
+        pending: pending
     }
   };
 }

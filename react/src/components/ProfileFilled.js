@@ -20,6 +20,8 @@ class ProfileFilled extends Component{
 }
 
 ProfileFilled.propTypes = {
+    max: PropTypes.number,
+    cur: PropTypes.number,
 }
 
 export default i18n(ProfileFilled);
