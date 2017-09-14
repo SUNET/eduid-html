@@ -628,6 +628,22 @@
     "defaultMessage": "Logout"
   },
   {
+    "id": "pending.pdata",
+    "defaultMessage": "Add personal information"
+  },
+  {
+    "id": "pending.emails",
+    "defaultMessage": "Add an email address"
+  },
+  {
+    "id": "pending.nins",
+    "defaultMessage": "Add a national identity number"
+  },
+  {
+    "id": "pending.phones",
+    "defaultMessage": "Add a phone number"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"

@@ -11,6 +11,7 @@ import chpassReducer from 'reducers/ChangePassword';
 import ninsReducer from 'reducers/Nins';
 import letterProofingReducer from 'reducers/LetterProofing';
 import notificationsReducer from 'reducers/Notifications';
+import profileReducer from 'reducers/Profile';
 
 const eduIDApp = combineReducers({
   chpass: chpassReducer,
@@ -23,7 +24,8 @@ const eduIDApp = combineReducers({
   nins: ninsReducer,
   letter_proofing: letterProofingReducer,
   notifications: notificationsReducer,
-  security: securityReducer
+  security: securityReducer,
+  profile: profileReducer
 });
 
 export default eduIDApp;
