@@ -323,6 +323,9 @@ describe("Async component", () => {
        next = generator.next(action);
        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
 
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('PROFILE_FILLED');
+
        action = {
          type: ninActions.GET_NINS_SUCCESS,
          payload: {

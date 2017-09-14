@@ -2,6 +2,7 @@
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders } from "actions/common";
 import { getConfigFail } from "actions/Config";
+import EDUID_CONFIG_URL from "init-config";
 
 
 export function* requestConfig () {

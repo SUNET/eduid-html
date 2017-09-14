@@ -521,7 +521,7 @@ describe("Async component", () => {
     expect(next.value.SELECT.args).toEqual([]);
 
     generator.next(mockState.config);
-    expect(mockWindow.location.href).toEqual('/dummy-tok-url/chpass?next=%2Fdummy-dash-url%2F%23chpass');
+    expect(mockWindow.location.href).toEqual('/dummy-tok-url/chpass?next=%2Fdummy-dash-url%2Fchpass');
   });
 
   it("Sagas postDeleteAccount", () => {
