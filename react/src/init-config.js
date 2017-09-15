@@ -1,4 +1,3 @@
 
-const EDUID_CONFIG_URL = '/services/jsconfig/config';
-
-export default EDUID_CONFIG_URL;
+export const EDUID_CONFIG_URL = '/services/jsconfig/config',
+             TOKEN_SERVICE_URL = '/services/authn/login';
