@@ -163,7 +163,9 @@ const init_app = function (target, component) {
   if (component) {
     app = (
       <Provider store={store}>
-          {component}
+          <BrowserRouter>
+            {component}
+          </BrowserRouter>
       </Provider>
     );
     ReactDOM.render(app, target, getConfig);

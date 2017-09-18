@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import i18n from 'i18n-messages';
 import HeaderContainer from "containers/Header";
@@ -47,7 +47,6 @@ class SubMain extends Component {
         });
 
         return (
-          <BrowserRouter>
             <div id='wrap container'>
               <HeaderContainer />
               <div className="container position-relative">
@@ -88,7 +87,6 @@ class SubMain extends Component {
               </div>
               <FooterContainer />
             </div>
-          </BrowserRouter>
         );
     }
 }
@@ -100,7 +98,8 @@ SubMain.propTypes = {
 
 const SubMainContainer = connect(
    (state, props) => ({
-        window_size: state.config.window_size
+        window_size: state.config.window_size,
+        eppn: state.personal_data.eppn
     }),
     (dispatch, props) => ({}),
 )(i18n(SubMain));
