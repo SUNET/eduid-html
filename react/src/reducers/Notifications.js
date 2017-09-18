@@ -9,26 +9,24 @@ const notifications = {
 };
 
 
-let notificationsReducer = (state=notifications, action) => {
+const notificationsReducer = (state=notifications, action) => {
   switch (action.type) {
     case actions.NEW_NOTIFICATION:
       switch (action.payload.level) {
-        case "danger":
+        case "errors":
           return {
             messages: [],
             warnings: [],
             errors: [ action.payload.message ]
           };
-        case "warning":
+        case "warnings":
           const warnings = state.warnings.slice();
           warnings.push(action.payload.message);
           return {
             ...state,
             warnings: warnings
           };
-        case "success":
-          const messages = state.messages.slice();
-          messages.unshift(action.payload.message);
+        case "messages":
           return {
             messages: [ action.payload.message ],
             warnings: [],

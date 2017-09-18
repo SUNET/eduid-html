@@ -63,7 +63,7 @@ describe("Notifications Actions", () => {
 describe("Reducers", () => {
 
     const msg = 'message',
-        level = 'danger',
+        level = 'errors',
         index = 0,
         mockState = {
             is_fetching: false,
@@ -142,9 +142,7 @@ describe("Notifications Component", () => {
               area = wrapper.find('div#notifications-area'),
               msg = wrapper.find('Alert');
 
-        expect(area.contains(msg)).toBeTruthy();
-        expect(msg.hasClass('success')).toBeTruthy();
-        expect(msg.contains('message')).toBeTruthy();
+        expect(area.contains(msg.get(0))).toBeTruthy();
     });
 });
 
