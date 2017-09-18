@@ -150,28 +150,11 @@ store.subscribe(() => {
 
 sagaMiddleware.run(rootSaga);
 
-/* authn */
-
-const checkAuthn = function () {
-    const cookieName = EDUID_COOKIE_NAME,
-          cookie= Cookies.get(cookieName);
-    if (cookie === undefined) {
-        const next = document.location.href;
-        document.location.href = EDUID_AUTHN_URL + '?next=' + next;
-    }
-};
-
 /* Get configuration */
 
 const getConfig = function () {
-    checkAuthn();
-    if (!store.getState().config.is_configured) {
-        store.dispatch(configActions.getConfig());
-    } else {
-        store.dispatch(configActions.getInitialUserdata());
-    }
+    store.dispatch(configActions.getConfig());
 };
-
 
 /* render app */
 
