@@ -80,7 +80,7 @@ function calculateProfileFilled (userdata) {
     });
     ['emails', 'phones', 'nins'].forEach( (tab) => {
         filled.max += 1;
-        if (userdata.payload[tab].length > 0) {
+        if (userdata.payload[tab] && userdata.payload[tab].length > 0) {
             filled.cur += 1;
         } else {
             filled.pending.push(tab);
