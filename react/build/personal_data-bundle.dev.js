@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e5b640cd6ba293aceddb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "37a4ceb25aba6ecf6ed8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24762,26 +24762,10 @@
 	
 	sagaMiddleware.run(rootSaga);
 	
-	/* authn */
-	
-	var checkAuthn = function checkAuthn() {
-	  var cookieName = ('sessid'),
-	      cookie = _jsCookie2.default.get(cookieName);
-	  if (cookie === undefined) {
-	    var next = document.location.href;
-	    document.location.href = ('http://dashboard.eduid.docker:8080/services/authn/login') + '?next=' + next;
-	  }
-	};
-	
 	/* Get configuration */
 	
 	var getConfig = function getConfig() {
-	  checkAuthn();
-	  if (!store.getState().config.is_configured) {
-	    store.dispatch(configActions.getConfig());
-	  } else {
-	    store.dispatch(configActions.getInitialUserdata());
-	  }
+	  store.dispatch(configActions.getConfig());
 	};
 	
 	/* render app */
@@ -24933,8 +24917,6 @@
 	  __REACT_HOT_LOADER__.register(saveState, 'saveState', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(store, 'store', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
-	
-	  __REACT_HOT_LOADER__.register(checkAuthn, 'checkAuthn', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(getConfig, 'getConfig', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
@@ -42025,21 +42007,19 @@
 	  switch (action.type) {
 	    case actions.NEW_NOTIFICATION:
 	      switch (action.payload.level) {
-	        case "danger":
+	        case "errors":
 	          return {
 	            messages: [],
 	            warnings: [],
 	            errors: [action.payload.message]
 	          };
-	        case "warning":
+	        case "warnings":
 	          var warnings = state.warnings.slice();
 	          warnings.push(action.payload.message);
 	          return (0, _extends3.default)({}, state, {
 	            warnings: warnings
 	          });
-	        case "success":
-	          var messages = state.messages.slice();
-	          messages.unshift(action.payload.message);
+	        case "messages":
 	          return {
 	            messages: [action.payload.message],
 	            warnings: [],
@@ -42247,10 +42227,10 @@
 	                if (action.error && action.payload) {
 	                    var msg = action.payload.errorMsg || action.payload.message;
 	                    if (msg) {
-	                        next(actions.eduidNotify(msg, 'danger'));
+	                        next(actions.eduidNotify(msg, 'errors'));
 	                    }
 	                } else if (action.payload && action.payload.message) {
-	                    next(actions.eduidNotify(action.payload.message, 'success'));
+	                    next(actions.eduidNotify(action.payload.message, 'messages'));
 	                }
 	                if (action.payload !== undefined) {
 	                    delete action.payload.message;
@@ -42460,7 +42440,7 @@
 	    });
 	    ['emails', 'phones', 'nins'].forEach(function (tab) {
 	        filled.max += 1;
-	        if (userdata.payload[tab].length > 0) {
+	        if (userdata.payload[tab] && userdata.payload[tab].length > 0) {
 	            filled.cur += 1;
 	        } else {
 	            filled.pending.push(tab);
@@ -44068,8 +44048,6 @@
 	
 	var _initConfig = __webpack_require__(675);
 	
-	var _initConfig2 = _interopRequireDefault(_initConfig);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var _marked = [requestConfig].map(_regenerator2.default.mark);
@@ -44081,7 +44059,7 @@
 	            switch (_context.prev = _context.next) {
 	                case 0:
 	                    _context.prev = 0;
-	                    input = document.getElementById('jsconfig_url'), jsconfig_url = input ? input.value : _initConfig2.default;
+	                    input = document.getElementById('jsconfig_url'), jsconfig_url = input ? input.value : _initConfig.EDUID_CONFIG_URL;
 	
 	                    console.log('Getting config from ' + jsconfig_url);
 	                    _context.next = 5;
@@ -44112,11 +44090,23 @@
 	    }, _marked[0], this, [[0, 10]]);
 	}
 	
+	var checkStatus = function checkStatus(response) {
+	    if (response.status >= 200 && response.status < 300) {
+	        return response;
+	    } else if (response.status === 0) {
+	        var next = document.location.href;
+	        document.location.href = _initConfig.TOKEN_SERVICE_URL + '?next=' + next;
+	    } else {
+	        throw new Error(response.statusText);
+	    }
+	};
+	
 	function fetchConfig(url) {
 	    return __webpack_provided_window_dot_fetch(url, {
 	        credentials: 'include',
-	        headers: _common.ajaxHeaders
-	    }).then(_common.checkStatus).then(function (response) {
+	        headers: _common.ajaxHeaders,
+	        redirect: 'manual'
+	    }).then(checkStatus).then(function (response) {
 	        return response.json();
 	    });
 	}
@@ -44128,6 +44118,8 @@
 	    }
 	
 	    __REACT_HOT_LOADER__.register(requestConfig, "requestConfig", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
+	
+	    __REACT_HOT_LOADER__.register(checkStatus, "checkStatus", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
 	
 	    __REACT_HOT_LOADER__.register(fetchConfig, "fetchConfig", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
 	}();
@@ -44142,23 +44134,20 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	             value: true
 	});
-	
-	var EDUID_CONFIG_URL = '/services/jsconfig/config';
-	
-	var _default = EDUID_CONFIG_URL;
-	exports.default = _default;
+	var EDUID_CONFIG_URL = exports.EDUID_CONFIG_URL = '/services/jsconfig/config',
+	    TOKEN_SERVICE_URL = exports.TOKEN_SERVICE_URL = '/services/authn/login';
 	;
 	
 	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
+	             if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	                          return;
+	             }
 	
-	  __REACT_HOT_LOADER__.register(EDUID_CONFIG_URL, 'EDUID_CONFIG_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
+	             __REACT_HOT_LOADER__.register(EDUID_CONFIG_URL, 'EDUID_CONFIG_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
 	
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
+	             __REACT_HOT_LOADER__.register(TOKEN_SERVICE_URL, 'TOKEN_SERVICE_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
 	}();
 
 	;
