@@ -23,5 +23,3 @@ let profileReducer = (state=profile, action) => {
   }
 };
 export default profileReducer;
-
-
