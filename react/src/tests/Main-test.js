@@ -6,7 +6,7 @@ import expect, { createSpy } from "expect";
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { MemoryRouter } from "react-router-dom";
 
-import Main from 'components/Main';
+import { SubMainContainer } from 'components/Main';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -37,11 +37,11 @@ function setupComponent() {
             errors: []
         }
     });
-    const props = { language: 'en' };
+    const props = { window_size: 'lg', testing: true };
     const wrapper = mount(<Provider store={ store }>
                               <IntlProvider locale={'en'} messages={messages}>
                                   <MemoryRouter>
-                                      <Main {...props} />
+                                      <SubMainContainer {...props} />
                                   </MemoryRouter>
                               </IntlProvider>
                           </Provider>);

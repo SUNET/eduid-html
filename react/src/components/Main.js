@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import i18n from 'i18n-messages';
 import HeaderContainer from "containers/Header";
@@ -46,7 +46,7 @@ class SubMain extends Component {
             );
         });
 
-        return (
+        const content = (
             <div id='wrap container'>
               <HeaderContainer />
               <div className="container position-relative">
@@ -88,12 +88,17 @@ class SubMain extends Component {
               <FooterContainer />
             </div>
         );
+        if (this.props.testing) { return content }
+        else {
+            return (<BrowserRouter>{content}</BrowserRouter>);
+        }
     }
 }
 
 SubMain.propTypes = {
     window_size: PropTypes.string,
-    eppn: PropTypes.string
+    eppn: PropTypes.string,
+    testing: PropTypes.bool
 };
 
 const SubMainContainer = connect(
@@ -103,6 +108,9 @@ const SubMainContainer = connect(
     }),
     (dispatch, props) => ({}),
 )(i18n(SubMain));
+
+
+export { SubMainContainer };
 
 
 /* localize the internationalized SubMain component,
@@ -127,7 +135,7 @@ class Main extends Component {
 
         return (
           <IntlProvider locale={ lang } messages={ messages }>
-            <SubMainContainer />
+            <SubMainContainer testing={false} />
           </IntlProvider>
         );
     }
