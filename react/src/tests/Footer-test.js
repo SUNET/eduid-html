@@ -30,7 +30,15 @@ function setupComponent() {
             ]
         }
     });
-    const props = { language: 'en' };
+    const props = {
+      is_configured: true,
+      language: 'en',
+      languages: [
+                ['en', 'English'],
+                ['sv', 'Svenska']
+            ],
+      changeLanguage: createSpy()
+    };
     const wrapper = mount(<Provider store={ store }>
                               <IntlProvider locale={'en'} messages={messages}>
                                   <Footer {...props} />
