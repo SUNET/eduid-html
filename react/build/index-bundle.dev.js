@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e5b640cd6ba293aceddb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "37a4ceb25aba6ecf6ed8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24766,26 +24766,10 @@
 	
 	sagaMiddleware.run(rootSaga);
 	
-	/* authn */
-	
-	var checkAuthn = function checkAuthn() {
-	  var cookieName = ('sessid'),
-	      cookie = _jsCookie2.default.get(cookieName);
-	  if (cookie === undefined) {
-	    var next = document.location.href;
-	    document.location.href = ('http://dashboard.eduid.docker:8080/services/authn/login') + '?next=' + next;
-	  }
-	};
-	
 	/* Get configuration */
 	
 	var getConfig = function getConfig() {
-	  checkAuthn();
-	  if (!store.getState().config.is_configured) {
-	    store.dispatch(configActions.getConfig());
-	  } else {
-	    store.dispatch(configActions.getInitialUserdata());
-	  }
+	  store.dispatch(configActions.getConfig());
 	};
 	
 	/* render app */
@@ -24937,8 +24921,6 @@
 	  __REACT_HOT_LOADER__.register(saveState, 'saveState', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(store, 'store', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
-	
-	  __REACT_HOT_LOADER__.register(checkAuthn, 'checkAuthn', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
 	  __REACT_HOT_LOADER__.register(getConfig, 'getConfig', '/home/eperez/src/git/eduid-html/react/src/init-app.js');
 	
@@ -42029,21 +42011,19 @@
 	  switch (action.type) {
 	    case actions.NEW_NOTIFICATION:
 	      switch (action.payload.level) {
-	        case "danger":
+	        case "errors":
 	          return {
 	            messages: [],
 	            warnings: [],
 	            errors: [action.payload.message]
 	          };
-	        case "warning":
+	        case "warnings":
 	          var warnings = state.warnings.slice();
 	          warnings.push(action.payload.message);
 	          return (0, _extends3.default)({}, state, {
 	            warnings: warnings
 	          });
-	        case "success":
-	          var messages = state.messages.slice();
-	          messages.unshift(action.payload.message);
+	        case "messages":
 	          return {
 	            messages: [action.payload.message],
 	            warnings: [],
@@ -42251,10 +42231,10 @@
 	                if (action.error && action.payload) {
 	                    var msg = action.payload.errorMsg || action.payload.message;
 	                    if (msg) {
-	                        next(actions.eduidNotify(msg, 'danger'));
+	                        next(actions.eduidNotify(msg, 'errors'));
 	                    }
 	                } else if (action.payload && action.payload.message) {
-	                    next(actions.eduidNotify(action.payload.message, 'success'));
+	                    next(actions.eduidNotify(action.payload.message, 'messages'));
 	                }
 	                if (action.payload !== undefined) {
 	                    delete action.payload.message;
@@ -42464,7 +42444,7 @@
 	    });
 	    ['emails', 'phones', 'nins'].forEach(function (tab) {
 	        filled.max += 1;
-	        if (userdata.payload[tab].length > 0) {
+	        if (userdata.payload[tab] && userdata.payload[tab].length > 0) {
 	            filled.cur += 1;
 	        } else {
 	            filled.pending.push(tab);
@@ -44072,8 +44052,6 @@
 	
 	var _initConfig = __webpack_require__(675);
 	
-	var _initConfig2 = _interopRequireDefault(_initConfig);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var _marked = [requestConfig].map(_regenerator2.default.mark);
@@ -44085,7 +44063,7 @@
 	            switch (_context.prev = _context.next) {
 	                case 0:
 	                    _context.prev = 0;
-	                    input = document.getElementById('jsconfig_url'), jsconfig_url = input ? input.value : _initConfig2.default;
+	                    input = document.getElementById('jsconfig_url'), jsconfig_url = input ? input.value : _initConfig.EDUID_CONFIG_URL;
 	
 	                    console.log('Getting config from ' + jsconfig_url);
 	                    _context.next = 5;
@@ -44116,11 +44094,23 @@
 	    }, _marked[0], this, [[0, 10]]);
 	}
 	
+	var checkStatus = function checkStatus(response) {
+	    if (response.status >= 200 && response.status < 300) {
+	        return response;
+	    } else if (response.status === 0) {
+	        var next = document.location.href;
+	        document.location.href = _initConfig.TOKEN_SERVICE_URL + '?next=' + next;
+	    } else {
+	        throw new Error(response.statusText);
+	    }
+	};
+	
 	function fetchConfig(url) {
 	    return __webpack_provided_window_dot_fetch(url, {
 	        credentials: 'include',
-	        headers: _common.ajaxHeaders
-	    }).then(_common.checkStatus).then(function (response) {
+	        headers: _common.ajaxHeaders,
+	        redirect: 'manual'
+	    }).then(checkStatus).then(function (response) {
 	        return response.json();
 	    });
 	}
@@ -44132,6 +44122,8 @@
 	    }
 	
 	    __REACT_HOT_LOADER__.register(requestConfig, "requestConfig", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
+	
+	    __REACT_HOT_LOADER__.register(checkStatus, "checkStatus", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
 	
 	    __REACT_HOT_LOADER__.register(fetchConfig, "fetchConfig", "/home/eperez/src/git/eduid-html/react/src/sagas/Config.js");
 	}();
@@ -44146,23 +44138,20 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	             value: true
 	});
-	
-	var EDUID_CONFIG_URL = '/services/jsconfig/config';
-	
-	var _default = EDUID_CONFIG_URL;
-	exports.default = _default;
+	var EDUID_CONFIG_URL = exports.EDUID_CONFIG_URL = '/services/jsconfig/config',
+	    TOKEN_SERVICE_URL = exports.TOKEN_SERVICE_URL = '/services/authn/login';
 	;
 	
 	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
+	             if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	                          return;
+	             }
 	
-	  __REACT_HOT_LOADER__.register(EDUID_CONFIG_URL, 'EDUID_CONFIG_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
+	             __REACT_HOT_LOADER__.register(EDUID_CONFIG_URL, 'EDUID_CONFIG_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
 	
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
+	             __REACT_HOT_LOADER__.register(TOKEN_SERVICE_URL, 'TOKEN_SERVICE_URL', '/home/eperez/src/git/eduid-html/react/src/init-config.js');
 	}();
 
 	;
@@ -74301,9 +74290,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state, props) {
 	    return {
-	        window_size: state.config.window_size,
-	        language: state.config.language,
-	        eppn: state.personal_data.eppn
+	        language: state.config.language
 	    };
 	};
 	
@@ -74346,6 +74333,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.SubMainContainer = undefined;
 	
 	var _classCallCheck2 = __webpack_require__(683);
 	
@@ -74460,93 +74448,98 @@
 	        );
 	      });
 	
-	      return _react2.default.createElement(
-	        _reactRouterDom.BrowserRouter,
-	        null,
+	      var content = _react2.default.createElement(
+	        'div',
+	        { id: 'wrap container' },
+	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'wrap container' },
-	          _react2.default.createElement(_Header2.default, null),
+	          { className: 'container position-relative' },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'container position-relative' },
-	            _react2.default.createElement(
-	              'noscript',
-	              null,
-	              _react2.default.createElement(
-	                'div',
-	                { id: 'no-script' },
-	                _react2.default.createElement(
-	                  'h3',
-	                  null,
-	                  this.props.l10n('main.noscript')
-	                )
-	              )
-	            ),
+	            'noscript',
+	            null,
 	            _react2.default.createElement(
 	              'div',
-	              { id: 'main-content-block' },
+	              { id: 'no-script' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                this.props.l10n('main.noscript')
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: 'main-content-block' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'profile-combo tabbable well row', id: 'profile-content-area' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'profile-combo tabbable well row', id: 'profile-content-area' },
+	                { className: 'col-md-3' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'col-md-3' },
+	                  { className: 'profile-head' },
 	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'profile-head' },
-	                    _react2.default.createElement(
-	                      'h3',
-	                      null,
-	                      this.props.l10n('main.profile_title')
-	                    ),
-	                    _react2.default.createElement(_PendingActions2.default, null)
+	                    'h3',
+	                    null,
+	                    this.props.l10n('main.profile_title')
 	                  ),
+	                  _react2.default.createElement(_PendingActions2.default, null)
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'tabs-left hidden-xs', id: 'profile-menu-large' },
 	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'tabs-left hidden-xs', id: 'profile-menu-large' },
+	                    'ul',
+	                    { className: 'nav nav-tabs nav-stacked' },
+	                    tabsElem,
+	                    _react2.default.createElement(_ProfileFilled2.default, null),
 	                    _react2.default.createElement(
-	                      'ul',
-	                      { className: 'nav nav-tabs nav-stacked' },
-	                      tabsElem,
-	                      _react2.default.createElement(_ProfileFilled2.default, null),
+	                      'li',
+	                      { id: 'profile-menu-eppn-li' },
 	                      _react2.default.createElement(
-	                        'li',
-	                        { id: 'profile-menu-eppn-li' },
+	                        'div',
+	                        { className: 'profile-menu-eppn' },
 	                        _react2.default.createElement(
-	                          'div',
-	                          { className: 'profile-menu-eppn' },
-	                          _react2.default.createElement(
-	                            'p',
-	                            { className: 'eppn-text-muted' },
-	                            this.props.l10n('main.eduid_id'),
-	                            ': ',
-	                            this.props.eppn
-	                          )
+	                          'p',
+	                          { className: 'eppn-text-muted' },
+	                          this.props.l10n('main.eduid_id'),
+	                          ': ',
+	                          this.props.eppn
 	                        )
 	                      )
 	                    )
 	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'tab-content info-container col-md-8 col-md-offset-1' },
-	                  _react2.default.createElement(_Notifications2.default, null),
-	                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/', component: _PersonalData2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/personaldata', component: _PersonalData2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/nins', component: _Nins2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/emails', component: _Emails2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/phones', component: _Mobile2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/security', component: _Security2.default }),
-	                  _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/chpass', component: _ChangePassword2.default })
 	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'tab-content info-container col-md-8 col-md-offset-1' },
+	                _react2.default.createElement(_Notifications2.default, null),
+	                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/', component: _PersonalData2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/personaldata', component: _PersonalData2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/nins', component: _Nins2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/emails', component: _Emails2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/phones', component: _Mobile2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/security', component: _Security2.default }),
+	                _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/chpass', component: _ChangePassword2.default })
 	              )
-	            ),
-	            _react2.default.createElement('div', { className: 'push' })
+	            )
 	          ),
-	          _react2.default.createElement(_Footer2.default, null)
-	        )
+	          _react2.default.createElement('div', { className: 'push' })
+	        ),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
+	      if (this.props.testing) {
+	        return content;
+	      } else {
+	        return _react2.default.createElement(
+	          _reactRouterDom.BrowserRouter,
+	          null,
+	          content
+	        );
+	      }
 	    }
 	  }]);
 	  return SubMain;
@@ -74554,16 +74547,20 @@
 	
 	SubMain.propTypes = {
 	  window_size: _propTypes2.default.string,
-	  eppn: _propTypes2.default.string
+	  eppn: _propTypes2.default.string,
+	  testing: _propTypes2.default.bool
 	};
 	
 	var SubMainContainer = (0, _reactRedux.connect)(function (state, props) {
 	  return {
-	    window_size: state.config.window_size
+	    window_size: state.config.window_size,
+	    eppn: state.personal_data.eppn
 	  };
 	}, function (dispatch, props) {
 	  return {};
 	})((0, _i18nMessages2.default)(SubMain));
+	
+	exports.SubMainContainer = SubMainContainer;
 	
 	/* localize the internationalized SubMain component,
 	 * and wrap it with IntlProvider, to produce the final
@@ -74599,7 +74596,7 @@
 	      return _react2.default.createElement(
 	        _reactIntl.IntlProvider,
 	        { locale: lang, messages: messages },
-	        _react2.default.createElement(SubMainContainer, null)
+	        _react2.default.createElement(SubMainContainer, { testing: false })
 	      );
 	    }
 	  }]);
@@ -75010,8 +75007,10 @@
 	}(_react.Component);
 	
 	Footer.propTypes = {
+	    is_configured: _propTypes2.default.bool,
 	    language: _propTypes2.default.string,
-	    languages: _propTypes2.default.array
+	    languages: _propTypes2.default.array,
+	    changeLanguage: _propTypes2.default.func
 	};
 	
 	var _default = (0, _i18nMessages2.default)(Footer);
@@ -75373,7 +75372,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { id: 'profile-filled-container' },
 	                _react2.default.createElement('meter', { max: this.props.max, value: this.props.cur,
 	                    id: 'profile-filled-meter',
 	                    ref: 'profileFilledMeter' })
@@ -75559,7 +75558,7 @@
 	                        pdataMissing = false;
 	                        return _react2.default.createElement(
 	                            'div',
-	                            { key: index },
+	                            { key: index, className: 'pending-action' },
 	                            _react2.default.createElement(
 	                                'a',
 	                                { href: '/profile/personal_data' },
@@ -75570,7 +75569,7 @@
 	                } else {
 	                    return _react2.default.createElement(
 	                        'div',
-	                        { key: index },
+	                        { key: index, className: 'pending-action' },
 	                        _react2.default.createElement(
 	                            'a',
 	                            { href: '/profile/' + missing },

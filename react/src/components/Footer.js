@@ -42,8 +42,10 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
+  is_configured: PropTypes.bool,
   language: PropTypes.string,
-  languages: PropTypes.array
+  languages: PropTypes.array,
+  changeLanguage: PropTypes.func
 }
 
 export default i18n(Footer);

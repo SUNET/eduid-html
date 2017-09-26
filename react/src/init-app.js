@@ -163,7 +163,7 @@ const init_app = function (target, component) {
   if (component) {
     app = (
       <Provider store={store}>
-          {component}
+            {component}
       </Provider>
     );
     ReactDOM.render(app, target, getConfig);

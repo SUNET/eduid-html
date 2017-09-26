@@ -46,8 +46,7 @@ class SubMain extends Component {
             );
         });
 
-        return (
-          <BrowserRouter>
+        const content = (
             <div id='wrap container'>
               <HeaderContainer />
               <div className="container position-relative">
@@ -88,22 +87,30 @@ class SubMain extends Component {
               </div>
               <FooterContainer />
             </div>
-          </BrowserRouter>
         );
+        if (this.props.testing) { return content }
+        else {
+            return (<BrowserRouter>{content}</BrowserRouter>);
+        }
     }
 }
 
 SubMain.propTypes = {
     window_size: PropTypes.string,
-    eppn: PropTypes.string
+    eppn: PropTypes.string,
+    testing: PropTypes.bool
 };
 
 const SubMainContainer = connect(
    (state, props) => ({
-        window_size: state.config.window_size
+        window_size: state.config.window_size,
+        eppn: state.personal_data.eppn
     }),
     (dispatch, props) => ({}),
 )(i18n(SubMain));
+
+
+export { SubMainContainer };
 
 
 /* localize the internationalized SubMain component,
@@ -128,7 +135,7 @@ class Main extends Component {
 
         return (
           <IntlProvider locale={ lang } messages={ messages }>
-            <SubMainContainer />
+            <SubMainContainer testing={false} />
           </IntlProvider>
         );
     }
