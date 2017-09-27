@@ -4,10 +4,5 @@
 .idea/
 node_modules/
 coverage/
-react/build/*.hot-update.js*
 npm-debug.log
-react/build/*.ttf
-react/build/*.svg
-react/build/*.woff
-react/build/*.woff2
-react/build/*.eot
+react/build/
