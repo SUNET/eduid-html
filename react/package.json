@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack --watch --progress",
     "test": "karma start",
+    "test-headless": "karma start headless.karma.conf.js",
     "debug": "karma start --single-run=false --debug --browser Chrome",
     "build": "webpack --config webpack.prod.config.js",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
@@ -78,7 +79,8 @@
     "json-loader": "^0.5.4",
     "karma": "^1.1.1",
     "karma-chai-lodash": "0.0.2",
-    "karma-chrome-launcher": "^1.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "puppeteer": "^0.11.0",
     "karma-cli": "^1.0.1",
     "karma-coverage": "^1.1.0",
     "karma-firefox-launcher": "^1.0.0",
