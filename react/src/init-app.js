@@ -53,6 +53,8 @@ import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 
+import { TOKEN_SERVICE_URL, EDUID_COOKIE_NAME } from "init-config";
+
 /* Sagas */
 
 function* rootSaga() {
@@ -161,12 +163,23 @@ const getConfig = function () {
 const init_app = function (target, component) {
   let app;
   if (component) {
+    if (component.props.allow_unauthn !== true) {
+        const cookie = Cookies.get(EDUID_COOKIE_NAME);
+        if (cookie === undefined) {
+            const next = document.location.href;
+            document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
+        }
+        action = getConfig;
+    } else {
+        action = function(){};
+    }
     app = (
       <Provider store={store}>
             {component}
       </Provider>
     );
-    ReactDOM.render(app, target, getConfig);
+    ReactDOM.render(app, target, action);
+
   } else {
     /* i18n */
     let lang_code;

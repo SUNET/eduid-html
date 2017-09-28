@@ -1,8 +1,8 @@
 
-import { put, select, call } from "redux-saga/effects";
-import { ajaxHeaders } from "actions/common";
+import { put, call } from "redux-saga/effects";
+import { ajaxHeaders, checkStatus } from "actions/common";
 import { getConfigFail } from "actions/Config";
-import { EDUID_CONFIG_URL, TOKEN_SERVICE_URL } from "init-config";
+import { EDUID_CONFIG_URL } from "init-config";
 
 
 export function* requestConfig () {
@@ -17,17 +17,6 @@ export function* requestConfig () {
         yield put(getConfigFail(error.toString()));
     }
 }
-
-const checkStatus = function (response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    } else if (response.status === 0) {
-        const next = document.location.href;
-        document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
-    } else {
-        throw new Error(response.statusText);
-    }
-};
 
 export function fetchConfig (url) {
     return window.fetch(url, {
