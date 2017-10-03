@@ -161,7 +161,7 @@ const getConfig = function () {
 /* render app */
 
 const init_app = function (target, component) {
-  let app;
+  let app, action;
   if (component) {
     if (component.props.allow_unauthn !== true) {
         const cookie = Cookies.get(EDUID_COOKIE_NAME);

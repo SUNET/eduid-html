@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         getRequest, postRequest } from "actions/common";
 import { getAllUserdata, getAllUserdataFail, postUserdataFail } from "actions/PersonalData";
 import * as ninActions from "actions/Nins";
 import * as emailActions from "actions/Emails";
@@ -58,10 +59,7 @@ export function* requestAllPersonalData () {
 
 export function fetchAllPersonalData (config) {
     return window.fetch(config.PERSONAL_DATA_URL + 'all-user-data', {
-      // To automatically send cookies only for the current domain,
-      // set credentials to 'same-origin'; use 'include' for CORS
-      credentials: 'include',
-      headers: ajaxHeaders
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -110,10 +108,8 @@ export function* savePersonalData () {
 
 export function sendPersonalData (config, data) {
     return window.fetch(config.PERSONAL_DATA_URL + 'user', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

@@ -1,6 +1,6 @@
 
 import { put, call } from "redux-saga/effects";
-import { ajaxHeaders, checkStatus } from "actions/common";
+import { ajaxHeaders, checkStatus, getRequest } from "actions/common";
 import { getConfigFail } from "actions/Config";
 import { EDUID_CONFIG_URL } from "init-config";
 
@@ -20,9 +20,7 @@ export function* requestConfig () {
 
 export function fetchConfig (url) {
     return window.fetch(url, {
-      credentials: 'include',
-      headers: ajaxHeaders,
-      redirect: 'manual'
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())

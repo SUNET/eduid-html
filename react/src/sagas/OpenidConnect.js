@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         postRequest } from "actions/common";
 import { postOpenidFail } from "actions/OpenidConnect";
 
 
@@ -29,9 +30,7 @@ export function* requestOpenidQRcode () {
 
 export function fetchQRcode (url, data) {
     return window.fetch(url, {
-        credentials: 'include',
-        method: 'POST',
-        headers: ajaxHeaders,
+        ...postRequest,
         body: JSON.stringify(data)
     })
     .then(checkStatus)

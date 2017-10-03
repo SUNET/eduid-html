@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         getRequest, postRequest } from "actions/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail  } from "actions/Security";
@@ -22,8 +23,7 @@ export function* requestCredentials () {
 
 export function fetchCredentials(config) {
     return window.fetch(config.SECURITY_URL + '/credentials', {
-      credentials: 'include',
-      headers: ajaxHeaders
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -70,10 +70,8 @@ export function* postDeleteAccount () {
 
 export function deleteAccount(config, data) {
     return window.fetch(config.SECURITY_URL + '/terminate-account', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
