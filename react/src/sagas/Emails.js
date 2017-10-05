@@ -23,10 +23,8 @@ export function* saveEmail () {
 
 export function sendEmail (config, data) {
     return window.fetch(config.EMAILS_URL + 'new', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -49,10 +47,8 @@ export function* requestResendEmailCode () {
 
 export function requestResend (config, data) {
     return window.fetch(config.EMAILS_URL + 'resend-code', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -76,10 +72,8 @@ export function* requestVerifyEmail () {
 
 export function requestVerify (config, data) {
     return window.fetch(config.EMAILS_URL + 'verify', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -102,10 +96,8 @@ export function* requestRemoveEmail () {
 
 export function requestRemove (config, data) {
     return window.fetch(config.EMAILS_URL + 'remove', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -128,10 +120,8 @@ export function* requestMakePrimaryEmail () {
 
 export function requestMakePrimary (config, data) {
     return window.fetch(config.EMAILS_URL + 'primary', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         postRequest } from "actions/common";
 import * as actions from "actions/LetterProofing";
 
 
@@ -23,10 +24,8 @@ export function* sendLetterProofing () {
 
 export function fetchLetterProofing (config, data) {
     return window.fetch(config.LETTER_PROOFING_URL + 'proofing', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -51,10 +50,8 @@ export function* sendLetterCode () {
 
 export function fetchLetterCode (config, data) {
     return window.fetch(config.LETTER_PROOFING_URL + 'verify-code', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

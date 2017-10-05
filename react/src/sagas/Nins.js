@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         postRequest, getRequest } from "actions/common";
 import * as actions from "actions/Nins";
 
 
@@ -19,8 +20,7 @@ export function* requestNins () {
 
 export function fetchNins(config) {
     return window.fetch(config.PERSONAL_DATA_URL + 'nins', {
-      credentials: 'include',
-      headers: ajaxHeaders
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -44,10 +44,8 @@ export function* requestRemoveNin () {
 
 export function requestRemove (config, data) {
     return window.fetch(config.LETTER_PROOFING_URL + 'remove-nin', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
