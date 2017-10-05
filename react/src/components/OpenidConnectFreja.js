@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import withUserAgent from 'react-useragent';
 
 import i18n from 'i18n-messages';
@@ -29,9 +30,9 @@ function getErrorMessage(errorObj, optionalKeys) {
   return 'Missing error message'
 }
 
-let OpenidConnectFreja = React.createClass({
+class OpenidConnectFreja extends Component {
 
-  render: function () {
+  render () {
     // Wait for config to load before rendering, is there a better way?
     try {
       if (!this.props.proofing_methods.includes('oidc_freja')) {
@@ -153,7 +154,7 @@ let OpenidConnectFreja = React.createClass({
       </div>
     );
   }
-});
+}
 
 OpenidConnectFreja.propTypes = {
   iaRequestData: PropTypes.string,

@@ -15,7 +15,7 @@ import Router from 'react-router';
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";

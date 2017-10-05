@@ -47,8 +47,6 @@ class SubMain extends Component {
         });
 
         const content = (
-            <div id='wrap container'>
-              <HeaderContainer />
               <div className="container position-relative">
                 <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
                 <div id="main-content-block">
@@ -85,12 +83,23 @@ class SubMain extends Component {
                 </div>
                 <div className='push'></div>
               </div>
-              <FooterContainer />
-            </div>
         );
-        if (this.props.testing) { return content }
-        else {
-            return (<BrowserRouter>{content}</BrowserRouter>);
+        if (this.props.testing) {
+            return ([
+              <HeaderContainer key="1" />,
+                <div key="2">
+                {content}
+                </div>,
+              <FooterContainer key="3" />
+            ]);
+        } else {
+            return ([
+              <HeaderContainer key="1" />,
+              <BrowserRouter key="2">
+                {content}
+              </BrowserRouter>,
+              <FooterContainer key="3" />
+            ]);
         }
     }
 }
