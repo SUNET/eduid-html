@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         postRequest } from "actions/common";
 import * as actions from "actions/Mobile";
 
 
@@ -24,10 +25,8 @@ export function* saveMobile () {
 
 export function sendMobile (config, data) {
     return window.fetch(config.MOBILE_URL + 'new', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -50,10 +49,8 @@ export function* requestResendMobileCode () {
 
 export function requestResend (config, data) {
     return window.fetch(config.MOBILE_URL + 'resend-code', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -77,10 +74,8 @@ export function* requestVerifyMobile () {
 
 export function requestVerify (config, data) {
     return window.fetch(config.MOBILE_URL + 'verify', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -103,10 +98,8 @@ export function* requestRemoveMobile () {
 
 export function requestRemove (config, data) {
     return window.fetch(config.MOBILE_URL + 'remove', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -129,10 +122,8 @@ export function* requestMakePrimaryMobile () {
 
 export function requestMakePrimary (config, data) {
     return window.fetch(config.MOBILE_URL + 'primary', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

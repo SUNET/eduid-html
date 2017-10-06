@@ -1,5 +1,6 @@
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         postRequest, getRequest } from "actions/common";
 import * as actions from "actions/ChangePassword";
 
 
@@ -18,8 +19,7 @@ export function* requestSuggestedPassword () {
 
 export function fetchSuggestedPassword(config) {
     return window.fetch(config.SECURITY_URL + '/suggested-password', {
-      credentials: 'include',
-      headers: ajaxHeaders
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())
@@ -47,10 +47,8 @@ export function* postPasswordChange () {
 
 export function postPassword(config, data) {
     return window.fetch(config.SECURITY_URL + '/change-password', {
-      method: 'post',
-      credentials: 'include',
-      headers: ajaxHeaders,
-      body: JSON.stringify(data)
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

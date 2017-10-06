@@ -1,6 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
-import { checkStatus, ajaxHeaders, putCsrfToken } from "actions/common";
+import { checkStatus, ajaxHeaders, putCsrfToken,
+         getRequest } from "actions/common";
 import * as actions from "actions/OpenidConnectFreja";
 
 export function* checkNINAndShowFrejaModal () {
@@ -76,9 +77,7 @@ export function* requestOpenidFrejaData() {
 
 export function fetchFrejaData (url, data) {
   let options = {
-    credentials: 'include',
-    headers: ajaxHeaders,
-    method: 'GET',
+      ...getRequest
   };
   if (data) {
     options['body'] = JSON.stringify(data);
