@@ -27,11 +27,12 @@ module.exports = {
     resolve: {
       // allow us to import components in tests like:
       // import Example from 'components/Example';
-      root: [
-        path.join(__dirname, 'src')
+      modules: [
+        path.resolve(__dirname, 'src'),
+        'node_modules'
       ],
       // allow us to avoid including extension name
-      extensions: ['', '.js', '.jsx', '.json'],
+      extensions: ['.js', '.jsx', '.json'],
     },
     module: {
       loaders: [
@@ -42,11 +43,11 @@ module.exports = {
         },
         {
           test: /\.json$/,
-          loader: 'json'
+          loader: 'json-loader'
         },
         {
           test: /\.scss$/,
-          loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass']
+          loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
         },
         {
           test: /\.css$/,
@@ -62,27 +63,27 @@ module.exports = {
         },
         {
           test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
-          loader: 'url?limit=10000&mimetype=application/font-woff'
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff'
         },
         {
           test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
-          loader: 'url?limit=10000&mimetype=application/octet-stream'
+          loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
         },
         {
           test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
-          loader: 'file'
+          loader: 'file-loader'
         },
         {
           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
-          loader: 'url?limit=10000&mimetype=image/svg+xml'
+          loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
         }
       ]
     },
     plugins:[
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProvidePlugin({
-        'Promise': 'exports?global.Promise!es6-promise',
-        'window.fetch': 'exports?global.fetch!whatwg-fetch'
+        'Promise': 'exports-loader?global.Promise!es6-promise',
+        'window.fetch': 'exports-loader?global.fetch!whatwg-fetch'
       }),
       // Initial configuration
       new webpack.DefinePlugin({
@@ -90,9 +91,14 @@ module.exports = {
           'EDUID_AUTHN_URL': "'http://dashboard.eduid.docker:8080/services/authn/login'",
           'EDUID_CONFIG_URL': "'http://dashboard.eduid.docker:8080/services/jsconfig/config'"
       }),
-      new webpack.NoErrorsPlugin()
-    ],
-    postcss: function () {
-      return [autoprefixer, precss];
-    }
+      new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.LoaderOptionsPlugin({
+         // test: /\.xxx$/, // may apply this only for some modules
+         options: {
+           postcss: function () {
+             return [autoprefixer, precss];
+           }
+         }
+       })
+    ]
 };

@@ -1,31 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 
-const TextControl = React.createClass({
+class TextControl extends Component {
 
-  getInitialState: function () {
+  getInitialState () {
     return { value: '' };
-  },
+  }
 
-  getValidationState: function () {
+  getValidationState () {
     if (this.props.validation !== undefined) {
       return this.props.validation(this.state.value);
     } else {
       return "success";
     }
-  },
+  }
 
-  handleChange: function (e) {
+  handleChange (e) {
     this.setState({ value: e.target.value });
     if (this.props.handleChange !== undefined) {
       this.props.handleChange(e);
     }
-  },
+  }
 
-  render: function () {
+  render () {
     let children, label, help, options;
     if ((this.props.componentClass === 'select') &&
         (this.props.options)) {
@@ -64,7 +64,7 @@ const TextControl = React.createClass({
         </FormGroup>
     );
   }
-});
+}
 
 TextControl.PropTypes = {
   name: PropTypes.string,
