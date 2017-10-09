@@ -1,7 +1,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import PersonalData from 'components/PersonalData';
@@ -11,7 +10,6 @@ import * as phoneActions from "actions/Mobile";
 import * as ninActions from "actions/Nins";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
 import personalDataReducer from "reducers/PersonalData";
 
 import {requestAllPersonalData, savePersonalData, fetchAllPersonalData, sendPersonalData} from '../sagas/PersonalData';

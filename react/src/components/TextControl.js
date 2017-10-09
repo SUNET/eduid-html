@@ -6,8 +6,11 @@ import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap
 
 class TextControl extends Component {
 
-  getInitialState () {
-    return { value: '' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
   }
 
   getValidationState () {
@@ -56,7 +59,7 @@ class TextControl extends Component {
                        type={this.props.type}
                        value={this.props.initialValue}
                        placeholder={this.props.placeholder}
-                       onChange={this.handleChange}>
+                       onChange={this.handleChange.bind(this)}>
             {children}
           </FormControl>
           <FormControl.Feedback className=""/>

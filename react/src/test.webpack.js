@@ -7,5 +7,10 @@ var intl = require('intl');  // intl polyfill
 
 var babel = require("babel-polyfill");  // babel polyfill
 
+var enzyme = require('enzyme');
+var Adapter = require('enzyme-adapter-react-16');
+
+enzyme.configure({ adapter: new Adapter() });
+
 var context = require.context('.', true, /-test\.js$/); //make sure you have your directory and regex test set correctly!
 context.keys().forEach(context);
