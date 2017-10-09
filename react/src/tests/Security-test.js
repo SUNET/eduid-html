@@ -1,4 +1,5 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { put, select, call } from "redux-saga/effects";
@@ -568,12 +569,12 @@ function setupComponent() {
     is_fetching: false,
     confirming_change: false,
     confirming_deletion: false,
-    handleStartConfirmationPassword: createSpy(),
-    handleStopConfirmationPassword: createSpy(),
-    handleConfirmationPassword: createSpy(),
-    handleStartConfirmationDeletion: createSpy(),
-    handleStopConfirmationDeletion: createSpy(),
-    handleConfirmationDeletion: createSpy(),
+    handleStartConfirmationPassword: mock.fn(),
+    handleStopConfirmationPassword: mock.fn(),
+    handleConfirmationPassword: mock.fn(),
+    handleStartConfirmationDeletion: mock.fn(),
+    handleStopConfirmationDeletion: mock.fn(),
+    handleConfirmationDeletion: mock.fn(),
   };
 
   const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
@@ -600,8 +601,8 @@ describe("Security Component", () => {
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -669,17 +670,17 @@ describe("Security Container", () => {
 
   it("Clicks change", () => {
 
-    expect(dispatch.calls.length).toEqual(0);
-    getWrapper().find('#security-change-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(0);
+    getWrapper().find('EduIDButton#security-change-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
   it("Clicks delete", () => {
 
-    expect(dispatch.calls.length).toEqual(0);
-    getWrapper().find('#delete-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
-    expect(dispatch.calls[0].arguments[0].type).toEqual("START_DELETE_ACCOUNT");
+    expect(dispatch.mock.calls.length).toEqual(0);
+    getWrapper().find('EduIDButton#delete-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls[0][0].type).toEqual("START_DELETE_ACCOUNT");
   });
 
   it("Clicks confirm delete", () => {
@@ -695,10 +696,10 @@ describe("Security Container", () => {
         confirming_deletion: true
     };
 
-    expect(dispatch.calls.length).toEqual(0);
+    expect(dispatch.mock.calls.length).toEqual(0);
     const deleteModal = getWrapper(true, newProps).find('DeleteModal');
-    deleteModal.node.deleteButton.props.onClick();
-    expect(dispatch.calls.length).toEqual(1);
-    expect(dispatch.calls[0].arguments[0].type).toEqual('POST_DELETE_ACCOUNT');
+    deleteModal.props().handleConfirm();
+    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls[0][0].type).toEqual('POST_DELETE_ACCOUNT');
   });
 });

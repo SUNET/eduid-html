@@ -1,4 +1,4 @@
-import React from 'react';
+const mock = require('jest-mock');import React from 'react';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { put, call, select } from "redux-saga/effects";
@@ -266,9 +266,9 @@ function setupComponent() {
     nin: '',
     valid_nin: true,
     proofing_methods: [],
-    validateNin: createSpy(),
-    handleChange: createSpy(),
-    handleDelete: createSpy()
+    validateNin: mock.fn(),
+    handleChange: mock.fn(),
+    handleDelete: mock.fn()
   };
 
   const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
@@ -292,8 +292,8 @@ describe("Nins Component", () => {
     expect(fieldset.hasClass('tabpane')).toBeTruthy();
     expect(fieldset.contains(ninInput.get(0))).toBeTruthy();
 
-    expect(form.props()).toContain({role: 'form'});
-    expect(fieldset.props()).toContain({id: 'nins-form'});
+    expect(form.props()).toMatchObject({role: 'form'});
+    expect(fieldset.props()).toMatchObject({id: 'nins-form'});
   });
 });
 
@@ -302,8 +302,8 @@ describe("Nins Component", () => {
 
 const fakeStore = (state) => ({
     default: () => {},
-    dispatch: createSpy(),
-    subscribe: createSpy(),
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
     getState: () => ({ ...state })
 });
 
@@ -367,9 +367,9 @@ describe("Nins Container", () => {
        {
         type: actions.POST_NIN_REMOVE_SUCCESS,
       });
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#button-rm-nin-196701100006').simulate('click');
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(0);
+    wrapper.find('EduIDButton#button-rm-nin-196701100006').simulate('click');
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 });
 

@@ -1,4 +1,5 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
@@ -148,8 +149,8 @@ describe("Notifications Component", () => {
 
 const fakeStore = (state) => ({
     default: () => {},
-    dispatch: createSpy(),
-    subscribe: createSpy(),
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
     getState: () => ({ ...state })
 });
 

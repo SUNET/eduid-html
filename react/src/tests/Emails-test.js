@@ -1,4 +1,4 @@
-import React from 'react';
+const mock = require('jest-mock');import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import Emails from 'components/Emails';
@@ -938,8 +938,8 @@ function setupComponent() {
     surname: '',
     display_name: '',
     language: '',
-    handleSave: createSpy(),
-    handleChange: createSpy(),
+    handleSave: mock.fn(),
+    handleChange: mock.fn(),
   };
 
   const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
@@ -965,8 +965,8 @@ describe("Emails Component", () => {
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -1037,9 +1037,9 @@ describe("Emails Container", () => {
        {
         type: actions.POST_EMAIL
       });
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#email-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(0);
+    wrapper.find('EduIDButton#email-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
 });

@@ -1,4 +1,5 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow, mount, render } from 'enzyme';
@@ -14,8 +15,8 @@ addLocaleData('react-intl/locale-data/en');
 
 const fakeStore = (state) => ({
     default: () => {},
-    dispatch: createSpy(),
-    subscribe: createSpy(),
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
     getState: () => ({ ...state })
 });
 
@@ -37,7 +38,7 @@ function setupComponent() {
                 ['en', 'English'],
                 ['sv', 'Svenska']
             ],
-      changeLanguage: createSpy()
+      changeLanguage: mock.fn()
     };
     const wrapper = mount(<Provider store={ store }>
                               <IntlProvider locale={'en'} messages={messages}>

@@ -1,4 +1,5 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
@@ -73,7 +74,7 @@ describe("Personal Data Actions", () => {
       type: actions.CHANGE_USERDATA,
       payload: data_error
     };
-    expect(actions.changeUserdata(data)).toNotEqual(expectedAction);
+    expect(actions.changeUserdata(data)).not.toEqual(expectedAction);
   });
 
   it("should update personal data user", () => {
@@ -274,8 +275,8 @@ function setupComponent() {
     surname: '',
     display_name: '',
     language: '',
-    handleSave: createSpy(),
-    handleChange: createSpy()
+    handleSave: mock.fn(),
+    handleChange: mock.fn()
   };
 
   const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
@@ -412,7 +413,7 @@ describe("PersonalData Component", () => {
           surname = wrapper.find("#surname"),
           given_name = wrapper.find("#given_name"),
           display_name = wrapper.find("#display_name"),
-          button = wrapper.find('#personal-data-button');
+          button = wrapper.find('EduIDButton#personal-data-button');
 
     expect(form.contains(fieldset.get(0))).toBeTruthy();
     expect(fieldset.hasClass('tabpane')).toBeTruthy();
@@ -421,12 +422,12 @@ describe("PersonalData Component", () => {
     expect(fieldset.contains(given_name.get(0))).toBeTruthy();
     expect(fieldset.contains(display_name.get(0))).toBeTruthy();
 
-    expect(form.props()).toContain({role: 'form'});
-    expect(fieldset.props()).toContain({id: 'personal-data-form'});
+    expect(form.props()).toMatchObject({role: 'form'});
+    expect(fieldset.props()).toMatchObject({id: 'personal-data-form'});
 
-    expect(props.handleSave.calls.length).toEqual(0);
+    expect(props.handleSave.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleSave.calls.length).toEqual(1);
+    expect(props.handleSave.mock.calls.length).toEqual(1);
 
   });
 
@@ -434,8 +435,8 @@ describe("PersonalData Component", () => {
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -505,9 +506,9 @@ describe("PersonalData Container", () => {
        {
         type: actions.POST_USERDATA_SUCCESS,
       });
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#personal-data-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(0);
+    wrapper.find('EduIDButton#personal-data-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
 });
