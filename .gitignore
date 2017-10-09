@@ -6,3 +6,4 @@ node_modules/
 coverage/
 npm-debug.log
 react/build/
+react/package-lock.json
