@@ -104,7 +104,7 @@
     "react-intl-translations-manager": "^5.0.1",
     "react-router": "4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-router-redux": "^4.0.8",
+    "react-router-redux": "^5.0.0-alpha.6",
     "react-spinkit": "^3.0.0",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",

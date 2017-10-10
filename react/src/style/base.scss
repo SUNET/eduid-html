@@ -547,9 +547,9 @@ div.position-relative {
   border-bottom-color: transparent;
 }
 
-.tabs-below > .nav-tabs > .active > a,
-.tabs-below > .nav-tabs > .active > a:hover,
-.tabs-below > .nav-tabs > .active > a:focus {
+.tabs-below > .nav-tabs > a.active,
+.tabs-below > .nav-tabs > a.active:hover,
+.tabs-below > .nav-tabs > a.active:focus {
   border-color: transparent #ddd #ddd #ddd;
 }
 
@@ -1059,9 +1059,9 @@ div#footer span.langselector {
       border-color: #eeeeee #dddddd #eeeeee #eeeeee;
     }
 
-    .tabs-left > .nav-tabs .active > a,
-    .tabs-left > .nav-tabs .active > a:hover,
-    .tabs-left > .nav-tabs .active > a:focus {
+    .tabs-left > .nav-tabs > a.active,
+    .tabs-left > .nav-tabs > a.active:hover,
+    .tabs-left > .nav-tabs > a.active:focus {
       border-color: #ddd transparent #ddd #ddd;
       *border-right-color: #ffffff;
     }
@@ -1084,9 +1084,9 @@ div#footer span.langselector {
       border-color: #eeeeee #eeeeee #eeeeee #dddddd;
     }
 
-    .tabs-right > .nav-tabs .active > a,
-    .tabs-right > .nav-tabs .active > a:hover,
-    .tabs-right > .nav-tabs .active > a:focus {
+    .tabs-right > .nav-tabs > a.active,
+    .tabs-right > .nav-tabs > a.active:hover,
+    .tabs-right > .nav-tabs > a.active:focus {
       border-color: #ddd #ddd #ddd transparent;
       *border-left-color: #ffffff;
     }

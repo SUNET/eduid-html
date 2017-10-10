@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
 
 import i18n from 'i18n-messages';
 import HeaderContainer from "containers/Header";
@@ -20,8 +22,11 @@ import ProfileFilledContainer from 'containers/ProfileFilled';
 import PendingActionsContainer from 'containers/PendingActions';
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'style/base.scss';
 import 'style/Main.scss';
 
+
+export const history = createHistory()
 
 /* SubMain is the main component, before internationalization */
 
@@ -37,11 +42,12 @@ class SubMain extends Component {
         const tabsElem = tabs.map( (tab, index) => {
             return (
                 <li key={index}>
-                  <Link className="main-nav-tabs"
+                  <NavLink className="main-nav-tabs"
+                        activeClassName="active"
                         to={`/profile/${tab.id}`}
                         id={`${tab.id}-router-link`}>
                     {tab.label}
-                  </Link>
+                  </NavLink>
                 </li>
             );
         });
@@ -95,9 +101,9 @@ class SubMain extends Component {
         } else {
             return ([
               <HeaderContainer key="1" />,
-              <BrowserRouter key="2">
+              <ConnectedRouter history={history} key="2">
                 {content}
-              </BrowserRouter>,
+              </ConnectedRouter>,
               <FooterContainer key="3" />
             ]);
         }
