@@ -51,6 +51,10 @@ class Header extends Component {
                   </form>
 
                 </div>
+                <div className="loa-big hidden-xs" id="eduid-header-loa">
+                  {this.props.email}
+                  ({this.props.l10n(this.props.confirmed)})
+                </div>
               </div>
             </div>
           </div>
@@ -61,6 +65,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+    email: PropTypes.string,
+    confirmed: PropTypes.string
 }
 
 export default i18n(Header);

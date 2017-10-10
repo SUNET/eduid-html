@@ -55,7 +55,7 @@ class SubMain extends Component {
         const content = (
               <div className="container position-relative">
                 <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
-                <div id="main-content-block">
+                <div id="content-block">
 
                   <div className='profile-combo tabbable well row' id="profile-content-area">
                     <div className='col-md-3'>

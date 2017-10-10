@@ -10,12 +10,14 @@ class ProfileFilled extends Component{
 
   render(){
     return(
-      <div id="profile-filled-container">
+      <li id="profile-filled-li">
+        <div className="profile-filled profile-filled-large">
           <meter max={this.props.max} value={this.props.cur}
                  id="profile-filled-meter"
                  ref="profileFilledMeter">
           </meter>
-      </div>);
+        </div>
+      </li>);
   }
 }
 
