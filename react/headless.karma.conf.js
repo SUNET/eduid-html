@@ -2,6 +2,7 @@
 var argv = require('yargs').argv;
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
+const path = require('path');
 
 var webpackKarma = {
   resolve: webpackConfig.resolve,
@@ -18,25 +19,76 @@ webpackKarma.externals = {
   'react/lib/ReactContext': true
 };
 
-const nodebug = process.env.npm_lifecycle_script.indexOf('--debug') === -1;
-
-if (nodebug) {
-  webpackKarma.module.preLoaders = [
-    {
-      test: /\.js$/,
-      loader: 'isparta',
-      exclude: /(tests|node_modules)\//,
-    }
-  ];
-  webpackKarma.isparta = {
-    embedSource: true,
-    noAutoWrap: true,
-    // these babel options will be passed only to isparta and not to babel-loader
-    babel: {
-      presets: ['es2015', 'react']
-    }
-  };
-}
+webpackKarma.module.rules = [
+  {
+    test: /\.js$/,
+    use: {
+        loader: 'istanbul-instrumenter-loader',
+        options: {
+          //esModules: true,
+          //produceSourceMap: true
+        }
+    },
+    enforce: 'post',
+    include: path.resolve('src/')
+  },
+  {
+    test: /\.js$/,
+    use: {loader: 'babel-loader'},
+    enforce: 'pre',
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.json$/,
+    use: {loader: 'json-loader'},
+    enforce: 'pre',
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      {loader: 'style-loader'},
+      {loader: 'css-loader'},
+      {loader: 'postcss-loader'},
+      {loader: 'sass-loader'}
+    ],
+    enforce: 'pre',
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.css$/,
+    use: [
+      {loader: 'style-loader'},
+      {loader: 'css-loader'}
+    ],
+    enforce: 'pre'
+  },
+  {
+    test: /\.png$/,
+    use: {loader: 'url-loader?limit=100000'},
+    enforce: 'pre'
+  },
+  {
+    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+    use: {loader: "url-loader?limit=10000&mimetype=application/octet-stream"},
+    enforce: 'pre'
+  },
+  {
+    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+    use: {loader: "url-loader?limit=10000&mimetype=image/svg+xml"},
+    enforce: 'pre'
+  },
+  {
+    test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+    use: {loader: "url-loader?limit=10000&mimetype=application/font-woff"},
+    enforce: 'pre'
+  },
+  {
+    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+    use: {loader: "file-loader"},
+    enforce: 'pre'
+  }
+];
 
 process.env.CHROME_BIN = require('puppeteer').executablePath()
 
@@ -67,12 +119,14 @@ module.exports = function (config) {
       // also run tests through sourcemap for easier debugging
       'src/test.webpack.js': [ 'webpack', 'sourcemap' ] //preprocess with webpack and our sourcemap loader
     },
-    reporters: [ 'progress', 'coverage' ], //report results in this format
-    coverageReporter: {
-      reporters: [
-        { type: 'lcov', dir: 'coverage/'},
-        { type: 'text' }
-      ]
+    reporters: [ 'progress', 'coverage-istanbul' ], //report results in this format
+    coverageIstanbulReporter: {
+        reports: [ 'html', 'text-summary' ],
+        fixWebpackSourcePaths: true,
+        dir: path.join(__dirname, 'coverage'),
+        'report-config': {
+            html: {subdir: 'html'}
+        }
     },
     webpack: webpackKarma,
     webpackServer: {
@@ -85,7 +139,8 @@ module.exports = function (config) {
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-coverage',
-      'karma-mocha'
+      'karma-mocha',
+      'karma-coverage-istanbul-reporter'
     ],
   });
 };
