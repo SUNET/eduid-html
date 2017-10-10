@@ -961,6 +961,21 @@ const msgs = {
         <FormattedMessage
           id="pending.phones"
           defaultMessage={`Add a phone number`} />),
+
+   'main.unconfirmed': (
+        <FormattedMessage
+          id="main.unconfirmed"
+          defaultMessage={`Unconfirmed`} />),
+
+   'main.confirmed': (
+        <FormattedMessage
+          id="main.confirmed"
+          defaultMessage={`Confirmed`} />),
+
+   'pfilled.completion': (
+        <FormattedMessage
+          id="pfilled.completion"
+          defaultMessage={`Completion`} />),
 };
 
 const unformatted = defineMessages({

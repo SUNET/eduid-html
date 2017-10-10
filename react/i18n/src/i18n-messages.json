@@ -644,6 +644,18 @@
     "defaultMessage": "Add a phone number"
   },
   {
+    "id": "main.unconfirmed",
+    "defaultMessage": "Unconfirmed"
+  },
+  {
+    "id": "main.confirmed",
+    "defaultMessage": "Confirmed"
+  },
+  {
+    "id": "pfilled.completion",
+    "defaultMessage": "Completion"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
