@@ -40,9 +40,15 @@ class SubMain extends Component {
                       {id: 'phones', label: this.props.l10n('main.phones')},
                       {id: 'security', label: this.props.l10n('main.security')}];
         const tabsElem = tabs.map( (tab, index) => {
+            //let classes;
+            //if (tab.id === 'personaldata') {
+                //classes = 'main-nav-tabs active';
+            //} else {
+                //classes = 'main-nav-tabs';
+            //}
             return (
                 <li key={index}>
-                  <NavLink className="main-nav-tabs"
+                  <NavLink className='main-nav-tabs'
                         activeClassName="active"
                         to={`/profile/${tab.id}`}
                         id={`${tab.id}-router-link`}>
@@ -76,14 +82,16 @@ class SubMain extends Component {
                       </div>
                     </div>
                     <div className="tab-content info-container col-md-8 col-md-offset-1">
-                      <NotificationsContainer />
-                      <Route exact path="/profile/" component={PersonalDataContainer} />
-                      <Route path="/profile/personaldata" component={PersonalDataContainer} />
-                      <Route path="/profile/nins" component={NinsContainer} />
-                      <Route path="/profile/emails" component={EmailsContainer} />
-                      <Route path="/profile/phones" component={MobileContainer} />
-                      <Route path="/profile/security" component={SecurityContainer} />
-                      <Route path="/profile/chpass" component={ChangePasswordContainer} />
+                      <div className="tab-pane active">
+                        <NotificationsContainer />
+                        <Route exact path="/profile/" component={PersonalDataContainer} />
+                        <Route path="/profile/personaldata" component={PersonalDataContainer} />
+                        <Route path="/profile/nins" component={NinsContainer} />
+                        <Route path="/profile/emails" component={EmailsContainer} />
+                        <Route path="/profile/phones" component={MobileContainer} />
+                        <Route path="/profile/security" component={SecurityContainer} />
+                        <Route path="/profile/chpass" component={ChangePasswordContainer} />
+                      </div>
                     </div>
                   </div>
                 </div>

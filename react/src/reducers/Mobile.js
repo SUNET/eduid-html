@@ -59,7 +59,9 @@ let mobileReducer = (state=mobileData, action) => {
       return {
         ...state,
         confirming: '',
-       resending: {
+        is_fetching: false,
+        failed: false,
+        resending: {
           is_fetching: false,
           failed: false,
           error: {},
@@ -108,7 +110,7 @@ let mobileReducer = (state=mobileData, action) => {
         return {
             ...state,
             ...state.payload,
-            is_fetching: true,
+            is_fetching: false,
             phones: action.payload.phones
         };
 

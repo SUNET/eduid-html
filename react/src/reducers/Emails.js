@@ -61,7 +61,9 @@ let emailsReducer = (state=emailsData, action) => {
       return {
         ...state,
         confirming: '',
-       resending: {
+        is_fetching: false,
+        failed: false,
+        resending: {
           is_fetching: false,
           failed: false,
           error: {},

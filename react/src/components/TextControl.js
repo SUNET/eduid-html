@@ -9,7 +9,7 @@ class TextControl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.initialValue,
     };
   }
 
@@ -57,7 +57,7 @@ class TextControl extends Component {
           {label}
           <FormControl componentClass={this.props.componentClass}
                        type={this.props.type}
-                       value={this.props.initialValue}
+                       value={this.state.value}
                        placeholder={this.props.placeholder}
                        onChange={this.handleChange.bind(this)}>
             {children}

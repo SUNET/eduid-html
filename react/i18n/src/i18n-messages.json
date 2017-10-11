@@ -1,5 +1,17 @@
 [
   {
+    "id": "error_in_form",
+    "defaultMessage": "Check the form below for errors."
+  },
+  {
+    "id": "Error: Internal Server Error",
+    "defaultMessage": "There was an error servicing your request. Please contact the administrators."
+  },
+  {
+    "id": "Error: Service Unavailable",
+    "defaultMessage": "Service Unavailable. Check your internet connection."
+  },
+  {
     "id": "Not a valid email address.",
     "defaultMessage": "Not a valid email address."
   },
@@ -73,7 +85,7 @@
   },
   {
     "id": "main.copyright",
-    "defaultMessage": "&copy; SUNET 2013-2017"
+    "defaultMessage": "SUNET 2013-2017"
   },
   {
     "id": "cm.ok",

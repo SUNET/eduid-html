@@ -4,7 +4,7 @@ import * as actions from "actions/Notifications";
 const notifyAndDispatch = store => next => action => {
     if (action.type !== actions.NEW_NOTIFICATION) {
         if (action.error && action.payload) {
-            const msg = action.payload.errorMsg || action.payload.message;
+            const msg = action.payload.errorMsg || action.payload.message || 'error_in_form';
             if (msg) {
                 next(actions.eduidNotify(msg, 'errors'));
             }

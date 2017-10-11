@@ -333,6 +333,9 @@ div.profile-combo {
     padding-top:40px;
 }
 
+div.table-responsive {
+    overflow-x: inherit;
+}
 
 /* Footer */
 #footer .container {
@@ -356,6 +359,7 @@ div.profile-combo {
 }
 #footer .langselector a {
     color:#000;
+    cursor: pointer;
 }
 
 

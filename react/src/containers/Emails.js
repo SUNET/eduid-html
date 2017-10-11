@@ -47,9 +47,10 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleConfirm: function (e) {
         const data = {
-            code: document.getElementById('emailConfirmDialogControl').value
+            code: document.getElementById('confirmation-code-area').querySelector('input').value
         };
-        dispatch(startVerify(data))
+        dispatch(startVerify(data));
+        dispatch(stopConfirmation());
     },
     handleRemove: function (e) {
         const dataNode = e.target.closest("tr.emailrow"),
