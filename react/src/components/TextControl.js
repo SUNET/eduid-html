@@ -14,11 +14,13 @@ class TextControl extends Component {
   }
 
   getValidationState () {
-    if (this.props.validation !== undefined) {
-      return this.props.validation(this.state.value);
-    } else {
-      return "success";
+    if (this.props.validationState !== undefined) {
+        return this.props.validationState
     }
+    if (this.props.validation !== undefined) {
+        return this.props.validation(this.state.value);
+    }
+    return "success";
   }
 
   handleChange (e) {
@@ -47,7 +49,7 @@ class TextControl extends Component {
             {this.props.label}
           </ControlLabel>);
     }
-    if (this.props.help && this.state.value) {
+    if (this.props.help) {
         help = <HelpBlock>{this.props.help}</HelpBlock>;
     }
 
@@ -78,6 +80,7 @@ TextControl.PropTypes = {
   initialValue: PropTypes.string,
   handleChange: PropTypes.func,
   validation: PropTypes.func,
+  validationState: PropTypes.string,
   help: PropTypes.string
 }
 

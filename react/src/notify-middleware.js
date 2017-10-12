@@ -1,5 +1,6 @@
 
 import * as actions from "actions/Notifications";
+import { profileFilled } from "actions/Profile";
 
 const notifyAndDispatch = store => next => action => {
     if (action.type !== actions.NEW_NOTIFICATION) {

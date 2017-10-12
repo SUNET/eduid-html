@@ -16,7 +16,7 @@ class PendingActions extends Component {
                 pdataMissing = false;
                 return (
                   <li key={index}>
-                    <a href="/profile/personal_data">
+                    <a href="/profile/personaldata">
                       {this.props.l10n('pending.pdata')}
                     </a>
                   </li>);
