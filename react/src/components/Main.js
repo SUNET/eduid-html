@@ -98,6 +98,7 @@ class SubMain extends Component {
                 <div className='push'></div>
               </div>
         );
+        setTimeout( () => {window.scroll(0,0)}, 100)
         if (this.props.testing) {
             return ([
               <HeaderContainer key="1" />,
