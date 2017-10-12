@@ -32,7 +32,7 @@ class Nins extends Component {
     }
     if (ninStatus === 'nonin') {
         invalidNinText = (this.props.valid_nin) ?
-                           this.props.l10n('nins.valid_nin') :
+                           '' :
                            this.props.l10n('nins.invalid_nin');
         ninInput = (
             <div>
