@@ -28,10 +28,9 @@ webpackProd.plugins = [
     }
   }),
   new webpack.ProvidePlugin({
-    'Promise': 'exports?global.Promise!es6-promise',
-    'window.fetch': 'exports?self.fetch!whatwg-fetch'
+    'Promise': 'exports-loader?global.Promise!es6-promise',
+    'window.fetch': 'exports-loader?self.fetch!whatwg-fetch'
   }),
-  new webpack.optimize.DedupePlugin(),
   new webpack.optimize.OccurrenceOrderPlugin(true),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
