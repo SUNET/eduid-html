@@ -11,11 +11,12 @@ import Cookies from "js-cookie";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from 'react-router';  
+
+import { routerMiddleware } from 'react-router-redux';
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";
@@ -52,6 +53,7 @@ import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
+import { history } from "components/Main";
 
 import { TOKEN_SERVICE_URL, EDUID_COOKIE_NAME } from "init-config";
 
@@ -140,6 +142,7 @@ export const store = createStore(
     composeEnhancers(
       applyMiddleware(
           sagaMiddleware,
+          routerMiddleware(history),
           notifyAndDispatch,
           createLogger()
           )

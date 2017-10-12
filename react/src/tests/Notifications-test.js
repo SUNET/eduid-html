@@ -1,7 +1,7 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetchMock from 'fetch-mock';
@@ -149,8 +149,8 @@ describe("Notifications Component", () => {
 
 const fakeStore = (state) => ({
     default: () => {},
-    dispatch: createSpy(),
-    subscribe: createSpy(),
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
     getState: () => ({ ...state })
 });
 

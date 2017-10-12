@@ -1,4 +1,4 @@
-import React from 'react';
+const mock = require('jest-mock');import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import * as actions from "actions/Mobile";
@@ -944,8 +944,8 @@ describe("Async component", () => {
 function setupComponent() {
   const props = {
     mobile: '',
-    handleSave: createSpy(),
-    handleChange: createSpy(),
+    handleSave: mock.fn(),
+    handleChange: mock.fn(),
   };
 
   const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
@@ -971,8 +971,8 @@ describe("Mobile Component", () => {
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -1042,9 +1042,9 @@ describe("Mobile Container", () => {
        {
         type: actions.POST_MOBILE
       });
-    expect(dispatch.calls.length).toEqual(0);
-    wrapper.find('#mobile-button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(0);
+    wrapper.find('EduIDButton#mobile-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
 });

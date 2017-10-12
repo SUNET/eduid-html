@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
 
 import i18n from 'i18n-messages';
 import HeaderContainer from "containers/Header";
@@ -20,8 +22,11 @@ import ProfileFilledContainer from 'containers/ProfileFilled';
 import PendingActionsContainer from 'containers/PendingActions';
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'style/base.scss';
 import 'style/Main.scss';
 
+
+export const history = createHistory()
 
 /* SubMain is the main component, before internationalization */
 
@@ -37,18 +42,17 @@ class SubMain extends Component {
         const tabsElem = tabs.map( (tab, index) => {
             return (
                 <li key={index}>
-                  <Link className="main-nav-tabs"
+                  <NavLink className="main-nav-tabs"
+                        activeClassName="active"
                         to={`/profile/${tab.id}`}
                         id={`${tab.id}-router-link`}>
                     {tab.label}
-                  </Link>
+                  </NavLink>
                 </li>
             );
         });
 
         const content = (
-            <div id='wrap container'>
-              <HeaderContainer />
               <div className="container position-relative">
                 <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
                 <div id="main-content-block">
@@ -85,12 +89,23 @@ class SubMain extends Component {
                 </div>
                 <div className='push'></div>
               </div>
-              <FooterContainer />
-            </div>
         );
-        if (this.props.testing) { return content }
-        else {
-            return (<BrowserRouter>{content}</BrowserRouter>);
+        if (this.props.testing) {
+            return ([
+              <HeaderContainer key="1" />,
+                <div key="2">
+                {content}
+                </div>,
+              <FooterContainer key="3" />
+            ]);
+        } else {
+            return ([
+              <HeaderContainer key="1" />,
+              <ConnectedRouter history={history} key="2">
+                {content}
+              </ConnectedRouter>,
+              <FooterContainer key="3" />
+            ]);
         }
     }
 }

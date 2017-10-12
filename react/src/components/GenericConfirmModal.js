@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, HelpBlock, Alert } from 'react-bootstrap';
+import Modal from "components/ModalShim";
 
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
@@ -33,11 +34,11 @@ class GenericConfirmModal extends Component {
                 <Modal.Footer>
                     <EduIDButton bsStyle="primary"
                           className="ok-button"
-                          onClick={this.props.acceptModal} >
+                          onClick={this.props.acceptModal.bind(this)} >
                         {this.props.l10n('cm.accept')}
                     </EduIDButton>
                     <Button className="cancel-button"
-                            onClick={this.props.closeModal} >
+                            onClick={this.props.closeModal.bind(this)} >
                          {this.props.l10n('cm.cancel')}
                     </Button>
                 </Modal.Footer>
@@ -52,7 +53,6 @@ GenericConfirmModal.propTypes = {
   modalId: PropTypes.string,
   title: PropTypes.any,
   mainText: PropTypes.any,
-  handleRemove: PropTypes.func,
   closeModal: PropTypes.func,
   acceptModal: PropTypes.func,
   showModal: PropTypes.bool,

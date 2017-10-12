@@ -1,7 +1,7 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
@@ -293,10 +293,10 @@ describe("Reducers", () => {
 
 function setupComponent() {
   const props = {
-    handleLetterProofing: createSpy(),
-    sendConfirmationLetter: createSpy(),
-    handleConfirmationLetter: createSpy(),
-    handleStopConfirmationLetter: createSpy(),
+    handleLetterProofing: mock.fn(),
+    sendConfirmationLetter: mock.fn(),
+    handleConfirmationLetter: mock.fn(),
+    handleStopConfirmationLetter: mock.fn(),
     resending: {
         is_fetching: false,
         failed: false
@@ -323,19 +323,19 @@ describe("LetterProofingButton Component", () => {
     expect(form.contains(fieldset.get(0))).toBeTruthy();
     expect(fieldset.contains(button.get(0))).toBeTruthy();
 
-    expect(form.props()).toContain({role: 'form'});
-    expect(fieldset.props()).toContain({id: 'letter-proofing'});
+    expect(form.props()).toMatchObject({role: 'form'});
+    expect(fieldset.props()).toMatchObject({id: 'letter-proofing'});
 
-    expect(props.handleLetterProofing.calls.length).toEqual(0);
+    expect(props.handleLetterProofing.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleLetterProofing.calls.length).toEqual(1);
+    expect(props.handleLetterProofing.mock.calls.length).toEqual(1);
   })
 });
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -398,9 +398,9 @@ describe("LetterProofing Container", () => {
         payload: {message: 'success'}
       });
 
-    expect(dispatch.calls.length).toEqual(0);
+    expect(dispatch.mock.calls.length).toEqual(0);
     wrapper.find('Button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
 });

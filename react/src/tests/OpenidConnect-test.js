@@ -1,7 +1,7 @@
 
+const mock = require('jest-mock');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
@@ -136,7 +136,7 @@ describe("Reducers", () => {
 
 function setupComponent() {
   const props = {
-    handleGetQRCode: createSpy(),
+    handleGetQRCode: mock.fn(),
     qr_img: 'code',
     qr_code: 'nonce'
   };
@@ -167,22 +167,22 @@ describe("OpenidConnect Component", () => {
     expect(fieldset.contains(button.get(0))).toBeTruthy();
     expect(divQrcode.contains(img.get(0))).toBeTruthy();
 
-    expect(form.props()).toContain({role: 'form'});
-    expect(fieldset.props()).toContain({id: 'openid-connect'});
-    expect(img.props()).toContain({src: 'code'});
+    expect(form.props()).toMatchObject({role: 'form'});
+    expect(fieldset.props()).toMatchObject({id: 'openid-connect'});
+    expect(img.props()).toMatchObject({src: 'code'});
     expect(caption).toBeTruthy();
 
-    expect(props.handleGetQRCode.calls.length).toEqual(0);
+    expect(props.handleGetQRCode.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleGetQRCode.calls.length).toEqual(1);
+    expect(props.handleGetQRCode.mock.calls.length).toEqual(1);
   })
 });
 
 
 const fakeStore = (state) => ({
   default: () => {},
-  dispatch: createSpy(),
-  subscribe: createSpy(),
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
   getState: () => ({ ...state })
 });
 
@@ -242,9 +242,9 @@ describe("OpenidConnect Container", () => {
         payload: {qr_img: 'new code', qr_code: 'new nonce'}
       });
 
-    expect(dispatch.calls.length).toEqual(0);
+    expect(dispatch.mock.calls.length).toEqual(0);
     wrapper.find('Button').props().onClick();
-    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
 });
@@ -276,13 +276,15 @@ describe("Async component", () => {
       return state.config.OIDC_PROOFING_URL;
     }
 
-    expect(next.value).toEqual(debug);
+    delete debug.SELECT.selector
+    expect(next.value).toMatchObject(debug);
 
     const oidcData = generator.next(next.value);
     const data = {
       'nin': 'testing'
     };
-    expect(oidcData.value).toEqual(call(fetchQRcode, debug, data));
+    let debug2 = call(fetchQRcode, debug, data);
+    expect(oidcData.value.CALL.args[1].nin).toEqual(debug2.CALL.args[1].nin);
 
     const action = {
       type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,

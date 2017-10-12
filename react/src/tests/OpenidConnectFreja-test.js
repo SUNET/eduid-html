@@ -1,13 +1,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
 import * as actions from "actions/OpenidConnectFreja";
 import openidConnectFrejaReducer from "reducers/OpenidConnectFreja";
 import OpenidConnectFreja from 'components/OpenidConnectFreja'
@@ -344,10 +342,9 @@ describe("Async component", () => {
 
     let next = generator.next();
 
-    next.value.SELECT.selector = function (state) {
-      return state;
-    };
-    expect(next.value).toEqual(select(state => state));
+    let debug = select(state => state);
+    delete debug.SELECT.selector
+    expect(next.value).toMatchObject(debug);
 
     const oidcFrejaData = generator.next(state);
     const data = {

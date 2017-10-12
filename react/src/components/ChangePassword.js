@@ -63,6 +63,7 @@ class ChangePassword extends Component {
                 role="form">
 
               <TextControl name="old_password"
+                           id="old_password"
                            label={this.props.l10n('chpass.old_password')}
                            componentClass="input"
                            ref={(field) => {this.oldPwField = field}}

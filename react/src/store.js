@@ -12,8 +12,10 @@ import ninsReducer from 'reducers/Nins';
 import letterProofingReducer from 'reducers/LetterProofing';
 import notificationsReducer from 'reducers/Notifications';
 import profileReducer from 'reducers/Profile';
+import { routerReducer } from 'react-router-redux'
 
 const eduIDApp = combineReducers({
+  router: routerReducer,
   chpass: chpassReducer,
   config: configReducer,
   emails: emailsReducer,
