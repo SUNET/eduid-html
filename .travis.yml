@@ -7,5 +7,5 @@ cache:
 before_script:
   - cd react
   - npm install
-script: npm run-script test-headless
+script: npm run-script test-headless && npm run build
 
