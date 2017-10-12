@@ -17,8 +17,6 @@ export function* requestAllPersonalData () {
         let userdata = yield call(fetchAllPersonalData, config);
         yield put(putCsrfToken(userdata));
         if (userdata.type === pdataActions.GET_ALL_USERDATA_SUCCESS) {
-          const filled = calculateProfileFilled(userdata);
-          yield put(profileActions.profileFilled(filled.max, filled.cur, filled.pending));
           const nins = userdata.payload.nins;
           delete userdata.payload.nins;
           const ninAction = {
@@ -63,28 +61,6 @@ export function fetchAllPersonalData (config) {
     })
     .then(checkStatus)
     .then(response => response.json())
-}
-
-
-function calculateProfileFilled (userdata) {
-    let filled = {max: 0, cur: 0, pending: []};
-    ['given_name', 'surname', 'display_name', 'language'].forEach( (pdata) => {
-        filled.max += 1;
-        if (userdata.payload[pdata]) {
-            filled.cur += 1;
-        } else {
-            filled.pending.push(pdata);
-        }
-    });
-    ['emails', 'phones', 'nins'].forEach( (tab) => {
-        filled.max += 1;
-        if (userdata.payload[tab] && userdata.payload[tab].length > 0) {
-            filled.cur += 1;
-        } else {
-            filled.pending.push(tab);
-        }
-    });
-    return filled;
 }
 
 

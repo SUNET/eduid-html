@@ -690,6 +690,22 @@ ul.circles-widget-labels li {
 }
 /*END: Accordion FAQ*/
 
+@media only screen and (min-width: 991px) {
+
+    div.mock-help-block {
+        height: 32px;
+    }
+
+    div.form-group span.help-block {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    div.form-group {
+        margin-bottom: 0;
+    }
+}
+
 
 @media only screen and (max-width: 991px) {
 
@@ -703,9 +719,6 @@ ul.circles-widget-labels li {
     div#profile-menu-large ul {
         margin-bottom: 50px;
     }
-}
-
-@media only screen and (max-width: 767px) {
 }
 
 @media only screen and (max-width: 767px) {

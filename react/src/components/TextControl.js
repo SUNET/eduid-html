@@ -14,11 +14,11 @@ class TextControl extends Component {
   }
 
   getValidationState () {
-    if (this.props.validationState !== undefined) {
-        return this.props.validationState
-    }
     if (this.props.validation !== undefined) {
         return this.props.validation(this.state.value);
+    }
+    if (this.props.validationState !== undefined) {
+        return this.props.validationState
     }
     return "success";
   }
@@ -51,6 +51,8 @@ class TextControl extends Component {
     }
     if (this.props.help) {
         help = <HelpBlock>{this.props.help}</HelpBlock>;
+    } else {
+        help = <div className="mock-help-block" />;
     }
 
     return (
