@@ -86,7 +86,7 @@ describe("ProfileFilled Component", () => {
 
     it("Renders", () => {
         const {wrapper, props} = setupComponent(),
-            container = wrapper.find('#profile-filled-container'),
+            container = wrapper.find('li#profile-filled-li'),
             meter = wrapper.find('meter');
 
         expect(container.contains(meter.get(0))).toBeTruthy();

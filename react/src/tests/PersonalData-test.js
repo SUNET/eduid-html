@@ -177,7 +177,8 @@ it("Receives a GET_ALL_USERDATA_FAIL action", () => {
         surname: 'Smith',
         display_name: 'John',
         language: 'en',
-        error: 'Bad error'
+        error: 'Bad error',
+        message: 'Bad error'
       }
     );
   });
@@ -262,7 +263,8 @@ it("Receives a POST_USERDATA_FAIL action", () => {
         surname: 'Smith',
         display_name: 'John',
         language: 'en',
-        error: "Bad error"
+        error: "Bad error",
+        message: "Bad error"
       }
     );
   });
@@ -321,9 +323,6 @@ describe("Async component", () => {
        }
        next = generator.next(action);
        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-
-       next = generator.next(action);
-       expect(next.value.PUT.action.type).toEqual('PROFILE_FILLED');
 
        action = {
          type: ninActions.GET_NINS_SUCCESS,

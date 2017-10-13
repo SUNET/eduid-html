@@ -29,6 +29,15 @@ function setupComponent() {
         personal_data: {
             eppn: 'test-eppn'
         },
+        emails: {
+            emails: []
+        },
+        nins: {
+            nins: []
+        },
+        phones: {
+            phones: []
+        },
         profile: {
             pending: []
         },
@@ -56,10 +65,11 @@ describe("Main Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
-              mainContent = wrapper.find('#main-content-block'),
+              mainContent = wrapper.find('div#content-block'),
               tabs = wrapper.find('ul.nav-tabs');
 
         expect(wrapper.contains(mainContent.get(0))).toBeTruthy();
         expect(wrapper.contains(tabs.get(0))).toBeTruthy();
+        expect(mainContent.contains(tabs.get(0))).toBeTruthy();
     });
 });

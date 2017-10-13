@@ -40,8 +40,8 @@ describe("Header Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
-              area = wrapper.find('#pending-actions-area'),
-              pending = wrapper.find('div.pending-action');
+              area = wrapper.find('ul.pending-actions'),
+              pending = wrapper.find('li.pending-action-item');
 
         expect(area.contains(pending.get(0))).toBeTruthy();
         expect(area.contains(pending.get(1))).toBeTruthy();

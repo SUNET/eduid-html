@@ -7,7 +7,7 @@ const mapStateToProps = (state, props) => {
     if (state.emails.emails.length >= 1) {
         email = state.emails.emails[0].email
     } else {
-        email = props.l10n("main.no-email-yet")
+        email = ''
     }
     if (state.nins.nins.length >= 1) {
         confirmed = 'main.confirmed'
