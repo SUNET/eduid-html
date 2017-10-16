@@ -64,6 +64,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "chai": "^4.1.2",
+    "compression-webpack-plugin": "^1.0.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
@@ -115,7 +116,8 @@
     "url-parse": "^1.1.9",
     "watchify": "^3.9.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-server": "^2.9.2",
     "whatwg-fetch": "^2.0.3",
     "yargs": "^9.0.1",
     "zxcvbn": "^4.4.2"

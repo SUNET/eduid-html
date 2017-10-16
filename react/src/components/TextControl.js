@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 
 class TextControl extends Component {
@@ -9,13 +12,16 @@ class TextControl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialValue,
+        value: props.initialValue,
+        state: props.validationState
     };
   }
 
   getValidationState () {
     if (this.props.validation !== undefined) {
-        return this.props.validation(this.state.value);
+        const state = this.props.validation(this.state.value);
+        //this.setState({state: state});
+        return state;
     }
     if (this.props.validationState !== undefined) {
         return this.props.validationState

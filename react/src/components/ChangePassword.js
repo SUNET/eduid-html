@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 
-import { Checkbox, FormGroup, ControlLabel } from 'react-bootstrap';
+import Checkbox from 'react-bootstrap/lib/Checkbox';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { zxcvbn } from 'zxcvbn';
 
 import i18n from 'i18n-messages';

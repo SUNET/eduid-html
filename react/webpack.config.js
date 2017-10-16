@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -99,6 +100,7 @@ module.exports = {
              return [autoprefixer, precss];
            }
          }
-       })
+       }),
+        new BundleAnalyzerPlugin()
     ]
 };

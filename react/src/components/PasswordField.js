@@ -2,7 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import zxcvbn from 'zxcvbn';
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+
+
 import i18n from 'i18n-messages';
 import * as actions from 'actions/ChangePassword'
 

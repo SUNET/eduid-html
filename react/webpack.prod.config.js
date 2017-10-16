@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 var webpackProd = {
   entry: webpackConfig.entry,
@@ -31,6 +32,7 @@ webpackProd.plugins = [
     'Promise': 'exports-loader?global.Promise!es6-promise',
     'window.fetch': 'exports-loader?self.fetch!whatwg-fetch'
   }),
+  new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
   new webpack.optimize.OccurrenceOrderPlugin(true),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
@@ -39,6 +41,13 @@ webpackProd.plugins = [
       output: {
       comments: false,
     },
+  }),
+  new CompressionPlugin({
+    asset: "[path].gz[query]",
+    algorithm: "gzip",
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.8
   })
 ];
 

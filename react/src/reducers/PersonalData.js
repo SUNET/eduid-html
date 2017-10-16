@@ -5,7 +5,7 @@ import * as actions from "actions/PersonalData";
 const personalData = {
     is_fetching: false,
     failed: false,
-    error: [],
+    error: {},
     message: '',
     eppn: '',
     given_name: '',
