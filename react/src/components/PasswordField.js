@@ -128,7 +128,7 @@ class PasswordField extends Component{
                  ref="passwordStrengthMeter">
           </meter>
           <p id="password-strength-text" ref="passwordStrengthText">
-              <span className="feedback">{this.state.warningCustom}</span>
+              <span className="help-block">{this.state.warningCustom}</span>
           </p>
           <FormControl.Feedback />
         </FormGroup>
@@ -145,7 +145,7 @@ class PasswordField extends Component{
                        onChange={this.handleRepeatChange}>
           </FormControl>
           <p id="password-repeat-text" ref="passwordRepeatText">
-              <span className="feedback">{this.state.warningRepeat}</span>
+              <span className="help-block">{this.state.warningRepeat}</span>
           </p>
           <FormControl.Feedback />
         </FormGroup>

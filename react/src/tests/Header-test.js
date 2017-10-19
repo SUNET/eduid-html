@@ -23,6 +23,8 @@ function setupComponent() {
     const store = fakeStore({
     });
     const props = {
+        email: 'fake@fake.fake',
+        confirmed: 'main.confirmed'
     };
     const wrapper = mount(<Provider store={ store }>
                               <IntlProvider locale={'en'} messages={messages}>
@@ -39,15 +41,13 @@ describe("Header Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
-              header = wrapper.find('#header'),
+              header = wrapper.find('header#header'),
               logo = wrapper.find('div#eduid-logo-small'),
               menu = wrapper.find('div#eduid-menu'),
-              button = wrapper.find('#logout-button');
+              button = wrapper.find('button#logout-button');
 
         expect(header.contains(logo.get(0))).toBeTruthy();
         expect(header.contains(menu.get(0))).toBeTruthy();
         expect(header.contains(button.get(0))).toBeTruthy();
     });
 });
-
-

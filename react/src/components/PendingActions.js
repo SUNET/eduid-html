@@ -15,27 +15,27 @@ class PendingActions extends Component {
             if (pdataMissing) {
                 pdataMissing = false;
                 return (
-                  <div key={index} className="pending-action">
-                    <a href="/profile/personal_data">
+                  <li key={index} className="pending-action-item">
+                    <a href="/profile/personaldata">
                       {this.props.l10n('pending.pdata')}
                     </a>
-                  </div>);
+                  </li>);
             }
         } else {
             return (
-                <div key={index} className="pending-action">
+                <li key={index} className="pending-action-item">
                   <a href={'/profile/' + missing}>
                    {this.props.l10n('pending.' + missing)}
                   </a>
-                </div>
+                </li>
             );
         }
     });
 
     return (
-        <div id="pending-actions-area">
+        <ul className="list-unstyled pending-actions">
           {toShow}
-        </div>
+        </ul>
     );
   }
 }

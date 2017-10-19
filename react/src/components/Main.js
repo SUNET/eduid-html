@@ -40,9 +40,15 @@ class SubMain extends Component {
                       {id: 'phones', label: this.props.l10n('main.phones')},
                       {id: 'security', label: this.props.l10n('main.security')}];
         const tabsElem = tabs.map( (tab, index) => {
+            //let classes;
+            //if (tab.id === 'personaldata') {
+                //classes = 'main-nav-tabs active';
+            //} else {
+                //classes = 'main-nav-tabs';
+            //}
             return (
                 <li key={index}>
-                  <NavLink className="main-nav-tabs"
+                  <NavLink className='main-nav-tabs'
                         activeClassName="active"
                         to={`/profile/${tab.id}`}
                         id={`${tab.id}-router-link`}>
@@ -55,7 +61,7 @@ class SubMain extends Component {
         const content = (
               <div className="container position-relative">
                 <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
-                <div id="main-content-block">
+                <div id="content-block">
 
                   <div className='profile-combo tabbable well row' id="profile-content-area">
                     <div className='col-md-3'>
@@ -76,20 +82,23 @@ class SubMain extends Component {
                       </div>
                     </div>
                     <div className="tab-content info-container col-md-8 col-md-offset-1">
-                      <NotificationsContainer />
-                      <Route exact path="/profile/" component={PersonalDataContainer} />
-                      <Route path="/profile/personaldata" component={PersonalDataContainer} />
-                      <Route path="/profile/nins" component={NinsContainer} />
-                      <Route path="/profile/emails" component={EmailsContainer} />
-                      <Route path="/profile/phones" component={MobileContainer} />
-                      <Route path="/profile/security" component={SecurityContainer} />
-                      <Route path="/profile/chpass" component={ChangePasswordContainer} />
+                      <div className="tab-pane active">
+                        <NotificationsContainer />
+                        <Route exact path="/profile/" component={PersonalDataContainer} />
+                        <Route path="/profile/personaldata" component={PersonalDataContainer} />
+                        <Route path="/profile/nins" component={NinsContainer} />
+                        <Route path="/profile/emails" component={EmailsContainer} />
+                        <Route path="/profile/phones" component={MobileContainer} />
+                        <Route path="/profile/security" component={SecurityContainer} />
+                        <Route path="/profile/chpass" component={ChangePasswordContainer} />
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className='push'></div>
               </div>
         );
+        setTimeout( () => {window.scroll(0,0)}, 100)
         if (this.props.testing) {
             return ([
               <HeaderContainer key="1" />,

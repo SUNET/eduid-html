@@ -89,6 +89,21 @@ const msgs = {
     /* Generic Messages *****/
     /************************/
 
+    'error_in_form': (
+        <FormattedMessage
+            id="error_in_form"
+            defaultMessage={`Check the form below for errors.`} />),
+
+    'Error: Internal Server Error': (
+        <FormattedMessage
+            id="Error: Internal Server Error"
+            defaultMessage={`There was an error servicing your request. Please contact the administrators.`} />),
+
+    'Error: Service Unavailable': (
+        <FormattedMessage
+            id="Error: Service Unavailable"
+            defaultMessage={`Service Unavailable. Check your internet connection.`} />),
+
     'Not a valid email address.': (
         <FormattedMessage
             id="Not a valid email address."
@@ -187,7 +202,7 @@ const msgs = {
     'main.copyright': (
         <FormattedMessage
             id="main.copyright"
-            defaultMessage={`&copy; SUNET 2013-2017`} />),
+            defaultMessage={` SUNET 2013-2017`} />),
 
     /************************/
     /* ConfirmModal *********/
@@ -961,6 +976,21 @@ const msgs = {
         <FormattedMessage
           id="pending.phones"
           defaultMessage={`Add a phone number`} />),
+
+   'main.unconfirmed': (
+        <FormattedMessage
+          id="main.unconfirmed"
+          defaultMessage={`Unconfirmed`} />),
+
+   'main.confirmed': (
+        <FormattedMessage
+          id="main.confirmed"
+          defaultMessage={`Confirmed`} />),
+
+   'pfilled.completion': (
+        <FormattedMessage
+          id="pfilled.completion"
+          defaultMessage={`Completion`} />),
 };
 
 const unformatted = defineMessages({

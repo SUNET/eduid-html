@@ -33,6 +33,40 @@
     font-size:72px;
     font-family: 'Roboto-Black';
 }
+
+.header .buttons .button.orange:hover {
+    background:#c85c0e;
+    border-color:#c85c0e;
+}
+
+.header .buttons .button.white-border {
+  background: transparent;
+  border-color: #fff;
+}
+
+.header .buttons a {
+      color: #fff;
+      line-height: 32px; }
+
+.logo {
+    width: 145px;
+    height: 50px;
+    background: url(../img/sprite.png) 1px 0 no-repeat;
+}
+
+.container-fluid .jumbotron {
+    color: #fff;
+}
+
+/* No javascript */
+div#no-script {
+    text-align: center;
+    color: #CC3732;
+}
+
+div#content-block {
+    display: block;
+}
 .profile-head a {
     color:#59856b;
 }
@@ -166,7 +200,7 @@
 div.profile-filled div.title {
     color:#44484b;
 }
-div.profile-filled div.title span {
+div.profile-filled div.title span.percentage {
     color:#fff;
 }
 ul.nav-tabs > li#profile-filled-li {
@@ -299,6 +333,9 @@ div.profile-combo {
     padding-top:40px;
 }
 
+div.table-responsive {
+    overflow-x: inherit;
+}
 
 /* Footer */
 #footer .container {
@@ -322,6 +359,7 @@ div.profile-combo {
 }
 #footer .langselector a {
     color:#000;
+    cursor: pointer;
 }
 
 
@@ -652,6 +690,24 @@ ul.circles-widget-labels li {
 }
 /*END: Accordion FAQ*/
 
+@media only screen and (min-width: 991px) {
+
+    div.mock-help-block {
+        height: 32px;
+    }
+
+    div.form-group span.help-block {
+        margin-top: 0;
+        margin-bottom: 0;
+        min-height: 32px;
+    }
+
+    div.form-group {
+        margin-bottom: 0;
+        min-height: 108px;
+    }
+}
+
 
 @media only screen and (max-width: 991px) {
 
@@ -665,9 +721,6 @@ ul.circles-widget-labels li {
     div#profile-menu-large ul {
         margin-bottom: 50px;
     }
-}
-
-@media only screen and (max-width: 767px) {
 }
 
 @media only screen and (max-width: 767px) {

@@ -10,6 +10,8 @@ class EduIDAlert extends Component {
   constructor(props) {
     super(props);
     this.state = {alertVisible: true}
+    this.handleAlertDismiss.bind(this);
+    this.handleAlertShow.bind(this);
   }
 
   render() {
@@ -39,7 +41,7 @@ class EduIDAlert extends Component {
 
 
 EduIDAlert.propTypes = {
-  Msg: PropTypes.string,
+  Msg: PropTypes.any,
   levelMessage: PropTypes.string
 }
 

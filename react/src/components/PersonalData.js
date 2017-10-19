@@ -15,6 +15,22 @@ class PersonalData extends Component {
 
     let spinning = false;
     if (this.props.is_fetching) spinning = true;
+    const required = value => {return value ? 'success' : 'error'},
+          getVState = (name) => {return this.props.errors ? (this.props.errors[name] ? 'error' : 'success') : 'success'},
+          errmsg = (name) => {return this.props.errors ? (this.props.errors[name] ? this.props.errors[name][0] : '') : ''};
+
+    const textInput = (name) => {
+        return (<TextControl name={name}
+                           initialValue={this.props[name]}
+                           label={this.props.l10n('pd.' + name)}
+                           componentClass="input"
+                           validation={required}
+                           validationState={getVState(name)}
+                           help={errmsg(name)}
+                           type="text"
+                           handleChange={this.props.handleChange} />);
+    }
+
     return (
         <div>
           <div className="intro">
@@ -27,28 +43,16 @@ class PersonalData extends Component {
                 className="form-horizontal"
                 role="form">
             <fieldset id="personal-data-form" className="tabpane">
-              <TextControl name="given_name"
-                           initialValue={this.props.given_name}
-                           label={this.props.l10n('pd.given_name')}
-                           componentClass="input"
-                           type="text"
-                           handleChange={this.props.handleChange} />
-              <TextControl name="surname"
-                           initialValue={this.props.surname}
-                           label={this.props.l10n('pd.surname')}
-                           componentClass="input"
-                           type="text"
-                           handleChange={this.props.handleChange} />
-              <TextControl name="display_name"
-                           initialValue={this.props.display_name}
-                           label={this.props.l10n('pd.display_name')}
-                           componentClass="input"
-                           type="text"
-                           handleChange={this.props.handleChange} />
+              {textInput('given_name')}
+              {textInput('surname')}
+              {textInput('display_name')}
               <TextControl name="language"
                            initialValue={this.props.language}
                            label={this.props.l10n('pd.language')}
                            componentClass="select"
+                           validation={required}
+                           validationState={getVState('language')}
+                           help={errmsg('language')}
                            value={this.props.language}
                            options={this.props.langs}
                            handleChange={this.props.handleChange} />
@@ -71,6 +75,7 @@ PersonalData.propTypes = {
   display_name: PropTypes.string,
   language: PropTypes.string,
   langs: PropTypes.array,
+  errors: PropTypes.object,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool
 }

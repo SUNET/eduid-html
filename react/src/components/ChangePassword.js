@@ -67,7 +67,7 @@ class ChangePassword extends Component {
                            label={this.props.l10n('chpass.old_password')}
                            componentClass="input"
                            ref={(field) => {this.oldPwField = field}}
-                           type="text" />
+                           type="password" />
 
               <FormGroup controlId="use-custom-password">
                   <ControlLabel>

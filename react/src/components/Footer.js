@@ -31,7 +31,7 @@ class Footer extends Component {
     return (<div id="footer">
                 <div className="container">
                     <p>
-                      {this.props.l10n('main.copyright')}
+                      &copy;{this.props.l10n('main.copyright')}
                       <span className="pull-right">
                         {langElems}
                       </span>

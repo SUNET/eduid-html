@@ -9,16 +9,18 @@ class TextControl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.initialValue,
     };
   }
 
   getValidationState () {
     if (this.props.validation !== undefined) {
-      return this.props.validation(this.state.value);
-    } else {
-      return "success";
+        return this.props.validation(this.state.value);
     }
+    if (this.props.validationState !== undefined) {
+        return this.props.validationState
+    }
+    return "success";
   }
 
   handleChange (e) {
@@ -47,8 +49,10 @@ class TextControl extends Component {
             {this.props.label}
           </ControlLabel>);
     }
-    if (this.props.help && this.state.value) {
+    if (this.props.help) {
         help = <HelpBlock>{this.props.help}</HelpBlock>;
+    } else {
+        help = <div className="mock-help-block" />;
     }
 
     return (
@@ -57,7 +61,7 @@ class TextControl extends Component {
           {label}
           <FormControl componentClass={this.props.componentClass}
                        type={this.props.type}
-                       value={this.props.initialValue}
+                       value={this.state.value}
                        placeholder={this.props.placeholder}
                        onChange={this.handleChange.bind(this)}>
             {children}
@@ -78,6 +82,7 @@ TextControl.PropTypes = {
   initialValue: PropTypes.string,
   handleChange: PropTypes.func,
   validation: PropTypes.func,
+  validationState: PropTypes.string,
   help: PropTypes.string
 }
 

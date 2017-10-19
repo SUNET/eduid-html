@@ -12,7 +12,8 @@ const mapStateToProps = (state, props) => {
     language: state.personal_data.language,
     langs: state.config.AVAILABLE_LANGUAGES,
     is_fetching: state.personal_data.is_fetching,
-    errorMsg: state.personal_data.error
+    errors: state.personal_data.error,
+    errorMsg: state.personal_data.message
   }
 };
 

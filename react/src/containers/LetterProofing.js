@@ -38,9 +38,10 @@ const mapDispatchToProps = (dispatch, props) => {
     sendConfirmationLetter: function (e) {
       e.preventDefault();
         const data = {
-            code: document.getElementById('letterConfirmDialogControl').value
+            code: document.getElementById('confirmation-code-area').querySelector('input').value
         };
       dispatch(actions.postLetterProofing(data));
+      dispatch(actions.stopPostLetterProofing());
     }
   }
 };

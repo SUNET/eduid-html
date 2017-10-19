@@ -10,6 +10,11 @@ class Header extends Component {
 
   render () {
 
+    let email = this.props.email;
+    if (email === '') {
+      email = this.props.l10n("main.no-email-yet")
+    }
+
     return (
       <header id="header" className="header">
         <div className="logo"></div>
@@ -51,6 +56,9 @@ class Header extends Component {
                   </form>
 
                 </div>
+                <div className="loa-big hidden-xs" id="eduid-header-loa">
+                  {email} ({this.props.l10n(this.props.confirmed)})
+                </div>
               </div>
             </div>
           </div>
@@ -61,6 +69,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+    email: PropTypes.string,
+    confirmed: PropTypes.string
 }
 
 export default i18n(Header);

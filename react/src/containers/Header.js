@@ -3,8 +3,21 @@ import { connect } from 'react-redux';
 import Header from 'components/Header';
 
 const mapStateToProps = (state, props) => {
-  return {
-  }
+    let email, confirmed;
+    if (state.emails.emails.length >= 1) {
+        email = state.emails.emails[0].email
+    } else {
+        email = ''
+    }
+    if (state.nins.nins.length >= 1) {
+        confirmed = 'main.confirmed'
+    } else {
+        confirmed = 'main.unconfirmed'
+    }
+    return {
+        email: email,
+        confirmed: confirmed
+    }
 };
 
 
