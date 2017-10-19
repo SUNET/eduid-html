@@ -1,35 +1,72 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import i18n from 'i18n-messages';
 import TextControl from 'components/TextControl';
+import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
+import { reduxForm } from 'redux-form';
 
 import 'style/PersonalData.scss';
 
 
+/* FORM */
+
+const required = value => {return value ? 'success' : 'error'},
+      getVState = (props, name) => {return props.errors ? (props.errors[name] ? 'error' : 'success') : 'success'},
+      errmsg = (props, name) => {return props.errors ? (props.errors[name] ? props.errors[name][0] : '') : ''};
+
+
+let PdataForm = props => {
+  const { handleSubmit } = props;
+  let spinning = false;
+  if (props.is_fetching) spinning = true;
+
+  return (
+    <form id="personaldataview-form"
+          className="form-horizontal"
+          onSubmit={ handleSubmit }
+          role="form">
+      <fieldset id="personal-data-form" className="tabpane">
+        <TextInput name="given_name"
+                   label={props.l10n('pd.given_name')} />
+        <TextInput name="surname"
+                   label={props.l10n('pd.surname')} />
+        <TextInput name="display_name"
+                   label={props.l10n('pd.display_name')} />
+        <TextInput componentClass="select"
+                   name="language"
+                   options={props.langs}
+                   label={props.l10n('pd.language')} />
+        <EduIDButton bsStyle="primary"
+                id="personal-data-button"
+                spinning={spinning}
+                onClick={props.handleSave}>
+              {props.l10n('button_save')}
+        </EduIDButton>
+      </fieldset>
+    </form>
+  )
+};
+
+PdataForm = reduxForm({
+  form: 'personal_data'
+})(PdataForm)
+
+PdataForm = connect(
+  state => ({
+    initialValues: state.personal_data
+  })
+)(PdataForm)
+
+
+/* COMPONENT */
+
 class PersonalData extends Component {
 
   render () {
-
-    let spinning = false;
-    if (this.props.is_fetching) spinning = true;
-    const required = value => {return value ? 'success' : 'error'},
-          getVState = (name) => {return this.props.errors ? (this.props.errors[name] ? 'error' : 'success') : 'success'},
-          errmsg = (name) => {return this.props.errors ? (this.props.errors[name] ? this.props.errors[name][0] : '') : ''};
-
-    const textInput = (name) => {
-        return (<TextControl name={name}
-                           initialValue={this.props[name]}
-                           label={this.props.l10n('pd.' + name)}
-                           componentClass="input"
-                           validation={required}
-                           validationState={getVState(name)}
-                           help={errmsg(name)}
-                           type="text"
-                           handleChange={this.props.handleChange} />);
-    }
 
     return (
         <div>
@@ -39,31 +76,7 @@ class PersonalData extends Component {
                 <p>{this.props.l10n('faq_link')}
                 <a href="https://www.eduid.se/faq.html">FAQ</a></p>
           </div>
-          <form id="personaldataview-form"
-                className="form-horizontal"
-                role="form">
-            <fieldset id="personal-data-form" className="tabpane">
-              {textInput('given_name')}
-              {textInput('surname')}
-              {textInput('display_name')}
-              <TextControl name="language"
-                           initialValue={this.props.language}
-                           label={this.props.l10n('pd.language')}
-                           componentClass="select"
-                           validation={required}
-                           validationState={getVState('language')}
-                           help={errmsg('language')}
-                           value={this.props.language}
-                           options={this.props.langs}
-                           handleChange={this.props.handleChange} />
-              <EduIDButton bsStyle="primary"
-                      id="personal-data-button"
-                      spinning={spinning}
-                      onClick={this.props.handleSave}>
-                    {this.props.l10n('button_save')}
-              </EduIDButton>
-            </fieldset>
-          </form>
+          <PdataForm {...this.props} />
         </div>
     );
   }

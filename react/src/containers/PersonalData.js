@@ -27,9 +27,9 @@ const mapDispatchToProps = (dispatch, props) => {
       let data = {};
       data[this.name] = e.target.value;
       dispatch(changeUserdata(data));
-    }
+    },
+    handleSubmit: (values) => {console.log(values)}
   }
-
 };
 
 const PersonalDataContainer = connect(
