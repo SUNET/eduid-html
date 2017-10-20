@@ -138,7 +138,7 @@ const saveState = (state) => {
 
 export const store = createStore(
     eduIDApp,
-    loadPersistedState(),
+//    loadPersistedState(),
     composeEnhancers(
       applyMiddleware(
           sagaMiddleware,
@@ -149,9 +149,9 @@ export const store = createStore(
     )
 );
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+//store.subscribe(() => {
+//  saveState(store.getState());
+//});
 
 sagaMiddleware.run(rootSaga);
 

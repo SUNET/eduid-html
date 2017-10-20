@@ -128,7 +128,7 @@ SubMain.propTypes = {
 const SubMainContainer = connect(
    (state, props) => ({
         window_size: state.config.window_size,
-        eppn: state.personal_data.eppn
+        eppn: state.personal_data.data.eppn
     }),
     (dispatch, props) => ({}),
 )(i18n(SubMain));

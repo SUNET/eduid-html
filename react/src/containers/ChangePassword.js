@@ -7,9 +7,9 @@ import * as actions from 'actions/ChangePassword'
 
 const mapStateToProps = (state, props) => {
   let userInput = [];
-  userInput.push(state.personal_data.given_name);
-  userInput.push(state.personal_data.surname);
-  userInput.push(state.personal_data.display_name);
+  userInput.push(state.personal_data.data.given_name);
+  userInput.push(state.personal_data.data.surname);
+  userInput.push(state.personal_data.data.display_name);
   userInput.concat(state.emails.emails);
   const is_fetching = state.chpass.is_fetching || state.security.is_fetching;
   return {

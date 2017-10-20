@@ -1,63 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Field } from 'redux-form';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 
-class TextInput extends Component {
+const textInput = (props) => {
+    const {
+        input,
+        label,
+        type,
+        meta,
+        selectOptions,
+        componentClass,
+        l10n
+    } = props;
+    const validationState = (meta.touched && meta.error) && 'error' || 'success';
+    const errmsg = (meta.touched && meta.error) && meta.error || '';
+    let field;
 
-    render () {
-        let field;
-
-        if (this.props.type === 'select') {
-            const options = this.props.options.slice();
-            const children = options.map(opt => {
-                return (<option key={opt[0]}
-                                value={opt[0]}>
-                          {opt[1]}
-                        </option>);
-            }, this);
-            field = (
-                <Field component={FormControl}
-                       {...this.props}>
-                    {children}
-                </Field>
-            );
-        } else {
-            field = (
-                <Field component={FormControl}
-                       {...this.props} />
-            );
+    if (componentClass === 'select') {
+        let options = [];
+        if (selectOptions) {
+            options = selectOptions.slice();
         }
+        const children = options.map(opt => {
+            return (<option key={opt[0]}
+                            value={opt[0]}>
+                      {opt[1]}
+                    </option>);
+        });
+        field = (
+            <FormControl componentClass={componentClass}
+                         {...input}>
+                {children}
+            </FormControl>
+        );
+    } else {
+        field = <FormControl componentClass={componentClass}
+                             {...input} /> ;
+    }
 
     return (
-        <FormGroup controlId={this.props.name}>
-          <ControlLabel>{this.props.label}</ControlLabel>
+        <FormGroup controlId={input.name}
+                   validationState={validationState}>
+          <ControlLabel>{label}</ControlLabel>
           {field}
           <FormControl.Feedback />
-          <HelpBlock>{this.props.help}</HelpBlock>
+          <div className="form-field-error-area">
+            <HelpBlock>{errmsg}</HelpBlock>
+          </div>
         </FormGroup>
     );
-  }
 }
 
-TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  componentClass: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.object.isRequired,
-  placeholder: PropTypes.string,
-  help: PropTypes.string,
-  options: PropTypes.array
-}
-
-TextInput.defaultProps = {
-  componentClass: 'input',
-  type: 'text'
-}
-
-export default TextInput;
+export default textInput;

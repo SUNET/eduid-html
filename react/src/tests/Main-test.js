@@ -27,7 +27,9 @@ function setupComponent() {
             language: 'en'
         },
         personal_data: {
-            eppn: 'test-eppn'
+            data: {
+                eppn: 'test-eppn'
+            }
         },
         emails: {
             emails: []

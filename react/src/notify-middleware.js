@@ -7,7 +7,7 @@ const calculateProfileFilled = (state) => {
     let filled = {max: 0, cur: 0, pending: []};
     ['given_name', 'surname', 'display_name', 'language'].forEach( (pdata) => {
         filled.max += 1;
-        if (state.personal_data[pdata]) {
+        if (state.personal_data.data[pdata]) {
             filled.cur += 1;
         } else {
             filled.pending.push(pdata);

@@ -68,7 +68,7 @@ export function* savePersonalData () {
     try {
         const config = yield select(state => state.config);
         const data = yield select(state =>  ({
-            ...state.personal_data,
+            ...state.personal_data.data,
             csrf_token: state.config.csrf_token
         }));
         delete data.is_fetching;
