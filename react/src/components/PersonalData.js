@@ -58,7 +58,7 @@ let PdataForm = props => {
         <EduIDButton bsStyle="primary"
                 id="personal-data-button"
                 spinning={spinning}
-                disabled={props.submitting}
+                disabled={props.pristine || props.submitting || props.invalid}
                 onClick={props.handleSave}>
               {props.l10n('button_save')}
         </EduIDButton>

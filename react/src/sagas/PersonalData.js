@@ -3,6 +3,10 @@ import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
          getRequest, postRequest } from "actions/common";
 import { getAllUserdata, getAllUserdataFail, postUserdataFail } from "actions/PersonalData";
+
+import { startSubmit, setSubmitSucceeded, setSubmitFailed } from "redux-form";
+import { startAsyncValidation, stopAsyncValidation } from "redux-form";
+
 import * as ninActions from "actions/Nins";
 import * as emailActions from "actions/Emails";
 import * as phoneActions from "actions/Mobile";
@@ -68,14 +72,22 @@ export function* savePersonalData () {
     try {
         const config = yield select(state => state.config);
         const data = yield select(state =>  ({
-            ...state.personal_data.data,
+            ...state.form.personal_data.values,
             csrf_token: state.config.csrf_token
         }));
-        delete data.is_fetching;
-        delete data.failed;
         delete data.eppn;
+        yield put(pdataActions.changeUserdata(data));
+        yield put(startSubmit('personal_data'));
+        yield put(startAsyncValidation('personal_data'));
         const resp = yield call(sendPersonalData, config, data);
         yield put(putCsrfToken(resp));
+        if (resp.type === pdataActions.POST_USERDATA_FAIL) {
+            yield put(stopAsyncValidation('personal_data', {given_name: 'required'}));
+            yield put(setSubmitFailed('personal_data', ...resp.payload.error));
+        } else {
+            yield put(stopAsyncValidation('personal_data'));
+            yield put(setSubmitSucceeded('personal_data'));
+        }
         yield put(resp);
     } catch(error) {
         yield put(postUserdataFail(error.toString()));

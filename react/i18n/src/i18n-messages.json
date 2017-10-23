@@ -4,6 +4,10 @@
     "defaultMessage": "Check the form below for errors."
   },
   {
+    "id": "required",
+    "defaultMessage": "Required"
+  },
+  {
     "id": "Error: Internal Server Error",
     "defaultMessage": "There was an error servicing your request. Please contact the administrators."
   },

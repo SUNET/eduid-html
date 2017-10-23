@@ -26,7 +26,7 @@ export default function i18n(WrappedComponent, options = {}) {
         withRef      = false,
     } = options;
 
-    WrappedComponent.propTypes['l10n'] = PropTypes.func;
+    //WrappedComponent.propTypes['l10n'] = PropTypes.func;
 
     class InjectIntl extends Component {
         constructor(props, context) {
@@ -93,6 +93,11 @@ const msgs = {
         <FormattedMessage
             id="error_in_form"
             defaultMessage={`Check the form below for errors.`} />),
+
+    'required': (
+        <FormattedMessage
+            id="required"
+            defaultMessage={`Required`} />),
 
     'Error: Internal Server Error': (
         <FormattedMessage

@@ -6,6 +6,8 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
+import i18n from 'i18n-messages';
+
 
 const textInput = (props) => {
     const {
@@ -17,8 +19,8 @@ const textInput = (props) => {
         componentClass,
         l10n
     } = props;
-    const validationState = (meta.touched && meta.error) && 'error' || 'success';
-    const errmsg = (meta.touched && meta.error) && meta.error || '';
+    const validationState = meta.error && 'error' || 'success';
+    const errmsg = meta.error && l10n(meta.error) || '';
     let field;
 
     if (componentClass === 'select') {
@@ -56,4 +58,4 @@ const textInput = (props) => {
     );
 }
 
-export default textInput;
+export default i18n(textInput);
