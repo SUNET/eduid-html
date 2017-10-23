@@ -19,8 +19,8 @@ const textInput = (props) => {
         componentClass,
         l10n
     } = props;
-    const validationState = meta.error && 'error' || 'success';
-    const errmsg = meta.error && l10n(meta.error) || '';
+    const validationState = ((meta.submitFailed || meta.touched) && meta.error) && 'error' || 'success';
+    const errmsg = ((meta.submitFailed || meta.touched) && meta.error) && l10n(meta.error) || '';
     let field;
 
     if (componentClass === 'select') {

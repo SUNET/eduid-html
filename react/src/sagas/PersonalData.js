@@ -82,11 +82,11 @@ export function* savePersonalData () {
         const resp = yield call(sendPersonalData, config, data);
         yield put(putCsrfToken(resp));
         if (resp.type === pdataActions.POST_USERDATA_FAIL) {
-            yield put(stopAsyncValidation('personal_data', {given_name: 'required'}));
             yield put(setSubmitFailed('personal_data', ...resp.payload.error));
+            yield put(stopAsyncValidation('personal_data', resp.payload.error));
         } else {
-            yield put(stopAsyncValidation('personal_data'));
             yield put(setSubmitSucceeded('personal_data'));
+            yield put(stopAsyncValidation('personal_data'));
         }
         yield put(resp);
     } catch(error) {

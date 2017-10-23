@@ -75,8 +75,7 @@ PdataForm = reduxForm({
 PdataForm = connect(
   state => ({
     initialValues: state.personal_data.data,
-    enableReinitialize: true,
-    keepDirtyOnReinitialize: true
+    enableReinitialize: true
   })
 )(PdataForm)
 
