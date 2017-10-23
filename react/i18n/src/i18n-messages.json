@@ -564,6 +564,14 @@
     "defaultMessage": "Invalid NIN"
   },
   {
+    "id": "nins.wrong_length",
+    "defaultMessage": "NINs must have 12 digits"
+  },
+  {
+    "id": "nins.ilegal_chars",
+    "defaultMessage": "NINs can only have digits"
+  },
+  {
     "id": "nins.valid_nin",
     "defaultMessage": "Valid NIN"
   },

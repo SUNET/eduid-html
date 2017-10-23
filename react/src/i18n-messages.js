@@ -850,6 +850,16 @@ const msgs = {
           id="nins.invalid_nin"
           defaultMessage={`Invalid NIN`} />),
 
+   'nins.wrong_length': (
+        <FormattedMessage
+          id="nins.wrong_length"
+          defaultMessage={`NINs must have 12 digits`} />),
+
+   'nins.ilegal_chars': (
+        <FormattedMessage
+          id="nins.ilegal_chars"
+          defaultMessage={`NINs can only have digits`} />),
+
    'nins.valid_nin': (
         <FormattedMessage
           id="nins.valid_nin"

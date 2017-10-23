@@ -11,6 +11,7 @@ const mapStateToProps = (state, props) => {
                          false;
   return {
      nins: state.nins.nins,
+     is_configured: state.config.is_configured,
      proofing_methods: state.config.PROOFING_METHODS,
      valid_nin: state.nins.valid_nin,
      nin: state.nins.nin,
