@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import { GET_USERDATA_SUCCESS } from "actions/PersonalData";

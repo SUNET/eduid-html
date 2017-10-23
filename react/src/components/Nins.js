@@ -1,13 +1,69 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
+import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import vettingRegistry from "vetting-registry";
 
 import 'style/Nins.scss';
+
+
+const validate = values => {
+  const errors = {};
+  let value  = values.norEduPersonNin;
+  // taken from https://gist.github.com/DiegoSalazar/4075533/
+  // accept only digits, dashes or spaces
+	if (/[^0-9-\s]+/.test(value)) return false;
+	// The Luhn Algorithm. It's so pretty.
+	var nCheck = 0, nDigit = 0, bEven = false;
+	value = value.replace(/\D/g, "");
+
+	for (var n = value.length - 1; n >= 0; n--) {
+		var cDigit = value.charAt(n),
+			  nDigit = parseInt(cDigit, 10);
+		if (bEven) {
+			if ((nDigit *= 2) > 9) nDigit -= 9;
+		}
+		nCheck += nDigit;
+		bEven = !bEven;
+	}
+	if ( (nCheck % 10) !== 0) {
+    errors.norEduPersonNin = 'nins.invalid_nin';
+  }
+  return errors
+}
+
+
+let NinForm = props => {
+    return (
+      <form id="nins-form"
+            role="form">
+        <fieldset id="nins-form" className="tabpane">
+          <Field component="TextInput"
+                 componentClass="input"
+                 type="text"
+                 name="norEduPersonNin"
+                 placeholder="yyyymmddnnnn" />
+        </fieldset>
+      </form>
+    )
+};
+
+NinForm = reduxForm({
+  form: 'nins',
+  validate
+})(NinForm)
+
+NinForm = connect(
+  state => ({
+    initialValues: {norEduPersonNin: state.nins.nin},
+    enableReinitialize: true
+  })
+)(NinForm)
 
 
 class Nins extends Component {
@@ -37,18 +93,7 @@ class Nins extends Component {
         ninInput = (
             <div>
               <p>{this.props.l10n('nins.help_text')}</p>
-              <form id="nins-form"
-                    role="form">
-                <fieldset id="nins-form" className="tabpane">
-                  <TextControl name="norEduPersonNin"
-                               placeholder="yyyymmddnnnn"
-                               validation={this.props.validateNin}
-                               componentClass="input"
-                               type="text"
-                               help={invalidNinText}
-                               handleChange={this.props.handleChange} />
-                </fieldset>
-              </form>
+              <NinForm {...this.props} />
             </div>
         );
         vettingButtons = (this.props.nin && this.props.valid_nin) ? vettingButtons : '';
@@ -110,7 +155,6 @@ Nins.propTypes = {
   nins: PropTypes.array,
   valid_nin: PropTypes.bool,
   validateNin: PropTypes.func,
-  handleChange: PropTypes.func,
   handleDelete: PropTypes.func,
   proofing_methods: PropTypes.array
 }
