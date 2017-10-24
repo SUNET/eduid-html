@@ -136,6 +136,10 @@
     "defaultMessage": "You can not delete the primary email"
   },
   {
+    "id": "emails.invalid_email",
+    "defaultMessage": "The entered value does not look like an email"
+  },
+  {
     "id": "tl.primary",
     "defaultMessage": "PRIMARY"
   },

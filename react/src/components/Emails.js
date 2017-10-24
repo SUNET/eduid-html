@@ -14,13 +14,12 @@ import 'style/Emails.scss';
 
 
 const validate = values => {
-    const errors = {};
-    const email = values.email;
+    const errors = {},
+          email = values.email,
+          pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!email) {
         errors.email = 'required';
-    }
-    const pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!pattern.test(email)) {
+    } else if (!pattern.test(email)) {
         errors.email = 'emails.invalid_email'
     }
     return errors;

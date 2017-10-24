@@ -272,6 +272,11 @@ const msgs = {
             id="emails.cannot_remove_primary"
             defaultMessage={`You can not delete the primary email`} />),
 
+    'emails.invalid_email': (
+    <FormattedMessage
+            id="emails.invalid_email"
+            defaultMessage={`The entered value does not look like an email`} />),
+
     "tl.primary": (
         <FormattedMessage
           id="tl.primary"
