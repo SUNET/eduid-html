@@ -376,6 +376,10 @@
     "defaultMessage": "Invalid verification code"
   },
   {
+    "id": "phones.invalid_phone",
+    "defaultMessage": "Invalid phone number"
+  },
+  {
     "id": "phones.verification-success",
     "defaultMessage": "Successfully verified phone number"
   },

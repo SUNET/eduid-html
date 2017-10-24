@@ -122,7 +122,6 @@ Emails.propTypes = {
   errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
-  handleChange: PropTypes.func,
   handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
   handleStartConfirmation: PropTypes.func,

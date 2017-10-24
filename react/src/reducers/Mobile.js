@@ -161,6 +161,15 @@ let mobileReducer = (state=mobileData, action) => {
         failed: true,
         error: action.payload.error,
       };
+    case "@@redux-form/CHANGE":
+      const form = {};
+      if (action.meta.form === 'phones' && action.meta.field === 'mobile') {
+          form.phone = action.payload;
+      }
+      return {
+        ...state,
+        ...form
+      };
     default:
       return state;
   }

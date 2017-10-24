@@ -55,7 +55,8 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.START_CONFIRMATION:
       return {
         ...state,
-        confirming: action.payload.email
+        confirming: action.payload.email,
+        is_fetching: true
       };
     case actions.STOP_CONFIRMATION:
       return {

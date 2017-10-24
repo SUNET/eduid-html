@@ -26,12 +26,6 @@ const mapDispatchToProps = (dispatch, props) => {
     handleAdd: (e) => {
         dispatch(postEmail());
     },
-    handleChange: function (e) {
-        const data = {
-            email: e.target.value
-        };
-        dispatch(changeEmail(data));
-    },
     handleResend: function (e) {
         e.preventDefault();
         dispatch(startResendEmailCode());

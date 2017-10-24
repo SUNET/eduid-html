@@ -1,14 +1,66 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import i18n from 'i18n-messages';
+import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
-import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
 import ConfirmModal from 'components/ConfirmModal';
 
 import 'style/Mobile.scss';
+
+
+const validate = values => {
+    const errors = {},
+          phone = values.mobile,
+          pattern = /^\+\d{10,20}$|^07[0236]\d{7}$|\+\d{2}\s\d{8,18}$/;
+    if (!phone) {
+        errors.mobile = 'required';
+    } else if (!pattern.test(phone)) {
+        errors.mobile = 'phones.invalid_phone'
+    }
+    return errors;
+};
+
+let PhoneForm = props => {
+    let spinning = false;
+    if (props.is_fetching) spinning = true;
+    return (
+        <form id="mobilesview-form"
+              className="form-horizontal"
+              role="form">
+          <fieldset id="mobile-form" className="tabpane">
+            <Field component={TextInput}
+                   componentClass="input"
+                   type="text"
+                   label={props.l10n('phones.phone_label')}
+                   name="mobile" />
+            <EduIDButton bsStyle="primary"
+                         id="mobile-button"
+                         spinning={spinning}
+                         disabled={!props.valid_phone}
+                         onClick={props.handleAdd}>
+                {props.l10n('mobile.button_add')}
+            </EduIDButton>
+          </fieldset>
+        </form>
+    );
+}
+
+PhoneForm = reduxForm({
+  form: 'phones',
+  validate
+})(PhoneForm)
+
+PhoneForm = connect(
+  state => ({
+    initialValues: {mobile: state.phones.phone},
+    enableReinitialize: true
+  })
+)(PhoneForm)
 
 
 class Mobile extends Component {
@@ -28,8 +80,6 @@ class Mobile extends Component {
       levelMessage = 'success';
     }
 
-    let spinning = false;
-    if (this.props.is_fetching) spinning = true;
     return (
         <div className="mobileview-form-container ">
               <div className="intro">
@@ -44,23 +94,7 @@ class Mobile extends Component {
                        handleMakePrimary={this.props.handleMakePrimary}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
-              <form id="mobilesview-form"
-                    className="form-horizontal"
-                    role="form">
-                <fieldset id="mobile-form" className="tabpane">
-                  <TextControl name="mobile"
-                               label={this.props.l10n('mobile.mobile_label')}
-                               componentClass="input"
-                               type="text"
-                               handleChange={this.props.handleChange} />
-                  <EduIDButton bsStyle="primary"
-                               id="mobile-button"
-                               spinning={spinning}
-                               onClick={this.props.handleAdd}>
-                      {this.props.l10n('mobile.button_add')}
-                  </EduIDButton>
-                </fieldset>
-              </form>
+            <PhoneForm {...this.props} />
             </div>
             <ConfirmModal
                 modalId="phoneConfirmDialog"
@@ -87,7 +121,6 @@ Mobile.propTypes = {
   errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
-  handleChange: PropTypes.func,
   handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
   handleStartConfirmation: PropTypes.func,

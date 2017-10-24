@@ -600,6 +600,11 @@ const msgs = {
           id="phones.code_invalid"
           defaultMessage={`Invalid verification code`} />),
 
+    'phones.invalid_phone': (
+        <FormattedMessage
+          id="phones.invalid_phone"
+          defaultMessage={`Invalid phone number`} />),
+
     'phones.verification-success': (
         <FormattedMessage
           id="phones.verification-success"
