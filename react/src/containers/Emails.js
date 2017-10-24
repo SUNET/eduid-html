@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import { isValid } from "redux-form";
 import Emails from 'components/Emails';
 import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode,
          finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
@@ -10,6 +11,8 @@ const mapStateToProps = (state, props) => {
                          false;
   return {
     emails: state.emails.emails,
+    valid_email: isValid('emails')(state),
+    email: state.emails.email,
     is_fetching: state.emails.is_fetching || pdata_fetching,
     errorMsg: state.emails.error,
     confirming: state.emails.confirming,

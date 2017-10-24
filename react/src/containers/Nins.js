@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import { isValid } from "redux-form";
 import Nins from 'components/Nins';
 import * as actions from "actions/Nins";
 
@@ -13,7 +14,7 @@ const mapStateToProps = (state, props) => {
      nins: state.nins.nins,
      is_configured: state.config.is_configured,
      proofing_methods: state.config.PROOFING_METHODS,
-     valid_nin: state.nins.valid_nin,
+     valid_nin: isValid('nins')(state),
      nin: state.nins.nin,
      is_fetching: state.nins.is_fetching || pdata_fetching,
      message: state.nins.message

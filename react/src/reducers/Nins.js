@@ -56,6 +56,15 @@ let ninsReducer = (state=ninState, action) => {
         failed: true,
         error: action.payload.error
       };
+    case "@@redux-form/CHANGE":
+      const form = {};
+      if (action.meta.form === 'nins' && action.meta.field === 'norEduPersonNin') {
+          form.nin = action.payload;
+      }
+      return {
+        ...state,
+        ...form
+      };
     default:
       return state;
   }

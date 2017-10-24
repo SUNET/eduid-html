@@ -39,9 +39,9 @@ const validate = values => {
 
 
 let NinForm = props => {
-    let buttons = props.buttons;
-    if (props.invalid) {
-        buttons = '';
+    let buttons = '';
+    if (props.valid_nin) {
+        buttons = props.buttons;
     }
     return [(
       <form id="nins-form"

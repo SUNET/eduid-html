@@ -172,6 +172,15 @@ let emailsReducer = (state=emailsData, action) => {
         failed: true,
         error: action.payload.error,
       };
+    case "@@redux-form/CHANGE":
+      const form = {};
+      if (action.meta.form === 'emails' && action.meta.field === 'email') {
+          form.email = action.payload;
+      }
+      return {
+        ...state,
+        ...form
+      };
     default:
       return state;
   }
