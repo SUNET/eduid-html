@@ -71,10 +71,7 @@ class Mobile extends Component {
         messageArgs = {},
         levelMessage = 'success';
 
-    if (this.props.resending.failed) {
-      message= this.props.l10n(this.props.resending.error.form);
-      levelMessage = 'error';
-    } else if (this.props.resending.message) {
+    if (this.props.resending.message) {
       message = this.props.resending.message;
       messageArgs = {email: this.props.confirming};
       levelMessage = 'success';
@@ -105,7 +102,7 @@ class Mobile extends Component {
                 placeholder={this.props.l10n('mobile.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
-                handleResendCode={this.props.handleResend}
+                handleResend={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
                 is_fetching={this.props.resending.is_fetching}
                 message={message}

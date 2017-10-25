@@ -112,6 +112,10 @@
     "defaultMessage": "CLOSE"
   },
   {
+    "id": "cm.enter_code",
+    "defaultMessage": "Enter your confirmation code below"
+  },
+  {
     "id": "phone_duplicated",
     "defaultMessage": "Added number is duplicated"
   },

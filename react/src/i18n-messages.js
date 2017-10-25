@@ -238,6 +238,11 @@ const msgs = {
           id="cm.close"
           defaultMessage={`CLOSE`} />),
 
+    'cm.enter_code': (
+        <FormattedMessage
+          id="cm.enter_code"
+          defaultMessage={`Enter your confirmation code below`} />),
+
     /************************/
     /* TABLE LIST ***********/
     /************************/
