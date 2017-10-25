@@ -49,7 +49,6 @@ class ChangePassword extends Component {
                            type="text"
                            ref="password"
                            name="suggested_password"
-                           id="suggested_password"
                            value={this.props.suggested_password}
                            disabled={true} />
 
@@ -75,35 +74,43 @@ class ChangePassword extends Component {
 
           <form id="passwordsview-form"
                 role="form">
-              <FormGroup controlId="old_password"
-                         validationState="success">
-                  <ControlLabel>{this.props.l10n('chpass.old_password')}</ControlLabel>
+              <fieldset>
+                  <FormGroup controlId="old_password"
+                             validationState="success">
+                      <ControlLabel>{this.props.l10n('chpass.old_password')}</ControlLabel>
 
-                  <FormControl componentClass="input"
-                               type="password"
-                               ref={(field) => {this.oldPwField = field}}
-                               name="old_password"
-                               id="old_password" />
-                  <FormControl.Feedback />
-                  <div className="form-field-error-area">
-                      <HelpBlock></HelpBlock>
-                  </div>
-              </FormGroup>
+                      <FormControl componentClass="input"
+                                   type="password"
+                                   ref={(field) => {this.oldPwField = field}}
+                                   name="old_password" />
+                      <FormControl.Feedback />
+                      <div className="form-field-error-area">
+                          <HelpBlock></HelpBlock>
+                      </div>
+                  </FormGroup>
 
-              <FormGroup controlId="use-custom-password">
-                  <ControlLabel>
-                    {this.props.l10n('chpass.use-custom-label')}
-                  </ControlLabel>
-                  <Checkbox onClick={this.props.handleChoice} />
-              </FormGroup>
+                  <FormGroup controlId="use-custom-password">
+                      <ControlLabel>
+                        {this.props.l10n('chpass.use-custom-label')}
+                      </ControlLabel>
+                      <Checkbox onClick={this.props.handleChoice} />
+                      <div className="form-field-error-area">
+                        <HelpBlock></HelpBlock>
+                      </div>
+                  </FormGroup>
+              </fieldset>
               {helpCustom}
-              {form}
-              <EduIDButton className="btn btn-primary"
-                           id="chpass-button"
-                           spinning={spinning}
-                           onClick={this.props.handleStartPasswordChange.bind(this)}>
-                        {this.props.l10n('chpass.change-password')}
-              </EduIDButton>
+              <fieldset>
+                  {form}
+              </fieldset>
+              <fieldset>
+                  <EduIDButton className="btn btn-primary"
+                               id="chpass-button"
+                               spinning={spinning}
+                               onClick={this.props.handleStartPasswordChange.bind(this)}>
+                            {this.props.l10n('chpass.change-password')}
+                  </EduIDButton>
+              </fieldset>
           </form>
         </div>
       </div>
