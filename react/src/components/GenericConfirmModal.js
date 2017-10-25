@@ -3,17 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/lib/Button';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Alert from 'react-bootstrap/lib/Alert';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-
 import Modal from "components/ModalShim";
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
-import EduiDAlert from 'components/EduIDAlert';
 
 
 class GenericConfirmModal extends Component {

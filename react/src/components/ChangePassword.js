@@ -5,10 +5,12 @@ import ReactDom from 'react-dom';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+
 import { zxcvbn } from 'zxcvbn';
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
 import EduIDButton from 'components/EduIDButton';
 import PasswordField from 'components/PasswordField';
 
@@ -38,12 +40,24 @@ class ChangePassword extends Component {
                  dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>
             </div>);
     } else {
-        form = (<TextControl name="suggested_password"
-                             label={this.props.l10n('chpass.suggested_password')}
-                             componentClass="input"
-                             initialValue={this.props.suggested_password}
-                             ref={(field) => {this.suggestedPwField = field}}
-                             type="text" />);
+        form = (
+        <FormGroup controlId="suggested_password"
+                   validationState="success">
+          <ControlLabel>{this.props.l10n('chpass.suggested_password')}</ControlLabel>
+          
+              <FormControl componentClass="input"
+                           type="text"
+                           ref="password"
+                           name="suggested_password"
+                           id="suggested_password"
+                           value={this.props.suggested_password}
+                           disabled={true} />
+
+          <FormControl.Feedback />
+          <div className="form-field-error-area">
+            <HelpBlock></HelpBlock>
+          </div>
+        </FormGroup>);
     }
 
     return (
@@ -59,17 +73,22 @@ class ChangePassword extends Component {
             {this.props.l10n('chpass.help-text-general')}
             </p>
 
-          {helpCustom}
-
           <form id="passwordsview-form"
                 role="form">
+              <FormGroup controlId="old_password"
+                         validationState="success">
+                  <ControlLabel>{this.props.l10n('chpass.old_password')}</ControlLabel>
 
-              <TextControl name="old_password"
-                           id="old_password"
-                           label={this.props.l10n('chpass.old_password')}
-                           componentClass="input"
-                           ref={(field) => {this.oldPwField = field}}
-                           type="password" />
+                  <FormControl componentClass="input"
+                               type="password"
+                               ref={(field) => {this.oldPwField = field}}
+                               name="old_password"
+                               id="old_password" />
+                  <FormControl.Feedback />
+                  <div className="form-field-error-area">
+                      <HelpBlock></HelpBlock>
+                  </div>
+              </FormGroup>
 
               <FormGroup controlId="use-custom-password">
                   <ControlLabel>
@@ -77,6 +96,7 @@ class ChangePassword extends Component {
                   </ControlLabel>
                   <Checkbox onClick={this.props.handleChoice} />
               </FormGroup>
+              {helpCustom}
               {form}
               <EduIDButton className="btn btn-primary"
                            id="chpass-button"
