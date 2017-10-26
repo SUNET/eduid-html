@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
     handleStartPasswordChange: function (event) {
       event.preventDefault();
-      const oldPassword = this.oldPwField.state.value;
+      const oldPassword = document.getElementById('old_password').value;
       if (!oldPassword) {
         dispatch(actions.passwordNotReady(this.props.l10n('chpass.no_old_pw')));
       } else {
@@ -60,6 +60,7 @@ const mapDispatchToProps = (dispatch, props) => {
           newPassword =  this.props.suggested_password;
         }
         dispatch(actions.postPasswordChange(oldPassword, newPassword));
+        this.props.history.push('security');
       }
     },
   }

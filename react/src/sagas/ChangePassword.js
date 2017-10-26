@@ -53,10 +53,3 @@ export function postPassword(config, data) {
     .then(checkStatus)
     .then(response => response.json())
 }
-
-
-export function* backToHome() {
-    const link = yield document.getElementById('personaldata-router-link');
-    link.click();
-    window.location.reload();
-}

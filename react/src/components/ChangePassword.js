@@ -25,37 +25,37 @@ const validate = values => {
 };
 
 
-let ChpassForm = props => {
+class ChpassForm extends Component {
+
+  render () {
 
     let form,
         helpCustom = "",
         spinning = false;
 
-    if (props.is_fetching) spinning = true;
+    if (this.props.is_fetching) spinning = true;
 
-    if (props.choose_custom) {
-        form = (<PasswordField user_input={props.user_input}
-                               entropy={props.password_entropy}
-                               ref={(field) => {pwField = field}}
-                               handlePassword={props.handlePassword.bind(this)}
+    if (this.props.choose_custom) {
+        form = (<PasswordField user_input={this.props.user_input}
+                               entropy={this.props.password_entropy}
+                               handlePassword={this.props.handlePassword.bind(this)}
                                name="custom-password-field-one"
                                name_repeat="custom-password-field-two"
                                />);
         helpCustom = (
             <div className='password-format'
-                 dangerouslySetInnerHTML={{__html: props.l10n('chpass.help-text-newpass')}}>
+                 dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>
             </div>);
     } else {
         form = (
         <FormGroup controlId="suggested_password"
                    validationState="success">
-          <ControlLabel>{props.l10n('chpass.suggested_password')}</ControlLabel>
+          <ControlLabel>{this.props.l10n('chpass.suggested_password')}</ControlLabel>
           
               <FormControl componentClass="input"
                            type="text"
-                           ref="password"
                            name="suggested_password"
-                           value={props.suggested_password}
+                           value={this.props.suggested_password}
                            disabled={true} />
 
           <FormControl.Feedback />
@@ -71,11 +71,10 @@ let ChpassForm = props => {
               <fieldset>
                   <FormGroup controlId="old_password"
                              validationState="success">
-                      <ControlLabel>{props.l10n('chpass.old_password')}</ControlLabel>
+                      <ControlLabel>{this.props.l10n('chpass.old_password')}</ControlLabel>
 
                       <FormControl componentClass="input"
                                    type="password"
-                                   ref={(field) => {oldPwField = field}}
                                    name="old_password" />
                       <FormControl.Feedback />
                       <div className="form-field-error-area">
@@ -85,9 +84,9 @@ let ChpassForm = props => {
 
                   <FormGroup controlId="use-custom-password">
                       <ControlLabel>
-                        {props.l10n('chpass.use-custom-label')}
+                        {this.props.l10n('chpass.use-custom-label')}
                       </ControlLabel>
-                      <Checkbox onClick={props.handleChoice} />
+                      <Checkbox onClick={this.props.handleChoice} />
                       <div className="form-field-error-area">
                         <HelpBlock></HelpBlock>
                       </div>
@@ -101,12 +100,13 @@ let ChpassForm = props => {
                   <EduIDButton className="btn btn-primary"
                                id="chpass-button"
                                spinning={spinning}
-                               onClick={props.handleStartPasswordChange.bind(this)}>
-                            {props.l10n('chpass.change-password')}
+                               onClick={this.props.handleStartPasswordChange.bind(this)}>
+                            {this.props.l10n('chpass.change-password')}
                   </EduIDButton>
               </fieldset>
           </form>
     );
+  }
 }
 
 ChpassForm = reduxForm({
