@@ -14,6 +14,7 @@ import { zxcvbn } from 'zxcvbn';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import TextInput from 'components/EduIDTextInput';
 
 import 'style/ChangePassword.scss';
 
@@ -56,43 +57,33 @@ class ChpassForm extends Component {
     if (this.props.is_fetching) spinning = true;
 
     if (this.props.choose_custom) {
-        const pwFieldCustomErr  = '',
-              pwFieldRepeatErr  = '';
+        const pwFieldCustomErr = '',
+              pwFieldRepeatErr = '',
+              meterHelpBlock = [(
+                    <meter max="4"
+                           id="password-strength-meter"
+                           ref="passwordStrengthMeter">
+                    </meter>),
+                    (<FormControl.Feedback />),
+                    (<div className="form-field-error-area">
+                      <HelpBlock>{pwFieldCustomErr}</HelpBlock>
+                    </div>)];
 
         form = (
           <div>
-            <FormGroup controlId={pwFieldCustomName}>
-              <ControlLabel>
-                  {this.props.l10n('pwfield.enter_password')}
-              </ControlLabel>
-              <Field component={FormControl}
+              <Field component={TextInput}
                      componentClass="input"
                      type="password"
                      ref={pwFieldCustomName}
+                     label={this.props.l10n('pwfield.enter_password')}
+                     helpBlock={meterHelpBlock}
                      name={pwFieldCustomName} />
-              <meter max="4"
-                     id="password-strength-meter"
-                     ref="passwordStrengthMeter">
-              </meter>
-              <FormControl.Feedback />
-              <div className="form-field-error-area">
-                <HelpBlock>{pwFieldCustomErr}</HelpBlock>
-              </div>
-            </FormGroup>
-            <FormGroup controlId={pwFieldRepeatName}>
-              <ControlLabel>
-                  {this.props.l10n('pwfield.repeat_password')}
-              </ControlLabel>
-              <Field component={FormControl}
+              <Field component={TextInput}
                      componentClass="input"
                      type="password"
                      ref={pwFieldRepeatName}
+                     label={this.props.l10n('pwfield.repeat_password')}
                      name={pwFieldRepeatName} />
-              <FormControl.Feedback />
-              <div className="form-field-error-area">
-                <HelpBlock>{pwFieldRepeatErr}</HelpBlock>
-              </div>
-            </FormGroup>
           </div>);
         
         helpCustom = (
@@ -100,43 +91,25 @@ class ChpassForm extends Component {
                  dangerouslySetInnerHTML={{__html: this.props.l10n('chpass.help-text-newpass')}}>
             </div>);
     } else {
-        form = (
-        <FormGroup controlId={pwFieldSuggestedName}
-                   validationState="success">
-          <ControlLabel>{this.props.l10n('chpass.suggested_password')}</ControlLabel>
-          
-              <Field component={FormControl}
-                     componentClass="input"
-                     type="text"
-                     name={pwFieldSuggestedName}
-                     ref={pwFieldSuggestedName}
-                     disabled={true} />
-
-              <FormControl.Feedback />
-              <div className="form-field-error-area">
-                <HelpBlock></HelpBlock>
-              </div>
-        </FormGroup>);
+        form = (<Field component={TextInput}
+                       componentClass="input"
+                       type="text"
+                       name={pwFieldSuggestedName}
+                       ref={pwFieldSuggestedName}
+                       label={this.props.l10n('chpass.suggested_password')}
+                       disabled={true} />);
     }
 
     return (
           <form id="passwordsview-form"
                 role="form">
               <fieldset>
-                  <FormGroup controlId={pwFieldOldName}
-                             validationState="success">
-                      <ControlLabel>{this.props.l10n('chpass.old_password')}</ControlLabel>
-
-                          <Field component={FormControl}
-                                 componentClass="input"
-                                 type="password"
-                                 ref={pwFieldOldName}
-                                 name={pwFieldOldName} />
-                      <FormControl.Feedback />
-                      <div className="form-field-error-area">
-                          <HelpBlock></HelpBlock>
-                      </div>
-                  </FormGroup>
+                  <Field component={TextInput}
+                         componentClass="input"
+                         type="password"
+                         ref={pwFieldOldName}
+                         label={this.props.l10n('chpass.old_password')}
+                         name={pwFieldOldName} />
 
                   <FormGroup controlId={pwFieldChooser}>
                       <ControlLabel>
@@ -175,10 +148,14 @@ ChpassForm = reduxForm({
 })(ChpassForm)
 
 ChpassForm = connect(
-  state => ({
-    initialValues: {pwFieldSuggestedName: state.security.suggested_password},
-    enableReinitialize: true
-  })
+  state => {
+    const initialValues = {};
+    initialValues[pwFieldSuggestedName] = state.chpass.suggested_password;
+    return {
+      initialValues: initialValues,
+      enableReinitialize: true
+    }
+  }
 )(ChpassForm)
 
 class ChangePassword extends Component {

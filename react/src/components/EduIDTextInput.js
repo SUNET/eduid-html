@@ -17,11 +17,13 @@ const textInput = (props) => {
         meta,
         selectOptions,
         componentClass,
-        l10n
+        l10n,
+        disabled,
+        helpBlock
     } = props;
     const validationState = ((meta.submitFailed || meta.touched) && meta.error) && 'error' || 'success';
     const errmsg = ((meta.submitFailed || meta.touched) && meta.error) && l10n(meta.error) || '';
-    let field;
+    let help, field;
 
     if (componentClass === 'select') {
         let options = [];
@@ -36,24 +38,31 @@ const textInput = (props) => {
         });
         field = (
             <FormControl componentClass={componentClass}
+                         disabled={disabled}
                          {...input}>
                 {children}
             </FormControl>
         );
     } else {
         field = <FormControl componentClass={componentClass}
+                             type={type}
+                             disabled={disabled}
                              {...input} /> ;
     }
+
+    if (helpBlock === undefined) {
+        help = [(<FormControl.Feedback />),
+          (<div className="form-field-error-area">
+            <HelpBlock>{errmsg}</HelpBlock>
+          </div>)];
+    } else {help = helpBlock}
 
     return (
         <FormGroup controlId={input.name}
                    validationState={validationState}>
           <ControlLabel>{label}</ControlLabel>
           {field}
-          <FormControl.Feedback />
-          <div className="form-field-error-area">
-            <HelpBlock>{errmsg}</HelpBlock>
-          </div>
+          {help}
         </FormGroup>
     );
 }
