@@ -22,7 +22,7 @@ const textInput = (props) => {
         helpBlock
     } = props;
     const validationState = ((meta.submitFailed || meta.touched) && meta.error) && 'error' || 'success';
-    const errmsg = ((meta.submitFailed || meta.touched) && meta.error) && l10n(meta.error) || '';
+    const errmsg = validationState === 'error' && l10n(meta.error) || '';
     let help, field;
 
     if (componentClass === 'select') {
@@ -51,8 +51,8 @@ const textInput = (props) => {
     }
 
     if (helpBlock === undefined) {
-        help = [(<FormControl.Feedback />),
-          (<div className="form-field-error-area">
+        help = [(<FormControl.Feedback key="0" />),
+          (<div className="form-field-error-area" key="1">
             <HelpBlock>{errmsg}</HelpBlock>
           </div>)];
     } else {help = helpBlock}

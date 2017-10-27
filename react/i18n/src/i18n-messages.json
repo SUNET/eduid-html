@@ -480,6 +480,14 @@
     "defaultMessage": "Custom password"
   },
   {
+    "id": "chpass.use-custom",
+    "defaultMessage": "Custom"
+  },
+  {
+    "id": "chpass.use-suggested",
+    "defaultMessage": "Suggested"
+  },
+  {
     "id": "chpass.repeat_password",
     "defaultMessage": "Repeat your custom password"
   },

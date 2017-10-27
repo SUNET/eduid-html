@@ -27,8 +27,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleChoice: function (e) {
-      if (e.target.checked) {
+    handleChoice: function (value) {
+      if (value === 'custom') {
         dispatch(actions.chooseCustomPassword());
       } else {
         dispatch(actions.chooseSuggestedPassword(props.suggested_password));

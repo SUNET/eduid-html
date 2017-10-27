@@ -4,7 +4,8 @@ import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import Checkbox from 'react-bootstrap/lib/Checkbox';
+import ToggleButton from 'react-bootstrap/lib/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
@@ -30,8 +31,36 @@ const validate = values => {
     const errors = {};
     if (!values[pwFieldOldName]) {
         errors[pwFieldOldName] = 'required'
-    } else if (values[pwFieldChooser]) {
-        const customPw = values[pwFieldCustomName];
+    } else if (values.choice === 'custom') {
+
+
+
+      // XXX Continue here
+
+    const messages = {
+      0: this.props.l10n('pwfield.terrible'),
+      1: this.props.l10n('pwfield.bad'),
+      2: this.props.l10n('pwfield.weak'),
+      3: this.props.l10n('pwfield.good'),
+      4: this.props.l10n('pwfield.strong')
+    }
+    const password = this.getCustomPassword(),
+          meter = ReactDom.findDOMNode(this.refs.passwordStrengthMeter),
+          result = zxcvbn(password, this.props.user_input),
+          entropy = Math.log(result.guesses, 2);
+
+    // Update the password strength meter
+    let score = 0,
+        min_entropy = this.props.entropy / 5,
+        step_entropy = min_entropy;
+    for (let n=0; n < 5 && entropy > min_entropy; n++){
+      score = n;
+      min_entropy += step_entropy;
+    }
+
+
+      // XXX Continue here
+
         if (customPw.length < 5) {
             errors[pwFieldCustomName] = 'weak-password';
         } else if (values[pwFieldRepeatName]) {
@@ -62,10 +91,11 @@ class ChpassForm extends Component {
               meterHelpBlock = [(
                     <meter max="4"
                            id="password-strength-meter"
+                           key="0"
                            ref="passwordStrengthMeter">
                     </meter>),
-                    (<FormControl.Feedback />),
-                    (<div className="form-field-error-area">
+                    (<FormControl.Feedback key="1" />),
+                    (<div className="form-field-error-area" key="2">
                       <HelpBlock>{pwFieldCustomErr}</HelpBlock>
                     </div>)];
 
@@ -111,18 +141,27 @@ class ChpassForm extends Component {
                          label={this.props.l10n('chpass.old_password')}
                          name={pwFieldOldName} />
 
-                  <FormGroup controlId={pwFieldChooser}>
-                      <ControlLabel>
-                        {this.props.l10n('chpass.use-custom-label')}
-                      </ControlLabel>
-                      <Field component={Checkbox}
-                             name={pwFieldChooser}
-                             ref={pwFieldChooser}
-                             onClick={this.props.handleChoice} />
-                      <div className="form-field-error-area">
-                        <HelpBlock></HelpBlock>
-                      </div>
-                  </FormGroup>
+                  <ControlLabel>
+                    {this.props.l10n('chpass.use-custom-label')}
+                  </ControlLabel>
+                    <ToggleButtonGroup
+                         name={pwFieldChooser}
+                         type="radio"
+                         defaultValue="suggested"
+                         onChange={this.props.handleChoice}>
+                      <ToggleButton value="custom">
+                        {this.props.l10n('chpass.use-custom')}
+                      </ToggleButton>
+                      <ToggleButton value="suggested">
+                        {this.props.l10n('chpass.use-suggested')}
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  <div className="form-field-error-area">
+                    <HelpBlock></HelpBlock>
+                  </div>
+                  <Field component="input"
+                         type="hidden"
+                         name="choice" />
               </fieldset>
               {helpCustom}
               <fieldset>
@@ -149,7 +188,10 @@ ChpassForm = reduxForm({
 
 ChpassForm = connect(
   state => {
-    const initialValues = {};
+    const choice = state.chpass.choose_custom && 'custom' || 'suggested';
+    const initialValues = {
+        choice: choice
+    };
     initialValues[pwFieldSuggestedName] = state.chpass.suggested_password;
     return {
       initialValues: initialValues,

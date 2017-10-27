@@ -741,6 +741,16 @@ const msgs = {
           id="chpass.custom_password"
           defaultMessage={`Custom password`} />),
 
+   'chpass.use-custom': (
+        <FormattedMessage
+          id="chpass.use-custom"
+          defaultMessage={`Custom`} />),
+
+   'chpass.use-suggested': (
+        <FormattedMessage
+          id="chpass.use-suggested"
+          defaultMessage={`Suggested`} />),
+
    'chpass.repeat_password': (
         <FormattedMessage
           id="chpass.repeat_password"
