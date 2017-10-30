@@ -537,6 +537,10 @@
   },
   {
     "id": "pwfield.terrible",
+    "defaultMessage": "Extremelly weak password"
+  },
+  {
+    "id": "pwfield.bad",
     "defaultMessage": "Very weak password"
   },
   {

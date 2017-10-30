@@ -11,8 +11,6 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
-import { zxcvbn } from 'zxcvbn';
-
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import TextInput from 'components/EduIDTextInput';
@@ -20,55 +18,28 @@ import TextInput from 'components/EduIDTextInput';
 import 'style/ChangePassword.scss';
 
 
-const pwFieldCustomName    = 'custom-password-field',
-      pwFieldRepeatName    = 'repeat-password-field',
-      pwFieldOldName       = 'old-password-field',
-      pwFieldSuggestedName = 'suggested-password-field',
-      pwFieldChooser       = 'choose-custom-field';
+export const pwFieldCustomName    = 'custom-password-field',
+             pwFieldRepeatName    = 'repeat-password-field',
+             pwFieldOldName       = 'old-password-field',
+             pwFieldSuggestedName = 'suggested-password-field',
+             pwFieldChooser       = 'choose-custom-field';
 
 
-const validate = values => {
+const validate = (values, props) => {
     const errors = {};
     if (!values[pwFieldOldName]) {
         errors[pwFieldOldName] = 'required'
-    } else if (values.choice === 'custom') {
-
-
-
-      // XXX Continue here
-
-    const messages = {
-      0: this.props.l10n('pwfield.terrible'),
-      1: this.props.l10n('pwfield.bad'),
-      2: this.props.l10n('pwfield.weak'),
-      3: this.props.l10n('pwfield.good'),
-      4: this.props.l10n('pwfield.strong')
     }
-    const password = this.getCustomPassword(),
-          meter = ReactDom.findDOMNode(this.refs.passwordStrengthMeter),
-          result = zxcvbn(password, this.props.user_input),
-          entropy = Math.log(result.guesses, 2);
-
-    // Update the password strength meter
-    let score = 0,
-        min_entropy = this.props.entropy / 5,
-        step_entropy = min_entropy;
-    for (let n=0; n < 5 && entropy > min_entropy; n++){
-      score = n;
-      min_entropy += step_entropy;
-    }
-
-
-      // XXX Continue here
-
-        if (customPw.length < 5) {
-            errors[pwFieldCustomName] = 'weak-password';
-        } else if (values[pwFieldRepeatName]) {
-            if (values[pwFieldCustomName] !== values[pwFieldRepeatName]) {
-                errors[pwFieldRepeatName] = 'different';
-            }
-        } else {
+    if (props.choose_custom) {
+        if (!values[pwFieldCustomName]) {
+            errors[pwFieldCustomName] = 'required';
+        } else if (props.custom_ready) {
+            errors[pwFieldCustomName] = 'chpass.low-password-entropy'
+        }
+        if (!values[pwFieldRepeatName]) {
             errors[pwFieldRepeatName] = 'required';
+        } else if (values[pwFieldRepeatName] !== values[pwFieldCustomName]) {
+            errors[pwFieldRepeatName] = 'chpass.different-repeat'
         }
     }
     return errors;
@@ -86,17 +57,15 @@ class ChpassForm extends Component {
     if (this.props.is_fetching) spinning = true;
 
     if (this.props.choose_custom) {
-        const pwFieldCustomErr = '',
-              pwFieldRepeatErr = '',
-              meterHelpBlock = [(
+        const meterHelpBlock = [(
                     <meter max="4"
+                           value={this.props.password_score}
                            id="password-strength-meter"
-                           key="0"
-                           ref="passwordStrengthMeter">
+                           key="0">
                     </meter>),
                     (<FormControl.Feedback key="1" />),
                     (<div className="form-field-error-area" key="2">
-                      <HelpBlock>{pwFieldCustomErr}</HelpBlock>
+                      <HelpBlock>{this.props.l10n(this.props.password_strength_msg)}</HelpBlock>
                     </div>)];
 
         form = (
@@ -104,9 +73,9 @@ class ChpassForm extends Component {
               <Field component={TextInput}
                      componentClass="input"
                      type="password"
-                     ref={pwFieldCustomName}
                      label={this.props.l10n('pwfield.enter_password')}
                      helpBlock={meterHelpBlock}
+                     ref={pwFieldCustomName}
                      name={pwFieldCustomName} />
               <Field component={TextInput}
                      componentClass="input"
@@ -159,9 +128,6 @@ class ChpassForm extends Component {
                   <div className="form-field-error-area">
                     <HelpBlock></HelpBlock>
                   </div>
-                  <Field component="input"
-                         type="hidden"
-                         name="choice" />
               </fieldset>
               {helpCustom}
               <fieldset>
@@ -188,10 +154,7 @@ ChpassForm = reduxForm({
 
 ChpassForm = connect(
   state => {
-    const choice = state.chpass.choose_custom && 'custom' || 'suggested';
-    const initialValues = {
-        choice: choice
-    };
+    const initialValues = {};
     initialValues[pwFieldSuggestedName] = state.chpass.suggested_password;
     return {
       initialValues: initialValues,
@@ -231,7 +194,6 @@ ChangePassword.propTypes = {
   next_url: PropTypes.string,
   errorMsg: PropTypes.string,
   password_entropy: PropTypes.number,
-  handlePassword: PropTypes.func,
   handleChoice: PropTypes.func,
   handleStartPasswordChange: PropTypes.func,
 }

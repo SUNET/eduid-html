@@ -814,6 +814,11 @@ const msgs = {
    'pwfield.terrible': (
         <FormattedMessage
           id="pwfield.terrible"
+          defaultMessage={`Extremelly weak password`} />),
+
+   'pwfield.bad': (
+        <FormattedMessage
+          id="pwfield.bad"
           defaultMessage={`Very weak password`} />),
 
    'pwfield.weak': (
