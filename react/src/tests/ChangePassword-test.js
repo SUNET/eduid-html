@@ -60,28 +60,6 @@ describe("ChangePassword Actions", () => {
      expect(actions.chooseCustomPassword()).toEqual(expectedAction);
   });
 
-  it("Valid custom password", () => {
-     const passwd = '1234',
-           expectedAction = {
-             type: actions.VALID_CUSTOM_PASSWORD,
-             payload: passwd
-           };
-     expect(actions.validCustomPassword(passwd)).toEqual(expectedAction);
-  });
-
-  it("Action password not ready", () => {
-     const err = 'Error',
-           expectedAction = {
-              type: actions.PASSWORD_NOT_READY,
-              error: true,
-              payload: {
-                error: new Error(err),
-                message: err
-              }
-           };
-     expect(actions.passwordNotReady(err)).toEqual(expectedAction);
-  });
-
   it("Post password change (new and old)", () => {
     const passwd1 = '1234',
           passwd2 = '5678',
