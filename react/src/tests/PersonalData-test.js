@@ -113,12 +113,14 @@ describe("Personal Data Actions", () => {
 describe("Reducers", () => {
 
   const mockState = {
-    is_fetching: false,
-    failed: false,
-    given_name: 'John',
-    surname: 'Smith',
-    display_name: 'John',
-    language: 'en',
+      is_fetching: false,
+      failed: false,
+      data: {
+          given_name: 'John',
+          surname: 'Smith',
+          display_name: 'John',
+          language: 'en',
+      }
   };
 
     it("Receives a GET_ALL_USERDATA action", () => {
@@ -133,10 +135,12 @@ describe("Reducers", () => {
       {
         is_fetching: true,
         failed: false,
-        given_name: 'John',
-        surname: 'Smith',
-        display_name: 'John',
-        language: 'en'
+        data: {
+            given_name: 'John',
+            surname: 'Smith',
+            display_name: 'John',
+            language: 'en'
+        }
       }
     );
   });
@@ -146,11 +150,13 @@ describe("Reducers", () => {
       personalDataReducer(
         mockState,
         {
+          payload: {surname: 'Surname'},
           type: actions.GET_USERDATA_SUCCESS
         }
       )
     ).toEqual(
       {
+        data: {surname: 'Surname'},
         is_fetching: false,
         failed: false
       }
@@ -173,10 +179,12 @@ it("Receives a GET_ALL_USERDATA_FAIL action", () => {
       {
         is_fetching: false,
         failed: true,
-        given_name: 'John',
-        surname: 'Smith',
-        display_name: 'John',
-        language: 'en',
+        data: {
+            given_name: 'John',
+            surname: 'Smith',
+            display_name: 'John',
+            language: 'en'
+        },
         error: 'Bad error',
         message: 'Bad error'
       }
@@ -199,10 +207,10 @@ it("Receives a CHANGE_USERDATA action", () => {
       {
         is_fetching: false,
         failed: false,
-        given_name: 'Jonna',
-        surname: 'Smith',
-        display_name: 'Jonna',
-        language: 'en'
+        data: {
+            given_name: 'Jonna',
+            display_name: 'Jonna'
+        }
       }
     );
   });
@@ -219,10 +227,12 @@ it("Receives a POST_USERDATA action", () => {
       {
         is_fetching: true,
         failed: false,
-        given_name: 'John',
-        surname: 'Smith',
-        display_name: 'John',
-        language: 'en'
+        data: {
+            given_name: 'John',
+            surname: 'Smith',
+            display_name: 'John',
+            language: 'en'
+        }
       }
     );
   });
@@ -232,13 +242,15 @@ it("Receives a POST_USERDATA_SUCCESS action", () => {
       personalDataReducer(
         mockState,
         {
+          payload: {surname: 'Surname'},
           type: actions.POST_USERDATA_SUCCESS
         }
       )
     ).toEqual(
       {
-        is_fetching: false,
-        failed: false
+          data: {surname: 'Surname'},
+          is_fetching: false,
+          failed: false
       }
     );
   });
@@ -259,10 +271,12 @@ it("Receives a POST_USERDATA_FAIL action", () => {
       {
         is_fetching: false,
         failed: true,
-        given_name: 'John',
-        surname: 'Smith',
-        display_name: 'John',
-        language: 'en',
+        data: {
+            given_name: 'John',
+            surname: 'Smith',
+            display_name: 'John',
+            language: 'en'
+        },
         error: "Bad error",
         message: "Bad error"
       }
@@ -270,6 +284,25 @@ it("Receives a POST_USERDATA_FAIL action", () => {
   });
 
 });
+
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
+const fakeState = {
+      personal_data: {
+        is_fetching: false,
+        failed: false,
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: '',
+      },
+      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
+    }
 
 function setupComponent() {
   const props = {
@@ -281,9 +314,11 @@ function setupComponent() {
     handleChange: mock.fn()
   };
 
-  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+  const wrapper = mount(<Provider store={ fakeStore(fakeState) }>
+                            <IntlProvider locale={'en'} messages={messages}>
                               <PersonalData {...props} />
-                          </IntlProvider>);
+                            </IntlProvider>
+                        </Provider>);
 
   return {
     props,
@@ -378,9 +413,11 @@ describe("Async component", () => {
 
        // expect(data).toEqual(select(mockState => mockState.config));
 
-       next = generator.next(data);
+       generator.next(data);
+       generator.next();
+       generator.next();
+       next = generator.next();
 
-       var result = next;
        expect(next.value).toEqual(call(sendPersonalData, config, data));
 
        const action = {
@@ -395,8 +432,10 @@ describe("Async component", () => {
        }
        next = generator.next(action);
        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-       next = generator.next();
+       generator.next();
        delete(action.payload.csrf_token);
+       generator.next();
+       next = generator.next();
        expect(next.value).toEqual(put(action));      
     });
 
@@ -432,13 +471,6 @@ describe("PersonalData Component", () => {
 
 });
 
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
-});
-
 describe("PersonalData Container", () => {
   let fulltext,
     given_name,
@@ -451,17 +483,7 @@ describe("PersonalData Container", () => {
     dispatch;
 
   beforeEach(() => {
-    const store = fakeStore({
-      personal_data: {
-        is_fetching: false,
-        failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: '',
-      },
-      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
-    });
+    const store = fakeStore(fakeState);
 
     mockProps = {
         given_name: 'Pablo',
@@ -501,13 +523,17 @@ describe("PersonalData Container", () => {
 
   it("Clicks", () => {
 
+    const mockEvent = {
+        preventDefault: () => {}
+    };
+
     fetchMock.post('http://localhost/services/personal-data/user',
        {
         type: actions.POST_USERDATA_SUCCESS,
       });
-    expect(dispatch.mock.calls.length).toEqual(0);
-    wrapper.find('EduIDButton#personal-data-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(5);
+    wrapper.find('EduIDButton#personal-data-button').props().onClick(mockEvent);
+    expect(dispatch.mock.calls.length).toEqual(6);
   });
 
 });

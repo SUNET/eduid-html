@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 
-//  XXX this interferes with the bootstrap in eduid-html
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'style/OpenidConnect.scss';
 
 

@@ -7,7 +7,6 @@ const ninState = {
     failed: false,
     error: '',
     message: '',
-    valid_nin: true,
     nin: '',
     rmNin: '',
     nins: []
@@ -38,21 +37,6 @@ let ninsReducer = (state=ninState, action) => {
         error: action.payload.error,
         message: action.payload.message
       };
-    case actions.VALID_NIN:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: false,
-        nin: action.payload.nin,
-        valid_nin: true
-      };
-    case actions.INVALID_NIN:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: false,
-        valid_nin: false
-      };
     case actions.POST_NIN_REMOVE:
       return {
         ...state,
@@ -63,15 +47,23 @@ let ninsReducer = (state=ninState, action) => {
       return {
         ...state,
         ...action.payload,
-        is_fetching: false,
-        valid_nin: true
+        is_fetching: false
       };
     case actions.POST_NIN_REMOVE_FAIL:
       return {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.error,
+        error: action.payload.error
+      };
+    case "@@redux-form/CHANGE":
+      const form = {};
+      if (action.meta.form === 'nins' && action.meta.field === 'norEduPersonNin') {
+          form.nin = action.payload;
+      }
+      return {
+        ...state,
+        ...form
       };
     default:
       return state;

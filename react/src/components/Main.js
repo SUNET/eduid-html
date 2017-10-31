@@ -34,36 +34,34 @@ class SubMain extends Component {
 
     render () {
 
-        const tabs = [{id: 'personaldata', label: this.props.l10n('main.personal_data')},
-                      {id: 'nins', label: this.props.l10n('main.nins')},
-                      {id: 'emails', label: this.props.l10n('main.emails')},
-                      {id: 'phones', label: this.props.l10n('main.phones')},
-                      {id: 'security', label: this.props.l10n('main.security')}];
-        const tabsElem = tabs.map( (tab, index) => {
-            //let classes;
-            //if (tab.id === 'personaldata') {
-                //classes = 'main-nav-tabs active';
-            //} else {
-                //classes = 'main-nav-tabs';
-            //}
-            return (
-                <li key={index}>
-                  <NavLink className='main-nav-tabs'
-                        activeClassName="active"
-                        to={`/profile/${tab.id}`}
-                        id={`${tab.id}-router-link`}>
-                    {tab.label}
-                  </NavLink>
-                </li>
-            );
-        });
+        let tabsElem = '';
 
-        const content = (
-              <div className="container position-relative">
-                <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
-                <div id="content-block">
+        if (this.props.show_sidebar) {
 
-                  <div className='profile-combo tabbable well row' id="profile-content-area">
+            const tabs = [{id: 'personaldata', label: this.props.l10n('main.personal_data')},
+                          {id: 'nins', label: this.props.l10n('main.nins')},
+                          {id: 'emails', label: this.props.l10n('main.emails')},
+                          {id: 'phones', label: this.props.l10n('main.phones')},
+                          {id: 'security', label: this.props.l10n('main.security')}];
+            const tabsElems = tabs.map( (tab, index) => {
+                //let classes;
+                //if (tab.id === 'personaldata') {
+                    //classes = 'main-nav-tabs active';
+                //} else {
+                    //classes = 'main-nav-tabs';
+                //}
+                return (
+                    <li key={index}>
+                      <NavLink className='main-nav-tabs'
+                            activeClassName="active"
+                            to={`/profile/${tab.id}`}
+                            id={`${tab.id}-router-link`}>
+                        {tab.label}
+                      </NavLink>
+                    </li>
+                );
+            });
+            tabsElem = (
                     <div className='col-md-3'>
                       <div className="profile-head">
                         <h3>{this.props.l10n('main.profile_title')}</h3>
@@ -71,7 +69,7 @@ class SubMain extends Component {
                       </div>
                       <div className="tabs-left hidden-xs" id="profile-menu-large">
                         <ul className='nav nav-tabs nav-stacked'>
-                          {tabsElem}
+                          {tabsElems}
                           <ProfileFilledContainer />
                           <li id="profile-menu-eppn-li">
                             <div className="profile-menu-eppn">
@@ -81,6 +79,18 @@ class SubMain extends Component {
                         </ul>
                       </div>
                     </div>
+            );
+        }
+
+        return ([
+          <HeaderContainer key="1" />,
+            <ConnectedRouter history={history} key="2">
+              <div className="container position-relative">
+                <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
+                <div id="content-block">
+
+                  <div className='profile-combo tabbable well row' id="profile-content-area">
+                    {tabsElem}
                     <div className="tab-content info-container col-md-8 col-md-offset-1">
                       <div className="tab-pane active">
                         <NotificationsContainer />
@@ -97,38 +107,23 @@ class SubMain extends Component {
                 </div>
                 <div className='push'></div>
               </div>
-        );
-        setTimeout( () => {window.scroll(0,0)}, 100)
-        if (this.props.testing) {
-            return ([
-              <HeaderContainer key="1" />,
-                <div key="2">
-                {content}
-                </div>,
-              <FooterContainer key="3" />
-            ]);
-        } else {
-            return ([
-              <HeaderContainer key="1" />,
-              <ConnectedRouter history={history} key="2">
-                {content}
-              </ConnectedRouter>,
-              <FooterContainer key="3" />
-            ]);
-        }
+            </ConnectedRouter>,
+          <FooterContainer key="3" />
+        ]);
     }
 }
 
 SubMain.propTypes = {
     window_size: PropTypes.string,
-    eppn: PropTypes.string,
-    testing: PropTypes.bool
+    show_sidebar: PropTypes.bool,
+    eppn: PropTypes.string
 };
 
 const SubMainContainer = connect(
    (state, props) => ({
         window_size: state.config.window_size,
-        eppn: state.personal_data.eppn
+        show_sidebar: state.config.show_sidebar,
+        eppn: state.personal_data.data.eppn
     }),
     (dispatch, props) => ({}),
 )(i18n(SubMain));
@@ -159,7 +154,7 @@ class Main extends Component {
 
         return (
           <IntlProvider locale={ lang } messages={ messages }>
-            <SubMainContainer testing={false} />
+            <SubMainContainer />
           </IntlProvider>
         );
     }

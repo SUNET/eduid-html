@@ -55,7 +55,7 @@ class LetterProofingButton extends Component {
                 placeholder={this.props.l10n('letter.placeholder')}
                 showModal={this.props.confirmingLetter}
                 closeModal={this.props.handleStopConfirmationLetter}
-                handleResendCode={this.props.handleConfirmationLetter}
+                handleResend={this.props.handleConfirmationLetter}
                 handleConfirm={this.props.sendConfirmationLetter}
                 is_fetching={this.props.resending.is_fetching}
                 message={message}

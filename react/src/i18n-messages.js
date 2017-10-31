@@ -26,7 +26,7 @@ export default function i18n(WrappedComponent, options = {}) {
         withRef      = false,
     } = options;
 
-    WrappedComponent.propTypes['l10n'] = PropTypes.func;
+    //WrappedComponent.propTypes['l10n'] = PropTypes.func;
 
     class InjectIntl extends Component {
         constructor(props, context) {
@@ -93,6 +93,11 @@ const msgs = {
         <FormattedMessage
             id="error_in_form"
             defaultMessage={`Check the form below for errors.`} />),
+
+    'required': (
+        <FormattedMessage
+            id="required"
+            defaultMessage={`Required`} />),
 
     'Error: Internal Server Error': (
         <FormattedMessage
@@ -233,6 +238,11 @@ const msgs = {
           id="cm.close"
           defaultMessage={`CLOSE`} />),
 
+    'cm.enter_code': (
+        <FormattedMessage
+          id="cm.enter_code"
+          defaultMessage={`Enter your confirmation code below`} />),
+
     /************************/
     /* TABLE LIST ***********/
     /************************/
@@ -266,6 +276,11 @@ const msgs = {
     <FormattedMessage
             id="emails.cannot_remove_primary"
             defaultMessage={`You can not delete the primary email`} />),
+
+    'emails.invalid_email': (
+    <FormattedMessage
+            id="emails.invalid_email"
+            defaultMessage={`The entered value does not look like an email`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -590,6 +605,11 @@ const msgs = {
           id="phones.code_invalid"
           defaultMessage={`Invalid verification code`} />),
 
+    'phones.invalid_phone': (
+        <FormattedMessage
+          id="phones.invalid_phone"
+          defaultMessage={`Invalid phone number`} />),
+
     'phones.verification-success': (
         <FormattedMessage
           id="phones.verification-success"
@@ -721,6 +741,16 @@ const msgs = {
           id="chpass.custom_password"
           defaultMessage={`Custom password`} />),
 
+   'chpass.use-custom': (
+        <FormattedMessage
+          id="chpass.use-custom"
+          defaultMessage={`Custom`} />),
+
+   'chpass.use-suggested': (
+        <FormattedMessage
+          id="chpass.use-suggested"
+          defaultMessage={`Suggested`} />),
+
    'chpass.repeat_password': (
         <FormattedMessage
           id="chpass.repeat_password"
@@ -784,6 +814,11 @@ const msgs = {
    'pwfield.terrible': (
         <FormattedMessage
           id="pwfield.terrible"
+          defaultMessage={`Extremelly weak password`} />),
+
+   'pwfield.bad': (
+        <FormattedMessage
+          id="pwfield.bad"
           defaultMessage={`Very weak password`} />),
 
    'pwfield.weak': (
@@ -844,6 +879,16 @@ const msgs = {
         <FormattedMessage
           id="nins.invalid_nin"
           defaultMessage={`Invalid NIN`} />),
+
+   'nins.wrong_length': (
+        <FormattedMessage
+          id="nins.wrong_length"
+          defaultMessage={`NINs must have 12 digits`} />),
+
+   'nins.ilegal_chars': (
+        <FormattedMessage
+          id="nins.ilegal_chars"
+          defaultMessage={`NINs can only have digits`} />),
 
    'nins.valid_nin': (
         <FormattedMessage

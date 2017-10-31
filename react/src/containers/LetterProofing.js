@@ -1,16 +1,17 @@
 
 import { connect } from 'react-redux';
+import { isValid } from "redux-form";
 import LetterProofingButton from 'components/LetterProofing';
 import * as actions from "actions/LetterProofing";
 
 
 const mapStateToProps = (state, props) => {
   const confirming = state.letter_proofing.confirmingLetter,
-        valid_nin = state.nins.valid_nin,
+        valid_nin = isValid('nins')(state),
         confirmingLetter = confirming && valid_nin;
   return {
     confirmingLetter: confirmingLetter,
-    valid_nin: state.nins.valid_nin,
+    valid_nin: isValid('nins')(state),
     nin: state.nins.nin,
     is_fetching: state.letter_proofing.is_fetching,
     message: state.letter_proofing.message,

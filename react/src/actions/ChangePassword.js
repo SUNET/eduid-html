@@ -48,26 +48,6 @@ export function chooseCustomPassword () {
 }
 
 
-export function validCustomPassword (pw) {
-  return {
-    type: VALID_CUSTOM_PASSWORD,
-    payload: pw
-  };
-}
-
-
-export function passwordNotReady (msg) {
-  return {
-    type: PASSWORD_NOT_READY,
-    error: true,
-    payload: {
-      error: new Error(msg),
-      message: msg
-    }
-  };
-}
-
-
 export function postPasswordChange (oldPassword, newPassword) {
   return {
     type: POST_PASSWORD_CHANGE,

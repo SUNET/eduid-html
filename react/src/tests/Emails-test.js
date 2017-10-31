@@ -331,7 +331,7 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        is_fetching: false,
+        is_fetching: true,
         failed: false,
         error: '',
         message: '',
@@ -1005,8 +1005,6 @@ describe("Emails Container", () => {
         language: 'en'
     };
 
-
-
     wrapper = mount(
         <IntlProvider locale={'en'} messages={messages}>
           <Provider store={store}>
@@ -1037,9 +1035,10 @@ describe("Emails Container", () => {
        {
         type: actions.POST_EMAIL
       });
-    expect(dispatch.mock.calls.length).toEqual(0);
+    expect(dispatch.mock.calls.length).toEqual(3);
+    wrapper.find('input#email').value = 'testing@example.com';
     wrapper.find('EduIDButton#email-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(4);
   });
 
 });

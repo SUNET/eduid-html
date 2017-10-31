@@ -5,13 +5,15 @@ import * as actions from "actions/PersonalData";
 const personalData = {
     is_fetching: false,
     failed: false,
-    error: [],
+    error: {},
     message: '',
-    eppn: '',
-    given_name: '',
-    surname: '',
-    display_name: '',
-    language: ''
+    data: {
+        eppn: '',
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: ''
+    }
 };
 
 
@@ -19,7 +21,7 @@ let personalDataReducer = (state=personalData, action) => {
   switch (action.type) {
     case actions.GET_USERDATA_SUCCESS:
       return {
-        ...action.payload,
+        data: {...action.payload},
         is_fetching: false,
         failed: false
       };
@@ -40,7 +42,7 @@ let personalDataReducer = (state=personalData, action) => {
     case actions.CHANGE_USERDATA:
       return {
         ...state,
-        ...action.payload
+        data: {...action.payload}
       };
     case actions.POST_USERDATA:
       return {
@@ -50,7 +52,8 @@ let personalDataReducer = (state=personalData, action) => {
       };
     case actions.POST_USERDATA_SUCCESS:
       return {
-        ...action.payload,
+        ...state,
+        data: {...action.payload},
         is_fetching: false,
         failed: false
       };

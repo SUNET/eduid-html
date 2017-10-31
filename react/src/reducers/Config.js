@@ -17,10 +17,15 @@ const lang_code = language.substring(0,2);
 const configData = {
     language: lang_code,
     window_size: actions.getWindowSize(),
+    show_sidebar: true,
     is_configured: false,
     is_fetching: false,
     failed: false
 };
+
+const urls_with_no_sidebar = [
+    'chpass'
+];
 
 
 let configReducer = (state=configData, action) => {
@@ -61,6 +66,13 @@ let configReducer = (state=configData, action) => {
       return {
           ...state,
           ...action.payload
+      };
+    case "@@router/LOCATION_CHANGE":
+      let show_sidebar = true;
+      if (urls_with_no_sidebar.filter(v => (action.payload.pathname.endsWith(v))).length > 0) {show_sidebar = false}
+      return {
+          ...state,
+          show_sidebar: show_sidebar
       };
     default:
       return state;

@@ -42,7 +42,7 @@ import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sagas/Security";
-import { requestSuggestedPassword, postPasswordChange, backToHome } from "sagas/ChangePassword";
+import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
@@ -86,7 +86,6 @@ function* rootSaga() {
     takeLatest(mobileActions.START_VERIFY, sagasMobile.requestVerifyMobile),
     takeLatest(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
-    takeLatest(pwActions.POST_SECURITY_CHANGE_PASSWORD_SUCCESS, backToHome),
     takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
     takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterProofing),
     takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterCode),
@@ -138,7 +137,7 @@ const saveState = (state) => {
 
 export const store = createStore(
     eduIDApp,
-    loadPersistedState(),
+//    loadPersistedState(),
     composeEnhancers(
       applyMiddleware(
           sagaMiddleware,
@@ -149,9 +148,9 @@ export const store = createStore(
     )
 );
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+//store.subscribe(() => {
+//  saveState(store.getState());
+//});
 
 sagaMiddleware.run(rootSaga);
 

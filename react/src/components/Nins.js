@@ -1,13 +1,74 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import i18n from 'i18n-messages';
-import TextControl from 'components/TextControl';
+import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import vettingRegistry from "vetting-registry";
 
 import 'style/Nins.scss';
+
+
+const validate = values => {
+  let value  = values.norEduPersonNin;
+  // taken from https://gist.github.com/DiegoSalazar/4075533/
+  // accept only digits, dashes or spaces
+	if (value.length !== 12) return {norEduPersonNin: 'nins.wrong_length'};
+	if (/[^0-9-\s]+/.test(value)) return {norEduPersonNin: 'nins.ilegal_chars'};
+	// The Luhn Algorithm. It's so pretty.
+	var nCheck = 0, nDigit = 0, bEven = false;
+	value = value.replace(/\D/g, "");
+
+	for (var n = value.length - 1; n >= 0; n--) {
+		var cDigit = value.charAt(n),
+			  nDigit = parseInt(cDigit, 10);
+		if (bEven) {
+			if ((nDigit *= 2) > 9) nDigit -= 9;
+		}
+		nCheck += nDigit;
+		bEven = !bEven;
+	}
+	if ( (nCheck % 10) !== 0) {
+    return {norEduPersonNin: 'nins.invalid_nin'};
+  }
+  return {}
+}
+
+
+let NinForm = props => {
+    let buttons = '';
+    if (props.valid_nin) {
+        buttons = props.buttons;
+    }
+    return [(
+      <form id="nins-form"
+            role="form"
+            key="-1">
+        <fieldset id="nins-form" className="tabpane">
+          <Field component={TextInput}
+                 componentClass="input"
+                 type="text"
+                 name="norEduPersonNin"
+                 placeholder="yyyymmddnnnn" />
+        </fieldset>
+      </form>),
+      ...buttons]
+};
+
+NinForm = reduxForm({
+  form: 'nins',
+  validate
+})(NinForm)
+
+NinForm = connect(
+  state => ({
+    initialValues: {norEduPersonNin: state.nins.nin},
+    enableReinitialize: true
+  })
+)(NinForm)
 
 
 class Nins extends Component {
@@ -15,13 +76,15 @@ class Nins extends Component {
   render () {
     let ninStatus = 'nonin',
         credsTable = '',
-        vettingButtons = this.props.proofing_methods.map((key, index) => {
-            return (<div key={index}>{vettingRegistry[key]}</div>);
-        }),
-        invalidNinText = '',
+        vettingButtons = '',
         ninInput = '',
         spinning = false,
         verifiedNin = '';
+    if (this.props.is_configured) {
+        vettingButtons = this.props.proofing_methods.map((key, index) => {
+            return (<div key={index}>{vettingRegistry[key]}</div>);
+        });
+    }
     if (this.props.nins.length) {
         ninStatus = 'unverified';
         const nins = this.props.nins.filter((nin) => nin.verified);
@@ -31,27 +94,12 @@ class Nins extends Component {
         }
     }
     if (ninStatus === 'nonin') {
-        invalidNinText = (this.props.valid_nin) ?
-                           '' :
-                           this.props.l10n('nins.invalid_nin');
         ninInput = (
             <div>
               <p>{this.props.l10n('nins.help_text')}</p>
-              <form id="nins-form"
-                    role="form">
-                <fieldset id="nins-form" className="tabpane">
-                  <TextControl name="norEduPersonNin"
-                               placeholder="yyyymmddnnnn"
-                               validation={this.props.validateNin}
-                               componentClass="input"
-                               type="text"
-                               help={invalidNinText}
-                               handleChange={this.props.handleChange} />
-                </fieldset>
-              </form>
+              <NinForm buttons={vettingButtons} {...this.props} />
             </div>
         );
-        vettingButtons = (this.props.nin && this.props.valid_nin) ? vettingButtons : '';
     } else if (ninStatus === 'unverified') {
         const ninList = (this.props.nins.map( (nin, index) => {
             return (
@@ -74,7 +122,9 @@ class Nins extends Component {
             </div>
         );
         if (this.props.nins.length > 1) {
-            vettingButtons = this.props.l10n('nins.only_one_to_verify');
+            ninInput = this.props.l10n('nins.only_one_to_verify');
+        } else {
+            ninInput = vettingButtons;
         }
 
     } else if (ninStatus === 'verified') {
@@ -86,7 +136,6 @@ class Nins extends Component {
               </p>
             </div>
         );
-        vettingButtons = '';
     }
 
     return (
@@ -99,7 +148,6 @@ class Nins extends Component {
                 {credsTable}
           </div>
           {ninInput}
-          {vettingButtons}
         </div>
     );
   }
@@ -108,9 +156,7 @@ class Nins extends Component {
 Nins.propTypes = {
   nin: PropTypes.string,
   nins: PropTypes.array,
-  valid_nin: PropTypes.bool,
   validateNin: PropTypes.func,
-  handleChange: PropTypes.func,
   handleDelete: PropTypes.func,
   proofing_methods: PropTypes.array
 }
