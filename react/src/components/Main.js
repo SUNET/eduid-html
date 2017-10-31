@@ -82,7 +82,9 @@ class SubMain extends Component {
             );
         }
 
-        const content = (
+        return ([
+          <HeaderContainer key="1" />,
+            <ConnectedRouter history={history} key="2">
               <div className="container position-relative">
                 <noscript><div id="no-script"><h3>{this.props.l10n('main.noscript')}</h3></div></noscript>
                 <div id="content-block">
@@ -105,32 +107,16 @@ class SubMain extends Component {
                 </div>
                 <div className='push'></div>
               </div>
-        );
-        if (this.props.testing) {
-            return ([
-              <HeaderContainer key="1" />,
-                <div key="2">
-                {content}
-                </div>,
-              <FooterContainer key="3" />
-            ]);
-        } else {
-            return ([
-              <HeaderContainer key="1" />,
-              <ConnectedRouter history={history} key="2">
-                {content}
-              </ConnectedRouter>,
-              <FooterContainer key="3" />
-            ]);
-        }
+            </ConnectedRouter>,
+          <FooterContainer key="3" />
+        ]);
     }
 }
 
 SubMain.propTypes = {
     window_size: PropTypes.string,
     show_sidebar: PropTypes.bool,
-    eppn: PropTypes.string,
-    testing: PropTypes.bool
+    eppn: PropTypes.string
 };
 
 const SubMainContainer = connect(
@@ -168,7 +154,7 @@ class Main extends Component {
 
         return (
           <IntlProvider locale={ lang } messages={ messages }>
-            <SubMainContainer testing={false} />
+            <SubMainContainer />
           </IntlProvider>
         );
     }

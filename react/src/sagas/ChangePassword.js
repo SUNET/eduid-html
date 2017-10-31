@@ -1,7 +1,9 @@
+import { push } from 'react-router-redux'
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
          postRequest, getRequest } from "actions/common";
 import * as actions from "actions/ChangePassword";
+import * as comp from "components/ChangePassword";
 
 
 export function* requestSuggestedPassword () {
@@ -38,6 +40,15 @@ export function* postPasswordChange () {
               };
         const change = yield call(postPassword, config, data);
         yield put(putCsrfToken(change));
+        if (change.type.endsWith('SUCCESS')) {
+            yield put(push('security'));
+        } else {
+            const newpass = change.payload.error.new_password;
+            if (newpass) {
+                change.payload.error[comp.pwFieldCustomName] = newpass;
+                delete change.payload.error.new_password;
+            }
+        }
         yield put(change);
     } catch(error) {
         yield put(actions.postPasswordChangeFail(error.toString()));

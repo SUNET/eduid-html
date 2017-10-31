@@ -433,11 +433,13 @@ describe("Async component", () => {
             success_ts: ''
           }
         ]
-      }
+      },
+      type: 'POST_SECURITY_CHANGE_PASSWORD_SUCCESS'
     };
     next = generator.next(mockCredentials);
     delete(mockCredentials.payload.csrf_token);
-    next = generator.next(mockCredentials);
+    generator.next(mockCredentials);
+    next = generator.next();
     expect(next.value).toEqual(put(mockCredentials));
   });
 });
@@ -533,9 +535,11 @@ describe("ChangePassword Container", () => {
             TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
         personal_data: {
-            given_name: 'given-name',
-            surname: 'surname',
-            display_name: 'display-name'
+            data: {
+                given_name: 'given-name',
+                surname: 'surname',
+                display_name: 'display-name'
+            }
         },
         emails: {
             emails: []

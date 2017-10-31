@@ -35,24 +35,6 @@ describe("Nin Actions", () => {
      expect(actions.getNinsFail(err)).toEqual(expectedAction);
    });
 
-   it("Should signal a valid nin", () => {
-     const nin = 'dummy-nin';
-     const expectedAction = {
-       type: actions.VALID_NIN,
-       payload: {
-         nin: nin
-       }
-     };
-     expect(actions.validNin(nin)).toEqual(expectedAction);
-   });
-
-   it("Should signal an invalid nin", () => {
-     const expectedAction = {
-       type: actions.INVALID_NIN
-     };
-     expect(actions.invalidNin()).toEqual(expectedAction);
-   });
-
    it("Should remove nin", () => {
      const nin = 'dummy-nin';
      const expectedAction = {
@@ -155,42 +137,6 @@ describe("Reducers", () => {
     );
   });
 
-  it("Receives a VALID_NIN action", () => {
-    const nin = 'valid-nin';
-    expect(
-      ninsReducer(
-        mockState,
-        {
-          type: actions.VALID_NIN,
-          payload: {
-            nin: nin
-          }
-        }
-      )
-    ).toEqual(
-      {
-        ...mockState,
-        nin: nin
-      }
-    );
-  });
-
-  it("Receives an INVALID_NIN action", () => {
-    expect(
-      ninsReducer(
-        mockState,
-        {
-          type: actions.INVALID_NIN,
-        }
-      )
-    ).toEqual(
-      {
-        ...mockState,
-        valid_nin: false
-      }
-    );
-  });
-
   it("Receives a POST_NIN_REMOVE action", () => {
     const nin = 'valid-nin';
     expect(
@@ -260,6 +206,31 @@ describe("Reducers", () => {
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
+const fakeStore = (state) => ({
+    default: () => {},
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
+    getState: () => ({ ...state })
+});
+
+const fakeState = {
+      nins: {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        valid_nin: true,
+        nins: [{number: '196701100006', verified: false, primary: false},
+               {number: '196701110005', verified: false, primary: false}],
+        nin:'',
+        rmNin: ''
+      },
+      config: {
+        LETTER_PROOFING_URL: 'http://localhost/services/letter-proofing/',
+        PROOFING_METHODS: []
+      }
+    }
+
 function setupComponent() {
   const props = {
     nins: [],
@@ -271,9 +242,12 @@ function setupComponent() {
     handleDelete: mock.fn()
   };
 
-  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
+
+  const wrapper = mount(<Provider store={ fakeStore(fakeState) }>
+                            <IntlProvider locale={'en'} messages={messages}>
                               <Nins {...props} />
-                          </IntlProvider>);
+                            </IntlProvider>
+                        </Provider>);
   return {
     props,
     wrapper
@@ -299,14 +273,6 @@ describe("Nins Component", () => {
 
 
 
-
-const fakeStore = (state) => ({
-    default: () => {},
-    dispatch: mock.fn(),
-    subscribe: mock.fn(),
-    getState: () => ({ ...state })
-});
-
 describe("Nins Container", () => {
   let mockProps,
     wrapper,
@@ -314,23 +280,7 @@ describe("Nins Container", () => {
     dispatch;
 
   beforeEach(() => {
-    const store = fakeStore({
-      nins: {
-        is_fetching: false,
-        failed: false,
-        error: '',
-        message: '',
-        valid_nin: true,
-        nins: [{number: '196701100006', verified: false, primary: false},
-               {number: '196701110005', verified: false, primary: false}],
-        nin:'',
-        rmNin: ''
-      },
-      config: {
-        LETTER_PROOFING_URL: 'http://localhost/services/letter-proofing/',
-        PROOFING_METHODS: []
-      }
-    });
+    const store = fakeStore(fakeState);
 
     mockProps = {
       nins: [],

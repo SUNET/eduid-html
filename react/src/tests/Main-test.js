@@ -49,12 +49,14 @@ function setupComponent() {
             errors: []
         }
     });
-    const props = { window_size: 'lg', testing: true };
+    const props = {
+        window_size: 'lg',
+        show_sidebar: true,
+        eppn: 'eppn-eppn'
+    };
     const wrapper = mount(<Provider store={ store }>
                               <IntlProvider locale={'en'} messages={messages}>
-                                  <MemoryRouter>
                                       <SubMainContainer {...props} />
-                                  </MemoryRouter>
                               </IntlProvider>
                           </Provider>);
     return {
@@ -67,11 +69,8 @@ describe("Main Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
-              mainContent = wrapper.find('div#content-block'),
-              tabs = wrapper.find('ul.nav-tabs');
+              mainContent = wrapper.find('div#content-block');
 
-        expect(wrapper.contains(mainContent.get(0))).toBeTruthy();
-        expect(wrapper.contains(tabs.get(0))).toBeTruthy();
-        expect(mainContent.contains(tabs.get(0))).toBeTruthy();
+        expect(mainContent.length).toEqual(1);
     });
 });

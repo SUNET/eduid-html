@@ -23,7 +23,7 @@ const mapStateToProps = (state, props) => {
     userInput.push(state.personal_data.data.display_name);
     userInput.concat(state.emails.emails);
     const is_fetching = state.chpass.is_fetching || state.security.is_fetching,
-          customPassword = state.form.chpass && state.form.chpass.values[comp.pwFieldCustomName] || '',
+          customPassword = state.form && state.form.chpass && state.form.chpass.values[comp.pwFieldCustomName] || '',
           result = zxcvbn(customPassword, userInput),
           entropy = Math.log(result.guesses, 2);
     let score = 0,
@@ -66,7 +66,6 @@ const mapDispatchToProps = (dispatch, props) => {
                 newPassword = this.refs[comp.pwFieldCustomName].value;
             }
             dispatch(actions.postPasswordChange(oldPassword, newPassword));
-            this.props.history.push('security');
         },
     }
 };
