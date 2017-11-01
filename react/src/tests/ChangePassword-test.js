@@ -60,28 +60,6 @@ describe("ChangePassword Actions", () => {
      expect(actions.chooseCustomPassword()).toEqual(expectedAction);
   });
 
-  it("Valid custom password", () => {
-     const passwd = '1234',
-           expectedAction = {
-             type: actions.VALID_CUSTOM_PASSWORD,
-             payload: passwd
-           };
-     expect(actions.validCustomPassword(passwd)).toEqual(expectedAction);
-  });
-
-  it("Action password not ready", () => {
-     const err = 'Error',
-           expectedAction = {
-              type: actions.PASSWORD_NOT_READY,
-              error: true,
-              payload: {
-                error: new Error(err),
-                message: err
-              }
-           };
-     expect(actions.passwordNotReady(err)).toEqual(expectedAction);
-  });
-
   it("Post password change (new and old)", () => {
     const passwd1 = '1234',
           passwd2 = '5678',
@@ -455,11 +433,13 @@ describe("Async component", () => {
             success_ts: ''
           }
         ]
-      }
+      },
+      type: 'POST_SECURITY_CHANGE_PASSWORD_SUCCESS'
     };
     next = generator.next(mockCredentials);
     delete(mockCredentials.payload.csrf_token);
-    next = generator.next(mockCredentials);
+    generator.next(mockCredentials);
+    next = generator.next();
     expect(next.value).toEqual(put(mockCredentials));
   });
 });
@@ -555,9 +535,11 @@ describe("ChangePassword Container", () => {
             TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
         personal_data: {
-            given_name: 'given-name',
-            surname: 'surname',
-            display_name: 'display-name'
+            data: {
+                given_name: 'given-name',
+                surname: 'surname',
+                display_name: 'display-name'
+            }
         },
         emails: {
             emails: []

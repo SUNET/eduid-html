@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import { isValid } from "redux-form";
 import Mobile from 'components/Mobile';
 import { makePrimary, postMobile, changeMobile, startResendMobileCode, finishConfirmation,
          startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
@@ -11,6 +12,8 @@ const mapStateToProps = (state, props) => {
                          false;
   return {
     phones: state.phones.phones,
+    valid_phone: isValid('phones')(state),
+    phone: state.phones.phone,
     is_fetching: state.phones.is_fetching || pdata_fetching,
     errorMsg: state.phones.error,
     confirming: state.phones.confirming,
@@ -23,12 +26,6 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     handleAdd: (e) => {
         dispatch(postMobile());
-    },
-    handleChange: function (e) {
-        const data = {
-            phone: e.target.value
-        };
-        dispatch(changeMobile(data));
     },
     handleResend: function (e) {
         e.preventDefault();

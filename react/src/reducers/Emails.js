@@ -55,7 +55,8 @@ let emailsReducer = (state=emailsData, action) => {
     case actions.START_CONFIRMATION:
       return {
         ...state,
-        confirming: action.payload.email
+        confirming: action.payload.email,
+        is_fetching: true
       };
     case actions.STOP_CONFIRMATION:
       return {
@@ -118,12 +119,9 @@ let emailsReducer = (state=emailsData, action) => {
           ...state,
           ...state.payload,
           is_fetching: false,
-          error: action.payload.error,
           resending: {
               is_fetching: false,
-              failed: true,
-              error: action.payload.error,
-              message: ''
+              failed: true
             },
       };
     case actions.START_VERIFY_FAIL:
@@ -171,6 +169,15 @@ let emailsReducer = (state=emailsData, action) => {
         is_fetching: false,
         failed: true,
         error: action.payload.error,
+      };
+    case "@@redux-form/CHANGE":
+      const form = {};
+      if (action.meta.form === 'emails' && action.meta.field === 'email') {
+          form.email = action.payload;
+      }
+      return {
+        ...state,
+        ...form
       };
     default:
       return state;

@@ -12,7 +12,8 @@ import ninsReducer from 'reducers/Nins';
 import letterProofingReducer from 'reducers/LetterProofing';
 import notificationsReducer from 'reducers/Notifications';
 import profileReducer from 'reducers/Profile';
-import { routerReducer } from 'react-router-redux'
+import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 const eduIDApp = combineReducers({
   router: routerReducer,
@@ -27,7 +28,8 @@ const eduIDApp = combineReducers({
   letter_proofing: letterProofingReducer,
   notifications: notificationsReducer,
   security: securityReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  form: formReducer
 });
 
 export default eduIDApp;

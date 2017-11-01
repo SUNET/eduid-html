@@ -7,7 +7,7 @@ const calculateProfileFilled = (state) => {
     let filled = {max: 0, cur: 0, pending: []};
     ['given_name', 'surname', 'display_name', 'language'].forEach( (pdata) => {
         filled.max += 1;
-        if (state.personal_data[pdata]) {
+        if (state.personal_data.data[pdata]) {
             filled.cur += 1;
         } else {
             filled.pending.push(pdata);
@@ -28,11 +28,11 @@ const notifyAndDispatch = store => next => action => {
     if (action.type !== actions.NEW_NOTIFICATION && action.type !== PROFILE_FILLED) {
         if (action.error && action.payload) {
             const msg = action.payload.errorMsg || action.payload.message || 'error_in_form';
-            if (msg) {
-                next(actions.eduidNotify(msg, 'errors'));
-            }
+            next(actions.eduidNotify(msg, 'errors'));
+            setTimeout( () => {window.scroll(0,0)}, 100)
         } else if (action.payload && action.payload.message) {
             next(actions.eduidNotify(action.payload.message, 'messages'));
+            setTimeout( () => {window.scroll(0,0)}, 100)
         }
         if (action.payload !== undefined) {
             delete(action.payload.message);

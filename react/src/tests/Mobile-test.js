@@ -1042,9 +1042,10 @@ describe("Mobile Container", () => {
        {
         type: actions.POST_MOBILE
       });
-    expect(dispatch.mock.calls.length).toEqual(0);
+    expect(dispatch.mock.calls.length).toEqual(3);
+    wrapper.find('input#mobile').value = '+34667667544';
     wrapper.find('EduIDButton#mobile-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(4);
   });
 
 });

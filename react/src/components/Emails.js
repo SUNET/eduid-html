@@ -1,14 +1,66 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import i18n from 'i18n-messages';
+import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
-import TextControl from 'components/TextControl';
 import TableList from 'components/TableList';
 import ConfirmModal from 'components/ConfirmModal';
 
 import 'style/Emails.scss';
+
+
+const validate = values => {
+    const errors = {},
+          email = values.email,
+          pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (!email) {
+        errors.email = 'required';
+    } else if (!pattern.test(email)) {
+        errors.email = 'emails.invalid_email'
+    }
+    return errors;
+};
+
+let EmailForm = props => {
+    let spinning = false;
+    if (props.is_fetching) spinning = true;
+    return (
+        <form id="emailsview-form"
+              className="form-horizontal"
+              role="form">
+          <fieldset id="emails-form" className="tabpane">
+            <Field component={TextInput}
+                   componentClass="input"
+                   type="text"
+                   label={props.l10n('emails.email_label')}
+                   name="email" />
+            <EduIDButton bsStyle="primary"
+                         id="email-button"
+                         spinning={spinning}
+                         disabled={!props.valid_email}
+                         onClick={props.handleAdd}>
+                {props.l10n('emails.button_add')}
+            </EduIDButton>
+          </fieldset>
+        </form>
+    );
+}
+
+EmailForm = reduxForm({
+  form: 'emails',
+  validate
+})(EmailForm)
+
+EmailForm = connect(
+  state => ({
+    initialValues: {email: state.emails.email},
+    enableReinitialize: true
+  })
+)(EmailForm)
 
 
 class Emails extends Component {
@@ -19,17 +71,12 @@ class Emails extends Component {
         messageArgs = {},
         levelMessage = 'success';
 
-    if (this.props.resending.failed) {
-      message= this.props.l10n(this.props.resending.error.form);
-      levelMessage = 'error';
-    } else if (this.props.resending.message) {
+    if (this.props.resending.message) {
       message = this.props.resending.message;
       messageArgs = {email: this.props.confirming};
       levelMessage = 'success';
     }
 
-    let spinning = false;
-    if (this.props.is_fetching) spinning = true;
     return (
         <div className="emailsview-form-container ">
           <div className="intro">
@@ -44,23 +91,7 @@ class Emails extends Component {
                        handleMakePrimary={this.props.handleMakePrimary}
                        errorMsg={this.props.errorMsg} />
             <div className="form-content">
-              <form id="emailsview-form"
-                    className="form-horizontal"
-                    role="form">
-                <fieldset id="emails-form" className="tabpane">
-                  <TextControl name="email"
-                               label={this.props.l10n('emails.email_label')}
-                               componentClass="input"
-                               type="text"
-                               handleChange={this.props.handleChange} />
-                  <EduIDButton bsStyle="primary"
-                               id="email-button"
-                               spinning={spinning}
-                               onClick={this.props.handleAdd}>
-                      {this.props.l10n('emails.button_add')}
-                  </EduIDButton>
-                </fieldset>
-              </form>
+            <EmailForm {...this.props} />
             </div>
             <ConfirmModal
                 modalId="emailConfirmDialog"
@@ -71,7 +102,7 @@ class Emails extends Component {
                 placeholder={this.props.l10n('emails.placeholder')}
                 showModal={Boolean(this.props.confirming)}
                 closeModal={this.props.handleStopConfirmation}
-                handleResendCode={this.props.handleResend}
+                handleResend={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
                 is_fetching={this.props.resending.is_fetching}
                 message={message}
@@ -88,7 +119,6 @@ Emails.propTypes = {
   errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
-  handleChange: PropTypes.func,
   handleResend: PropTypes.func,
   handleAdd: PropTypes.func,
   handleStartConfirmation: PropTypes.func,

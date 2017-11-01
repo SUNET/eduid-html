@@ -3,7 +3,7 @@
 
 
 import { Modal as ReactOverlayModal } from 'react-overlays'
-import { Modal } from 'react-bootstrap'
+import Modal from 'react-bootstrap/lib/Modal'
 
 const focus = () => {}
 const cDU = ReactOverlayModal.prototype.componentDidUpdate
