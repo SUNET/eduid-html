@@ -6,7 +6,6 @@ cache:
     - react/node_modules
 before_script:
   - cd react
-  - npm rebuild node-sass --force
   - npm install
 script: npm run-script test-headless && npm run build
 
