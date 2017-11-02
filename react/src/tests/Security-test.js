@@ -611,12 +611,13 @@ describe("Security Container", () => {
   let mockProps,
     language,
     getWrapper,
+    getState,
     dispatch,
     store;
 
   beforeEach(() => {
 
-    const getState = function (deleting) {
+    getState = function (deleting) {
       return {
         security: {
             is_fetching: false,
@@ -640,19 +641,20 @@ describe("Security Container", () => {
 
     mockProps = {
         credentials: [],
-        language: 'en'
+        language: 'en',
+        confirming_deletion: false
     };
 
-    getWrapper = function (deleting=false, props=mockProps) {
+    getWrapper = function ({ deleting=false, props=mockProps } = {}) {
       store = fakeStore(getState(deleting));
       dispatch = store.dispatch;
 
       const wrapper = mount(
-          <IntlProvider locale={'en'} messages={messages}>
-            <Provider store={store}>
+          <Provider store={store}>
+            <IntlProvider locale={'en'} messages={messages}>
               <SecurityContainer {...props}/>
-            </Provider>
-          </IntlProvider>
+            </IntlProvider>
+          </Provider>
       );
       return wrapper;
     };
@@ -695,9 +697,8 @@ describe("Security Container", () => {
         language: 'en',
         confirming_deletion: true
     };
-
-    expect(dispatch.mock.calls.length).toEqual(0);
     const deleteModal = getWrapper(true, newProps).find('DeleteModal');
+    expect(dispatch.mock.calls.length).toEqual(0);
     deleteModal.props().handleConfirm();
     expect(dispatch.mock.calls.length).toEqual(1);
     expect(dispatch.mock.calls[0][0].type).toEqual('POST_DELETE_ACCOUNT');
