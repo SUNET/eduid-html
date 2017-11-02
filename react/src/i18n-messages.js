@@ -209,6 +209,11 @@ const msgs = {
             id="main.copyright"
             defaultMessage={` SUNET 2013-2017`} />),
 
+    'main.menu': (
+        <FormattedMessage
+            id="main.menu"
+            defaultMessage={`Menu`} />),
+
     /************************/
     /* ConfirmModal *********/
     /************************/
