@@ -59,6 +59,7 @@ class SubMain extends Component {
                               <li key={index}>
                                 <NavLink className={classes}
                                       activeClassName="active"
+                                      onClick={() => this.setState({openTabs: false})}
                                       to={`/profile/${tab.id}`}
                                       id={`${tab.id}-router-link`}>
                                   {tab.label}

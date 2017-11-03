@@ -806,6 +806,11 @@ const msgs = {
           id="chpass.password-changed"
           defaultMessage={`Password successfully changed`} />),
 
+   'chpass.different-repeat': (
+        <FormattedMessage
+          id="chpass.different-repeat"
+          defaultMessage={`Passwords differ`} />),
+
    'pwfield.enter_password': (
         <FormattedMessage
           id="pwfield.enter_password"
@@ -943,6 +948,11 @@ const msgs = {
         <FormattedMessage
           id="letter.no_state_found"
           defaultMessage={`No state found`} />),
+
+   'letter.letter_sent_msg': (
+        <FormattedMessage
+          id="letter.letter_sent_msg"
+          defaultMessage={`You have been sent a verification letter`} />),
 
    'letter.already-sent': (
         <FormattedMessage
