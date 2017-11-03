@@ -282,10 +282,6 @@ table.table-striped tr > td:first-child {
     cursor:pointer;
 }
 
-div.profile-filled-large {
-    padding-top: 80px;
-}
-
 div.profile-filled-small {
     padding-top: 40px;
 }
@@ -692,6 +688,7 @@ ul.circles-widget-labels li {
 
 meter {
     width: 100%;
+    color: #58b78b;
 }
 
 
@@ -719,6 +716,11 @@ meter {
     div.confirmation-code-area > div.form-group {
         width: 100% !important;
     }
+
+    div.profile-filled-large {
+        padding-top: 80px;
+    }
+
 }
 
 
@@ -726,6 +728,10 @@ meter {
 
     div#profile-menu-large {
         display: none;
+    }
+
+    div.profile-filled-large {
+        padding-top: 40px;
     }
 }
 

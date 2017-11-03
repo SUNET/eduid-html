@@ -16,10 +16,9 @@ class ProfileFilled extends Component{
           <div className="title">
             {this.props.l10n('pfilled.completion')}: <span className="percentage"> {percent}%</span>
           </div>
-          <meter max={this.props.max} value={this.props.cur}
-                 id="profile-filled-meter"
-                 ref="profileFilledMeter">
-          </meter>
+          <div className="progress progress-striped">
+            <div className="progress-bar profile-filled-progress-bar" style={{width: percent + '%'}} />
+          </div>
         </div>
       </li>);
   }
