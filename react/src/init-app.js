@@ -32,6 +32,7 @@ import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import * as letterActions from "actions/LetterProofing";
+import * as headerActions from "actions/Header";
 
 import { requestAllPersonalData, savePersonalData } from "sagas/PersonalData";
 import { saveEmail, requestResendEmailCode,
@@ -46,6 +47,7 @@ import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePasswo
 import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
+import { requestLogout } from "sagas/Header";
 
 import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
@@ -93,6 +95,7 @@ function* rootSaga() {
     takeEvery(letterActions.STOP_LETTER_PROOFING, requestNins),
     takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
     takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
+    takeEvery(headerActions.POST_LOGOUT, requestLogout),
   ];
 }
 
