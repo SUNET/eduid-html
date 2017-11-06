@@ -1,8 +1,8 @@
 
-import { put, call } from "redux-saga/effects";
+import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
          postRequest } from "actions/common";
-import { postLogoutFail } from "actions/Header";
+import { postLogoutFail, POST_AUTHN_LOGOUT_SUCCESS } from "actions/Header";
 
 
 export function* requestLogout () {
@@ -14,7 +14,11 @@ export function* requestLogout () {
               authn_url = state.config.TOKEN_SERVICE_URL;
         const resp = yield call(sendLogout, authn_url, data);
         yield put(putCsrfToken(resp));
-        yield put(resp);
+        if (resp.type === POST_AUTHN_LOGOUT_SUCCESS) {
+            document.location.href = resp.payload.location;
+        } else {
+            yield put(resp);
+        }
     } catch(error) {
         console.log('Error performing logout: ' + error.toString());
         yield put(postLogoutFail(error.toString()));
