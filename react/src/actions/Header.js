@@ -18,7 +18,7 @@ export function postLogoutFail (err) {
     error: true,
     payload: {
       error: err,
-      message: err
+      message: err.toString()
     }
   };
 }

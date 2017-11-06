@@ -15,7 +15,9 @@ export function* requestLogout () {
         const resp = yield call(sendLogout, authn_url, data);
         yield put(putCsrfToken(resp));
         if (resp.type === POST_AUTHN_LOGOUT_SUCCESS) {
-            document.location.href = resp.payload.location;
+            const win = resp.testingWindow || window;
+            win.location = resp.payload.location;
+            delete resp.testingWindow;
         } else {
             yield put(resp);
         }
