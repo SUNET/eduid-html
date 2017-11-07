@@ -1,6 +1,7 @@
 
 import { connect } from 'react-redux';
 import Header from 'components/Header';
+import { startLogout } from "actions/Header";
 
 const mapStateToProps = (state, props) => {
     let email, confirmed;
@@ -23,6 +24,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+      handleLogout: function (e) {
+          dispatch(startLogout());
+      }
   }
 };
 

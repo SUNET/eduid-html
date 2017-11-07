@@ -58,14 +58,11 @@ class Header extends Component {
                 <div className="buttons nav navbar-nav navbar-right">
                   <div className="button log-out">
 
-                    <form method="POST" action="" id="logout-form">
-                      <button id="logout-button"
-                              className="button"
-                              type="submit"
-                              name="submit">
-                                {this.props.l10n('header.logout')}
-                      </button>
-                    </form>
+                    <button id="logout-button"
+                            className="button"
+                            onClick={this.props.handleLogout}>
+                              {this.props.l10n('header.logout')}
+                    </button>
 
                   </div>
                   <div className="loa-big hidden-xs" id="eduid-header-loa">
