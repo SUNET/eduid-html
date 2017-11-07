@@ -18,7 +18,6 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
 import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
 import notifyAndDispatch from "./notify-middleware";
@@ -167,12 +166,11 @@ const getConfig = function () {
 
 const init_app = function (target, component) {
   let app, action;
-  if (component) {
     if (component.props.allow_unauthn !== true) {
         const cookie = Cookies.get(EDUID_COOKIE_NAME);
         if (cookie === undefined) {
-            const next = document.location.href;
-            document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
+            const next = window.location.href;
+            window.location.href = TOKEN_SERVICE_URL + '?next=' + next;
         }
         action = getConfig;
     } else {
@@ -185,66 +183,6 @@ const init_app = function (target, component) {
     );
     ReactDOM.render(app, target, action);
 
-  } else {
-    /* i18n */
-    let lang_code;
-    const state = store.getState();
-    if (state.config.is_configured) {
-        lang_code = state.config.language;
-    } else {
-        const language = navigator.languages
-                           ? navigator.languages[0]
-                           : (navigator.language || navigator.userLanguage);
-        lang_code = language.substring(0,2);
-    }
-    const locale = require('react-intl/locale-data/' + lang_code);
-    const messages = require('../i18n/l10n/' + lang_code);
-
-    addLocaleData(locale);
-
-    app = ( <Provider store={store}>
-      <IntlProvider locale={ lang_code } messages={ messages }>
-        <BrowserRouter>
-          <div>
-            <Route exact path="/profile/" render={props => {
-              switch (props.location.hash.split('#')[1]) {
-                case 'personaldata':
-                  return (<PersonalDataContainer />);
-                  break;
-                case 'nins':
-                  return (<NinsContainer />);
-                  break;
-                case 'emails':
-                  return (<EmailsContainer />);
-                  break;
-                case 'mobiles':
-                  return (<MobileContainer />);
-                  break;
-                case 'security':
-                  return (<SecurityContainer />);
-                  break;
-                case 'chpass':
-                  return (<ChangePasswordContainer />);
-                  break;
-                default:
-                  return (<PersonalDataContainer />);
-              }
-            }}/>
-
-            <ul role="nav" className="hidden">
-              <li><Link to="/profile/#personaldata" id="personaldata-router-link">Personal Data</Link></li>
-              <li><Link to="/profile/#nins" id="nins-router-link">Nins</Link></li>
-              <li><Link to="/profile/#emails" id="emails-router-link">Emails</Link></li>
-              <li><Link to="/profile/#mobiles" id="mobiles-router-link">Phones</Link></li>
-              <li><Link to="/profile/#security" id="security-router-link">Security</Link></li>
-              <li><Link to="/profile/#chpass" id="chpass-router-link"> </Link></li>
-            </ul>
-          </div>
-        </BrowserRouter>
-      </IntlProvider>
-    </Provider> );
-    ReactDOM.render(app, target, getConfig);
-  }
   return app;
 };
 

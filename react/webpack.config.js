@@ -14,10 +14,10 @@ module.exports = {
       // "only" prevents reload on syntax errors:
       // hot: 'webpack/hot/only-dev-server',
       index: './src/entry-points/index',
-      personal_data: './src/entry-points/personal-data',
-      dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
-      openid_connect: './src/entry-points/openid-connect',
-      openid_connect_freja: './src/entry-points/openid-connect-freja'
+      //personal_data: './src/entry-points/personal-data',
+      //dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
+      //openid_connect: './src/entry-points/openid-connect',
+      //openid_connect_freja: './src/entry-points/openid-connect-freja'
     },
     output: {
       path: path.join(__dirname, 'build'),
@@ -34,6 +34,7 @@ module.exports = {
       ],
       // allow us to avoid including extension name
       extensions: ['.js', '.jsx', '.json'],
+      mainFields: ["browser", "module", "main"]
     },
     module: {
       loaders: [

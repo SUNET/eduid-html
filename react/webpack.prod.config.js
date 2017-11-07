@@ -3,11 +3,13 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var webpackProd = {
   entry: webpackConfig.entry,
   resolve: webpackConfig.resolve,
-  module: webpackConfig.module
+  module: webpackConfig.module,
+  target: 'web'
 };
 
 delete webpackProd.entry.server;
@@ -15,6 +17,10 @@ delete webpackProd.entry.hot;
 
 //webpackProd.devtool = 'inline-source-map';
 delete webpackProd.devtool;
+
+webpackProd.entry = {
+    index: './src/entry-points/index'
+}
 
 webpackProd.output = {
   filename: '[name].js',
@@ -48,7 +54,8 @@ webpackProd.plugins = [
     test: /\.js$|\.css$|\.html$/,
     threshold: 10240,
     minRatio: 0.8
-  })
+  }),
+  new BundleAnalyzerPlugin()
 ];
 
 module.exports = webpackProd;

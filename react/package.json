@@ -2,13 +2,13 @@
   "name": "eduid-react",
   "version": "0.1.0",
   "description": "",
-  "main": "src/entry-points/personal-data.js",
+  "browser": "src/entry-points/index.js",
   "scripts": {
     "start": "webpack --watch --progress",
     "test": "karma start",
     "test-headless": "karma start headless.karma.conf.js",
     "debug": "karma start --single-run=false --debug --browser Chrome",
-    "build": "webpack --config webpack.prod.config.js",
+    "build": "webpack --config webpack.prod.config.js --watch --progress",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "manage:translations": "node ./translationRunner.js"
   },
