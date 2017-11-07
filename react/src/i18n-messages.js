@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import invariant from 'invariant';
 import { intlShape, defineMessages, injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
@@ -79,8 +80,25 @@ export default function i18n(WrappedComponent, options = {}) {
     };
 
     InjectIntl.WrappedComponent = WrappedComponent;
+ 
 
-    return InjectIntl;
+const mapStateToProps = (state, props) => {
+    return {
+        language: state.config.language
+    }
+};
+
+const InjectIntlContainer = connect(
+  mapStateToProps,
+  () => ({})
+)(InjectIntl);
+
+
+
+
+
+
+    return InjectIntlContainer;
 }
 
 

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { Route, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
@@ -200,10 +200,7 @@ class Main extends Component {
 
     render () {
         const lang = this.props.language,
-              locale = require('react-intl/locale-data/' + lang),
-              messages = require('../../i18n/l10n/' + lang);
-
-        addLocaleData(locale);
+              messages = this.props.messages[lang];
 
         return (
           <IntlProvider locale={ lang } messages={ messages }>
@@ -215,7 +212,8 @@ class Main extends Component {
 
 Main.propTypes = {
     language: PropTypes.string,
-    handleWindowSizeChange: PropTypes.func
+    handleWindowSizeChange: PropTypes.func,
+    messages: PropTypes.object
 }
 
 export default Main;
