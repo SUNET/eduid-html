@@ -92,6 +92,10 @@
     "defaultMessage": "SUNET 2013-2017"
   },
   {
+    "id": "main.menu",
+    "defaultMessage": "Menu"
+  },
+  {
     "id": "cm.ok",
     "defaultMessage": "OK"
   },
@@ -528,6 +532,10 @@
     "defaultMessage": "Password successfully changed"
   },
   {
+    "id": "chpass.different-repeat",
+    "defaultMessage": "Passwords differ"
+  },
+  {
     "id": "pwfield.enter_password",
     "defaultMessage": "Enter password"
   },
@@ -630,6 +638,10 @@
   {
     "id": "letter.no_state_found",
     "defaultMessage": "No state found"
+  },
+  {
+    "id": "letter.letter_sent_msg",
+    "defaultMessage": "You have been sent a verification letter"
   },
   {
     "id": "letter.already-sent",
