@@ -79,6 +79,7 @@ export default function i18n(WrappedComponent, options = {}) {
     };
 
     InjectIntl.WrappedComponent = WrappedComponent;
+    return InjectIntl;
 }
 
 
