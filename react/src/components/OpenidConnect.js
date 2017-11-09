@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 
 import 'style/OpenidConnect.scss';
@@ -49,4 +48,4 @@ OpenidConnect.propTypes = {
   handleGetQRCode: PropTypes.func
 }
 
-export default i18n(OpenidConnect);
+export default OpenidConnect;

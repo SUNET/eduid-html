@@ -11,7 +11,6 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import TextInput from 'components/EduIDTextInput';
 
@@ -198,4 +197,4 @@ ChangePassword.propTypes = {
   handleStartPasswordChange: PropTypes.func,
 }
 
-export default i18n(ChangePassword);
+export default ChangePassword;

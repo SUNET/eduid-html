@@ -17,7 +17,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
 import { createLogger } from 'redux-logger';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux'
 import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
 import notifyAndDispatch from "./notify-middleware";
@@ -56,7 +56,6 @@ import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 import { history } from "components/Main";
 
-import { TOKEN_SERVICE_URL, EDUID_COOKIE_NAME } from "init-config";
 
 /* Sagas */
 
@@ -165,7 +164,7 @@ const getConfig = function () {
 /* render app */
 
 const init_app = function (target, component) {
-  let app, action;
+    let action;
     if (component.props.allow_unauthn !== true) {
         const cookie = Cookies.get(EDUID_COOKIE_NAME);
         if (cookie === undefined) {
@@ -176,14 +175,12 @@ const init_app = function (target, component) {
     } else {
         action = function(){};
     }
-    app = (
+    const App = () => (
       <Provider store={store}>
             {component}
       </Provider>
     );
-    ReactDOM.render(app, target, action);
-
-  return app;
+    ReactDOM.render(<App />, target, action);
 };
 
 export default init_app;

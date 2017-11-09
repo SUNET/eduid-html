@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/lib/Alert';
 
-import i18n from 'i18n-messages';
 import 'style/PendingActions.scss';
 
 
@@ -44,6 +43,4 @@ PendingActions.propTypes = {
     pending: PropTypes.array
 }
 
-export default i18n(PendingActions);
-
-
+export default PendingActions;

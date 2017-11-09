@@ -1,6 +1,5 @@
 
 import { newCsrfToken } from "actions/Config";
-import { TOKEN_SERVICE_URL } from "init-config";
 
 
 export const checkStatus = function (response) {

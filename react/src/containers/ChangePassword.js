@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import zxcvbn from 'zxcvbn';
 
+import i18n from 'i18n-messages';
 import ChangePassword from 'components/ChangePassword';
 import * as comp from 'components/ChangePassword';
 import * as actions from 'actions/ChangePassword';
@@ -75,5 +76,5 @@ const ChangePasswordContainer = connect(
   mapDispatchToProps
 )(ChangePassword);
 
-export default ChangePasswordContainer;
+export default i18n(ChangePasswordContainer);
 

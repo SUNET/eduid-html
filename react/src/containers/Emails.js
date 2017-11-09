@@ -4,6 +4,7 @@ import { isValid } from "redux-form";
 import Emails from 'components/Emails';
 import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode,
          finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
+import i18n from 'i18n-messages';
 
 const mapStateToProps = (state, props) => {
   const pdata_fetching = state.personal_data ?
@@ -71,5 +72,5 @@ const EmailsContainer = connect(
   mapDispatchToProps
 )(Emails);
 
-export default EmailsContainer;
+export default i18n(EmailsContainer);
 

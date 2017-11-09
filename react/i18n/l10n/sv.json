@@ -70,7 +70,7 @@
   "letter.lost_code": "When you click on the \"Send code\" link a letter with a verification code will be sent to your official postal address.",
   "letter.no-address-found": "No postal address found",
   "letter.no_state_found": "No state found",
-  "letter.placeholder": "Letter confirmation code",
+  "letter.placeholder": "Letter confirmation code SSSVVV",
   "letter.resend_code": "Send code",
   "letter.saved-unconfirmed": "Saved unconfirmed NIN",
   "letter.verification_success": "Successfully verified NIN",

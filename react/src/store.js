@@ -1,5 +1,7 @@
 
 import { combineReducers } from 'redux';
+import { intlReducer } from 'react-intl-redux'
+
 import personalDataReducer from 'reducers/PersonalData';
 import emailsReducer from 'reducers/Emails';
 import configReducer from 'reducers/Config';
@@ -29,7 +31,8 @@ const eduIDApp = combineReducers({
   notifications: notificationsReducer,
   security: securityReducer,
   profile: profileReducer,
-  form: formReducer
+  form: formReducer,
+  intl: intlReducer
 });
 
 export default eduIDApp;

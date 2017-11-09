@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import ConfirmModal from 'components/ConfirmModal';
 
@@ -79,4 +78,4 @@ LetterProofingButton.propTypes = {
   handleConfirmationLetter: PropTypes.func
 }
 
-export default i18n(LetterProofingButton);
+export default LetterProofingButton;

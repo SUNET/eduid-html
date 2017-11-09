@@ -6,8 +6,6 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
-import i18n from 'i18n-messages';
-
 
 const textInput = (props) => {
     const {
@@ -67,4 +65,4 @@ const textInput = (props) => {
     );
 }
 
-export default i18n(textInput);
+export default textInput;

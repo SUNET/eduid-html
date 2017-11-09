@@ -1,6 +1,8 @@
 
 import { connect } from 'react-redux';
 import PendingActions from 'components/PendingActions';
+import i18n from 'i18n-messages';
+
 
 const mapStateToProps = (state, props) => {
   return {
@@ -19,6 +21,4 @@ const PendingActionsContainer = connect(
   mapDispatchToProps
 )(PendingActions);
 
-export default PendingActionsContainer;
-
-
+export default i18n(PendingActionsContainer);

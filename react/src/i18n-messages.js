@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import invariant from 'invariant';
-import { intlShape, defineMessages, injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { intlShape, defineMessages, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 function getDisplayName(Component) {
     return Component.displayName || Component.name || 'Component';
@@ -38,7 +38,7 @@ export default function i18n(WrappedComponent, options = {}) {
             invariant(withRef,
                 '[React Intl] To access the wrapped instance, ' +
                 'the `{withRef: true}` option must be set when calling: ' +
-                '`injectIntl()`'
+                '`i18n()`'
             );
 
             return this.refs.wrappedInstance;
@@ -500,11 +500,6 @@ const msgs = {
         <FormattedMessage
           id="pd.surname"
           defaultMessage={`Surname`} />),
-
-    "pd.display_name": (
-        <FormattedMessage
-          id="pd.display_name"
-          defaultMessage={`Display Name`} />),
 
     "pd.language": (
         <FormattedMessage
@@ -1103,5 +1098,10 @@ const unformatted = defineMessages({
         id: "letter.placeholder",
         defaultMessage: `Letter confirmation code`,
         description: "Placeholder for letter proofing text input"
+    },
+
+    "pd.display_name": {
+          id:"pd.display_name",
+          defaultMessage:`Display Name`
     },
 });

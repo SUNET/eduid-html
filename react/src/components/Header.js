@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 
 import Collapse from 'react-bootstrap/lib/Collapse';
 
-import i18n from 'i18n-messages';
-
-
 
 class Header extends Component {
 
@@ -83,4 +80,4 @@ Header.propTypes = {
     confirmed: PropTypes.string
 }
 
-export default i18n(Header);
+export default Header;

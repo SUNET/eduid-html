@@ -89,9 +89,9 @@ module.exports = {
       }),
       // Initial configuration
       new webpack.DefinePlugin({
-          'EDUID_COOKIE_NAME': "'sessid'",
-          'EDUID_AUTHN_URL': "'http://dashboard.eduid.docker:8080/services/authn/login'",
-          'EDUID_CONFIG_URL': "'http://dashboard.eduid.docker:8080/services/jsconfig/config'"
+          EDUID_CONFIG_URL: JSON.stringify('/services/jsconfig/config'),
+          EDUID_COOKIE_NAME: JSON.stringify('sessid'),
+          TOKEN_SERVICE_URL: JSON.stringify('/services/authn/login')
       }),
       new webpack.NoEmitOnErrorsPlugin(),
         new webpack.LoaderOptionsPlugin({

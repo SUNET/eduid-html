@@ -304,10 +304,6 @@
     "defaultMessage": "Surname"
   },
   {
-    "id": "pd.display_name",
-    "defaultMessage": "Display Name"
-  },
-  {
     "id": "pd.language",
     "defaultMessage": "Language"
   },
@@ -759,5 +755,9 @@
     "id": "letter.placeholder",
     "description": "Placeholder for letter proofing text input",
     "defaultMessage": "Letter confirmation code"
+  },
+  {
+    "id": "pd.display_name",
+    "defaultMessage": "Display Name"
   }
 ]
