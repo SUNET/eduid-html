@@ -5,19 +5,7 @@ import React from 'react';
 import init_app from "../init-app";
 import OpenidConnectFrejaContainer from 'containers/OpenidConnectFreja';
 
-import { IntlProvider, addLocaleData } from 'react-intl';
-
-
-const lang_code = 'en';
-const locale = require('react-intl/locale-data/' + lang_code);
-const messages = require('../../i18n/l10n/' + lang_code);
-
-addLocaleData(locale);
-
-let component = (
-  <IntlProvider locale={ lang_code } messages={ messages }>
-    <OpenidConnectFrejaContainer />
-  </IntlProvider>);
+let component = <OpenidConnectFrejaContainer />;
 
 
 if (window.tabbedform === undefined) {
@@ -61,7 +49,7 @@ var TabbedForm = function (container) {
               if (url === "nins") {
                 const root = document.getElementById('openid-connect-root'),
                       form = root.previousElementSibling;
-                      init_app(root, component);
+                      init_app(root, component, true);
               }
 
           }, 'html').fail(function (xhr) {
