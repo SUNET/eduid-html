@@ -168,16 +168,7 @@ const getConfig = function () {
 const init_app = function (target, component) {
   let app, action;
   if (component) {
-    if (component.props.allow_unauthn !== true) {
-        const cookie = Cookies.get(EDUID_COOKIE_NAME);
-        if (cookie === undefined) {
-            const next = document.location.href;
-            document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
-        }
-        action = getConfig;
-    } else {
-        action = function(){};
-    }
+    action = getConfig;
     app = (
       <Provider store={store}>
             {component}

@@ -5,7 +5,19 @@ import React from 'react';
 import init_app from "../init-app";
 import OpenidConnectFrejaContainer from 'containers/OpenidConnectFreja';
 
-let component = <OpenidConnectFrejaContainer />;
+import { IntlProvider, addLocaleData } from 'react-intl';
+
+
+const lang_code = 'en';
+const locale = require('react-intl/locale-data/' + lang_code);
+const messages = require('../../i18n/l10n/' + lang_code);
+
+addLocaleData(locale);
+
+let component = (
+  <IntlProvider locale={ lang_code } messages={ messages }>
+    <OpenidConnectFrejaContainer />
+  </IntlProvider>);
 
 
 if (window.tabbedform === undefined) {
