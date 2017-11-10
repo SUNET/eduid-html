@@ -491,21 +491,6 @@ const msgs = {
     /* PERSONAL DATA ********/
     /************************/
 
-    "pd.given_name": (
-        <FormattedMessage
-          id="pd.given_name"
-          defaultMessage={`Given Name`} />),
-
-    "pd.surname": (
-        <FormattedMessage
-          id="pd.surname"
-          defaultMessage={`Surname`} />),
-
-    "pd.language": (
-        <FormattedMessage
-          id="pd.language"
-          defaultMessage={`Language`} />),
-
     'pd.long_description': (
         <FormattedMessage
           id="pd.long_description"
@@ -1100,8 +1085,23 @@ const unformatted = defineMessages({
         description: "Placeholder for letter proofing text input"
     },
 
+    "pd.given_name": {
+          id:"pd.given_name",
+          defaultMessage:`Given Name`
+    },
+
+    "pd.surname": {
+          id:"pd.surname",
+          defaultMessage:`Surname`
+    },
+
     "pd.display_name": {
           id:"pd.display_name",
           defaultMessage:`Display Name`
+    },
+
+    "pd.language": {
+          id:"pd.language",
+          defaultMessage:`Language`
     },
 });
