@@ -49,7 +49,7 @@ var TabbedForm = function (container) {
               if (url === "nins") {
                 const root = document.getElementById('openid-connect-root'),
                       form = root.previousElementSibling;
-                      init_app(root, component);
+                      init_app(root, component, true);
               }
 
           }, 'html').fail(function (xhr) {
