@@ -1,5 +1,6 @@
 
 import { put, select, call } from "redux-saga/effects";
+import { updateIntl } from 'react-intl-redux';
 import { checkStatus, ajaxHeaders, putCsrfToken,
          getRequest, postRequest } from "actions/common";
 import { getAllUserdata, getAllUserdataFail, postUserdataFail } from "actions/PersonalData";
@@ -50,6 +51,13 @@ export function* requestAllPersonalData () {
           yield put(phoneAction);
           userdata.type = pdataActions.GET_USERDATA_SUCCESS;
           yield put(userdata);
+          const lang = userdata.payload.language;
+          if (lang) {
+              yield put(updateIntl({
+                  locale: lang,
+                  messages: LOCALIZED_MESSAGES[lang]
+              }));
+          }
         } else {
           yield put(userdata);
         }
@@ -87,6 +95,13 @@ export function* savePersonalData () {
         } else {
             yield put(setSubmitSucceeded('personal_data'));
             yield put(stopAsyncValidation('personal_data'));
+        }
+        const lang = resp.payload.language;
+        if (lang) {
+            yield put(updateIntl({
+                locale: lang,
+                messages: LOCALIZED_MESSAGES[lang]
+            }));
         }
         yield put(resp);
     } catch(error) {

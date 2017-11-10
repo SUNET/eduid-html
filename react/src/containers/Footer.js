@@ -14,21 +14,11 @@ const mapStateToProps = (state, props) => {
 };
 
 
-
-import * as enMsg from "../../i18n/l10n/en";
-import * as svMsg from "../../i18n/l10n/sv";
-
-const messages = {
-    en: enMsg,
-    sv: svMsg
-};
-
-
 const mapDispatchToProps = (dispatch, props) => {
   return {
       changeLanguage: function (e) {
           const lang = e.target.closest('.langselector').dataset.lang;
-          const msgs = messages[lang];
+          const msgs = LOCALIZED_MESSAGES[lang];
           dispatch(updateIntl({
               locale: lang,
               messages : msgs

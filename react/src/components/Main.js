@@ -175,7 +175,6 @@ Main.propTypes = {
     window_size: PropTypes.string,
     show_sidebar: PropTypes.bool,
     eppn: PropTypes.string,
-    language: PropTypes.string,
     handleWindowSizeChange: PropTypes.func,
     messages: PropTypes.object
 }

@@ -88,7 +88,6 @@ Security.propTypes = {
   credentials: PropTypes.array,
   creation_date: PropTypes.string,
   last_used: PropTypes.string,
-  language: PropTypes.string,
   langs: PropTypes.array,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
