@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
+const initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -82,16 +83,12 @@ module.exports = {
       ]
     },
     plugins:[
+      // Initial configuration
+      initialConfigPlugin,
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProvidePlugin({
         'Promise': 'exports-loader?global.Promise!es6-promise',
         'window.fetch': 'exports-loader?global.fetch!whatwg-fetch'
-      }),
-      // Initial configuration
-      new webpack.DefinePlugin({
-          EDUID_CONFIG_URL: JSON.stringify('/services/jsconfig/config'),
-          EDUID_COOKIE_NAME: JSON.stringify('sessid'),
-          TOKEN_SERVICE_URL: JSON.stringify('/services/authn/login')
       }),
       new webpack.NoEmitOnErrorsPlugin(),
         new webpack.LoaderOptionsPlugin({
