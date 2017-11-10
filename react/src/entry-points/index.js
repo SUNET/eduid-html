@@ -5,10 +5,14 @@ import { addLocaleData } from 'react-intl';
 import init_app from "init-app";
 import MainContainer from "containers/Main";
 
-import en from 'react-intl/locale-data/en';
-import sv from 'react-intl/locale-data/sv';
+const locales = [];
 
-addLocaleData([...en, ...sv]);
+AVAILABLE_LANGUAGES.forEach((lang) => {
+    const locale = require('react-intl/locale-data/' + lang[0]);
+    locales.push(locale);
+});
+
+addLocaleData([].concat(...locales));
 
 
 init_app(
