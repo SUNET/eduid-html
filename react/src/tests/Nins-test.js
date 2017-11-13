@@ -1,6 +1,6 @@
 const mock = require('jest-mock');import React from 'react';
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 import { put, call, select } from "redux-saga/effects";
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
@@ -220,14 +220,17 @@ const fakeState = {
         error: '',
         message: '',
         valid_nin: true,
-        nins: [{number: '196701100006', verified: false, primary: false},
-               {number: '196701110005', verified: false, primary: false}],
+        nins: [],
         nin:'',
         rmNin: ''
       },
       config: {
         LETTER_PROOFING_URL: 'http://localhost/services/letter-proofing/',
         PROOFING_METHODS: []
+      },
+      intl: {
+        locale: 'en',
+        messages: messages
       }
     }
 
@@ -244,9 +247,7 @@ function setupComponent() {
 
 
   const wrapper = mount(<Provider store={ fakeStore(fakeState) }>
-                            <IntlProvider locale={'en'} messages={messages}>
-                              <Nins {...props} />
-                            </IntlProvider>
+                            <NinsContainer {...props} />
                         </Provider>);
   return {
     props,
@@ -280,7 +281,10 @@ describe("Nins Container", () => {
     dispatch;
 
   beforeEach(() => {
-    const store = fakeStore(fakeState);
+    const state = {...fakeState};
+    state.nins.nins = [{number: '196701100006', verified: false, primary: false},
+                       {number: '196701110005', verified: false, primary: false}];
+    const store = fakeStore(state);
 
     mockProps = {
       nins: [],
@@ -292,11 +296,9 @@ describe("Nins Container", () => {
     };
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
+        <Provider store={store}>
             <NinsContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        </Provider>
     );
     ninlist = wrapper.find('.nin-holder');
     dispatch = store.dispatch;

@@ -8,8 +8,8 @@ import configureStore from 'redux-mock-store';
 import emailsReducer from "reducers/Emails";
 
 import EmailsContainer from "containers/Emails";
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 
 import { requestEmails, fetchEmails, requestResend, requestResendEmailCode, saveEmail, sendEmail,
          requestVerifyEmail, requestVerify, requestRemoveEmail, requestRemove, requestMakePrimaryEmail,
@@ -402,7 +402,7 @@ describe("Reducers", () => {
     );
   });
 
-it("Receives a START_RESEND_EMAIL_CODE_SUCCESS action", () => {
+  it("Receives a START_RESEND_EMAIL_CODE_SUCCESS action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -430,7 +430,7 @@ it("Receives a START_RESEND_EMAIL_CODE_SUCCESS action", () => {
     );
   });
 
-it("Receives a START_RESEND_EMAIL_CODE_FAIL action", () => {
+  it("Receives a START_RESEND_EMAIL_CODE_FAIL action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -491,7 +491,7 @@ it("Receives a START_RESEND_EMAIL_CODE_FAIL action", () => {
     );
   });
 
-it("Receives a START_VERIFY_FAIL action", () => {
+  it("Receives a START_VERIFY_FAIL action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -551,7 +551,7 @@ it("Receives a START_VERIFY_FAIL action", () => {
     );
   });
 
-it("Receives a POST_EMAIL_REMOVE_SUCCESS action", () => {
+  it("Receives a POST_EMAIL_REMOVE_SUCCESS action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -579,7 +579,7 @@ it("Receives a POST_EMAIL_REMOVE_SUCCESS action", () => {
     );
   });
 
-it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
+  it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -610,7 +610,7 @@ it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
   });
 
 
- it("Receives a POST_EMAIL_PRIMARY action", () => {
+  it("Receives a POST_EMAIL_PRIMARY action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -640,7 +640,7 @@ it("Receives a POST_EMAIL_REMOVE_FAIL action", () => {
     );
   });
 
-it("Receives a POST_EMAIL_PRIMARY_SUCCESS action", () => {
+  it("Receives a POST_EMAIL_PRIMARY_SUCCESS action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -668,7 +668,7 @@ it("Receives a POST_EMAIL_PRIMARY_SUCCESS action", () => {
     );
   });
 
-it("Receives a POST_EMAIL_PRIMARY_FAIL action", () => {
+  it("Receives a POST_EMAIL_PRIMARY_FAIL action", () => {
     expect(
       emailsReducer(
         mockState,
@@ -701,7 +701,6 @@ it("Receives a POST_EMAIL_PRIMARY_FAIL action", () => {
 
 });
 
-const getState = () => state;
 const state = {
     emails: {
         is_fetching: false,
@@ -722,8 +721,13 @@ const state = {
         csrf_token: '123456789',
         EMAILS_URL: 'test/localhost',
         email: 'email@localhost.com',
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
     }
 };
+const getState = () => state;
 
 
 describe("Async component", () => {
@@ -932,7 +936,7 @@ describe("Async component", () => {
 
 });
 
-function setupComponent() {
+function setupComponent(store) {
   const props = {
     given_name: '',
     surname: '',
@@ -942,32 +946,32 @@ function setupComponent() {
     handleChange: mock.fn(),
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
-                             <Emails {...props} />
-                          </IntlProvider>)
+  const wrapper = shallow(<Provider store={store}>
+                             <EmailsContainer {...props} />
+                          </Provider>)
   return {
     props,
     wrapper,
   }
-}
-
-describe("Emails Component", () => {
-
-    it("Renders", () => {
-        const {wrapper, props} = setupComponent(),
-            form = wrapper.find('form'),
-            fieldset = wrapper.find('fieldset'),
-            email = wrapper.find('TextControl[name="email"]');
-        // TODO: not finished
-    });
-});
-
+};
 
 const fakeStore = (state) => ({
   default: () => {},
   dispatch: mock.fn(),
   subscribe: mock.fn(),
   getState: () => ({ ...state })
+});
+
+describe("Emails Component", () => {
+
+    it("Renders", () => {
+        const store = fakeStore(getState()),
+            {wrapper, props} = setupComponent(store),
+            form = wrapper.find('form'),
+            fieldset = wrapper.find('fieldset'),
+            email = wrapper.find('TextControl[name="email"]');
+        // TODO: not finished
+    });
 });
 
 
@@ -981,24 +985,7 @@ describe("Emails Container", () => {
     dispatch;
 
  beforeEach(() => {
-    const store = fakeStore({
-        emails: {
-            is_fetching: false,
-            failed: false,
-            error: '',
-            message: '',
-            resending: {
-              is_fetching: false,
-              failed: false,
-              error: {},
-              message: ''
-            },
-            confirming: '',
-            emails: [],
-            email: '',
-        },
-      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
-    });
+    const store = fakeStore(getState());
 
     mockProps = {
         email: 'test@localhost.com',
@@ -1006,11 +993,9 @@ describe("Emails Container", () => {
     };
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
+        <Provider store={store}>
             <EmailsContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        </Provider>
     );
     fulldom = wrapper.find(EmailsContainer);
     fulltext = wrapper.find(EmailsContainer).text();

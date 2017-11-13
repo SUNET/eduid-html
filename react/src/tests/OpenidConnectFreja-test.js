@@ -10,8 +10,8 @@ import * as actions from "actions/OpenidConnectFreja";
 import openidConnectFrejaReducer from "reducers/OpenidConnectFreja";
 import OpenidConnectFreja from 'components/OpenidConnectFreja'
 
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 import OpenidConnectFrejaContainer from "containers/OpenidConnectFreja";
 
 const messages = require('../../i18n/l10n/en');
@@ -328,6 +328,10 @@ const state = {
   },
   openid_freja_data: {
     nin: 'testing',
+  },
+  intl: {
+    locale: 'en',
+    messages: messages
   }
 };
 
@@ -366,5 +370,4 @@ describe("Async component", () => {
     delete(action.payload.csrf_token);
     expect(next.value).toEqual(put(action));
   });
-
 });

@@ -11,7 +11,7 @@ import * as actions from "actions/ChangePassword";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import chpassReducer from "reducers/ChangePassword";
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 
 import { requestSuggestedPassword, postPasswordChange,
          fetchSuggestedPassword, postPassword} from 'sagas/ChangePassword';
@@ -445,7 +445,51 @@ describe("Async component", () => {
 });
 
 
-function setupComponent(custom=false) {
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
+const fakeState = (custom) => ({
+    security: {
+        is_fetching: false,
+    },
+    chpass: {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        suggested_password: 'abcd',
+        old_password: '',
+        new_password: 'defg',
+        choose_custom: custom
+    },
+    config: {
+        csrf_token: '',
+        SECURITY_URL: '/dummy-sec-url',
+        DASHBOARD_URL: '/dummy-dash-url',
+        TOKEN_SERVICE_URL: '/dummy-tok-url'
+    },
+    personal_data: {
+        data: {
+            given_name: 'given-name',
+            surname: 'surname',
+            display_name: 'display-name'
+        }
+    },
+    emails: {
+        emails: []
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
+    }
+});
+
+
+function setupComponent(store, custom=false) {
   const props = {
     is_fetching: false,
     choose_custom: custom,
@@ -457,9 +501,9 @@ function setupComponent(custom=false) {
     handleStartPasswordChange: mock.fn()
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
-                             <ChangePassword {...props} />
-                          </IntlProvider>)
+  const wrapper = shallow(<Provider store={store}>
+                             <ChangePasswordContainer {...props} />
+                          </Provider>)
   return {
     props,
     wrapper,
@@ -469,7 +513,8 @@ function setupComponent(custom=false) {
 describe("ChangePassword Component suggested", () => {
 
     it("Renders", () => {
-        const {wrapper, props} = setupComponent(),
+        const store = fakeStore(fakeState(false)),
+            {wrapper, props} = setupComponent(store),
             form = wrapper.find('form#passwordsview-form'),
             inputOldPassword = wrapper.find('TextControl[name="old_password"]'),
             checkBoxCustom = wrapper.find('CheckBox'),
@@ -481,21 +526,14 @@ describe("ChangePassword Component suggested", () => {
 describe("ChangePassword Component custom", () => {
 
     it("Renders", () => {
-        const {wrapper, props} = setupComponent(true),
+        const store = fakeStore(fakeState(true)),
+            {wrapper, props} = setupComponent(store, true),
             form = wrapper.find('form#passwordsview-form'),
             inputOldPassword = wrapper.find('TextControl[name="old_password"]'),
             checkBoxCustom = wrapper.find('CheckBox'),
             inputCustom = wrapper.find('PasswordField'),
             button = wrapper.find('EduIDButton');
     });
-});
-
-
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
 });
 
 
@@ -513,40 +551,6 @@ describe("ChangePassword Container", () => {
 
   beforeEach(() => {
 
-    const getState = function (custom) {
-      return {
-        security: {
-            is_fetching: false,
-        },
-        chpass: {
-            is_fetching: false,
-            failed: false,
-            error: '',
-            message: '',
-            suggested_password: 'abcd',
-            old_password: '',
-            new_password: 'defg',
-            choose_custom: custom
-        },
-        config: {
-            csrf_token: '',
-            SECURITY_URL: '/dummy-sec-url',
-            DASHBOARD_URL: '/dummy-dash-url',
-            TOKEN_SERVICE_URL: '/dummy-tok-url'
-        },
-        personal_data: {
-            data: {
-                given_name: 'given-name',
-                surname: 'surname',
-                display_name: 'display-name'
-            }
-        },
-        emails: {
-            emails: []
-        }
-      }
-    };
-
     mockProps = {
         is_fetching: false,
         choose_custom: false,
@@ -558,15 +562,13 @@ describe("ChangePassword Container", () => {
     };
 
     getWrapper = function (custom=false, props=mockProps) {
-      const state = getState(custom);
+      const state = fakeState(custom);
       store = fakeStore(state);
       dispatch = store.dispatch;
       const wrapper = mount(
-          <IntlProvider locale={'en'} messages={messages}>
-            <Provider store={store}>
+          <Provider store={store}>
               <ChangePasswordContainer {...props}/>
-            </Provider>
-          </IntlProvider>
+          </Provider>
       );
       return wrapper;
     };
