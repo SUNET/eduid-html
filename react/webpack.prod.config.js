@@ -4,12 +4,12 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
 
 var webpackProd = {
   entry: webpackConfig.entry,
   resolve: webpackConfig.resolve,
-  module: webpackConfig.module,
-  target: 'web'
+  module: webpackConfig.module
 };
 
 delete webpackProd.entry.server;
@@ -29,6 +29,7 @@ webpackProd.output = {
 }
 
 webpackProd.plugins = [
+  initialConfigPlugin,
   new webpack.DefinePlugin({
     'process.env':{
       'NODE_ENV': JSON.stringify('production')

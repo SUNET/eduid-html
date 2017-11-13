@@ -177,16 +177,13 @@ const init_app = function (target, component, intl=false) {
                                : (navigator.language || navigator.userLanguage);
             lang_code = language.substring(0,2);
         }
-        const locale = require('react-intl/locale-data/' + lang_code);
         const messages = require('../i18n/l10n/' + lang_code);
+        store.dispatch(updateIntl({ locale: lang_code, messages: messages }));
 
-        addLocaleData(locale);
         action = getConfig;
         app = (
           <Provider store={store}>
-              <IntlProvider locale={ lang_code } messages={ messages }>
-                {component}
-              </IntlProvider>
+              {component}
           </Provider>
         );
     } else {
@@ -214,7 +211,7 @@ const init_app = function (target, component, intl=false) {
         }
         app = (
           <Provider store={store}>
-                {component}
+              {component}
           </Provider>);
     }
     ReactDOM.render(app, target, action);
