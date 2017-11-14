@@ -164,6 +164,10 @@ ChpassForm = connect(
 
 class ChangePassword extends Component {
 
+  componentWillMount() {
+    this.props.loadZxcvbn();
+  }
+
   render () {
 
     return (
