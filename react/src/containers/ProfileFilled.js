@@ -1,6 +1,8 @@
 
 import { connect } from 'react-redux';
 import ProfileFilled from 'components/ProfileFilled';
+import i18n from 'i18n-messages';
+
 
 const mapStateToProps = (state, props) => {
   return {
@@ -20,5 +22,4 @@ const ProfileFilledContainer = connect(
   mapDispatchToProps
 )(ProfileFilled);
 
-export default ProfileFilledContainer;
-
+export default i18n(ProfileFilledContainer);

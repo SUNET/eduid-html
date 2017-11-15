@@ -14,6 +14,8 @@ export const START_PASSWORD_CHANGE = 'START_PASSWORD_CHANGE';
 export const POST_SECURITY_CHANGE_PASSWORD_SUCCESS = 'POST_SECURITY_CHANGE_PASSWORD_SUCCESS';
 export const POST_SECURITY_CHANGE_PASSWORD_FAIL = 'POST_SECURITY_CHANGE_PASSWORD_FAIL';
 
+export const SET_ZXCVBN = 'SET_ZXCVBN';
+
 
 export function getSuggestedPassword () {
   return {
@@ -76,3 +78,11 @@ export function postPasswordChangeFail (err) {
   };
 }
 
+export function setZxcvbn(module) {
+    return {
+        type: SET_ZXCVBN,
+        payload: {
+            module: module
+        }
+    }
+}

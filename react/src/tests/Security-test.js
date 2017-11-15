@@ -11,12 +11,12 @@ import * as actions from "actions/Security";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
 
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -458,6 +458,14 @@ describe("Reducers", () => {
   });
 });
 
+
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
 const mockState = {
   security: {
     location: 'dummy-location',
@@ -467,6 +475,10 @@ const mockState = {
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
+  },
+  intl: {
+    locale: 'en',
+    messages: messages
   }
 };
 
@@ -577,9 +589,9 @@ function setupComponent() {
     handleConfirmationDeletion: mock.fn(),
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
-                             <Security {...props} />
-                          </IntlProvider>)
+  const wrapper = shallow(<Provider store={fakeStore(mockState)}>
+                             <SecurityContainer {...props} />
+                          </Provider>)
   return {
     props,
     wrapper,
@@ -596,14 +608,6 @@ describe("Security Component", () => {
             modalChange = wrapper.find('GenericConfirmModal'),
             modalDelete = wrapper.find('DeleteModal');
     });
-});
-
-
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
 });
 
 
@@ -636,6 +640,10 @@ describe("Security Container", () => {
             DASHBOARD_URL: '/dummy-dash-url',
             TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
+        intl: {
+            locale: 'en',
+            messages: messages
+        }
       }
     };
 
@@ -651,9 +659,7 @@ describe("Security Container", () => {
 
       const wrapper = mount(
           <Provider store={store}>
-            <IntlProvider locale={'en'} messages={messages}>
               <SecurityContainer {...props}/>
-            </IntlProvider>
           </Provider>
       );
       return wrapper;

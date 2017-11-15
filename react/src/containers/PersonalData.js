@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import PersonalData from 'components/PersonalData';
 import { postUserdata, changeUserdata } from "actions/PersonalData";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -27,4 +28,4 @@ const PersonalDataContainer = connect(
   mapDispatchToProps
 )(PersonalData);
 
-export default PersonalDataContainer;
+export default i18n(PersonalDataContainer);

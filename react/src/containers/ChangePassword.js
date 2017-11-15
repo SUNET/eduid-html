@@ -1,11 +1,12 @@
 
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import zxcvbn from 'zxcvbn';
 
+import i18n from 'i18n-messages';
 import ChangePassword from 'components/ChangePassword';
 import * as comp from 'components/ChangePassword';
 import * as actions from 'actions/ChangePassword';
+
 
 
 const pwStrengthMessages = [
@@ -22,17 +23,22 @@ const mapStateToProps = (state, props) => {
     userInput.push(state.personal_data.data.surname);
     userInput.push(state.personal_data.data.display_name);
     userInput.concat(state.emails.emails);
-    const is_fetching = state.chpass.is_fetching || state.security.is_fetching,
-          customPassword = state.form && state.form.chpass && state.form.chpass.values[comp.pwFieldCustomName] || '',
-          result = zxcvbn(customPassword, userInput),
-          entropy = Math.log(result.guesses, 2);
+    let is_fetching = state.chpass.is_fetching || state.security.is_fetching;
+    const customPassword = state.form && state.form.chpass && state.form.chpass.values[comp.pwFieldCustomName] || '';
     let score = 0,
         configEntropy = state.config.PASSWORD_ENTROPY,
         minEntropy = configEntropy / 5,
-        stepEntropy = minEntropy;
-    for (let n=0; n < 5 && entropy > minEntropy; n++){
-        score = n;
-        minEntropy += stepEntropy;
+        stepEntropy = minEntropy,
+        entropy = 0;
+    if (state.chpass.zxcvbn_module) {
+        const result = state.chpass.zxcvbn_module(customPassword, userInput);
+        entropy = Math.log(result.guesses, 2);
+        for (let n=0; n < 5 && entropy > minEntropy; n++){
+            score = n;
+            minEntropy += stepEntropy;
+        }
+    } else {
+        is_fetching = true;
     }
 
     return {
@@ -67,6 +73,15 @@ const mapDispatchToProps = (dispatch, props) => {
             }
             dispatch(actions.postPasswordChange(oldPassword, newPassword));
         },
+        loadZxcvbn: function () {
+            return new Promise(resolve => {
+                require.ensure([], () => {  
+                    const module = require('zxcvbn');
+                    dispatch(actions.setZxcvbn(module));
+                    resolve();
+                });
+            });
+        }
     }
 };
 
@@ -75,5 +90,5 @@ const ChangePasswordContainer = connect(
   mapDispatchToProps
 )(ChangePassword);
 
-export default ChangePasswordContainer;
+export default i18n(ChangePasswordContainer);
 

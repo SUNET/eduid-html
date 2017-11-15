@@ -7,7 +7,7 @@ import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetch from "whatwg-fetch";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { put, call, select } from "redux-saga/effects";
 
@@ -290,8 +290,38 @@ describe("Reducers", () => {
 
 });
 
+const fakeState = {
+    letter_proofing: {
+        is_fetching: false,
+        failed: false,
+        message: '',
+        errMsg: '',
+        letter_sent: '',
+        resending: {
+            is_fetching: false,
+            failed: false
+        }
+    },
+    config: {LETTER_PROOFING_URL: 'http://localhost/letter'},
+    nins: {
+        valid_nin: false,
+        nin: 'dummy-nin'
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
+    }
+};
 
-function setupComponent() {
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
+
+function setupComponent(store) {
   const props = {
     handleLetterProofing: mock.fn(),
     sendConfirmationLetter: mock.fn(),
@@ -302,9 +332,9 @@ function setupComponent() {
         failed: false
     }
   };
-  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
-                              <LetterProofingButton {...props} />
-                          </IntlProvider>);
+  const wrapper = mount(<Provider store={store}>
+                            <LetterProofingContainer {...props} />
+                        </Provider>);
   return {
     props,
     wrapper
@@ -314,7 +344,8 @@ function setupComponent() {
 describe("LetterProofingButton Component", () => {
 
   it("Renders", () => {
-    const { wrapper, props } = setupComponent(),
+    const store = fakeStore(fakeState),
+          { wrapper, props } = setupComponent(store),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
           button = wrapper.find('EduIDButton');
@@ -326,17 +357,10 @@ describe("LetterProofingButton Component", () => {
     expect(form.props()).toMatchObject({role: 'form'});
     expect(fieldset.props()).toMatchObject({id: 'letter-proofing'});
 
-    expect(props.handleLetterProofing.mock.calls.length).toEqual(0);
+    expect(store.dispatch.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleLetterProofing.mock.calls.length).toEqual(1);
+    expect(store.dispatch.mock.calls.length).toEqual(1);
   })
-});
-
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
 });
 
 describe("LetterProofing Container", () => {
@@ -346,35 +370,16 @@ describe("LetterProofing Container", () => {
       dispatch;
 
   beforeEach(() => {
-    const store = fakeStore({
-      letter_proofing: {
-        is_fetching: false,
-        failed: false,
-        message: '',
-        errMsg: '',
-        letter_sent: '',
-        resending: {
-            is_fetching: false,
-            failed: false
-        }
-      },
-      config: {LETTER_PROOFING_URL: 'http://localhost/letter'},
-      nins: {
-          valid_nin: false,
-          nin: 'dummy-nin'
-      }
-    });
+    const store = fakeStore(fakeState);
 
     mockProps = {
         resending: {}
     };
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
-            <LetterProofingContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        <Provider store={store}>
+          <LetterProofingContainer {...mockProps}/>
+        </Provider>
     );
 
     buttontext = wrapper.find('EduIDButton').text();
@@ -430,9 +435,6 @@ describe("Async component", () => {
 
         next = generator.next();
 
-        const mockGetState = function (state) {
-            return state.config;
-        };
         const data = {
             nin: 'dummy-nin',
             csrf_token: 'csrf-token'
@@ -461,9 +463,6 @@ describe("Async component", () => {
 
         let next = generator.next();
 
-        const mockGetState = function (state) {
-            return state.config;
-        };
         const data = {
             code: 'dummy-code',
             csrf_token: 'csrf-token'

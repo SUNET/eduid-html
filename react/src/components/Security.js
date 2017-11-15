@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
 import GenericConfirmModal from 'components/GenericConfirmModal';
@@ -89,7 +88,6 @@ Security.propTypes = {
   credentials: PropTypes.array,
   creation_date: PropTypes.string,
   last_used: PropTypes.string,
-  language: PropTypes.string,
   langs: PropTypes.array,
   errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
@@ -104,4 +102,4 @@ Security.propTypes = {
   handleConfirmationDeletion: PropTypes.func,
 }
 
-export default i18n(Security);
+export default Security;

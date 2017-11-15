@@ -1,13 +1,13 @@
 
 const mock = require('jest-mock');
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux'
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy } from "expect";
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 import { MemoryRouter } from "react-router-dom";
 
-import Footer from 'components/Footer';
+import FooterContainer from 'containers/Footer';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -29,6 +29,10 @@ function setupComponent() {
                 ['en', 'English'],
                 ['sv', 'Svenska']
             ]
+        },
+        intl: {
+            locale: 'en',
+            messages: messages
         }
     });
     const props = {
@@ -41,9 +45,7 @@ function setupComponent() {
       changeLanguage: mock.fn()
     };
     const wrapper = mount(<Provider store={ store }>
-                              <IntlProvider locale={'en'} messages={messages}>
-                                  <Footer {...props} />
-                              </IntlProvider>
+                                  <FooterContainer {...props} />
                           </Provider>);
     return {
         props,

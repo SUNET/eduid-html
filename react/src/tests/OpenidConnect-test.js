@@ -11,8 +11,8 @@ import * as actions from "actions/OpenidConnect";
 import openidConnectReducer from "reducers/OpenidConnect";
 import OpenidConnect from 'components/OpenidConnect'
 
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 import OpenidConnectContainer from "containers/OpenidConnect";
 
 const messages = require('../../i18n/l10n/en')
@@ -134,17 +134,40 @@ describe("Reducers", () => {
 });
 
 
-function setupComponent() {
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
+const fakeState = {
+    openid_data: {
+        is_fetching: false,
+        failed: false,
+        qr_img: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        qr_code: 'new nonce'
+    },
+    config: {
+        OIDC_PROOFING_URL: 'http://localhost/oidc'
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
+    }
+};
+
+
+function setupComponent(store) {
   const props = {
     handleGetQRCode: mock.fn(),
     qr_img: 'code',
     qr_code: 'nonce'
   };
 
-  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
-                              <OpenidConnect {...props} />
-                          </IntlProvider>);
-
+  const wrapper = mount(<Provider store={store}>
+                            <OpenidConnectContainer {...props} />
+                        </Provider>);
   return {
     props,
     wrapper
@@ -154,7 +177,8 @@ function setupComponent() {
 describe("OpenidConnect Component", () => {
 
   it("Renders", () => {
-    const { wrapper, props } = setupComponent(),
+    const store = fakeStore(fakeState),
+          { wrapper, props } = setupComponent(store),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
           button = wrapper.find('EduIDButton'),
@@ -169,21 +193,13 @@ describe("OpenidConnect Component", () => {
 
     expect(form.props()).toMatchObject({role: 'form'});
     expect(fieldset.props()).toMatchObject({id: 'openid-connect'});
-    expect(img.props()).toMatchObject({src: 'code'});
+    expect(img.props()).toMatchObject({src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'});
     expect(caption).toBeTruthy();
 
-    expect(props.handleGetQRCode.mock.calls.length).toEqual(0);
+    expect(store.dispatch.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(props.handleGetQRCode.mock.calls.length).toEqual(1);
+    expect(store.dispatch.mock.calls.length).toEqual(1);
   })
-});
-
-
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
 });
 
 describe("OpenidConnect Container", () => {
@@ -195,15 +211,7 @@ describe("OpenidConnect Container", () => {
       dispatch;
 
   beforeEach(() => {
-    const store = fakeStore({
-      openid_data: {
-        is_fetching: false,
-        failed: false,
-        qr_img: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        qr_code: 'new nonce'
-      },
-      config: {OIDC_PROOFING_URL: 'http://localhost/oidc'},
-    });
+    const store = fakeStore(fakeState);
 
     mockProps = {
       qr_img: 'data: old code',
@@ -211,11 +219,9 @@ describe("OpenidConnect Container", () => {
     };
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
+        <Provider store={store}>
             <OpenidConnectContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        </Provider>
     );
 
     fulltext = wrapper.find(OpenidConnectContainer).text();

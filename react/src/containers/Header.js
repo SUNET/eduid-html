@@ -2,6 +2,8 @@
 import { connect } from 'react-redux';
 import Header from 'components/Header';
 import { startLogout } from "actions/Header";
+import i18n from 'i18n-messages';
+
 
 const mapStateToProps = (state, props) => {
     let email, confirmed;
@@ -35,4 +37,4 @@ const HeaderContainer = connect(
   mapDispatchToProps
 )(Header);
 
-export default HeaderContainer;
+export default i18n(HeaderContainer);

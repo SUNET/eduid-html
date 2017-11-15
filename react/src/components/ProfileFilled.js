@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
-import i18n from 'i18n-messages';
 
 import 'style/ProfileFilled.scss';
 
@@ -29,5 +28,4 @@ ProfileFilled.propTypes = {
     cur: PropTypes.number,
 }
 
-export default i18n(ProfileFilled);
-
+export default ProfileFilled;

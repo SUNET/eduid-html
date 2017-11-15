@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/lib/Alert';
 
-import i18n from 'i18n-messages';
 import 'style/Notifications.scss';
 
 
@@ -54,5 +53,4 @@ Notifications.propTypes = {
     errors: PropTypes.array
 }
 
-export default i18n(Notifications);
-
+export default Notifications;

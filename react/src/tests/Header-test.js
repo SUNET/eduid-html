@@ -1,13 +1,13 @@
 
 const mock = require('jest-mock');
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import { put, select, call } from "redux-saga/effects";
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy } from "expect";
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 
-import Header from 'components/Header';
+import HeaderContainer from 'containers/Header';
 import * as actions from "actions/Header";
 import { requestLogout, sendLogout } from "sagas/Header";
 
@@ -40,11 +40,14 @@ describe("Header Actions", () => {
 });
 
 
-const getState = () => state;
 const state = {
     config : {
         csrf_token: '123456789',
         TOKEN_SERVICE_URL: 'test/localhost'
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
     }
 };
 
@@ -89,15 +92,23 @@ const fakeStore = (state) => ({
 
 function setupComponent() {
     const store = fakeStore({
+        intl: {
+            locale: 'en',
+            messages: messages
+        },
+        emails: {
+            emails: []
+        },
+        nins: {
+            nins: []
+        }
     });
     const props = {
         email: 'fake@fake.fake',
         confirmed: 'main.confirmed'
     };
     const wrapper = mount(<Provider store={ store }>
-                              <IntlProvider locale={'en'} messages={messages}>
-                                  <Header {...props} />
-                              </IntlProvider>
+                              <HeaderContainer {...props} />
                           </Provider>);
     return {
         props,

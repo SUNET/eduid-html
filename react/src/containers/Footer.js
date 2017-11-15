@@ -1,13 +1,14 @@
 
 import { connect } from 'react-redux';
+import { updateIntl } from 'react-intl-redux';
 import Footer from 'components/Footer';
+import i18n from 'i18n-messages';
 
-import { setLanguage } from "actions/Config";
 
 const mapStateToProps = (state, props) => {
   return {
     is_configured: state.config.is_configured,
-    language: state.config.language,
+    language: state.intl.locale,
     languages: state.config.AVAILABLE_LANGUAGES
   }
 };
@@ -17,7 +18,11 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
       changeLanguage: function (e) {
           const lang = e.target.closest('.langselector').dataset.lang;
-          dispatch(setLanguage(lang));
+          const msgs = LOCALIZED_MESSAGES[lang];
+          dispatch(updateIntl({
+              locale: lang,
+              messages : msgs
+          }));
       }
   }
 };
@@ -27,5 +32,4 @@ const FooterContainer = connect(
   mapDispatchToProps
 )(Footer);
 
-export default FooterContainer;
-
+export default i18n(FooterContainer);

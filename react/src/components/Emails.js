@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import i18n from 'i18n-messages';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import TableList from 'components/TableList';
@@ -126,4 +125,4 @@ Emails.propTypes = {
   handleRemoveEmail: PropTypes.func
 }
 
-export default i18n(Emails);
+export default Emails;

@@ -17,8 +17,8 @@ import { routerMiddleware } from 'react-router-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import createSagaMiddleware, { takeLatest, takeEvery } from 'redux-saga';
 import { createLogger } from 'redux-logger';
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux'
+import { updateIntl } from 'react-intl-redux';
 import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
 import notifyAndDispatch from "./notify-middleware";
@@ -177,36 +177,44 @@ const init_app = function (target, component, intl=false) {
                                : (navigator.language || navigator.userLanguage);
             lang_code = language.substring(0,2);
         }
-        const locale = require('react-intl/locale-data/' + lang_code);
         const messages = require('../i18n/l10n/' + lang_code);
+        store.dispatch(updateIntl({ locale: lang_code, messages: messages }));
 
-        addLocaleData(locale);
         action = getConfig;
         app = (
           <Provider store={store}>
-              <IntlProvider locale={ lang_code } messages={ messages }>
-                {component}
-              </IntlProvider>
+              {component}
           </Provider>
         );
     } else {
         if (component.props.allow_unauthn !== true) {
             const cookie = Cookies.get(EDUID_COOKIE_NAME);
             if (cookie === undefined) {
-                const next = document.location.href;
-                document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
+                const next = window.location.href;
+                window.location.href = TOKEN_SERVICE_URL + '?next=' + next;
             }
             action = getConfig;
         } else {
             action = function(){};
         }
+        const language = navigator.languages
+                         ? navigator.languages[0]
+                         : (navigator.language || navigator.userLanguage);
+        const supported = AVAILABLE_LANGUAGES.map((lang) => (lang[0]))
+
+        if (supported.includes(language)) {
+            const lang_code = language.substring(0,2);
+            store.dispatch(updateIntl({
+                locale: lang_code,
+                messages: LOCALIZED_MESSAGES[lang_code]
+            }));
+        }
         app = (
           <Provider store={store}>
-                {component}
-          </Provider>
-        );
-      }
-      ReactDOM.render(app, target, action);
+              {component}
+          </Provider>);
+    }
+    ReactDOM.render(app, target, action);
 };
 
 export default init_app;

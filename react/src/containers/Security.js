@@ -4,6 +4,7 @@ import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion }
        from "actions/Security";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -48,4 +49,4 @@ const SecurityContainer = connect(
   mapDispatchToProps
 )(Security);
 
-export default SecurityContainer;
+export default i18n(SecurityContainer);

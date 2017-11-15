@@ -1,12 +1,12 @@
 
 const mock = require('jest-mock');
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy } from "expect";
 import { IntlProvider, addLocaleData } from 'react-intl';
 
-import PendingActions from 'components/PendingActions';
+import PendingActionsContainer from 'containers/PendingActions';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -21,14 +21,19 @@ const fakeStore = (state) => ({
 
 function setupComponent() {
     const store = fakeStore({
+        intl: {
+            locale: 'en',
+            messages: messages
+        },
+        profile: {
+            pending: ['surname', 'emails']
+        }
     });
     const props = {
         pending: ['surname', 'emails']
     };
     const wrapper = mount(<Provider store={ store }>
-                              <IntlProvider locale={'en'} messages={messages}>
-                                  <PendingActions {...props} />
-                              </IntlProvider>
+                              <PendingActionsContainer {...props} />
                           </Provider>);
     return {
         props,
@@ -36,7 +41,7 @@ function setupComponent() {
     };
 }
 
-describe("Header Component", () => {
+describe("PendingActions Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
@@ -47,6 +52,3 @@ describe("Header Component", () => {
         expect(area.contains(pending.get(1))).toBeTruthy();
     });
 });
-
-
-
