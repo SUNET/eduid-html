@@ -8,7 +8,7 @@
     "test": "karma start",
     "test-headless": "karma start headless.karma.conf.js",
     "debug": "karma start --single-run=false --debug --browser Chrome",
-    "build": "webpack --config webpack.prod.config.js --watch --progress",
+    "build": "webpack --config webpack.prod.config.js",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "manage:translations": "node ./translationRunner.js"
   },
