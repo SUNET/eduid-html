@@ -5,6 +5,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import i18n from 'i18n-messages';
 
 
 const textInput = (props) => {
@@ -65,4 +66,4 @@ const textInput = (props) => {
     );
 }
 
-export default textInput;
+export default i18n(textInput);

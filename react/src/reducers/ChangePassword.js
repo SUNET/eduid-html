@@ -91,7 +91,7 @@ let chpassReducer = (state=chpass, action) => {
     case actions.SET_ZXCVBN:
       return {
         ...state,
-        zxcvbn_module: actions.payload.module
+        zxcvbn_module: action.payload.module
       };
     default:
       return state;

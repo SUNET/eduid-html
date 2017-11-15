@@ -11,6 +11,8 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
+import i18n from 'i18n-messages';
+
 import EduIDButton from 'components/EduIDButton';
 import TextInput from 'components/EduIDTextInput';
 
@@ -161,6 +163,8 @@ ChpassForm = connect(
     }
   }
 )(ChpassForm)
+
+ChpassForm = i18n(ChpassForm);
 
 class ChangePassword extends Component {
 

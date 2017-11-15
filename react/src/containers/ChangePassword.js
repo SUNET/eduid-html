@@ -76,9 +76,9 @@ const mapDispatchToProps = (dispatch, props) => {
         loadZxcvbn: function () {
             return new Promise(resolve => {
                 require.ensure([], () => {  
-                    resolve(() => {
-                        dispatch(setZxcvbn(require('zxcvbn')));
-                    });
+                    const module = require('zxcvbn');
+                    dispatch(actions.setZxcvbn(module));
+                    resolve();
                 });
             });
         }
