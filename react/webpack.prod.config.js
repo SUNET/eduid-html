@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
 
 var webpackProd = {
@@ -56,7 +56,7 @@ webpackProd.plugins = [
     threshold: 10240,
     minRatio: 0.8
   }),
-  new BundleAnalyzerPlugin()
+  // new BundleAnalyzerPlugin()
 ];
 
 module.exports = webpackProd;

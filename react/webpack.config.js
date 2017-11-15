@@ -4,7 +4,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -99,6 +99,6 @@ module.exports = {
            }
          }
        }),
-        new BundleAnalyzerPlugin()
+       // new BundleAnalyzerPlugin()
     ]
 };
