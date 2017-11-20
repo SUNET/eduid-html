@@ -25,6 +25,10 @@ jQuery.fn.initDeformCallbacks = function () {
             console.log('Executing form script: ' + script);
             window.forms_helper_functions[script]();
         });
+        const root = document.getElementById('openid-connect-root');
+        if (root) {
+            init_app(root, component, true);
+        }
     }
 };
 
@@ -46,9 +50,9 @@ var TabbedForm = function (container) {
               container.find("a[data-toggle=tooltip]").tooltip();
               container.find("button[data-toggle=tooltip]").tooltip();
               container.find("label[data-toggle=tooltip]").tooltip();
+              console.log('ooooooooooooooooooooooo    ' + url);
               if (url === "nins") {
-                const root = document.getElementById('openid-connect-root'),
-                      form = root.previousElementSibling;
+                const root = document.getElementById('openid-connect-root');
                       init_app(root, component, true);
               }
 

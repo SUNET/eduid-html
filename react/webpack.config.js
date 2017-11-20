@@ -18,7 +18,7 @@ module.exports = {
       //personal_data: './src/entry-points/personal-data',
       //dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
       //openid_connect: './src/entry-points/openid-connect',
-      //openid_connect_freja: './src/entry-points/openid-connect-freja'
+      openid_connect_freja: './src/entry-points/openid-connect-freja'
     },
     output: {
       path: path.join(__dirname, 'build'),
