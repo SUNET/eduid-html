@@ -7,3 +7,4 @@ coverage/
 npm-debug.log
 react/build/
 react/package-lock.json
+.npm
