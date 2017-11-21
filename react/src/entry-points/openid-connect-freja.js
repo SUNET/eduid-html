@@ -50,7 +50,6 @@ var TabbedForm = function (container) {
               container.find("a[data-toggle=tooltip]").tooltip();
               container.find("button[data-toggle=tooltip]").tooltip();
               container.find("label[data-toggle=tooltip]").tooltip();
-              console.log('ooooooooooooooooooooooo    ' + url);
               if (url === "nins") {
                 const root = document.getElementById('openid-connect-root');
                       init_app(root, component, true);
