@@ -18,10 +18,6 @@ delete webpackProd.entry.hot;
 //webpackProd.devtool = 'inline-source-map';
 delete webpackProd.devtool;
 
-webpackProd.entry = {
-    index: './src/entry-points/index'
-}
-
 webpackProd.output = {
   filename: '[name].js',
   publicPath: '/static/build/',
