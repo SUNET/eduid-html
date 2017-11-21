@@ -5,6 +5,12 @@ import React from 'react';
 import init_app from "../init-app";
 import OpenidConnectFrejaContainer from 'containers/OpenidConnectFreja';
 
+import { addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import sv from 'react-intl/locale-data/sv';
+
+addLocaleData([...en, ...sv])
+
 let component = <OpenidConnectFrejaContainer />;
 
 
