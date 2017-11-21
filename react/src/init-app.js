@@ -63,9 +63,6 @@ import { history } from "components/Main";
 function* rootSaga() {
   yield [
     takeLatest(configActions.GET_JSCONFIG_CONFIG, requestConfig),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestAllPersonalData),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestCredentials),
-    takeLatest(configActions.GET_JSCONFIG_CONFIG_SUCCESS, requestSuggestedPassword),
     takeLatest(configActions.GET_INITIAL_USERDATA, requestAllPersonalData),
     takeLatest(configActions.GET_INITIAL_USERDATA, requestCredentials),
     takeLatest(configActions.GET_INITIAL_USERDATA, requestSuggestedPassword),
@@ -162,23 +159,21 @@ const getConfig = function () {
     store.dispatch(configActions.getConfig());
 };
 
+const getConfigAndData = function () {
+    store.dispatch(configActions.getConfig());
+    store.dispatch(configActions.getInitialUserdata());
+};
+
 /* render app */
 
 const init_app = function (target, component, intl=false) {
     let app, action;
     if (intl) {
-        let lang_code;
-        const state = store.getState();
-        if (state.config.is_configured) {
-            lang_code = state.config.language;
-        } else {
-            const language = navigator.languages
-                               ? navigator.languages[0]
-                               : (navigator.language || navigator.userLanguage);
-            lang_code = language.substring(0,2);
-        }
-        const messages = require('../i18n/l10n/' + lang_code);
-        store.dispatch(updateIntl({ locale: lang_code, messages: messages }));
+        const lang_code = document.getElementById('eduid-lang-selected').dataset.lang;
+        store.dispatch(updateIntl({
+            locale: lang_code,
+            messages: LOCALIZED_MESSAGES[lang_code]
+        }));
 
         action = getConfig;
         app = (
@@ -187,16 +182,12 @@ const init_app = function (target, component, intl=false) {
           </Provider>
         );
     } else {
-        if (component.props.allow_unauthn !== true) {
-            const cookie = Cookies.get(EDUID_COOKIE_NAME);
-            if (cookie === undefined) {
-                const next = window.location.href;
-                window.location.href = TOKEN_SERVICE_URL + '?next=' + next;
-            }
-            action = getConfig;
-        } else {
-            action = function(){};
+        const cookie = Cookies.get(EDUID_COOKIE_NAME);
+        if (cookie === undefined) {
+            const next = window.location.href;
+            window.location.href = TOKEN_SERVICE_URL + '?next=' + next;
         }
+        action = getConfigAndData;
         const language = navigator.languages
                          ? navigator.languages[0]
                          : (navigator.language || navigator.userLanguage);
