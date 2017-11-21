@@ -167,18 +167,20 @@ const getConfig = function () {
 const init_app = function (target, component, intl=false) {
     let app, action;
     if (intl) {
-        //let lang_code;
-        //const state = store.getState();
-        //if (state.config.is_configured) {
-            //lang_code = state.config.language;
-        //} else {
-            //const language = navigator.languages
-                               //? navigator.languages[0]
-                               //: (navigator.language || navigator.userLanguage);
-            //lang_code = language.substring(0,2);
-        //}
-        //const messages = require('../i18n/l10n/' + lang_code);
-        //store.dispatch(updateIntl({ locale: lang_code, messages: messages }));
+        let lang_code;
+        const state = store.getState();
+        if (state.config.is_configured) {
+            lang_code = state.config.language;
+        } else {
+            const language = navigator.languages
+                               ? navigator.languages[0]
+                               : (navigator.language || navigator.userLanguage);
+            lang_code = language.substring(0,2);
+        }
+        store.dispatch(updateIntl({
+            locale: lang_code,
+            messages: LOCALIZED_MESSAGES[lang_code]
+        }));
 
         action = getConfig;
         app = (
