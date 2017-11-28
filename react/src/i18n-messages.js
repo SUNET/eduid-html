@@ -409,6 +409,15 @@ const msgs = {
           defaultMessage={`SE-LEG`} />),
 
     /************************/
+    /* Phone Subscription ***/
+    /************************/
+
+    'lmp.confirm-lookup-mobile': (
+        <FormattedMessage
+          id="lmp.confirm-lookup-mobile"
+          defaultMessage={`Phone Subscription`} />),
+
+    /************************/
     /* OIDC FREJA ***********/
     /************************/
 

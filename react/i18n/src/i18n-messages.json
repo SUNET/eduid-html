@@ -236,6 +236,10 @@
     "defaultMessage": "SE-LEG"
   },
   {
+    "id": "lmp.confirm-lookup-mobile",
+    "defaultMessage": "Phone Subscription"
+  },
+  {
     "id": "ocf.initialize_proofing",
     "defaultMessage": "FREJA EID"
   },
