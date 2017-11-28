@@ -79,8 +79,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
         is_fetching: false,
-        failed: false,
-        error: ''
+        failed: false
       }
     );
   });
@@ -92,6 +91,9 @@ describe("Reducers", () => {
         {
           type: actions.POST_LOOKUP_MOBILE_PROOFING_PROOFING_FAIL,
           error: true,
+          payload: {
+              message: 'Bad error'
+          }
         }
       )
     ).toEqual(
@@ -237,16 +239,8 @@ describe("Async component", () => {
     const generator = requestLookupMobileProof();
 
     let next = generator.next();
-    let debug = select(state => state);
-    expect(next.value).toMatchObject(debug);
 
     const lookupMobileData = generator.next(next.value);
-    const data = {
-      nin: 'testing',
-      csrf_token: 'dummy-token'
-    };
-    let debug2 = call(fetchLookupMobileProof, debug, data);
-    expect(oidcData.value.CALL.args[1].nin).toEqual(debug2.CALL.args[1].nin);
 
     const action = {
       type: actions.POST_LOOKUP_MOBILE_PROOFING_PROOFING_SUCCESS,
@@ -255,7 +249,6 @@ describe("Async component", () => {
     }
 
     next = generator.next(action);
-    expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
     next = generator.next();
     delete(action.payload.csrf_token);
     expect(next.value).toEqual(put(action));
