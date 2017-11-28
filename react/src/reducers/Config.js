@@ -7,7 +7,8 @@ const configData = {
     show_sidebar: true,
     is_configured: false,
     is_fetching: false,
-    failed: false
+    failed: false,
+    is_spa: false
 };
 
 const urls_with_no_sidebar = [
@@ -53,6 +54,11 @@ let configReducer = (state=configData, action) => {
       return {
           ...state,
           ...action.payload
+      };
+    case actions.CONFIG_SPA:
+      return {
+          ...state,
+          is_spa: true
       };
     case "@@router/LOCATION_CHANGE":
       let show_sidebar = true;
