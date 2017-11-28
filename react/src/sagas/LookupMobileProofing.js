@@ -7,11 +7,13 @@ import { postLookupMobileFail } from "actions/LookupMobileProofing";
 
 export function* requestLookupMobileProof () {
     try {
-        const url = yield select(state => state.config.LOOKUP_MOBILE_PROOFING_URL),
-              input = document.querySelector('input[name=norEduPersonNIN]'),
+        const state = yield select(state => state),
+              url = state.config.LOOKUP_MOBILE_PROOFING_URL,
+              input = document.getElementById('norEduPersonNin'),
               nin = input ? input.value : 'testing',
               data = {
-                'nin': nin
+                nin: nin,
+                csrf_token: state.config.csrf_token
               };
 
         const lookupMobileData = yield call(fetchLookupMobileProof, url, data);
