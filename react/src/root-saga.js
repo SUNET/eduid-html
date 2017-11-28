@@ -11,6 +11,7 @@ import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
 import * as letterActions from "actions/LetterProofing";
+import * as lmpActions from "actions/LookupMobileProofing";
 import * as headerActions from "actions/Header";
 
 import { requestAllPersonalData, savePersonalData } from "sagas/PersonalData";
@@ -27,6 +28,7 @@ import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
 import { requestLogout } from "sagas/Header";
+import { requestLookupMobileProof } from "sagas/LookupMobileProofing";
 
 
 function* configSpaSaga () {
@@ -46,6 +48,7 @@ function* rootSaga() {
     takeLatest(configActions.GET_INITIAL_USERDATA, requestSuggestedPassword),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
     takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
+    takeLatest(lmpActions.POST_LOOKUP_MOBILE_PROOFING_PROOFING, requestLookupMobileProof),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
     takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData),
     takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal),
