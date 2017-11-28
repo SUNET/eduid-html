@@ -417,6 +417,26 @@ const msgs = {
           id="lmp.confirm-lookup-mobile"
           defaultMessage={`Phone Subscription`} />),
 
+    'no_phone': (
+        <FormattedMessage
+          id="no_phone"
+          defaultMessage={`You must add a phone number to be able to use this vetting method`} />),
+
+    'error_lookup_mobile_task': (
+        <FormattedMessage
+          id="error_lookup_mobile_task"
+          defaultMessage={`There were problems looking up your mobile phone`} />),
+
+    'error_navet_task': (
+        <FormattedMessage
+          id="error_navet_task"
+          defaultMessage={`There were problems looking up your mobile phone`} />),
+
+    'lmp.verification_success': (
+        <FormattedMessage
+          id="lmp.verification_success"
+          defaultMessage={`Your NIN has been successfully verified`} />),
+
     /************************/
     /* OIDC FREJA ***********/
     /************************/

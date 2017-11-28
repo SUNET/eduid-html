@@ -240,6 +240,10 @@
     "defaultMessage": "Phone Subscription"
   },
   {
+    "id": "no_phone",
+    "defaultMessage": "You must add a phone number to be able to use this vetting method"
+  },
+  {
     "id": "ocf.initialize_proofing",
     "defaultMessage": "FREJA EID"
   },
