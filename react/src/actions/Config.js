@@ -7,6 +7,7 @@ export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 export const NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
 export const GET_INITIAL_USERDATA = 'GET_INITIAL_USERDATA';
 export const RESIZE_WINDOW = 'RESIZE_WINDOW';
+export const CONFIG_SPA = 'CONFIG_SINGLE_PAGE_APP';
 
 export function getConfig () {
   return {
@@ -39,6 +40,13 @@ export function getInitialUserdata () {
   return {
     type: GET_INITIAL_USERDATA
   };
+}
+
+
+export function configSpa () {
+    return {
+        type: CONFIG_SPA
+    };
 }
 
 
