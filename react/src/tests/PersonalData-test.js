@@ -453,12 +453,12 @@ describe("PersonalData Component", () => {
     expect(form.props()).toMatchObject({role: 'form'});
     expect(fieldset.props()).toMatchObject({id: 'personal-data-form'});
 
-    expect(store.dispatch.mock.calls.length).toEqual(5);
+    const numCalls = store.dispatch.mock.calls.length;
     const fakeEvent = {
         preventDefault: () => {}
     };
     button.props().onClick(fakeEvent);
-    expect(store.dispatch.mock.calls.length).toEqual(6);
+    expect(store.dispatch.mock.calls.length).toEqual(numCalls + 1);
 
   });
 
@@ -522,9 +522,9 @@ describe("PersonalData Container", () => {
        {
         type: actions.POST_USERDATA_SUCCESS,
       });
-    expect(dispatch.mock.calls.length).toEqual(5);
+    const numCalls = dispatch.mock.calls.length;
     wrapper.find('EduIDButton#personal-data-button').props().onClick(mockEvent);
-    expect(dispatch.mock.calls.length).toEqual(6);
+    expect(dispatch.mock.calls.length).toEqual(numCalls + 1);
   });
 
 });
