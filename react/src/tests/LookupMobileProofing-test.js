@@ -15,7 +15,7 @@ import { Provider } from 'react-intl-redux';
 import { addLocaleData } from 'react-intl';
 import LookupMobileProofingContainer from "containers/LookupMobileProofing";
 
-const messages = require('../../i18n/l10n/en')
+const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
 
@@ -139,7 +139,8 @@ const fakeState = {
         error: ''
     },
     config: {
-        LOOKUP_MOBILE_PROOFING_URL: 'http://localhost/lookup-mobile'
+        LOOKUP_MOBILE_PROOFING_URL: 'http://localhost/lookup-mobile',
+        csrf_token: 'dummy-token'
     },
     intl: {
         locale: 'en',
@@ -222,13 +223,6 @@ describe("LookupMobileProofing Container", () => {
 });
 
 
-const state = {
-config : {
-    LOOKUP_MOBILE_PROOFING_URL: 'http://localhost/services/proofing',
-    csrf_token: 'dummy-token'
-}
-};
-
 import { requestLookupMobileProof, fetchLookupMobileProof } from '../sagas/LookupMobileProofing';
 import { put, call, select } from "redux-saga/effects";
 
@@ -239,16 +233,16 @@ describe("Async component", () => {
     const generator = requestLookupMobileProof();
 
     let next = generator.next();
-
-    const lookupMobileData = generator.next(next.value);
+    next = generator.next(fakeState);
 
     const action = {
       type: actions.POST_LOOKUP_MOBILE_PROOFING_PROOFING_SUCCESS,
       payload: {
+          csrf_token: 'dummy-token'
       }
     }
 
-    next = generator.next(action);
+    generator.next(action);
     next = generator.next();
     delete(action.payload.csrf_token);
     expect(next.value).toEqual(put(action));
