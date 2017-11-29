@@ -1020,10 +1020,10 @@ describe("Emails Container", () => {
        {
         type: actions.POST_EMAIL
       });
-    expect(dispatch.mock.calls.length).toEqual(3);
+    const numCalls = dispatch.mock.calls.length;
     wrapper.find('input#email').value = 'testing@example.com';
     wrapper.find('EduIDButton#email-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(4);
+    expect(dispatch.mock.calls.length).toEqual(numCalls + 1);
   });
 
 });
