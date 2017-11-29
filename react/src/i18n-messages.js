@@ -409,6 +409,25 @@ const msgs = {
           defaultMessage={`SE-LEG`} />),
 
     /************************/
+    /* Phone Subscription ***/
+    /************************/
+
+    'lmp.confirm-lookup-mobile': (
+        <FormattedMessage
+          id="lmp.confirm-lookup-mobile"
+          defaultMessage={`Phone Subscription`} />),
+
+    'no_phone': (
+        <FormattedMessage
+          id="no_phone"
+          defaultMessage={`You must add a phone number to be able to use this vetting method`} />),
+
+    'lmp.verification_success': (
+        <FormattedMessage
+          id="lmp.verification_success"
+          defaultMessage={`Your NIN has been successfully verified`} />),
+
+    /************************/
     /* OIDC FREJA ***********/
     /************************/
 
