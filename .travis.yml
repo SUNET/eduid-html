@@ -3,7 +3,7 @@ node_js:
 - 'lts/*'
 cache:
   directories:
-    - react/node_modules
+    - node_modules
 before_script:
   - cd react
   - npm install
