@@ -10,7 +10,8 @@ const chpass = {
     suggested_password: '',
     old_password: '',
     new_password: '',
-    choose_custom: false
+    choose_custom: false,
+    zxcvbn_module: undefined
 };
 
 
@@ -86,6 +87,11 @@ let chpassReducer = (state=chpass, action) => {
         error: action.payload.message,
         is_fetching: false,
         failed: true
+      };
+    case actions.SET_ZXCVBN:
+      return {
+        ...state,
+        zxcvbn_module: action.payload.module
       };
     default:
       return state;

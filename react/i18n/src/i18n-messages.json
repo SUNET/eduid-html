@@ -92,6 +92,10 @@
     "defaultMessage": "SUNET 2013-2017"
   },
   {
+    "id": "main.menu",
+    "defaultMessage": "Menu"
+  },
+  {
     "id": "cm.ok",
     "defaultMessage": "OK"
   },
@@ -290,22 +294,6 @@
   {
     "id": "ocf.error_unknown_error",
     "defaultMessage": "Temporary technical difficulties, please try again later"
-  },
-  {
-    "id": "pd.given_name",
-    "defaultMessage": "Given Name"
-  },
-  {
-    "id": "pd.surname",
-    "defaultMessage": "Surname"
-  },
-  {
-    "id": "pd.display_name",
-    "defaultMessage": "Display Name"
-  },
-  {
-    "id": "pd.language",
-    "defaultMessage": "Language"
   },
   {
     "id": "pd.long_description",
@@ -528,6 +516,10 @@
     "defaultMessage": "Password successfully changed"
   },
   {
+    "id": "chpass.different-repeat",
+    "defaultMessage": "Passwords differ"
+  },
+  {
     "id": "pwfield.enter_password",
     "defaultMessage": "Enter password"
   },
@@ -630,6 +622,10 @@
   {
     "id": "letter.no_state_found",
     "defaultMessage": "No state found"
+  },
+  {
+    "id": "letter.letter_sent_msg",
+    "defaultMessage": "You have been sent a verification letter"
   },
   {
     "id": "letter.already-sent",
@@ -747,5 +743,21 @@
     "id": "letter.placeholder",
     "description": "Placeholder for letter proofing text input",
     "defaultMessage": "Letter confirmation code"
+  },
+  {
+    "id": "pd.given_name",
+    "defaultMessage": "Given Name"
+  },
+  {
+    "id": "pd.surname",
+    "defaultMessage": "Surname"
+  },
+  {
+    "id": "pd.display_name",
+    "defaultMessage": "Display Name"
+  },
+  {
+    "id": "pd.language",
+    "defaultMessage": "Language"
   }
 ]

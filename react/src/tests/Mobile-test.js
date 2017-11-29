@@ -10,8 +10,8 @@ import { put, call, select } from "redux-saga/effects";
 
 import Mobile from 'components/Mobile';
 import MobileContainer from "containers/Mobile";
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 import fetchMock from 'fetch-mock';
 
 const messages = require('../../i18n/l10n/en');
@@ -737,6 +737,10 @@ const state = {
     config : {
         csrf_token: '123456789',
         MOBILE_URL: 'test/localhost',
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
     }
 };
 
@@ -941,39 +945,39 @@ describe("Async component", () => {
 });
 
 
-function setupComponent() {
+function setupComponent(store) {
   const props = {
     mobile: '',
     handleSave: mock.fn(),
     handleChange: mock.fn(),
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
-                              <Mobile {...props} />
-                          </IntlProvider>)
-
+  const wrapper = shallow(<Provider store={store}>
+                              <MobileContainer {...props} />
+                          </Provider>)
   return {
     props,
     wrapper,
   }
 }
 
-
-describe("Mobile Component", () => {
-
-    it("Renders", () => {
-        const {wrapper, props} = setupComponent(),
-            form = wrapper.find('form'),
-            fieldset = wrapper.find('fieldset'),
-            email = wrapper.find('TextControl[name="mobile"]');
-    });
-});
-
 const fakeStore = (state) => ({
   default: () => {},
   dispatch: mock.fn(),
   subscribe: mock.fn(),
   getState: () => ({ ...state })
+});
+
+
+describe("Mobile Component", () => {
+
+    it("Renders", () => {
+        const store = fakeStore(getState()),
+            {wrapper, props} = setupComponent(store),
+            form = wrapper.find('form'),
+            fieldset = wrapper.find('fieldset'),
+            email = wrapper.find('TextControl[name="mobile"]');
+    });
 });
 
 
@@ -987,25 +991,7 @@ describe("Mobile Container", () => {
     dispatch;
 
  beforeEach(() => {
-    const store = fakeStore({
-        phones: {
-            is_fetching: true,
-            failed: false,
-            error: '',
-            message: '',
-            resending: {
-              is_fetching: false,
-              failed: false,
-              error: {},
-              message: ''
-            },
-            confirming: '',
-            mobiles: [],
-            mobile: '',
-            code: '',
-        },
-      config: {MOBILE_URL: 'http://localhost/services/mobile'},
-    });
+    const store = fakeStore(getState());
 
     mockProps = {
         mobile: 966123123,
@@ -1014,11 +1000,9 @@ describe("Mobile Container", () => {
 
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
+        <Provider store={store}>
             <MobileContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        </Provider>
     );
     fulldom = wrapper.find(MobileContainer);
     fulltext = wrapper.find(MobileContainer).text();

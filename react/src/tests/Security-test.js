@@ -11,12 +11,12 @@ import * as actions from "actions/Security";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
 
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
@@ -458,6 +458,14 @@ describe("Reducers", () => {
   });
 });
 
+
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
 const mockState = {
   security: {
     location: 'dummy-location',
@@ -467,6 +475,10 @@ const mockState = {
     DASHBOARD_URL: '/dummy-dash-url',
     TOKEN_SERVICE_URL: '/dummy-tok-url',
     SECURITY_URL: '/dummy-sec-url'
+  },
+  intl: {
+    locale: 'en',
+    messages: messages
   }
 };
 
@@ -577,9 +589,9 @@ function setupComponent() {
     handleConfirmationDeletion: mock.fn(),
   };
 
-  const wrapper = shallow(<IntlProvider locale={'en'} messages={messages}>
-                             <Security {...props} />
-                          </IntlProvider>)
+  const wrapper = shallow(<Provider store={fakeStore(mockState)}>
+                             <SecurityContainer {...props} />
+                          </Provider>)
   return {
     props,
     wrapper,
@@ -599,24 +611,17 @@ describe("Security Component", () => {
 });
 
 
-const fakeStore = (state) => ({
-  default: () => {},
-  dispatch: mock.fn(),
-  subscribe: mock.fn(),
-  getState: () => ({ ...state })
-});
-
-
 describe("Security Container", () => {
   let mockProps,
     language,
     getWrapper,
+    getState,
     dispatch,
     store;
 
   beforeEach(() => {
 
-    const getState = function (deleting) {
+    getState = function (deleting) {
       return {
         security: {
             is_fetching: false,
@@ -635,24 +640,27 @@ describe("Security Container", () => {
             DASHBOARD_URL: '/dummy-dash-url',
             TOKEN_SERVICE_URL: '/dummy-tok-url'
         },
+        intl: {
+            locale: 'en',
+            messages: messages
+        }
       }
     };
 
     mockProps = {
         credentials: [],
-        language: 'en'
+        language: 'en',
+        confirming_deletion: false
     };
 
-    getWrapper = function (deleting=false, props=mockProps) {
+    getWrapper = function ({ deleting=false, props=mockProps } = {}) {
       store = fakeStore(getState(deleting));
       dispatch = store.dispatch;
 
       const wrapper = mount(
-          <IntlProvider locale={'en'} messages={messages}>
-            <Provider store={store}>
+          <Provider store={store}>
               <SecurityContainer {...props}/>
-            </Provider>
-          </IntlProvider>
+          </Provider>
       );
       return wrapper;
     };
@@ -695,9 +703,8 @@ describe("Security Container", () => {
         language: 'en',
         confirming_deletion: true
     };
-
-    expect(dispatch.mock.calls.length).toEqual(0);
     const deleteModal = getWrapper(true, newProps).find('DeleteModal');
+    expect(dispatch.mock.calls.length).toEqual(0);
     deleteModal.props().handleConfirm();
     expect(dispatch.mock.calls.length).toEqual(1);
     expect(dispatch.mock.calls[0][0].type).toEqual('POST_DELETE_ACCOUNT');

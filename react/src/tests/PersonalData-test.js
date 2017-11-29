@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
 import PersonalData from 'components/PersonalData';
+import PersonalDataContainer from 'containers/PersonalData';
 import * as actions from "actions/PersonalData";
 import * as emailActions from "actions/Emails";
 import * as phoneActions from "actions/Mobile";
@@ -16,31 +17,11 @@ import personalDataReducer from "reducers/PersonalData";
 import {requestAllPersonalData, savePersonalData, fetchAllPersonalData, sendPersonalData} from '../sagas/PersonalData';
 import { put, call, select } from "redux-saga/effects";
 
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import PersonalDataContainer from "containers/PersonalData";
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
-
-
-const mockState = {
-  personal_data: {
-      is_fetching: false,
-      failed: false,
-      given_name: '',
-      surname: '',
-      display_name: '',
-      language: ''
-  },
-  config : {
-      csrf_token: '',
-      is_configured : true,
-      is_fetching: false,
-      failed: false,
-      PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
-  }
-};
 
 
 describe("Personal Data Actions", () => {
@@ -123,7 +104,7 @@ describe("Reducers", () => {
       }
   };
 
-    it("Receives a GET_ALL_USERDATA action", () => {
+  it("Receives a GET_ALL_USERDATA action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -145,7 +126,7 @@ describe("Reducers", () => {
     );
   });
 
-    it("Receives a GET_USERDATA_SUCCESS action", () => {
+  it("Receives a GET_USERDATA_SUCCESS action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -163,7 +144,7 @@ describe("Reducers", () => {
     );
   });
 
-it("Receives a GET_ALL_USERDATA_FAIL action", () => {
+  it("Receives a GET_ALL_USERDATA_FAIL action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -191,7 +172,7 @@ it("Receives a GET_ALL_USERDATA_FAIL action", () => {
     );
   });
 
-it("Receives a CHANGE_USERDATA action", () => {
+  it("Receives a CHANGE_USERDATA action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -215,7 +196,7 @@ it("Receives a CHANGE_USERDATA action", () => {
     );
   });
 
-it("Receives a POST_USERDATA action", () => {
+  it("Receives a POST_USERDATA action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -237,7 +218,7 @@ it("Receives a POST_USERDATA action", () => {
     );
   });
 
-it("Receives a POST_USERDATA_SUCCESS action", () => {
+  it("Receives a POST_USERDATA_SUCCESS action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -255,7 +236,7 @@ it("Receives a POST_USERDATA_SUCCESS action", () => {
     );
   });
 
-it("Receives a POST_USERDATA_FAIL action", () => {
+  it("Receives a POST_USERDATA_FAIL action", () => {
     expect(
       personalDataReducer(
         mockState,
@@ -285,6 +266,7 @@ it("Receives a POST_USERDATA_FAIL action", () => {
 
 });
 
+
 const fakeStore = (state) => ({
   default: () => {},
   dispatch: mock.fn(),
@@ -293,18 +275,28 @@ const fakeStore = (state) => ({
 });
 
 const fakeState = {
-      personal_data: {
-        is_fetching: false,
-        failed: false,
-        given_name: '',
-        surname: '',
-        display_name: '',
-        language: '',
-      },
-      config: {PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'},
-    }
+  personal_data: {
+      is_fetching: false,
+      failed: false,
+      given_name: '',
+      surname: '',
+      display_name: '',
+      language: ''
+  },
+  config : {
+      csrf_token: '',
+      is_configured : true,
+      is_fetching: false,
+      failed: false,
+      PERSONAL_DATA_URL: 'http://localhost/services/personal-data/user'
+  },
+  intl: {
+      locale: 'en',
+      messagers: messages
+  }
+};
 
-function setupComponent() {
+function setupComponent(store) {
   const props = {
     given_name: '',
     surname: '',
@@ -314,12 +306,9 @@ function setupComponent() {
     handleChange: mock.fn()
   };
 
-  const wrapper = mount(<Provider store={ fakeStore(fakeState) }>
-                            <IntlProvider locale={'en'} messages={messages}>
-                              <PersonalData {...props} />
-                            </IntlProvider>
+  const wrapper = mount(<Provider store={ store }>
+                            <PersonalDataContainer {...props} />
                         </Provider>);
-
   return {
     props,
     wrapper
@@ -406,12 +395,12 @@ describe("Async component", () => {
        let next = generator.next();
 
        // const config = next.value;
-       next = generator.next(mockState.config);
+       next = generator.next(fakeState.config);
 
-       const data = mockState.personal_data;
-       const config = mockState.config;
+       const data = fakeState.personal_data;
+       const config = fakeState.config;
 
-       // expect(data).toEqual(select(mockState => mockState.config));
+       // expect(data).toEqual(select(fakeState => fakeState.config));
 
        generator.next(data);
        generator.next();
@@ -444,7 +433,8 @@ describe("Async component", () => {
 describe("PersonalData Component", () => {
 
   it("Renders", () => {
-    const { wrapper, props } = setupComponent(),
+    const store = fakeStore(fakeState),
+          { wrapper, props } = setupComponent(store),
           form = wrapper.find('form'),
           fieldset = wrapper.find('fieldset'),
           language = wrapper.find("#language"),
@@ -463,9 +453,12 @@ describe("PersonalData Component", () => {
     expect(form.props()).toMatchObject({role: 'form'});
     expect(fieldset.props()).toMatchObject({id: 'personal-data-form'});
 
-    expect(props.handleSave.mock.calls.length).toEqual(0);
-    button.props().onClick();
-    expect(props.handleSave.mock.calls.length).toEqual(1);
+    expect(store.dispatch.mock.calls.length).toEqual(5);
+    const fakeEvent = {
+        preventDefault: () => {}
+    };
+    button.props().onClick(fakeEvent);
+    expect(store.dispatch.mock.calls.length).toEqual(6);
 
   });
 
@@ -494,11 +487,9 @@ describe("PersonalData Container", () => {
 
 
     wrapper = mount(
-        <IntlProvider locale={'en'} messages={messages}>
-          <Provider store={store}>
+        <Provider store={store}>
             <PersonalDataContainer {...mockProps}/>
-          </Provider>
-        </IntlProvider>
+        </Provider>
     );
     fulldom = wrapper.find(PersonalDataContainer);
     fulltext = wrapper.find(PersonalDataContainer).text();

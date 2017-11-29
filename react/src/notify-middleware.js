@@ -25,7 +25,7 @@ const calculateProfileFilled = (state) => {
 };
 
 const notifyAndDispatch = store => next => action => {
-    if (action.type !== actions.NEW_NOTIFICATION && action.type !== PROFILE_FILLED) {
+    if (action.type.endsWith('SUCCESS') || action.type.endsWith('FAIL')) {
         if (action.error && action.payload) {
             const msg = action.payload.errorMsg || action.payload.message || 'error_in_form';
             next(actions.eduidNotify(msg, 'errors'));

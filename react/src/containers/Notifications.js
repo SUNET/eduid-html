@@ -2,6 +2,8 @@
 import { connect } from 'react-redux';
 import Notifications from 'components/Notifications';
 import * as actions from 'actions/Notifications';
+import i18n from 'i18n-messages';
+
 
 const mapStateToProps = (state, props) => {
   return {
@@ -28,4 +30,4 @@ const NotificationsContainer = connect(
   mapDispatchToProps
 )(Notifications);
 
-export default NotificationsContainer;
+export default i18n(NotificationsContainer);

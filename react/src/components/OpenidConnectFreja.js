@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withUserAgent from 'react-useragent';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
@@ -172,4 +171,4 @@ OpenidConnectFreja.propTypes = {
   nin: PropTypes.string,
 };
 
-export default withUserAgent(i18n(OpenidConnectFreja));
+export default withUserAgent(OpenidConnectFreja);

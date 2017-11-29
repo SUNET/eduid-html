@@ -1,26 +1,14 @@
 
 import * as actions from "actions/Config";
 
-const default_language = "en";
-const supported_languages = ["en", "sv"];
-let language = navigator.languages
-                 ? navigator.languages[0]
-                 : (navigator.language || navigator.userLanguage);
-
-if (!supported_languages.includes(language)) {
-  language = default_language;
-}
-
-const lang_code = language.substring(0,2);
-
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
-    language: lang_code,
     window_size: actions.getWindowSize(),
     show_sidebar: true,
     is_configured: false,
     is_fetching: false,
-    failed: false
+    failed: false,
+    is_spa: false
 };
 
 const urls_with_no_sidebar = [
@@ -66,6 +54,11 @@ let configReducer = (state=configData, action) => {
       return {
           ...state,
           ...action.payload
+      };
+    case actions.CONFIG_SPA:
+      return {
+          ...state,
+          is_spa: true
       };
     case "@@router/LOCATION_CHANGE":
       let show_sidebar = true;

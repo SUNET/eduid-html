@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import i18n from 'i18n-messages';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import { GET_USERDATA_SUCCESS } from "actions/PersonalData";
@@ -105,4 +104,4 @@ PersonalData.propTypes = {
   is_fetching: PropTypes.bool
 }
 
-export default i18n(PersonalData);
+export default PersonalData;

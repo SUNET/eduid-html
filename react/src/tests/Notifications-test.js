@@ -7,7 +7,7 @@ import expect, { createSpy, spyOn, isSpy } from "expect";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import { put, call, select } from "redux-saga/effects";
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 
 import Notifications from 'components/Notifications';
@@ -26,6 +26,10 @@ const mockState = {
       messages: [],
       warnings: [],
       errors: []
+  },
+  intl: {
+      locale: 'en',
+      messages: messages
   }
 };
 
@@ -119,6 +123,13 @@ describe("Reducers", () => {
     });
 });
 
+const fakeStore = (state) => ({
+    default: () => {},
+    dispatch: mock.fn(),
+    subscribe: mock.fn(),
+    getState: () => ({ ...state })
+});
+
 function setupComponent() {
 
     const props = {
@@ -126,9 +137,11 @@ function setupComponent() {
         warnings: [],
         errors: []
     };
-    const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
-                              <Notifications {...props} />
-                          </IntlProvider>);
+    const state = {...mockState};
+    state.notifications.messages.push('message-2');
+    const wrapper = mount(<Provider store={fakeStore(state)}>
+                              <NotificationsContainer {...props} />
+                          </Provider>);
     return {
         props,
         wrapper
@@ -147,13 +160,6 @@ describe("Notifications Component", () => {
 });
 
 
-const fakeStore = (state) => ({
-    default: () => {},
-    dispatch: mock.fn(),
-    subscribe: mock.fn(),
-    getState: () => ({ ...state })
-});
-
 describe("Notifications Container", () => {
   let fulltext,
     fulldom,
@@ -169,10 +175,14 @@ describe("Notifications Container", () => {
             notifications: {
                 is_fetching: false,
                 failed: false,
-            messages: [],
-            warnings: [],
-            errors: ['t-error']
+                messages: [],
+                warnings: [],
+                errors: ['t-error']
             },
+            intl: {
+                locale: 'en',
+                messages: messages
+            }
         });
 
         mockProps = {
@@ -182,11 +192,9 @@ describe("Notifications Container", () => {
         };
 
         wrapper = mount(
-            <IntlProvider locale={'en'} messages={messages}>
-              <Provider store={store}>
+            <Provider store={store}>
                 <NotificationsContainer {...mockProps}/>
-              </Provider>
-            </IntlProvider>
+            </Provider>
         );
         fulldom = wrapper.find(NotificationsContainer);
         fulltext = wrapper.find(NotificationsContainer).text();

@@ -6,8 +6,8 @@ export const GET_JSCONFIG_CONFIG_SUCCESS = 'GET_JSCONFIG_CONFIG_SUCCESS';
 export const GET_JSCONFIG_CONFIG_FAIL = 'GET_JSCONFIG_CONFIG_FAIL';
 export const NEW_CSRF_TOKEN = 'NEW_CSRF_TOKEN';
 export const GET_INITIAL_USERDATA = 'GET_INITIAL_USERDATA';
-export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const RESIZE_WINDOW = 'RESIZE_WINDOW';
+export const CONFIG_SPA = 'CONFIG_SINGLE_PAGE_APP';
 
 export function getConfig () {
   return {
@@ -43,14 +43,12 @@ export function getInitialUserdata () {
 }
 
 
-export function setLanguage (lang) {
-  return {
-    type: SET_LANGUAGE,
-    payload: {
-      language: lang
-    }
-  };
+export function configSpa () {
+    return {
+        type: CONFIG_SPA
+    };
 }
+
 
 export function resizeWindow () {
     return {

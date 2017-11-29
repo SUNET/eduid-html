@@ -4,6 +4,7 @@ import { isValid } from "redux-form";
 import Mobile from 'components/Mobile';
 import { makePrimary, postMobile, changeMobile, startResendMobileCode, finishConfirmation,
          startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -72,5 +73,4 @@ const MobileContainer = connect(
   mapDispatchToProps
 )(Mobile);
 
-export default MobileContainer;
-
+export default i18n(MobileContainer);

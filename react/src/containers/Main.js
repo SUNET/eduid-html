@@ -1,11 +1,15 @@
 
 import { connect } from 'react-redux';
+
+import i18n from 'i18n-messages';
 import Main from 'components/Main';
 import { resizeWindow } from "actions/Config";
 
 const mapStateToProps = (state, props) => {
     return {
-        language: state.config.language
+        window_size: state.config.window_size,
+        show_sidebar: state.config.show_sidebar,
+        eppn: state.personal_data.data.eppn
     }
 };
 
@@ -23,4 +27,4 @@ const MainContainer = connect(
   mapDispatchToProps
 )(Main);
 
-export default MainContainer;
+export default i18n(MainContainer);

@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import OpenidConnect from 'components/OpenidConnect';
 import { postOpenid } from "actions/OpenidConnect";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -27,4 +28,4 @@ const OpenidConnectContainer = connect(
   mapDispatchToProps
 )(OpenidConnect);
 
-export default OpenidConnectContainer;
+export default i18n(OpenidConnectContainer);

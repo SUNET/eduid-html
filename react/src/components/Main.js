@@ -1,13 +1,12 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
 import { Route, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
+import Collapse from 'react-bootstrap/lib/Collapse';
 
-import i18n from 'i18n-messages';
 import HeaderContainer from "containers/Header";
 import FooterContainer from "containers/Footer";
 
@@ -30,11 +29,26 @@ export const history = createHistory()
 
 /* SubMain is the main component, before internationalization */
 
-class SubMain extends Component {
+class Main extends Component {
+
+    constructor(...args) {
+        super(...args);
+        this.state = {
+            openTabs: false
+        };
+    }
+
+    componentWillMount() {
+        window.addEventListener('resize', this.props.handleWindowSizeChange);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.props.handleWindowSizeChange);
+    }
 
     render () {
 
-        let tabsElem = '';
+        let tabsElem = '',
+            profElem = '';
 
         if (this.props.show_sidebar) {
 
@@ -42,44 +56,87 @@ class SubMain extends Component {
                           {id: 'nins', label: this.props.l10n('main.nins')},
                           {id: 'emails', label: this.props.l10n('main.emails')},
                           {id: 'phones', label: this.props.l10n('main.phones')},
-                          {id: 'security', label: this.props.l10n('main.security')}];
-            const tabsElems = tabs.map( (tab, index) => {
-                //let classes;
-                //if (tab.id === 'personaldata') {
-                    //classes = 'main-nav-tabs active';
-                //} else {
-                    //classes = 'main-nav-tabs';
-                //}
-                return (
-                    <li key={index}>
-                      <NavLink className='main-nav-tabs'
-                            activeClassName="active"
-                            to={`/profile/${tab.id}`}
-                            id={`${tab.id}-router-link`}>
-                        {tab.label}
-                      </NavLink>
-                    </li>
+                          {id: 'security', label: this.props.l10n('main.security')}],
+                  size = this.props.window_size,
+                  tabsElems = (classes) => {
+                      return tabs.map( (tab, index) => {
+                          return (
+                              <li key={index}>
+                                <NavLink className={classes}
+                                      activeClassName="active"
+                                      onClick={() => this.setState({openTabs: false})}
+                                      to={`/profile/${tab.id}`}
+                                      id={`${tab.id}-router-link`}>
+                                  {tab.label}
+                                </NavLink>
+                              </li>
+                          );
+                      });
+                  };
+            if (size === 'lg' || size === 'md') {
+                tabsElem = (
+                      <div className='col-md-3'>
+                        <div className="profile-head">
+                          <h3>{this.props.l10n('main.profile_title')}</h3>
+                          <PendingActionsContainer />
+                        </div>
+                        <div className="tabs-left hidden-xs" id="profile-menu-large">
+                          <ul className='nav nav-tabs nav-stacked'>
+                            {tabsElems('main-nav-tabs')}
+                            <ProfileFilledContainer />
+                            <li id="profile-menu-eppn-li">
+                              <div className="profile-menu-eppn">
+                                <p className="eppn-text-muted">{this.props.l10n('main.eduid_id')}: {this.props.eppn}</p>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                 );
-            });
-            tabsElem = (
-                    <div className='col-md-3'>
-                      <div className="profile-head">
-                        <h3>{this.props.l10n('main.profile_title')}</h3>
-                        <PendingActionsContainer />
+            } else {
+                tabsElem = [(
+                      <div key="1" className='col-md-3'>
+                        <div className="profile-head">
+                          <h3>{this.props.l10n('main.profile_title')}</h3>
+                          <PendingActionsContainer />
+                        </div>
+                      </div>),
+                      (<nav key="2" className="navbar navbar-default hidden-md hidden-lg" role="navigation">
+                        <div className="container-fluid">
+                          <div className="navbar-header">
+                            <button type="button"
+                                    className="navbar-toggle collapsed"
+                                    onClick={() => this.setState({openTabs: !this.state.openTabs})}>
+                              <span className="sr-only">{this.props.l10n('main.toggle-navigation')}</span>
+                              <span className="icon-bar"></span>
+                              <span className="icon-bar"></span>
+                              <span className="icon-bar"></span>
+                            </button>
+                            <a className="navbar-brand" href="#">
+                              {this.props.l10n('main.menu')}
+                            </a>
+                          </div>
+    
+                        <Collapse in={this.state.openTabs}>
+                          <ul className="nav nav-stacked nav-tabs navbar-nav">
+                              {tabsElems('main-nav-tabs btn btn-block')}
+                          </ul>
+                        </Collapse>
                       </div>
-                      <div className="tabs-left hidden-xs" id="profile-menu-large">
-                        <ul className='nav nav-tabs nav-stacked'>
-                          {tabsElems}
-                          <ProfileFilledContainer />
-                          <li id="profile-menu-eppn-li">
-                            <div className="profile-menu-eppn">
-                              <p className="eppn-text-muted">{this.props.l10n('main.eduid_id')}: {this.props.eppn}</p>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-            );
+                    </nav>
+                )];
+                
+                profElem = (
+                      <ul className="nav nav-stacked nav-tabs navbar-nav">
+                        <ProfileFilledContainer />
+                        <li id="profile-menu-eppn-li">
+                          <div className="profile-menu-eppn">
+                            <p className="eppn-text-muted">{this.props.l10n('main.eduid_id')}: {this.props.eppn}</p>
+                          </div>
+                        </li>
+                      </ul>
+                );
+            }
         }
 
         return ([
@@ -103,6 +160,7 @@ class SubMain extends Component {
                         <Route path="/profile/chpass" component={ChangePasswordContainer} />
                       </div>
                     </div>
+                    {profElem}
                   </div>
                 </div>
                 <div className='push'></div>
@@ -113,56 +171,12 @@ class SubMain extends Component {
     }
 }
 
-SubMain.propTypes = {
+Main.propTypes = {
     window_size: PropTypes.string,
     show_sidebar: PropTypes.bool,
-    eppn: PropTypes.string
-};
-
-const SubMainContainer = connect(
-   (state, props) => ({
-        window_size: state.config.window_size,
-        show_sidebar: state.config.show_sidebar,
-        eppn: state.personal_data.data.eppn
-    }),
-    (dispatch, props) => ({}),
-)(i18n(SubMain));
-
-
-export { SubMainContainer };
-
-
-/* localize the internationalized SubMain component,
- * and wrap it with IntlProvider, to produce the final
- * Main Component */
-
-class Main extends Component {
-
-    componentWillMount() {
-        window.addEventListener('resize', this.props.handleWindowSizeChange);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.props.handleWindowSizeChange);
-    }
-
-    render () {
-        const lang = this.props.language,
-              locale = require('react-intl/locale-data/' + lang),
-              messages = require('../../i18n/l10n/' + lang);
-
-        addLocaleData(locale);
-
-        return (
-          <IntlProvider locale={ lang } messages={ messages }>
-            <SubMainContainer />
-          </IntlProvider>
-        );
-    }
-}
-
-Main.propTypes = {
-    language: PropTypes.string,
-    handleWindowSizeChange: PropTypes.func
+    eppn: PropTypes.string,
+    handleWindowSizeChange: PropTypes.func,
+    messages: PropTypes.object
 }
 
 export default Main;

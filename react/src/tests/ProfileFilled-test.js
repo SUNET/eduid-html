@@ -1,15 +1,15 @@
+const mock = require('jest-mock');
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy, spyOn, isSpy } from "expect";
-import ProfileFilled from 'components/ProfileFilled';
+import ProfileFilledContainer from 'containers/ProfileFilled';
 import * as actions from "actions/Profile";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import profileReducer from "reducers/Profile";
 
-import ProfileFilledContainer from "containers/ProfileFilled";
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { Provider } from 'react-intl-redux';
+import { addLocaleData } from 'react-intl';
 
 
 const messages = require('../../i18n/l10n/en');
@@ -66,6 +66,26 @@ describe("Reducers", () => {
   });
 });
 
+const fakeStore = (state) => ({
+  default: () => {},
+  dispatch: mock.fn(),
+  subscribe: mock.fn(),
+  getState: () => ({ ...state })
+});
+
+const fakeState = {
+  config : {
+      csrf_token: '',
+  },
+  profile: {
+      cur: 5,
+      max: 7
+  },
+  intl: {
+      locale: 'en',
+      messagers: messages
+  }
+};
 
 function setupComponent() {
   const props = {
@@ -73,9 +93,9 @@ function setupComponent() {
       cur: 5
   };
 
-  const wrapper = mount(<IntlProvider locale={'en'} messages={messages}>
-                             <ProfileFilled {...props} />
-                          </IntlProvider>)
+  const wrapper = mount(<Provider store={fakeStore(fakeState)}>
+                             <ProfileFilledContainer {...props} />
+                        </Provider>)
   return {
     props,
     wrapper,
@@ -87,7 +107,7 @@ describe("ProfileFilled Component", () => {
     it("Renders", () => {
         const {wrapper, props} = setupComponent(),
             container = wrapper.find('li#profile-filled-li'),
-            meter = wrapper.find('meter');
+            meter = wrapper.find('div.profile-filled-progress-bar');
 
         expect(container.contains(meter.get(0))).toBeTruthy();
     });

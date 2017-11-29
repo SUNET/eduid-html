@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
 import ConfirmModal from 'components/ConfirmModal';
 
@@ -48,7 +47,7 @@ class LetterProofingButton extends Component {
           </form>
           <ConfirmModal
                 modalId="letterConfirmDialog"
-                inputId="letterConfirmDialogControl"
+                controlId="letterConfirmDialogControl"
                 title={this.props.l10n('letter.confirm_title')}
                 resendHelp={this.props.l10n('letter.lost_code')}
                 resendText={this.props.l10n('letter.resend_code')}
@@ -79,4 +78,4 @@ LetterProofingButton.propTypes = {
   handleConfirmationLetter: PropTypes.func
 }
 
-export default i18n(LetterProofingButton);
+export default LetterProofingButton;

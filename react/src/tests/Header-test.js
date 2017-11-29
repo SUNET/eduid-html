@@ -1,16 +1,87 @@
 
 const mock = require('jest-mock');
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
+import { put, select, call } from "redux-saga/effects";
 import { shallow, mount, render } from 'enzyme';
 import expect, { createSpy } from "expect";
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 
-import Header from 'components/Header';
+import HeaderContainer from 'containers/Header';
+import * as actions from "actions/Header";
+import { requestLogout, sendLogout } from "sagas/Header";
 
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
+
+describe("Header Actions", () => {
+
+    it("Should start logout ", () => {
+       const expectedAction = {
+           type: actions.POST_LOGOUT
+       };
+       expect(actions.startLogout()).toEqual(expectedAction);
+   });
+
+   it("Logout failure ", () => {
+       const err = new Error('Error'),
+             data = {
+                 error: err,
+                 message: err.toString()
+             };
+       const expectedAction = {
+           type: actions.POST_AUTHN_LOGOUT_FAIL,
+           error: true,
+           payload: data
+       };
+       expect(actions.postLogoutFail(err)).toEqual(expectedAction);
+   });
+});
+
+
+const state = {
+    config : {
+        csrf_token: '123456789',
+        TOKEN_SERVICE_URL: 'test/localhost'
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
+    }
+};
+
+describe("Async component", () => {
+
+    it("Sagas requestLogout", () => {
+
+       const generator = requestLogout();
+       let next = generator.next();
+
+       const data = {
+                csrf_token: state.config.csrf_token
+              };
+
+       const resp = generator.next(state);
+       const url = state.config.TOKEN_SERVICE_URL;
+       expect(resp.value).toEqual(call(sendLogout, url, data));
+       const dummyLocation = 'dummy-location',
+             testingWindow = {location: ""},
+             action = {
+                 type: actions.POST_AUTHN_LOGOUT_SUCCESS,
+                 payload: {
+                     csrf_token: 'csrf-token',
+                     location: dummyLocation
+                 },
+                 testingWindow: testingWindow
+             };
+       next = generator.next(action);
+       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+
+       generator.next();
+       expect(testingWindow.location).toEqual(dummyLocation);
+    });
+});
 
 const fakeStore = (state) => ({
     default: () => {},
@@ -21,15 +92,23 @@ const fakeStore = (state) => ({
 
 function setupComponent() {
     const store = fakeStore({
+        intl: {
+            locale: 'en',
+            messages: messages
+        },
+        emails: {
+            emails: []
+        },
+        nins: {
+            nins: []
+        }
     });
     const props = {
         email: 'fake@fake.fake',
         confirmed: 'main.confirmed'
     };
     const wrapper = mount(<Provider store={ store }>
-                              <IntlProvider locale={'en'} messages={messages}>
-                                  <Header {...props} />
-                              </IntlProvider>
+                              <HeaderContainer {...props} />
                           </Provider>);
     return {
         props,

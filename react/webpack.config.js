@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -14,9 +15,9 @@ module.exports = {
       // "only" prevents reload on syntax errors:
       // hot: 'webpack/hot/only-dev-server',
       index: './src/entry-points/index',
-      personal_data: './src/entry-points/personal-data',
-      dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
-      openid_connect: './src/entry-points/openid-connect',
+      //personal_data: './src/entry-points/personal-data',
+      //dashboard: ['babel-polyfill', './src/entry-points/dashboard-tabbed-form'],
+      //openid_connect: './src/entry-points/openid-connect',
       openid_connect_freja: './src/entry-points/openid-connect-freja'
     },
     output: {
@@ -34,6 +35,7 @@ module.exports = {
       ],
       // allow us to avoid including extension name
       extensions: ['.js', '.jsx', '.json'],
+      mainFields: ["browser", "module", "main"]
     },
     module: {
       loaders: [
@@ -81,16 +83,12 @@ module.exports = {
       ]
     },
     plugins:[
+      // Initial configuration
+      initialConfigPlugin,
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProvidePlugin({
         'Promise': 'exports-loader?global.Promise!es6-promise',
         'window.fetch': 'exports-loader?global.fetch!whatwg-fetch'
-      }),
-      // Initial configuration
-      new webpack.DefinePlugin({
-          'EDUID_COOKIE_NAME': "'sessid'",
-          'EDUID_AUTHN_URL': "'http://dashboard.eduid.docker:8080/services/authn/login'",
-          'EDUID_CONFIG_URL': "'http://dashboard.eduid.docker:8080/services/jsconfig/config'"
       }),
       new webpack.NoEmitOnErrorsPlugin(),
         new webpack.LoaderOptionsPlugin({
@@ -101,6 +99,6 @@ module.exports = {
            }
          }
        }),
-        new BundleAnalyzerPlugin()
+       // new BundleAnalyzerPlugin()
     ]
 };

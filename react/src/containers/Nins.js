@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { isValid } from "redux-form";
 import Nins from 'components/Nins';
 import * as actions from "actions/Nins";
+import i18n from 'i18n-messages';
 
 
 
@@ -36,4 +37,4 @@ const NinsContainer = connect(
   mapDispatchToProps
 )(Nins);
 
-export default NinsContainer;
+export default i18n(NinsContainer);

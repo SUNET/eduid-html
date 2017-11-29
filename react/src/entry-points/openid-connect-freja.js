@@ -5,6 +5,12 @@ import React from 'react';
 import init_app from "../init-app";
 import OpenidConnectFrejaContainer from 'containers/OpenidConnectFreja';
 
+import { addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import sv from 'react-intl/locale-data/sv';
+
+addLocaleData([...en, ...sv])
+
 let component = <OpenidConnectFrejaContainer />;
 
 
@@ -25,6 +31,10 @@ jQuery.fn.initDeformCallbacks = function () {
             console.log('Executing form script: ' + script);
             window.forms_helper_functions[script]();
         });
+        const root = document.getElementById('openid-connect-root');
+        if (root) {
+            init_app(root, component, true);
+        }
     }
 };
 
@@ -47,9 +57,8 @@ var TabbedForm = function (container) {
               container.find("button[data-toggle=tooltip]").tooltip();
               container.find("label[data-toggle=tooltip]").tooltip();
               if (url === "nins") {
-                const root = document.getElementById('openid-connect-root'),
-                      form = root.previousElementSibling;
-                      init_app(root, component);
+                const root = document.getElementById('openid-connect-root');
+                      init_app(root, component, true);
               }
 
           }, 'html').fail(function (xhr) {

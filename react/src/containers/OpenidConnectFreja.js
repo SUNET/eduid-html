@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import OpenidConnectFreja from 'components/OpenidConnectFreja';
 import { postOpenidFreja, getOpenidFreja, showOpenidFrejaModal, hideOpenidFrejaModal } from "actions/OpenidConnectFreja";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -38,5 +39,4 @@ const OpenidConnectFrejaContainer = connect(
   mapDispatchToProps
 )(OpenidConnectFreja);
 
-export default OpenidConnectFrejaContainer;
-
+export default i18n(OpenidConnectFrejaContainer);

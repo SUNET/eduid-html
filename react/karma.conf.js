@@ -2,13 +2,15 @@
 var argv = require('yargs').argv;
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
+var initialConfigPlugin = require('./src/init-config').initialConfigPlugin;
 const path = require('path');
 
 process.env.CHROME_BIN = "chromium"
 
 var webpackKarma = {
   resolve: webpackConfig.resolve,
-  module: webpackConfig.module
+  module: webpackConfig.module,
+  plugins: [ initialConfigPlugin ]
 };
 
 webpackKarma.devtool = 'inline-source-map';

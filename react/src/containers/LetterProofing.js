@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { isValid } from "redux-form";
 import LetterProofingButton from 'components/LetterProofing';
 import * as actions from "actions/LetterProofing";
+import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
@@ -52,4 +53,4 @@ const LetterProofingContainer = connect(
   mapDispatchToProps
 )(LetterProofingButton);
 
-export default LetterProofingContainer;
+export default i18n(LetterProofingContainer);
