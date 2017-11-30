@@ -16,4 +16,4 @@ COPY . /opt/eduid/eduid-html/wwwroot/
 
 WORKDIR /
 
-CMD ["nginx"]
+CMD ["/start.sh"]
