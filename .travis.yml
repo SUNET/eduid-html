@@ -4,5 +4,5 @@ node_js:
 before_script:
   - cd react
   - npm install
-script: npm run-script test-headless && npm run build
+script: npm run-script test-headless && npm run build && npm run build-pro
 
