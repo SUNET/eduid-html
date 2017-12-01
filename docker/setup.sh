@@ -7,7 +7,12 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get -y dist-upgrade
 apt-get -y install \
-    nginx
+    nginx \
+    iputils-ping \
+    procps \
+    netcat-openbsd \
+&& apt-get clean
+
 
 # make sure we get rid of all default sites
 rm -f /etc/nginx/sites-enabled/*
