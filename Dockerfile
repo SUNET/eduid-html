@@ -26,7 +26,7 @@ COPY tekniker.html /opt/eduid/www/tekniker.html
 
 # Copy react app and other webapp dependencies to /opt/eduid/static/
 COPY static /opt/eduid/static/
-COPY react/build /opt/eduid/static/build/
+COPY react/build /opt/eduid/build/
 
 # Copy profile loading html to /opt/eduid/profile/
 COPY react/public/index.html /opt/eduid/profile/index.html
