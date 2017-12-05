@@ -761,12 +761,20 @@ meter {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
-div#profile-menu-small {
-    margin-left: -15px !important;
-    margin-right: -15px !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+    div#profile-menu-small {
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    div.container-fluid .navbar-header {
+        display: none;
+    }
+
+    ul.nav.navbar-nav.collapse {
+        display: block;
+    }
 
 }
 
