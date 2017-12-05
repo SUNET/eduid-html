@@ -536,6 +536,11 @@ const msgs = {
           id="pd.save-success"
           defaultMessage={`Successfully saved Personal information`} />),
 
+    'pd.choose-language': (
+        <FormattedMessage
+          id="pd.choose-language"
+          defaultMessage={`Choose language`} />),
+
     /************************/
     /* Mobile ***************/
     /************************/
