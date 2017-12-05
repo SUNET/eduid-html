@@ -328,6 +328,10 @@
     "defaultMessage": "Successfully saved Personal information"
   },
   {
+    "id": "pd.choose-language",
+    "defaultMessage": "Choose language"
+  },
+  {
     "id": "mobile.resend_success",
     "defaultMessage": "New code successfully sent to {email}"
   },
