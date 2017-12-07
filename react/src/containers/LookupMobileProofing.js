@@ -9,8 +9,7 @@ import i18n from 'i18n-messages';
 const mapStateToProps = (state, props) => {
   return {
     is_fetching: state.lookup_mobile.is_fetching,
-    disabled: ! isValid('nins')(state),
-    errorMsg: state.lookup_mobile.error
+    disabled: ! isValid('nins')(state)
   }
 };
 

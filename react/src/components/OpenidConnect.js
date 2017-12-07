@@ -20,8 +20,6 @@ class OpenidConnect extends Component {
                 className="form-horizontal"
                 role="form">
             <fieldset id="openid-connect">
-              <span className="error-msg text-danger">{this.props.errorMsg}</span>
-              <br />
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       onClick={this.props.handleGetQRCode}>
@@ -43,7 +41,6 @@ class OpenidConnect extends Component {
 OpenidConnect.propTypes = {
   qr_img: PropTypes.string,
   qr_code: PropTypes.string,
-  errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   handleGetQRCode: PropTypes.func
 }

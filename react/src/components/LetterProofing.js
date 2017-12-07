@@ -15,29 +15,12 @@ class LetterProofingButton extends Component {
 
     if (this.props.is_fetching) spinning = true;
 
-    let message = '',
-        messageArgs = {},
-        levelMessage = 'success';
-
-    if (this.props.letter_sent) {
-        message = 'letter.letter_sent_msg';
-        messageArgs = {letter_sent: this.props.letter_sent,
-                       letter_expires: this.props.letter_expires};
-        levelMessage = 'success';
-    } else if (this.props.resending.failed) {
-        message = this.props.resending.message;
-        messageArgs = {};
-        levelMessage = 'error';
-    }
-
     return (
         <div>
           <form id="letter-proofing-form"
                 className="form-horizontal"
                 role="form">
             <fieldset id="letter-proofing">
-              <span className="error-msg text-danger">{this.props.errorMsg}</span>
-              <br />
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       onClick={this.props.handleLetterProofing}>
@@ -56,10 +39,7 @@ class LetterProofingButton extends Component {
                 closeModal={this.props.handleStopConfirmationLetter}
                 handleResend={this.props.handleConfirmationLetter}
                 handleConfirm={this.props.sendConfirmationLetter}
-                is_fetching={this.props.resending.is_fetching}
-                message={message}
-                messageArgs={messageArgs}
-                LevelMessage={levelMessage} />
+                is_fetching={this.props.resending.is_fetching} />
         </div>
     );
   }
@@ -69,7 +49,6 @@ LetterProofingButton.propTypes = {
   letter_sent: PropTypes.string,
   letter_expires: PropTypes.string,
   resending: PropTypes.object,
-  errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   confirmingLetter: PropTypes.bool,
   sendConfirmationLetter: PropTypes.func,

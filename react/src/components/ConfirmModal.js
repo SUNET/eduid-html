@@ -6,15 +6,10 @@ import { Field, reduxForm } from 'redux-form';
 
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Alert from 'react-bootstrap/lib/Alert';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
 
 import i18n from 'i18n-messages';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
-import EduiDAlert from 'components/EduIDAlert';
 
 
 const getConfirmForm = inputName => {
@@ -29,18 +24,10 @@ const getConfirmForm = inputName => {
     };
 
     let ConfirmForm = props => {
-        let spinning = false,
-            msg, msgClass, alertElem;
 
+        let spinning = false;
         if (props.is_fetching) spinning = true;
 
-        if (props.message) {
-          msg = props.l10n(props.message, props.messageArgs);
-          alertElem = ( <EduiDAlert className="help-block"
-                                    levelMessage={props.levelMessage}
-                                    Msg={msg}>
-                        </EduiDAlert>);
-        }
         return (
             <form id={inputName + '-form'}
                   className="form-horizontal"
@@ -50,9 +37,6 @@ const getConfirmForm = inputName => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <span className="help-block" id="alert">
-                         {alertElem}
-                    </span>
                     <div id="confirmation-code-area">
                         <Field component={TextInput}
                                componentClass="input"
@@ -121,9 +105,6 @@ ConfirmModal.propTypes = {
   handleResend: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
-  message: PropTypes.string,
-  levelMessage: PropTypes.string,
-  messageArgs: PropTypes.object,
   is_fetching: PropTypes.bool
 }
 

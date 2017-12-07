@@ -16,7 +16,6 @@ const mapStateToProps = (state, props) => {
     valid_phone: isValid('phones')(state),
     phone: state.phones.phone,
     is_fetching: state.phones.is_fetching || pdata_fetching,
-    errorMsg: state.phones.error,
     confirming: state.phones.confirming,
     resending: state.phones.resending,
   }

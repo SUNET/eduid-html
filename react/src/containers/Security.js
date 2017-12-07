@@ -13,7 +13,6 @@ const mapStateToProps = (state, props) => {
      confirming_change: state.security.confirming_change,
      confirming_deletion: state.security.confirming_deletion,
      is_fetching: state.security.is_fetching,
-     errorMsg: state.security.error,
      redirect_to: state.security.location,
      deleted: state.security.deleted
   }

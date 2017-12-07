@@ -15,7 +15,6 @@ const mapStateToProps = (state, props) => {
     valid_email: isValid('emails')(state),
     email: state.emails.email,
     is_fetching: state.emails.is_fetching || pdata_fetching,
-    errorMsg: state.emails.error,
     confirming: state.emails.confirming,
     resending: state.emails.resending,
   }

@@ -9,8 +9,7 @@ const mapStateToProps = (state, props) => {
   return {
     qr_img: state.openid_data.qr_img,
     qr_code: state.openid_data.qr_code,
-    is_fetching: state.openid_data.is_fetching,
-    errorMsg: state.openid_data.error
+    is_fetching: state.openid_data.is_fetching
   }
 };
 

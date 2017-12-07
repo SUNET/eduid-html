@@ -577,7 +577,6 @@ function setupComponent() {
     last_used: '',
     language: '',
     langs: [],
-    errorMsg: '',
     is_fetching: false,
     confirming_change: false,
     confirming_deletion: false,
