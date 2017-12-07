@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/lib/Modal';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
 const ModalBody = Modal.Body;
 
@@ -31,6 +32,7 @@ class DeleteModal extends Component {
                 </Modal.Header>
 
                 <ModalBody>
+                    <NotificationsContainer />
                     <div id="delete-account">
                         <p>{this.props.l10n('security.modal_info')}</p>
                         <p>{this.props.l10n('security.modal_notes')}</p>

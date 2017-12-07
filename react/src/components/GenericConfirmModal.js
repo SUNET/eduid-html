@@ -7,6 +7,7 @@ import Modal from "components/ModalShim";
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
 
 class GenericConfirmModal extends Component {
@@ -26,6 +27,7 @@ class GenericConfirmModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
+                    <NotificationsContainer />
                     <div>
                         <p>{this.props.mainText}</p>
                     </div>

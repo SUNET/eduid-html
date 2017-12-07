@@ -10,6 +10,7 @@ import Modal from 'react-bootstrap/lib/Modal';
 import i18n from 'i18n-messages';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
 
 const getConfirmForm = inputName => {
@@ -37,6 +38,7 @@ const getConfirmForm = inputName => {
                 </Modal.Header>
 
                 <Modal.Body>
+                    <NotificationsContainer />
                     <div id="confirmation-code-area">
                         <Field component={TextInput}
                                componentClass="input"
