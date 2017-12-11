@@ -22,7 +22,7 @@ export function* requestCredentials () {
 
 
 export function fetchCredentials(config) {
-    return window.fetch(config.SECURITY_URL + '/credentials', {
+    return window.fetch(config.SECURITY_URL + 'credentials', {
         ...getRequest
     })
     .then(checkStatus)
@@ -69,7 +69,7 @@ export function* postDeleteAccount () {
 
 
 export function deleteAccount(config, data) {
-    return window.fetch(config.SECURITY_URL + '/terminate-account', {
+    return window.fetch(config.SECURITY_URL + 'terminate-account', {
         ...postRequest,
         body: JSON.stringify(data)
     })
