@@ -35,9 +35,9 @@ export function* requestPasswordChange (win) {
         yield put(stopConfirmationPassword());
         const config = yield select(state => state.config),
               tsURL = config.TOKEN_SERVICE_URL,
-              chpassURL = tsURL + '/chpass',
+              chpassURL = tsURL + 'chpass',
               dashURL = config.DASHBOARD_URL,
-              nextURL = dashURL + '/chpass',
+              nextURL = dashURL + 'chpass',
               url = chpassURL + '?next=' + encodeURIComponent(nextURL);
 
         if (win !== undefined && win.location !== undefined) {
