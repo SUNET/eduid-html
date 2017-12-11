@@ -65,17 +65,6 @@ PhoneForm = connect(
 class Mobile extends Component {
 
   render () {
-
-    let message = '',
-        messageArgs = {},
-        levelMessage = 'success';
-
-    if (this.props.resending.message) {
-      message = this.props.resending.message;
-      messageArgs = {email: this.props.confirming};
-      levelMessage = 'success';
-    }
-
     return (
         <div className="mobileview-form-container ">
               <div className="intro">
@@ -87,8 +76,7 @@ class Mobile extends Component {
             <TableList entries={this.props.phones}
                        handleStartConfirmation={this.props.handleStartConfirmation}
                        handleRemove={this.props.handleRemove}
-                       handleMakePrimary={this.props.handleMakePrimary}
-                       errorMsg={this.props.errorMsg} />
+                       handleMakePrimary={this.props.handleMakePrimary} />
             <div className="form-content">
             <PhoneForm {...this.props} />
             </div>
@@ -103,10 +91,7 @@ class Mobile extends Component {
                 closeModal={this.props.handleStopConfirmation}
                 handleResend={this.props.handleResend}
                 handleConfirm={this.props.handleConfirm}
-                is_fetching={this.props.resending.is_fetching}
-                message={message}
-                messageArgs={messageArgs}
-                LevelMessage={levelMessage} />
+                is_fetching={this.props.resending.is_fetching} />
         </div>
     );
   }
@@ -114,7 +99,6 @@ class Mobile extends Component {
 
 Mobile.propTypes = {
   phones: PropTypes.array,
-  errorMsg: PropTypes.string,
   confirming: PropTypes.string,
   resending: PropTypes.object,
   handleResend: PropTypes.func,

@@ -15,8 +15,6 @@ const mapStateToProps = (state, props) => {
     valid_nin: isValid('nins')(state),
     nin: state.nins.nin,
     is_fetching: state.letter_proofing.is_fetching,
-    message: state.letter_proofing.message,
-    errMsg: state.letter_proofing.errMsg,
     resending: state.letter_proofing.resending,
     letter_sent: state.letter_proofing.letter_sent,
     letter_expires: state.letter_proofing.letter_expires,

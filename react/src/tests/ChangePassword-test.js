@@ -370,8 +370,8 @@ const mockState = {
   },
   config: {
     csrf_token: 'csrf-token',
-    DASHBOARD_URL: '/dummy-dash-url',
-    TOKEN_SERVICE_URL: '/dummy-tok-url',
+    DASHBOARD_URL: '/dummy-dash-url/',
+    TOKEN_SERVICE_URL: '/dummy-tok-url/',
     SECURITY_URL: '/dummy-sec-url'
   }
 };
@@ -469,8 +469,8 @@ const fakeState = (custom) => ({
     config: {
         csrf_token: '',
         SECURITY_URL: '/dummy-sec-url',
-        DASHBOARD_URL: '/dummy-dash-url',
-        TOKEN_SERVICE_URL: '/dummy-tok-url'
+        DASHBOARD_URL: '/dummy-dash-url/',
+        TOKEN_SERVICE_URL: '/dummy-tok-url/'
     },
     personal_data: {
         data: {
@@ -494,7 +494,6 @@ function setupComponent(store, custom=false) {
     is_fetching: false,
     choose_custom: custom,
     user_input: [],
-    errorMsg: '',
     password_entropy: 0,
     handlePassword: mock.fn(),
     handleChoice: mock.fn(),
@@ -557,7 +556,6 @@ describe("ChangePassword Container", () => {
         suggested_password: 'abcd',
         new_password: 'defg',
         user_input: [],
-        errorMsg: '',
         password_entropy: 0
     };
 
@@ -606,7 +604,6 @@ describe("ChangePassword Container", () => {
             choose_custom: true,
             new_password: 'abcd',
             user_input: [],
-            errorMsg: '',
             password_entropy: 0
           },
           wrapper = getWrapper(true, newProps);
@@ -627,7 +624,6 @@ describe("ChangePassword Container", () => {
             choose_custom: true,
             new_password: '',
             user_input: [],
-            errorMsg: '',
             password_entropy: 0
           },
           wrapper = getWrapper(true, newProps),

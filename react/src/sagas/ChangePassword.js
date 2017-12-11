@@ -20,7 +20,7 @@ export function* requestSuggestedPassword () {
 
 
 export function fetchSuggestedPassword(config) {
-    return window.fetch(config.SECURITY_URL + '/suggested-password', {
+    return window.fetch(config.SECURITY_URL + 'suggested-password', {
         ...getRequest
     })
     .then(checkStatus)
@@ -57,7 +57,7 @@ export function* postPasswordChange () {
 
 
 export function postPassword(config, data) {
-    return window.fetch(config.SECURITY_URL + '/change-password', {
+    return window.fetch(config.SECURITY_URL + 'change-password', {
         ...postRequest,
         body: JSON.stringify(data)
     })

@@ -12,10 +12,6 @@ class LookupMobileProofing extends Component {
   render () {
     let spinning = false;
     if (!this.props.disabled && this.props.is_fetching) spinning = true;
-    let errorMsg = '';
-    if (this.props.errorMsg) {
-        errorMsg = this.props.l10n(this.props.errorMsg);
-    }
 
     return (
         <div>
@@ -23,10 +19,6 @@ class LookupMobileProofing extends Component {
                 className="form-horizontal"
                 role="form">
             <fieldset id="lookup-mobile-proofing">
-              <span className="error-msg text-danger">
-                {errorMsg}
-              </span>
-              <br />
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       disabled={this.props.disabled}
@@ -41,7 +33,6 @@ class LookupMobileProofing extends Component {
 }
 
 LookupMobileProofing.propTypes = {
-  errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   disabled: PropTypes.bool,
   handleLookupMobile: PropTypes.func

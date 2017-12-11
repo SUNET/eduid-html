@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/lib/Button';
-import Modal from "components/ModalShim";
+import Modal from "react-bootstrap/lib/Modal";
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
 
 class GenericConfirmModal extends Component {
@@ -26,6 +27,7 @@ class GenericConfirmModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
+                    <NotificationsContainer />
                     <div>
                         <p>{this.props.mainText}</p>
                     </div>

@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-bootstrap/lib/Modal';
+import Modal from "react-bootstrap/lib/Modal";
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
-const ModalBody = Modal.Body;
 
 class DeleteModal extends Component {
 
@@ -30,7 +30,8 @@ class DeleteModal extends Component {
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
 
-                <ModalBody>
+                <Modal.Body>
+                    <NotificationsContainer />
                     <div id="delete-account">
                         <p>{this.props.l10n('security.modal_info')}</p>
                         <p>{this.props.l10n('security.modal_notes')}</p>
@@ -42,7 +43,7 @@ class DeleteModal extends Component {
                             {this.props.l10n('security.confirm_button')}
                         </EduIDButton>
                     </div>
-                </ModalBody>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button className="cancel-button"
                             onClick={this.props.closeModal} >

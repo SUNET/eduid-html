@@ -3,26 +3,13 @@ import PropTypes from 'prop-types';
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';
-import EduiDAlert from 'components/EduIDAlert';
 
 
 class TableList extends Component {
 
   render () {
     let rows = [],
-         alertElem, msg,
          key;
-    if (this.props.errorMsg) {
-        if (this.props.errorMsg.number) {
-            msg = this.props.l10n(this.props.errorMsg.number);
-        } else if (this.props.errorMsg.email) {
-            msg = this.props.l10n(this.props.errorMsg.email);
-        } else {
-            msg = this.props.l10n(this.props.errorMsg.form);
-        }
-
-      alertElem = ( <EduiDAlert className="help-block" levelMessage="danger" Msg={msg}></EduiDAlert>);
-    }
     if (this.props.entries) {
       rows = this.props.entries.map((entry, index) => {
           if (entry.number) {
@@ -88,9 +75,6 @@ class TableList extends Component {
     }
     return (
         <div className="table-responsive">
-              <span className="help-block" id="alert">
-                         {alertElem}
-              </span>
             <table className="table table-striped table-form">
                 <tbody>
                     {rows}
@@ -106,7 +90,6 @@ TableList.propTypes = {
     handleStartConfirmation: PropTypes.func,
     handleRemove: PropTypes.func,
     handleMakePrimary: PropTypes.func,
-    errorMsg: PropTypes.string,
 }
 
 export default i18n(TableList);

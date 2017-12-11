@@ -199,7 +199,6 @@ ChangePassword.propTypes = {
   choose_custom: PropTypes.bool,
   user_input: PropTypes.array,
   next_url: PropTypes.string,
-  errorMsg: PropTypes.string,
   password_entropy: PropTypes.number,
   handleChoice: PropTypes.func,
   handleStartPasswordChange: PropTypes.func,
