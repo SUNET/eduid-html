@@ -40,7 +40,7 @@ class Notifications extends Component {
     }
 
     return (
-        <div class="notifications-area">
+        <div className="notifications-area">
           {toShow}
         </div>
     );
