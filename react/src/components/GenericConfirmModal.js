@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/lib/Button';
-import Modal from "components/ModalShim";
+import Modal from "react-bootstrap/lib/Modal";
 
 import i18n from 'i18n-messages';
 import EduIDButton from 'components/EduIDButton';

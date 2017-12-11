@@ -45,12 +45,12 @@
     "intl": "^1.2.5",
     "invariant": "^2.2.2",
     "react": "^16.0.0",
-    "react-bootstrap": "^0.31.3",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
+    "react-useragent": "^0.4.4",
     "redux": "^3.7.2",
-    "redux-saga": "^0.15.6",
-    "react-useragent": "^0.4.4"
+    "redux-saga": "^0.15.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.4",
