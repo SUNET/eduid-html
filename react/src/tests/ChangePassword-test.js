@@ -370,8 +370,8 @@ const mockState = {
   },
   config: {
     csrf_token: 'csrf-token',
-    DASHBOARD_URL: '/dummy-dash-url',
-    TOKEN_SERVICE_URL: '/dummy-tok-url',
+    DASHBOARD_URL: '/dummy-dash-url/',
+    TOKEN_SERVICE_URL: '/dummy-tok-url/',
     SECURITY_URL: '/dummy-sec-url'
   }
 };
@@ -469,8 +469,8 @@ const fakeState = (custom) => ({
     config: {
         csrf_token: '',
         SECURITY_URL: '/dummy-sec-url',
-        DASHBOARD_URL: '/dummy-dash-url',
-        TOKEN_SERVICE_URL: '/dummy-tok-url'
+        DASHBOARD_URL: '/dummy-dash-url/',
+        TOKEN_SERVICE_URL: '/dummy-tok-url/'
     },
     personal_data: {
         data: {
