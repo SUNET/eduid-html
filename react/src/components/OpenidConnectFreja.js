@@ -16,24 +16,6 @@ import Well from 'react-bootstrap/lib/Well';
 import 'style/OpenidConnect.scss';
 
 
-function getErrorMessage(errorObj, optionalKeys) {
-  /*
-  Loop through the error object in search for known keys that hold error messages.
-  The order is optionalKeys before commonKeys.
-  */
-  let commonKeys = ['l10n_message', 'message', 'csrf_token'];
-  let keys = optionalKeys || [];
-  keys = keys.concat(commonKeys);
-  for (let key of keys)  {
-    for (let objKey of Object.keys(errorObj)) {
-      if (Object.is(key, objKey)) {
-        return errorObj[key]
-      }
-    }
-  }
-  return 'Missing error message'
-}
-
 class OpenidConnectFreja extends Component {
 
   render () {
@@ -63,14 +45,8 @@ class OpenidConnectFreja extends Component {
       </Well>
     );
 
-    let spinning = false, validationState = null, alertElem, errorElem, notOnMobileMsg, frejaButton, showModalButton, buttonGroup;
+    let spinning = false, notOnMobileMsg, frejaButton, showModalButton, buttonGroup;
     if (this.props.is_fetching) spinning = true;
-    if (this.props.error) {
-      let errorMsg = getErrorMessage(this.props.error, ['nin']);
-      alertElem = <Alert bsStyle="warning">{this.props.l10n(errorMsg)}</Alert>;
-      errorElem = <HelpBlock>{this.props.l10n(errorMsg)}</HelpBlock>;
-      validationState = "error"
-    }
 
     if (!isMobile) {
       notOnMobileMsg = (
@@ -104,9 +80,6 @@ class OpenidConnectFreja extends Component {
             {this.props.l10n('ocf.freja_instructions_install_link')}
           </Button>
 
-          <span className="help-block" id="alert">
-                  {alertElem}
-                </span>
           {frejaButton}
         </ButtonGroup>
       )
@@ -151,8 +124,7 @@ class OpenidConnectFreja extends Component {
 
           </Modal>
         </div>
-        <FormGroup validationState={validationState}>
-          {errorElem}
+        <FormGroup>
           {showModalButton}
         </FormGroup>
       </div>
@@ -162,7 +134,6 @@ class OpenidConnectFreja extends Component {
 
 OpenidConnectFreja.propTypes = {
   iaRequestData: PropTypes.string,
-  errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   handleInitializeFrejaProofing: PropTypes.func,
   handleShowModal: PropTypes.func,

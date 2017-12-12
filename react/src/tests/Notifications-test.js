@@ -152,7 +152,7 @@ describe("Notifications Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(),
-              area = wrapper.find('div#notifications-area'),
+              area = wrapper.find('div.notifications-area'),
               msg = wrapper.find('Alert');
 
         expect(area.contains(msg.get(0))).toBeTruthy();

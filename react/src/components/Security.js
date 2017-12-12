@@ -89,7 +89,6 @@ Security.propTypes = {
   creation_date: PropTypes.string,
   last_used: PropTypes.string,
   langs: PropTypes.array,
-  errorMsg: PropTypes.string,
   is_fetching: PropTypes.bool,
   confirming_change: PropTypes.bool,
   deleted: PropTypes.bool,
