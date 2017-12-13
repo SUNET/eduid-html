@@ -138,10 +138,6 @@ div#content-block {
     position:relative;
     background-color:#fff;
 }
-#profile-menu-large li a.active,
-#profile-menu-large li:hover a {
-    /*padding-left:30px;*/
-}
 .nav-tabs>li>a:hover {
     border-color:transparent;
 }
@@ -151,8 +147,7 @@ div#content-block {
 .nav-tabs>li {
     margin-bottom:0;
 }
-#profile-menu-large li > a.active:after,
-#profile-menu-large li:hover:after {
+#profile-menu-large li > a.active:after {
     content:'';
     display:block;
     position:absolute;
@@ -163,6 +158,21 @@ div#content-block {
 	border-top: 22px solid transparent;
 	border-bottom: 22px solid transparent;
 	border-left: 20px solid #fff;
+}
+
+@media (pointer: fine) {
+  #profile-menu-large li:hover:after {
+      content:'';
+      display:block;
+      position:absolute;
+      top:0;
+      right:-20px;
+      width: 0;
+    height: 0;
+    border-top: 22px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 20px solid #fff;
+  }
 }
 
 .nav-tabs>li>a.active,
