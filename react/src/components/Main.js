@@ -52,12 +52,13 @@ class Main extends Component {
 
         if (this.props.show_sidebar) {
 
-            const tabs = [{id: 'personaldata', label: this.props.l10n('main.personal_data')},
-                          {id: 'nins', label: this.props.l10n('main.nins')},
-                          {id: 'emails', label: this.props.l10n('main.emails')},
-                          {id: 'phones', label: this.props.l10n('main.phones')},
-                          {id: 'security', label: this.props.l10n('main.security')}],
-                  size = this.props.window_size,
+            const size = this.props.window_size,
+                  sm = size === 'sm',
+                  tabs = [{id: 'personaldata', label: sm ? 'main.personal_data_label_sm' : 'main.personal_data'},
+                          {id: 'nins', label: sm ? 'main.nins_label_sm' : 'main.nins'},
+                          {id: 'emails', label: sm ? 'main.emails_label_sm' : 'main.emails'},
+                          {id: 'phones', label: sm ? 'main.phones_label_sm' : 'main.phones'},
+                          {id: 'security', label: sm ? 'main.security_label_sm' : 'main.security'}],
                   tabsElems = (classes) => {
                       return tabs.map( (tab, index) => {
                           return (
@@ -67,7 +68,7 @@ class Main extends Component {
                                       onClick={() => this.setState({openTabs: false})}
                                       to={`/profile/${tab.id}`}
                                       id={`${tab.id}-router-link`}>
-                                  {tab.label}
+                                  {this.props.l10n(tab.label)}
                                 </NavLink>
                               </li>
                           );
@@ -80,7 +81,8 @@ class Main extends Component {
                         <h3>{this.props.l10n('main.profile_title')}</h3>
                         <PendingActionsContainer />
                       </div>
-                      <div className="tabs-left hidden-xs" id="profile-menu-large">
+
+                    <div className="tabs-left" role="navigation" id="profile-menu-large">
                         <ul className='nav nav-tabs nav-stacked'>
                           {tabsElems('main-nav-tabs')}
                           <ProfileFilledContainer />

@@ -198,6 +198,31 @@ const msgs = {
             id="main.security"
             defaultMessage={`Security`} />),
 
+    'main.personal_data_label_sm': (
+        <FormattedMessage
+            id="main.personal_data_label_sm"
+            defaultMessage={`Personal`} />),
+
+    'main.nins_label_sm': (
+        <FormattedMessage
+            id="main.nins_label_sm"
+            defaultMessage={`Identity`} />),
+
+    'main.emails_label_sm': (
+        <FormattedMessage
+            id="main.emails_label_sm"
+            defaultMessage={`Emails`} />),
+
+    'main.phones_label_sm': (
+        <FormattedMessage
+            id="main.phones_label_sm"
+            defaultMessage={`Phones`} />),
+
+    'main.security_label_sm': (
+        <FormattedMessage
+            id="main.security_label_sm"
+            defaultMessage={`Security`} />),
+
     'main.eduid_id': (
         <FormattedMessage
             id="main.eduid_id"
@@ -535,11 +560,6 @@ const msgs = {
         <FormattedMessage
           id="pd.save-success"
           defaultMessage={`Successfully saved Personal information`} />),
-
-    'pd.choose-language': (
-        <FormattedMessage
-          id="pd.choose-language"
-          defaultMessage={`Choose language`} />),
 
     /************************/
     /* Mobile ***************/
@@ -1127,5 +1147,10 @@ const unformatted = defineMessages({
     "pd.language": {
           id:"pd.language",
           defaultMessage:`Language`
+    },
+
+    'pd.choose-language': {
+          id: "pd.choose-language",
+          defaultMessage: `Choose language`
     },
 });
