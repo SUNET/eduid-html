@@ -14,12 +14,12 @@ import 'style/Mobile.scss';
 
 const validate = values => {
     const errors = {},
-          phone = values.mobile,
+          phone = values.number,
           pattern = /^\+\d{10,20}$|^07[0236]\d{7}$|\+\d{2}\s\d{8,18}$/;
     if (!phone) {
-        errors.mobile = 'required';
+        errors.number = 'required';
     } else if (!pattern.test(phone)) {
-        errors.mobile = 'phones.invalid_phone'
+        errors.number = 'phones.invalid_phone'
     }
     return errors;
 };
@@ -36,7 +36,7 @@ let PhoneForm = props => {
                    componentClass="input"
                    type="text"
                    label={props.l10n('phones.phone_label')}
-                   name="mobile" />
+                   name="number" />
             <EduIDButton bsStyle="primary"
                          id="mobile-button"
                          spinning={spinning}
@@ -56,7 +56,7 @@ PhoneForm = reduxForm({
 
 PhoneForm = connect(
   state => ({
-    initialValues: {mobile: state.phones.phone},
+    initialValues: {number: state.phones.phone},
     enableReinitialize: true
   })
 )(PhoneForm)
