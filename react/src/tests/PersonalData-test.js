@@ -293,7 +293,15 @@ const fakeState = {
   intl: {
       locale: 'en',
       messagers: messages
-  }
+  },
+    form: {personal_data: {values: {
+      is_fetching: false,
+      failed: false,
+      given_name: '',
+      surname: '',
+      display_name: '',
+      language: ''
+  }}}
 };
 
 function setupComponent(store) {
@@ -395,15 +403,16 @@ describe("Async component", () => {
        let next = generator.next();
 
        // const config = next.value;
-       next = generator.next(fakeState.config);
+       next = generator.next(fakeState);
 
        const data = fakeState.personal_data;
        const config = fakeState.config;
+       data.csrf_token = "";
+
 
        // expect(data).toEqual(select(fakeState => fakeState.config));
 
        generator.next(data);
-       generator.next();
        generator.next();
        next = generator.next();
 

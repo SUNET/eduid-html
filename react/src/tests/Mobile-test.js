@@ -751,8 +751,11 @@ describe("Async component", () => {
                 csrf_token: state.config.csrf_token
               };
 
-       const mobiles = generator.next(state);
-       expect(mobiles.value).toEqual(call(sendMobile, state.config, data));
+       generator.next(state);
+       generator.next(data);
+       generator.next();
+       next = generator.next();
+       expect(next.value).toEqual(call(sendMobile, state.config, data));
 
         const action = {
           type: actions.POST_MOBILE_SUCCESS,
@@ -769,6 +772,8 @@ describe("Async component", () => {
         }
         next = generator.next(action);
         expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       generator.next();
+       generator.next();
         next = generator.next();
         delete(action.payload.csrf_token);
         expect(next.value).toEqual(put(action));
