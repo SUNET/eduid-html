@@ -139,8 +139,7 @@ class Nins extends Component {
           <div className="intro">
               <h4>{this.props.l10n('nins.main_title')}</h4>
                 <p>{this.props.l10n('nins.justification')}</p>
-                <p>{this.props.l10n('faq_link')}
-                <a href="https://www.eduid.se/faq.html">FAQ</a></p>
+                <p>{this.props.l10n('faq_link')} <a href="https://www.eduid.se/faq.html">FAQ</a></p>
                 {credsTable}
           </div>
           {ninInput}
