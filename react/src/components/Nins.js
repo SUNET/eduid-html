@@ -38,10 +38,6 @@ const validate = values => {
 
 
 let NinForm = props => {
-    let buttons = '';
-    if (props.valid_nin) {
-        buttons = props.buttons;
-    }
     return [(
       <form id="nins-form"
             role="form"
@@ -54,7 +50,7 @@ let NinForm = props => {
                  placeholder="yyyymmddnnnn" />
         </fieldset>
       </form>),
-      ...buttons]
+      ...props.buttons]
 };
 
 NinForm = reduxForm({
@@ -80,8 +76,9 @@ class Nins extends Component {
         spinning = false,
         verifiedNin = '';
     if (this.props.is_configured) {
+        const vettingBtns = vettingRegistry(!this.props.valid_nin);
         vettingButtons = this.props.proofing_methods.map((key, index) => {
-            return (<div key={index}>{vettingRegistry[key]}</div>);
+            return (<div key={index}>{vettingBtns[key]}</div>);
         });
     }
     if (this.props.nins.length) {
