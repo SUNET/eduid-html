@@ -7,8 +7,6 @@
  * it with the redux store.
  */
 
-import Cookies from "js-cookie";
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -112,11 +110,6 @@ const init_app = function (target, component, intl=false) {
           </Provider>
         );
     } else {
-        const cookie = Cookies.get(EDUID_COOKIE_NAME);
-        if (cookie === undefined) {
-            const next = window.location.href;
-            window.location.href = TOKEN_SERVICE_URL + '?next=' + next;
-        }
         action = getConfigSpa;
         const language = navigator.languages
                          ? navigator.languages[0]
