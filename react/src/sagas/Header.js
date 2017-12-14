@@ -28,7 +28,7 @@ export function* requestLogout () {
 }
 
 export function sendLogout (url, data) {
-    return window.fetch(url + '/logout', {
+    return window.fetch(url + 'logout', {
         ...postRequest,
         body: JSON.stringify(data)
     })
