@@ -737,11 +737,6 @@ describe("Async component", () => {
        const generator = saveEmail();
        let next = generator.next();
 
-       // next.value.SELECT.selector = function (state) {
-       //      return state;
-       // };
-       // expect(next.value).toEqual(select(state => state));
-
        const data = {
                 email: state.emails.email,
                 verified: false,
@@ -749,8 +744,11 @@ describe("Async component", () => {
                 csrf_token: state.config.csrf_token
               };
 
-       const emails = generator.next(state);
-       expect(emails.value).toEqual(call(sendEmail, state.config, data));
+       generator.next(state);
+       generator.next(data);
+       generator.next();
+       next = generator.next();
+       expect(next.value).toEqual(call(sendEmail, state.config, data));
 
         const action = {
           type: actions.POST_EMAIL_SUCCESS,
@@ -768,6 +766,8 @@ describe("Async component", () => {
 
        next = generator.next(action);
        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       generator.next();
+       generator.next();
        next = generator.next();
        delete(action.payload.csrf_token);
        expect(next.value).toEqual(put(action));

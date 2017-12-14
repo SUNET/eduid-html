@@ -20,18 +20,6 @@ addLocaleData('react-intl/locale-data/en');
 
 describe("Mobile Actions", () => {
 
-    it("Should change the mobile ", () => {
-       const data = {
-           'mobile': 612123123,
-           'text': 'texting'
-       };
-       const expectedAction = {
-           type: actions.CHANGE_MOBILE,
-           payload: data
-       };
-       expect(actions.changeMobile(data)).toEqual(expectedAction);
-   });
-
    it("Should post the mobile ", () => {
        const expectedAction = {
            type: actions.POST_MOBILE
@@ -763,8 +751,11 @@ describe("Async component", () => {
                 csrf_token: state.config.csrf_token
               };
 
-       const mobiles = generator.next(state);
-       expect(mobiles.value).toEqual(call(sendMobile, state.config, data));
+       generator.next(state);
+       generator.next(data);
+       generator.next();
+       next = generator.next();
+       expect(next.value).toEqual(call(sendMobile, state.config, data));
 
         const action = {
           type: actions.POST_MOBILE_SUCCESS,
@@ -781,6 +772,8 @@ describe("Async component", () => {
         }
         next = generator.next(action);
         expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+       generator.next();
+       generator.next();
         next = generator.next();
         delete(action.payload.csrf_token);
         expect(next.value).toEqual(put(action));

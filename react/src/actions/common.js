@@ -1,3 +1,7 @@
+import { put, select, call } from "redux-saga/effects";
+import { updateIntl } from 'react-intl-redux';
+import { startSubmit, setSubmitSucceeded, setSubmitFailed } from "redux-form";
+import { startAsyncValidation, stopAsyncValidation } from "redux-form";
 
 import { newCsrfToken } from "actions/Config";
 
@@ -44,3 +48,34 @@ export const putCsrfToken = function (action) {
     return {type: 'NOOP_ACTION'};
   }
 };
+
+export function saveData (getData, formName, startAction, fetcher, failAction) {
+    return function* () {
+        try {
+            const state = yield select(state => state);
+            const data = getData(state);
+            yield put(startAction(data));
+            yield put(startSubmit(formName));
+            yield put(startAsyncValidation(formName));
+            const resp = yield call(fetcher, state.config, data);
+            yield put(putCsrfToken(resp));
+            if (resp.type.endsWith('FAIL')) {
+                yield put(setSubmitFailed(formName, ...resp.payload.error));
+                yield put(stopAsyncValidation(formName, resp.payload.error));
+            } else {
+                yield put(setSubmitSucceeded(formName));
+                yield put(stopAsyncValidation(formName));
+            }
+            const lang = resp.payload.language;
+            if (lang) {
+                yield put(updateIntl({
+                    locale: lang,
+                    messages: LOCALIZED_MESSAGES[lang]
+                }));
+            }
+            yield put(resp);
+        } catch(error) {
+            yield put(failAction(error.toString()));
+        }
+    }
+}
