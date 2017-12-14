@@ -1,26 +1,16 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest } from "actions/common";
+         postRequest, saveData } from "actions/common";
 import * as actions from "actions/Emails";
 
 
-export function* saveEmail () {
-    try {
-        const state = yield select(state => state),
-              data = {
-                email: state.emails.email,
-                verified: false,
-                primary: false,
-                csrf_token: state.config.csrf_token
-              };
-        const emails = yield call(sendEmail, state.config, data);
-        yield put(putCsrfToken(emails));
-        yield put(emails);
-    } catch(error) {
-        yield put(actions.postEmailFail(error.toString()));
-    }
-}
+const getData = (state) => ({
+    email: state.emails.email,
+    verified: false,
+    primary: false,
+    csrf_token: state.config.csrf_token
+});
 
 export function sendEmail (config, data) {
     return window.fetch(config.EMAILS_URL + 'new', {
@@ -30,6 +20,12 @@ export function sendEmail (config, data) {
     .then(checkStatus)
     .then(response => response.json())
 }
+
+export const saveEmail = saveData(getData,
+                                  'emails',
+                                  (data) => ({type: 'NOOP_ACTION'}),
+                                  sendEmail,
+                                  actions.postEmailFail)
 
 export function* requestResendEmailCode () {
     try {
