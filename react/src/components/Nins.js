@@ -13,16 +13,16 @@ import 'style/Nins.scss';
 
 const validate = values => {
   let value  = values.norEduPersonNin;
-  // taken from https://gist.github.com/DiegoSalazar/4075533/
-  // accept only digits, dashes or spaces
+  // accept only digits
+  if (/[^0-9]+/.test(value)) return {norEduPersonNin: 'nins.illegal_chars'};
 	if (value.length !== 12) return {norEduPersonNin: 'nins.wrong_length'};
-	if (/[^0-9-\s]+/.test(value)) return {norEduPersonNin: 'nins.ilegal_chars'};
-	// The Luhn Algorithm. It's so pretty.
-	var nCheck = 0, nDigit = 0, bEven = false;
-	value = value.replace(/\D/g, "");
 
-	for (var n = value.length - 1; n >= 0; n--) {
-		var cDigit = value.charAt(n),
+	// The Luhn Algorithm. It's so pretty.
+  // taken from https://gist.github.com/DiegoSalazar/4075533/
+	let nCheck = 0, bEven = false;
+	value = value.slice(2);  // To pass the Luhn check only use the 10 last digits
+	for (let n = value.length - 1; n >= 0; n--) {
+		let cDigit = value.charAt(n),
 			  nDigit = parseInt(cDigit, 10);
 		if (bEven) {
 			if ((nDigit *= 2) > 9) nDigit -= 9;
