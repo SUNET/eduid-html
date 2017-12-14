@@ -22,6 +22,7 @@ class OpenidConnect extends Component {
             <fieldset id="openid-connect">
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
+                      disabled={this.props.disabled}
                       onClick={this.props.handleGetQRCode}>
                     {this.props.l10n('oc.get_qrcode')}
               </EduIDButton>
@@ -39,6 +40,7 @@ class OpenidConnect extends Component {
 }
 
 OpenidConnect.propTypes = {
+  disabled: PropTypes.bool,
   qr_img: PropTypes.string,
   qr_code: PropTypes.string,
   is_fetching: PropTypes.bool,

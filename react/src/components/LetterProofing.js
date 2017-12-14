@@ -23,6 +23,7 @@ class LetterProofingButton extends Component {
             <fieldset id="letter-proofing">
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
+                      disabled={this.props.disabled}
                       onClick={this.props.handleLetterProofing}>
                 {this.props.l10n('letter.letter_button_text')}
               </EduIDButton>
@@ -50,6 +51,7 @@ LetterProofingButton.propTypes = {
   letter_expires: PropTypes.string,
   resending: PropTypes.object,
   is_fetching: PropTypes.bool,
+  disabled: PropTypes.bool,
   confirmingLetter: PropTypes.bool,
   sendConfirmationLetter: PropTypes.func,
   handleLetterProofing: PropTypes.func,

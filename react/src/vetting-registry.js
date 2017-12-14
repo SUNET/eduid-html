@@ -6,11 +6,11 @@ import LetterProofingContainer from "containers/LetterProofing";
 import LookupMobileProofingContainer from "containers/LookupMobileProofing";
 
 
-let vettingRegistry = {
-  lookup_mobile: <LookupMobileProofingContainer />,
-  letter: <LetterProofingContainer />,
-  oidc: <OpenidConnectContainer />,
-  oidc_freja: <OpenidConnectFrejaContainer />
-};
+let vettingRegistry = (disabled) => ({
+  lookup_mobile: <LookupMobileProofingContainer disabled={disabled} />,
+  letter: <LetterProofingContainer disabled={disabled} />,
+  oidc: <OpenidConnectContainer disabled={disabled} />,
+  oidc_freja: <OpenidConnectFrejaContainer disabled={disabled} />
+});
 
 export default vettingRegistry
