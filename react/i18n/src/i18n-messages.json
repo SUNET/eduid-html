@@ -84,6 +84,26 @@
     "defaultMessage": "Security"
   },
   {
+    "id": "main.personal_data_label_sm",
+    "defaultMessage": "Personal"
+  },
+  {
+    "id": "main.nins_label_sm",
+    "defaultMessage": "Identity"
+  },
+  {
+    "id": "main.emails_label_sm",
+    "defaultMessage": "Emails"
+  },
+  {
+    "id": "main.phones_label_sm",
+    "defaultMessage": "Phones"
+  },
+  {
+    "id": "main.security_label_sm",
+    "defaultMessage": "Security"
+  },
+  {
     "id": "main.eduid_id",
     "defaultMessage": "eduID identifier"
   },
@@ -326,10 +346,6 @@
   {
     "id": "pd.save-success",
     "defaultMessage": "Successfully saved Personal information"
-  },
-  {
-    "id": "pd.choose-language",
-    "defaultMessage": "Choose language"
   },
   {
     "id": "mobile.resend_success",
@@ -775,5 +791,9 @@
   {
     "id": "pd.language",
     "defaultMessage": "Language"
+  },
+  {
+    "id": "pd.choose-language",
+    "defaultMessage": "Choose language"
   }
 ]
