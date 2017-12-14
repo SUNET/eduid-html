@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { isValid } from "redux-form";
 import Mobile from 'components/Mobile';
-import { makePrimary, postMobile, changeMobile, startResendMobileCode, finishConfirmation,
+import { makePrimary, postMobile, startResendMobileCode, finishConfirmation,
          startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
 import i18n from 'i18n-messages';
 

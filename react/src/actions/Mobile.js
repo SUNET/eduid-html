@@ -1,5 +1,4 @@
 export const GET_MOBILES_SUCCESS = 'GET_PHONE_ALL_SUCCESS';
-export const CHANGE_MOBILE = 'CHANGE_MOBILE';
 export const POST_MOBILE = 'POST_MOBILE';
 export const POST_MOBILE_SUCCESS = 'POST_PHONE_NEW_SUCCESS';
 export const POST_MOBILE_FAIL = 'POST_PHONE_NEW_FAIL';
@@ -19,13 +18,6 @@ export const POST_MOBILE_PRIMARY = 'POST_MOBILE_PRIMARY'
 export const POST_MOBILE_PRIMARY_SUCCESS = 'POST_PHONE_PRIMARY_SUCCESS'
 export const POST_MOBILE_PRIMARY_FAIL = 'POST_PHONE_PRIMARY_FAIL'
 
-
-export function changeMobile (data) {
-  return {
-    type: CHANGE_MOBILE,
-    payload: data
-  };
-}
 
 export function postMobile () {
   return {

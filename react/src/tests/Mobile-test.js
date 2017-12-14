@@ -20,18 +20,6 @@ addLocaleData('react-intl/locale-data/en');
 
 describe("Mobile Actions", () => {
 
-    it("Should change the mobile ", () => {
-       const data = {
-           'mobile': 612123123,
-           'text': 'texting'
-       };
-       const expectedAction = {
-           type: actions.CHANGE_MOBILE,
-           payload: data
-       };
-       expect(actions.changeMobile(data)).toEqual(expectedAction);
-   });
-
    it("Should post the mobile ", () => {
        const expectedAction = {
            type: actions.POST_MOBILE
