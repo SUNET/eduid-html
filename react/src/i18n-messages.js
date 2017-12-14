@@ -98,10 +98,15 @@ const msgs = {
             id="required"
             defaultMessage={`Required`} />),
 
+    'Error: NOT FOUND': (
+        <FormattedMessage
+            id="Error: NOT FOUND"
+            defaultMessage={`There was an error (404) servicing your request. The administrator has been alerted. Please try again later.`} />),
+
     'Error: Internal Server Error': (
         <FormattedMessage
             id="Error: Internal Server Error"
-            defaultMessage={`There was an error servicing your request. Please contact the administrators.`} />),
+            defaultMessage={`There was an error (500) servicing your request. The administrator has been alerted. Please try again later.`} />),
 
     'Error: Service Unavailable': (
         <FormattedMessage

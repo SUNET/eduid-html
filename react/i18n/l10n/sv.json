@@ -1,6 +1,6 @@
 {
   "CSRF failed to validate": "CSRF-koden var fel, var god ladda om sidan",
-  "Error: Internal Server Error": "There was an error servicing your request. Please contact the administrators.",
+  "Error: Internal Server Error": "Ett problem (500) uppstod. De ansvariga är underrättade. Var god försök senare.",
   "Error: Service Unavailable": "Service Unavailable. Check your internet connection.",
   "Missing error message": "Felmeddelande saknas",
   "No connection to authorization endpoint": "Anslutningen till auktoriseringsservern misslyckades, var god försök senare",
