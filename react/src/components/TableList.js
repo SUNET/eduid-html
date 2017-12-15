@@ -27,9 +27,10 @@ class TableList extends Component {
                         <span className="nobutton">{this.props.l10n('tl.primary')}</span>
                     </td>
                     <td className="non-identifier">
-                    <EduIDButton className="text-muted" bsStyle="link">
-                            {this.props.l10n('tl.remove')}
-                        </EduIDButton>
+                    <EduIDButton bsStyle="link"
+                                 onClick={this.props.handleRemove}>
+                      {this.props.l10n('tl.remove')}
+                      </EduIDButton>
                     </td>
                 </tr>);
           } else if (entry.verified) {
