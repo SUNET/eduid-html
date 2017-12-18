@@ -47,11 +47,7 @@ const getConfirmForm = inputName => {
                                placeholder={props.placeholder}
                                controlId={inputName}
                                name={inputName} />
-                        {props.resendHelp}
-                        <a href="#" onClick={props.handleResend}
-                           className="resend-code">
-                            {props.resendText}
-                        </a>
+                        {props.resendHelp} <a href="#" onClick={props.handleResend}className="resend-code">{props.resendText}</a>
                     </div>
                 </Modal.Body>
 

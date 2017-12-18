@@ -70,8 +70,7 @@ class Mobile extends Component {
               <div className="intro">
               <h4>{this.props.l10n('phones.main_title')}</h4>
                 <p>{this.props.l10n('phones.long_description')}</p>
-                <p>{this.props.l10n('faq_link')}
-                <a href="https://www.eduid.se/faq.html">FAQ</a></p>
+                <p>{this.props.l10n('faq_link')} <a href="https://www.eduid.se/faq.html">FAQ</a></p>
           </div>
             <TableList entries={this.props.phones}
                        handleStartConfirmation={this.props.handleStartConfirmation}
