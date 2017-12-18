@@ -18,6 +18,7 @@ const mapStateToProps = (state, props) => {
     is_fetching: state.phones.is_fetching || pdata_fetching,
     confirming: state.phones.confirming,
     resending: state.phones.resending,
+    default_country_code: state.config.DEFAULT_COUNTRY_CODE,
   }
 };
 

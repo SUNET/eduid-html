@@ -12,16 +12,23 @@ import ConfirmModal from 'components/ConfirmModal';
 import 'style/Mobile.scss';
 
 
-const validate = values => {
-    const errors = {},
-          phone = values.number,
-          pattern = /^\+\d{10,20}$|^07[0236]\d{7}$|\+\d{2}\s\d{8,18}$/;
-    if (!phone) {
-        errors.number = 'required';
-    } else if (!pattern.test(phone)) {
-        errors.number = 'phones.invalid_phone'
+const validate = props => {
+    return (phone) => {
+        if (!phone) {
+            return 'required';
+        }
+        phone = phone.replace(/ /g, '');
+        if (phone.startsWith('00')) {
+            return 'phone.e164_format';
+        }
+        if (phone.startsWith('0')) {
+            phone = '+' + props.default_country_code + phone.substr(1);
+        }
+        const pattern = /^\+[1-9]\d{6,20}$/;
+        if (!pattern.test(phone)) {
+            return 'phone.phone_format';
+        }
     }
-    return errors;
 };
 
 let PhoneForm = props => {
@@ -36,6 +43,7 @@ let PhoneForm = props => {
                    componentClass="input"
                    type="text"
                    label={props.l10n('phones.phone_label')}
+                   validate={ validate(props) }
                    name="number" />
             <EduIDButton bsStyle="primary"
                          id="mobile-button"
@@ -50,8 +58,7 @@ let PhoneForm = props => {
 }
 
 PhoneForm = reduxForm({
-  form: 'phones',
-  validate
+  form: 'phones'
 })(PhoneForm)
 
 PhoneForm = connect(
