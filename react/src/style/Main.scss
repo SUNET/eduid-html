@@ -168,6 +168,36 @@ div#content-block {
       top:0;
       right:-20px;
       width: 0;
+      height: 0;
+      border-top: 22px solid transparent;
+      border-bottom: 22px solid transparent;
+      border-left: 20px solid #fff;
+  }
+}
+
+@media (-moz-touch-enabled: 0) {
+  #profile-menu-large li:hover:after {
+      content:'';
+      display:block;
+      position:absolute;
+      top:0;
+      right:-20px;
+      width: 0;
+      height: 0;
+      border-top: 22px solid transparent;
+      border-bottom: 22px solid transparent;
+      border-left: 20px solid #fff;
+  }
+}
+
+@media (pointer: fine) {
+  #profile-menu-large li:hover:after {
+      content:'';
+      display:block;
+      position:absolute;
+      top:0;
+      right:-20px;
+      width: 0;
     height: 0;
     border-top: 22px solid transparent;
     border-bottom: 22px solid transparent;
