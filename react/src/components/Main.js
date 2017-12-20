@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Redirect } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import Collapse from 'react-bootstrap/lib/Collapse';
@@ -152,7 +152,7 @@ class Main extends Component {
                     <div className="tab-content info-container col-md-8 col-md-offset-1">
                       <div className="tab-pane active">
                         <NotificationsContainer />
-                        <Route exact path="/profile/" component={PersonalDataContainer} />
+                        <Route exact path="/profile/" component={() => (<Redirect to="/profile/personaldata" />)} />
                         <Route path="/profile/personaldata" component={PersonalDataContainer} />
                         <Route path="/profile/nins" component={NinsContainer} />
                         <Route path="/profile/emails" component={EmailsContainer} />
