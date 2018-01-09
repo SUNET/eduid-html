@@ -118,6 +118,11 @@ const msgs = {
             id="Not a valid email address."
             defaultMessage={`Not a valid email address.`} />),
 
+    'user-out-of-sync': (
+        <FormattedMessage
+            id="user-out-of-sync"
+            defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
+
     'out_of_sync': (
         <FormattedMessage
             id="out_of_sync"
@@ -315,6 +320,11 @@ const msgs = {
     <FormattedMessage
             id="emails.invalid_email"
             defaultMessage={`The entered value does not look like an email`} />),
+
+    'emails.missing': (
+    <FormattedMessage
+            id="emails.missing"
+            defaultMessage={`You must provide an emai address`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -962,6 +972,11 @@ const msgs = {
         <FormattedMessage
           id="nins.no-mobile-match"
           defaultMessage={`No phone number matching NIN`} />),
+
+   'nins.verified_no_rm': (
+        <FormattedMessage
+          id="nins.verified_no_rm"
+          defaultMessage={`You cannot remove your ve3rified National identity number`} />),
 
     /************************/
     /* Letter proofing ******/

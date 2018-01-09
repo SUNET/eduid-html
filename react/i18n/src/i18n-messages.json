@@ -24,6 +24,10 @@
     "defaultMessage": "Not a valid email address."
   },
   {
+    "id": "user-out-of-sync",
+    "defaultMessage": "User data is out of sync. Reload page to re-sync."
+  },
+  {
     "id": "out_of_sync",
     "defaultMessage": "User data is out of sync. Reload page to re-sync."
   },
@@ -170,6 +174,10 @@
   {
     "id": "emails.invalid_email",
     "defaultMessage": "The entered value does not look like an email"
+  },
+  {
+    "id": "emails.missing",
+    "defaultMessage": "You must provide an emai address"
   },
   {
     "id": "tl.primary",
@@ -650,6 +658,10 @@
   {
     "id": "nins.no-mobile-match",
     "defaultMessage": "No phone number matching NIN"
+  },
+  {
+    "id": "nins.verified_no_rm",
+    "defaultMessage": "You cannot remove your ve3rified National identity number"
   },
   {
     "id": "letter.letter_button_text",
