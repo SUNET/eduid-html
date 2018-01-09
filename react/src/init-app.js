@@ -51,10 +51,15 @@ import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 
 /* i18n */
+const default_language = "en";
+const supported_languages = ["en", "sv"];
+let language = navigator.languages
+                 ? navigator.languages[0]
+                 : (navigator.language || navigator.userLanguage);
 
-const language = navigator.languages
-                   ? navigator.languages[0]
-                   : (navigator.language || navigator.userLanguage);
+if (!supported_languages.includes(language)) {
+  language = default_language;
+}
 
 const lang_code = language.substring(0,2);
 const locale = require('react-intl/locale-data/' + lang_code);
