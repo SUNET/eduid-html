@@ -472,9 +472,8 @@ div#recaptcha_widget_div input#recaptcha_response_field {
         width:100%;
     }
 
-    div#eduid-logo-small {
-        margin-left: -90px;
-        margin-top: -4px;
+    div#eduid-logo-large {
+        display: none;
     }
 
     ul.nav.navbar-nav li a {
