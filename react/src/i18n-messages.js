@@ -118,9 +118,19 @@ const msgs = {
             id="Not a valid email address."
             defaultMessage={`Not a valid email address.`} />),
 
+    'user-out-of-sync': (
+        <FormattedMessage
+            id="user-out-of-sync"
+            defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
+
     'out_of_sync': (
         <FormattedMessage
             id="out_of_sync"
+            defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
+
+    'user-out-of-sync': (
+        <FormattedMessage
+            id="user-out-of-sync"
             defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
 
     "button_save": (
@@ -315,6 +325,11 @@ const msgs = {
     <FormattedMessage
             id="emails.invalid_email"
             defaultMessage={`The entered value does not look like an email`} />),
+
+    'emails.missing': (
+    <FormattedMessage
+            id="emails.missing"
+            defaultMessage={`You must provide an emai address`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -566,6 +581,12 @@ const msgs = {
           id="pd.save-success"
           defaultMessage={`Successfully saved Personal information`} />),
 
+    'pdata.field_required': (
+        <FormattedMessage
+          id="pdata.field_required"
+          defaultMessage={`This field is required`} />),
+
+
     /************************/
     /* Mobile ***************/
     /************************/
@@ -668,6 +689,18 @@ const msgs = {
           id="phones.code-sent"
           defaultMessage={`Successfully sent verification code`} />),
 
+    'phone.e164_format': (
+        <FormattedMessage
+          id="phone.e164_format"
+          defaultMessage={`Invalid telephone number. It must be a valid Swedish number, or written
+                            using international notation, starting with '+' and followed by 10-20 digits.`} />),
+
+    'phone.swedish_mobile_format': (
+        <FormattedMessage
+          id="phone.swedish_mobile_format"
+          defaultMessage={`Invalid telephone number. It must be a valid Swedish number, or written
+                            using international notation, starting with '+' and followed by 10-20 digits.`} />),
+
     /***********************/
     /* Security ************/
     /***********************/
@@ -764,6 +797,36 @@ const msgs = {
           id="security.confirm_title_deletion"
           defaultMessage={`Account deletion`} />),
 
+    'security.u2f.max_allowed_tokens': (
+        <FormattedMessage
+          id="security.u2f.max_allowed_tokens"
+          defaultMessage={`You already have the maximum allowed number of tokens`} />),
+
+    'security.u2f.missing_enrollment_data': (
+        <FormattedMessage
+          id="security.u2f.missing_enrollment_data"
+          defaultMessage={`Found no U2F enrollment data in your session`} />),
+
+    'security.u2f.no_token_found': (
+        <FormattedMessage
+          id="security.u2f.no_token_found"
+          defaultMessage={`No U2F token found in your session`} />),
+
+    'security.u2f.missing_token': (
+        <FormattedMessage
+          id="security.u2f.missing_token"
+          defaultMessage={`No U2F token found in your session`} />),
+
+    'security.u2f.missing_challenge_data': (
+        <FormattedMessage
+          id="security.u2f.missing_challenge_data"
+          defaultMessage={`Found no U2F challenge data in your session`} />),
+
+    'security.u2f.description_to_long': (
+        <FormattedMessage
+          id="security.u2f.description_to_long"
+          defaultMessage={`You tried to set a U2F token description long`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"
@@ -827,6 +890,11 @@ const msgs = {
    'chpass.stale_reauthn': (
         <FormattedMessage
           id="chpass.stale_reauthn"
+          defaultMessage={`Stale re-authentication. Please re-initiate the process.`} />),
+
+   'chpass.stale_authn_info': (
+        <FormattedMessage
+          id="chpass.stale_authn_info"
           defaultMessage={`Stale re-authentication. Please re-initiate the process.`} />),
 
    'chpass.password-changed': (
@@ -962,6 +1030,11 @@ const msgs = {
         <FormattedMessage
           id="nins.no-mobile-match"
           defaultMessage={`No phone number matching NIN`} />),
+
+   'nins.verified_no_rm': (
+        <FormattedMessage
+          id="nins.verified_no_rm"
+          defaultMessage={`You cannot remove your ve3rified National identity number`} />),
 
     /************************/
     /* Letter proofing ******/

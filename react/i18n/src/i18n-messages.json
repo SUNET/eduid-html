@@ -24,6 +24,10 @@
     "defaultMessage": "Not a valid email address."
   },
   {
+    "id": "user-out-of-sync",
+    "defaultMessage": "User data is out of sync. Reload page to re-sync."
+  },
+  {
     "id": "out_of_sync",
     "defaultMessage": "User data is out of sync. Reload page to re-sync."
   },
@@ -170,6 +174,10 @@
   {
     "id": "emails.invalid_email",
     "defaultMessage": "The entered value does not look like an email"
+  },
+  {
+    "id": "emails.missing",
+    "defaultMessage": "You must provide an emai address"
   },
   {
     "id": "tl.primary",
@@ -352,6 +360,10 @@
     "defaultMessage": "Successfully saved Personal information"
   },
   {
+    "id": "pdata.field_required",
+    "defaultMessage": "This field is required"
+  },
+  {
     "id": "mobile.resend_success",
     "defaultMessage": "New code successfully sent to {email}"
   },
@@ -428,6 +440,14 @@
     "defaultMessage": "Successfully sent verification code"
   },
   {
+    "id": "phone.e164_format",
+    "defaultMessage": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits."
+  },
+  {
+    "id": "phone.swedish_mobile_format",
+    "defaultMessage": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits."
+  },
+  {
     "id": "security.long_description",
     "defaultMessage": "Your eduID account password can be changed below."
   },
@@ -496,6 +516,30 @@
     "defaultMessage": "Account deletion"
   },
   {
+    "id": "security.u2f.max_allowed_tokens",
+    "defaultMessage": "You already have the maximum allowed number of tokens"
+  },
+  {
+    "id": "security.u2f.missing_enrollment_data",
+    "defaultMessage": "Found no U2F enrollment data in your session"
+  },
+  {
+    "id": "security.u2f.no_token_found",
+    "defaultMessage": "No U2F token found in your session"
+  },
+  {
+    "id": "security.u2f.missing_token",
+    "defaultMessage": "No U2F token found in your session"
+  },
+  {
+    "id": "security.u2f.missing_challenge_data",
+    "defaultMessage": "Found no U2F challenge data in your session"
+  },
+  {
+    "id": "security.u2f.description_to_long",
+    "defaultMessage": "You tried to set a U2F token description long"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
@@ -545,6 +589,10 @@
   },
   {
     "id": "chpass.stale_reauthn",
+    "defaultMessage": "Stale re-authentication. Please re-initiate the process."
+  },
+  {
+    "id": "chpass.stale_authn_info",
     "defaultMessage": "Stale re-authentication. Please re-initiate the process."
   },
   {
@@ -650,6 +698,10 @@
   {
     "id": "nins.no-mobile-match",
     "defaultMessage": "No phone number matching NIN"
+  },
+  {
+    "id": "nins.verified_no_rm",
+    "defaultMessage": "You cannot remove your ve3rified National identity number"
   },
   {
     "id": "letter.letter_button_text",
