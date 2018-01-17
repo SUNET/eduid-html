@@ -1,19 +1,21 @@
 
 import { put, call } from "redux-saga/effects";
-import { ajaxHeaders, checkStatus, getRequest } from "actions/common";
+import { ajaxHeaders, checkStatus, getRequest, notIE11Unauthn } from "actions/common";
 import { getConfigFail } from "actions/Config";
 
 
 export function* requestConfig () {
+    const input = document.getElementById('jsconfig_url'),
+          jsconfig_url = input ? input.value : EDUID_CONFIG_URL;
     try {
-        const input = document.getElementById('jsconfig_url'),
-              jsconfig_url = input ? input.value : EDUID_CONFIG_URL;
         console.log('Getting config from ' + jsconfig_url);
         const config = yield call(fetchConfig, jsconfig_url);
         yield put(config);
     } catch(error) {
-        console.log('Error fetching config: ' + error.toString());
-        yield put(getConfigFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            console.log('Error fetching config: ' + error.toString());
+            yield put(getConfigFail(error.toString()));
+        }
     }
 }
 

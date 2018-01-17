@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest } from "actions/common";
+         postRequest, notIE11Unauthn } from "actions/common";
 import { postOpenidFail } from "actions/OpenidConnect";
 
 
@@ -24,7 +24,9 @@ export function* requestOpenidQRcode () {
             yield put(oidcData);
         }
     } catch(error) {
-        yield put(postOpenidFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(postOpenidFail(error.toString()));
+        }
     }
 }
 

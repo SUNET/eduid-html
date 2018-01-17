@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, saveData } from "actions/common";
+         postRequest, saveData, notIE11Unauthn } from "actions/common";
 import * as actions from "actions/Mobile";
 
 
@@ -38,7 +38,9 @@ export function* requestResendMobileCode () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.resendMobileCodeFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(actions.resendMobileCodeFail(error.toString()));
+        }
     }
 }
 
@@ -63,7 +65,9 @@ export function* requestVerifyMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startVerifyFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(actions.startVerifyFail(error.toString()));
+        }
     }
 }
 
@@ -87,7 +91,9 @@ export function* requestRemoveMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startRemoveFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(actions.startRemoveFail(error.toString()));
+        }
     }
 }
 
@@ -111,7 +117,9 @@ export function* requestMakePrimaryMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.makePrimaryFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(actions.makePrimaryFail(error.toString()));
+        }
     }
 }
 

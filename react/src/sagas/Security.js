@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         getRequest, postRequest } from "actions/common";
+         getRequest, postRequest, notIE11Unauthn } from "actions/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail  } from "actions/Security";
@@ -47,7 +47,9 @@ export function* requestPasswordChange (win) {
         }
 
     } catch(error) {
-        yield put(getPasswordChangeFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(getPasswordChangeFail(error.toString()));
+        }
     }
 }
 
@@ -63,7 +65,9 @@ export function* postDeleteAccount () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(accountRemovedFail(error.toString()));
+        if (notIE11Unauthn(error) === true) {
+            yield put(accountRemovedFail(error.toString()));
+        }
     }
 }
 
