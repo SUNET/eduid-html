@@ -1,6 +1,6 @@
 
 import { put, call } from "redux-saga/effects";
-import { ajaxHeaders, checkStatus, getRequest, notIE11Unauthn } from "actions/common";
+import { ajaxHeaders, checkStatus, getRequest, failRequest } from "actions/common";
 import { getConfigFail } from "actions/Config";
 
 
@@ -12,10 +12,7 @@ export function* requestConfig () {
         const config = yield call(fetchConfig, jsconfig_url);
         yield put(config);
     } catch(error) {
-        if (notIE11Unauthn(error) === true) {
-            console.log('Error fetching config: ' + error.toString());
-            yield put(getConfigFail(error.toString()));
-        }
+        yield* failRequest(error, getConfigFail);
     }
 }
 

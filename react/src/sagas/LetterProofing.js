@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, notIE11Unauthn } from "actions/common";
+         postRequest, failRequest } from "actions/common";
 import * as actions from "actions/LetterProofing";
 
 
@@ -18,9 +18,7 @@ export function* sendLetterProofing () {
         yield put(putCsrfToken(response));
         yield put(response);
     } catch(error) {
-        if (notIE11Unauthn(error) === true) {
-            yield put(actions.postLetterProofingFail(error));
-        }
+        yield* failRequest(error, actions.postLetterProofingFail);
     }
 }
 
@@ -46,9 +44,7 @@ export function* sendLetterCode () {
         yield put(putCsrfToken(response));
         yield put(response);
     } catch(error) {
-        if (notIE11Unauthn(error) === true) {
-            yield put(actions.postLetterCodeFail(error));
-        }
+        yield* failRequest(error, actions.postLetterCodeFail);
     }
 }
 

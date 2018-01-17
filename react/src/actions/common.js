@@ -39,13 +39,13 @@ export const getRequest = {
     headers: ajaxHeaders,
 }
 
-export const notIE11Unauthn = function (error) {
+export const failRequest = function* (error, failAction) {
     if ((navigator.userAgent.indexOf("Trident/7") > -1) &&
         (error.toString() === "SyntaxError: Invalid character")) {
         const next = document.location.href;
         document.location.assign(TOKEN_SERVICE_URL + '?next=' + next);
     } else {
-        return true;
+        yield put(failAction(error.toString()));
     }
 }
 
@@ -85,9 +85,7 @@ export function saveData (getData, formName, startAction, fetcher, failAction) {
             }
             yield put(resp);
         } catch(error) {
-            if (notIE11Unauthn(error) === true) {
-                yield put(failAction(error.toString()));
-            }
+            yield* failRequest(error, failAction);
         }
     }
 }
