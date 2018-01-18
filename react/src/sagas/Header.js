@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest } from "actions/common";
+         postRequest, failRequest } from "actions/common";
 import { postLogoutFail, POST_AUTHN_LOGOUT_SUCCESS } from "actions/Header";
 
 
@@ -22,8 +22,7 @@ export function* requestLogout () {
             yield put(resp);
         }
     } catch(error) {
-        console.log('Error performing logout: ' + error.toString());
-        yield put(postLogoutFail(error.toString()));
+        yield* failRequest(error, postLogoutFail);
     }
 }
 

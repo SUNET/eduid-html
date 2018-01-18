@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, getRequest } from "actions/common";
+         postRequest, getRequest, failRequest } from "actions/common";
 import * as actions from "actions/Nins";
 
 
@@ -13,7 +13,7 @@ export function* requestNins () {
         yield put(putCsrfToken(nins));
         yield put(nins);
     } catch(error) {
-        yield put(actions.getNinsFail(error));
+        yield* failRequest(error, actions.getNinsFail);
     }
 }
 
@@ -38,7 +38,7 @@ export function* requestRemoveNin () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startRemoveFail(error));
+        yield* failRequest(error, actions.startRemoveFail);
     }
 }
 

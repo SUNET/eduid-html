@@ -11,14 +11,14 @@ export const checkStatus = function (response) {
         return response;
     } else if (response.status === 0) {
         const next = document.location.href;
-        document.location.href = TOKEN_SERVICE_URL + '?next=' + next;
+        document.location.assign(TOKEN_SERVICE_URL + '?next=' + next);
     } else {
         throw new Error(response.statusText);
     }
 };
 
 export const ajaxHeaders = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
     'Accept': 'application/json',
     "Access-Control-Allow-Origin": "*",
     "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
@@ -37,6 +37,17 @@ export const getRequest = {
     redirect: 'manual',
     credentials: 'include',
     headers: ajaxHeaders,
+}
+
+export const failRequest = function* (error, failAction) {
+    if ((navigator.userAgent.indexOf("Trident/7") > -1) &&
+        (error.toString() === "SyntaxError: Invalid character")) {
+        const next = document.location.href;
+        document.location.assign(TOKEN_SERVICE_URL + '?next=' + next);
+    } else {
+        console.log('Communication error: ' + error.toString());
+        yield put(failAction(error.toString()));
+    }
 }
 
 export const putCsrfToken = function (action) {
@@ -75,7 +86,7 @@ export function saveData (getData, formName, startAction, fetcher, failAction) {
             }
             yield put(resp);
         } catch(error) {
-            yield put(failAction(error.toString()));
+            yield* failRequest(error, failAction);
         }
     }
 }

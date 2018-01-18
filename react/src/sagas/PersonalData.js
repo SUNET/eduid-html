@@ -2,7 +2,7 @@
 import { put, select, call } from "redux-saga/effects";
 import { updateIntl } from 'react-intl-redux';
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         getRequest, postRequest, saveData } from "actions/common";
+         getRequest, postRequest, saveData, failRequest } from "actions/common";
 import { getAllUserdata, getAllUserdataFail, postUserdataFail } from "actions/PersonalData";
 
 import * as ninActions from "actions/Nins";
@@ -59,7 +59,7 @@ export function* requestAllPersonalData () {
           yield put(userdata);
         }
     } catch(error) {
-        yield put(getAllUserdataFail(error.toString()));
+        yield* failRequest(error, getAllUserdataFail);
     }
 }
 

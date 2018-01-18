@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest } from "actions/common";
+         postRequest, failRequest } from "actions/common";
 import { postLookupMobileFail } from "actions/LookupMobileProofing";
 
 
@@ -20,7 +20,7 @@ export function* requestLookupMobileProof () {
         yield put(putCsrfToken(lookupMobileData));
         yield put(lookupMobileData);
     } catch(error) {
-        yield put(postLookupMobileFail(error.toString()));
+        yield* failRequest(error, postLookupMobileFail);
     }
 }
 
