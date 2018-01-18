@@ -12,3 +12,7 @@ div#eduid-splash-screen {
     background-color:#bbded9;
     background-image:url(../img/texture.png);
 }
+
+div#eduid-splash-screen > div.spinner {
+    opacity: 1.0;
+}

@@ -22,7 +22,7 @@ module.exports = {
     },
     output: {
       path: path.join(__dirname, 'build'),
-      publicPath: 'http://html.eduid.docker/static/build/',
+      publicPath: 'http://dashboard.eduid.local.emergya.info:8080/static/build/',
       filename: '[name]-bundle.dev.js'
     },
     devtool: 'source-map',
