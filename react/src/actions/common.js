@@ -45,6 +45,7 @@ export const failRequest = function* (error, failAction) {
         const next = document.location.href;
         document.location.assign(TOKEN_SERVICE_URL + '?next=' + next);
     } else {
+        console.log('Communication error: ' + error.toString());
         yield put(failAction(error.toString()));
     }
 }
