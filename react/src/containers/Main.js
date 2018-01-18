@@ -9,8 +9,7 @@ const mapStateToProps = (state, props) => {
     return {
         window_size: state.config.window_size,
         show_sidebar: state.config.show_sidebar,
-        eppn: state.personal_data.data.eppn,
-        is_app_loaded: state.config.is_app_loaded
+        eppn: state.personal_data.data.eppn
     }
 };
 

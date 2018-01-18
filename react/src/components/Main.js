@@ -142,7 +142,7 @@ class Main extends Component {
         }
 
         return ([
-          <SplashContainer key="0" is_app_loaded={this.props.is_app_loaded} />,
+          <SplashContainer key="0" />,
           <HeaderContainer key="1" />,
             <ConnectedRouter history={history} key="2">
               <div className="container position-relative">
@@ -179,8 +179,7 @@ Main.propTypes = {
     show_sidebar: PropTypes.bool,
     eppn: PropTypes.string,
     handleWindowSizeChange: PropTypes.func,
-    messages: PropTypes.object,
-    is_app_loaded: PropTypes.bool
+    messages: PropTypes.object
 }
 
 export default Main;

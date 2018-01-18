@@ -6,18 +6,12 @@ import i18n from 'i18n-messages';
 
 const mapStateToProps = (state, props) => {
     return {
+        is_app_loaded: state.config.is_app_loaded
     }
 };
 
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-  }
-};
-
 const SplashContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Splash);
 
 export default i18n(SplashContainer);
