@@ -2,15 +2,10 @@
 const mock = require('jest-mock');
 import React from 'react';
 import { Provider } from 'react-intl-redux';
-import { shallow, mount, render } from 'enzyme';
-import expect, { createSpy } from "expect";
-import { addLocaleData } from 'react-intl';
-import { MemoryRouter } from "react-router-dom";
+import { mount } from 'enzyme';
+import expect from "expect";
 
 import SplashContainer from 'containers/Splash';
-
-const messages = require('../../i18n/l10n/en');
-addLocaleData('react-intl/locale-data/en');
 
 
 const fakeStore = (state) => ({
@@ -37,7 +32,7 @@ function setupComponent(loaded) {
     };
 }
 
-describe("Main Component", () => {
+describe("Splash Component", () => {
 
     it("Renders", () => {
         const { wrapper, props } = setupComponent(false),
