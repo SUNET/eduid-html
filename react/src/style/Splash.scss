@@ -1,0 +1,14 @@
+
+@import '../variables.scss';
+
+
+div#eduid-splash-screen {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color:#bbded9;
+    background-image:url(../img/texture.png);
+}
