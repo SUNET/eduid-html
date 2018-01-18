@@ -36,7 +36,7 @@ describe("Splash Component", () => {
         expect(splash.length).toEqual(1);
     });
 
-    it("Doesn't Renders", () => {
+    it("Doesn't Render", () => {
         const wrapper = setupComponent(true),
               splash = wrapper.find('div#eduid-splash-screen');
 
