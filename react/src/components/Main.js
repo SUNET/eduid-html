@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, NavLink, Redirect } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'react-router-redux';
 import Collapse from 'react-bootstrap/lib/Collapse';
 
+import SplashContainer from "containers/Splash";
 import HeaderContainer from "containers/Header";
 import FooterContainer from "containers/Footer";
 
@@ -141,6 +142,7 @@ class Main extends Component {
         }
 
         return ([
+          <SplashContainer key="0" />,
           <HeaderContainer key="1" />,
             <ConnectedRouter history={history} key="2">
               <div className="container position-relative">
