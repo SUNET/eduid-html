@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         getRequest } from "actions/common";
+         getRequest, failRequest } from "actions/common";
 import * as actions from "actions/OpenidConnectFreja";
 
 export function* checkNINAndShowFrejaModal () {
@@ -25,8 +25,7 @@ export function* checkNINAndShowFrejaModal () {
       yield put(actions.showOpenidFrejaModalSuccess(nin));
     }
   } catch(error) {
-      console.log(error.toString());
-      yield put(actions.showOpenidFrejaModalFail('ocf.error_unknown_error'));
+      yield* failRequest(error, actions.showOpenidFrejaModalFail);
   }
 }
 
@@ -59,7 +58,7 @@ export function* initializeOpenidFrejaData () {
         }
     }
   } catch(error) {
-      yield put(actions.postOpenidFrejaFail(error.toString()));
+      yield* failRequest(error, actions.postOpenidFrejaFail);
   }
 }
 
@@ -71,7 +70,7 @@ export function* requestOpenidFrejaData() {
     yield put(putCsrfToken(oidcFrejaData));
     yield put(oidcFrejaData);
   } catch(error) {
-      yield put(actions.getOpenidFrejaFail(error.toString()));
+      yield* failRequest(error, actions.getOpenidFrejaFail);
   }
 }
 

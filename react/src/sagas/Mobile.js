@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, saveData } from "actions/common";
+         postRequest, saveData, failRequest } from "actions/common";
 import * as actions from "actions/Mobile";
 
 
@@ -38,7 +38,7 @@ export function* requestResendMobileCode () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.resendMobileCodeFail(error.toString()));
+        yield* failRequest(error, actions.resendMobileCodeFail);
     }
 }
 
@@ -63,7 +63,7 @@ export function* requestVerifyMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startVerifyFail(error.toString()));
+        yield* failRequest(error, actions.startVerifyFail);
     }
 }
 
@@ -87,7 +87,7 @@ export function* requestRemoveMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.startRemoveFail(error.toString()));
+        yield* failRequest(error, actions.startRemoveFail);
     }
 }
 
@@ -111,7 +111,7 @@ export function* requestMakePrimaryMobile () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(actions.makePrimaryFail(error.toString()));
+        yield* failRequest(error, actions.makePrimaryFail);
     }
 }
 

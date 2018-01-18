@@ -1,7 +1,7 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         getRequest, postRequest } from "actions/common";
+         getRequest, postRequest, failRequest } from "actions/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail  } from "actions/Security";
@@ -16,7 +16,7 @@ export function* requestCredentials () {
         yield put(putCsrfToken(credentials));
         yield put(credentials);
     } catch(error) {
-        yield put(getCredentialsFail(error.toString()));
+        yield* failRequest(error, getCredentialsFail);
     }
 }
 
@@ -47,7 +47,7 @@ export function* requestPasswordChange (win) {
         }
 
     } catch(error) {
-        yield put(getPasswordChangeFail(error.toString()));
+        yield* failRequest(error, getPasswordChangeFail);
     }
 }
 
@@ -63,7 +63,7 @@ export function* postDeleteAccount () {
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {
-        yield put(accountRemovedFail(error.toString()));
+        yield* failRequest(error, accountRemovedFail);
     }
 }
 
