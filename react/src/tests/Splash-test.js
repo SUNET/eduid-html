@@ -21,28 +21,23 @@ function setupComponent(loaded) {
             is_app_loaded: loaded
         }
     });
-    const props = {
-    };
     const wrapper = mount(<Provider store={ store }>
-                              <SplashContainer {...props} />
+                              <SplashContainer />
                           </Provider>);
-    return {
-        props,
-        wrapper
-    };
+    return wrapper;
 }
 
 describe("Splash Component", () => {
 
     it("Renders", () => {
-        const { wrapper, props } = setupComponent(false),
+        const wrapper = setupComponent(false),
               splash = wrapper.find('div#eduid-splash-screen');
 
         expect(splash.length).toEqual(1);
     });
 
     it("Doesn't Renders", () => {
-        const { wrapper, props } = setupComponent(true),
+        const wrapper = setupComponent(true),
               splash = wrapper.find('div#eduid-splash-screen');
 
         expect(splash.length).toEqual(0);
