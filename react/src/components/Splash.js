@@ -17,18 +17,24 @@ const spinnerOpts = {
 class Splash extends Component {
 
     componentDidMount () {
-        const splash = this.refs.eduidSplash;
-        const spinner = new Spinner(spinnerOpts).spin();
-        splash.appendChild(spinner.el);
+        if (!this.props.is_app_loaded) {
+            const splash = this.refs.eduidSplash;
+            const spinner = new Spinner(spinnerOpts).spin();
+            splash.appendChild(spinner.el);
+        }
     }
 
     render () {
-
-
+        const comp = this.props.is_app_loaded ? '' :
+            <div ref="eduidSplash" id="eduid-splash-screen" />;
         return (
-            <div ref="eduidSplash" id="eduid-splash-screen" />
+            comp
         );
     }
+}
+
+Splash.propTypes = {
+    is_app_loaded: PropTypes.bool
 }
 
 export default Splash;
