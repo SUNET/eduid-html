@@ -177,7 +177,7 @@
   },
   {
     "id": "emails.missing",
-    "defaultMessage": "You must provide an emai address"
+    "defaultMessage": "You must provide an email address"
   },
   {
     "id": "tl.primary",
@@ -701,7 +701,7 @@
   },
   {
     "id": "nins.verified_no_rm",
-    "defaultMessage": "You cannot remove your ve3rified National identity number"
+    "defaultMessage": "You cannot remove your verified National identity number"
   },
   {
     "id": "letter.letter_button_text",
@@ -765,7 +765,7 @@
   },
   {
     "id": "foot.change-version-tip",
-    "defaultMessage": "This is an experimental version. If you meet any problem while using the app, you can switch to the old version."
+    "defaultMessage": "This is an experimental version. If you experience any problem while using the app, you can switch to the old version."
   },
   {
     "id": "pending.pdata",

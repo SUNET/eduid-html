@@ -329,7 +329,7 @@ const msgs = {
     'emails.missing': (
     <FormattedMessage
             id="emails.missing"
-            defaultMessage={`You must provide an emai address`} />),
+            defaultMessage={`You must provide an email address`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -1034,7 +1034,7 @@ const msgs = {
    'nins.verified_no_rm': (
         <FormattedMessage
           id="nins.verified_no_rm"
-          defaultMessage={`You cannot remove your ve3rified National identity number`} />),
+          defaultMessage={`You cannot remove your verified National identity number`} />),
 
     /************************/
     /* Letter proofing ******/
@@ -1126,7 +1126,7 @@ const msgs = {
    'foot.change-version-tip': (
         <FormattedMessage
           id="foot.change-version-tip"
-          defaultMessage={`This is an experimental version. If you meet any problem while using the app, you can switch to the old version.`} />),
+          defaultMessage={`This is an experimental version. If you experience any problem while using the app, you can switch to the old version.`} />),
 
 
    'pending.pdata': (
