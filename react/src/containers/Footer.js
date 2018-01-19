@@ -1,6 +1,8 @@
 
 import { connect } from 'react-redux';
 import { updateIntl } from 'react-intl-redux';
+import Cookies from "js-cookie";
+
 import Footer from 'components/Footer';
 import i18n from 'i18n-messages';
 
@@ -23,6 +25,11 @@ const mapDispatchToProps = (dispatch, props) => {
               locale: lang,
               messages : msgs
           }));
+      },
+      changeDashboardSession: function (e) {
+          Cookies.remove('eduid-dashboard-version');
+          Cookies.set('eduid-dashboard-version', '1');
+          document.location.reload(true);
       }
   }
 };
