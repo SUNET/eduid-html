@@ -246,7 +246,7 @@ const msgs = {
     'main.copyright': (
         <FormattedMessage
             id="main.copyright"
-            defaultMessage={` SUNET 2013-2017`} />),
+            defaultMessage={` SUNET 2013-2018`} />),
 
     'main.menu': (
         <FormattedMessage
@@ -329,7 +329,7 @@ const msgs = {
     'emails.missing': (
     <FormattedMessage
             id="emails.missing"
-            defaultMessage={`You must provide an emai address`} />),
+            defaultMessage={`You must provide an email address`} />),
 
     "tl.primary": (
         <FormattedMessage
@@ -1034,7 +1034,7 @@ const msgs = {
    'nins.verified_no_rm': (
         <FormattedMessage
           id="nins.verified_no_rm"
-          defaultMessage={`You cannot remove your ve3rified National identity number`} />),
+          defaultMessage={`You cannot remove your verified National identity number`} />),
 
     /************************/
     /* Letter proofing ******/
@@ -1115,8 +1115,19 @@ const msgs = {
           defaultMessage={`Logout`} />),
 
     /************************/
-    /* Header ******** ******/
+    /* Footer ******** ******/
     /************************/
+
+   'foot.change-version': (
+        <FormattedMessage
+          id="foot.change-version"
+          defaultMessage={`Use old version of the app`} />),
+
+   'foot.change-version-tip': (
+        <FormattedMessage
+          id="foot.change-version-tip"
+          defaultMessage={`This is an experimental version. If you experience any problem while using the app, you can switch to the old version.`} />),
+
 
    'pending.pdata': (
         <FormattedMessage

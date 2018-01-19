@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
 
 class Footer extends Component {
@@ -25,6 +27,10 @@ class Footer extends Component {
         langElems = (<span />);
     }
 
+    const tooltip = (<Tooltip id="dashboard-version-tooltip">
+                         {this.props.l10n('foot.change-version-tip')}
+                     </Tooltip>);
+
     return (<div id="footer">
                 <div className="container">
                     <p>
@@ -32,6 +38,13 @@ class Footer extends Component {
                       <span className="pull-right">
                         {langElems}
                       </span>
+                    </p>
+                    <p id="go-to-old-dashboard">
+                      <OverlayTrigger placement="top" overlay={tooltip}>
+                          <a onClick={this.props.changeDashboardSession}>
+                            {this.props.l10n('foot.change-version')}
+                          </a>
+                      </OverlayTrigger>
                     </p>
                 </div>
             </div>);
