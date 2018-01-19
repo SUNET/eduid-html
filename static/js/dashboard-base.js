@@ -30,8 +30,15 @@
 
       $(document).ready(function () {
         $(document).ready(function () {$('div#content-block').show()});
+        $('[data-toggle="tooltip"]').tooltip();
         $('a.null-link').click(function (e) {
             e.preventDefault();
+        });
+        $('p#go-to-old-dashbard a').click(function (e) {
+            e.preventDefault();
+            Cookies.remove('eduid-dashboard-version');
+            Cookies.set('eduid-dashboard-version', '2');
+            document.location.reload(true);
         });
         setMessagesTimer();
       });
