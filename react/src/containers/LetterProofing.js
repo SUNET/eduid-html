@@ -26,14 +26,10 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
-      dispatch(actions.startPostLetterProofing());
+      dispatch(actions.postSendLetterProofing());
     },
     handleStopConfirmationLetter: function (e) {
       dispatch(actions.stopPostLetterProofing());
-    },
-    handleConfirmationLetter: function (e) {
-      e.preventDefault();
-      dispatch(actions.postSendLetterProofing());
     },
     sendConfirmationLetter: function (e) {
       e.preventDefault();

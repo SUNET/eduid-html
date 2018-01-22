@@ -33,13 +33,11 @@ class LetterProofingButton extends Component {
                 modalId="letterConfirmDialog"
                 controlId="letterConfirmDialogControl"
                 title={this.props.l10n('letter.confirm_title')}
-                resendHelp={this.props.l10n('letter.lost_code')}
-                resendText={this.props.l10n('letter.resend_code')}
                 placeholder={this.props.l10n('letter.placeholder')}
                 showModal={this.props.confirmingLetter}
                 closeModal={this.props.handleStopConfirmationLetter}
-                handleResend={this.props.handleConfirmationLetter}
                 handleConfirm={this.props.sendConfirmationLetter}
+                with_resend_link={false}
                 is_fetching={this.props.resending.is_fetching} />
         </div>
     );

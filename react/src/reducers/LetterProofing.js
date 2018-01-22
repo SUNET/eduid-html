@@ -26,7 +26,6 @@ let letterProofingReducer = (state=letterData, action) => {
     case actions.START_LETTER_PROOFING:
       return {
         ...state,
-        confirmingLetter: true,
         is_fetching: false,
         failed: false
       };
@@ -60,11 +59,16 @@ let letterProofingReducer = (state=letterData, action) => {
         }
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
+      let confirming = false;
+      if (action.payload.message === 'letter.already-sent') {
+        confirming = true;
+      }
       return {
         ...state,
         ...action.payload,
         is_fetching: false,
         failed: false,
+        confirmingLetter: confirming,
         resending: {
             ...state.resending,
             is_fetching: false,
