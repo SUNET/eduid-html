@@ -649,6 +649,15 @@ ul.circles-widget-labels li {
 }
 /*END: Accordion FAQ*/
 
+/*  Change dashboard version */
+
+p#go-to-new-dashboard {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* END Change dashboard version */
+
 
 @media only screen and (max-width: 991px) {
 
