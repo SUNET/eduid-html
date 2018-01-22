@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
+import 'style/Footer.scss';
+
 
 class Footer extends Component {
 
