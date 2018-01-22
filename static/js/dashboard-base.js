@@ -34,7 +34,7 @@
         $('a.null-link').click(function (e) {
             e.preventDefault();
         });
-        $('p#go-to-old-dashbard a').click(function (e) {
+        $('p#go-to-new-dashboard a').click(function (e) {
             e.preventDefault();
             Cookies.remove('eduid-dashboard-version');
             Cookies.set('eduid-dashboard-version', '2');
