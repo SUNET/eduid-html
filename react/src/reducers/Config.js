@@ -1,5 +1,6 @@
 
 import * as actions from "actions/Config";
+import * as pdataActions from "actions/PersonalData";
 
 // see the config params in eduid-developer/etcd/conf.yaml
 const configData = {
@@ -8,7 +9,8 @@ const configData = {
     is_configured: false,
     is_fetching: false,
     failed: false,
-    is_spa: false
+    is_spa: false,
+    is_app_loaded: false
 };
 
 const urls_with_no_sidebar = [
@@ -59,6 +61,11 @@ let configReducer = (state=configData, action) => {
       return {
           ...state,
           is_spa: true
+      };
+    case pdataActions.GET_USERDATA_SUCCESS:
+      return {
+          ...state,
+          is_app_loaded: true
       };
     case "@@router/LOCATION_CHANGE":
       let show_sidebar = true;

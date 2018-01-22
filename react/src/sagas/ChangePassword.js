@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux'
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, getRequest } from "actions/common";
+         postRequest, getRequest, failRequest } from "actions/common";
 import * as actions from "actions/ChangePassword";
 import * as comp from "components/ChangePassword";
 
@@ -14,7 +14,7 @@ export function* requestSuggestedPassword () {
         yield put(putCsrfToken(suggested));
         yield put(suggested);
     } catch(error) {
-        yield put(actions.getSuggestedPasswordFail(error.toString()));
+        yield* failRequest(error, actions.getSuggestedPasswordFail);
     }
 }
 
@@ -51,7 +51,7 @@ export function* postPasswordChange () {
         }
         yield put(change);
     } catch(error) {
-        yield put(actions.postPasswordChangeFail(error.toString()));
+        yield* failRequest(error, actions.postPasswordChangeFail);
     }
 }
 
