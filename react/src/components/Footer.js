@@ -43,7 +43,7 @@ class Footer extends Component {
                     </p>
                     <p id="go-to-old-dashboard">
                       <OverlayTrigger placement="top" overlay={tooltip}>
-                          <a onClick={this.props.changeDashboardSession}>
+                          <a onClick={this.props.changeDashboardSession(this.props.reload_to)}>
                             {this.props.l10n('foot.change-version')}
                           </a>
                       </OverlayTrigger>
@@ -57,7 +57,9 @@ Footer.propTypes = {
   is_configured: PropTypes.bool,
   language: PropTypes.string,
   languages: PropTypes.array,
-  changeLanguage: PropTypes.func
+  changeLanguage: PropTypes.func,
+  reload_to: PropTypes.bool,
+  changeDashboardSession: PropTypes.func
 }
 
 export default Footer;
