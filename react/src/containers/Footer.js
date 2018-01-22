@@ -11,7 +11,8 @@ const mapStateToProps = (state, props) => {
   return {
     is_configured: state.config.is_configured,
     language: state.intl.locale,
-    languages: state.config.AVAILABLE_LANGUAGES
+    languages: state.config.AVAILABLE_LANGUAGES,
+    reload_to: state.config.DASHBOARD_URL
   }
 };
 
@@ -26,10 +27,13 @@ const mapDispatchToProps = (dispatch, props) => {
               messages : msgs
           }));
       },
-      changeDashboardSession: function (e) {
-          Cookies.remove('eduid-dashboard-version');
-          Cookies.set('eduid-dashboard-version', '1');
-          document.location.reload(true);
+      changeDashboardSession: function (reload_to) {
+          return (e) => {
+              e.preventDefault();
+              Cookies.remove('eduid-dashboard-version');
+              Cookies.set('eduid-dashboard-version', '1');
+              window.location = reload_to;
+          }
       }
   }
 };
