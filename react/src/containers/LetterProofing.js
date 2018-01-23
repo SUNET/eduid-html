@@ -12,6 +12,7 @@ const mapStateToProps = (state, props) => {
         confirmingLetter = confirming && valid_nin;
   return {
     confirmingLetter: confirmingLetter,
+    verifyingLetter: state.letter_proofing.verifyingLetter,
     valid_nin: isValid('nins')(state),
     nin: state.nins.nin,
     is_fetching: state.letter_proofing.is_fetching,
@@ -26,9 +27,16 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
+      dispatch(actions.getSendLetterProofing());
+    },
+    confirmLetterProofing: function (e) {
       dispatch(actions.postSendLetterProofing());
+      dispatch(actions.stopGetLetterProofing());
     },
     handleStopConfirmationLetter: function (e) {
+      dispatch(actions.stopGetLetterProofing());
+    },
+    handleStopVerificationLetter: function (e) {
       dispatch(actions.stopPostLetterProofing());
     },
     sendConfirmationCode: function (e) {

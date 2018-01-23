@@ -58,7 +58,7 @@ Footer.propTypes = {
   language: PropTypes.string,
   languages: PropTypes.array,
   changeLanguage: PropTypes.func,
-  reload_to: PropTypes.bool,
+  reload_to: PropTypes.string,
   changeDashboardSession: PropTypes.func
 }
 

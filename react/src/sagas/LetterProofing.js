@@ -1,9 +1,29 @@
 
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
-         postRequest, failRequest } from "actions/common";
+         postRequest, getRequest, failRequest } from "actions/common";
 import * as actions from "actions/LetterProofing";
 
+
+export function* sendGetLetterProofing () {
+    try {
+        const state = yield select(state => state),
+              nin = state.nins.nin;
+        const response = yield call(fetchGetLetterProofing, state.config, nin);
+        yield put(putCsrfToken(response));
+        yield put(response);
+    } catch(error) {
+        yield* failRequest(error, actions.getLetterCodeFail);
+    }
+}
+
+export function fetchGetLetterProofing (config, nin) {
+    return window.fetch(config.LETTER_PROOFING_URL + 'proofing?nin=' + nin, {
+        ...getRequest
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
 
 export function* sendLetterProofing () {
     try {

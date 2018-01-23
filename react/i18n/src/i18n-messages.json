@@ -826,6 +826,16 @@
     "defaultMessage": "Confirm identity with code sent by letter"
   },
   {
+    "id": "letter.confirm_info",
+    "description": "Explanation for letter proofing confirm dialog",
+    "defaultMessage": "If you click \"accept\" below, you will be sent a letter by physical mail with a confirmation code. Once you receive it come back here and click again on \"confirm using letter\", and you will be offered a form to enter your code and verify your identity. The code sent to you will expire in 2 weeks starting now."
+  },
+  {
+    "id": "letter.verify_title",
+    "description": "Title for letter proofing verify dialog",
+    "defaultMessage": "Verify your identity with the code you have received by physical mail"
+  },
+  {
     "id": "letter.lost_code",
     "description": "Text for letter proofing confirm dialog",
     "defaultMessage": "When you click on the \"Send code\" link a letter with a verification code will be sent to your official postal address."

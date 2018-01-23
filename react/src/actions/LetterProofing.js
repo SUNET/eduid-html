@@ -1,17 +1,32 @@
 
 export const STOP_LETTER_PROOFING = 'STOP_LETTER_PROOFING';
 export const POST_LETTER_PROOFING_PROOFING = 'POST_LETTER_PROOFING_PROOFING';
+export const GET_LETTER_PROOFING_CODE = 'GET_LETTER_PROOFING_CODE';
 export const POST_LETTER_PROOFING_CODE = 'POST_LETTER_PROOFING_CODE';
 export const WAIT_LETTER_PROOFING_PROOFING = 'WAIT_LETTER_PROOFING_PROOFING';
 export const POST_LETTER_PROOFING_PROOFING_SUCCESS = 'POST_LETTER_PROOFING_PROOFING_SUCCESS';
 export const POST_LETTER_PROOFING_PROOFING_FAIL = 'POST_LETTER_PROOFING_PROOFING_FAIL';
 export const POST_LETTER_PROOFING_CODE_FAIL = 'POST_LETTER_PROOFING_VERIFY_CODE_FAIL';
+export const GET_LETTER_PROOFING_PROOFING_FAIL = 'GET_LETTER_PROOFING_PROOFING_FAIL';
 export const POST_LETTER_PROOFING_CODE_SUCCESS = 'POST_LETTER_PROOFING_VERIFY_CODE_SUCCESS';
+export const GET_LETTER_PROOFING_PROOFING_SUCCESS = 'GET_LETTER_PROOFING_PROOFING_SUCCESS';
 
+
+export function stopGetLetterProofing () {
+  return {
+    type: STOP_LETTER_CONFIRM
+  };
+}
 
 export function stopPostLetterProofing () {
   return {
     type: STOP_LETTER_PROOFING
+  };
+}
+
+export function getSendLetterProofing () {
+  return {
+    type: GET_LETTER_PROOFING_CODE
   };
 }
 
@@ -39,6 +54,17 @@ export function waitLetterProofing () {
 export function postLetterProofingFail (err) {
   return {
     type: POST_LETTER_PROOFING_PROOFING_FAIL,
+    error: true,
+    payload: {
+      error: err,
+      message: err.toString()
+    }
+  };
+}
+
+export function getLetterCodeFail (err) {
+  return {
+    type: GET_LETTER_PROOFING_PROOFING_FAIL,
     error: true,
     payload: {
       error: err,
