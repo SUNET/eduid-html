@@ -60,7 +60,7 @@ let letterProofingReducer = (state=letterData, action) => {
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
       let confirming = false;
-      if (action.payload.message === 'letter.already-sent') {
+      if (!action.payload.letter_expired) {
         confirming = true;
       }
       return {

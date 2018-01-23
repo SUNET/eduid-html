@@ -36,7 +36,7 @@ class LetterProofingButton extends Component {
                 placeholder={this.props.l10n('letter.placeholder')}
                 showModal={this.props.confirmingLetter}
                 closeModal={this.props.handleStopConfirmationLetter}
-                handleConfirm={this.props.sendConfirmationLetter}
+                handleConfirm={this.props.sendConfirmationCode}
                 with_resend_link={false}
                 is_fetching={this.props.resending.is_fetching} />
         </div>
@@ -51,10 +51,9 @@ LetterProofingButton.propTypes = {
   is_fetching: PropTypes.bool,
   disabled: PropTypes.bool,
   confirmingLetter: PropTypes.bool,
-  sendConfirmationLetter: PropTypes.func,
+  sendConfirmationCode: PropTypes.func,
   handleLetterProofing: PropTypes.func,
-  handleStopConfirmationLetter: PropTypes.func,
-  handleConfirmationLetter: PropTypes.func
+  handleStopConfirmationLetter: PropTypes.func
 }
 
 export default LetterProofingButton;

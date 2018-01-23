@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, props) => {
     handleStopConfirmationLetter: function (e) {
       dispatch(actions.stopPostLetterProofing());
     },
-    sendConfirmationLetter: function (e) {
+    sendConfirmationCode: function (e) {
       e.preventDefault();
         const data = {
             code: document.getElementById('confirmation-code-area').querySelector('input').value
