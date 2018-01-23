@@ -16,6 +16,7 @@ import letterProofingReducer from "reducers/LetterProofing";
 import LetterProofingButton from 'components/LetterProofing'
 import LetterProofingContainer from "containers/LetterProofing";
 import {sendLetterProofing, fetchLetterProofing,
+        sendGetLetterProofing, fetchGetLetterProofing,
         sendLetterCode, fetchLetterCode } from '../sagas/LetterProofing';
 
 const messages = require('../../i18n/l10n/en');
@@ -376,6 +377,30 @@ describe("Async component", () => {
 
         const action = {
           type: 'POST_LETTER_PROOFING_PROOFING_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            message: 'success'
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+
+    it("Sagas sendGetLetterProfing", () => {
+
+        const generator = sendGetLetterProofing();
+
+        let next = generator.next();
+
+        const nin = 'dummy-nin';
+        const resp = generator.next(state);
+        expect(resp.value).toEqual(call(fetchGetLetterProofing, state.config, nin));
+
+        const action = {
+          type: 'GET_LETTER_PROOFING_PROOFING_SUCCESS',
           payload: {
             csrf_token: 'csrf-token',
             message: 'success'
