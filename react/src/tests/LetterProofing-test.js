@@ -49,13 +49,6 @@ describe("Letter proofing Actions", () => {
     expect(actions.postLetterProofingVerificationCode(data)).toEqual(expectedAction);
   });
 
-  it("should create an action to wait on sending the code", () => {
-    const expectedAction = {
-      type: actions.WAIT_LETTER_PROOFING_PROOFING
-    };
-    expect(actions.waitLetterProofing()).toEqual(expectedAction);
-  });
-
   it("should create an action to signal an error sending the letter", () => {
     const err = new Error('Bad error');
     const expectedAction = {
@@ -86,6 +79,7 @@ describe("Reducers", () => {
 
   const mockState = {
     confirmingLetter: false,
+    verifyingLetter: false,
     code: '',
     letter_sent: '',
     letter_expires: '',
@@ -93,13 +87,7 @@ describe("Reducers", () => {
     is_fetching: false,
     failed: false,
     error: "",
-    message: '',
-    resending: {
-      is_fetching: false,
-      failed: false,
-      error: {},
-      message: ''
-    },
+    message: ''
   };
 
   it("Receives a STOP_LETTER_VERIFICATION action", () => {
@@ -133,25 +121,6 @@ describe("Reducers", () => {
     );
   });
 
-  it("Receives a WAIT_LETTER_PROOFING_PROOFING action", () => {
-    expect(
-      letterProofingReducer(
-        mockState,
-        {
-          type: actions.WAIT_LETTER_PROOFING_PROOFING
-        }
-      )
-    ).toEqual(
-      {
-          ...mockState,
-          resending: {
-              ...mockState.resending,
-              is_fetching: true
-          }
-      }
-    );
-  });
-
   it("Receives a POST_LETTER_PROOFING_PROOFING_SUCCESS action", () => {
     expect(
       letterProofingReducer(
@@ -166,7 +135,6 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          confirmingLetter: true,
           message: 'success'
       }
     );
@@ -188,11 +156,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          resending: {
-              ...mockState.resending,
-              failed: true,
-              message: 'err'
-          }
+          failed: true
       }
     );
   });
@@ -211,12 +175,8 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          code: 'dummy-code',
-          resending: {
-              ...mockState.resending,
-              is_fetching: true,
-              failed: false
-          }
+          is_fetching: true,
+          code: 'dummy-code'
       }
     );
   });
@@ -257,12 +217,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          failed: true,
-          resending: {
-              ...mockState.resending,
-              failed: true,
-              message: 'err'
-          }
+          failed: true
       }
     );
   });
@@ -410,9 +365,6 @@ describe("Async component", () => {
         const generator = sendLetterProofing();
 
         let next = generator.next();
-        expect(next.value).toEqual(put(actions.waitLetterProofing()));
-
-        next = generator.next();
 
         const data = {
             nin: 'dummy-nin',

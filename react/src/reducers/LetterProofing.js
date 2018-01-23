@@ -87,12 +87,14 @@ let letterProofingReducer = (state=letterData, action) => {
     case actions.POST_LETTER_PROOFING_CODE:
       return {
         ...state,
+        ...action.payload,
         is_fetching: true,
         failed: false
       };
     case actions.POST_LETTER_PROOFING_CODE_SUCCESS:
       return {
         ...state,
+        message: action.payload.message,
         is_fetching: false,
         failed: false,
         confirmingLetter: false,
