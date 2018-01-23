@@ -12,59 +12,29 @@ const letterData = {
     is_fetching: false,
     failed: false,
     error: "",
-    message: '',
-    resending: {
-      is_fetching: false,
-      failed: false,
-      error: {},
-      message: ''
-    },
+    message: ''
 };
 
 
 let letterProofingReducer = (state=letterData, action) => {
   switch (action.type) {
-    case actions.STOP_LETTER_CONFIRM:
+    case actions.STOP_LETTER_CONFIRMATION:
       return {
         ...state,
         confirmingLetter: false,
-        is_fetching: false,
-        failed: false
+        verifyingLetter: false
       };
-    case actions.STOP_LETTER_PROOFING:
+    case actions.STOP_LETTER_VERIFICATION:
       return {
         ...state,
-        verifyingLetter: false,
-        is_fetching: false,
-        failed: false
+        confirmingLetter: false,
+        verifyingLetter: false
       };
-    case actions.GET_LETTER_PROOFING_CODE:
+    case actions.GET_LETTER_PROOFING_PROOFING:
       return {
         ...state,
         is_fetching: true,
         failed: false
-      };
-    case actions.POST_LETTER_PROOFING_CODE:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: false,
-        resending: {
-            ...state.resending,
-            is_fetching: false,
-            failed: false
-        }
-      };
-    case actions.WAIT_LETTER_PROOFING_PROOFING:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: false,
-        resending: {
-            ...state.resending,
-            is_fetching: true,
-            failed: false
-        }
       };
     case actions.GET_LETTER_PROOFING_PROOFING_SUCCESS:
       let verifying = false,
@@ -76,17 +46,26 @@ let letterProofingReducer = (state=letterData, action) => {
       }
       return {
         ...state,
+        ...action.payload,
         is_fetching: false,
         failed: false,
         verifyingLetter: verifying,
         confirmingLetter: confirming
       };
-    case actions.POST_LETTER_PROOFING_PROOFING_FAIL:
+    case actions.GET_LETTER_PROOFING_PROOFING_FAIL:
       return {
         ...state,
         is_fetching: false,
         failed: true,
+        verifyingLetter: false,
         confirmingLetter: false
+      };
+    case actions.POST_LETTER_PROOFING_PROOFING:
+      return {
+        ...state,
+        is_fetching: true,
+        failed: false,
+        code: action.payload.code
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
       return {
@@ -95,36 +74,21 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false,
         confirmingLetter: false,
-        verifyingLetter: false,
-        resending: {
-            ...state.resending,
-            is_fetching: false,
-            failed: false
-        }
+        verifyingLetter: false
       };
     case actions.POST_LETTER_PROOFING_PROOFING_FAIL:
       return {
         ...state,
         is_fetching: false,
-        failed: false,
-        resending: {
-            ...state.resending,
-            is_fetching: false,
-            failed: true,
-            message: action.payload.message
-        }
+        failed: true,
+        confirmingLetter: false,
+        verifyingLetter: false
       };
-    case actions.POST_LETTER_PROOFING_PROOFING:
+    case actions.POST_LETTER_PROOFING_CODE:
       return {
         ...state,
-        is_fetching: false,
-        failed: false,
-        code: action.payload.code,
-        resending: {
-            ...state.resending,
-            is_fetching: true,
-            failed: false
-        }
+        is_fetching: true,
+        failed: false
       };
     case actions.POST_LETTER_PROOFING_CODE_SUCCESS:
       return {
@@ -132,24 +96,15 @@ let letterProofingReducer = (state=letterData, action) => {
         is_fetching: false,
         failed: false,
         confirmingLetter: false,
-        message: action.payload.message,
-        resending: {
-            ...state.resending,
-            is_fetching: false,
-            failed: false,
-        }
+        verifyingLetter: false
       };
     case actions.POST_LETTER_PROOFING_CODE_FAIL:
       return {
         ...state,
         is_fetching: false,
         failed: true,
-        resending: {
-            ...state.resending,
-            is_fetching: false,
-            failed: true,
-            message: action.payload.message
-        }
+        confirmingLetter: false,
+        verifyingLetter: false
       };
     default:
       return state;

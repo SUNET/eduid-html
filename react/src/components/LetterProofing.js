@@ -46,17 +46,13 @@ class LetterProofingButton extends Component {
                 showModal={this.props.verifyingLetter}
                 closeModal={this.props.handleStopVerificationLetter}
                 handleConfirm={this.props.sendConfirmationCode}
-                with_resend_link={false}
-                is_fetching={this.props.resending.is_fetching} />
+                with_resend_link={false} />
         </div>
     );
   }
 }
 
 LetterProofingButton.propTypes = {
-  letter_sent: PropTypes.string,
-  letter_expires: PropTypes.string,
-  resending: PropTypes.object,
   is_fetching: PropTypes.bool,
   disabled: PropTypes.bool,
   confirmingLetter: PropTypes.bool,

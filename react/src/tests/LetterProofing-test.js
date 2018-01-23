@@ -26,27 +26,27 @@ describe("Letter proofing Actions", () => {
 
   it("should create an action to close the modal for the letter-sent code", () => {
     const expectedAction = {
-      type: actions.STOP_LETTER_PROOFING
+      type: actions.STOP_LETTER_VERIFICATION
     };
-    expect(actions.stopPostLetterProofing()).toEqual(expectedAction);
+    expect(actions.stopLetterVerification()).toEqual(expectedAction);
   });
 
   it("should create an action to trigger sending a letter with the code", () => {
     const expectedAction = {
-      type: actions.POST_LETTER_PROOFING_CODE
+      type: actions.POST_LETTER_PROOFING_PROOFING
     };
-    expect(actions.postSendLetterProofing()).toEqual(expectedAction);
+    expect(actions.postLetterProofingSendLetter()).toEqual(expectedAction);
   });
 
   it("should create an action to POST the entered code", () => {
     const data = {code: 'dummy-code'},
           expectedAction = {
-              type: actions.POST_LETTER_PROOFING_PROOFING,
+              type: actions.POST_LETTER_PROOFING_CODE,
               payload: {
                 code: data.code
               }
     };
-    expect(actions.postLetterProofing(data)).toEqual(expectedAction);
+    expect(actions.postLetterProofingVerificationCode(data)).toEqual(expectedAction);
   });
 
   it("should create an action to wait on sending the code", () => {
@@ -66,7 +66,7 @@ describe("Letter proofing Actions", () => {
         message: err.toString()
       }
     };
-    expect(actions.postLetterProofingFail(err)).toEqual(expectedAction);
+    expect(actions.postLetterProofingSendLetterFail(err)).toEqual(expectedAction);
   });
   it("should create an action to signal an error verifying the code", () => {
     const err = new Error('Bad error');
@@ -78,7 +78,7 @@ describe("Letter proofing Actions", () => {
         message: err.toString()
       }
     };
-    expect(actions.postLetterCodeFail(err)).toEqual(expectedAction);
+    expect(actions.postLetterProofingVerificationCodeFail(err)).toEqual(expectedAction);
   });
 });
 
@@ -102,12 +102,12 @@ describe("Reducers", () => {
     },
   };
 
-  it("Receives a STOP_LETTER_PROOFING action", () => {
+  it("Receives a STOP_LETTER_VERIFICATION action", () => {
     expect(
       letterProofingReducer(
         mockState,
         {
-          type: actions.STOP_LETTER_PROOFING
+          type: actions.STOP_LETTER_VERIFICATION
         }
       )
     ).toEqual(
@@ -123,7 +123,7 @@ describe("Reducers", () => {
       letterProofingReducer(
         mockState,
         {
-          type: actions.STOP_LETTER_PROOFING
+          type: actions.STOP_LETTER_VERIFICATION
         }
       )
     ).toEqual(
@@ -197,12 +197,12 @@ describe("Reducers", () => {
     );
   });
 
-  it("Receives a POST_LETTER_PROOFING_PROOFING action", () => {
+  it("Receives a POST_LETTER_PROOFING_CODE action", () => {
     expect(
       letterProofingReducer(
         mockState,
         {
-          type: actions.POST_LETTER_PROOFING_PROOFING,
+          type: actions.POST_LETTER_PROOFING_CODE,
           payload: {
               code: 'dummy-code'
           }

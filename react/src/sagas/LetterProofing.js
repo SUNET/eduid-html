@@ -13,7 +13,7 @@ export function* sendGetLetterProofing () {
         yield put(putCsrfToken(response));
         yield put(response);
     } catch(error) {
-        yield* failRequest(error, actions.getLetterCodeFail);
+        yield* failRequest(error, actions.getLetterProofingStateFail);
     }
 }
 
@@ -27,7 +27,6 @@ export function fetchGetLetterProofing (config, nin) {
 
 export function* sendLetterProofing () {
     try {
-        yield put(actions.waitLetterProofing());
         const state = yield select(state => state),
               data = {
                 nin: state.nins.nin,
@@ -38,7 +37,7 @@ export function* sendLetterProofing () {
         yield put(putCsrfToken(response));
         yield put(response);
     } catch(error) {
-        yield* failRequest(error, actions.postLetterProofingFail);
+        yield* failRequest(error, actions.postLetterProofingSendLetterFail);
     }
 }
 
@@ -64,7 +63,7 @@ export function* sendLetterCode () {
         yield put(putCsrfToken(response));
         yield put(response);
     } catch(error) {
-        yield* failRequest(error, actions.postLetterCodeFail);
+        yield* failRequest(error, actions.postLetterProofingVerificationCodeFail);
     }
 }
 
