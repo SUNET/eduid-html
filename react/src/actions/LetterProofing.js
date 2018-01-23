@@ -1,5 +1,4 @@
 
-export const START_LETTER_PROOFING = 'START_LETTER_PROOFING';
 export const STOP_LETTER_PROOFING = 'STOP_LETTER_PROOFING';
 export const POST_LETTER_PROOFING_PROOFING = 'POST_LETTER_PROOFING_PROOFING';
 export const POST_LETTER_PROOFING_CODE = 'POST_LETTER_PROOFING_CODE';
@@ -13,12 +12,6 @@ export const POST_LETTER_PROOFING_CODE_SUCCESS = 'POST_LETTER_PROOFING_VERIFY_CO
 export function stopPostLetterProofing () {
   return {
     type: STOP_LETTER_PROOFING
-  };
-}
-
-export function startPostLetterProofing () {
-  return {
-    type: START_LETTER_PROOFING
   };
 }
 

@@ -23,12 +23,6 @@ const letterData = {
 
 let letterProofingReducer = (state=letterData, action) => {
   switch (action.type) {
-    case actions.START_LETTER_PROOFING:
-      return {
-        ...state,
-        is_fetching: false,
-        failed: false
-      };
     case actions.STOP_LETTER_PROOFING:
       return {
         ...state,

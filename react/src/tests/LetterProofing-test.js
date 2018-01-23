@@ -24,12 +24,6 @@ addLocaleData('react-intl/locale-data/en');
 
 describe("Letter proofing Actions", () => {
 
-  it("should create an action to open the modal for the letter-sent code", () => {
-    const expectedAction = {
-      type: actions.START_LETTER_PROOFING
-    };
-    expect(actions.startPostLetterProofing()).toEqual(expectedAction);
-  });
   it("should create an action to close the modal for the letter-sent code", () => {
     const expectedAction = {
       type: actions.STOP_LETTER_PROOFING
@@ -108,22 +102,6 @@ describe("Reducers", () => {
     },
   };
 
-  it("Receives a START_LETTER_PROOFING action", () => {
-    expect(
-      letterProofingReducer(
-        mockState,
-        {
-          type: actions.START_LETTER_PROOFING
-        }
-      )
-    ).toEqual(
-      {
-          ...mockState,
-          confirmingLetter: true
-      }
-    );
-  });
-
   it("Receives a STOP_LETTER_PROOFING action", () => {
     expect(
       letterProofingReducer(
@@ -188,6 +166,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
+          confirmingLetter: true,
           message: 'success'
       }
     );
