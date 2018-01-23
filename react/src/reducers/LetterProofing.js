@@ -64,8 +64,7 @@ let letterProofingReducer = (state=letterData, action) => {
       return {
         ...state,
         is_fetching: true,
-        failed: false,
-        code: action.payload.code
+        failed: false
       };
     case actions.POST_LETTER_PROOFING_PROOFING_SUCCESS:
       return {
