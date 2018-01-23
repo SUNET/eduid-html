@@ -3,6 +3,7 @@ import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
          postRequest, getRequest, failRequest } from "actions/common";
 import * as actions from "actions/LetterProofing";
+import { eduidRMNotify } from "actions/Notifications";
 
 
 export function* sendGetLetterProofing () {
@@ -12,6 +13,7 @@ export function* sendGetLetterProofing () {
         const response = yield call(fetchGetLetterProofing, state.config, nin);
         yield put(putCsrfToken(response));
         yield put(response);
+        yield put(eduidRMNotify('messages', 0));
     } catch(error) {
         yield* failRequest(error, actions.getLetterProofingStateFail);
     }
