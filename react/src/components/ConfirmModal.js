@@ -29,6 +29,15 @@ const getConfirmForm = inputName => {
         let spinning = false;
         if (props.is_fetching) spinning = true;
 
+        let resendMarkup = '';
+        if (props.with_resend_link) {
+            resendMarkup = (
+                <div>
+                    {props.resendHelp} <a href="#" onClick={props.handleResend}className="resend-code">{props.resendText}</a>
+                </div>
+            );
+        }
+
         return (
             <form id={inputName + '-form'}
                   className="form-horizontal"
@@ -47,7 +56,7 @@ const getConfirmForm = inputName => {
                                placeholder={props.placeholder}
                                controlId={inputName}
                                name={inputName} />
-                        {props.resendHelp} <a href="#" onClick={props.handleResend}className="resend-code">{props.resendText}</a>
+                        {resendMarkup}
                     </div>
                 </Modal.Body>
 
@@ -103,7 +112,12 @@ ConfirmModal.propTypes = {
   handleResend: PropTypes.func,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
-  is_fetching: PropTypes.bool
-}
+  is_fetching: PropTypes.bool,
+  with_resend_link: PropTypes.bool
+};
+
+ConfirmModal.defaultProps = {
+  with_resend_link: true
+};
 
 export default i18n(ConfirmModal);

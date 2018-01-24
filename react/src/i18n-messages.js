@@ -1202,6 +1202,16 @@ const unformatted = defineMessages({
         defaultMessage: `Confirm identity with code sent by letter`,
         description: "Title for letter proofing confirm dialog"
     },
+    'letter.confirm_info': {
+        id: "letter.confirm_info",
+        defaultMessage: `If you click "accept" below, you will be sent a letter by physical mail with a confirmation code. Once you receive it come back here and click again on "confirm using letter", and you will be offered a form to enter your code and verify your identity. The code sent to you will expire in 2 weeks starting now.`,
+        description: "Explanation for letter proofing confirm dialog"
+    },
+    'letter.verify_title': {
+        id: "letter.verify_title",
+        defaultMessage: `Verify your identity with the code you have received by physical mail`,
+        description: "Title for letter proofing verify dialog"
+    },
     'letter.lost_code': {
         id: "letter.lost_code",
         defaultMessage: `When you click on the "Send code" link a letter with a verification code will be sent to your official postal address.`,

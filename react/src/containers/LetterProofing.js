@@ -12,13 +12,10 @@ const mapStateToProps = (state, props) => {
         confirmingLetter = confirming && valid_nin;
   return {
     confirmingLetter: confirmingLetter,
+    verifyingLetter: state.letter_proofing.verifyingLetter,
     valid_nin: isValid('nins')(state),
     nin: state.nins.nin,
-    is_fetching: state.letter_proofing.is_fetching,
-    resending: state.letter_proofing.resending,
-    letter_sent: state.letter_proofing.letter_sent,
-    letter_expires: state.letter_proofing.letter_expires,
-    letter_expired: state.letter_proofing.letter_expired
+    is_fetching: state.letter_proofing.is_fetching
   }
 };
 
@@ -26,22 +23,25 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
-      dispatch(actions.startPostLetterProofing());
+      dispatch(actions.getLetterProofingState());
     },
-    handleStopConfirmationLetter: function (e) {
-      dispatch(actions.stopPostLetterProofing());
+    confirmLetterProofing: function (e) {
+      dispatch(actions.postLetterProofingSendLetter());
+      dispatch(actions.stopLetterConfirmation());
     },
-    handleConfirmationLetter: function (e) {
-      e.preventDefault();
-      dispatch(actions.postSendLetterProofing());
-    },
-    sendConfirmationLetter: function (e) {
+    sendConfirmationCode: function (e) {
       e.preventDefault();
         const data = {
             code: document.getElementById('confirmation-code-area').querySelector('input').value
         };
-      dispatch(actions.postLetterProofing(data));
-      dispatch(actions.stopPostLetterProofing());
+      dispatch(actions.postLetterProofingVerificationCode(data));
+      dispatch(actions.stopLetterVerification());
+    },
+    handleStopConfirmationLetter: function (e) {
+      dispatch(actions.stopLetterConfirmation());
+    },
+    handleStopVerificationLetter: function (e) {
+      dispatch(actions.stopLetterVerification());
     }
   }
 };

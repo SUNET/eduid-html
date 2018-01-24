@@ -1,49 +1,53 @@
 
-export const START_LETTER_PROOFING = 'START_LETTER_PROOFING';
-export const STOP_LETTER_PROOFING = 'STOP_LETTER_PROOFING';
+export const STOP_LETTER_CONFIRMATION = 'STOP_LETTER_CONFIRMATION';
+export const STOP_LETTER_VERIFICATION = 'STOP_LETTER_VERIFICATION';
+export const GET_LETTER_PROOFING_PROOFING = 'GET_LETTER_PROOFING_PROOFING';
+export const GET_LETTER_PROOFING_PROOFING_FAIL = 'GET_LETTER_PROOFING_PROOFING_FAIL';
+export const GET_LETTER_PROOFING_PROOFING_SUCCESS = 'GET_LETTER_PROOFING_PROOFING_SUCCESS';
 export const POST_LETTER_PROOFING_PROOFING = 'POST_LETTER_PROOFING_PROOFING';
-export const POST_LETTER_PROOFING_CODE = 'POST_LETTER_PROOFING_CODE';
-export const WAIT_LETTER_PROOFING_PROOFING = 'WAIT_LETTER_PROOFING_PROOFING';
-export const POST_LETTER_PROOFING_PROOFING_SUCCESS = 'POST_LETTER_PROOFING_PROOFING_SUCCESS';
 export const POST_LETTER_PROOFING_PROOFING_FAIL = 'POST_LETTER_PROOFING_PROOFING_FAIL';
+export const POST_LETTER_PROOFING_PROOFING_SUCCESS = 'POST_LETTER_PROOFING_PROOFING_SUCCESS';
+export const POST_LETTER_PROOFING_CODE = 'POST_LETTER_PROOFING_VERIFY_CODE';
 export const POST_LETTER_PROOFING_CODE_FAIL = 'POST_LETTER_PROOFING_VERIFY_CODE_FAIL';
 export const POST_LETTER_PROOFING_CODE_SUCCESS = 'POST_LETTER_PROOFING_VERIFY_CODE_SUCCESS';
 
 
-export function stopPostLetterProofing () {
+export function stopLetterConfirmation () {
   return {
-    type: STOP_LETTER_PROOFING
+    type: STOP_LETTER_CONFIRMATION
   };
 }
 
-export function startPostLetterProofing () {
+export function stopLetterVerification () {
   return {
-    type: START_LETTER_PROOFING
+    type: STOP_LETTER_VERIFICATION
   };
 }
 
-export function postSendLetterProofing () {
+export function getLetterProofingState () {
   return {
-    type: POST_LETTER_PROOFING_CODE
+    type: GET_LETTER_PROOFING_PROOFING
   };
 }
 
-export function postLetterProofing (data) {
+export function getLetterProofingStateFail (err) {
   return {
-    type: POST_LETTER_PROOFING_PROOFING,
+    type: GET_LETTER_PROOFING_PROOFING_FAIL,
+    error: true,
     payload: {
-        code: data.code
+      error: err,
+      message: err.toString()
     }
   };
 }
 
-export function waitLetterProofing () {
+export function postLetterProofingSendLetter () {
   return {
-    type: WAIT_LETTER_PROOFING_PROOFING
+    type: POST_LETTER_PROOFING_PROOFING
   };
 }
 
-export function postLetterProofingFail (err) {
+export function postLetterProofingSendLetterFail (err) {
   return {
     type: POST_LETTER_PROOFING_PROOFING_FAIL,
     error: true,
@@ -54,7 +58,16 @@ export function postLetterProofingFail (err) {
   };
 }
 
-export function postLetterCodeFail (err) {
+export function postLetterProofingVerificationCode (data) {
+  return {
+    type: POST_LETTER_PROOFING_CODE,
+    payload: {
+        code: data.code
+    }
+  };
+}
+
+export function postLetterProofingVerificationCodeFail (err) {
   return {
     type: POST_LETTER_PROOFING_CODE_FAIL,
     error: true,
