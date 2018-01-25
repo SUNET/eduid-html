@@ -907,6 +907,11 @@ const msgs = {
           id="chpass.different-repeat"
           defaultMessage={`Passwords differ`} />),
 
+   'chpass.unable-to-verify-old-password': (
+        <FormattedMessage
+          id="chpass.unable-to-verify-old-password"
+          defaultMessage={`There were problems trying to verify your old credentials. If you are certain that they are correct, please contact the administrator`} />),
+
    'pwfield.enter_password': (
         <FormattedMessage
           id="pwfield.enter_password"

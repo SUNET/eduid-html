@@ -22,6 +22,7 @@
   "chpass.stale_reauthn": "Stale re-authentication. Please re-initiate the process.",
   "chpass.suggested_password": "Suggested password",
   "chpass.title-general": "Change your password",
+  "chpass.unable-to-verify-old-password": "There were problems trying to verify your old credentials. If you are certain that they are correct, please contact the administrator",
   "chpass.use-custom": "Custom",
   "chpass.use-custom-label": "Use my own password",
   "chpass.use-suggested": "Suggested",
