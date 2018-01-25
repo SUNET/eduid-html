@@ -10,11 +10,11 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import Button from 'react-bootstrap/lib/Button';
 
 import i18n from 'i18n-messages';
 
 import EduIDButton from 'components/EduIDButton';
-import CancelButton from 'components/CancelButton';
 import TextInput from 'components/EduIDTextInput';
 
 import 'style/ChangePassword.scss';
@@ -143,7 +143,10 @@ class ChpassForm extends Component {
                                disabled={this.props.invalid}>
                             {this.props.l10n('chpass.change-password')}
                   </EduIDButton>
-                  <CancelButton new_location={this.props.cancel_to} />
+                  <Button className="cancel-button eduid-cancel-button"
+                        onClick={() => this.props.history.push(this.props.cancel_to)} >
+                     {this.props.l10n('cm.cancel')}
+                  </Button>
               </fieldset>
           </form>
     );
