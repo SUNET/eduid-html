@@ -14,6 +14,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import i18n from 'i18n-messages';
 
 import EduIDButton from 'components/EduIDButton';
+import CancelButton from 'components/CancelButton';
 import TextInput from 'components/EduIDTextInput';
 
 import 'style/ChangePassword.scss';
@@ -134,7 +135,7 @@ class ChpassForm extends Component {
               <fieldset>
                   {form}
               </fieldset>
-              <fieldset>
+              <fieldset id="chpass-form" className="tabpane">
                   <EduIDButton className="btn btn-primary"
                                id="chpass-button"
                                spinning={spinning}
@@ -142,6 +143,7 @@ class ChpassForm extends Component {
                                disabled={this.props.invalid}>
                             {this.props.l10n('chpass.change-password')}
                   </EduIDButton>
+                  <CancelButton new_location={this.props.cancel_to} />
               </fieldset>
           </form>
     );
@@ -202,6 +204,7 @@ ChangePassword.propTypes = {
   password_entropy: PropTypes.number,
   handleChoice: PropTypes.func,
   handleStartPasswordChange: PropTypes.func,
+  cancel_to: PropTypes.string
 }
 
 export default ChangePassword;

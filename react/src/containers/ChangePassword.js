@@ -49,7 +49,8 @@ const mapStateToProps = (state, props) => {
         password_entropy: configEntropy,
         password_score: score,
         password_strength_msg: pwStrengthMessages[score],
-        custom_ready: configEntropy > entropy
+        custom_ready: configEntropy > entropy,
+        cancel_to: state.config.DASHBOARD_URL
     }
 };
 
