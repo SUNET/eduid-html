@@ -604,6 +604,10 @@
     "defaultMessage": "Passwords differ"
   },
   {
+    "id": "chpass.unable-to-verify-old-password",
+    "defaultMessage": "There were problems trying to verify your old credentials. If you are certain that they are correct, please contact the administrator"
+  },
+  {
     "id": "pwfield.enter_password",
     "defaultMessage": "Enter password"
   },

@@ -10,6 +10,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import Button from 'react-bootstrap/lib/Button';
 
 import i18n from 'i18n-messages';
 
@@ -134,7 +135,7 @@ class ChpassForm extends Component {
               <fieldset>
                   {form}
               </fieldset>
-              <fieldset>
+              <fieldset id="chpass-form" className="tabpane">
                   <EduIDButton className="btn btn-primary"
                                id="chpass-button"
                                spinning={spinning}
@@ -142,6 +143,10 @@ class ChpassForm extends Component {
                                disabled={this.props.invalid}>
                             {this.props.l10n('chpass.change-password')}
                   </EduIDButton>
+                  <Button className="cancel-button eduid-cancel-button"
+                        onClick={() => this.props.history.push(this.props.cancel_to)} >
+                     {this.props.l10n('cm.cancel')}
+                  </Button>
               </fieldset>
           </form>
     );
@@ -202,6 +207,7 @@ ChangePassword.propTypes = {
   password_entropy: PropTypes.number,
   handleChoice: PropTypes.func,
   handleStartPasswordChange: PropTypes.func,
+  cancel_to: PropTypes.string
 }
 
 export default ChangePassword;
