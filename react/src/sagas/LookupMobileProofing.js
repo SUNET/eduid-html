@@ -10,7 +10,9 @@ export function* requestLookupMobileProof () {
         const state = yield select(state => state),
               url = state.config.LOOKUP_MOBILE_PROOFING_URL,
               input = document.getElementById('norEduPersonNin'),
-              nin = input ? input.value : 'testing',
+              unconfirmed = document.getElementById('eduid-unconfirmed-nin'),
+              nin = input ? input.value :
+                            (unconfirmed ? state.nins.nin : 'testing'),
               data = {
                 nin: nin,
                 csrf_token: state.config.csrf_token
