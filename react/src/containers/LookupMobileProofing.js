@@ -7,10 +7,9 @@ import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
-  const phone = state.phones.phones.filter(phone => phone.verified === true);
   return {
     is_fetching: state.lookup_mobile.is_fetching,
-    disabled: ((! isValid('nins')(state)) || (phone.length === 0))
+    disabled: ! isValid('nins')(state)
   }
 };
 
