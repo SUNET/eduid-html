@@ -9,9 +9,11 @@ export function* requestOpenidQRcode () {
     try {
         const openid_url = yield select(state => state.config.OIDC_PROOFING_URL),
               input = document.querySelector('input[name=norEduPersonNIN]'),
-              nin = input ? (input.value || 'no nin') : 'testing',
+              unconfirmed = document.getElementById('eduid-unconfirmed-nin'),
+              nin = input ? (input.value || 'no nin') :
+                            (unconfirmed ? state.nins.nin : 'testing'),
               data = {
-                'nin': nin
+                nin: nin
               };
 
         console.log('Getting QRCode for NIN: ' + nin);
