@@ -13,12 +13,16 @@ class EduIDButton extends Component {
   render () {
     const { spinning, ...other } = this.props,
           classes = spinning && 'active has-spinner' || 'has-spinner';
+    let spin_holder = '';
+    if (spinning) {
+        spin_holder = (<div className="spin-holder">
+            <Glyphicon className="spinner" glyph="refresh" />
+          </div>);
+    }
     return (
         <Button className={classes} disabled={spinning} {...other}>
             {this.props.children}
-          <div className="spin-holder">
-            <Glyphicon className="spinner" glyph="refresh" />
-          </div>
+            {spin_holder}
         </Button>
     );
   }
