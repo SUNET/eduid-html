@@ -8,7 +8,7 @@ import i18n from 'i18n-messages';
 const mapStateToProps = (state, props) => {
     let email, confirmed;
     if (state.emails.emails.length >= 1) {
-        email = state.emails.emails[0].email
+        email = state.emails.emails.filter(mail => mail.primary)[0].email;
     } else {
         email = ''
     }
