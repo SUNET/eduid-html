@@ -12,7 +12,8 @@ const mapStateToProps = (state, props) => {
     } else {
         email = ''
     }
-    if (state.nins.nins.length >= 1) {
+    const nins = state.nins.nins.filter(nin => nin.verified);
+    if (nins.length >= 1) {
         confirmed = 'main.confirmed'
     } else {
         confirmed = 'main.unconfirmed'
