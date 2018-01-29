@@ -1133,7 +1133,6 @@ const msgs = {
           id="foot.change-version-tip"
           defaultMessage={`This is an experimental version. If you experience any problem while using the app, you can switch to the old version.`} />),
 
-
    'pending.pdata': (
         <FormattedMessage
           id="pending.pdata"
@@ -1153,6 +1152,21 @@ const msgs = {
         <FormattedMessage
           id="pending.phones"
           defaultMessage={`Add a phone number`} />),
+
+   'pending_confirm.emails': (
+        <FormattedMessage
+          id="pending_confirm.emails"
+          defaultMessage={`Confirm email address`} />),
+
+   'pending_confirm.nins': (
+        <FormattedMessage
+          id="pending_confirm.nins"
+          defaultMessage={`Confirm national identity number`} />),
+
+   'pending_confirm.phones': (
+        <FormattedMessage
+          id="pending_confirm.phones"
+          defaultMessage={`Confirm phone number`} />),
 
    'main.unconfirmed': (
         <FormattedMessage

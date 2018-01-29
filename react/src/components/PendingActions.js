@@ -23,17 +23,27 @@ class PendingActions extends Component {
         } else {
             return (
                 <li key={index} className="pending-action-item">
-                  <a href={'/profile/' + missing}>
+                  <a onClick={this.props.handleGoToPending(missing).bind(this)}>
                    {this.props.l10n('pending.' + missing)}
                   </a>
                 </li>
             );
         }
+    }),
+    toConfirm = this.props.pending_confirm.map((missing, index) => {
+        return (
+            <li key={index} className="pending-action-item">
+              <a onClick={this.props.handleGoToPending(missing).bind(this)}>
+               {this.props.l10n('pending_confirm.' + missing)}
+              </a>
+            </li>
+        );
     });
 
     return (
         <ul className="list-unstyled pending-actions">
           {toShow}
+          {toConfirm}
         </ul>
     );
   }

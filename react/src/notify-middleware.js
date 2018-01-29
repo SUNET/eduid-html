@@ -4,7 +4,7 @@ import { profileFilled, PROFILE_FILLED } from "actions/Profile";
 
 
 const calculateProfileFilled = (state) => {
-    let filled = {max: 0, cur: 0, pending: []};
+    let filled = {max: 0, cur: 0, pending: [], pending_confirm: []};
     ['given_name', 'surname', 'display_name', 'language'].forEach( (pdata) => {
         filled.max += 1;
         if (state.personal_data.data[pdata]) {
@@ -16,7 +16,11 @@ const calculateProfileFilled = (state) => {
     ['emails', 'phones', 'nins'].forEach( (tab) => {
         filled.max += 1;
         if (state[tab][tab] && state[tab][tab].length > 0) {
-            filled.cur += 1;
+            if (state[tab][tab].filter(obj => obj.verified).length > 0) {
+                filled.cur += 1;
+            } else {
+                filled.pending_confirm.push(tab);
+            }
         } else {
             filled.pending.push(tab);
         }
@@ -45,7 +49,7 @@ const notifyAndDispatch = store => next => action => {
         }
         if (!action.error) {
             const filled = calculateProfileFilled(store.getState());
-            next(profileFilled(filled.max, filled.cur, filled.pending));
+            next(profileFilled(filled.max, filled.cur, filled.pending, filled.pending_confirm));
         }
     }
     return next(action);

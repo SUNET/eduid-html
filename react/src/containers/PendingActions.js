@@ -6,13 +6,21 @@ import i18n from 'i18n-messages';
 
 const mapStateToProps = (state, props) => {
   return {
-      pending: state.profile.pending
+      dashboard_url: state.config.DASHBOARD_URL,
+      pending: state.profile.pending,
+      pending_confirm: state.profile.pending_confirm
   }
 };
 
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+    handleGoToPending: function (missing) {
+      return function (e) {
+          e.preventDefault();
+          this.props.history.push(this.props.dashboard_url + missing);
+      }
+    },
   }
 };
 
