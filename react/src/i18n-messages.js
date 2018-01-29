@@ -1168,6 +1168,11 @@ const msgs = {
         <FormattedMessage
           id="pfilled.completion"
           defaultMessage={`Completion`} />),
+
+   'csrf.try-again': (
+        <FormattedMessage
+          id="csrf.try-again"
+          defaultMessage={`There was a problem with your submission, please try again`} />),
 };
 
 const unformatted = defineMessages({

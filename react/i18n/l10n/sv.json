@@ -34,6 +34,7 @@
   "cm.lost_code": "Tappat bort din verifieringskod?",
   "cm.ok": "OK",
   "cm.resend_code": "Skicka bekräftelsekoden igen",
+  "csrf.try-again": "There was a problem with your submission, please try again",
   "emails.button_add": "Lägg till",
   "emails.cannot_remove_primary": "You can not delete the primary email",
   "emails.cannot_remove_unique": "You must have at least one email address",
