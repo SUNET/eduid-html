@@ -28,8 +28,8 @@ describe("EduIDButton Component should mount", () => {
 
     expect(button.hasClass('has-spinner')).toBe(true);
     expect(button.hasClass('active')).toBe(false);
-    expect(divEl.hasClass('spin-holder')).toBe(true);
-    expect(glyph.hasClass('spinner')).toBe(true);
+    expect(divEl.length).toBe(0);
+    expect(glyph.length).toBe(0);
   });
 
   it("Renders with spinner", () => {
