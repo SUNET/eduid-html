@@ -14,11 +14,11 @@ class Security extends Component {
   render () {
     if (this.props.redirect_to !== '') {
         window.location.href = this.props.redirect_to;
-        return
+        return null
     }
     if (this.props.deleted) {
         window.location.href = 'https://eduid.se';
-        return
+        return null
     }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {

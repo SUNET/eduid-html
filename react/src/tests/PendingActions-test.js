@@ -26,11 +26,16 @@ function setupComponent() {
             messages: messages
         },
         profile: {
-            pending: ['surname', 'emails']
+            pending: ['surname', 'emails'],
+            pending_confirm: ['phone']
+        },
+        config: {
+            DASHBOARD_URL: '/profile/'
         }
     });
     const props = {
-        pending: ['surname', 'emails']
+        pending: ['surname', 'emails'],
+        pending_confirm: ['phone']
     };
     const wrapper = mount(<Provider store={ store }>
                               <PendingActionsContainer {...props} />
@@ -50,5 +55,6 @@ describe("PendingActions Component", () => {
 
         expect(area.contains(pending.get(0))).toBeTruthy();
         expect(area.contains(pending.get(1))).toBeTruthy();
+        expect(area.contains(pending.get(2))).toBeTruthy();
     });
 });

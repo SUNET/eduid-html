@@ -80,7 +80,7 @@ class Main extends Component {
                     <div className='col-md-3'>
                       <div className="profile-head">
                         <h3>{this.props.l10n('main.profile_title')}</h3>
-                        <PendingActionsContainer />
+                        <PendingActionsContainer history={history} />
                       </div>
 
                     <div className="tabs-left" role="navigation" id="profile-menu-large">
@@ -101,7 +101,7 @@ class Main extends Component {
                     <div key="1" className='col-md-3'>
                       <div className="profile-head">
                         <h3>{this.props.l10n('main.profile_title')}</h3>
-                        <PendingActionsContainer />
+                        <PendingActionsContainer history={history} />
                       </div>
                     </div>),
                     (<nav key="2" className="navbar navbar-default" role="navigation">

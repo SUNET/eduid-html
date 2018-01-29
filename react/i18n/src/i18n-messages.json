@@ -788,6 +788,18 @@
     "defaultMessage": "Add a phone number"
   },
   {
+    "id": "pending_confirm.emails",
+    "defaultMessage": "Confirm email address"
+  },
+  {
+    "id": "pending_confirm.nins",
+    "defaultMessage": "Confirm national identity number"
+  },
+  {
+    "id": "pending_confirm.phones",
+    "defaultMessage": "Confirm phone number"
+  },
+  {
     "id": "main.unconfirmed",
     "defaultMessage": "Unconfirmed"
   },
