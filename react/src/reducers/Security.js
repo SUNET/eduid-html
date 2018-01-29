@@ -45,6 +45,7 @@ let securityReducer = (state=security, action) => {
     case actions.STOP_CHANGE_PASSWORD:
       return {
         ...state,
+        is_fetching: false,
         confirming_change: false
       };
     case actions.GET_CHANGE_PASSWORD:
