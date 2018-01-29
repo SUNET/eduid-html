@@ -144,7 +144,7 @@ class ChpassForm extends Component {
                             {this.props.l10n('chpass.change-password')}
                   </EduIDButton>
                   <Button className="cancel-button eduid-cancel-button"
-                        onClick={() => this.props.history.push(this.props.cancel_to)} >
+                        onClick={this.props.handleStopPasswordChange.bind(this)} >
                      {this.props.l10n('cm.cancel')}
                   </Button>
               </fieldset>
