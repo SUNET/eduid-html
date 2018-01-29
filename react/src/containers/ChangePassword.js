@@ -6,6 +6,7 @@ import i18n from 'i18n-messages';
 import ChangePassword from 'components/ChangePassword';
 import * as comp from 'components/ChangePassword';
 import * as actions from 'actions/ChangePassword';
+import { stopConfirmationPassword } from 'actions/Security';
 
 
 
@@ -74,6 +75,15 @@ const mapDispatchToProps = (dispatch, props) => {
             }
             dispatch(actions.postPasswordChange(oldPassword, newPassword));
         },
+
+        handleStopPasswordChange: function (event) {
+            event.preventDefault();
+            this.props.history.push(this.props.cancel_to)
+            dispatch(stopConfirmationPassword());
+        },
+
+
+
         loadZxcvbn: function () {
             return new Promise(resolve => {
                 require.ensure([], () => {  
