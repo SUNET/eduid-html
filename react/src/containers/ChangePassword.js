@@ -82,8 +82,6 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(stopConfirmationPassword());
         },
 
-
-
         loadZxcvbn: function () {
             return new Promise(resolve => {
                 require.ensure([], () => {  
