@@ -71,8 +71,10 @@ export function saveData (getData, formName, startAction, fetcher, failAction) {
             const resp = yield call(fetcher, state.config, data);
             yield put(putCsrfToken(resp));
             if (resp.type.endsWith('FAIL')) {
-                yield put(setSubmitFailed(formName, ...resp.payload.error));
-                yield put(stopAsyncValidation(formName, resp.payload.error));
+                if (resp.payload.error) {
+                    yield put(setSubmitFailed(formName, ...resp.payload.error));
+                    yield put(stopAsyncValidation(formName, resp.payload.error));
+                }
             } else {
                 yield put(setSubmitSucceeded(formName));
                 yield put(stopAsyncValidation(formName));
