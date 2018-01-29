@@ -26,7 +26,7 @@ import { requestCredentials, requestPasswordChange, postDeleteAccount } from "sa
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
-import { sendLetterProofing, sendLetterCode } from "sagas/LetterProofing";
+import { sendLetterProofing, sendGetLetterProofing, sendLetterCode } from "sagas/LetterProofing";
 import { requestLogout } from "sagas/Header";
 import { requestLookupMobileProof } from "sagas/LookupMobileProofing";
 
@@ -66,10 +66,11 @@ function* rootSaga() {
     takeLatest(securityActions.GET_CHANGE_PASSWORD, requestPasswordChange),
     takeLatest(pwActions.POST_PASSWORD_CHANGE, postPasswordChange),
     takeLatest(securityActions.POST_DELETE_ACCOUNT, postDeleteAccount),
-    takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterProofing),
-    takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterCode),
+    takeLatest(letterActions.POST_LETTER_PROOFING_PROOFING, sendLetterProofing),
+    takeLatest(letterActions.GET_LETTER_PROOFING_PROOFING, sendGetLetterProofing),
+    takeLatest(letterActions.POST_LETTER_PROOFING_CODE, sendLetterCode),
     takeLatest(ninActions.POST_NIN_REMOVE, requestRemoveNin),
-    takeEvery(letterActions.STOP_LETTER_PROOFING, requestNins),
+    takeEvery(letterActions.STOP_LETTER_VERIFICATION, requestNins),
     takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
     takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
     takeEvery(headerActions.POST_LOGOUT, requestLogout),

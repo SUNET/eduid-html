@@ -99,7 +99,7 @@ class Nins extends Component {
     } else if (ninStatus === 'unverified') {
         const ninList = (this.props.nins.map( (nin, index) => {
             return (
-               <div className="nin-holder" key={index} data-ninnumber={nin.number}>
+               <div className="nin-holder" id="eduid-unconfirmed-nin" key={index} data-ninnumber={nin.number}>
                   <strong>{nin.number}</strong>
                   <EduIDButton bsStyle="danger"
                                id={'button-rm-nin-'+nin.number}

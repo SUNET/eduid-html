@@ -907,6 +907,11 @@ const msgs = {
           id="chpass.different-repeat"
           defaultMessage={`Passwords differ`} />),
 
+   'chpass.unable-to-verify-old-password': (
+        <FormattedMessage
+          id="chpass.unable-to-verify-old-password"
+          defaultMessage={`There were problems trying to verify your old credentials. If you are certain that they are correct, please contact the administrator`} />),
+
    'pwfield.enter_password': (
         <FormattedMessage
           id="pwfield.enter_password"
@@ -1163,6 +1168,11 @@ const msgs = {
         <FormattedMessage
           id="pfilled.completion"
           defaultMessage={`Completion`} />),
+
+   'csrf.try-again': (
+        <FormattedMessage
+          id="csrf.try-again"
+          defaultMessage={`There was a problem with your submission, please try again`} />),
 };
 
 const unformatted = defineMessages({
@@ -1201,6 +1211,16 @@ const unformatted = defineMessages({
         id: "letter.confirm_title",
         defaultMessage: `Confirm identity with code sent by letter`,
         description: "Title for letter proofing confirm dialog"
+    },
+    'letter.confirm_info': {
+        id: "letter.confirm_info",
+        defaultMessage: `If you click "accept" below, you will be sent a letter by physical mail with a confirmation code. Once you receive it come back here and click again on "confirm using letter", and you will be offered a form to enter your code and verify your identity. The code sent to you will expire in 2 weeks starting now.`,
+        description: "Explanation for letter proofing confirm dialog"
+    },
+    'letter.verify_title': {
+        id: "letter.verify_title",
+        defaultMessage: `Verify your identity with the code you have received by physical mail`,
+        description: "Title for letter proofing verify dialog"
     },
     'letter.lost_code': {
         id: "letter.lost_code",

@@ -16,6 +16,7 @@ import letterProofingReducer from "reducers/LetterProofing";
 import LetterProofingButton from 'components/LetterProofing'
 import LetterProofingContainer from "containers/LetterProofing";
 import {sendLetterProofing, fetchLetterProofing,
+        sendGetLetterProofing, fetchGetLetterProofing,
         sendLetterCode, fetchLetterCode } from '../sagas/LetterProofing';
 
 const messages = require('../../i18n/l10n/en');
@@ -24,42 +25,29 @@ addLocaleData('react-intl/locale-data/en');
 
 describe("Letter proofing Actions", () => {
 
-  it("should create an action to open the modal for the letter-sent code", () => {
-    const expectedAction = {
-      type: actions.START_LETTER_PROOFING
-    };
-    expect(actions.startPostLetterProofing()).toEqual(expectedAction);
-  });
   it("should create an action to close the modal for the letter-sent code", () => {
     const expectedAction = {
-      type: actions.STOP_LETTER_PROOFING
+      type: actions.STOP_LETTER_VERIFICATION
     };
-    expect(actions.stopPostLetterProofing()).toEqual(expectedAction);
+    expect(actions.stopLetterVerification()).toEqual(expectedAction);
   });
 
   it("should create an action to trigger sending a letter with the code", () => {
     const expectedAction = {
-      type: actions.POST_LETTER_PROOFING_CODE
+      type: actions.POST_LETTER_PROOFING_PROOFING
     };
-    expect(actions.postSendLetterProofing()).toEqual(expectedAction);
+    expect(actions.postLetterProofingSendLetter()).toEqual(expectedAction);
   });
 
   it("should create an action to POST the entered code", () => {
     const data = {code: 'dummy-code'},
           expectedAction = {
-              type: actions.POST_LETTER_PROOFING_PROOFING,
+              type: actions.POST_LETTER_PROOFING_CODE,
               payload: {
                 code: data.code
               }
     };
-    expect(actions.postLetterProofing(data)).toEqual(expectedAction);
-  });
-
-  it("should create an action to wait on sending the code", () => {
-    const expectedAction = {
-      type: actions.WAIT_LETTER_PROOFING_PROOFING
-    };
-    expect(actions.waitLetterProofing()).toEqual(expectedAction);
+    expect(actions.postLetterProofingVerificationCode(data)).toEqual(expectedAction);
   });
 
   it("should create an action to signal an error sending the letter", () => {
@@ -72,7 +60,7 @@ describe("Letter proofing Actions", () => {
         message: err.toString()
       }
     };
-    expect(actions.postLetterProofingFail(err)).toEqual(expectedAction);
+    expect(actions.postLetterProofingSendLetterFail(err)).toEqual(expectedAction);
   });
   it("should create an action to signal an error verifying the code", () => {
     const err = new Error('Bad error');
@@ -84,7 +72,7 @@ describe("Letter proofing Actions", () => {
         message: err.toString()
       }
     };
-    expect(actions.postLetterCodeFail(err)).toEqual(expectedAction);
+    expect(actions.postLetterProofingVerificationCodeFail(err)).toEqual(expectedAction);
   });
 });
 
@@ -92,6 +80,7 @@ describe("Reducers", () => {
 
   const mockState = {
     confirmingLetter: false,
+    verifyingLetter: false,
     code: '',
     letter_sent: '',
     letter_expires: '',
@@ -99,37 +88,15 @@ describe("Reducers", () => {
     is_fetching: false,
     failed: false,
     error: "",
-    message: '',
-    resending: {
-      is_fetching: false,
-      failed: false,
-      error: {},
-      message: ''
-    },
+    message: ''
   };
 
-  it("Receives a START_LETTER_PROOFING action", () => {
+  it("Receives a STOP_LETTER_VERIFICATION action", () => {
     expect(
       letterProofingReducer(
         mockState,
         {
-          type: actions.START_LETTER_PROOFING
-        }
-      )
-    ).toEqual(
-      {
-          ...mockState,
-          confirmingLetter: true
-      }
-    );
-  });
-
-  it("Receives a STOP_LETTER_PROOFING action", () => {
-    expect(
-      letterProofingReducer(
-        mockState,
-        {
-          type: actions.STOP_LETTER_PROOFING
+          type: actions.STOP_LETTER_VERIFICATION
         }
       )
     ).toEqual(
@@ -145,31 +112,12 @@ describe("Reducers", () => {
       letterProofingReducer(
         mockState,
         {
-          type: actions.STOP_LETTER_PROOFING
+          type: actions.STOP_LETTER_VERIFICATION
         }
       )
     ).toEqual(
       {
           ...mockState
-      }
-    );
-  });
-
-  it("Receives a WAIT_LETTER_PROOFING_PROOFING action", () => {
-    expect(
-      letterProofingReducer(
-        mockState,
-        {
-          type: actions.WAIT_LETTER_PROOFING_PROOFING
-        }
-      )
-    ).toEqual(
-      {
-          ...mockState,
-          resending: {
-              ...mockState.resending,
-              is_fetching: true
-          }
       }
     );
   });
@@ -209,21 +157,17 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          resending: {
-              ...mockState.resending,
-              failed: true,
-              message: 'err'
-          }
+          failed: true
       }
     );
   });
 
-  it("Receives a POST_LETTER_PROOFING_PROOFING action", () => {
+  it("Receives a POST_LETTER_PROOFING_CODE action", () => {
     expect(
       letterProofingReducer(
         mockState,
         {
-          type: actions.POST_LETTER_PROOFING_PROOFING,
+          type: actions.POST_LETTER_PROOFING_CODE,
           payload: {
               code: 'dummy-code'
           }
@@ -232,12 +176,8 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          code: 'dummy-code',
-          resending: {
-              ...mockState.resending,
-              is_fetching: true,
-              failed: false
-          }
+          is_fetching: true,
+          code: 'dummy-code'
       }
     );
   });
@@ -278,12 +218,7 @@ describe("Reducers", () => {
     ).toEqual(
       {
           ...mockState,
-          failed: true,
-          resending: {
-              ...mockState.resending,
-              failed: true,
-              message: 'err'
-          }
+          failed: true
       }
     );
   });
@@ -431,9 +366,6 @@ describe("Async component", () => {
         const generator = sendLetterProofing();
 
         let next = generator.next();
-        expect(next.value).toEqual(put(actions.waitLetterProofing()));
-
-        next = generator.next();
 
         const data = {
             nin: 'dummy-nin',
@@ -445,6 +377,30 @@ describe("Async component", () => {
 
         const action = {
           type: 'POST_LETTER_PROOFING_PROOFING_SUCCESS',
+          payload: {
+            csrf_token: 'csrf-token',
+            message: 'success'
+          }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        next = generator.next();
+        delete(action.payload.csrf_token);
+        expect(next.value).toEqual(put(action));
+    });
+
+    it("Sagas sendGetLetterProfing", () => {
+
+        const generator = sendGetLetterProofing();
+
+        let next = generator.next();
+
+        const nin = 'dummy-nin';
+        const resp = generator.next(state);
+        expect(resp.value).toEqual(call(fetchGetLetterProofing, state.config, nin));
+
+        const action = {
+          type: 'GET_LETTER_PROOFING_PROOFING_SUCCESS',
           payload: {
             csrf_token: 'csrf-token',
             message: 'success'

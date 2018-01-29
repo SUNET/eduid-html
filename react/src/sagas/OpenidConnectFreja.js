@@ -13,8 +13,12 @@ export function* checkNINAndShowFrejaModal () {
     if (!nin) {
       let inputNin = document.querySelector('input[name=norEduPersonNIN]');
       if (!inputNin) {
-        // Form is always created, only hidden. Must be running tests.
-        nin = 'testing';
+        const unconfirmed = document.getElementById('eduid-unconfirmed-nin');
+        if (unconfirmed) {
+          nin = state.nins.nin;
+        } else {
+          nin = 'testing';
+        }
       } else {
         nin = inputNin.value ? inputNin.value : 'no nin'
       }

@@ -42,7 +42,7 @@ export function* postPasswordChange () {
         yield put(putCsrfToken(change));
         if (change.type.endsWith('SUCCESS')) {
             yield put(push('security'));
-        } else {
+        } else if (change.payload.error !== undefined) {
             const newpass = change.payload.error.new_password;
             if (newpass) {
                 change.payload.error[comp.pwFieldCustomName] = newpass;

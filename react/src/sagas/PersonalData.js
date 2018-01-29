@@ -21,31 +21,37 @@ export function* requestAllPersonalData () {
         if (userdata.type === pdataActions.GET_ALL_USERDATA_SUCCESS) {
           const nins = userdata.payload.nins;
           delete userdata.payload.nins;
-          const ninAction = {
-              type: ninActions.GET_NINS_SUCCESS,
-              payload: {
-                  nins: nins
-              }
-          };
+          if (nins !== undefined) {
+              const ninAction = {
+                  type: ninActions.GET_NINS_SUCCESS,
+                  payload: {
+                      nins: nins
+                  }
+              };
+              yield put(ninAction);
+          }
           const emails = userdata.payload.emails;
           delete userdata.payload.emails;
-          const emailAction = {
-              type: emailActions.GET_EMAILS_SUCCESS,
-              payload: {
-                  emails: emails
-              }
-          };
+          if (emails !== undefined) {
+              const emailAction = {
+                  type: emailActions.GET_EMAILS_SUCCESS,
+                  payload: {
+                      emails: emails
+                  }
+              };
+              yield put(emailAction);
+          }
           const phones = userdata.payload.phones;
           delete userdata.payload.phones;
-          const phoneAction = {
-              type: phoneActions.GET_MOBILES_SUCCESS,
-              payload: {
-                  phones: phones
-              }
-          };
-          yield put(ninAction);
-          yield put(emailAction);
-          yield put(phoneAction);
+          if (phones !== undefined) {
+              const phoneAction = {
+                  type: phoneActions.GET_MOBILES_SUCCESS,
+                  payload: {
+                      phones: phones
+                  }
+              };
+              yield put(phoneAction);
+          }
           userdata.type = pdataActions.GET_USERDATA_SUCCESS;
           yield put(userdata);
           const lang = userdata.payload.language;

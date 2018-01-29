@@ -604,6 +604,10 @@
     "defaultMessage": "Passwords differ"
   },
   {
+    "id": "chpass.unable-to-verify-old-password",
+    "defaultMessage": "There were problems trying to verify your old credentials. If you are certain that they are correct, please contact the administrator"
+  },
+  {
     "id": "pwfield.enter_password",
     "defaultMessage": "Enter password"
   },
@@ -796,6 +800,10 @@
     "defaultMessage": "Completion"
   },
   {
+    "id": "csrf.try-again",
+    "defaultMessage": "There was a problem with your submission, please try again"
+  },
+  {
     "id": "emails.confirm_email_placeholder",
     "description": "Placeholder for email text input",
     "defaultMessage": "Email confirmation code"
@@ -824,6 +832,16 @@
     "id": "letter.confirm_title",
     "description": "Title for letter proofing confirm dialog",
     "defaultMessage": "Confirm identity with code sent by letter"
+  },
+  {
+    "id": "letter.confirm_info",
+    "description": "Explanation for letter proofing confirm dialog",
+    "defaultMessage": "If you click \"accept\" below, you will be sent a letter by physical mail with a confirmation code. Once you receive it come back here and click again on \"confirm using letter\", and you will be offered a form to enter your code and verify your identity. The code sent to you will expire in 2 weeks starting now."
+  },
+  {
+    "id": "letter.verify_title",
+    "description": "Title for letter proofing verify dialog",
+    "defaultMessage": "Verify your identity with the code you have received by physical mail"
   },
   {
     "id": "letter.lost_code",
