@@ -8,9 +8,9 @@ ENV LANG en_US.UTF-8
 # Add Dockerfile to the container as documentation
 COPY Dockerfile /Dockerfile
 
-COPY nodesource.list /root/nodesource.list
-COPY nodesource.pub /root/nodesource.pub
 COPY setup.sh /opt/eduid/setup.sh
+COPY setup_node.sh /opt/eduid/setup_node.sh
 RUN /opt/eduid/setup.sh
+RUN /opt/eduid/setup_node.sh
 
-WORKDIR /root/react
+WORKDIR /src/eduid-html
