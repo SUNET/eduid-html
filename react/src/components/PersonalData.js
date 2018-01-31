@@ -57,8 +57,7 @@ let PdataForm = props => {
                 id="personal-data-button"
                 spinning={spinning}
                 disabled={props.pristine || props.submitting || props.invalid}
-                onClick={props.handleSave}
-                onMouseOver={props.handleHover(props.no_lang_data_good)}>
+                onClick={props.handleSave}>
               {props.l10n('button_save')}
         </EduIDButton>
       </fieldset>
@@ -101,10 +100,7 @@ class PersonalData extends Component {
 PersonalData.propTypes = {
   data: PropTypes.object,
   langs: PropTypes.array,
-  is_fetching: PropTypes.bool,
-  no_lang_data_good: PropTypes.bool,
-  handleSave: PropTypes.func,
-  handleHover: PropTypes.func
+  is_fetching: PropTypes.bool
 }
 
 export default PersonalData;
