@@ -8,8 +8,6 @@ import EduIDButton from 'components/EduIDButton';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Alert from 'react-bootstrap/lib/Alert';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Well from 'react-bootstrap/lib/Well';
 

@@ -41,6 +41,12 @@ const notificationsReducer = (state=notifications, action) => {
       let newState = {...state};
       newState[action.payload.level] = msgs;
       return newState;
+    case actions.RM_ALL_NOTIFICATION:
+      return {
+        messages: [],
+        warnings: [],
+        errors: []
+      };
     case "@@router/LOCATION_CHANGE":
       return {
         messages: [],

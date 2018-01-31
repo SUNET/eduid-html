@@ -679,15 +679,16 @@ describe("Security Container", () => {
 
     expect(dispatch.mock.calls.length).toEqual(0);
     getWrapper().find('EduIDButton#security-change-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(2);
   });
 
   it("Clicks delete", () => {
 
     expect(dispatch.mock.calls.length).toEqual(0);
     getWrapper().find('EduIDButton#delete-button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
-    expect(dispatch.mock.calls[0][0].type).toEqual("START_DELETE_ACCOUNT");
+    expect(dispatch.mock.calls.length).toEqual(2);
+    expect(dispatch.mock.calls[0][0].type).toEqual("RM_ALL_NOTIFICATION");
+    expect(dispatch.mock.calls[1][0].type).toEqual("START_DELETE_ACCOUNT");
   });
 
   it("Clicks confirm delete", () => {
