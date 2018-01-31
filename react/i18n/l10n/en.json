@@ -190,7 +190,7 @@
   "pwfield.repeat_different": "Repeated pasword is different",
   "pwfield.repeat_password": "Repeat password",
   "pwfield.strong": "Strong password",
-  "pwfield.terrible": "Extremelly weak password",
+  "pwfield.terrible": "Extremely weak password",
   "pwfield.weak": "Weak password",
   "required": "Required",
   "security.account_description": "Use the button below to permanently delete your eduID account.",
