@@ -1,7 +1,7 @@
 
-
 export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
 export const RM_NOTIFICATION = 'RM_NOTIFICATION';
+export const RM_ALL_NOTIFICATION = 'RM_ALL_NOTIFICATION';
 
 export function eduidNotify (msg, level) {
   return {
@@ -20,5 +20,11 @@ export function eduidRMNotify (level, index) {
       level: level,
       index: index
     }
+  };
+}
+
+export function eduidRMAllNotify () {
+  return {
+    type: RM_ALL_NOTIFICATION
   };
 }

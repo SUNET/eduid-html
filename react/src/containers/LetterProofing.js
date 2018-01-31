@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { isValid } from "redux-form";
 import LetterProofingButton from 'components/LetterProofing';
 import * as actions from "actions/LetterProofing";
+import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 
@@ -23,6 +24,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     handleLetterProofing: function (e) {
+      dispatch(eduidRMAllNotify());
       dispatch(actions.getLetterProofingState());
     },
     confirmLetterProofing: function (e) {
