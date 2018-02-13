@@ -41,6 +41,7 @@
   "emails.code-sent": "A new confirmation code has been sent to you",
   "emails.code_expired_send_new": "Expired verification code, sending another",
   "emails.code_invalid": "Ogiltig bekräftelsekod, vänligen prova igen eller begär en ny bekräftelsekod",
+  "emails.code_unknown_send_new": "Unknown verification code, sending another",
   "emails.confirm_email_placeholder": "Bekräftelsekod",
   "emails.confirm_title": "Check your email inbox for {email} for further instructions",
   "emails.duplicated": "That email address is already in use, please choose another",

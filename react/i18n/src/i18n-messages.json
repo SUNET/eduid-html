@@ -248,6 +248,10 @@
     "defaultMessage": "Expired verification code, sending another"
   },
   {
+    "id": "emails.code_unknown_send_new",
+    "defaultMessage": "Unknown verification code, sending another"
+  },
+  {
     "id": "emails.verification-success",
     "defaultMessage": "Successfully verified email address"
   },

@@ -41,6 +41,7 @@
   "emails.code-sent": "Successfully sent verification code",
   "emails.code_expired_send_new": "Expired verification code, sending another",
   "emails.code_invalid": "The confirmation code is invalid, please try again or request a new code",
+  "emails.code_unknown_send_new": "Unknown verification code, sending another",
   "emails.confirm_email_placeholder": "Email confirmation code",
   "emails.confirm_title": "Check your email inbox for {email} for further instructions",
   "emails.duplicated": "That email address is already in use, please choose another",
