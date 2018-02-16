@@ -180,6 +180,10 @@
     "defaultMessage": "You must provide an email address"
   },
   {
+    "id": "emails.unknown_email",
+    "defaultMessage": "We have no record of the email address you provided"
+  },
+  {
     "id": "tl.primary",
     "defaultMessage": "PRIMARY"
   },
@@ -206,6 +210,10 @@
   {
     "id": "emails.code_invalid",
     "defaultMessage": "The confirmation code is invalid, please try again or request a new code"
+  },
+  {
+    "id": "emails.code_invalid_or_expired",
+    "defaultMessage": "The confirmation code is invalid or it has expired, please try again or request a new code"
   },
   {
     "id": "emails.button_add",
@@ -246,6 +254,10 @@
   {
     "id": "emails.code_expired_send_new",
     "defaultMessage": "Expired verification code, sending another"
+  },
+  {
+    "id": "emails.code_unknown_send_new",
+    "defaultMessage": "Unknown verification code, sending another"
   },
   {
     "id": "emails.verification-success",
@@ -418,6 +430,14 @@
   {
     "id": "phones.invalid_phone",
     "defaultMessage": "Invalid phone number"
+  },
+  {
+    "id": "phones.unknown_phone",
+    "defaultMessage": "We have no record of the phone number you provided"
+  },
+  {
+    "id": "phones.code_invalid_or_expired",
+    "defaultMessage": "The confirmation code is invalid or it has expired, please try again or request a new code"
   },
   {
     "id": "phones.verification-success",
