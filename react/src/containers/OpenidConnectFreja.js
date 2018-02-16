@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import OpenidConnectFreja from 'components/OpenidConnectFreja';
 import { postOpenidFreja, getOpenidFreja, showOpenidFrejaModal, hideOpenidFrejaModal } from "actions/OpenidConnectFreja";
+import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(getOpenidFreja());
     },
     handleShowModal: function (e) {
+      dispatch(eduidRMAllNotify());
       dispatch(showOpenidFrejaModal());
     },
     handleHideModal: function (e) {

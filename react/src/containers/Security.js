@@ -4,6 +4,7 @@ import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion }
        from "actions/Security";
+import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 
@@ -22,6 +23,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
      handleStartConfirmationPassword: function (e) {
+        dispatch(eduidRMAllNotify());
         dispatch(startConfirmationPassword());
     },
     handleStopConfirmationPassword: function (e) {
@@ -31,6 +33,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(confirmPasswordChange());
     },
     handleStartConfirmationDeletion: function (e) {
+        dispatch(eduidRMAllNotify());
         dispatch(startConfirmationDeletion());
     },
     handleStopConfirmationDeletion: function (e) {

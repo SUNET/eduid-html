@@ -20,7 +20,10 @@ const textInput = (props) => {
         disabled,
         helpBlock
     } = props;
-    const validationState = ((meta.submitFailed || meta.touched) && meta.error) && 'error' || 'success';
+    let validationState = null;
+    if (meta.touched || meta.submitFailed) {
+        validationState = meta.error && 'error' || 'success';
+    }
     const errmsg = validationState === 'error' && l10n(meta.error) || '';
     let help, field;
 

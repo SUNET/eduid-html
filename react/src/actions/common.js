@@ -20,8 +20,8 @@ export const checkStatus = function (response) {
 export const ajaxHeaders = {
     'Content-Type': 'application/json; charset=utf-8',
     'Accept': 'application/json',
-    "Access-Control-Allow-Origin": "*",
-    "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    'Accept-Encoding': 'gzip,deflate',
+    "Cache-Control": "no-store, no-cache, must-revalidate",
     "Pragma": "no-cache"
 };
 
@@ -71,8 +71,10 @@ export function saveData (getData, formName, startAction, fetcher, failAction) {
             const resp = yield call(fetcher, state.config, data);
             yield put(putCsrfToken(resp));
             if (resp.type.endsWith('FAIL')) {
-                yield put(setSubmitFailed(formName, ...resp.payload.error));
-                yield put(stopAsyncValidation(formName, resp.payload.error));
+                if (resp.payload.error) {
+                    yield put(setSubmitFailed(formName, ...resp.payload.error));
+                    yield put(stopAsyncValidation(formName, resp.payload.error));
+                }
             } else {
                 yield put(setSubmitSucceeded(formName));
                 yield put(stopAsyncValidation(formName));
