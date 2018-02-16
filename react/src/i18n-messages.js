@@ -434,11 +434,6 @@ const msgs = {
           id="emails.code_expired_send_new"
           defaultMessage={`Expired verification code, sending another`} />),
 
-    'emails.code_unknown_send_new': (
-        <FormattedMessage
-          id="emails.code_unknown_send_new"
-          defaultMessage={`Unknown verification code, sending another`} />),
-
     'emails.verification-success': (
         <FormattedMessage
           id="emails.verification-success"
