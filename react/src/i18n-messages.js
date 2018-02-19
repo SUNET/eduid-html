@@ -331,6 +331,11 @@ const msgs = {
             id="emails.missing"
             defaultMessage={`You must provide an email address`} />),
 
+    'emails.unknown_email': (
+    <FormattedMessage
+            id="emails.unknown_email"
+            defaultMessage={`We have no record of the email address you provided`} />),
+
     "tl.primary": (
         <FormattedMessage
           id="tl.primary"
@@ -371,6 +376,11 @@ const msgs = {
         <FormattedMessage
           id="emails.code_invalid"
           defaultMessage={`The confirmation code is invalid, please try again or request a new code`} />),
+
+    'emails.code_invalid_or_expired': (
+        <FormattedMessage
+          id="emails.code_invalid_or_expired"
+          defaultMessage={`The confirmation code is invalid or it has expired, please try again or request a new code`} />),
 
     'emails.button_add': (
         <FormattedMessage
@@ -423,6 +433,11 @@ const msgs = {
         <FormattedMessage
           id="emails.code_expired_send_new"
           defaultMessage={`Expired verification code, sending another`} />),
+
+    'emails.code_unknown_send_new': (
+        <FormattedMessage
+          id="emails.code_unknown_send_new"
+          defaultMessage={`Unknown verification code, sending another`} />),
 
     'emails.verification-success': (
         <FormattedMessage
@@ -663,6 +678,16 @@ const msgs = {
         <FormattedMessage
           id="phones.invalid_phone"
           defaultMessage={`Invalid phone number`} />),
+
+    'phones.unknown_phone': (
+        <FormattedMessage
+          id="phones.unknown_phone"
+          defaultMessage={`We have no record of the phone number you provided`} />),
+
+    'phones.code_invalid_or_expired': (
+        <FormattedMessage
+          id="phones.code_invalid_or_expired"
+          defaultMessage={`The confirmation code is invalid or it has expired, please try again or request a new code`} />),
 
     'phones.verification-success': (
         <FormattedMessage
