@@ -21,6 +21,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import eduIDApp from "./store";
 import notifyAndDispatch from "./notify-middleware";
 import * as configActions from "actions/Config";
+import { eduidNotify } from "actions/Notifications";
 
 import { history } from "components/Main";
 
@@ -90,6 +91,17 @@ const getConfig = function () {
 const getConfigSpa = function () {
     store.dispatch(configActions.getConfig());
     store.dispatch(configActions.configSpa());
+    let params = (new URL(document.location)).searchParams;
+    if (params) {
+        let msg = params.get("msg");
+        if (msg !== null) {
+            if (msg.indexOf(':ERROR:') === 0) {
+                store.dispatch(eduidNotify(msg.substr(7), 'errors'));
+            } else {
+                store.dispatch(eduidNotify(msg, 'messages'));
+            }
+        }
+    }
 };
 
 /* render app */
