@@ -85,14 +85,6 @@ input:focus {
 
 
 /* Header */
-.header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9998;
-  padding: 20px 35px 0; }
-
 .header .container {
     padding: 0; }
 .header ul {
