@@ -178,6 +178,16 @@ const msgs = {
           id="error_lookup_mobile_task"
           defaultMessage={`Problem looking up the phone number`} />),
 
+   'unexpected-problem': (
+        <FormattedMessage
+          id="unexpected-problem"
+          defaultMessage={`There was an unexpected problem servicing your request, please try again or contact the site administrators`} />),
+
+   'unexpected-success': (
+        <FormattedMessage
+          id="unexpected-success"
+          defaultMessage={`The request was successfully addressed`} />),
+
     /************************/
     /* Main *****************/
     /************************/

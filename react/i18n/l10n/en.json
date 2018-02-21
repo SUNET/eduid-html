@@ -224,5 +224,7 @@
   "tl.pending": "PENDING CONFIRMATION",
   "tl.primary": "PRIMARY",
   "tl.remove": "REMOVE",
+  "unexpected-problem": "There was an unexpected problem servicing your request, please try again or contact the site administrators",
+  "unexpected-success": "The request was successfully addressed",
   "user-out-of-sync": "User data is out of sync. Reload page to re-sync."
 }

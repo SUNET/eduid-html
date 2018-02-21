@@ -10,7 +10,8 @@ const configData = {
     is_fetching: false,
     failed: false,
     is_spa: false,
-    is_app_loaded: false
+    is_app_loaded: false,
+    DEBUG: true
 };
 
 const urls_with_no_sidebar = [
