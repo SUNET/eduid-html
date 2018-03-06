@@ -16,8 +16,7 @@ export function* requestLogout () {
             redirect: 'manual'
         })
         .then(resp => {
-            const win = resp.testingWindow || window;
-            win.location = resp.url;
+            window.location = resp.url
         });
     } catch(error) {
         yield* failRequest(error, postLogoutFail);
