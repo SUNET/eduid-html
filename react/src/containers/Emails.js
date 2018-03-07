@@ -4,6 +4,7 @@ import { isValid } from "redux-form";
 import Emails from 'components/Emails';
 import { postEmail, changeEmail, startConfirmation, stopConfirmation, startResendEmailCode,
          finishConfirmation, startVerify, requestRemoveEmail, startRemove, makePrimary } from "actions/Emails";
+import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 const mapStateToProps = (state, props) => {
@@ -31,6 +32,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(startResendEmailCode());
     },
     handleStartConfirmation: function (e) {
+        dispatch(eduidRMAllNotify());
         const dataNode = e.target.closest("tr.emailrow"),
               data = {
                   identifier: dataNode.getAttribute('data-identifier'),

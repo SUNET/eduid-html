@@ -178,6 +178,16 @@ const msgs = {
           id="error_lookup_mobile_task"
           defaultMessage={`Problem looking up the phone number`} />),
 
+   'unexpected-problem': (
+        <FormattedMessage
+          id="unexpected-problem"
+          defaultMessage={`There was an unexpected problem servicing your request, please try again or contact the site administrators`} />),
+
+   'unexpected-success': (
+        <FormattedMessage
+          id="unexpected-success"
+          defaultMessage={`The request was successfully addressed`} />),
+
     /************************/
     /* Main *****************/
     /************************/
@@ -331,6 +341,11 @@ const msgs = {
             id="emails.missing"
             defaultMessage={`You must provide an email address`} />),
 
+    'emails.unknown_email': (
+    <FormattedMessage
+            id="emails.unknown_email"
+            defaultMessage={`We have no record of the email address you provided`} />),
+
     "tl.primary": (
         <FormattedMessage
           id="tl.primary"
@@ -371,6 +386,11 @@ const msgs = {
         <FormattedMessage
           id="emails.code_invalid"
           defaultMessage={`The confirmation code is invalid, please try again or request a new code`} />),
+
+    'emails.code_invalid_or_expired': (
+        <FormattedMessage
+          id="emails.code_invalid_or_expired"
+          defaultMessage={`The confirmation code is invalid or it has expired, please try again or request a new code`} />),
 
     'emails.button_add': (
         <FormattedMessage
@@ -664,6 +684,16 @@ const msgs = {
           id="phones.invalid_phone"
           defaultMessage={`Invalid phone number`} />),
 
+    'phones.unknown_phone': (
+        <FormattedMessage
+          id="phones.unknown_phone"
+          defaultMessage={`We have no record of the phone number you provided`} />),
+
+    'phones.code_invalid_or_expired': (
+        <FormattedMessage
+          id="phones.code_invalid_or_expired"
+          defaultMessage={`The confirmation code is invalid or it has expired, please try again or request a new code`} />),
+
     'phones.verification-success': (
         <FormattedMessage
           id="phones.verification-success"
@@ -925,7 +955,7 @@ const msgs = {
    'pwfield.terrible': (
         <FormattedMessage
           id="pwfield.terrible"
-          defaultMessage={`Extremelly weak password`} />),
+          defaultMessage={`Extremely weak password`} />),
 
    'pwfield.bad': (
         <FormattedMessage

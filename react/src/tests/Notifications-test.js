@@ -30,6 +30,9 @@ const mockState = {
   intl: {
       locale: 'en',
       messages: messages
+  },
+  config: {
+      DEBUG: true
   }
 };
 
@@ -182,6 +185,9 @@ describe("Notifications Container", () => {
             intl: {
                 locale: 'en',
                 messages: messages
+            },
+            config: {
+                DEBUG: true
             }
         });
 

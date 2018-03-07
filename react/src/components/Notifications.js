@@ -9,32 +9,44 @@ class Notifications extends Component {
 
   render () {
     let toShow = this.props.errors.map( (err, index) => {
+        let err_msg = this.props.l10n(err);
+        if (!this.props.debug && err_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
+            err_msg = this.props.l10n('unexpected-problem');
+        }
         return (<Alert key={index}
                        bsStyle="danger"
                        data-level="errors"
                        data-index={index}
                        onDismiss={this.props.handleRMNotification}>
-                   {this.props.l10n(err)}
+                   {err_msg}
                 </Alert>);
     });
 
     if (toShow.length === 0) {
         toShow = this.props.messages.map( (msg, index) => {
+            let success_msg = this.props.l10n(msg);
+            if (!this.props.debug && success_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
+                success_msg = this.props.l10n('unexpected-success');
+            }
             return (<Alert key={index}
                            bsStyle="success"
                            data-level="messages"
                            data-index={index}
                            onDismiss={this.props.handleRMNotification}>
-                       {this.props.l10n(msg)}
+                       {success_msg}
                     </Alert>);
         });
         toShow.concat( this.props.warnings.map( (warning, index) => {
+            const warn = this.props.l10n(warning);
+            if (!this.props.debug && warn.indexOf('UNKNOWN MESSAGE ID (') === 0) {
+                return '';
+            }
             return (<Alert key={index}
                            bsStyle="warning"
                            data-level="warnings"
                            data-index={index}
                            onDismiss={this.props.handleRMNotification}>
-                       {this.props.l10n(warning)}
+                       {warn}
                     </Alert>);
         }));
     }

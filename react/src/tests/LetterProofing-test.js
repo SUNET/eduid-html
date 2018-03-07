@@ -294,7 +294,7 @@ describe("LetterProofingButton Component", () => {
 
     expect(store.dispatch.mock.calls.length).toEqual(0);
     button.props().onClick();
-    expect(store.dispatch.mock.calls.length).toEqual(1);
+    expect(store.dispatch.mock.calls.length).toEqual(2);
   })
 });
 
@@ -340,7 +340,7 @@ describe("LetterProofing Container", () => {
 
     expect(dispatch.mock.calls.length).toEqual(0);
     wrapper.find('Button').props().onClick();
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(2);
   });
 
 });

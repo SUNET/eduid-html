@@ -101,6 +101,7 @@ describe("Reducers", () => {
           surname: 'Smith',
           display_name: 'John',
           language: 'en',
+          eppn: 'dummy-eppn'
       }
   };
 
@@ -120,7 +121,8 @@ describe("Reducers", () => {
             given_name: 'John',
             surname: 'Smith',
             display_name: 'John',
-            language: 'en'
+            language: 'en',
+            eppn: 'dummy-eppn'
         }
       }
     );
@@ -137,7 +139,9 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        data: {surname: 'Surname'},
+        data: {
+            surname: 'Surname'
+        },
         is_fetching: false,
         failed: false
       }
@@ -164,7 +168,8 @@ describe("Reducers", () => {
             given_name: 'John',
             surname: 'Smith',
             display_name: 'John',
-            language: 'en'
+            language: 'en',
+            eppn: 'dummy-eppn'
         },
         error: 'Bad error',
         message: 'Bad error'
@@ -190,6 +195,7 @@ describe("Reducers", () => {
         failed: false,
         data: {
             given_name: 'Jonna',
+            eppn: 'dummy-eppn',
             display_name: 'Jonna'
         }
       }
@@ -212,7 +218,8 @@ describe("Reducers", () => {
             given_name: 'John',
             surname: 'Smith',
             display_name: 'John',
-            language: 'en'
+            language: 'en',
+            eppn: 'dummy-eppn'
         }
       }
     );
@@ -229,7 +236,10 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-          data: {surname: 'Surname'},
+          data: {
+              surname: 'Surname',
+              eppn: 'dummy-eppn'
+          },
           is_fetching: false,
           failed: false
       }
@@ -256,7 +266,8 @@ describe("Reducers", () => {
             given_name: 'John',
             surname: 'Smith',
             display_name: 'John',
-            language: 'en'
+            language: 'en',
+            eppn: 'dummy-eppn'
         },
         error: "Bad error",
         message: "Bad error"
@@ -278,10 +289,13 @@ const fakeState = {
   personal_data: {
       is_fetching: false,
       failed: false,
-      given_name: '',
-      surname: '',
-      display_name: '',
-      language: ''
+      data: {
+          given_name: '',
+          surname: '',
+          display_name: '',
+          language: '',
+          eppn: ''
+      }
   },
   config : {
       csrf_token: '',
@@ -306,10 +320,13 @@ const fakeState = {
 
 function setupComponent(store) {
   const props = {
-    given_name: '',
-    surname: '',
-    display_name: '',
-    language: '',
+    data: {
+        given_name: '',
+        surname: '',
+        display_name: '',
+        language: '',
+        eppn: ''
+    },
     handleSave: mock.fn(),
     handleChange: mock.fn()
   };
@@ -348,6 +365,7 @@ describe("Async component", () => {
            surname: '',
            display_name: '',
            language: '',
+           eppn: '',
            nins: [],
            emails: [],
            phones: []
@@ -389,7 +407,8 @@ describe("Async component", () => {
            given_name: '',
            surname: '',
            display_name: '',
-           language: ''
+           language: '',
+           eppn: ''
          }
        }
        next = generator.next();
@@ -405,9 +424,16 @@ describe("Async component", () => {
        // const config = next.value;
        next = generator.next(fakeState);
 
-       const data = fakeState.personal_data;
        const config = fakeState.config;
-       data.csrf_token = "";
+       const data = {
+          is_fetching: false,
+          failed: false,
+          given_name: '',
+          surname: '',
+          display_name: '',
+          language: '',
+          csrf_token: ''
+          }
 
 
        // expect(data).toEqual(select(fakeState => fakeState.config));
@@ -425,7 +451,8 @@ describe("Async component", () => {
            given_name: '',
            surname: '',
            display_name: '',
-           language: ''
+           language: '',
+           eppn: ''
          }
        }
        next = generator.next(action);
@@ -450,6 +477,7 @@ describe("PersonalData Component", () => {
           surname = wrapper.find("#surname"),
           given_name = wrapper.find("#given_name"),
           display_name = wrapper.find("#display_name"),
+          eppn = wrapper.find("p.eppn.text-muted"),
           button = wrapper.find('EduIDButton#personal-data-button');
 
     expect(form.contains(fieldset.get(0))).toBeTruthy();
@@ -480,6 +508,7 @@ describe("PersonalData Container", () => {
     surname,
     display_name,
     language,
+    eppn,
     mockProps,
     wrapper,
     dispatch;
@@ -488,10 +517,13 @@ describe("PersonalData Container", () => {
     const store = fakeStore(fakeState);
 
     mockProps = {
-        given_name: 'Pablo',
-        surname: 'Iglesias',
-        display_name: 'Pablo',
-        language: 'en'
+        data: {
+            given_name: 'Pablo',
+            surname: 'Iglesias',
+            display_name: 'Pablo',
+            language: 'en',
+            eppn: 'dummy-eppn'
+        }
     };
 
 
@@ -502,10 +534,11 @@ describe("PersonalData Container", () => {
     );
     fulldom = wrapper.find(PersonalDataContainer);
     fulltext = wrapper.find(PersonalDataContainer).text();
-    given_name = wrapper.find(PersonalDataContainer).props().given_name;
-    surname = wrapper.find(PersonalDataContainer).props().surname;
-    display_name = wrapper.find(PersonalDataContainer).props().display_name;
-    language = wrapper.find(PersonalDataContainer).props().language;
+    given_name = wrapper.find(PersonalDataContainer).props().data.given_name;
+    surname = wrapper.find(PersonalDataContainer).props().data.surname;
+    display_name = wrapper.find(PersonalDataContainer).props().data.display_name;
+    language = wrapper.find(PersonalDataContainer).props().data.language;
+    eppn = wrapper.find(PersonalDataContainer).props().data.eppn;
     dispatch = store.dispatch;
   });
 
@@ -519,6 +552,7 @@ describe("PersonalData Container", () => {
       expect(given_name).toEqual('Pablo');
       expect(surname).toEqual('Iglesias');
       expect(display_name).toEqual('Pablo');
+      expect(eppn).toEqual('dummy-eppn');
   });
 
   it("Clicks", () => {

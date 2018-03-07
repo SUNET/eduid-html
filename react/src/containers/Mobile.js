@@ -4,6 +4,7 @@ import { isValid } from "redux-form";
 import Mobile from 'components/Mobile';
 import { makePrimary, postMobile, startResendMobileCode, finishConfirmation,
          startConfirmation, stopConfirmation, startVerify, startRemove } from "actions/Mobile";
+import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(startResendMobileCode());
     },
     handleStartConfirmation: function (e) {
+        dispatch(eduidRMAllNotify());
         const dataNode = e.target.closest("tr.emailrow"),
               data = {
                   identifier: dataNode.getAttribute('data-identifier'),

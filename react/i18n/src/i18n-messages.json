@@ -68,6 +68,14 @@
     "defaultMessage": "Problem looking up the phone number"
   },
   {
+    "id": "unexpected-problem",
+    "defaultMessage": "There was an unexpected problem servicing your request, please try again or contact the site administrators"
+  },
+  {
+    "id": "unexpected-success",
+    "defaultMessage": "The request was successfully addressed"
+  },
+  {
     "id": "main.profile_title",
     "defaultMessage": "Profile"
   },
@@ -180,6 +188,10 @@
     "defaultMessage": "You must provide an email address"
   },
   {
+    "id": "emails.unknown_email",
+    "defaultMessage": "We have no record of the email address you provided"
+  },
+  {
     "id": "tl.primary",
     "defaultMessage": "PRIMARY"
   },
@@ -206,6 +218,10 @@
   {
     "id": "emails.code_invalid",
     "defaultMessage": "The confirmation code is invalid, please try again or request a new code"
+  },
+  {
+    "id": "emails.code_invalid_or_expired",
+    "defaultMessage": "The confirmation code is invalid or it has expired, please try again or request a new code"
   },
   {
     "id": "emails.button_add",
@@ -420,6 +436,14 @@
     "defaultMessage": "Invalid phone number"
   },
   {
+    "id": "phones.unknown_phone",
+    "defaultMessage": "We have no record of the phone number you provided"
+  },
+  {
+    "id": "phones.code_invalid_or_expired",
+    "defaultMessage": "The confirmation code is invalid or it has expired, please try again or request a new code"
+  },
+  {
     "id": "phones.verification-success",
     "defaultMessage": "Successfully verified phone number"
   },
@@ -617,7 +641,7 @@
   },
   {
     "id": "pwfield.terrible",
-    "defaultMessage": "Extremelly weak password"
+    "defaultMessage": "Extremely weak password"
   },
   {
     "id": "pwfield.bad",

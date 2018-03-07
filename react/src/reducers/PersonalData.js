@@ -40,6 +40,7 @@ let personalDataReducer = (state=personalData, action) => {
         error: action.payload.error
       };
     case actions.CHANGE_USERDATA:
+      if (!action.payload.eppn) {action.payload.eppn = state.data.eppn}
       return {
         ...state,
         data: {...action.payload}
@@ -51,6 +52,7 @@ let personalDataReducer = (state=personalData, action) => {
         failed: false
       };
     case actions.POST_USERDATA_SUCCESS:
+      if (!action.payload.eppn) {action.payload.eppn = state.data.eppn}
       return {
         ...state,
         data: {...action.payload},
