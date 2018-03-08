@@ -52,10 +52,16 @@
     display:block;
     text-align:center;
 }
+#email-register-lg-icon {
+    height: 47px;
+    margin-bottom: -46px;
+    margin-left: -5px;
+    width: 100px;
+}
+
 #email-register-lg .input-group input {
     display:inline-block;
-    float:left;
-    width:calc(100% - 370px);
+    width:calc(100% - 440px);
     vertical-align:top;
     border-color:#fff;
     box-shadow:none;
