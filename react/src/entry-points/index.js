@@ -21,6 +21,11 @@ if (!Element.prototype.closest)
 
 // end Polyfill
 
+// URL.searchParams polyfill
+
+window.URLSearchParams = require('url-search-params');
+
+// End polyfill
 
 import React from 'react';
 import ReactDOM from 'react-dom';
