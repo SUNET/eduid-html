@@ -40,7 +40,8 @@ describe("OIDC Freja Actions", () => {
       type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
       error: true,
       payload: {
-        error: {'l10n_message': 'Bad error'},
+        error: true,
+        message: "Bad error",
       }
     };
     expect(actions.postOpenidFrejaFail(err)).toEqual(expectedAction);
@@ -107,7 +108,8 @@ describe("Reducers", () => {
           type: actions.POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
           error: true,
           payload: {
-            error: {'l10n_message': 'Bad error'},
+            error: true,
+            message: "Bad error"
           }
         }
       )
@@ -116,7 +118,8 @@ describe("Reducers", () => {
 				is_fetching: false,
         failed: true,
         iaRequestData: "",
-        error: {'l10n_message': 'Bad error'},
+        error: true,
+        message: 'Bad error',
         showModal: true,
         nin: "190001021234",
       }

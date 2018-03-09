@@ -21,14 +21,13 @@ export function getOpenidFreja () {
   };
 }
 
-export function getOpenidFrejaFail(l10nMessage) {
+export function getOpenidFrejaFail(message) {
   return {
     type: GET_OIDC_PROOFING_FREJA_PROOFING_FAIL,
     error: true,
     payload: {
-      error: {
-        l10n_message: l10nMessage
-      },
+      error: true,
+      message: message
     }
   };
 }
@@ -39,14 +38,13 @@ export function postOpenidFreja () {
   };
 }
 
-export function postOpenidFrejaFail (l10nMessage) {
+export function postOpenidFrejaFail (message) {
   return {
     type: POST_OIDC_PROOFING_FREJA_PROOFING_FAIL,
     error: true,
     payload: {
-      error: {
-        l10n_message: l10nMessage
-      },
+      error: true,
+      message: message
     }
   };
 }
@@ -66,14 +64,13 @@ export function showOpenidFrejaModalSuccess (nin) {
   };
 }
 
-export function showOpenidFrejaModalFail (l10nMessage) {
+export function showOpenidFrejaModalFail (message) {
   return {
     type: SHOW_OIDC_FREJA_MODAL_FAIL,
     error: true,
     payload: {
-      error: {
-        l10n_message: l10nMessage
-      },
+      error: true,
+      message: message
     }
   };
 }

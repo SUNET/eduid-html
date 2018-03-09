@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withUserAgent from 'react-useragent';
 
 import EduIDButton from 'components/EduIDButton';
+import NotificationsContainer from 'containers/Notifications';
 
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
@@ -109,6 +110,7 @@ class OpenidConnectFreja extends Component {
             <Modal.Body>
               <h4>{this.props.l10n('ocf.freja_instructions_title')}</h4>
               {freja_instructions}
+              <NotificationsContainer />
               {buttonGroup || notOnMobileMsg}
             </Modal.Body>
 
