@@ -88,10 +88,11 @@ const getConfig = function () {
     store.dispatch(configActions.getConfig());
 };
 
+
 const getConfigSpa = function () {
     store.dispatch(configActions.getConfig());
     store.dispatch(configActions.configSpa());
-    let params = (new URL(document.location)).searchParams;
+    let params = new URLSearchParams(document.location.search);
     if (params) {
         let msg = params.get("msg");
         if (msg !== null) {
