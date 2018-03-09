@@ -7,22 +7,22 @@ import * as actions from "actions/OpenidConnectFreja";
 export function* checkNINAndShowFrejaModal () {
   try {
     let nin;
-    let pendingNin = document.querySelector('td[class=identifier]');  // If a user has more than one unconfirmed NIN the first in the list will be picked
+    const input = document.getElementById('norEduPersonNin'),
+    unconfirmed = document.getElementById('eduid-unconfirmed-nin'),
+    state = yield select(state => state);
+
     // Check if there is a pending NIN before trying form input
-    if (pendingNin) nin = pendingNin.textContent;
+    if (unconfirmed) nin = state.nins.nin;
     if (!nin) {
-      let inputNin = document.querySelector('input[name=norEduPersonNIN]');
-      if (!inputNin) {
-        const unconfirmed = document.getElementById('eduid-unconfirmed-nin');
-        if (unconfirmed) {
-          nin = state.nins.nin;
-        } else {
+      if (!input) {
+        if (!unconfirmed) {
           nin = 'testing';
         }
       } else {
-        nin = inputNin.value ? inputNin.value : 'no nin'
+        nin = input.value ? input.value : 'no nin'
       }
     }
+
     if (nin === 'no nin') {
         yield put(actions.showOpenidFrejaModalFail('ocf.error_missing_nin'));
     } else {
