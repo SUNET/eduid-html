@@ -41,7 +41,8 @@ export const getRequest = {
 
 export const failRequest = function* (error, failAction) {
     if ((navigator.userAgent.indexOf("Trident/7") > -1) &&
-        (error.toString() === "SyntaxError: Invalid character")) {
+        ((error.toString() === "SyntaxError: Invalid character") ||
+         (error.toString() === "TypeError: Network request failed"))) {
         const next = document.location.href;
         document.location.assign(TOKEN_SERVICE_URL + '?next=' + next);
     } else {
