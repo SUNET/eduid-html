@@ -286,7 +286,6 @@ div#recaptcha_widget_div input#recaptcha_response_field {
 }
 
 /* Center captcha */
-.center-block {float: none !important;}
 
 .media {
     width: 100%;
@@ -524,6 +523,11 @@ div#recaptcha_widget_div input#recaptcha_response_field {
     .jumbotron p.lead {
         font-size:24px;
     }
+
+    div.g-recaptcha {
+        margin-left: 7px;
+    }
+
 
     div#eduid-logo-small {
         display: none;
