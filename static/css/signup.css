@@ -149,6 +149,9 @@ div.eduid-fetched-info-form {
 div#instructions_div .btn-success {
     margin-left:0px!important;
 }
+div#instructions_div {
+    display: none;
+}
 
 form.form-inline div.input-group p.help-block {
     text-align: center;
@@ -242,6 +245,10 @@ button[type=submit].btn {
 
 #gotit_btn {
   margin: auto;
+}
+
+button#access-more-button {
+  display: inline-block;
 }
 
 form.accept-cancel {
