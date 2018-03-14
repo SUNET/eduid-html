@@ -19,6 +19,8 @@ export const POST_DELETE_ACCOUNT_FAIL = 'POST_SECURITY_TERMINATE_ACCOUNT_FAIL';
 export const GET_DELETE_ACCOUNT = 'GET_SECURITY_ACCOUNT_TERMINATED';
 export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCESS';
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
+export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
+export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
 
 
 export function getCredentials () {
@@ -111,5 +113,18 @@ export function accountRemovedFail (err) {
       error: new Error(err),
       message: err
     }
+  };
+}
+
+
+export function startU2fRegistration () {
+  return {
+    type: START_U2F_REGISTRATION,
+  };
+}
+
+export function stopU2fRegistration () {
+  return {
+    type: STOP_U2F_REGISTRATION
   };
 }

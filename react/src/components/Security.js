@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Modal from 'react-bootstrap/lib/Modal';
 
 import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
@@ -53,6 +54,12 @@ class Security extends Component {
                       onClick={this.props.handleStartConfirmationPassword}>
                     {this.props.l10n('security.change_password')}
           </EduIDButton>
+          <EduIDButton bsStyle="primary"
+                      id="security-u2f-button"
+                      spinning={spinning}
+                      onClick={this.props.handleStartU2fRegistration}>
+                    {this.props.l10n('security.add_u2f_token')}
+          </EduIDButton>
           <div className="second-block">
               <div className="intro">
                  <h4>{this.props.l10n('security.account_title')}</h4>
@@ -79,6 +86,26 @@ class Security extends Component {
                 closeModal={this.props.handleStopConfirmationDeletion}
                 handleConfirm={this.props.handleConfirmationDeletion}
           />
+
+          <Modal>
+            <Modal.Content>
+                <Modal.Header>
+                    <Modal.Title>{this.props.l10n('u2f.action-required')}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <p>{this.props.l10n('u2f.push-the-button')}</p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <EduIDButton className="cancel-button"
+                            id="cancel-u2f"
+                            onClick={this.props.handleCloseU2fModal} >
+                         {this.props.l10n('cm.cancel')}
+                    </EduIDButton>
+                </Modal.Footer>
+            </Modal.Content>
+          </Modal>
         </div>
     );
   }
