@@ -4,12 +4,12 @@ $(function ($) {
     var prepare_modal = function (e, callback) {
             e.preventDefault();
 
-            $('.aup a[href=#reject]').off().click(function (e) {
+            $('.aup a[href="#reject"]').off().click(function (e) {
                 e.preventDefault();
                 $('.aup').modal('hide');
             });
 
-            $('.aup a[href=#accept]').click(callback);
+            $('.aup a[href="#accept"]').click(callback);
 
             $('.aup').modal('show');
         };

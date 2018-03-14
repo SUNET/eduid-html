@@ -936,9 +936,8 @@ div#footer span.langselector {
         border:none;
     }
 
-    div#eduid-logo-small {
-        margin-left: -90px;
-        margin-top: -4px;
+    div#eduid-logo-large {
+        display: none;
     }
 
     /* main menu in small devices */
@@ -1017,6 +1016,10 @@ div#footer span.langselector {
     nav.navbar.navbar-default#eduid-navbar {
         background-color: transparent;
         border-color: transparent;
+    }
+
+    header > nav.navbar.bg-dark {
+        background-color: transparent !important;
     }
 
     .jumbotron p.lead {

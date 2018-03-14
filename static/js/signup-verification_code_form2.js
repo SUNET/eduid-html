@@ -3,8 +3,9 @@ $(function ($) {
 
     $(document).ready(function () {
         $('button#gotit_btn').click(function (e) {
-          $('#instructions_div').removeClass('hide');
-          $('#gotit_btn').addClass('hide');
+          e.preventDefault();
+          $('#instructions_div').show();
+          $('#password-gotit-div').hide();
         });
     });
 
