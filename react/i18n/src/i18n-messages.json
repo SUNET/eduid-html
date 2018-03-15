@@ -564,6 +564,10 @@
     "defaultMessage": "You tried to set a U2F token description long"
   },
   {
+    "id": "security.add_u2f_token",
+    "defaultMessage": "Add U2F token"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },

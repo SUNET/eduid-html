@@ -12,7 +12,10 @@ const security = {
     confirming_change: false,
     confirming_deletion: false,
     location: '',
-    deleted: false
+    deleted: false,
+    u2f_is_fetching: false,
+    u2f_failed: false,
+    u2f_is_enrolled: false,
 };
 
 
@@ -115,6 +118,26 @@ let securityReducer = (state=security, action) => {
         ...state,
         is_fetching: false,
         failed: true,
+        error: action.payload.error,
+        message: action.payload.message
+      };
+    case actions.START_U2F_REGISTRATION:
+      return {
+        ...state,
+        u2f_is_fetching: true,
+        u2f_failed: false
+      };
+    case actions.STOP_U2F_REGISTRATION:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: false
+      };
+    case actions.GET_U2F_ENROLL_FAIL:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: true,
         error: action.payload.error,
         message: action.payload.message
       };

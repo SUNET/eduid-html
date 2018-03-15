@@ -4,7 +4,8 @@ import { checkStatus, ajaxHeaders, putCsrfToken,
          getRequest, postRequest, failRequest } from "actions/common";
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
-         postConfirmDeletion, accountRemovedFail  } from "actions/Security";
+         postConfirmDeletion, accountRemovedFail,
+         enrollU2FFail } from "actions/Security";
 
 
 
@@ -72,6 +73,27 @@ export function deleteAccount(config, data) {
     return window.fetch(config.SECURITY_URL + 'terminate-account', {
         ...postRequest,
         body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+
+export function* getU2FEnroll () {
+    try {
+        const state = yield select(state => state);
+        const resp = yield call(enrollU2F, state.config);
+        yield put(putCsrfToken(resp));
+        yield put(resp);
+    } catch(error) {
+        yield* failRequest(error, enrollU2FFail);
+    }
+}
+
+
+export function enrollU2F(config) {
+    return window.fetch(config.SECURITY_URL + 'u2f/enroll', {
+        ...getRequest
     })
     .then(checkStatus)
     .then(response => response.json())

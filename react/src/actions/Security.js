@@ -21,6 +21,9 @@ export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCE
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
 export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
 export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
+export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
+export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
+
 
 
 export function getCredentials () {
@@ -126,5 +129,16 @@ export function startU2fRegistration () {
 export function stopU2fRegistration () {
   return {
     type: STOP_U2F_REGISTRATION
+  };
+}
+
+export function enrollU2FFail (err) {
+  return {
+    type: GET_U2F_ENROLL_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
   };
 }

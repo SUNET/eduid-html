@@ -16,7 +16,9 @@ const mapStateToProps = (state, props) => {
      confirming_deletion: state.security.confirming_deletion,
      is_fetching: state.security.is_fetching,
      redirect_to: state.security.location,
-     deleted: state.security.deleted
+     deleted: state.security.deleted,
+     u2f_is_fetching: state.security.u2f_is_fetching,
+     u2f_is_enrolled: state.security.u2f_is_enrolled
   }
 };
 
@@ -44,10 +46,10 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(confirmDeletion());
     },
     handleStartU2fRegistration: function (e) {
-        dispactch(startU2fRegistration());
+        dispatch(startU2fRegistration());
     },
     handleCloseU2fModal: function (e) {
-        dispactch(stopU2fRegistration());
+        dispatch(stopU2fRegistration());
     }
   }
 

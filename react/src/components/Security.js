@@ -31,7 +31,7 @@ class Security extends Component {
             );
         }, this);
 
-    if (this.props.is_fetching) spinning = true;
+    if (this.props.is_fetching || this.props.u2f_is_fetching) spinning = true;
     return (
         <div>
           <div className="intro">
@@ -48,18 +48,22 @@ class Security extends Component {
                 {creds_table}
               </tbody>
           </table>
-          <EduIDButton bsStyle="primary"
-                      id="security-change-button"
-                      spinning={spinning}
-                      onClick={this.props.handleStartConfirmationPassword}>
-                    {this.props.l10n('security.change_password')}
-          </EduIDButton>
-          <EduIDButton bsStyle="primary"
-                      id="security-u2f-button"
-                      spinning={spinning}
-                      onClick={this.props.handleStartU2fRegistration}>
-                    {this.props.l10n('security.add_u2f_token')}
-          </EduIDButton>
+          <div id="change-password">
+            <EduIDButton bsStyle="primary"
+                        id="security-change-button"
+                        spinning={spinning}
+                        onClick={this.props.handleStartConfirmationPassword}>
+                      {this.props.l10n('security.change_password')}
+            </EduIDButton>
+          </div>
+          <div id="add-u2f-token">
+            <EduIDButton bsStyle="primary"
+                        id="security-u2f-button"
+                        spinning={spinning}
+                        onClick={this.props.handleStartU2fRegistration}>
+                      {this.props.l10n('security.add_u2f_token')}
+            </EduIDButton>
+          </div>
           <div className="second-block">
               <div className="intro">
                  <h4>{this.props.l10n('security.account_title')}</h4>
@@ -87,24 +91,22 @@ class Security extends Component {
                 handleConfirm={this.props.handleConfirmationDeletion}
           />
 
-          <Modal>
-            <Modal.Content>
-                <Modal.Header>
-                    <Modal.Title>{this.props.l10n('u2f.action-required')}</Modal.Title>
-                </Modal.Header>
+          <Modal show={this.props.u2f_is_enrolled}>
+              <Modal.Header>
+                  <Modal.Title>{this.props.l10n('u2f.action-required')}</Modal.Title>
+              </Modal.Header>
 
-                <Modal.Body>
-                    <p>{this.props.l10n('u2f.push-the-button')}</p>
-                </Modal.Body>
+              <Modal.Body>
+                  <p>{this.props.l10n('u2f.push-the-button')}</p>
+              </Modal.Body>
 
-                <Modal.Footer>
-                    <EduIDButton className="cancel-button"
-                            id="cancel-u2f"
-                            onClick={this.props.handleCloseU2fModal} >
-                         {this.props.l10n('cm.cancel')}
-                    </EduIDButton>
-                </Modal.Footer>
-            </Modal.Content>
+              <Modal.Footer>
+                  <EduIDButton className="cancel-button"
+                          id="cancel-u2f"
+                          onClick={this.props.handleCloseU2fModal} >
+                       {this.props.l10n('cm.cancel')}
+                  </EduIDButton>
+              </Modal.Footer>
           </Modal>
         </div>
     );
@@ -117,6 +119,7 @@ Security.propTypes = {
   last_used: PropTypes.string,
   langs: PropTypes.array,
   is_fetching: PropTypes.bool,
+  u2f_is_fetching: PropTypes.bool,
   confirming_change: PropTypes.bool,
   deleted: PropTypes.bool,
   handleStartConfirmationPassword: PropTypes.func,
@@ -126,6 +129,8 @@ Security.propTypes = {
   handleStartConfirmationDeletion: PropTypes.func,
   handleStopConfirmationDeletion: PropTypes.func,
   handleConfirmationDeletion: PropTypes.func,
+  handleStartU2fRegistration: PropTypes.func,
+  handleCloseU2fModal: PropTypes.func
 }
 
 export default Security;

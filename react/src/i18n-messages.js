@@ -857,6 +857,11 @@ const msgs = {
           id="security.u2f.description_to_long"
           defaultMessage={`You tried to set a U2F token description long`} />),
 
+    'security.add_u2f_token': (
+        <FormattedMessage
+          id="security.add_u2f_token"
+          defaultMessage={`Add U2F token`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"
