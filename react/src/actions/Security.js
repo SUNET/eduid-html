@@ -23,6 +23,7 @@ export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
 export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
 export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
 export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
+export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
 
 
 
@@ -135,6 +136,17 @@ export function stopU2fRegistration () {
 export function enrollU2FFail (err) {
   return {
     type: GET_U2F_ENROLL_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function registerU2FFail (err) {
+  return {
+    type: GET_U2F_REGISTER_FAIL,
     error: true,
     payload: {
       error: new Error(err),

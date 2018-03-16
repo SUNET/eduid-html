@@ -8,8 +8,11 @@ import 'style/Notifications.scss';
 class Notifications extends Component {
 
   render () {
-    let toShow = this.props.errors.map( (err, index) => {
+    let toShow = this.props.errors.map( (err, index, values) => {
         let err_msg = this.props.l10n(err);
+        if (values !== null) {
+            err_msg = err_msg(values);
+        }
         if (!this.props.debug && err_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
             err_msg = this.props.l10n('unexpected-problem');
         }
@@ -23,8 +26,11 @@ class Notifications extends Component {
     });
 
     if (toShow.length === 0) {
-        toShow = this.props.messages.map( (msg, index) => {
+        toShow = this.props.messages.map( (msg, index, values) => {
             let success_msg = this.props.l10n(msg);
+            if (values !== null) {
+                success_msg = success_msg(values);
+            }
             if (!this.props.debug && success_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
                 success_msg = this.props.l10n('unexpected-success');
             }
@@ -36,8 +42,11 @@ class Notifications extends Component {
                        {success_msg}
                     </Alert>);
         });
-        toShow.concat( this.props.warnings.map( (warning, index) => {
-            const warn = this.props.l10n(warning);
+        toShow.concat( this.props.warnings.map( (warning, index, values) => {
+            let warn = this.props.l10n(warning);
+            if (values !== null) {
+                warn = warn(values);
+            }
             if (!this.props.debug && warn.indexOf('UNKNOWN MESSAGE ID (') === 0) {
                 return '';
             }

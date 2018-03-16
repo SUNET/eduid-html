@@ -16,6 +16,7 @@ const security = {
     u2f_is_fetching: false,
     u2f_failed: false,
     u2f_is_enrolled: false,
+    u2f_request: {}
 };
 
 
@@ -131,6 +132,7 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         u2f_is_fetching: false,
+        u2f_is_enrolled: false,
         u2f_failed: false
       };
     case actions.GET_U2F_ENROLL_FAIL:
@@ -138,6 +140,24 @@ let securityReducer = (state=security, action) => {
         ...state,
         u2f_is_fetching: false,
         u2f_failed: true,
+        u2f_is_enrolled: false,
+        error: action.payload.error,
+        message: action.payload.message
+      };
+    case actions.GET_U2F_ENROLL_SUCCESS:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: true,
+        u2f_request: action.payload
+      };
+    case actions.GET_U2F_REGISTER_FAIL:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
         error: action.payload.error,
         message: action.payload.message
       };
