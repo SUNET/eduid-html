@@ -145,6 +145,9 @@ let securityReducer = (state=security, action) => {
         message: action.payload.message
       };
     case actions.GET_U2F_ENROLL_SUCCESS:
+      action.payload.registerRequests.forEach(function (rr) {
+          rr.appId = action.payload.appId;
+      });
       return {
         ...state,
         u2f_is_fetching: false,
@@ -160,6 +163,15 @@ let securityReducer = (state=security, action) => {
         u2f_is_enrolled: false,
         error: action.payload.error,
         message: action.payload.message
+      };
+    case actions.POST_U2F_BIND_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
+        u2f_is_fetching: false,
+        is_fetching: false
       };
     default:
       return state;

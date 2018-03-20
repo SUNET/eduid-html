@@ -104,8 +104,7 @@ export function enrollU2F(config) {
 export function* registerU2F () {
     try {
         const state = yield select(state => state);
-        const resp = yield call(doU2FRegister, state);
-        yield put(stopU2fRegistration());
+        const resp = yield call(register, state.security.u2f_request.registerRequests);
         if(resp.errorCode) {
           switch (resp.errorCode) {
             case 1:
@@ -120,34 +119,31 @@ export function* registerU2F () {
             case 4:
               put(eduidNotify('security.u2f_registration_error_device', 'errors'));
               break;
+            case 5:
+              put(eduidNotify('security.u2f_registration_error_timeout', 'errors'));
+              break;
             default:
               put(eduidNotify('security.u2f_registration_error_code', 'errors', {errorCode: resp.errorCode}));
           }
         } else {
             const data = {
                 csrf_token: state.config.csrf_token,
-                token_response: JSON.stringify(resp)
+                registrationData: resp.registrationData,
+                clientData: resp.clientData,
+                version: 'U2F_V2'
             };
-            const resp = yield call(postU2FToken, state.config, data);
-            yield put(putCsrfToken(resp));
-            yield put(resp);
+            const resp2 = yield call(postU2FToken, state.config, data);
+            yield put(putCsrfToken(resp2));
+            yield put(resp2);
         }
+        yield put(stopU2fRegistration());
     } catch(error) {
         yield* failRequest(error, registerU2FFail);
     }
 }
 
-export function doU2FRegister (state) {
-    const request = state.security.u2f_request;
-    return register(
-        request.registerRequests,
-        10
-    )
-    .then(response => response)
-}
-
 export function postU2FToken (config, data) {
-    return window.fetch(config.SECURITY_URL + 'u2f/register', {
+    return window.fetch(config.SECURITY_URL + 'u2f/bind', {
         ...postRequest,
         body: JSON.stringify(data)
     })

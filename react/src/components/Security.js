@@ -23,7 +23,7 @@ class Security extends Component {
     }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
-            return (<tr key="{index}">
+            return (<tr key={index}>
                         <td>{this.props.l10n(cred.credential_type)}</td>
                         <td>{new Date(cred.created_ts).toString()}</td>
                         <td>{new Date(cred.success_ts).toString()}</td>
