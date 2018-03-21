@@ -46,7 +46,8 @@ describe("Notifications Actions", () => {
                 type: actions.NEW_NOTIFICATION,
                 payload: {
                     message: msg,
-                    level: level
+                    level: level,
+                    values: null
                 }
             };
         expect(actions.eduidNotify(msg, level)).toEqual(expectedAction);
@@ -88,7 +89,8 @@ describe("Reducers", () => {
                     type: actions.NEW_NOTIFICATION,
                     payload: {
                         message: msg,
-                        level: level
+                        level: level,
+                        values: null
                     }
                 }
             )
@@ -96,7 +98,7 @@ describe("Reducers", () => {
             {
             messages: [],
             warnings: [],
-            errors: [msg]
+            errors: [{msg: msg, vals: null}]
             }
         );
     });
@@ -136,12 +138,12 @@ const fakeStore = (state) => ({
 function setupComponent() {
 
     const props = {
-        messages: ['message'],
+        messages: [{msg: 'message', vals: null}],
         warnings: [],
         errors: []
     };
     const state = {...mockState};
-    state.notifications.messages.push('message-2');
+    state.notifications.messages.push({msg: 'message-2', vals: null});
     const wrapper = mount(<Provider store={fakeStore(state)}>
                               <NotificationsContainer {...props} />
                           </Provider>);
@@ -180,7 +182,7 @@ describe("Notifications Container", () => {
                 failed: false,
                 messages: [],
                 warnings: [],
-                errors: ['t-error']
+                errors: [{msg: 't-error', vals: null}]
             },
             intl: {
                 locale: 'en',
@@ -194,7 +196,7 @@ describe("Notifications Container", () => {
         mockProps = {
             messages: [],
             warnings: [],
-            errors: ['t-error']
+            errors: [{msg: 't-error', vals: null}]
         };
 
         wrapper = mount(
@@ -217,6 +219,6 @@ describe("Notifications Container", () => {
     it("Renders", () => {
         expect(msgs).toEqual([]);
         expect(wrns).toEqual([]);
-        expect(errs).toEqual(['t-error']);
+        expect(errs).toEqual([{msg: 't-error', vals: null}]);
     });
 });
