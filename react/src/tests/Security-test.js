@@ -979,12 +979,15 @@ function setupComponent() {
     is_fetching: false,
     confirming_change: false,
     confirming_deletion: false,
+    u2f_is_fetching: false,
+    u2f_is_enrolled: false,
     handleStartConfirmationPassword: mock.fn(),
     handleStopConfirmationPassword: mock.fn(),
     handleConfirmationPassword: mock.fn(),
     handleStartConfirmationDeletion: mock.fn(),
     handleStopConfirmationDeletion: mock.fn(),
     handleConfirmationDeletion: mock.fn(),
+    handleStartU2fRegistration: mock.fn()
   };
 
   const wrapper = shallow(<Provider store={fakeStore(mockState)}>
@@ -1002,6 +1005,7 @@ describe("Security Component", () => {
         const {wrapper, props} = setupComponent(),
             table = wrapper.find('table.passwords'),
             buttonChange = wrapper.find('EduIDButton#security-change-button'),
+            buttonU2F = wrapper.find('EduIDButton#security-u2f-button'),
             buttonDelete = wrapper.find('EduIDButton#delete-button'),
             modalChange = wrapper.find('GenericConfirmModal'),
             modalDelete = wrapper.find('DeleteModal');
@@ -1031,6 +1035,11 @@ describe("Security Container", () => {
             confirming_change: false,
             confirming_deletion: deleting,
             location: '',
+            deleted: false,
+            u2f_is_fetching: false,
+            u2f_failed: false,
+            u2f_is_enrolled: false,
+            u2f_request: {}
         },
         config: {
             csrf_token: '',
@@ -1079,6 +1088,21 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(0);
     getWrapper().find('EduIDButton#security-change-button').props().onClick();
     expect(dispatch.mock.calls.length).toEqual(2);
+  });
+
+  it("Clicks U2F", () => {
+
+    fetchMock.post('/dummy-sec-url',
+       {
+          type: actions.GET_U2F_ENROLL_SUCCESS,
+          payload: {
+            u2f_request: {}
+          }
+      });
+
+    expect(dispatch.mock.calls.length).toEqual(0);
+    getWrapper().find('EduIDButton#security-u2f-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
   it("Clicks delete", () => {
