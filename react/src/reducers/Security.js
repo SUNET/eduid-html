@@ -168,7 +168,7 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         ...action.payload,
-        u2f_failed: true,
+        u2f_failed: false,
         u2f_is_enrolled: false,
         u2f_is_fetching: false,
         is_fetching: false

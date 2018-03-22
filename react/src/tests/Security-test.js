@@ -170,7 +170,12 @@ describe("Reducers", () => {
     code: '',
     confirming_change: false,
     confirming_deletion: false,
-    location: ''
+    location: '',
+    deleted: false,
+    u2f_is_fetching: false,
+    u2f_failed: false,
+    u2f_is_enrolled: false,
+    u2f_request: {}
   };
 
   it("Receives a GET_CREDENTIALS action", () => {
@@ -191,17 +196,32 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
 
   it("Receives a GET_CREDENTIALS_SUCCESS action", () => {
+    const credentials = [
+            {
+              credential_type: 'password',
+              created_ts: '',
+              success_ts: ''
+            }
+          ];
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_CREDENTIALS_SUCCESS
+          type: actions.GET_CREDENTIALS_SUCCESS,
+          payload: {
+              credentials: credentials
+          }
         }
       )
     ).toEqual(
@@ -210,11 +230,16 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        credentials: [],
+        credentials: credentials,
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -244,7 +269,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -267,7 +297,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: true,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -290,7 +325,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -313,7 +353,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -343,7 +388,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -366,7 +416,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: true,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -389,7 +444,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -412,7 +472,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -435,7 +500,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -462,7 +532,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: location
+        location: location,
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -492,10 +567,219 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
+
+  it("Receives a START_U2F_REGISTRATION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_U2F_REGISTRATION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: true,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a STOP_U2F_REGISTRATION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.STOP_U2F_REGISTRATION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_ENROLL_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_ENROLL_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: error,
+        message: err,
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_ENROLL_SUCCESS action", () => {
+    const challenge = 'dummy',
+          version = 'v2',
+          registerRequests = [{challenge: challenge, version: version}],
+          appId = 'app-id';
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_ENROLL_SUCCESS,
+          payload: {
+            registerRequests: registerRequests,
+            appId: appId
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: true,
+        u2f_request: {registerRequests: [{challenge: challenge,
+                                           version: version,
+                                           appId: appId}],
+                      appId: appId}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_REGISTER_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_REGISTER_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: error,
+        message: err,
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a POST_U2F_BIND_SUCCESS action", () => {
+    const credentials = [
+            {
+              credential_type: 'password',
+              created_ts: '',
+              success_ts: ''
+            }
+          ];
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_U2F_BIND_SUCCESS,
+          payload: {
+              credentials: credentials
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: credentials,
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
 });
 
 
