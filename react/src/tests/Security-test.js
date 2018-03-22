@@ -14,7 +14,8 @@ import securityReducer from "reducers/Security";
 import { Provider } from 'react-intl-redux';
 
 import { requestCredentials, fetchCredentials,
-  requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
+  requestPasswordChange, postDeleteAccount, deleteAccount,
+  getU2FEnroll, enrollU2F, registerU2F } from 'sagas/Security';
 
 import { addLocaleData } from 'react-intl';
 
@@ -886,6 +887,27 @@ describe("Async component", () => {
       }
       next = generator.next(action);
       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
+  });
+
+  it("Sagas U2F enroll", () => {
+
+      const generator = getU2FEnroll();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(enrollU2F, mockState.config));      
+      const action = {
+        type: actions.GET_U2F_ENROLL_SUCCESS,
+        payload: {
+          csrf_token: 'csrf-token',
+          u2f_request: 'dummy'
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
       next = generator.next();
       delete(action.payload.csrf_token);
       expect(next.value).toEqual(put(action));      
