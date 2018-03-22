@@ -1,6 +1,7 @@
 
 const mock = require('jest-mock');
 import React from 'react';
+import { register } from 'u2f-api'
 import { shallow, mount, render } from 'enzyme';
 import { put, select, call } from "redux-saga/effects";
 import expect, { createSpy, spyOn, isSpy } from "expect";
@@ -12,10 +13,11 @@ import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
 import { Provider } from 'react-intl-redux';
+import { eduidNotify } from "actions/Notifications";
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount,
-  getU2FEnroll, enrollU2F, registerU2F } from 'sagas/Security';
+  getU2FEnroll, enrollU2F, registerU2F, postU2FToken } from 'sagas/Security';
 
 import { addLocaleData } from 'react-intl';
 
@@ -794,6 +796,9 @@ const fakeStore = (state) => ({
 const mockState = {
   security: {
     location: 'dummy-location',
+    u2f_request:{
+      registerRequests: [ 'dummy' ]
+    }
   },
   config: {
     csrf_token: 'csrf-token',
@@ -913,6 +918,54 @@ describe("Async component", () => {
       expect(next.value).toEqual(put(action));      
   });
 
+  it("Sagas U2F register", () => {
+
+      const generator = registerU2F();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
+      const response = {
+        registrationData: 'dummy-reg-data',
+        clientData: 'dummy-client-data'
+      };
+      const data = {
+        ...response,
+        version: 'U2F_V2',
+        csrf_token: mockState.config.csrf_token
+      };
+      next = generator.next(response);
+      expect(next.value).toEqual(call(postU2FToken, mockState.config, data));
+      const action = {
+        type: actions.POST_U2F_BIND_SUCCESS,
+        payload: {
+          csrf_token: mockState.config.csrf_token,
+          credentials: [ 'dummy-credentials' ]
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
+      next = generator.next();
+      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
+  });
+
+  it("Sagas U2F register error", () => {
+
+      const generator = registerU2F();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
+      const response = {
+        errorCode: 1
+      };
+      next = generator.next(response);
+      expect(next.value.PUT.action.type).toEqual('NEW_NOTIFICATION');
+      next = generator.next();
+      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
+  });
 });
 
 

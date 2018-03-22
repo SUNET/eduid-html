@@ -7,6 +7,7 @@ import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
          enrollU2FFail, stopU2fRegistration, registerU2FFail } from "actions/Security";
+import { eduidNotify } from "actions/Notifications";
 
 
 
@@ -108,22 +109,22 @@ export function* registerU2F () {
         if(resp.errorCode) {
           switch (resp.errorCode) {
             case 1:
-              put(eduidNotify('security.u2f_registration_error_unknown', 'errors'));
+              yield put(eduidNotify('security.u2f_registration_error_unknown', 'errors'));
               break;
             case 2:
-              put(eduidNotify('security.u2f_registration_error_bad', 'errors'));
+              yield put(eduidNotify('security.u2f_registration_error_bad', 'errors'));
               break;
             case 3:
-              put(eduidNotify('security.u2f_registration_error_unsupported', 'errors'));
+              yield put(eduidNotify('security.u2f_registration_error_unsupported', 'errors'));
               break;
             case 4:
-              put(eduidNotify('security.u2f_registration_error_device', 'errors'));
+              yield put(eduidNotify('security.u2f_registration_error_device', 'errors'));
               break;
             case 5:
-              put(eduidNotify('security.u2f_registration_error_timeout', 'errors'));
+              yield put(eduidNotify('security.u2f_registration_error_timeout', 'errors'));
               break;
             default:
-              put(eduidNotify('security.u2f_registration_error_code', 'errors', {errorCode: resp.errorCode}));
+              yield put(eduidNotify('security.u2f_registration_error_code', 'errors', {errorCode: resp.errorCode}));
           }
         } else {
             const data = {
