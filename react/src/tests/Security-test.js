@@ -117,6 +117,46 @@ describe("Security Actions", () => {
     };
     expect(actions.removeAccountFail(err)).toEqual(expectedAction);
   });
+
+  it("Should start U2F registration", () => {
+    const expectedAction = {
+      type: actions.START_U2F_REGISTRATION,
+    };
+    expect(actions.startU2fRegistration()).toEqual(expectedAction);
+  });
+
+  it("Should stop U2F registration", () => {
+    const expectedAction = {
+      type: actions.STOP_U2F_REGISTRATION,
+    };
+    expect(actions.stopU2fRegistration()).toEqual(expectedAction);
+  });
+
+  it("Should signal failure when trying to enroll for U2F", () => {
+    const err = 'Bad error';
+    const expectedAction = {
+      type: actions.GET_U2F_ENROLL_FAIL,
+      error: true,
+      payload: {
+        error: new Error(err),
+        message: err
+      }
+    };
+    expect(actions.enrollU2FFail(err)).toEqual(expectedAction);
+  });
+
+  it("Should signal failure when trying to register for U2F", () => {
+    const err = 'Bad error';
+    const expectedAction = {
+      type: actions.GET_U2F_REGISTER_FAIL,
+      error: true,
+      payload: {
+        error: new Error(err),
+        message: err
+      }
+    };
+    expect(actions.registerU2FFail(err)).toEqual(expectedAction);
+  });
 });
 
 describe("Reducers", () => {
