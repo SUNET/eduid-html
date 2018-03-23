@@ -2,7 +2,8 @@
 import { connect } from 'react-redux';
 import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
-         confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion }
+         confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
+          startU2fRegistration, stopU2fRegistration }
        from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
@@ -15,7 +16,9 @@ const mapStateToProps = (state, props) => {
      confirming_deletion: state.security.confirming_deletion,
      is_fetching: state.security.is_fetching,
      redirect_to: state.security.location,
-     deleted: state.security.deleted
+     deleted: state.security.deleted,
+     u2f_is_fetching: state.security.u2f_is_fetching,
+     u2f_is_enrolled: state.security.u2f_is_enrolled
   }
 };
 
@@ -42,6 +45,12 @@ const mapDispatchToProps = (dispatch, props) => {
     handleConfirmationDeletion: function (e) {
         dispatch(confirmDeletion());
     },
+    handleStartU2fRegistration: function (e) {
+        dispatch(startU2fRegistration());
+    },
+    handleCloseU2fModal: function (e) {
+        dispatch(stopU2fRegistration());
+    }
   }
 
 };

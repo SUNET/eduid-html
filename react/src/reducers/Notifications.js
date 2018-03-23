@@ -17,18 +17,18 @@ const notificationsReducer = (state=notifications, action) => {
           return {
             messages: [],
             warnings: [],
-            errors: [ action.payload.message ]
+            errors: [ { msg: action.payload.message, vals: action.payload.values } ]
           };
         case "warnings":
           const warnings = state.warnings.slice();
-          warnings.push(action.payload.message);
+          warnings.push({ msg: action.payload.message, vals: action.payload.values });
           return {
             ...state,
             warnings: warnings
           };
         case "messages":
           return {
-            messages: [ action.payload.message ],
+            messages: [ { msg: action.payload.message, vals: action.payload.values } ],
             warnings: [],
             errors: []
           };

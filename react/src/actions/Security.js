@@ -19,6 +19,13 @@ export const POST_DELETE_ACCOUNT_FAIL = 'POST_SECURITY_TERMINATE_ACCOUNT_FAIL';
 export const GET_DELETE_ACCOUNT = 'GET_SECURITY_ACCOUNT_TERMINATED';
 export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCESS';
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
+export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
+export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
+export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
+export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
+export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
+export const POST_U2F_BIND_SUCCESS = 'POST_U2F_U2F_BIND_SUCCESS';
+export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
 
 
 export function getCredentials () {
@@ -106,6 +113,41 @@ export function removeAccountFail (err) {
 export function accountRemovedFail (err) {
   return {
     type: GET_DELETE_ACCOUNT_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+
+export function startU2fRegistration () {
+  return {
+    type: START_U2F_REGISTRATION,
+  };
+}
+
+export function stopU2fRegistration () {
+  return {
+    type: STOP_U2F_REGISTRATION
+  };
+}
+
+export function enrollU2FFail (err) {
+  return {
+    type: GET_U2F_ENROLL_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function registerU2FFail (err) {
+  return {
+    type: GET_U2F_REGISTER_FAIL,
     error: true,
     payload: {
       error: new Error(err),

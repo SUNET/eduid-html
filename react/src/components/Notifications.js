@@ -9,7 +9,10 @@ class Notifications extends Component {
 
   render () {
     let toShow = this.props.errors.map( (err, index) => {
-        let err_msg = this.props.l10n(err);
+        let err_msg = this.props.l10n(err.msg);
+        if (err.vals !== null) {
+            err_msg = err_msg(err.vals);
+        }
         if (!this.props.debug && err_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
             err_msg = this.props.l10n('unexpected-problem');
         }
@@ -24,7 +27,10 @@ class Notifications extends Component {
 
     if (toShow.length === 0) {
         toShow = this.props.messages.map( (msg, index) => {
-            let success_msg = this.props.l10n(msg);
+            let success_msg = this.props.l10n(msg.msg);
+            if (msg.vals !== null) {
+                success_msg = success_msg(msg.vals);
+            }
             if (!this.props.debug && success_msg.indexOf('UNKNOWN MESSAGE ID (') === 0) {
                 success_msg = this.props.l10n('unexpected-success');
             }
@@ -37,7 +43,10 @@ class Notifications extends Component {
                     </Alert>);
         });
         toShow.concat( this.props.warnings.map( (warning, index) => {
-            const warn = this.props.l10n(warning);
+            let warn = this.props.l10n(warning.msg);
+            if (warning.vals !== null) {
+                warn = warn(warning.vals);
+            }
             if (!this.props.debug && warn.indexOf('UNKNOWN MESSAGE ID (') === 0) {
                 return '';
             }

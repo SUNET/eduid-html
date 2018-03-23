@@ -1,6 +1,7 @@
 
 const mock = require('jest-mock');
 import React from 'react';
+import { register } from 'u2f-api'
 import { shallow, mount, render } from 'enzyme';
 import { put, select, call } from "redux-saga/effects";
 import expect, { createSpy, spyOn, isSpy } from "expect";
@@ -12,9 +13,11 @@ import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
 import { Provider } from 'react-intl-redux';
+import { eduidNotify } from "actions/Notifications";
 
 import { requestCredentials, fetchCredentials,
-  requestPasswordChange, postDeleteAccount, deleteAccount } from 'sagas/Security';
+  requestPasswordChange, postDeleteAccount, deleteAccount,
+  getU2FEnroll, enrollU2F, registerU2F, postU2FToken } from 'sagas/Security';
 
 import { addLocaleData } from 'react-intl';
 
@@ -117,6 +120,46 @@ describe("Security Actions", () => {
     };
     expect(actions.removeAccountFail(err)).toEqual(expectedAction);
   });
+
+  it("Should start U2F registration", () => {
+    const expectedAction = {
+      type: actions.START_U2F_REGISTRATION,
+    };
+    expect(actions.startU2fRegistration()).toEqual(expectedAction);
+  });
+
+  it("Should stop U2F registration", () => {
+    const expectedAction = {
+      type: actions.STOP_U2F_REGISTRATION,
+    };
+    expect(actions.stopU2fRegistration()).toEqual(expectedAction);
+  });
+
+  it("Should signal failure when trying to enroll for U2F", () => {
+    const err = 'Bad error';
+    const expectedAction = {
+      type: actions.GET_U2F_ENROLL_FAIL,
+      error: true,
+      payload: {
+        error: new Error(err),
+        message: err
+      }
+    };
+    expect(actions.enrollU2FFail(err)).toEqual(expectedAction);
+  });
+
+  it("Should signal failure when trying to register for U2F", () => {
+    const err = 'Bad error';
+    const expectedAction = {
+      type: actions.GET_U2F_REGISTER_FAIL,
+      error: true,
+      payload: {
+        error: new Error(err),
+        message: err
+      }
+    };
+    expect(actions.registerU2FFail(err)).toEqual(expectedAction);
+  });
 });
 
 describe("Reducers", () => {
@@ -130,7 +173,12 @@ describe("Reducers", () => {
     code: '',
     confirming_change: false,
     confirming_deletion: false,
-    location: ''
+    location: '',
+    deleted: false,
+    u2f_is_fetching: false,
+    u2f_failed: false,
+    u2f_is_enrolled: false,
+    u2f_request: {}
   };
 
   it("Receives a GET_CREDENTIALS action", () => {
@@ -151,17 +199,32 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
 
   it("Receives a GET_CREDENTIALS_SUCCESS action", () => {
+    const credentials = [
+            {
+              credential_type: 'password',
+              created_ts: '',
+              success_ts: ''
+            }
+          ];
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_CREDENTIALS_SUCCESS
+          type: actions.GET_CREDENTIALS_SUCCESS,
+          payload: {
+              credentials: credentials
+          }
         }
       )
     ).toEqual(
@@ -170,11 +233,16 @@ describe("Reducers", () => {
         failed: false,
         error: '',
         message: '',
-        credentials: [],
+        credentials: credentials,
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -204,7 +272,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -227,7 +300,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: true,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -250,7 +328,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -273,7 +356,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -303,7 +391,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -326,7 +419,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: true,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -349,7 +447,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -372,7 +475,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -395,7 +503,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -422,7 +535,12 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: location
+        location: location,
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
@@ -452,10 +570,219 @@ describe("Reducers", () => {
         code: '',
         confirming_change: false,
         confirming_deletion: false,
-        location: ''
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
       }
     );
   });
+
+  it("Receives a START_U2F_REGISTRATION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_U2F_REGISTRATION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: true,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a STOP_U2F_REGISTRATION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.STOP_U2F_REGISTRATION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_ENROLL_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_ENROLL_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: error,
+        message: err,
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_ENROLL_SUCCESS action", () => {
+    const challenge = 'dummy',
+          version = 'v2',
+          registerRequests = [{challenge: challenge, version: version}],
+          appId = 'app-id';
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_ENROLL_SUCCESS,
+          payload: {
+            registerRequests: registerRequests,
+            appId: appId
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: true,
+        u2f_request: {registerRequests: [{challenge: challenge,
+                                           version: version,
+                                           appId: appId}],
+                      appId: appId}
+      }
+    );
+  });
+
+  it("Receives a GET_U2F_REGISTER_FAIL action", () => {
+    const err = 'Error',
+          error = new Error(err);
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.GET_U2F_REGISTER_FAIL,
+          error: true,
+          payload: {
+            error: error,
+            message: err
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: error,
+        message: err,
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: true,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a POST_U2F_BIND_SUCCESS action", () => {
+    const credentials = [
+            {
+              credential_type: 'password',
+              created_ts: '',
+              success_ts: ''
+            }
+          ];
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.POST_U2F_BIND_SUCCESS,
+          payload: {
+              credentials: credentials
+          }
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: credentials,
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
 });
 
 
@@ -469,6 +796,9 @@ const fakeStore = (state) => ({
 const mockState = {
   security: {
     location: 'dummy-location',
+    u2f_request:{
+      registerRequests: [ 'dummy' ]
+    }
   },
   config: {
     csrf_token: 'csrf-token',
@@ -567,6 +897,75 @@ describe("Async component", () => {
       expect(next.value).toEqual(put(action));      
   });
 
+  it("Sagas U2F enroll", () => {
+
+      const generator = getU2FEnroll();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(enrollU2F, mockState.config));      
+      const action = {
+        type: actions.GET_U2F_ENROLL_SUCCESS,
+        payload: {
+          csrf_token: 'csrf-token',
+          u2f_request: 'dummy'
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
+  });
+
+  it("Sagas U2F register", () => {
+
+      const generator = registerU2F();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
+      const response = {
+        registrationData: 'dummy-reg-data',
+        clientData: 'dummy-client-data'
+      };
+      const data = {
+        ...response,
+        version: 'U2F_V2',
+        csrf_token: mockState.config.csrf_token
+      };
+      next = generator.next(response);
+      expect(next.value).toEqual(call(postU2FToken, mockState.config, data));
+      const action = {
+        type: actions.POST_U2F_BIND_SUCCESS,
+        payload: {
+          csrf_token: mockState.config.csrf_token,
+          credentials: [ 'dummy-credentials' ]
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
+      next = generator.next();
+      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
+  });
+
+  it("Sagas U2F register error", () => {
+
+      const generator = registerU2F();
+      generator.next();
+      let next = generator.next(mockState);
+      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
+      const response = {
+        errorCode: 1
+      };
+      next = generator.next(response);
+      expect(next.value.PUT.action.type).toEqual('NEW_NOTIFICATION');
+      next = generator.next();
+      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
+  });
 });
 
 
@@ -580,12 +979,15 @@ function setupComponent() {
     is_fetching: false,
     confirming_change: false,
     confirming_deletion: false,
+    u2f_is_fetching: false,
+    u2f_is_enrolled: false,
     handleStartConfirmationPassword: mock.fn(),
     handleStopConfirmationPassword: mock.fn(),
     handleConfirmationPassword: mock.fn(),
     handleStartConfirmationDeletion: mock.fn(),
     handleStopConfirmationDeletion: mock.fn(),
     handleConfirmationDeletion: mock.fn(),
+    handleStartU2fRegistration: mock.fn()
   };
 
   const wrapper = shallow(<Provider store={fakeStore(mockState)}>
@@ -603,6 +1005,7 @@ describe("Security Component", () => {
         const {wrapper, props} = setupComponent(),
             table = wrapper.find('table.passwords'),
             buttonChange = wrapper.find('EduIDButton#security-change-button'),
+            buttonU2F = wrapper.find('EduIDButton#security-u2f-button'),
             buttonDelete = wrapper.find('EduIDButton#delete-button'),
             modalChange = wrapper.find('GenericConfirmModal'),
             modalDelete = wrapper.find('DeleteModal');
@@ -632,6 +1035,11 @@ describe("Security Container", () => {
             confirming_change: false,
             confirming_deletion: deleting,
             location: '',
+            deleted: false,
+            u2f_is_fetching: false,
+            u2f_failed: false,
+            u2f_is_enrolled: false,
+            u2f_request: {}
         },
         config: {
             csrf_token: '',
@@ -680,6 +1088,21 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(0);
     getWrapper().find('EduIDButton#security-change-button').props().onClick();
     expect(dispatch.mock.calls.length).toEqual(2);
+  });
+
+  it("Clicks U2F", () => {
+
+    fetchMock.post('/dummy-sec-url',
+       {
+          type: actions.GET_U2F_ENROLL_SUCCESS,
+          payload: {
+            u2f_request: {}
+          }
+      });
+
+    expect(dispatch.mock.calls.length).toEqual(0);
+    getWrapper().find('EduIDButton#security-u2f-button').props().onClick();
+    expect(dispatch.mock.calls.length).toEqual(1);
   });
 
   it("Clicks delete", () => {

@@ -564,6 +564,42 @@
     "defaultMessage": "You tried to set a U2F token description long"
   },
   {
+    "id": "security.add_u2f_token",
+    "defaultMessage": "Add U2F token"
+  },
+  {
+    "id": "security.u2f_registration_error_unknown",
+    "defaultMessage": "U2F error: Unknown error"
+  },
+  {
+    "id": "security.u2f_registration_error_bad",
+    "defaultMessage": "U2F error: Bad request"
+  },
+  {
+    "id": "security.u2f_registration_error_unsupported",
+    "defaultMessage": "U2F error: Configuration unsupported"
+  },
+  {
+    "id": "security.u2f_registration_error_device",
+    "defaultMessage": "U2F error: Device ineligible"
+  },
+  {
+    "id": "security.u2f_registration_error_timeout",
+    "defaultMessage": "U2F error: Timeout"
+  },
+  {
+    "id": "security.u2f_registration_error_code",
+    "defaultMessage": "U2F failed with error code: {errorCode}"
+  },
+  {
+    "id": "security.u2f_credential_type",
+    "defaultMessage": "U2F key"
+  },
+  {
+    "id": "security.u2f_register_success",
+    "defaultMessage": "U2F key successfully registered"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
