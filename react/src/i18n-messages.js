@@ -903,6 +903,16 @@ const msgs = {
           id="security.u2f_register_success"
           defaultMessage={`U2F key successfully registered`} />),
 
+    'u2f.action-required': (
+        <FormattedMessage
+          id="u2f.action-required"
+          defaultMessage={`Action required for multi factor authentication`} />),
+
+    'u2f.push-the-button': (
+        <FormattedMessage
+          id="u2f.push-the-button"
+          defaultMessage={`Please touch the button in your U2F key`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"

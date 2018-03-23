@@ -600,6 +600,14 @@
     "defaultMessage": "U2F key successfully registered"
   },
   {
+    "id": "u2f.action-required",
+    "defaultMessage": "Action required for multi factor authentication"
+  },
+  {
+    "id": "u2f.push-the-button",
+    "defaultMessage": "Please touch the button in your U2F key"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
