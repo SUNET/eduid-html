@@ -139,7 +139,11 @@ export function* registerU2F () {
         }
         yield put(stopU2fRegistration());
     } catch(error) {
-        yield* failRequest(error, registerU2FFail);
+        const state = yield select(state => state);
+        if (state.security.u2f_is_enrolled) {
+            yield put(stopU2fRegistration());
+            yield* failRequest(error, registerU2FFail);
+        }
     }
 }
 
