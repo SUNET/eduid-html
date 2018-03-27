@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/lib/Modal';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
@@ -23,10 +24,21 @@ class Security extends Component {
     }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
-            return (<tr key={index}>
+            let btnRm = '';
+            if (cred.credential_type === 'security.u2f_credential_type') {
+                btnRm = (<div class="btn-group btn-group-xs" role="group">
+                           <button className="btn btn-danger btn-remove-u2f"
+                                   onClick={this.props.handleRemoveU2FToken}>
+                             <Glyphicon className="trash" glyph="trash" />
+                           </button>
+                         </div>);
+            }
+            return (<tr key={index} className="u2f-token-holder" data-token={cred.key}>
                         <td>{this.props.l10n(cred.credential_type)}</td>
-                        <td>{new Date(cred.created_ts).toString()}</td>
-                        <td>{new Date(cred.success_ts).toString()}</td>
+                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{new Date(cred.created_ts).toDateString()}</td>
+                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{new Date(cred.success_ts).toDateString()}</td>
+                        <td>{cred.description}</td>
+                        <td>{btnRm}</td>
                     </tr>
             );
         }, this);
@@ -44,6 +56,8 @@ class Security extends Component {
                     <th>{this.props.l10n('security.credential')}</th>
                     <th>{this.props.l10n('security.creation_date')}</th>
                     <th>{this.props.l10n('security.last_used')}</th>
+                    <th>{this.props.l10n('security.description')}</th>
+                    <th>{this.props.l10n('security.remove')}</th>
                 </tr>
                 {creds_table}
               </tbody>

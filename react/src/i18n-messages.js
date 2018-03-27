@@ -740,6 +740,16 @@ const msgs = {
           id="security.long_description"
           defaultMessage={`Your eduID account password can be changed below.`} />),
 
+    'security.description': (
+        <FormattedMessage
+          id="security.description"
+          defaultMessage={`Description`} />),
+
+    'security.remove': (
+        <FormattedMessage
+          id="security.remove"
+          defaultMessage={`Remove`} />),
+
     'security.main_title': (
         <FormattedMessage
           id="security.main_title"

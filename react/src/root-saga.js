@@ -22,7 +22,8 @@ import * as sagasMobile from "sagas/Mobile";
 import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
 import { requestConfig } from "sagas/Config";
 import { requestOpenidQRcode } from "sagas/OpenidConnect";
-import { requestCredentials, requestPasswordChange, postDeleteAccount, getU2FEnroll, registerU2F } from "sagas/Security";
+import { requestCredentials, requestPasswordChange, postDeleteAccount,
+         getU2FEnroll, registerU2F, removeU2FToken } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 import { requestNins, requestRemoveNin } from "sagas/Nins";
 import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
@@ -76,6 +77,7 @@ function* rootSaga() {
     takeEvery(headerActions.POST_LOGOUT, requestLogout),
     takeLatest(securityActions.START_U2F_REGISTRATION, getU2FEnroll),
     takeLatest(securityActions.GET_U2F_ENROLL_SUCCESS, registerU2F),
+    takeLatest(securityActions.POST_U2F_REMOVE, removeU2FToken),
   ];
 }
 

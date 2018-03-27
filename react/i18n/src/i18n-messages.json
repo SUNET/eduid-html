@@ -476,6 +476,14 @@
     "defaultMessage": "Your eduID account password can be changed below."
   },
   {
+    "id": "security.description",
+    "defaultMessage": "Description"
+  },
+  {
+    "id": "security.remove",
+    "defaultMessage": "Remove"
+  },
+  {
     "id": "security.main_title",
     "defaultMessage": "Security"
   },

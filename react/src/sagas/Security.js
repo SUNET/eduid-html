@@ -6,7 +6,7 @@ import { checkStatus, ajaxHeaders, putCsrfToken,
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
-         enrollU2FFail, stopU2fRegistration, registerU2FFail } from "actions/Security";
+         enrollU2FFail, stopU2fRegistration, registerU2FFail, tokenRemovedFail } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
 
 
@@ -149,6 +149,32 @@ export function* registerU2F () {
 
 export function postU2FToken (config, data) {
     return window.fetch(config.SECURITY_URL + 'u2f/bind', {
+        ...postRequest,
+        body: JSON.stringify(data)
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+
+export function* removeU2FToken () {
+    try {
+        const state = yield select(state => state);
+        const data = {
+            csrf_token: state.config.csrf_token,
+            keyHandle: state.security.u2f_token_remove
+        };
+        const resp = yield call(removeToken, state.config, data);
+        yield put(putCsrfToken(resp));
+        yield put(resp);
+    } catch(error) {
+        yield* failRequest(error, tokenRemovedFail);
+    }
+}
+
+
+export function removeToken(config, data) {
+    return window.fetch(config.SECURITY_URL + 'u2f/remove', {
         ...postRequest,
         body: JSON.stringify(data)
     })
