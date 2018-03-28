@@ -620,6 +620,10 @@
     "defaultMessage": "U2F token successfully removed"
   },
   {
+    "id": "security.u2f-describe-title",
+    "defaultMessage": "Enter a description for the U2F token you are about to register"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },

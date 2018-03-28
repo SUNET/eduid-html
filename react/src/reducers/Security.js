@@ -13,6 +13,8 @@ const security = {
     confirming_deletion: false,
     location: '',
     deleted: false,
+    u2f_asking_description: false,
+    u2f_token_description: '',
     u2f_is_fetching: false,
     u2f_failed: false,
     u2f_is_enrolled: false,
@@ -127,7 +129,8 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         u2f_is_fetching: true,
-        u2f_failed: false
+        u2f_failed: false,
+        u2f_token_description: action.payload.description
       };
     case actions.STOP_U2F_REGISTRATION:
       return {
@@ -135,6 +138,22 @@ let securityReducer = (state=security, action) => {
         u2f_is_fetching: false,
         u2f_is_enrolled: false,
         u2f_failed: false
+      };
+    case actions.START_ASK_U2F_DESCRIPTION:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_asking_description: true
+      };
+    case actions.STOP_ASK_U2F_DESCRIPTION:
+      return {
+        ...state,
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_asking_description: false
       };
     case actions.GET_U2F_ENROLL_FAIL:
       return {

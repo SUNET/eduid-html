@@ -42,6 +42,7 @@ class LetterProofingButton extends Component {
                 modalId="letterConfirmDialog"
                 controlId="letterConfirmDialogControl"
                 title={this.props.l10n('letter.verify_title')}
+                resendLabel={this.props.l10n('cm.enter_code')}
                 placeholder={this.props.l10n('letter.placeholder')}
                 showModal={this.props.verifyingLetter}
                 closeModal={this.props.handleStopVerificationLetter}
