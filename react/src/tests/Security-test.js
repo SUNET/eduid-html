@@ -122,6 +122,20 @@ describe("Security Actions", () => {
     expect(actions.removeAccountFail(err)).toEqual(expectedAction);
   });
 
+  it("Should start asking U2F description", () => {
+    const expectedAction = {
+      type: actions.START_ASK_U2F_DESCRIPTION
+    };
+    expect(actions.startAskU2FDescription()).toEqual(expectedAction);
+  });
+
+  it("Should stop asking U2F description", () => {
+    const expectedAction = {
+      type: actions.STOP_ASK_U2F_DESCRIPTION
+    };
+    expect(actions.stopAskU2FDescription()).toEqual(expectedAction);
+  });
+
   it("Should start U2F registration", () => {
     const expectedAction = {
       type: actions.START_U2F_REGISTRATION,
@@ -179,6 +193,8 @@ describe("Reducers", () => {
     confirming_deletion: false,
     location: '',
     deleted: false,
+    u2f_asking_description: false,
+    u2f_token_description: '',
     u2f_is_fetching: false,
     u2f_failed: false,
     u2f_is_enrolled: false,
@@ -205,6 +221,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -243,6 +261,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -278,6 +298,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -306,6 +328,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -334,6 +358,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -362,6 +388,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -397,6 +425,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -425,6 +455,8 @@ describe("Reducers", () => {
         confirming_deletion: true,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -453,6 +485,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -481,6 +515,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -509,6 +545,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -541,6 +579,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: location,
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -576,6 +616,68 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a START_ASK_U2F_DESCRIPTION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.START_ASK_U2F_DESCRIPTION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_asking_description: true,
+        u2f_token_description: '',
+        u2f_is_fetching: false,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_request: {}
+      }
+    );
+  });
+
+  it("Receives a STOP_ASK_U2F_DESCRIPTION action", () => {
+    expect(
+      securityReducer(
+        mockState,
+        {
+          type: actions.STOP_ASK_U2F_DESCRIPTION
+        }
+      )
+    ).toEqual(
+      {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        u2f_asking_description: false,
+        u2f_token_description: '',
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -608,6 +710,7 @@ describe("Reducers", () => {
         location: '',
         deleted: false,
         u2f_token_description: 'description',
+        u2f_asking_description: false,
         u2f_is_fetching: true,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -636,6 +739,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: '',
+        u2f_asking_description: false,
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -671,6 +776,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: '',
+        u2f_asking_description: false,
         u2f_is_fetching: false,
         u2f_failed: true,
         u2f_is_enrolled: false,
@@ -707,6 +814,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: '',
+        u2f_asking_description: false,
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: true,
@@ -745,6 +854,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: '',
+        u2f_asking_description: false,
         u2f_is_fetching: false,
         u2f_failed: true,
         u2f_is_enrolled: false,
@@ -783,6 +894,8 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: '',
+        u2f_asking_description: false,
         u2f_is_fetching: false,
         u2f_failed: false,
         u2f_is_enrolled: false,
@@ -1045,6 +1158,7 @@ describe("Security Component", () => {
             buttonU2F = wrapper.find('EduIDButton#security-u2f-button'),
             buttonDelete = wrapper.find('EduIDButton#delete-button'),
             modalChange = wrapper.find('GenericConfirmModal'),
+            modalU2FDescription = wrapper.find('ConfirmModal'),
             modalDelete = wrapper.find('DeleteModal');
     });
 });
@@ -1060,7 +1174,7 @@ describe("Security Container", () => {
 
   beforeEach(() => {
 
-    getState = function (deleting) {
+    getState = function (deleting, askingDescription) {
       return {
         security: {
             is_fetching: false,
@@ -1079,6 +1193,8 @@ describe("Security Container", () => {
             confirming_deletion: deleting,
             location: '',
             deleted: false,
+            u2f_asking_description: askingDescription,
+            u2f_token_description: '',
             u2f_is_fetching: false,
             u2f_failed: false,
             u2f_is_enrolled: false,
@@ -1094,6 +1210,11 @@ describe("Security Container", () => {
         intl: {
             locale: 'en',
             messages: messages
+        },
+        notifications: {
+            messages: [],
+            errors: [],
+            warnings: []
         }
       }
     };
@@ -1101,11 +1222,14 @@ describe("Security Container", () => {
     mockProps = {
         credentials: [],
         language: 'en',
-        confirming_deletion: false
+        confirming_deletion: false,
+        u2f_asking_description: false
     };
 
-    getWrapper = function ({ deleting=false, props=mockProps } = {}) {
-      store = fakeStore(getState(deleting));
+    getWrapper = function ({ deleting=false,
+                             askingDesc=false,
+                             props=mockProps } = {}) {
+      store = fakeStore(getState(deleting, askingDesc));
       dispatch = store.dispatch;
 
       const wrapper = mount(
@@ -1136,16 +1260,9 @@ describe("Security Container", () => {
 
   it("Clicks U2F", () => {
 
-    fetchMock.post('/dummy-sec-url',
-       {
-          type: actions.GET_U2F_ENROLL_SUCCESS,
-          payload: {
-            u2f_request: {}
-          }
-      });
-
     expect(dispatch.mock.calls.length).toEqual(0);
-    getWrapper().find('EduIDButton#security-u2f-button').props().onClick();
+    const wrapper = getWrapper();
+    wrapper.find('EduIDButton#security-u2f-button').simulate('click');
     expect(dispatch.mock.calls.length).toEqual(1);
   });
 
@@ -1170,7 +1287,7 @@ describe("Security Container", () => {
         language: 'en',
         confirming_deletion: true
     };
-    const deleteModal = getWrapper(true, newProps).find('DeleteModal');
+    const deleteModal = getWrapper(true, false, newProps).find('DeleteModal');
     expect(dispatch.mock.calls.length).toEqual(0);
     deleteModal.props().handleConfirm();
     expect(dispatch.mock.calls.length).toEqual(1);

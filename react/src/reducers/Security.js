@@ -143,7 +143,7 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         u2f_is_fetching: false,
-        u2f_failed: true,
+        u2f_failed: false,
         u2f_is_enrolled: false,
         u2f_asking_description: true
       };
@@ -151,7 +151,7 @@ let securityReducer = (state=security, action) => {
       return {
         ...state,
         u2f_is_fetching: false,
-        u2f_failed: true,
+        u2f_failed: false,
         u2f_is_enrolled: false,
         u2f_asking_description: false
       };
