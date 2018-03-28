@@ -125,8 +125,11 @@ describe("Security Actions", () => {
   it("Should start U2F registration", () => {
     const expectedAction = {
       type: actions.START_U2F_REGISTRATION,
+      payload: {
+          description: 'description'
+      }
     };
-    expect(actions.startU2fRegistration()).toEqual(expectedAction);
+    expect(actions.startU2fRegistration('description')).toEqual(expectedAction);
   });
 
   it("Should stop U2F registration", () => {
@@ -586,7 +589,10 @@ describe("Reducers", () => {
       securityReducer(
         mockState,
         {
-          type: actions.START_U2F_REGISTRATION
+          type: actions.START_U2F_REGISTRATION,
+          payload: {
+              description: 'description'
+          }
         }
       )
     ).toEqual(
@@ -601,6 +607,7 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
+        u2f_token_description: 'description',
         u2f_is_fetching: true,
         u2f_failed: false,
         u2f_is_enrolled: false,
