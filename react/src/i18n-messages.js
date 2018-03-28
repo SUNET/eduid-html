@@ -928,6 +928,11 @@ const msgs = {
           id="security.u2f-token-removed"
           defaultMessage={`U2F token successfully removed`} />),
 
+    'security.u2f-describe-title': (
+        <FormattedMessage
+          id="security.u2f-describe-title"
+          defaultMessage={`Enter a description for the U2F token you are about to register`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"

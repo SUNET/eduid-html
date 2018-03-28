@@ -52,7 +52,7 @@ const getConfirmForm = inputName => {
                         <Field component={TextInput}
                                componentClass="input"
                                type="text"
-                               label={props.l10n('cm.enter_code')}
+                               label={props.resendLabel}
                                placeholder={props.placeholder}
                                controlId={inputName}
                                name={inputName} />

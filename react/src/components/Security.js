@@ -7,6 +7,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import EduIDButton from 'components/EduIDButton';
 import DeleteModal from 'components/DeleteModal';
 import GenericConfirmModal from 'components/GenericConfirmModal';
+import ConfirmModal from 'components/ConfirmModal';
 
 import 'style/Security.scss';
 
@@ -74,7 +75,7 @@ class Security extends Component {
             <EduIDButton bsStyle="primary"
                         id="security-u2f-button"
                         spinning={spinning}
-                        onClick={this.props.handleStartU2fRegistration}>
+                        onClick={this.props.handleStartAskingU2FDescription}>
                       {this.props.l10n('security.add_u2f_token')}
             </EduIDButton>
           </div>
@@ -104,6 +105,19 @@ class Security extends Component {
                 closeModal={this.props.handleStopConfirmationDeletion}
                 handleConfirm={this.props.handleConfirmationDeletion}
           />
+          <ConfirmModal
+              modalId="describeU2FTokenDialog"
+              controlId="describeU2FTokenDialogControl"
+              title={this.props.l10n('security.u2f-describe-title')}
+              resendLabel=""
+              resendHelp=""
+              resendText=""
+              placeholder=""
+              with_resend_link={false}
+              showModal={Boolean(this.props.u2f_asking_description)}
+              closeModal={this.props.handleStopAskingU2FDescription}
+              handleConfirm={this.props.handleStartU2fRegistration}
+              is_fetching={false} />
 
           <Modal show={this.props.u2f_is_enrolled}>
               <Modal.Header>
@@ -140,6 +154,9 @@ Security.propTypes = {
   handleStopConfirmationPassword: PropTypes.func,
   handleConfirmationPassword: PropTypes.func,
   confirming_deletion: PropTypes.bool,
+  u2f_asking_description: PropTypes.bool,
+  handleStartAskingU2FDescription: PropTypes.func,
+  handleStopAskingU2FDescription: PropTypes.func,
   handleStartConfirmationDeletion: PropTypes.func,
   handleStopConfirmationDeletion: PropTypes.func,
   handleConfirmationDeletion: PropTypes.func,

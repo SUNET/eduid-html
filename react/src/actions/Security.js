@@ -29,6 +29,8 @@ export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
 export const POST_U2F_REMOVE = 'POST_U2F_U2F_REMOVE';
 export const POST_U2F_REMOVE_SUCCESS = 'POST_U2F_U2F_REMOVE_SUCCESS';
 export const POST_U2F_REMOVE_FAIL = 'POST_U2F_U2F_REMOVE_FAIL';
+export const START_ASK_U2F_DESCRIPTION = 'START_ASK_U2F_DESCRIPTION';
+export const STOP_ASK_U2F_DESCRIPTION = 'STOP_ASK_U2F_DESCRIPTION';
 
 
 export function getCredentials () {
@@ -125,9 +127,25 @@ export function accountRemovedFail (err) {
 }
 
 
-export function startU2fRegistration () {
+export function startAskU2FDescription () {
+  return {
+    type: START_ASK_U2F_DESCRIPTION,
+  };
+}
+
+export function stopAskU2FDescription () {
+  return {
+    type: STOP_ASK_U2F_DESCRIPTION,
+  };
+}
+
+
+export function startU2fRegistration (description) {
   return {
     type: START_U2F_REGISTRATION,
+    payload: {
+        description: description
+    }
   };
 }
 

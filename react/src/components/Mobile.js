@@ -89,6 +89,7 @@ class Mobile extends Component {
                 modalId="phoneConfirmDialog"
                 controlId="phoneConfirmDialogControl"
                 title={this.props.l10n('mobile.confirm_title', {phone: this.props.confirming})}
+                resendLabel={this.props.l10n('cm.enter_code')}
                 resendHelp={this.props.l10n('cm.lost_code')}
                 resendText={this.props.l10n('cm.resend_code')}
                 placeholder={this.props.l10n('mobile.placeholder')}

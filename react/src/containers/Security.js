@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
-          startU2fRegistration, stopU2fRegistration, postRemoveU2FToken }
-       from "actions/Security";
+          startU2fRegistration, stopU2fRegistration, postRemoveU2FToken,
+          startAskU2FDescription, stopAskU2FDescription } from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
@@ -17,6 +17,7 @@ const mapStateToProps = (state, props) => {
      is_fetching: state.security.is_fetching,
      redirect_to: state.security.location,
      deleted: state.security.deleted,
+     u2f_asking_description: state.security.u2f_asking_description,
      u2f_is_fetching: state.security.u2f_is_fetching,
      u2f_is_enrolled: state.security.u2f_is_enrolled
   }
@@ -45,8 +46,16 @@ const mapDispatchToProps = (dispatch, props) => {
     handleConfirmationDeletion: function (e) {
         dispatch(confirmDeletion());
     },
+    handleStartAskingU2FDescription: function (e) {
+        dispatch(startAskU2FDescription());
+    },
+    handleStopAskingU2FDescription: function (e) {
+        dispatch(stopAskU2FDescription());
+    },
     handleStartU2fRegistration: function (e) {
-        dispatch(startU2fRegistration());
+        const description = document.getElementById('describeU2FTokenDialogControl').value;
+        dispatch(stopAskU2FDescription());
+        dispatch(startU2fRegistration(description));
     },
     handleCloseU2fModal: function (e) {
         dispatch(stopU2fRegistration());

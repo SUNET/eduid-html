@@ -130,6 +130,7 @@ export function* registerU2F () {
             const data = {
                 csrf_token: state.config.csrf_token,
                 registrationData: resp.registrationData,
+                description: state.security.u2f_token_description,
                 clientData: resp.clientData,
                 version: 'U2F_V2'
             };
