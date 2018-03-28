@@ -24,9 +24,9 @@ class Security extends Component {
     }
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
-            let btnRm = '';
+            let btnRemove = '';
             if (cred.credential_type === 'security.u2f_credential_type') {
-                btnRm = (<div className="btn-group btn-group-xs" role="group">
+                btnRemove = (<div className="btn-group btn-group-xs" role="group">
                            <button className="btn btn-danger btn-remove-u2f"
                                    onClick={this.props.handleRemoveU2FToken}>
                              <Glyphicon className="trash" glyph="trash" />
@@ -38,7 +38,7 @@ class Security extends Component {
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{new Date(cred.created_ts).toDateString()}</td>
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{new Date(cred.success_ts).toDateString()}</td>
                         <td>{cred.description}</td>
-                        <td>{btnRm}</td>
+                        <td>{btnRemove}</td>
                     </tr>
             );
         }, this);
