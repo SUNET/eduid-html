@@ -26,7 +26,7 @@ class Security extends Component {
         creds_table = this.props.credentials.map((cred, index) => {
             let btnRm = '';
             if (cred.credential_type === 'security.u2f_credential_type') {
-                btnRm = (<div class="btn-group btn-group-xs" role="group">
+                btnRm = (<div className="btn-group btn-group-xs" role="group">
                            <button className="btn btn-danger btn-remove-u2f"
                                    onClick={this.props.handleRemoveU2FToken}>
                              <Glyphicon className="trash" glyph="trash" />

@@ -601,11 +601,11 @@
   },
   {
     "id": "security.u2f_credential_type",
-    "defaultMessage": "U2F key"
+    "defaultMessage": "U2F token"
   },
   {
     "id": "security.u2f_register_success",
-    "defaultMessage": "U2F key successfully registered"
+    "defaultMessage": "U2F token successfully registered"
   },
   {
     "id": "u2f.action-required",
@@ -614,6 +614,10 @@
   {
     "id": "u2f.push-the-button",
     "defaultMessage": "Please touch the button in your U2F key"
+  },
+  {
+    "id": "security.u2f-token-removed",
+    "defaultMessage": "U2F token successfully removed"
   },
   {
     "id": "chpass.suggested_password",

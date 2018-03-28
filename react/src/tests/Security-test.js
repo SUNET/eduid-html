@@ -17,7 +17,8 @@ import { eduidNotify } from "actions/Notifications";
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount,
-  getU2FEnroll, enrollU2F, registerU2F, postU2FToken } from 'sagas/Security';
+  getU2FEnroll, enrollU2F, registerU2F, postU2FToken,
+  removeU2FToken, removeToken } from 'sagas/Security';
 
 import { addLocaleData } from 'react-intl';
 
@@ -798,7 +799,8 @@ const mockState = {
     location: 'dummy-location',
     u2f_request:{
       registerRequests: [ 'dummy' ]
-    }
+    },
+    u2f_token_remove: 'dummy-key'
   },
   config: {
     csrf_token: 'csrf-token',
@@ -966,6 +968,34 @@ describe("Async component", () => {
       next = generator.next();
       expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
   });
+
+  it("Sagas U2F remove token", () => {
+
+    const generator = removeU2FToken();
+    let next = generator.next();
+    expect(next.value.SELECT.args).toEqual([]);
+
+    const data = {
+        csrf_token: 'csrf-token',
+        keyHandle: 'dummy-key'
+    };
+
+    next = generator.next(mockState);
+    expect(next.value).toEqual(call(removeToken, mockState.config, data));
+
+
+      const action = {
+        type: actions.POST_U2F_REMOVE_SUCCESS,
+        payload: {
+          csrf_token: 'csrf-token',
+        }
+      }
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+      next = generator.next();
+      delete(action.payload.csrf_token);
+      expect(next.value).toEqual(put(action));      
+  });
 });
 
 
@@ -1030,7 +1060,13 @@ describe("Security Container", () => {
             failed: false,
             error: '',
             message: '',
-            credentials: [],
+            credentials: [{
+                created_ts: "2018-03-28T09:39:11.001371",
+                credential_type: "security.u2f_credential_type",
+                description: "",
+                key: "dummy-key",
+                success_ts: "2018-03-28T09:39:11.001371"
+            }],
             code: '',
             confirming_change: false,
             confirming_deletion: deleting,
@@ -1039,7 +1075,8 @@ describe("Security Container", () => {
             u2f_is_fetching: false,
             u2f_failed: false,
             u2f_is_enrolled: false,
-            u2f_request: {}
+            u2f_request: {},
+            u2f_token_remove: 'dummy-token'
         },
         config: {
             csrf_token: '',
@@ -1131,5 +1168,27 @@ describe("Security Container", () => {
     deleteModal.props().handleConfirm();
     expect(dispatch.mock.calls.length).toEqual(1);
     expect(dispatch.mock.calls[0][0].type).toEqual('POST_DELETE_ACCOUNT');
+  });
+
+  it("Clicks remove U2F token", () => {
+
+    const newProps = {
+        credentials: [{
+            created_ts: "2018-03-28T09:39:11.001371",
+            credential_type: "security.u2f_credential_type",
+            description: "",
+            key: "dummy-key",
+            success_ts: "2018-03-28T09:39:11.001371"
+        }],
+        language: 'en',
+        confirming_deletion: false
+    };
+
+    expect(dispatch.mock.calls.length).toEqual(0);
+    const wrapper = getWrapper(true, newProps);
+    const btn = wrapper.find('button.btn-remove-u2f');
+    btn.simulate('click');
+    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls[0][0].type).toEqual("POST_U2F_U2F_REMOVE");
   });
 });
