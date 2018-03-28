@@ -26,6 +26,9 @@ export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
 export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
 export const POST_U2F_BIND_SUCCESS = 'POST_U2F_U2F_BIND_SUCCESS';
 export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
+export const POST_U2F_REMOVE = 'POST_U2F_U2F_REMOVE';
+export const POST_U2F_REMOVE_SUCCESS = 'POST_U2F_U2F_REMOVE_SUCCESS';
+export const POST_U2F_REMOVE_FAIL = 'POST_U2F_U2F_REMOVE_FAIL';
 
 
 export function getCredentials () {
@@ -148,6 +151,26 @@ export function enrollU2FFail (err) {
 export function registerU2FFail (err) {
   return {
     type: GET_U2F_REGISTER_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function postRemoveU2FToken (token) {
+  return {
+    type: POST_U2F_REMOVE,
+    payload: {
+        token: token
+    }
+  };
+}
+
+export function tokenRemovedFail (err) {
+  return {
+    type: POST_U2F_REMOVE_FAIL,
     error: true,
     payload: {
       error: new Error(err),

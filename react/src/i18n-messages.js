@@ -740,6 +740,16 @@ const msgs = {
           id="security.long_description"
           defaultMessage={`Your eduID account password can be changed below.`} />),
 
+    'security.description': (
+        <FormattedMessage
+          id="security.description"
+          defaultMessage={`Description`} />),
+
+    'security.remove': (
+        <FormattedMessage
+          id="security.remove"
+          defaultMessage={`Remove`} />),
+
     'security.main_title': (
         <FormattedMessage
           id="security.main_title"
@@ -896,12 +906,12 @@ const msgs = {
     'security.u2f_credential_type': (
         <FormattedMessage
           id="security.u2f_credential_type"
-          defaultMessage={`U2F key`} />),
+          defaultMessage={`U2F token`} />),
 
     'security.u2f_register_success': (
         <FormattedMessage
           id="security.u2f_register_success"
-          defaultMessage={`U2F key successfully registered`} />),
+          defaultMessage={`U2F token successfully registered`} />),
 
     'u2f.action-required': (
         <FormattedMessage
@@ -912,6 +922,11 @@ const msgs = {
         <FormattedMessage
           id="u2f.push-the-button"
           defaultMessage={`Please touch the button in your U2F key`} />),
+
+    'security.u2f-token-removed': (
+        <FormattedMessage
+          id="security.u2f-token-removed"
+          defaultMessage={`U2F token successfully removed`} />),
 
     'chpass.suggested_password': (
         <FormattedMessage

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
-          startU2fRegistration, stopU2fRegistration }
+          startU2fRegistration, stopU2fRegistration, postRemoveU2FToken }
        from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
@@ -50,6 +50,10 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleCloseU2fModal: function (e) {
         dispatch(stopU2fRegistration());
+    },
+    handleRemoveU2FToken: function (e) {
+        const token = e.target.closest('.u2f-token-holder').dataset.token;
+        dispatch(postRemoveU2FToken(token));
     }
   }
 
