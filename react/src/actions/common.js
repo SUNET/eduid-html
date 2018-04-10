@@ -22,7 +22,8 @@ export const ajaxHeaders = {
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip,deflate',
     "Cache-Control": "no-store, no-cache, must-revalidate",
-    "Pragma": "no-cache"
+    "Pragma": "no-cache",
+    "X-Requested-With": "XMLHttpRequest"
 };
 
 export const postRequest = {
