@@ -2,32 +2,52 @@
 import { put, select, call } from "redux-saga/effects";
 import { checkStatus, ajaxHeaders, putCsrfToken,
          postRequest, failRequest } from "actions/common";
-import { postOpenidFail } from "actions/OpenidConnect";
+import * as actions from "../actions/OpenidConnect";
+import {postOpenidSelegFail} from "../actions/OpenidConnect";
 
+
+export function* checkNINAndShowSelegModal() {
+  try {
+    let nin;
+    const
+      state = yield select(state => state),
+      input = document.getElementById('norEduPersonNin'),
+      unconfirmed = document.getElementById('eduid-unconfirmed-nin');
+
+    // Check if there is a pending NIN before trying form input
+    if (unconfirmed) nin = state.nins.nin;
+    if (!nin) {
+        if (!input) {
+            if (!unconfirmed) {
+              nin = 'testing';
+            }
+        } else {
+            nin = input.value ? input.value : 'no nin'
+        }
+    }
+    if (nin === 'no nin') {
+      yield put(actions.postOpenidSelegFail('oc.error_missing_nin'));
+    } else {
+      console.log('Putting postOpenidSeleg with nin: ' + nin);
+      yield put(actions.postOpenidSeleg(nin));
+    }
+
+  } catch(error) {
+    yield* failRequest(error, postOpenidSelegFail);
+  }
+}
 
 export function* requestOpenidQRcode () {
-    try {
-        const openid_url = yield select(state => state.config.OIDC_PROOFING_URL),
-              input = document.querySelector('input[name=norEduPersonNIN]'),
-              unconfirmed = document.getElementById('eduid-unconfirmed-nin'),
-              nin = input ? (input.value || 'no nin') :
-                            (unconfirmed ? state.nins.nin : 'testing'),
-              data = {
-                nin: nin
-              };
-
-        console.log('Getting QRCode for NIN: ' + nin);
-
-        if (nin === 'no nin') {
-            yield put(postOpenidFail('Error: No NIN entered'));
-        } else {
-            const oidcData = yield call(fetchQRcode, openid_url, data);
-            yield put(putCsrfToken(oidcData));
-            yield put(oidcData);
-        }
-    } catch(error) {
-        yield* failRequest(error, postOpenidFail);
-    }
+  const state = yield select(state => state),
+    openid_url = state.config.OIDC_PROOFING_URL,
+    data = {
+      'csrf_token': state.config.csrf_token,
+      'nin': state.openid_data.nin
+    };
+  console.log('Getting opaque data for NIN: ' + state.openid_data.nin);
+  const oidcData = yield call(fetchQRcode, openid_url, data);
+  yield put(putCsrfToken(oidcData));
+  yield put(oidcData);
 }
 
 export function fetchQRcode (url, data) {

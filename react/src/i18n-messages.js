@@ -128,11 +128,6 @@ const msgs = {
             id="out_of_sync"
             defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
 
-    'user-out-of-sync': (
-        <FormattedMessage
-            id="user-out-of-sync"
-            defaultMessage={`User data is out of sync. Reload page to re-sync.`} />),
-
     "button_save": (
         <FormattedMessage
           id="button_save"
@@ -316,16 +311,6 @@ const msgs = {
             id="mail_duplicated"
             defaultMessage={`Added email is duplicated`} />),
 
-    'phones.cannot_remove_unique': (
-    <FormattedMessage
-            id="phone_cannot_remove_unique"
-            defaultMessage={`You can not delete the unique phone`} />),
-
-    'emails.cannot_remove_unique': (
-    <FormattedMessage
-            id="emails_cannot_remove_unique"
-            defaultMessage={`You can not delete the unique email`} />),
-
     'emails.cannot_remove_primary': (
     <FormattedMessage
             id="emails.cannot_remove_primary"
@@ -465,15 +450,6 @@ const msgs = {
           defaultMessage={`Successfully sent verification code`} />),
 
     /************************/
-    /* OIDC *****************/
-    /************************/
-
-    'oc.get_qrcode': (
-        <FormattedMessage
-          id="oc.get_qrcode"
-          defaultMessage={`SE-LEG`} />),
-
-    /************************/
     /* Phone Subscription ***/
     /************************/
 
@@ -491,6 +467,61 @@ const msgs = {
         <FormattedMessage
           id="lmp.verification_success"
           defaultMessage={`Your NIN has been successfully verified`} />),
+
+    /************************/
+    /* OIDC SELEG ***********/
+    /************************/
+
+    'oc.initialize_proofing': (
+        <FormattedMessage
+          id="oc.initialize_proofing"
+          defaultMessage={`SE-LEG`} />),
+
+    'oc.modal_title': (
+        <FormattedMessage
+          id="oc.modal_title"
+          defaultMessage={`Confirm using SE-LEG`} />),
+
+    'oc.instructions_title': (
+        <FormattedMessage
+          id="oc.instructions_title"
+          defaultMessage={`How to confirm your account using SE-LEG`} />),
+
+    'oc.instructions_step_1': (
+        <FormattedMessage
+          id="oc.instructions_step_1"
+          defaultMessage={`SE-LEG help text goes here, step 1.`} />),
+
+    'oc.instructions_step_2': (
+        <FormattedMessage
+          id="oc.instructions_step_2"
+          defaultMessage={`SE-LEG help text goes here, step 2.`} />),
+
+    'oc.instructions_step_3': (
+        <FormattedMessage
+          id="oc.instructions_step_3"
+          defaultMessage={`SE-LEG help text goes here, step 3.`} />),
+
+    'oc.instructions_step_4': (
+        <FormattedMessage
+          id="oc.instructions_step_4"
+          defaultMessage={`SE-LEG help text goes here, step 4.`} />),
+
+    'oc.instructions_step_5': (
+        <FormattedMessage
+          id="oc.instructions_step_5"
+          defaultMessage={`SE-LEG help text goes here, step 5.`} />),
+
+    'oc.error_missing_nin': (
+        <FormattedMessage
+          id="oc.error_missing_nin"
+          defaultMessage={`Please add a national identity number and try again`} />),
+
+    'oc.error_unknown_error': (
+        <FormattedMessage
+          id="oc.error_unknown_error"
+          defaultMessage={`Temporary technical difficulties, please try again later`} />),
+
 
     /************************/
     /* OIDC FREJA ***********/
@@ -784,11 +815,6 @@ const msgs = {
         <FormattedMessage
           id="security.account_title"
           defaultMessage={`Account deletion`} />),
-
-    'security.delete_account': (
-        <FormattedMessage
-          id="security.delete_account"
-          defaultMessage={`Delete eduID account`} />),
 
     'security.delete_account': (
         <FormattedMessage

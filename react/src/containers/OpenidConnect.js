@@ -1,23 +1,32 @@
 
 import { connect } from 'react-redux';
 import OpenidConnect from 'components/OpenidConnect';
-import { postOpenid } from "actions/OpenidConnect";
 import i18n from 'i18n-messages';
+import {eduidRMAllNotify} from "../actions/Notifications";
+import {showOpenidSelegModal, hideOpenidSelegModal} from "../actions/OpenidConnect";
+import {getNins} from "../actions/Nins";
 
 
 const mapStateToProps = (state, props) => {
   return {
     qr_img: state.openid_data.qr_img,
     qr_code: state.openid_data.qr_code,
-    is_fetching: state.openid_data.is_fetching
+    nin: state.openid_data.nin,
+    is_fetching: state.openid_data.is_fetching,
+    showModal: state.openid_data.showModal,
+    error: state.openid_data.error
   }
 };
 
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleGetQRCode: function (e) {
-      dispatch(postOpenid());
+    handleShowModal: function (e) {
+      dispatch(showOpenidSelegModal());
+      dispatch(eduidRMAllNotify());
+    },
+    handleHideModal: function (e) {
+      dispatch(hideOpenidSelegModal());
     }
   }
 };
