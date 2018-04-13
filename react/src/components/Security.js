@@ -34,10 +34,15 @@ class Security extends Component {
                            </button>
                          </div>);
             }
+            const date_created = new Date(cred.created_ts).toISOString().split('T')[0]
+            let date_success = '';
+            if (cred.success_ts) {
+                date_success = new Date(cred.success_ts).toISOString().split('T')[0]
+            }
             return (<tr key={index} className="u2f-token-holder" data-token={cred.key}>
                         <td>{this.props.l10n(cred.credential_type)}</td>
-                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{new Date(cred.created_ts).toDateString()}</td>
-                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{new Date(cred.success_ts).toDateString()}</td>
+                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{date_created}</td>
+                        <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{date_success}</td>
                         <td>{cred.description}</td>
                         <td>{btnRemove}</td>
                     </tr>
