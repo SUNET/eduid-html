@@ -17,13 +17,7 @@ setTimeout(function() {
             u2fdata.registeredKeys,
             function(data) {
                 if(data.errorCode) {
-                    switch (data.errorCode) {
-                        case 4:
-                            alert("This device is not registered for this account.");
-                            break;
-                        default:
-                            alert("U2F failed with error code: " + data.errorCode);
-                    }
+                    document.getElementById('form').submit();
                 } else {
                     document.getElementById('tokenResponse').value = JSON.stringify(data);
                     document.getElementById('form').submit();
