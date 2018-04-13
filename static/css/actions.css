@@ -34,3 +34,18 @@ div.chpasswd-header > h3 {
 }
 
 /* -----------  End ToU  ------------------ */
+
+
+/* -----------  U2F  ------------------ */
+
+div.u2f-title, div.u2f-subtitle, p.u2f-text {
+  text-align: center;
+}
+
+div.u2f-title h2 {
+  font-size: 54px;
+}
+
+div.u2f-subtitle {
+  margin-bottom: 100px;
+}
