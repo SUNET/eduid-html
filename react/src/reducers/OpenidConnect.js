@@ -35,8 +35,6 @@ let openidConnectReducer = (state=openidData, action) => {
       return {
         ...state,
         is_fetching: false,
-        qr_img: openidData.qr_img,
-        qr_code: openidData.qr_code,
         failed: true,
         error: true,
         message: action.payload.message

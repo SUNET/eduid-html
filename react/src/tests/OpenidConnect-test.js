@@ -1,3 +1,4 @@
+import {fetchFrejaData} from "../sagas/OpenidConnectFreja";
 
 const mock = require('jest-mock');
 import React from 'react';
@@ -23,10 +24,14 @@ addLocaleData('react-intl/locale-data/en');
 describe("OIDC Actions", () => {
 
   it("should create an action to trigger fetching a qrcode", () => {
+    const nin = "190102031234";
     const expectedAction = {
-      type: actions.POST_OIDC_PROOFING_PROOFING
+      type: actions.POST_OIDC_PROOFING_PROOFING,
+      payload: {
+        nin: "190102031234"
+      }
     };
-    expect(actions.postOpenid()).toEqual(expectedAction);
+    expect(actions.postOpenidSeleg(nin)).toEqual(expectedAction);
   });
 
   it("should create an action to signal an error fetching a qrcode", () => {
@@ -35,11 +40,11 @@ describe("OIDC Actions", () => {
       type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
       error: true,
       payload: {
-        error: 'Bad error',
+        error: true,
         message: 'Bad error'
       }
     };
-    expect(actions.postOpenidFail(err)).toEqual(expectedAction);
+    expect(actions.postOpenidSelegFail(err)).toEqual(expectedAction);
   });
 });
 
@@ -48,24 +53,35 @@ describe("Reducers", () => {
   const mockState = {
     is_fetching: false,
     failed: false,
+    error: "",
     qr_img: "code",
-    qr_code: 'nonce'
+    qr_code: "nonce",
+    nin: "",
+    showModal: false,
   };
+
+  const nin = "190102031234";
 
   it("Receives a POST_OIDC_PROOFING_PROOFING action", () => {
     expect(
       openidConnectReducer(
         mockState,
         {
-          type: actions.POST_OIDC_PROOFING_PROOFING
+          type: actions.POST_OIDC_PROOFING_PROOFING,
+          payload: {
+            nin: nin
+          }
         }
       )
     ).toEqual(
       {
+        is_fetching: true,
+        failed: false,
+        error: "",
         qr_img: "code",
         qr_code: "nonce",
-        is_fetching: true,
-        failed: false
+        nin: nin,
+        showModal: false,
       }
     );
   });
@@ -81,10 +97,13 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
+        is_fetching: false,
+        failed: false,
+        error: "",
         qr_img: "new code",
         qr_code: "new nonce",
-        is_fetching: false,
-        failed: false
+        nin: "",
+        showModal: false,
       }
     );
   });
@@ -97,18 +116,21 @@ describe("Reducers", () => {
           type: actions.POST_OIDC_PROOFING_PROOFING_FAIL,
           error: true,
           payload: {
-            error: "Bad error",
+            error: true,
             message: "Bad error"
           }
         }
       )
     ).toEqual(
       {
-        qr_img: "code",
-        qr_code: "nonce",
         is_fetching: false,
         failed: true,
-        error: "Bad error"
+        error: true,
+        message: "Bad error",
+        nin: "",
+        qr_img: "code",
+        qr_code: "nonce",
+        showModal: false,
       }
     );
   });
@@ -126,8 +148,11 @@ describe("Reducers", () => {
       {
         is_fetching: false,
         failed: false,
+        error: "",
+        nin: "",
         qr_img: "code",
-        qr_code: "nonce"
+        qr_code: "nonce",
+        showModal: false,
       }
     );
   });
@@ -145,8 +170,11 @@ const fakeState = {
     openid_data: {
         is_fetching: false,
         failed: false,
-        qr_img: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        qr_code: 'new nonce'
+        error: "",
+        qr_img: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        qr_code: 'new nonce',
+        nin: "",
+        showModal: false,
     },
     config: {
         OIDC_PROOFING_URL: 'http://localhost/oidc'
@@ -156,6 +184,7 @@ const fakeState = {
         messages: messages
     }
 };
+
 
 
 function setupComponent(store) {
@@ -174,6 +203,8 @@ function setupComponent(store) {
   };
 }
 
+// Modals are hard
+/*
 describe("OpenidConnect Component", () => {
 
   it("Renders", () => {
@@ -254,43 +285,51 @@ describe("OpenidConnect Container", () => {
   });
 
 });
-
+*/
 
 const state = {
-config : {
-    OIDC_PROOFING_URL: 'http://localhost/services/personal-data/user'
-}
+  config : {
+    OIDC_PROOFING_URL: 'http://localhost/services/oidc-proofing/proofing',
+    csrf_token: 'csrf-token',
+  },
+  openid_data: {
+    nin: 'testing',
+  },
+  intl: {
+    locale: 'en',
+    messages: messages
+  }
 };
 
-import {requestOpenidQRcode, fetchQRcode} from '../sagas/OpenidConnect';
+import {checkNINAndShowSelegModal, requestOpenidQRcode, fetchQRcode} from '../sagas/OpenidConnect';
 import { put, call, select } from "redux-saga/effects";
 
 describe("Async component", () => {
 
+  it("Sagas checkNINAndShowSelegModal", () => {
+    const generator = checkNINAndShowSelegModal();
+    let next = generator.next();
+    let debug = select(state => state);
+    delete debug.SELECT.selector;
+    expect(next.value).toMatchObject(debug);
+
+  });
+
   it("Sagas requestOpenidQRcode", () => {
 
     const generator = requestOpenidQRcode();
-
     let next = generator.next();
-    let debug = select(state => state.config.OIDC_PROOFING_URL);
-    // WE need modfied the following selector due a problems with indent.
-    // The test fails if we dont do that, previous selector:
-    // function (state) {
-    //                     return state.config.OIDC_PROOFING_URL;
-    //                 }
-    next.value.SELECT.selector = function (state) {
-      return state.config.OIDC_PROOFING_URL;
-    }
-
-    delete debug.SELECT.selector
+    let debug = select(state => state);
+    delete debug.SELECT.selector;
     expect(next.value).toMatchObject(debug);
 
-    const oidcData = generator.next(next.value);
+    const oidcData = generator.next(state);
     const data = {
-      'nin': 'testing'
+      'nin': 'testing',
+      'csrf_token': 'csrf-token'
     };
-    let debug2 = call(fetchQRcode, debug, data);
-    expect(oidcData.value.CALL.args[1].nin).toEqual(debug2.CALL.args[1].nin);
+
+    expect(oidcData.value).toEqual(call(fetchQRcode, state.config.OIDC_PROOFING_URL, data));
 
     const action = {
       type: actions.POST_OIDC_PROOFING_PROOFING_SUCCESS,
@@ -299,13 +338,14 @@ describe("Async component", () => {
         qr_code: 'new nonce',
         csrf_token: 'csrf-token'
       }
-    }
+    };
 
     next = generator.next(action);
     expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
     next = generator.next();
     delete(action.payload.csrf_token);
     expect(next.value).toEqual(put(action));
+
   });
 
 });
