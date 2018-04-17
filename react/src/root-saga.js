@@ -20,13 +20,12 @@ import { saveEmail, requestResendEmailCode,
          requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile";
 import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
+import * as sagasOpenid from "sagas/OpenidConnect";
 import { requestConfig } from "sagas/Config";
-import { requestOpenidQRcode } from "sagas/OpenidConnect";
 import { requestCredentials, requestPasswordChange, postDeleteAccount,
          getU2FEnroll, registerU2F, removeU2FToken } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
 import { requestNins, requestRemoveNin } from "sagas/Nins";
-import { requestOpenidFrejaData } from "sagas/OpenidConnectFreja";
 import { sendLetterProofing, sendGetLetterProofing, sendLetterCode } from "sagas/LetterProofing";
 import { requestLogout } from "sagas/Header";
 import { requestLookupMobileProof } from "sagas/LookupMobileProofing";
@@ -48,7 +47,8 @@ function* rootSaga() {
     takeLatest(configActions.GET_INITIAL_USERDATA, requestCredentials),
     takeLatest(configActions.GET_INITIAL_USERDATA, requestSuggestedPassword),
     takeLatest(pdataActions.POST_USERDATA, savePersonalData),
-    takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, requestOpenidQRcode),
+    takeLatest(openidActions.SHOW_OIDC_SELEG_MODAL, sagasOpenid.checkNINAndShowSelegModal),
+    takeLatest(openidActions.POST_OIDC_PROOFING_PROOFING, sagasOpenid.requestOpenidQRcode),
     takeLatest(lmpActions.POST_LOOKUP_MOBILE_PROOFING_PROOFING, requestLookupMobileProof),
     takeLatest(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.initializeOpenidFrejaData),
     takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData),
@@ -74,6 +74,8 @@ function* rootSaga() {
     takeEvery(letterActions.STOP_LETTER_VERIFICATION, requestNins),
     takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
     takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
+    takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING_SUCCESS, requestNins),
+    takeEvery(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS, requestNins),
     takeEvery(headerActions.POST_LOGOUT, requestLogout),
     takeLatest(securityActions.START_U2F_REGISTRATION, getU2FEnroll),
     takeLatest(securityActions.GET_U2F_ENROLL_SUCCESS, registerU2F),

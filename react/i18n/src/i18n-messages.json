@@ -168,14 +168,6 @@
     "defaultMessage": "Added email is duplicated"
   },
   {
-    "id": "phone_cannot_remove_unique",
-    "defaultMessage": "You can not delete the unique phone"
-  },
-  {
-    "id": "emails_cannot_remove_unique",
-    "defaultMessage": "You can not delete the unique email"
-  },
-  {
     "id": "emails.cannot_remove_primary",
     "defaultMessage": "You can not delete the primary email"
   },
@@ -280,10 +272,6 @@
     "defaultMessage": "Successfully sent verification code"
   },
   {
-    "id": "oc.get_qrcode",
-    "defaultMessage": "SE-LEG"
-  },
-  {
     "id": "lmp.confirm-lookup-mobile",
     "defaultMessage": "Phone Subscription"
   },
@@ -294,6 +282,46 @@
   {
     "id": "lmp.verification_success",
     "defaultMessage": "Your NIN has been successfully verified"
+  },
+  {
+    "id": "oc.initialize_proofing",
+    "defaultMessage": "SE-LEG"
+  },
+  {
+    "id": "oc.modal_title",
+    "defaultMessage": "Confirm using SE-LEG"
+  },
+  {
+    "id": "oc.instructions_title",
+    "defaultMessage": "How to confirm your account using SE-LEG"
+  },
+  {
+    "id": "oc.instructions_step_1",
+    "defaultMessage": "SE-LEG help text goes here, step 1."
+  },
+  {
+    "id": "oc.instructions_step_2",
+    "defaultMessage": "SE-LEG help text goes here, step 2."
+  },
+  {
+    "id": "oc.instructions_step_3",
+    "defaultMessage": "SE-LEG help text goes here, step 3."
+  },
+  {
+    "id": "oc.instructions_step_4",
+    "defaultMessage": "SE-LEG help text goes here, step 4."
+  },
+  {
+    "id": "oc.instructions_step_5",
+    "defaultMessage": "SE-LEG help text goes here, step 5."
+  },
+  {
+    "id": "oc.error_missing_nin",
+    "defaultMessage": "Please add a national identity number and try again"
+  },
+  {
+    "id": "oc.error_unknown_error",
+    "defaultMessage": "Temporary technical difficulties, please try again later"
   },
   {
     "id": "ocf.initialize_proofing",

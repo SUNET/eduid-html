@@ -350,7 +350,7 @@ describe("Async component", () => {
     let next = generator.next();
 
     let debug = select(state => state);
-    delete debug.SELECT.selector
+    delete debug.SELECT.selector;
     expect(next.value).toMatchObject(debug);
 
     const oidcFrejaData = generator.next(state);
