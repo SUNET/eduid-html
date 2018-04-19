@@ -36,7 +36,9 @@ let EmailForm = props => {
                    componentClass="input"
                    type="text"
                    label={props.l10n('emails.email_label')}
-                   name="email" />
+                   name="email"
+                   placeholder="example@example.com"
+                   helpBlock={props.l10n('emails.input_help_text')} />
             <EduIDButton bsStyle="primary"
                          id="email-button"
                          spinning={spinning}

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import EduIDButton from 'components/EduIDButton';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 import 'style/LookupMobileProofing.scss';
 
@@ -22,9 +23,11 @@ class LookupMobileProofing extends Component {
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       disabled={this.props.disabled}
-                      onClick={this.props.handleLookupMobile}>
+                      onClick={this.props.handleLookupMobile}
+                      block>
                     {this.props.l10n('lmp.confirm-lookup-mobile')}
               </EduIDButton>
+              <HelpBlock>{this.props.l10n('lmp.initialize_proofing_help_text')}</HelpBlock>
             </fieldset>
           </form>
         </div>

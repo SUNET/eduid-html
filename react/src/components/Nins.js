@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import TextInput from 'components/EduIDTextInput';
 import EduIDButton from 'components/EduIDButton';
 import vettingRegistry from "vetting-registry";
@@ -47,10 +48,14 @@ let NinForm = props => {
                  componentClass="input"
                  type="text"
                  name="norEduPersonNin"
-                 placeholder="yyyymmddnnnn" />
+                 placeholder={props.l10n('nins.input_placeholder')}
+                 helpBlock={props.l10n('nins.input_help_text')} />
         </fieldset>
-      </form>),
-      ...props.buttons]
+        <ButtonGroup vertical block>
+          {props.buttons}
+        </ButtonGroup>
+      </form>)
+    ]
 };
 
 NinForm = reduxForm({
@@ -78,7 +83,7 @@ class Nins extends Component {
     if (this.props.is_configured) {
         const vettingBtns = vettingRegistry(!this.props.valid_nin);
         vettingButtons = this.props.proofing_methods.map((key, index) => {
-            return (<div key={index}>{vettingBtns[key]}</div>);
+          return (<div key={index}>{vettingBtns[key]}</div>);
         });
     }
     if (this.props.nins.length) {

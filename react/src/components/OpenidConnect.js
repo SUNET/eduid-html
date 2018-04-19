@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Well from 'react-bootstrap/lib/Well';
 import Image from 'react-bootstrap/lib/Image';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 import 'style/OpenidConnect.scss';
 
@@ -40,9 +41,11 @@ class OpenidConnect extends Component {
             <EduIDButton bsStyle="primary"
                          spinning={spinning}
                          disabled={this.props.disabled}
-                         onClick={this.props.handleShowModal}>
+                         onClick={this.props.handleShowModal}
+                         block>
               {this.props.l10n('oc.initialize_proofing')}
             </EduIDButton>
+            <HelpBlock>{this.props.l10n('oc.initialize_proofing_help_text')}</HelpBlock>
           </fieldset>
         </form>
 

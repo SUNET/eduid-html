@@ -18,7 +18,8 @@ const textInput = (props) => {
         componentClass,
         l10n,
         disabled,
-        helpBlock
+        helpBlock,
+        placeholder
     } = props;
     let validationState = null;
     if (meta.touched || meta.submitFailed) {
@@ -41,6 +42,7 @@ const textInput = (props) => {
         field = (
             <FormControl componentClass={componentClass}
                          disabled={disabled}
+                         placeholder={placeholder}
                          {...input}>
                 {children}
             </FormControl>
@@ -49,6 +51,7 @@ const textInput = (props) => {
         field = <FormControl componentClass={componentClass}
                              type={type}
                              disabled={disabled}
+                             placeholder={placeholder}
                              {...input} /> ;
     }
 
@@ -63,7 +66,7 @@ const textInput = (props) => {
         <FormGroup controlId={input.name}
                    validationState={validationState}>
           <ControlLabel>{label}</ControlLabel>
-          {field}
+          {field }
           {help}
         </FormGroup>
     );

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import EduIDButton from 'components/EduIDButton';
 import ConfirmModal from 'components/ConfirmModal';
 import GenericConfirmModal from 'components/GenericConfirmModal';
@@ -25,9 +26,11 @@ class LetterProofingButton extends Component {
               <EduIDButton bsStyle="primary"
                       spinning={spinning}
                       disabled={this.props.disabled}
-                      onClick={this.props.handleLetterProofing}>
+                      onClick={this.props.handleLetterProofing}
+                      block>
                 {this.props.l10n('letter.letter_button_text')}
               </EduIDButton>
+              <HelpBlock>{this.props.l10n('letter.initialize_proofing_help_text')}</HelpBlock>
             </fieldset>
           </form>
           <GenericConfirmModal

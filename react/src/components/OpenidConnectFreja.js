@@ -9,8 +9,8 @@ import NotificationsContainer from 'containers/Notifications';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Well from 'react-bootstrap/lib/Well';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 import 'style/OpenidConnect.scss';
 
@@ -85,22 +85,31 @@ class OpenidConnectFreja extends Component {
     }
 
     showModalButton = (
-      <Button bsStyle="primary"
+      <EduIDButton bsStyle="primary"
               id="openid-connect-freja-show-modal"
-              onClick={this.props.handleShowModal}>
+              onClick={this.props.handleShowModal}
+              block>
             {this.props.l10n('ocf.initialize_proofing')}
-      </Button>
+      </EduIDButton>
     );
 
     return (
       <div>
+        <form id="openid-connect-freja-form"
+              className="form-horizontal"
+              role="form">
+          <fieldset id="openid-connect-freja">
+            {showModalButton}
+            <HelpBlock>{this.props.l10n('ocf.initialize_proofing_help_text')}</HelpBlock>
+          </fieldset>
+        </form>
+
         <div id="openid-connect-freja-info-dialog"
              tabIndex="-1"
              role="dialog"
              aria-labelledby="askDialogPrompt"
              aria-hidden="true"
              data-backdrop="true">
-
 
           <Modal show={this.props.showModal} id="openid-connect-freja-modal">
             <Modal.Header>
@@ -121,12 +130,8 @@ class OpenidConnectFreja extends Component {
                 {this.props.l10n('cm.close')}
               </Button>
             </Modal.Footer>
-
           </Modal>
         </div>
-        <FormGroup>
-          {showModalButton}
-        </FormGroup>
       </div>
     );
   }

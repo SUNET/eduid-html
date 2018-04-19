@@ -42,7 +42,10 @@ let PhoneForm = props => {
                    componentClass="input"
                    type="text"
                    label={props.l10n('phones.phone_label')}
-                   name="number" />
+                   name="number"
+                   placeholder={props.l10n('phones.input_placeholder')}
+                   helpBlock={props.l10n('phones.input_help_text')}/>
+
             <EduIDButton bsStyle="primary"
                          id="mobile-button"
                          spinning={spinning}
