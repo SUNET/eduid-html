@@ -74,6 +74,8 @@ function* rootSaga() {
     takeEvery(letterActions.STOP_LETTER_VERIFICATION, requestNins),
     takeEvery(ninActions.POST_NIN_REMOVE_SUCCESS, requestNins),
     takeEvery(letterActions.POST_LETTER_PROOFING_CODE_SUCCESS, requestNins),
+    takeEvery(lmpActions.POST_LOOKUP_MOBILE_PROOFING_PROOFING_SUCCESS, requestNins),
+    takeEvery(lmpActions.POST_LOOKUP_MOBILE_PROOFING_PROOFING_FAIL, requestNins),
     takeEvery(openidActions.POST_OIDC_PROOFING_PROOFING_SUCCESS, requestNins),
     takeEvery(openidFrejaActions.POST_OIDC_PROOFING_FREJA_PROOFING_SUCCESS, requestNins),
     takeEvery(headerActions.POST_LOGOUT, requestLogout),
