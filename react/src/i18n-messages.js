@@ -367,6 +367,11 @@ const msgs = {
             id="emails.email"
             defaultMessage={`Email`} />),
 
+    'emails.input_help_text': (
+        <FormattedMessage
+          id="emails.input_help_text"
+          defaultMessage={"A valid email address"} />),
+
     'emails.code_invalid': (
         <FormattedMessage
           id="emails.code_invalid"
@@ -458,6 +463,11 @@ const msgs = {
           id="lmp.confirm-lookup-mobile"
           defaultMessage={`Phone Subscription`} />),
 
+    'lmp.initialize_proofing_help_text': (
+        <FormattedMessage
+          id="lmp.initialize_proofing_help_text"
+          defaultMessage={`To use this option you need to have your phone number subscription under your own name.`} />),
+
     'no_phone': (
         <FormattedMessage
           id="no_phone"
@@ -476,6 +486,11 @@ const msgs = {
         <FormattedMessage
           id="oc.initialize_proofing"
           defaultMessage={`SE-LEG`} />),
+
+    'oc.initialize_proofing_help_text': (
+        <FormattedHTMLMessage
+          id="oc.initialize_proofing_help_text"
+          defaultMessage={`To use this option you need to visit a <a href="https://www.sunet.se/samarbeten/projekt-nationell-tjanst-for-grundidentifiering/" target="_blank">SE-LEG RA</a> and show identification.`} />),
 
     'oc.modal_title': (
         <FormattedMessage
@@ -620,22 +635,27 @@ const msgs = {
     'pd.all-data-success': (
         <FormattedMessage
           id="pd.all-data-success"
-          defaultMessage={`Successfully retrieved Personal information`} />),
+          defaultMessage={`Successfully retrieved personal information`} />),
 
     'pd.pdata-success': (
         <FormattedMessage
           id="pd.pdata-success"
-          defaultMessage={`Successfully retrieved Personal information`} />),
+          defaultMessage={`Successfully retrieved personal information`} />),
 
     'pd.save-success': (
         <FormattedMessage
           id="pd.save-success"
-          defaultMessage={`Successfully saved Personal information`} />),
+          defaultMessage={`Successfully saved personal information`} />),
 
     'pdata.field_required': (
         <FormattedMessage
           id="pdata.field_required"
           defaultMessage={`This field is required`} />),
+
+    'pd.display_name_input_help_text': (
+        <FormattedMessage
+          id="pd.display_name_input_help_text"
+          defaultMessage={`Some services will show this instead of your given name and surname.`} />),
 
 
     /************************/
@@ -669,6 +689,11 @@ const msgs = {
           id="phones.long_description"
           defaultMessage={`You can connect one or more mobile phone numbers with
            your eduID account, and select which one is the primary one.`} />),
+
+    'phones.input_help_text': (
+        <FormattedMessage
+          id="phones.input_help_text"
+          defaultMessage={"Phone number starting with 0 or +"} />),
 
     'phones.main_title': (
         <FormattedMessage
@@ -1103,6 +1128,11 @@ const msgs = {
           id="nins.nin"
           defaultMessage={"Number"} />),
 
+   'nins.input_help_text': (
+        <FormattedMessage
+          id="nins.input_help_text"
+          defaultMessage={"National identity number with 12 digits"} />),
+
    'nins.verified': (
         <FormattedMessage
           id="nins.verified"
@@ -1128,9 +1158,9 @@ const msgs = {
           id="nins.wrong_length"
           defaultMessage={`NINs must have 12 digits`} />),
 
-   'nins.ilegal_chars': (
+   'nins.illegal_chars': (
         <FormattedMessage
-          id="nins.ilegal_chars"
+          id="nins.illegal_chars"
           defaultMessage={`NINs can only have digits`} />),
 
    'nins.valid_nin': (
@@ -1181,6 +1211,11 @@ const msgs = {
         <FormattedMessage
           id="letter.letter_button_text"
           defaultMessage={`Confirm using letter`} />),
+
+    'letter.initialize_proofing_help_text': (
+        <FormattedMessage
+          id="letter.initialize_proofing_help_text"
+          defaultMessage={`To use this option you will have to wait for a letter sent to your official address.`} />),
 
    'letter.no_state_found': (
         <FormattedMessage
@@ -1408,4 +1443,19 @@ const unformatted = defineMessages({
           id: "pd.choose-language",
           defaultMessage: `Choose language`
     },
+
+    "pd.display_name_input_placeholder": {
+          id: "pd.display_name_inputplaceholder",
+          defaultMessage: `Given name Surname`
+    },
+
+    "nins.input_placeholder": {
+          id: "nins.input_placeholder",
+          defaultMessage: `yyyymmddnnnn`
+    },
+
+    "phones.input_placeholder": {
+          id: "phones.input_placeholder",
+          defaultMessage: `Phone number`
+    }
 });
