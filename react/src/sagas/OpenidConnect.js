@@ -28,7 +28,6 @@ export function* checkNINAndShowSelegModal() {
     if (nin === 'no nin') {
       yield put(actions.postOpenidSelegFail('oc.error_missing_nin'));
     } else {
-      console.log('Putting postOpenidSeleg with nin: ' + nin);
       yield put(actions.postOpenidSeleg(nin));
     }
 

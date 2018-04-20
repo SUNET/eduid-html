@@ -33,10 +33,8 @@ export function* checkNINAndShowFrejaModal () {
   }
 }
 
-// Used for reloading page until we remove the old ui
 export function* closeFrejaModal () {
   yield put(actions.hideOpenidFrejaModalSuccess());
-  yield window.location.reload(true);
 }
 
 export function* initializeOpenidFrejaData () {

@@ -208,6 +208,10 @@
     "defaultMessage": "Email"
   },
   {
+    "id": "emails.input_help_text",
+    "defaultMessage": "A valid email address"
+  },
+  {
     "id": "emails.code_invalid",
     "defaultMessage": "The confirmation code is invalid, please try again or request a new code"
   },
@@ -276,6 +280,10 @@
     "defaultMessage": "Phone Subscription"
   },
   {
+    "id": "lmp.initialize_proofing_help_text",
+    "defaultMessage": "To use this option you need to have your phone number subscription under your own name."
+  },
+  {
     "id": "no_phone",
     "defaultMessage": "You must add a phone number to be able to use this vetting method"
   },
@@ -286,6 +294,10 @@
   {
     "id": "oc.initialize_proofing",
     "defaultMessage": "SE-LEG"
+  },
+  {
+    "id": "oc.initialize_proofing_help_text",
+    "defaultMessage": "To use this option you need to visit a <a href=\"https://www.sunet.se/samarbeten/projekt-nationell-tjanst-for-grundidentifiering/\" target=\"_blank\">SE-LEG RA</a> and show identification."
   },
   {
     "id": "oc.modal_title",
@@ -393,19 +405,23 @@
   },
   {
     "id": "pd.all-data-success",
-    "defaultMessage": "Successfully retrieved Personal information"
+    "defaultMessage": "Successfully retrieved personal information"
   },
   {
     "id": "pd.pdata-success",
-    "defaultMessage": "Successfully retrieved Personal information"
+    "defaultMessage": "Successfully retrieved personal information"
   },
   {
     "id": "pd.save-success",
-    "defaultMessage": "Successfully saved Personal information"
+    "defaultMessage": "Successfully saved personal information"
   },
   {
     "id": "pdata.field_required",
     "defaultMessage": "This field is required"
+  },
+  {
+    "id": "pd.display_name_input_help_text",
+    "defaultMessage": "Some services will show this instead of your given name and surname."
   },
   {
     "id": "mobile.resend_success",
@@ -426,6 +442,10 @@
   {
     "id": "phones.long_description",
     "defaultMessage": "You can connect one or more mobile phone numbers with\n           your eduID account, and select which one is the primary one."
+  },
+  {
+    "id": "phones.input_help_text",
+    "defaultMessage": "Phone number starting with 0 or +"
   },
   {
     "id": "phones.main_title",
@@ -764,6 +784,10 @@
     "defaultMessage": "Number"
   },
   {
+    "id": "nins.input_help_text",
+    "defaultMessage": "National identity number with 12 digits"
+  },
+  {
     "id": "nins.verified",
     "defaultMessage": "Verified"
   },
@@ -784,7 +808,7 @@
     "defaultMessage": "NINs must have 12 digits"
   },
   {
-    "id": "nins.ilegal_chars",
+    "id": "nins.illegal_chars",
     "defaultMessage": "NINs can only have digits"
   },
   {
@@ -822,6 +846,10 @@
   {
     "id": "letter.letter_button_text",
     "defaultMessage": "Confirm using letter"
+  },
+  {
+    "id": "letter.initialize_proofing_help_text",
+    "defaultMessage": "To use this option you will have to wait for a letter sent to your official address."
   },
   {
     "id": "letter.no_state_found",
@@ -1001,5 +1029,17 @@
   {
     "id": "pd.choose-language",
     "defaultMessage": "Choose language"
+  },
+  {
+    "id": "pd.display_name_inputplaceholder",
+    "defaultMessage": "Given name Surname"
+  },
+  {
+    "id": "nins.input_placeholder",
+    "defaultMessage": "yyyymmddnnnn"
+  },
+  {
+    "id": "phones.input_placeholder",
+    "defaultMessage": "Phone number"
   }
 ]

@@ -46,21 +46,23 @@ let PdataForm = props => {
                componentClass='input'
                type='text'
                name="display_name"
-               label={props.l10n('pd.display_name')} />
+               label={props.l10n('pd.display_name')}
+               placeholder={props.l10n('pd.display_name_input_placeholder')}
+               helpBlock={props.l10n('pd.display_name_input_help_text')} />
         <Field component={TextInput}
                componentClass="select"
                type='text'
                name="language"
                selectOptions={props.langs}
                label={props.l10n('pd.language')} />
-        <EduIDButton bsStyle="primary"
-                id="personal-data-button"
-                spinning={spinning}
-                disabled={props.pristine || props.submitting || props.invalid}
-                onClick={props.handleSave}>
-              {props.l10n('button_save')}
-        </EduIDButton>
       </fieldset>
+      <EduIDButton bsStyle="primary"
+              id="personal-data-button"
+              spinning={spinning}
+              disabled={props.pristine || props.submitting || props.invalid}
+              onClick={props.handleSave}>
+            {props.l10n('button_save')}
+      </EduIDButton>
     </form>
   )
 };
