@@ -40,16 +40,16 @@ class Header extends Component {
                    id="eduid-menu">
                 <ul  className="nav navbar-nav">
                   <li>
-                    <a href="">{this.props.l10n('header.students')}</a>
+                    <a href={this.props.studentsLink}>{this.props.l10n('header.students')}</a>
                   </li>
                   <li>
-                    <a href="">{this.props.l10n('header.technicians')}</a>
+                    <a href={this.props.techniciansLink}>{this.props.l10n('header.technicians')}</a>
                   </li>
                   <li>
-                    <a href="">{this.props.l10n('header.staff')}</a>
+                    <a href={this.props.staffLink}>{this.props.l10n('header.staff')}</a>
                   </li>
                   <li>
-                    <a href="">{this.props.l10n('header.faq')}</a>
+                    <a href={this.props.faqLink}>{this.props.l10n('header.faq')}</a>
                   </li>
                 </ul>
                 <div className="buttons nav navbar-nav navbar-right">
@@ -76,8 +76,12 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    email: PropTypes.string,
-    confirmed: PropTypes.string
-}
+  email: PropTypes.string,
+  confirmed: PropTypes.string,
+  studentsLink: PropTypes.string,
+  techniciansLink: PropTypes.string,
+  staffLink: PropTypes.string,
+  faqLink: PropTypes.string
+};
 
 export default Header;

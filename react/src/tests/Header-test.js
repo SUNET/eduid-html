@@ -43,7 +43,11 @@ describe("Header Actions", () => {
 
 const state = {
     config : {
-        TOKEN_SERVICE_URL: 'http://localhost/'
+        TOKEN_SERVICE_URL: 'http://localhost/',
+        STATIC_STUDENTS_URL: 'http://localhost/',
+        STATIC_TECHNICIANS_URL: 'http://localhost/',
+        STATIC_STAFF_URL: 'http://localhost/',
+        STATIC_FAQ_URL: 'http://localhost/'
     },
     intl: {
         locale: 'en',
@@ -78,6 +82,12 @@ const fakeStore = (state) => ({
 
 function setupComponent() {
     const store = fakeStore({
+        config: {
+            STATIC_STUDENTS_URL: 'http://localhost/',
+            STATIC_TECHNICIANS_URL: 'http://localhost/',
+            STATIC_STAFF_URL: 'http://localhost/',
+            STATIC_FAQ_URL: 'http://localhost/'
+        },
         intl: {
             locale: 'en',
             messages: messages
