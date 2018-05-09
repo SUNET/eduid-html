@@ -43,7 +43,7 @@ export function* requestRemoveNin () {
 }
 
 export function requestRemove (config, data) {
-    return window.fetch(config.LETTER_PROOFING_URL + 'remove-nin', {
+    return window.fetch(config.SECURITY_URL + 'remove-nin', {
         ...postRequest,
         body: JSON.stringify(data)
     })
