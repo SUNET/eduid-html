@@ -41,13 +41,6 @@ class Footer extends Component {
                         {langElems}
                       </span>
                     </p>
-                    <p id="go-to-old-dashboard">
-                      <OverlayTrigger placement="top" overlay={tooltip}>
-                          <a onClick={this.props.changeDashboardSession(this.props.reload_to)}>
-                            {this.props.l10n('foot.change-version')}
-                          </a>
-                      </OverlayTrigger>
-                    </p>
                 </div>
             </div>);
   }
