@@ -30,5 +30,7 @@ COPY react/build /opt/eduid/build/
 
 # Copy profile loading html to /opt/eduid/profile/
 COPY react/public/index.html /opt/eduid/profile/index.html
+# Temporary solution for signup public
+COPY react/public/signup.html /opt/eduid/signup/index.html
 
 CMD ["/start.sh"]
