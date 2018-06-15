@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Well from 'react-bootstrap/lib/Well';
 import Image from 'react-bootstrap/lib/Image';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import CookieChecker from "components/CookieChecker";
 
 import 'style/OpenidConnect.scss';
 
@@ -33,6 +34,7 @@ class OpenidConnect extends Component {
     );
 
     return (
+      <CookieChecker cookieName="show-se-leg">
       <div>
         <form id="openid-connect-form"
               className="form-horizontal"
@@ -84,6 +86,7 @@ class OpenidConnect extends Component {
           </Modal>
         </div>
       </div>
+      </CookieChecker>
     );
   }
 }
