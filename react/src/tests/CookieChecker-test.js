@@ -16,42 +16,42 @@ function setupComponent(props={}) {
 
 describe("Test CookieChecker Component", () => {
 
-    it("Should render: no cookie", () => {
-        const comp = setupComponent({cookieName: 'test'}),
-              test = comp.find('div#test-cookie-checker');
-
-        expect(test.length).toEqual(1);
-    });
-
-    it("Should not render: cookie present", () => {
-        Cookies.set('test', 'noshow');
+    it("Should not render: no cookie", () => {
         const comp = setupComponent({cookieName: 'test'}),
               test = comp.find('div#test-cookie-checker');
 
         expect(test.length).toEqual(0);
     });
 
-    it("Should not render: cookie present and matching pattern", () => {
-        Cookies.set('test', 'noshow');
-        const comp = setupComponent({cookieName: "test", cookiePattern: "noshow"}),
-              test = comp.find('div#test-cookie-checker');
-
-        expect(test.length).toEqual(0);
-    });
-
-    it("Should render: unknown cookie name", () => {
-        Cookies.set('test', 'noshow');
-        const comp = setupComponent({cookieName: "bad-name", cookiePattern: "noshow"}),
+    it("Should render: cookie present", () => {
+        Cookies.set('test', 'show');
+        const comp = setupComponent({cookieName: 'test'}),
               test = comp.find('div#test-cookie-checker');
 
         expect(test.length).toEqual(1);
     });
 
-    it("Should render: not matching pattern", () => {
-        Cookies.set('test', 'noshow');
+    it("Should render: cookie present and matching pattern", () => {
+        Cookies.set('test', 'show');
+        const comp = setupComponent({cookieName: "test", cookiePattern: "show"}),
+              test = comp.find('div#test-cookie-checker');
+
+        expect(test.length).toEqual(1);
+    });
+
+    it("Should not render: no matching cookie name", () => {
+        Cookies.set('test', 'show');
+        const comp = setupComponent({cookieName: "bad-name", cookiePattern: "show"}),
+              test = comp.find('div#test-cookie-checker');
+
+        expect(test.length).toEqual(0);
+    });
+
+    it("Should not render: not matching cookie value", () => {
+        Cookies.set('test', 'show');
         const comp = setupComponent({cookieName: "test", cookiePattern: "bad-pattern"}),
               test = comp.find('div#test-cookie-checker');
 
-        expect(test.length).toEqual(1);
+        expect(test.length).toEqual(0);
     });
 });

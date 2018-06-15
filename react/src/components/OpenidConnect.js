@@ -34,7 +34,7 @@ class OpenidConnect extends Component {
     );
 
     return (
-      <CookieChecker cookieName="hide-se-leg">
+      <CookieChecker cookieName="show-se-leg">
       <div>
         <form id="openid-connect-form"
               className="form-horizontal"

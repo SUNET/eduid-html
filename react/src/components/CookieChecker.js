@@ -14,11 +14,11 @@ class CookieCHecker extends Component {
                 const pattern = (this.props.cookiePattern !== undefined)? this.props.cookiePattern : '';
                 const regex = new RegExp(pattern);
                 if (regex.test(cookie)) {
-                    return <div />;
+                    return this.props.children;
                 }
             }
         }
-        return this.props.children;
+        return <div />;
     }
 }
 
