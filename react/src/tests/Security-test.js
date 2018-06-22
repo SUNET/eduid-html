@@ -1263,7 +1263,7 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(0);
     const wrapper = getWrapper();
     wrapper.find('EduIDButton#security-u2f-button').simulate('click');
-    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls.length).toEqual(2);
   });
 
   it("Clicks delete", () => {
