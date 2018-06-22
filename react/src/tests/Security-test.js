@@ -1316,6 +1316,6 @@ describe("Security Container", () => {
     const btn = wrapper.find('button.btn-remove-u2f');
     btn.simulate('click');
     expect(dispatch.mock.calls.length).toEqual(1);
-    expect(dispatch.mock.calls[0][0].type).toEqual(actions.POST_U2F_U2F_REMOVE);
+    expect(dispatch.mock.calls[0][0].type).toEqual("POST_U2F_U2F_REMOVE");
   });
 });
