@@ -47,6 +47,7 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(confirmDeletion());
     },
     handleStartAskingU2FDescription: function (e) {
+        dispatch(eduidRMAllNotify());
         dispatch(startAskU2FDescription());
     },
     handleStopAskingU2FDescription: function (e) {
