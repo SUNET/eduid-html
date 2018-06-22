@@ -9,6 +9,7 @@ import Security from 'components/Security';
 import DeleteModal from 'components/DeleteModal';
 import SecurityContainer from 'containers/Security';
 import * as actions from "actions/Security";
+import * as notifyActions from "actions/Notifications";
 import fetchMock from 'fetch-mock';
 import configureStore from 'redux-mock-store';
 import securityReducer from "reducers/Security";
@@ -1264,6 +1265,8 @@ describe("Security Container", () => {
     const wrapper = getWrapper();
     wrapper.find('EduIDButton#security-u2f-button').simulate('click');
     expect(dispatch.mock.calls.length).toEqual(2);
+    expect(dispatch.mock.calls[0][0].type).toEqual(notifyActions.RM_ALL_NOTIFICATION);
+    expect(dispatch.mock.calls[1][0].type).toEqual(actions.START_ASK_U2F_DESCRIPTION);
   });
 
   it("Clicks delete", () => {
@@ -1271,8 +1274,8 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(0);
     getWrapper().find('EduIDButton#delete-button').props().onClick();
     expect(dispatch.mock.calls.length).toEqual(2);
-    expect(dispatch.mock.calls[0][0].type).toEqual("RM_ALL_NOTIFICATION");
-    expect(dispatch.mock.calls[1][0].type).toEqual("START_DELETE_ACCOUNT");
+    expect(dispatch.mock.calls[0][0].type).toEqual(notifyActions.RM_ALL_NOTIFICATION);
+    expect(dispatch.mock.calls[1][0].type).toEqual(actions.START_DELETE_ACCOUNT);
   });
 
   it("Clicks confirm delete", () => {
@@ -1291,7 +1294,7 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(0);
     deleteModal.props().handleConfirm();
     expect(dispatch.mock.calls.length).toEqual(1);
-    expect(dispatch.mock.calls[0][0].type).toEqual('POST_DELETE_ACCOUNT');
+    expect(dispatch.mock.calls[0][0].type).toEqual(actions.POST_DELETE_ACCOUNT);
   });
 
   it("Clicks remove U2F token", () => {
@@ -1313,6 +1316,6 @@ describe("Security Container", () => {
     const btn = wrapper.find('button.btn-remove-u2f');
     btn.simulate('click');
     expect(dispatch.mock.calls.length).toEqual(1);
-    expect(dispatch.mock.calls[0][0].type).toEqual("POST_U2F_U2F_REMOVE");
+    expect(dispatch.mock.calls[0][0].type).toEqual(actions.POST_U2F_U2F_REMOVE);
   });
 });
