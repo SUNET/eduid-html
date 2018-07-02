@@ -503,29 +503,19 @@ const msgs = {
           defaultMessage={`How to confirm your account using SE-LEG`} />),
 
     'oc.instructions_step_1': (
-        <FormattedMessage
+        <FormattedHTMLMessage
           id="oc.instructions_step_1"
-          defaultMessage={`SE-LEG help text goes here, step 1.`} />),
+          defaultMessage={`Visit the nearest library on this list: <ul><li>Mjölby: Burensköldsvägen 13</li><li>Motala: Repslagaregatan 1</li><li>Söderköping: Margaretagatan 19</li><li>Åtvidaberg: B-fabriksgränd 4</li></ul>`} />),
 
     'oc.instructions_step_2': (
         <FormattedMessage
           id="oc.instructions_step_2"
-          defaultMessage={`SE-LEG help text goes here, step 2.`} />),
+          defaultMessage={`Bring your chosen form of ID and the QR code below and ask the librarian for a verification of your eduID account.`} />),
 
     'oc.instructions_step_3': (
         <FormattedMessage
           id="oc.instructions_step_3"
-          defaultMessage={`SE-LEG help text goes here, step 3.`} />),
-
-    'oc.instructions_step_4': (
-        <FormattedMessage
-          id="oc.instructions_step_4"
-          defaultMessage={`SE-LEG help text goes here, step 4.`} />),
-
-    'oc.instructions_step_5': (
-        <FormattedMessage
-          id="oc.instructions_step_5"
-          defaultMessage={`SE-LEG help text goes here, step 5.`} />),
+          defaultMessage={`Within a couple of hours you account should be verified.`} />),
 
     'oc.error_missing_nin': (
         <FormattedMessage
