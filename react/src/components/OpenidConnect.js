@@ -27,8 +27,6 @@ class OpenidConnect extends Component {
           <li>{this.props.l10n('oc.instructions_step_1')}</li>
           <li>{this.props.l10n('oc.instructions_step_2')}</li>
           <li>{this.props.l10n('oc.instructions_step_3')}</li>
-          <li>{this.props.l10n('oc.instructions_step_4')}</li>
-          <li>{this.props.l10n('oc.instructions_step_5')}</li>
         </ol>
       </Well>
     );
@@ -68,11 +66,8 @@ class OpenidConnect extends Component {
               {seleg_instructions}
               <NotificationsContainer/>
 
+              <Image src={this.props.qr_img} className="img-responsive center-block" alt={this.props.qr_code} />
 
-              <Image src={this.props.qr_img} className="img-responsive center-block" />
-
-
-              <span>{this.props.qr_code}</span>
             </Modal.Body>
 
             <Modal.Footer>
