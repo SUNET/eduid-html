@@ -2,8 +2,8 @@ builders:
   - script
 build_in_docker:
   image: docker.sunet.se/sunet/docker-jenkins-node-job
-  export_ld_library_path: false
 script:
+  - unset LD_LIBRARY_PATH
   - node --version
   - npm --version
   - cd react
