@@ -1,0 +1,37 @@
+builders:
+  - script
+build_in_docker:
+  image: docker.sunet.se/sunet/docker-jenkins-node-job
+  export_ld_library_path: false
+script:
+  - node --version
+  - npm --version
+  - cd react
+  - npm install
+  - npm run-script test-headless
+  - npm run build && npm run build-pro
+clean_workspace: true
+archive_artifacts:
+  include: "react/build/*"
+triggers:
+  cron: "@weekly"
+slack:
+  room: eduid-builds
+
+extra_jobs:
+  - name: eduid-html-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-html
+    archive_artifacts: ~
+    copy_artifacts:
+      project_name: eduid-html
+    managed_scripts:
+      - docker_build_prep.sh
+      - docker_tag.sh
+    triggers:
+      github_push: false
+      cron: ~
+    upstream:
+      - eduid-html
+
