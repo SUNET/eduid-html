@@ -11,6 +11,9 @@ script:
   - npm run-script test-headless
   - npm run build && npm run build-pro
 clean_workspace: true
+copy_artifacts:
+  project_name: eduid-front
+  target_dir: react/build/front/
 archive_artifacts:
   include: "react/build/*"
 triggers:
