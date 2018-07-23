@@ -18,6 +18,8 @@ archive_artifacts:
   include: "react/build/*"
 triggers:
   cron: "@weekly"
+upstream:
+  - eduid-front
 slack:
   room: eduid-builds
 
