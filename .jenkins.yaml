@@ -14,8 +14,9 @@ clean_workspace: true
 copy_artifacts:
   project_name: eduid-front
   target_dir: react/build/front/
+  flatten: true
 archive_artifacts:
-  include: "react/build/*"
+  include: "react/build/**/*"
 triggers:
   cron: "@weekly"
 upstream:
