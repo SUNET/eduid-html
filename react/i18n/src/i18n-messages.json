@@ -392,6 +392,38 @@
     "defaultMessage": "Temporary technical difficulties, please try again later"
   },
   {
+    "id": "account_linking.main_title",
+    "defaultMessage": "Account Linking"
+  },
+  {
+    "id": "account_linking.long_description",
+    "defaultMessage": "Here you can link other online account with you eduID account."
+  },
+  {
+    "id": "oc.authorization_success",
+    "defaultMessage": "ORCID connected successfully"
+  },
+  {
+    "id": "oc.already_connected",
+    "defaultMessage": "ORCID already connected to this account"
+  },
+  {
+    "id": "oc.sub_missmatch",
+    "defaultMessage": "Subject mismatch when trying to connect ORCID account"
+  },
+  {
+    "id": "oc.title",
+    "defaultMessage": "ORCID"
+  },
+  {
+    "id": "oc.long_description",
+    "defaultMessage": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher."
+  },
+  {
+    "id": "oc.about_link",
+    "defaultMessage": "Read more at the <a href=\"https://orcid.org\">Orcid website</a>."
+  },
+  {
     "id": "pd.long_description",
     "defaultMessage": "This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you."
   },
