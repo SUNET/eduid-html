@@ -96,6 +96,10 @@
     "defaultMessage": "Phone Numbers"
   },
   {
+    "id": "'main.account_linking'",
+    "defaultMessage": "Account Linking"
+  },
+  {
     "id": "main.security",
     "defaultMessage": "Security"
   },

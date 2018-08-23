@@ -9,6 +9,7 @@ import openidConnectReducer from 'reducers/OpenidConnect';
 import lookupMobileProofingReducer from 'reducers/LookupMobileProofing';
 import openidConnectFrejaReducer from 'reducers/OpenidConnectFreja';
 import mobileReducer from 'reducers/Mobile';
+import accountLinkingReducer from 'reducers/AccountLinking';
 import securityReducer from 'reducers/Security';
 import chpassReducer from 'reducers/ChangePassword';
 import ninsReducer from 'reducers/Nins';
@@ -31,6 +32,7 @@ const eduIDApp = combineReducers({
   nins: ninsReducer,
   letter_proofing: letterProofingReducer,
   notifications: notificationsReducer,
+  account_linking: accountLinkingReducer,
   security: securityReducer,
   profile: profileReducer,
   form: formReducer,

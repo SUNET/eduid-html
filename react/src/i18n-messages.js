@@ -213,6 +213,11 @@ const msgs = {
             id="main.phones"
             defaultMessage={`Phone Numbers`} />),
 
+  'main.account_linking': (
+        <FormattedMessage
+            id="'main.account_linking'"
+            defaultMessage={`Account Linking`} />),
+
     'main.security': (
         <FormattedMessage
             id="main.security"
@@ -607,6 +612,19 @@ const msgs = {
           id="ocf.error_unknown_error"
           defaultMessage={`Temporary technical difficulties, please try again later`} />),
 
+    /************************/
+    /* ACCOUNT LINKING ******/
+    /************************/
+
+    'account_linking.main_title': (
+        <FormattedMessage
+          id="account_linking.main_title"
+          defaultMessage={`Account Linking`} />),
+
+    'account_linking.long_description': (
+        <FormattedMessage
+          id="account_linking.long_description"
+          defaultMessage={`Here you can link other online account with you eduID account.`} />),
     /************************/
     /* PERSONAL DATA ********/
     /************************/
