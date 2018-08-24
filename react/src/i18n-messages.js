@@ -624,7 +624,7 @@ const msgs = {
     'account_linking.long_description': (
         <FormattedMessage
           id="account_linking.long_description"
-          defaultMessage={`Here you can link other online account with you eduID account.`} />),
+          defaultMessage={`Here you can link other online accounts with you eduID account.`} />),
 
     /************************/
     /* ORCID ****************/
@@ -632,33 +632,38 @@ const msgs = {
 
     'orc.authorization_success': (
           <FormattedMessage
-            id="oc.authorization_success"
+            id="orc.authorization_success"
             defaultMessage={`ORCID connected successfully`} />),
 
     'orc.already_connected': (
           <FormattedMessage
-            id="oc.already_connected"
+            id="orc.already_connected"
             defaultMessage={`ORCID already connected to this account`} />),
 
     'orc.sub_mismatch': (
           <FormattedMessage
-            id="oc.sub_missmatch"
+            id="orc.sub_missmatch"
             defaultMessage={`Subject mismatch when trying to connect ORCID account`} />),
 
     'orc.title': (
           <FormattedMessage
-            id="oc.title"
+            id="orc.title"
             defaultMessage={`ORCID`} />),
 
     'orc.long_description': (
           <FormattedMessage
-            id="oc.long_description"
+            id="orc.long_description"
             defaultMessage={`ORCID provides a persistent digital identifier that distinguishes you from every other researcher.`} />),
 
     'orc.about_link': (
           <FormattedHTMLMessage
-            id="oc.about_link"
-            defaultMessage={`Read more at the <a href="https://orcid.org">Orcid website</a>.`} />),
+            id="orc.about_link"
+            defaultMessage={`Read more at the <a href="https://orcid.org">ORCID website</a>.`} />),
+
+    'orc.connect': (
+          <FormattedMessage
+            id="orc.connect"
+            defaultMessage={`Connect ORCID account`} />),
 
     /************************/
     /* PERSONAL DATA ********/

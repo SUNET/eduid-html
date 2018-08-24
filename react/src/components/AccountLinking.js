@@ -31,6 +31,8 @@ class AccountLinking extends Component {
 
 AccountLinking.propTypes = {
   orcid: PropTypes.object,
+  handleOrcidConnect: PropTypes.func,
+  handleOrcidDelete: PropTypes.func,
   langs: PropTypes.array,
   is_fetching: PropTypes.bool,
 };

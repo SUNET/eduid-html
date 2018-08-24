@@ -12,27 +12,39 @@ class Orcid extends Component {
 
   render () {
     let spinning = false;
+    let orcidData;
+
     if (this.props.is_fetching) spinning = true;
 
     const orcidIntro = (
         <div className="orcid-intro">
-            <h4>{this.props.l10n('orc.title')}</h4>
-            <p>{this.props.l10n('orc.long_description')}</p>
-            <p>{this.props.l10n('orc.about_link')}</p>
-          </div>
+          <h4>{this.props.l10n('orc.title')}</h4>
+          <p>{this.props.l10n('orc.long_description')}</p>
+        </div>
     );
-    let orcidData;
 
-    if (this.props.orcid !== undefined) {
+    if (this.props.orcid.id !== undefined) {
+      let orcidAuthor = this.props.orcid.name;
+      if (!orcidAuthor) {
+        orcidAuthor = this.props.orcid.given_name + ' ' + this.props.orcid.family_name;
+      }
       orcidData = (
         <div className="orcid-data">
-          <p>{this.props.orcid.id}</p>
+          <p>
+            {orcidAuthor} <a href={this.props.orcid.id}><div className="orcid-logo-container"><span className="orcid-logo" /></div> {this.props.orcid.id}</a>
+            <EduIDButton bsStyle="link" onClick={this.props.handleOrcidDelete}>
+              <Glyphicon glyph="remove"/>
+            </EduIDButton>
+          </p>
         </div>
       )
     } else {
       orcidData = (
         <div className="orcid-data">
-          a button
+          <EduIDButton bsStyle="primary" id="connect-orcid-button" onClick={this.props.handleOrcidConnect} spinning={spinning}>
+            <div className="orcid-logo-container"><span className="orcid-logo" /></div> {this.props.l10n('orc.connect')}
+          </EduIDButton>
+          <p>{this.props.l10n('orc.about_link')}</p>
         </div>
       )
     }
@@ -47,6 +59,8 @@ class Orcid extends Component {
 
 Orcid.propTypes = {
   orcid: PropTypes.object,
+  handleOrcidConnect: PropTypes.func,
+  handleOrcidDelete: PropTypes.func,
   langs: PropTypes.array,
   is_fetching: PropTypes.bool,
 };

@@ -6,6 +6,7 @@ export const GET_ORCID_FAIL = 'GET_PERSONAL_DATA_ORCID_FAIL';
 export const POST_ORCID_REMOVE = 'POST_ORCID_REMOVE';
 export const POST_ORCID_REMOVE_SUCCESS = 'POST_ORCID_REMOVE_SUCCESS';
 export const POST_ORCID_REMOVE_FAIL = 'POST_ORCID_REMOVE_FAIL';
+export const GET_ORCID_CONNECT = 'GET_ORCID_CONNECT';
 
 
 export function getOrcid () {
@@ -22,6 +23,12 @@ export function getOrcidFail (err) {
       error: err,
       message: err.toString()
     }
+  };
+}
+
+export function startOrcidConnect () {
+  return {
+    type: GET_ORCID_CONNECT,
   };
 }
 

@@ -21,8 +21,11 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-      handleOrcidDelete: function (e) {
+      handleOrcidDelete: function () {
           dispatch(actions.startOrcidRemove());
+      },
+      handleOrcidConnect: function () {
+          dispatch(actions.startOrcidConnect());
       }
   }
 };
