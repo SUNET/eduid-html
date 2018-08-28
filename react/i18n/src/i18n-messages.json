@@ -408,6 +408,10 @@
     "defaultMessage": "ORCID already connected to this account"
   },
   {
+    "id": "orc.unknown_state",
+    "defaultMessage": "State was unknown when trying to connect ORCID account"
+  },
+  {
     "id": "orc.sub_missmatch",
     "defaultMessage": "Subject mismatch when trying to connect ORCID account"
   },

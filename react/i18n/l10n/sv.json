@@ -169,6 +169,7 @@
   "orc.long_description": "ORCID ger en beständig digital identifierare som särskiljer dig från andra forskare.",
   "orc.sub_missmatch": "\"Subject\" skilde sig åt när ORCID-kontot skulle kopplas",
   "orc.title": "ORCID",
+  "orc.unknown_state": "\"State\" var okänt när ORCID-kontot skulle kopplas",
   "out_of_sync": "Användardata ur synk. Var god ladda om sidan.",
   "pd.all-data-success": "Kontodata laddat",
   "pd.choose-language": "Välj språk",

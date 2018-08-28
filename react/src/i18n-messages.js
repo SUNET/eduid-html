@@ -640,6 +640,11 @@ const msgs = {
             id="orc.already_connected"
             defaultMessage={`ORCID already connected to this account`} />),
 
+    'orc.unknown_state': (
+          <FormattedMessage
+            id="orc.unknown_state"
+            defaultMessage={`State was unknown when trying to connect ORCID account`} />),
+
     'orc.sub_mismatch': (
           <FormattedMessage
             id="orc.sub_missmatch"
