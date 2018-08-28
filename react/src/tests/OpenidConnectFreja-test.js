@@ -17,13 +17,13 @@ import OpenidConnectFrejaContainer from "containers/OpenidConnectFreja";
 const messages = require('../../i18n/l10n/en');
 addLocaleData('react-intl/locale-data/en');
 
-
+/**
 Object.defineProperty(navigator, "userAgent", {
   get: function () {
     return this.testUserAgent;
   }
 });
-
+**/
 
 describe("OIDC Freja Actions", () => {
 
