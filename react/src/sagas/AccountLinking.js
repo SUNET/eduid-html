@@ -17,9 +17,19 @@ export function* requestOrcid () {
     }
 }
 
-export function* requestConnectOrcid () {
-    const state = yield select(state => state);
-    return window.location = state.config.ORCID_URL + 'authorize';
+export function* requestConnectOrcid (win) {
+    try {
+        const config = yield select(state => state.config);
+        let url = config.ORCID_URL + 'authorize';
+
+        if (win !== undefined && win.location !== undefined) {
+            win.location.href = url;
+        } else {
+            window.location.href = url;
+        }
+    } catch(error) {
+        yield* failRequest(error, actions.startOrcidConnectFail);
+    }
 }
 
 export function fetchOrcid(config) {
@@ -33,11 +43,11 @@ export function fetchOrcid(config) {
 
 export function* requestRemoveOrcid () {
     try {
-        const state = yield select(state => state),
+        const config = yield select(state => state.config),
               data = {
-                csrf_token: state.config.csrf_token
+                csrf_token: config.csrf_token
               };
-        const resp = yield call(removeOrcid, state.config, data);
+        const resp = yield call(removeOrcid, config, data);
         yield put(putCsrfToken(resp));
         yield put(resp);
     } catch(error) {

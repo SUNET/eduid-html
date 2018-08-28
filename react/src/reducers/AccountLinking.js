@@ -1,6 +1,5 @@
 
 import * as actions from "actions/AccountLinking";
-import {GET_ORCID_CONNECT} from "actions/AccountLinking";
 
 
 const accountLinkingState = {
@@ -28,7 +27,7 @@ let accountLinkingReducer = (state=accountLinkingState, action) => {
     case actions.GET_ORCID_SUCCESS:
       return {
         ...state,
-        orcid: action.payload,
+        ...action.payload,
         is_fetching: false
       };
     case actions.GET_ORCID_FAIL:
@@ -53,6 +52,7 @@ let accountLinkingReducer = (state=accountLinkingState, action) => {
       return {
         ...state,
         ...action.payload,
+        orcid: {},
         is_fetching: false
       };
     case actions.POST_ORCID_REMOVE_FAIL:
@@ -60,7 +60,8 @@ let accountLinkingReducer = (state=accountLinkingState, action) => {
         ...state,
         is_fetching: false,
         failed: true,
-        error: action.payload.error
+        error: action.payload.error,
+        message: action.payload.message
       };
     default:
       return state;

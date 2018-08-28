@@ -29,13 +29,15 @@ class Orcid extends Component {
         orcidAuthor = this.props.orcid.given_name + ' ' + this.props.orcid.family_name;
       }
       orcidData = (
-        <div className="orcid-data">
-          <p>
-            {orcidAuthor} <a href={this.props.orcid.id}><div className="orcid-logo-container"><span className="orcid-logo" /></div> {this.props.orcid.id}</a>
-            <EduIDButton bsStyle="link" onClick={this.props.handleOrcidDelete}>
-              <Glyphicon glyph="remove"/>
-            </EduIDButton>
-          </p>
+        <div className="table-responsive">
+            <table className="table table-striped table-form">
+                <tbody>
+                    <tr className="emailrow">
+                      <td>{orcidAuthor} <a href={this.props.orcid.id}><div className="orcid-logo-container"><span className="orcid-logo" /></div> {this.props.orcid.id}</a></td>
+                      <td><EduIDButton bsStyle="link" id="remove-orcid-button" onClick={this.props.handleOrcidDelete}>{this.props.l10n('tl.remove')}</EduIDButton></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
       )
     } else {
