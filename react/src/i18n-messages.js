@@ -215,7 +215,7 @@ const msgs = {
 
   'main.account_linking': (
         <FormattedMessage
-            id="'main.account_linking'"
+            id="main.account_linking"
             defaultMessage={`Account Linking`} />),
 
     'main.security': (
@@ -624,7 +624,7 @@ const msgs = {
     'account_linking.long_description': (
         <FormattedMessage
           id="account_linking.long_description"
-          defaultMessage={`Here you can link other online accounts with you eduID account.`} />),
+          defaultMessage={`You can link other accounts with you eduID account.`} />),
 
     /************************/
     /* ORCID ****************/

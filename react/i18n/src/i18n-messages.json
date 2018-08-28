@@ -96,7 +96,7 @@
     "defaultMessage": "Phone Numbers"
   },
   {
-    "id": "'main.account_linking'",
+    "id": "main.account_linking",
     "defaultMessage": "Account Linking"
   },
   {
@@ -397,7 +397,7 @@
   },
   {
     "id": "account_linking.long_description",
-    "defaultMessage": "Here you can link other online accounts with you eduID account."
+    "defaultMessage": "You can link other accounts with you eduID account."
   },
   {
     "id": "orc.authorization_success",
