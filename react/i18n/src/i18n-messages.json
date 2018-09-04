@@ -272,6 +272,10 @@
     "defaultMessage": "You must have at least one email address"
   },
   {
+    "id": "emails.cannot_remove_unique_verified",
+    "defaultMessage": "You must have at least one verified email address"
+  },
+  {
     "id": "emails.removal-success",
     "defaultMessage": "Successfully removed email address"
   },

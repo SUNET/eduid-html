@@ -449,6 +449,11 @@ const msgs = {
           id="emails.cannot_remove_unique"
           defaultMessage={`You must have at least one email address`} />),
 
+    'emails.cannot_remove_unique_verified': (
+        <FormattedMessage
+          id="emails.cannot_remove_unique_verified"
+          defaultMessage={`You must have at least one verified email address`} />),
+
     'emails.removal-success': (
         <FormattedMessage
           id="emails.removal-success"
