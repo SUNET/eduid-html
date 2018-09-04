@@ -3,11 +3,16 @@ import * as actions from "actions/AccountLinking";
 
 
 const accountLinkingState = {
-    is_fetching: false,
-    failed: false,
-    error: '',
-    message: '',
-    orcid: {}
+  is_fetching: false,
+  failed: false,
+  error: '',
+  message: '',
+  orcid: {
+    id: null,
+    name: null,
+    given_name: null,
+    family_name: null
+  }
 };
 
 

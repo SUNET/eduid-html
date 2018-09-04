@@ -23,7 +23,7 @@ class Orcid extends Component {
         </div>
     );
 
-    if (this.props.orcid.id !== undefined) {
+    if (!this.props.orcid.id) {
       let orcidAuthor = this.props.orcid.name;
       if (!orcidAuthor) {
         orcidAuthor = this.props.orcid.given_name + ' ' + this.props.orcid.family_name;
