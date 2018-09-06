@@ -7,12 +7,7 @@ const accountLinkingState = {
   failed: false,
   error: '',
   message: '',
-  orcid: {
-    id: null,
-    name: null,
-    given_name: null,
-    family_name: null
-  }
+  orcid: null
 };
 
 
