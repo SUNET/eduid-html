@@ -213,6 +213,11 @@ const msgs = {
             id="main.phones"
             defaultMessage={`Phone Numbers`} />),
 
+  'main.account_linking': (
+        <FormattedMessage
+            id="main.account_linking"
+            defaultMessage={`Account Linking`} />),
+
     'main.security': (
         <FormattedMessage
             id="main.security"
@@ -611,6 +616,64 @@ const msgs = {
         <FormattedMessage
           id="ocf.error_unknown_error"
           defaultMessage={`Temporary technical difficulties, please try again later`} />),
+
+    /************************/
+    /* ACCOUNT LINKING ******/
+    /************************/
+
+    'account_linking.main_title': (
+        <FormattedMessage
+          id="account_linking.main_title"
+          defaultMessage={`Account Linking`} />),
+
+    'account_linking.long_description': (
+        <FormattedMessage
+          id="account_linking.long_description"
+          defaultMessage={`You can link other accounts with you eduID account.`} />),
+
+    /************************/
+    /* ORCID ****************/
+    /************************/
+
+    'orc.authorization_success': (
+          <FormattedMessage
+            id="orc.authorization_success"
+            defaultMessage={`ORCID connected successfully`} />),
+
+    'orc.already_connected': (
+          <FormattedMessage
+            id="orc.already_connected"
+            defaultMessage={`ORCID already connected to this account`} />),
+
+    'orc.unknown_state': (
+          <FormattedMessage
+            id="orc.unknown_state"
+            defaultMessage={`State was unknown when trying to connect ORCID account`} />),
+
+    'orc.sub_mismatch': (
+          <FormattedMessage
+            id="orc.sub_missmatch"
+            defaultMessage={`Subject mismatch when trying to connect ORCID account`} />),
+
+    'orc.title': (
+          <FormattedMessage
+            id="orc.title"
+            defaultMessage={`ORCID`} />),
+
+    'orc.long_description': (
+          <FormattedMessage
+            id="orc.long_description"
+            defaultMessage={`ORCID provides a persistent digital identifier that distinguishes you from every other researcher.`} />),
+
+    'orc.about_link': (
+          <FormattedHTMLMessage
+            id="orc.about_link"
+            defaultMessage={`Read more at the <a href="https://orcid.org">ORCID website</a>.`} />),
+
+    'orc.connect': (
+          <FormattedMessage
+            id="orc.connect"
+            defaultMessage={`Connect ORCID account`} />),
 
     /************************/
     /* PERSONAL DATA ********/

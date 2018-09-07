@@ -7,6 +7,7 @@ import * as emailActions from "actions/Emails";
 import * as mobileActions from "actions/Mobile"
 import * as openidActions from "actions/OpenidConnect";
 import * as securityActions from "actions/Security";
+import * as accountLinkingActions from "actions/AccountLinking";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
@@ -22,6 +23,7 @@ import * as sagasMobile from "sagas/Mobile";
 import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
 import * as sagasOpenid from "sagas/OpenidConnect";
 import { requestConfig } from "sagas/Config";
+import { requestRemoveOrcid, requestOrcid, requestConnectOrcid } from "sagas/AccountLinking";
 import { requestCredentials, requestPasswordChange, postDeleteAccount,
          getU2FEnroll, registerU2F, removeU2FToken } from "sagas/Security";
 import { requestSuggestedPassword, postPasswordChange } from "sagas/ChangePassword";
@@ -83,6 +85,9 @@ function* rootSaga() {
     takeLatest(securityActions.START_U2F_REGISTRATION, getU2FEnroll),
     takeLatest(securityActions.GET_U2F_ENROLL_SUCCESS, registerU2F),
     takeLatest(securityActions.POST_U2F_REMOVE, removeU2FToken),
+    takeEvery(accountLinkingActions.POST_ORCID_REMOVE, requestRemoveOrcid),
+    takeEvery(accountLinkingActions.POST_ORCID_REMOVE_SUCCESS, requestOrcid),
+    takeEvery(accountLinkingActions.GET_ORCID_CONNECT, requestConnectOrcid),
   ];
 }
 

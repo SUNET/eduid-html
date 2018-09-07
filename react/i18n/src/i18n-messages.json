@@ -96,6 +96,10 @@
     "defaultMessage": "Phone Numbers"
   },
   {
+    "id": "main.account_linking",
+    "defaultMessage": "Account Linking"
+  },
+  {
     "id": "main.security",
     "defaultMessage": "Security"
   },
@@ -390,6 +394,46 @@
   {
     "id": "ocf.error_unknown_error",
     "defaultMessage": "Temporary technical difficulties, please try again later"
+  },
+  {
+    "id": "account_linking.main_title",
+    "defaultMessage": "Account Linking"
+  },
+  {
+    "id": "account_linking.long_description",
+    "defaultMessage": "You can link other accounts with you eduID account."
+  },
+  {
+    "id": "orc.authorization_success",
+    "defaultMessage": "ORCID connected successfully"
+  },
+  {
+    "id": "orc.already_connected",
+    "defaultMessage": "ORCID already connected to this account"
+  },
+  {
+    "id": "orc.unknown_state",
+    "defaultMessage": "State was unknown when trying to connect ORCID account"
+  },
+  {
+    "id": "orc.sub_missmatch",
+    "defaultMessage": "Subject mismatch when trying to connect ORCID account"
+  },
+  {
+    "id": "orc.title",
+    "defaultMessage": "ORCID"
+  },
+  {
+    "id": "orc.long_description",
+    "defaultMessage": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher."
+  },
+  {
+    "id": "orc.about_link",
+    "defaultMessage": "Read more at the <a href=\"https://orcid.org\">ORCID website</a>."
+  },
+  {
+    "id": "orc.connect",
+    "defaultMessage": "Connect ORCID account"
   },
   {
     "id": "pd.long_description",

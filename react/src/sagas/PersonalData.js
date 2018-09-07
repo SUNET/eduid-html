@@ -10,6 +10,7 @@ import * as emailActions from "actions/Emails";
 import * as phoneActions from "actions/Mobile";
 import * as pdataActions from "actions/PersonalData";
 import * as profileActions from "actions/Profile";
+import * as accountLinkingActions from "actions/AccountLinking";
 
 
 export function* requestAllPersonalData () {
@@ -51,6 +52,17 @@ export function* requestAllPersonalData () {
                   }
               };
               yield put(phoneAction);
+          }
+          const orcid = userdata.payload.orcid;
+          delete userdata.payload.orcid;
+          if (orcid !== undefined) {
+              const orcidAction = {
+                  type: accountLinkingActions.GET_PERSONAL_DATA_ORCID_SUCCESS,
+                  payload: {
+                      orcid: orcid
+                  }
+              };
+              yield put(orcidAction);
           }
           userdata.type = pdataActions.GET_USERDATA_SUCCESS;
           yield put(userdata);

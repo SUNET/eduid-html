@@ -15,6 +15,7 @@ import PersonalDataContainer from 'containers/PersonalData';
 import NinsContainer from 'containers/Nins';
 import EmailsContainer from 'containers/Emails';
 import MobileContainer from 'containers/Mobile';
+import AccountLinkingContainer from 'containers/AccountLinking';
 import SecurityContainer from 'containers/Security';
 import ChangePasswordContainer from 'containers/ChangePassword';
 import NotificationsContainer from 'containers/Notifications';
@@ -59,6 +60,7 @@ class Main extends Component {
                           {id: 'nins', label: sm ? 'main.nins_label_sm' : 'main.nins'},
                           {id: 'emails', label: sm ? 'main.emails_label_sm' : 'main.emails'},
                           {id: 'phones', label: sm ? 'main.phones_label_sm' : 'main.phones'},
+                          {id: 'accountlinking', label: sm ? 'main.account_linking_label_sm' : 'main.account_linking'},
                           {id: 'security', label: sm ? 'main.security_label_sm' : 'main.security'}],
                   tabsElems = (classes) => {
                       return tabs.map( (tab, index) => {
@@ -159,6 +161,7 @@ class Main extends Component {
                         <Route path="/profile/nins" component={NinsContainer} />
                         <Route path="/profile/emails" component={EmailsContainer} />
                         <Route path="/profile/phones" component={MobileContainer} />
+                        <Route path="/profile/accountlinking" component={AccountLinkingContainer} />
                         <Route path="/profile/security" component={SecurityContainer} />
                         <Route path="/profile/chpass" component={ChangePasswordContainer} />
                       </div>
