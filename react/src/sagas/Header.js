@@ -15,7 +15,7 @@ export function* requestLogout () {
             window.fetch(url, {
                 method: 'get',
                 credentials: 'same-origin',
-                mode: 'no-cors',
+                mode: 'cors',
                 redirect: 'manual'
             })
             .then(resp => {
