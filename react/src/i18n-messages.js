@@ -663,17 +663,22 @@ const msgs = {
     'orc.long_description': (
           <FormattedMessage
             id="orc.long_description"
-            defaultMessage={`ORCID provides a persistent digital identifier that distinguishes you from every other researcher.`} />),
+            defaultMessage={`ORCID provides a persistent identifier – an ORCID iD – that distinguishes you from other researchers and a mechanism for linking your research outputs and activities to your ORCID iD regardless of which organization you are working with.`} />),
 
     'orc.about_link': (
           <FormattedHTMLMessage
             id="orc.about_link"
-            defaultMessage={`Read more at the <a href="https://orcid.org">ORCID website</a>.`} />),
+            defaultMessage={`Learn more about ORCID in eduID from our <a href="https://www.eduid.se/en/faq.html">FAQ</a>.`} />),
 
     'orc.connect': (
           <FormattedMessage
             id="orc.connect"
             defaultMessage={`Connect ORCID account`} />),
+
+    'orc.authorization_fail': (
+          <FormattedMessage
+            id="orc.authorization_fail"
+            defaultMessage={`ORCID authentication failed`} />),
 
     /************************/
     /* PERSONAL DATA ********/
