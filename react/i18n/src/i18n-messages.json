@@ -425,15 +425,19 @@
   },
   {
     "id": "orc.long_description",
-    "defaultMessage": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher."
+    "defaultMessage": "ORCID provides a persistent identifier – an ORCID iD – that distinguishes you from other researchers and a mechanism for linking your research outputs and activities to your ORCID iD regardless of which organization you are working with."
   },
   {
     "id": "orc.about_link",
-    "defaultMessage": "Read more at the <a href=\"https://orcid.org\">ORCID website</a>."
+    "defaultMessage": "Learn more about ORCID in eduID from our <a href=\"https://www.eduid.se/en/faq.html\">FAQ</a>."
   },
   {
     "id": "orc.connect",
     "defaultMessage": "Connect ORCID account"
+  },
+  {
+    "id": "orc.authorization_fail",
+    "defaultMessage": "ORCID authentication failed"
   },
   {
     "id": "pd.long_description",
