@@ -4,7 +4,7 @@ import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
           startU2fRegistration, stopU2fRegistration, postRemoveU2FToken,
-          startAskU2FDescription, stopAskU2FDescription } from "actions/Security";
+          startAskU2FDescription, stopAskU2FDescription, postVerifyU2FToken} from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
@@ -64,6 +64,10 @@ const mapDispatchToProps = (dispatch, props) => {
     handleRemoveU2FToken: function (e) {
         const token = e.target.closest('.u2f-token-holder').dataset.token;
         dispatch(postRemoveU2FToken(token));
+    },
+    handleVerifyU2FToken: function (e) {
+        const token = e.target.closest('.u2f-token-holder').dataset.token;
+        dispatch(postVerifyU2FToken(token));
     }
   }
 

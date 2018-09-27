@@ -29,6 +29,8 @@ export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
 export const POST_U2F_REMOVE = 'POST_U2F_U2F_REMOVE';
 export const POST_U2F_REMOVE_SUCCESS = 'POST_U2F_U2F_REMOVE_SUCCESS';
 export const POST_U2F_REMOVE_FAIL = 'POST_U2F_U2F_REMOVE_FAIL';
+export const POST_U2F_VERIFY = 'POST_U2F_VERIFY';
+export const POST_U2F_VERIFY_FAIL = 'POST_U2F_VERIFY_FAIL';
 export const START_ASK_U2F_DESCRIPTION = 'START_ASK_U2F_DESCRIPTION';
 export const STOP_ASK_U2F_DESCRIPTION = 'STOP_ASK_U2F_DESCRIPTION';
 
@@ -189,6 +191,26 @@ export function postRemoveU2FToken (token) {
 export function tokenRemovedFail (err) {
   return {
     type: POST_U2F_REMOVE_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function postVerifyU2FToken (token) {
+  return {
+    type: POST_U2F_VERIFY,
+    payload: {
+        token: token
+    }
+  };
+}
+
+export function tokenVerifyFail (err) {
+  return {
+    type: POST_U2F_VERIFY_FAIL,
     error: true,
     payload: {
       error: new Error(err),

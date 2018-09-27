@@ -8,6 +8,7 @@ import { getCredentials, getCredentialsFail,
          postConfirmDeletion, accountRemovedFail,
          enrollU2FFail, stopU2fRegistration, registerU2FFail, tokenRemovedFail } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
+import {tokenVerifyFail} from "../actions/Security";
 
 
 
@@ -181,4 +182,23 @@ export function removeToken(config, data) {
     })
     .then(checkStatus)
     .then(response => response.json())
+}
+
+export function* verifyU2FToken (win) {
+    try {
+        const state = yield select(state => state);
+        const keyHandle = state.security.u2f_token_verify;
+
+        let idpParam = '?idp=' + state.config.TOKEN_VERIFY_IDP;
+        let url = state.config.EIDAS_URL + 'verify-token/' + keyHandle + idpParam;
+
+        if (win !== undefined && win.location !== undefined) {
+            win.location.href = url;
+        } else {
+            window.location.href = url;
+        }
+
+    } catch(error) {
+        yield* failRequest(error, tokenVerifyFail);
+    }
 }

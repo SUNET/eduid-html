@@ -681,6 +681,25 @@ const msgs = {
             defaultMessage={`ORCID authentication failed`} />),
 
     /************************/
+    /* EIDAS ********/
+    /************************/
+
+    'eidas.token_not_found': (
+          <FormattedMessage
+            id="eidas.token_not_found"
+            defaultMessage={`U2F token not found`} />),
+
+    'eidas.token_not_in_credentials_used': (
+          <FormattedMessage
+            id="eidas.token_not_in_credentials_used"
+            defaultMessage={`U2F token not used for login`} />),
+
+    'eidas.token_verify_success': (
+          <FormattedMessage
+            id="eidas.token_verify_success"
+            defaultMessage={`U2F token verified successfully`} />),
+
+    /************************/
     /* PERSONAL DATA ********/
     /************************/
 
@@ -868,6 +887,11 @@ const msgs = {
         <FormattedMessage
           id="security.remove"
           defaultMessage={`Remove`} />),
+
+    'security.verify': (
+        <FormattedMessage
+          id="security.verify"
+          defaultMessage={`Verify`} />),
 
     'security.main_title': (
         <FormattedMessage
