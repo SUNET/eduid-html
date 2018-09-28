@@ -26,6 +26,7 @@ class Security extends Component {
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             let btnRemove = '';
+            let btnVerify = '';
             if (cred.credential_type === 'security.u2f_credential_type') {
                 btnRemove = (<div className="btn-group btn-group-xs" role="group">
                            <button className="btn btn-danger btn-remove-u2f"
@@ -33,6 +34,17 @@ class Security extends Component {
                              <Glyphicon className="trash" glyph="trash" />
                            </button>
                          </div>);
+                if (cred.verified) {
+                    btnVerify = (<div className="text-center"><Glyphicon className="ok" glyph="ok" /></div>);
+                  }
+                else if (cred.used_for_login && !cred.verified) {
+                  btnVerify = (<div className="btn-group btn-group-xs" role="group">
+                           <button className="btn btn-info btn-verify-u2f"
+                                   onClick={this.props.handleVerifyU2FToken}>
+                             <Glyphicon className="circle-arrow-up" glyph="circle-arrow-up" />
+                           </button>
+                         </div>);
+                }
             }
             const date_created = new Date(cred.created_ts).toISOString().split('T')[0]
             let date_success = '';
@@ -44,6 +56,7 @@ class Security extends Component {
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{date_created}</td>
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{date_success}</td>
                         <td>{cred.description}</td>
+                        <td>{btnVerify}</td>
                         <td>{btnRemove}</td>
                     </tr>
             );
@@ -63,6 +76,7 @@ class Security extends Component {
                     <th>{this.props.l10n('security.creation_date')}</th>
                     <th>{this.props.l10n('security.last_used')}</th>
                     <th>{this.props.l10n('security.description')}</th>
+                    <th>{this.props.l10n('security.verify')}</th>
                     <th>{this.props.l10n('security.remove')}</th>
                 </tr>
                 {creds_table}

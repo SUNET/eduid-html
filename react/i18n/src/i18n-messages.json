@@ -440,6 +440,18 @@
     "defaultMessage": "ORCID authentication failed"
   },
   {
+    "id": "eidas.token_not_found",
+    "defaultMessage": "U2F token not found"
+  },
+  {
+    "id": "eidas.token_not_in_credentials_used",
+    "defaultMessage": "U2F token not used for login"
+  },
+  {
+    "id": "eidas.token_verify_success",
+    "defaultMessage": "U2F token verified successfully"
+  },
+  {
     "id": "pd.long_description",
     "defaultMessage": "This information is sent to service providers\n           when you log in using eduID in order to personalize those services for you."
   },
@@ -574,6 +586,10 @@
   {
     "id": "security.remove",
     "defaultMessage": "Remove"
+  },
+  {
+    "id": "security.verify",
+    "defaultMessage": "Verify"
   },
   {
     "id": "security.main_title",

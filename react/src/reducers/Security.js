@@ -19,7 +19,8 @@ const security = {
     u2f_failed: false,
     u2f_is_enrolled: false,
     u2f_request: {},
-    u2f_token_remove: ''
+    u2f_token_remove: '',
+    u2f_token_verify: ''
 };
 
 
@@ -215,6 +216,23 @@ let securityReducer = (state=security, action) => {
         ...state,
         ...action.payload,
         u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_is_fetching: false,
+        is_fetching: false
+      };
+    case actions.POST_U2F_VERIFY:
+      return {
+        ...state,
+        u2f_token_verify: action.payload.token,
+        u2f_failed: false,
+        u2f_is_enrolled: false,
+        u2f_is_fetching: true,
+        is_fetching: false
+      };
+    case actions.POST_U2F_VERIFY_FAIL:
+      return {
+        ...state,
+        u2f_failed: true,
         u2f_is_enrolled: false,
         u2f_is_fetching: false,
         is_fetching: false
