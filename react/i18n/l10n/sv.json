@@ -98,6 +98,7 @@
   "lmp.verification_success": "Ditt personummer har verifierats",
   "mail_duplicated": "E-postadressen finns redan i listan",
   "main.account_linking": "Kontolänkning",
+  "main.account_linking_label_sm": "Kontolänkning",
   "main.confirmed": "Bekräftad",
   "main.copyright": "SUNET 2013-2018",
   "main.eduid_id": "eduID-identifierare",

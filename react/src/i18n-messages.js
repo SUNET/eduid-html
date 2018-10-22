@@ -213,7 +213,7 @@ const msgs = {
             id="main.phones"
             defaultMessage={`Phone Numbers`} />),
 
-  'main.account_linking': (
+    'main.account_linking': (
         <FormattedMessage
             id="main.account_linking"
             defaultMessage={`Account Linking`} />),
@@ -242,6 +242,11 @@ const msgs = {
         <FormattedMessage
             id="main.phones_label_sm"
             defaultMessage={`Phones`} />),
+
+    'main.account_linking_label_sm': (
+        <FormattedMessage
+            id="main.account_linking_label_sm"
+            defaultMessage={`Account Linking`} />),
 
     'main.security_label_sm': (
         <FormattedMessage
