@@ -120,6 +120,10 @@
     "defaultMessage": "Phones"
   },
   {
+    "id": "main.account_linking_label_sm",
+    "defaultMessage": "Account Linking"
+  },
+  {
     "id": "main.security_label_sm",
     "defaultMessage": "Security"
   },
