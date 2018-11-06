@@ -686,7 +686,7 @@ const msgs = {
             defaultMessage={`ORCID authentication failed`} />),
 
     /************************/
-    /* EIDAS ********/
+    /* EIDAS ****************/
     /************************/
 
     'eidas.token_not_found': (
@@ -699,10 +699,30 @@ const msgs = {
             id="eidas.token_not_in_credentials_used"
             defaultMessage={`U2F token not used for login`} />),
 
+    'eidas.nin_not_matching': (
+          <FormattedMessage
+            id="eidas.nin_not_matching"
+            defaultMessage={`Asserted identity not matching the current accounts verified identity`} />),
+
+    'eidas.nin_already_verified': (
+          <FormattedMessage
+            id="eidas.nin_already_verified"
+            defaultMessage={`You have already verified your identity`} />),
+
+    'eidas.nin_verify_success': (
+          <FormattedMessage
+            id="eidas.nin_verify_success"
+            defaultMessage={`Identity verified successfully`} />),
+
     'eidas.token_verify_success': (
           <FormattedMessage
             id="eidas.token_verify_success"
             defaultMessage={`U2F token verified successfully`} />),
+
+    'eidas.authn_context_mismatch': (
+          <FormattedMessage
+            id="eidas.authn_context_mismatch"
+            defaultMessage={`Wrong authentication context received`} />),
 
     /************************/
     /* PERSONAL DATA ********/
@@ -897,6 +917,11 @@ const msgs = {
         <FormattedMessage
           id="security.verify"
           defaultMessage={`Verify`} />),
+
+    'security.verified': (
+        <FormattedMessage
+          id="security.verified"
+          defaultMessage={`Verified`} />),
 
     'security.main_title': (
         <FormattedMessage

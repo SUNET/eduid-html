@@ -29,27 +29,30 @@ class Security extends Component {
             let btnVerify = '';
             if (cred.credential_type === 'security.u2f_credential_type') {
                 btnRemove = (<div className="btn-group btn-group-xs" role="group">
-                           <button className="btn btn-danger btn-remove-u2f"
+                              <button className="btn btn-link btn-remove-u2f"
                                    onClick={this.props.handleRemoveU2FToken}>
-                             <Glyphicon className="trash" glyph="trash" />
-                           </button>
-                         </div>);
+                              {this.props.l10n('security.remove')}
+                              </button>
+                            </div>);
                 if (cred.verified) {
-                    btnVerify = (<div className="text-center"><Glyphicon className="ok" glyph="ok" /></div>);
-                  }
-                else if (cred.used_for_login && !cred.verified) {
                   btnVerify = (<div className="btn-group btn-group-xs" role="group">
-                           <button className="btn btn-info btn-verify-u2f"
+                                <button className="btn btn-link btn-verified-u2f" disabled>
+                                {this.props.l10n('security.verified')}
+                                </button>
+                              </div>);
+                } else if (cred.used_for_login && !cred.verified) {
+                  btnVerify = (<div className="btn-group btn-group-xs" role="group">
+                           <button className="btn btn-link btn-verify-u2f"
                                    onClick={this.props.handleVerifyU2FToken}>
-                             <Glyphicon className="circle-arrow-up" glyph="circle-arrow-up" />
+                             {this.props.l10n('security.verify')}
                            </button>
                          </div>);
                 }
             }
-            const date_created = new Date(cred.created_ts).toISOString().split('T')[0]
+            const date_created = new Date(cred.created_ts).toISOString().split('T')[0];
             let date_success = '';
             if (cred.success_ts) {
-                date_success = new Date(cred.success_ts).toISOString().split('T')[0]
+                date_success = new Date(cred.success_ts).toISOString().split('T')[0];
             }
             return (<tr key={index} className="u2f-token-holder" data-token={cred.key}>
                         <td>{this.props.l10n(cred.credential_type)}</td>

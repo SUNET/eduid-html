@@ -452,8 +452,24 @@
     "defaultMessage": "U2F token not used for login"
   },
   {
+    "id": "eidas.nin_not_matching",
+    "defaultMessage": "Asserted identity not matching the current accounts verified identity"
+  },
+  {
+    "id": "eidas.nin_already_verified",
+    "defaultMessage": "You have already verified your identity"
+  },
+  {
+    "id": "eidas.nin_verify_success",
+    "defaultMessage": "Identity verified successfully"
+  },
+  {
     "id": "eidas.token_verify_success",
     "defaultMessage": "U2F token verified successfully"
+  },
+  {
+    "id": "eidas.authn_context_mismatch",
+    "defaultMessage": "Wrong authentication context received"
   },
   {
     "id": "pd.long_description",
@@ -594,6 +610,10 @@
   {
     "id": "security.verify",
     "defaultMessage": "Verify"
+  },
+  {
+    "id": "security.verified",
+    "defaultMessage": "Verified"
   },
   {
     "id": "security.main_title",
