@@ -19,9 +19,13 @@ function setupComponent(loaded) {
     const store = fakeStore({
         config: {
             is_app_loaded: loaded
+        },
+        intl: {
+            locale: 'en',
+            messages: {}
         }
     });
-    const wrapper = mount(<Provider store={ store }>
+    const wrapper = mount(<Provider locale="en" store={ store }>
                               <SplashContainer />
                           </Provider>);
     return wrapper;

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withUserAgent from 'react-useragent';
+import { withUserAgent } from 'react-useragent';
 
 import EduIDButton from 'components/EduIDButton';
 import NotificationsContainer from 'containers/Notifications';
