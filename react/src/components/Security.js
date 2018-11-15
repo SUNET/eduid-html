@@ -34,6 +34,7 @@ class Security extends Component {
                               {this.props.l10n('security.remove')}
                               </button>
                             </div>);
+                /* Temorary remove token verify button
                 if (cred.verified) {
                   btnVerify = (<div className="btn-group btn-group-xs" role="group">
                                 <button className="btn btn-link btn-verified-u2f" disabled>
@@ -48,6 +49,7 @@ class Security extends Component {
                            </button>
                          </div>);
                 }
+                */
             }
             const date_created = new Date(cred.created_ts).toISOString().split('T')[0];
             let date_success = '';
