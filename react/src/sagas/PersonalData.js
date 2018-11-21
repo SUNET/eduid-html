@@ -65,7 +65,6 @@ export function* requestAllPersonalData () {
               yield put(orcidAction);
           }
           userdata.type = pdataActions.GET_USERDATA_SUCCESS;
-          yield put(userdata);
           const lang = userdata.payload.language;
           if (lang) {
               yield put(updateIntl({
@@ -73,6 +72,7 @@ export function* requestAllPersonalData () {
                   messages: LOCALIZED_MESSAGES[lang]
               }));
           }
+          yield put(userdata);
         } else {
           yield put(userdata);
         }
