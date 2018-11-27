@@ -154,19 +154,23 @@ class ChpassForm extends Component {
 }
 
 ChpassForm = reduxForm({
-  form: 'chpass',
-  validate
+    form: 'chpass',
+    destroyOnUnmount: false,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
+    keepValuesOnReinitialize: true,
+    updateUnregisteredFields: true,
+    validate: validate
 })(ChpassForm)
 
 ChpassForm = connect(
-  state => {
-    const initialValues = {};
-    initialValues[pwFieldSuggestedName] = state.chpass.suggested_password;
-    return {
-      initialValues: initialValues,
-      enableReinitialize: true
+    state => {
+	const initialValues = {};
+	initialValues[pwFieldSuggestedName] = state.chpass.suggested_password;
+	return {
+	    initialValues: initialValues
+	}
     }
-  }
 )(ChpassForm)
 
 ChpassForm = i18n(ChpassForm);
