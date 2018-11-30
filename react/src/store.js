@@ -8,6 +8,7 @@ import configReducer from 'reducers/Config';
 import openidConnectReducer from 'reducers/OpenidConnect';
 import lookupMobileProofingReducer from 'reducers/LookupMobileProofing';
 import openidConnectFrejaReducer from 'reducers/OpenidConnectFreja';
+import eidasReducer from 'reducers/Eidas';
 import mobileReducer from 'reducers/Mobile';
 import accountLinkingReducer from 'reducers/AccountLinking';
 import securityReducer from 'reducers/Security';
@@ -27,6 +28,7 @@ const eduIDApp = combineReducers({
   openid_data: openidConnectReducer,
   lookup_mobile: lookupMobileProofingReducer,
   openid_freja_data: openidConnectFrejaReducer,
+  eidas_data: eidasReducer,
   personal_data: personalDataReducer,
   phones: mobileReducer,
   nins: ninsReducer,
