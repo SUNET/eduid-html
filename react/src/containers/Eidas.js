@@ -15,10 +15,8 @@ const mapStateToProps = (state, props) => {
   }
   let eidas_sp_freja_idp_url = eidas_sp_url + verify_path + "?idp=" + freja_idp_url;
   return {
-    is_fetching: state.eidas_data.is_fetching,
     showModal: state.eidas_data.showModal,
-    eidas_sp_freja_idp_url: eidas_sp_freja_idp_url,
-    error: state.eidas_data.error
+    eidas_sp_freja_idp_url: eidas_sp_freja_idp_url
   }
 };
 
