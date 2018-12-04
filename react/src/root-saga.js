@@ -11,7 +11,6 @@ import * as accountLinkingActions from "actions/AccountLinking";
 import * as pwActions from "actions/ChangePassword";
 import * as ninActions from "actions/Nins";
 import * as openidFrejaActions from "actions/OpenidConnectFreja";
-import * as eidasActions from "actions/Eidas";
 import * as letterActions from "actions/LetterProofing";
 import * as lmpActions from "actions/LookupMobileProofing";
 import * as headerActions from "actions/Header";
@@ -22,7 +21,6 @@ import { saveEmail, requestResendEmailCode,
          requestMakePrimaryEmail } from "sagas/Emails";
 import * as sagasMobile from "sagas/Mobile";
 import * as sagasOpenidFreja from "sagas/OpenidConnectFreja";
-import * as sagasEidas from "sagas/Eidas";
 import * as sagasOpenid from "sagas/OpenidConnect";
 import { requestConfig } from "sagas/Config";
 import { requestRemoveOrcid, requestOrcid, requestConnectOrcid } from "sagas/AccountLinking";
@@ -58,8 +56,6 @@ function* rootSaga() {
     takeLatest(openidFrejaActions.GET_OIDC_PROOFING_FREJA_PROOFING, sagasOpenidFreja.requestOpenidFrejaData),
     takeLatest(openidFrejaActions.SHOW_OIDC_FREJA_MODAL, sagasOpenidFreja.checkNINAndShowFrejaModal),
     takeLatest(openidFrejaActions.HIDE_OIDC_FREJA_MODAL, sagasOpenidFreja.closeFrejaModal),
-    takeEvery(eidasActions.SHOW_EIDAS_MODAL, sagasEidas.showEidasModal),
-    takeEvery(eidasActions.HIDE_EIDAS_MODAL, sagasEidas.closeEidasModal),
     takeLatest(emailActions.POST_EMAIL, saveEmail),
     takeLatest(emailActions.START_RESEND_EMAIL_CODE, requestResendEmailCode),
     takeLatest(emailActions.START_VERIFY, requestVerifyEmail),
