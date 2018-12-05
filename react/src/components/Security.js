@@ -35,10 +35,8 @@ class Security extends Component {
                               </button>
                             </div>);
                 if (cred.verified) {
-                  btnVerify = (<div className="btn-group btn-group-xs" role="group">
-                                <button className="btn btn-link btn-verified-u2f" disabled>
+                  btnVerify = (<div role="group">
                                 {this.props.l10n('security.verified')}
-                                </button>
                               </div>);
                 } else {
                   btnVerify = (<div className="btn-group btn-group-xs" role="group">
