@@ -22,48 +22,29 @@ describe("Eidas Actions", () => {
 
   it("should create an action to trigger modal window", () => {
     const expectedAction = {
-      type: actions.SHOW_EIDAS_MODAL_SUCCESS
+      type: actions.SHOW_EIDAS_MODAL
     };
-    expect(actions.showEidasModalSuccess()).toEqual(expectedAction);
-  });
-
-  it("should create an action to signal an error", () => {
-    const err = 'Bad error';
-    const expectedAction = {
-      type: actions.SHOW_EIDAS_MODAL_FAIL,
-      error: true,
-      payload: {
-        error: true,
-        message: "Bad error",
-      }
-    };
-    expect(actions.showEidasModalFail(err)).toEqual(expectedAction);
+    expect(actions.showEidasModal()).toEqual(expectedAction);
   });
 });
 
 describe("Reducers", () => {
 
   const mockState = {
-    is_fetching: false,
-    failed: false,
-    error: null,
     eidas_sp_freja_idp_url: "",
     showModal: false
   };
 
-  it("Receives a SHOW_EIDAS_MODAL_SUCCESS action", () => {
+  it("Receives a SHOW_EIDAS_MODAL action", () => {
     expect(
       eidasReducer(
         mockState,
         {
-          type: actions.SHOW_EIDAS_MODAL_SUCCESS
+          type: actions.SHOW_EIDAS_MODAL
         }
       )
     ).toEqual(
       {
-        is_fetching: false,
-        failed: false,
-        error: null,
         eidas_sp_freja_idp_url: "",
         showModal: true
       }
@@ -81,9 +62,6 @@ describe("Reducers", () => {
       )
     ).toEqual(
       {
-        is_fetching: false,
-        failed: false,
-        error: null,
         eidas_sp_freja_idp_url: "",
         showModal: false
       }
