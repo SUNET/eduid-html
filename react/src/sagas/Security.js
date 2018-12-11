@@ -202,3 +202,30 @@ export function* verifyU2FToken (win) {
         yield* failRequest(error, tokenVerifyFail);
     }
 }
+
+
+export function* registerWebAuthn () {
+    try {
+        const state = yield select(state => state);
+        const response = yield call(beginWebAuthnRegistration, state.config);
+        if(response.errorCode) {
+          switch (response.errorCode) {
+	      // TODO XXX Add different notifications for different error codes
+            default:
+              yield put(eduidNotify('security.webauthn-registration-error', 'errors'));
+          }
+        } else {
+        }
+        yield put(stopU2fRegistration());
+    } catch(error) {
+        const state = yield select(state => state);
+    }
+}
+
+export function beginWebAuthnRegistration (config) {
+    return window.fetch(config.SECURITY_URL + 'register/begin', {
+        ...postRequest
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
