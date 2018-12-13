@@ -63,7 +63,7 @@ class Security extends Component {
             );
         }, this);
 
-    if (this.props.is_fetching || this.props.u2f_is_fetching) spinning = true;
+    if (this.props.is_fetching || this.props.u2f_is_fetching || this.props.webauthn_is_fetching) spinning = true;
     return (
         <div>
           <div className="intro">
@@ -173,6 +173,24 @@ class Security extends Component {
                   <EduIDButton className="cancel-button"
                           id="cancel-u2f"
                           onClick={this.props.handleCloseU2fModal} >
+                       {this.props.l10n('cm.cancel')}
+                  </EduIDButton>
+              </Modal.Footer>
+          </Modal>
+
+          <Modal show={this.props.webauthn_begun}>
+              <Modal.Header>
+                  <Modal.Title>{this.props.l10n('webauthn.action-required')}</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                  <p>{this.props.l10n('webauthn.push-the-button')}</p>
+              </Modal.Body>
+
+              <Modal.Footer>
+                  <EduIDButton className="cancel-button"
+                          id="cancel-webauthn"
+                          onClick={this.props.handleCloseWebauthnModal} >
                        {this.props.l10n('cm.cancel')}
                   </EduIDButton>
               </Modal.Footer>

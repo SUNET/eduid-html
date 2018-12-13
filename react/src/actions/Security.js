@@ -25,7 +25,10 @@ export const START_WEBAUTHN_REGISTRATION = 'START_WEBAUTHN_REGISTRATION';
 export const STOP_WEBAUTHN_REGISTRATION = 'STOP_WEBAUTHN_REGISTRATION';
 export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
 export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
+export const GET_WEBAUTHN_BEGIN_FAIL = 'GET_WEBAUTHN_WEBAUTHN_BEGIN_FAIL';
+export const GET_WEBAUTHN_BEGIN_SUCCESS = 'GET_WEBAUTHN_WEBAUTHN_BEGIN_SUCCESS';
 export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
+export const GET_WEBAUTHN_REGISTER_FAIL = 'GET_WEBAUTHN_WEBAUTHN_REGISTER_FAIL';
 export const POST_U2F_BIND_SUCCESS = 'POST_U2F_U2F_BIND_SUCCESS';
 export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
 export const POST_U2F_REMOVE = 'POST_U2F_U2F_REMOVE';
@@ -201,9 +204,31 @@ export function enrollU2FFail (err) {
   };
 }
 
+export function beginWebauthnFail (err) {
+  return {
+    type: GET_WEBAUTHN_BEGIN_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
 export function registerU2FFail (err) {
   return {
     type: GET_U2F_REGISTER_FAIL,
+    error: true,
+    payload: {
+      error: new Error(err),
+      message: err
+    }
+  };
+}
+
+export function registerWebauthnFail (err) {
+  return {
+    type: GET_WEBAUTHN_REGISTER_FAIL,
     error: true,
     payload: {
       error: new Error(err),

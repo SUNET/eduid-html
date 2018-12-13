@@ -7,8 +7,8 @@ import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
          enrollU2FFail, stopU2fRegistration,
-	 registerU2FFail, tokenRemovedFail,
-         registerWebAuthnFail } from "actions/Security";
+         registerU2FFail, tokenRemovedFail,
+         registerWebauthnFail, GET_WEBAUTHN_BEGIN_SUCCESS } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
 import {tokenVerifyFail} from "../actions/Security";
 
@@ -206,23 +206,17 @@ export function* verifyU2FToken (win) {
 }
 
 
-export function* registerWebAuthn () {
+export function* beginRegisterWebauthn () {
     try {
         const state = yield select(state => state);
-        const options = yield call(beginWebAuthnRegistration, state.config);
-	const attestation = navigator.credentials.create(options);
-	const data = {
-	    attestationObject: attestation.response.attestationObject,
-	    clientDataJSON: attestation.response.clientDataJSON
-	}
-        const result = yield call(webAuthnRegistration, state.config, data);
-        yield put(result);
+        //const result = yield call(beginWebauthnRegistration, state.config);
+        yield put({type: GET_WEBAUTHN_BEGIN_SUCCESS, payload: {password: {id: 'hoho', password: 'hihi'}}});
     } catch(error) {
-        yield* failRequest(error, registerWebAuthnFail);
+        yield* failRequest(error, registerWebauthnFail);
     }
 }
 
-export function beginWebAuthnRegistration (config) {
+export function beginWebauthnRegistration (config) {
     return window.fetch(config.SECURITY_URL + 'register/begin', {
         ...postRequest
     })
@@ -230,7 +224,23 @@ export function beginWebAuthnRegistration (config) {
     .then(response => response.json())
 }
 
-export function webAuthnRegistration (config, data) {
+
+export function* registerWebauthn () {
+    try {
+        const state = yield select(state => state);
+        const attestation = yield call(navigator.credentials.create, state.security.webauthn_options);
+        const data = {
+            attestationObject: attestation.response.attestationObject,
+            clientDataJSON: attestation.response.clientDataJSON
+        }
+        const result = yield call(webauthnRegistration, state.config, data);
+        yield put(result);
+    } catch(error) {
+        yield* failRequest(error, registerWebauthnFail);
+    }
+}
+
+export function webauthnRegistration (config, data) {
     return window.fetch(config.SECURITY_URL + 'register/complete', {
         ...postRequest,
         body: JSON.stringify(data)

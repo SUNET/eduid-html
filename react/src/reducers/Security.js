@@ -23,6 +23,8 @@ const security = {
     webauthn_failed: false,
     u2f_is_enrolled: false,
     u2f_request: {},
+    webauthn_begun: false,
+    webauthn_options: {},
     u2f_token_remove: '',
     u2f_token_verify: ''
 };
@@ -144,6 +146,20 @@ let securityReducer = (state=security, action) => {
         u2f_is_enrolled: false,
         u2f_failed: false
       };
+    case actions.START_WEBAUTHN_REGISTRATION:
+      return {
+        ...state,
+        webauthn_is_fetching: true,
+        webauthn_failed: false,
+        webauthn_token_description: action.payload.description
+      };
+    case actions.STOP_WEBAUTHN_REGISTRATION:
+      return {
+        ...state,
+        webauthn_is_fetching: false,
+        webauthn_begun: false,
+        webauthn_failed: false
+      };
     case actions.START_ASK_U2F_DESCRIPTION:
       return {
         ...state,
@@ -195,6 +211,23 @@ let securityReducer = (state=security, action) => {
         u2f_failed: false,
         u2f_is_enrolled: true,
         u2f_request: action.payload
+      };
+    case actions.GET_WEBAUTHN_BEGIN_FAIL:
+      return {
+        ...state,
+        webauthn_is_fetching: false,
+        webauthn_failed: true,
+        webauthn_begun: false,
+        error: action.payload.error,
+        message: action.payload.message
+      };
+    case actions.GET_WEBAUTHN_BEGIN_SUCCESS:
+      return {
+        ...state,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: true,
+        webauthn_options: action.payload
       };
     case actions.GET_U2F_REGISTER_FAIL:
       return {

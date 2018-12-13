@@ -12,19 +12,20 @@ import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
-  return {
-     credentials: state.security.credentials,
-     confirming_change: state.security.confirming_change,
-     confirming_deletion: state.security.confirming_deletion,
-     is_fetching: state.security.is_fetching,
-     redirect_to: state.security.location,
-     deleted: state.security.deleted,
-     u2f_asking_description: state.security.u2f_asking_description,
-     u2f_is_fetching: state.security.u2f_is_fetching,
-     webauthn_asking_description: state.security.webauthn_asking_description,
-     webauthn_is_fetching: state.security.webauthn_is_fetching,
-     u2f_is_enrolled: state.security.u2f_is_enrolled
-  }
+    return {
+        credentials: state.security.credentials,
+        confirming_change: state.security.confirming_change,
+        confirming_deletion: state.security.confirming_deletion,
+        is_fetching: state.security.is_fetching,
+        redirect_to: state.security.location,
+        deleted: state.security.deleted,
+        u2f_asking_description: state.security.u2f_asking_description,
+        u2f_is_fetching: state.security.u2f_is_fetching,
+        webauthn_asking_description: state.security.webauthn_asking_description,
+        webauthn_is_fetching: state.security.webauthn_is_fetching,
+        u2f_is_enrolled: state.security.u2f_is_enrolled,
+        webauthn_begun: state.security.webauthn_begun,
+    }
 };
 
 
@@ -76,6 +77,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     handleCloseU2fModal: function (e) {
         dispatch(stopU2fRegistration());
+    },
+    handleCloseWebauthnModal: function (e) {
+        dispatch(stopWebauthnRegistration());
     },
     handleRemoveU2FToken: function (e) {
         const token = e.target.closest('.u2f-token-holder').dataset.token;
