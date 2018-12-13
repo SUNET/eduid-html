@@ -13,20 +13,14 @@ const security = {
     confirming_deletion: false,
     location: '',
     deleted: false,
-    u2f_asking_description: false,
     webauthn_asking_description: false,
-    u2f_token_description: '',
     webauthn_token_description: '',
-    u2f_is_fetching: false,
-    u2f_failed: false,
     webauthn_is_fetching: false,
     webauthn_failed: false,
-    u2f_is_enrolled: false,
-    u2f_request: {},
     webauthn_begun: false,
     webauthn_options: {},
-    u2f_token_remove: '',
-    u2f_token_verify: ''
+    webauthn_token_remove: '',
+    webauthn_token_verify: ''
 };
 
 
@@ -132,20 +126,6 @@ let securityReducer = (state=security, action) => {
         error: action.payload.error,
         message: action.payload.message
       };
-    case actions.START_U2F_REGISTRATION:
-      return {
-        ...state,
-        u2f_is_fetching: true,
-        u2f_failed: false,
-        u2f_token_description: action.payload.description
-      };
-    case actions.STOP_U2F_REGISTRATION:
-      return {
-        ...state,
-        u2f_is_fetching: false,
-        u2f_is_enrolled: false,
-        u2f_failed: false
-      };
     case actions.START_WEBAUTHN_REGISTRATION:
       return {
         ...state,
@@ -159,22 +139,6 @@ let securityReducer = (state=security, action) => {
         webauthn_is_fetching: false,
         webauthn_begun: false,
         webauthn_failed: false
-      };
-    case actions.START_ASK_U2F_DESCRIPTION:
-      return {
-        ...state,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_asking_description: true
-      };
-    case actions.STOP_ASK_U2F_DESCRIPTION:
-      return {
-        ...state,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_asking_description: false
       };
     case actions.START_ASK_WEBAUTHN_DESCRIPTION:
       return {
@@ -191,26 +155,6 @@ let securityReducer = (state=security, action) => {
         webauthn_failed: false,
         webauthn_is_enrolled: false,
         webauthn_asking_description: false
-      };
-    case actions.GET_U2F_ENROLL_FAIL:
-      return {
-        ...state,
-        u2f_is_fetching: false,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        error: action.payload.error,
-        message: action.payload.message
-      };
-    case actions.GET_U2F_ENROLL_SUCCESS:
-      action.payload.registerRequests.forEach(function (rr) {
-          rr.appId = action.payload.appId;
-      });
-      return {
-        ...state,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: true,
-        u2f_request: action.payload
       };
     case actions.GET_WEBAUTHN_BEGIN_FAIL:
       return {
@@ -229,65 +173,47 @@ let securityReducer = (state=security, action) => {
         webauthn_begun: true,
         webauthn_options: action.payload
       };
-    case actions.GET_U2F_REGISTER_FAIL:
+    case actions.POST_WEBAUTHN_REMOVE:
       return {
         ...state,
-        u2f_is_fetching: false,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        error: action.payload.error,
-        message: action.payload.message
+        webauthn_token_remove: action.payload.token,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_is_fetching: true,
+        is_fetching: false
       };
-    case actions.POST_U2F_BIND_SUCCESS:
+    case actions.POST_WEBAUTHN_REMOVE_FAIL:
+      return {
+        ...state,
+        webauthn_failed: true,
+        webauthn_begun: false,
+        webauthn_is_fetching: false,
+        is_fetching: false
+      };
+    case actions.POST_WEBAUTHN_REMOVE_SUCCESS:
       return {
         ...state,
         ...action.payload,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_is_fetching: false,
         is_fetching: false
       };
-    case actions.POST_U2F_REMOVE:
+    case actions.POST_WEBAUTHN_VERIFY:
       return {
         ...state,
-        u2f_token_remove: action.payload.token,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: true,
+        webauthn_token_verify: action.payload.token,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_is_fetching: true,
         is_fetching: false
       };
-    case actions.POST_U2F_REMOVE_FAIL:
+    case actions.POST_WEBAUTHN_VERIFY_FAIL:
       return {
         ...state,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: false,
-        is_fetching: false
-      };
-    case actions.POST_U2F_REMOVE_SUCCESS:
-      return {
-        ...state,
-        ...action.payload,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: false,
-        is_fetching: false
-      };
-    case actions.POST_U2F_VERIFY:
-      return {
-        ...state,
-        u2f_token_verify: action.payload.token,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: true,
-        is_fetching: false
-      };
-    case actions.POST_U2F_VERIFY_FAIL:
-      return {
-        ...state,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        u2f_is_fetching: false,
+        webauthn_failed: true,
+        webauthn_begun: false,
+        webauthn_is_fetching: false,
         is_fetching: false
       };
     default:

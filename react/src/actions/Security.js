@@ -19,25 +19,16 @@ export const POST_DELETE_ACCOUNT_FAIL = 'POST_SECURITY_TERMINATE_ACCOUNT_FAIL';
 export const GET_DELETE_ACCOUNT = 'GET_SECURITY_ACCOUNT_TERMINATED';
 export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCESS';
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
-export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
-export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
 export const START_WEBAUTHN_REGISTRATION = 'START_WEBAUTHN_REGISTRATION';
 export const STOP_WEBAUTHN_REGISTRATION = 'STOP_WEBAUTHN_REGISTRATION';
-export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
-export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
 export const GET_WEBAUTHN_BEGIN_FAIL = 'GET_WEBAUTHN_WEBAUTHN_BEGIN_FAIL';
 export const GET_WEBAUTHN_BEGIN_SUCCESS = 'GET_WEBAUTHN_WEBAUTHN_BEGIN_SUCCESS';
-export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
 export const GET_WEBAUTHN_REGISTER_FAIL = 'GET_WEBAUTHN_WEBAUTHN_REGISTER_FAIL';
-export const POST_U2F_BIND_SUCCESS = 'POST_U2F_U2F_BIND_SUCCESS';
-export const POST_U2F_BIND_FAIL = 'POST_U2F_U2F_BIND_FAIL';
-export const POST_U2F_REMOVE = 'POST_U2F_U2F_REMOVE';
-export const POST_U2F_REMOVE_SUCCESS = 'POST_U2F_U2F_REMOVE_SUCCESS';
-export const POST_U2F_REMOVE_FAIL = 'POST_U2F_U2F_REMOVE_FAIL';
-export const POST_U2F_VERIFY = 'POST_U2F_VERIFY';
-export const POST_U2F_VERIFY_FAIL = 'POST_U2F_VERIFY_FAIL';
-export const START_ASK_U2F_DESCRIPTION = 'START_ASK_U2F_DESCRIPTION';
-export const STOP_ASK_U2F_DESCRIPTION = 'STOP_ASK_U2F_DESCRIPTION';
+export const POST_WEBAUTHN_REMOVE = 'POST_WEBAUTHN_WEBAUTHN_REMOVE';
+export const POST_WEBAUTHN_REMOVE_SUCCESS = 'POST_WEBAUTHN_WEBAUTHN_REMOVE_SUCCESS';
+export const POST_WEBAUTHN_REMOVE_FAIL = 'POST_WEBAUTHN_WEBAUTHN_REMOVE_FAIL';
+export const POST_WEBAUTHN_VERIFY = 'POST_WEBAUTHN_VERIFY';
+export const POST_WEBAUTHN_VERIFY_FAIL = 'POST_WEBAUTHN_VERIFY_FAIL';
 export const START_ASK_WEBAUTHN_DESCRIPTION = 'START_ASK_WEBAUTHN_DESCRIPTION';
 export const STOP_ASK_WEBAUTHN_DESCRIPTION = 'STOP_ASK_WEBAUTHN_DESCRIPTION';
 
@@ -136,19 +127,6 @@ export function accountRemovedFail (err) {
 }
 
 
-export function startAskU2FDescription () {
-  return {
-    type: START_ASK_U2F_DESCRIPTION,
-  };
-}
-
-export function stopAskU2FDescription () {
-  return {
-    type: STOP_ASK_U2F_DESCRIPTION,
-  };
-}
-
-
 export function startAskWebauthnDescription () {
   return {
     type: START_ASK_WEBAUTHN_DESCRIPTION,
@@ -158,22 +136,6 @@ export function startAskWebauthnDescription () {
 export function stopAskWebauthnDescription () {
   return {
     type: STOP_ASK_WEBAUTHN_DESCRIPTION,
-  };
-}
-
-
-export function startU2fRegistration (description) {
-  return {
-    type: START_U2F_REGISTRATION,
-    payload: {
-        description: description
-    }
-  };
-}
-
-export function stopU2fRegistration () {
-  return {
-    type: STOP_U2F_REGISTRATION
   };
 }
 
@@ -193,31 +155,9 @@ export function stopWebauthnRegistration () {
   };
 }
 
-export function enrollU2FFail (err) {
-  return {
-    type: GET_U2F_ENROLL_FAIL,
-    error: true,
-    payload: {
-      error: new Error(err),
-      message: err
-    }
-  };
-}
-
 export function beginWebauthnFail (err) {
   return {
     type: GET_WEBAUTHN_BEGIN_FAIL,
-    error: true,
-    payload: {
-      error: new Error(err),
-      message: err
-    }
-  };
-}
-
-export function registerU2FFail (err) {
-  return {
-    type: GET_U2F_REGISTER_FAIL,
     error: true,
     payload: {
       error: new Error(err),
@@ -237,9 +177,9 @@ export function registerWebauthnFail (err) {
   };
 }
 
-export function postRemoveU2FToken (token) {
+export function postRemoveWebauthnToken (token) {
   return {
-    type: POST_U2F_REMOVE,
+    type: POST_WEBAUTHN_REMOVE,
     payload: {
         token: token
     }
@@ -248,7 +188,7 @@ export function postRemoveU2FToken (token) {
 
 export function tokenRemovedFail (err) {
   return {
-    type: POST_U2F_REMOVE_FAIL,
+    type: POST_WEBAUTHN_REMOVE_FAIL,
     error: true,
     payload: {
       error: new Error(err),
@@ -257,9 +197,9 @@ export function tokenRemovedFail (err) {
   };
 }
 
-export function postVerifyU2FToken (token) {
+export function postVerifyWebauthnToken (token) {
   return {
-    type: POST_U2F_VERIFY,
+    type: POST_WEBAUTHN_VERIFY,
     payload: {
         token: token
     }
@@ -268,7 +208,7 @@ export function postVerifyU2FToken (token) {
 
 export function tokenVerifyFail (err) {
   return {
-    type: POST_U2F_VERIFY_FAIL,
+    type: POST_WEBAUTHN_VERIFY_FAIL,
     error: true,
     payload: {
       error: new Error(err),
