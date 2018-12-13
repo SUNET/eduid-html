@@ -99,6 +99,14 @@ class Security extends Component {
                       {this.props.l10n('security.add_u2f_token')}
             </EduIDButton>
           </div>
+          <div id="add-webauthn-token">
+            <EduIDButton bsStyle="primary"
+                        id="security-webauthn-button"
+                        spinning={spinning}
+                        onClick={this.props.handleStartAskingWebauthnDescription}>
+                      {this.props.l10n('security.add_webauthn_token')}
+            </EduIDButton>
+          </div>
           <div className="second-block">
               <div className="intro">
                  <h4>{this.props.l10n('security.account_title')}</h4>
@@ -137,6 +145,19 @@ class Security extends Component {
               showModal={Boolean(this.props.u2f_asking_description)}
               closeModal={this.props.handleStopAskingU2FDescription}
               handleConfirm={this.props.handleStartU2fRegistration}
+              is_fetching={false} />
+          <ConfirmModal
+              modalId="describeWebauthnTokenDialog"
+              controlId="describeWebauthnTokenDialogControl"
+              title={this.props.l10n('security.webauthn-describe-title')}
+              resendLabel=""
+              resendHelp=""
+              resendText=""
+              placeholder=""
+              with_resend_link={false}
+              showModal={Boolean(this.props.webauthn_asking_description)}
+              closeModal={this.props.handleStopAskingWebauthnDescription}
+              handleConfirm={this.props.handleStartWebauthnRegistration}
               is_fetching={false} />
 
           <Modal show={this.props.u2f_is_enrolled}>

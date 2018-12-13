@@ -21,6 +21,8 @@ export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCE
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
 export const START_U2F_REGISTRATION = 'START_U2F_REGISTRATION';
 export const STOP_U2F_REGISTRATION = 'STOP_U2F_REGISTRATION';
+export const START_WEBAUTHN_REGISTRATION = 'START_WEBAUTHN_REGISTRATION';
+export const STOP_WEBAUTHN_REGISTRATION = 'STOP_WEBAUTHN_REGISTRATION';
 export const GET_U2F_ENROLL_FAIL = 'GET_U2F_U2F_ENROLL_FAIL';
 export const GET_U2F_ENROLL_SUCCESS = 'GET_U2F_U2F_ENROLL_SUCCESS';
 export const GET_U2F_REGISTER_FAIL = 'GET_U2F_U2F_REGISTER_FAIL';
@@ -33,6 +35,8 @@ export const POST_U2F_VERIFY = 'POST_U2F_VERIFY';
 export const POST_U2F_VERIFY_FAIL = 'POST_U2F_VERIFY_FAIL';
 export const START_ASK_U2F_DESCRIPTION = 'START_ASK_U2F_DESCRIPTION';
 export const STOP_ASK_U2F_DESCRIPTION = 'STOP_ASK_U2F_DESCRIPTION';
+export const START_ASK_WEBAUTHN_DESCRIPTION = 'START_ASK_WEBAUTHN_DESCRIPTION';
+export const STOP_ASK_WEBAUTHN_DESCRIPTION = 'STOP_ASK_WEBAUTHN_DESCRIPTION';
 
 
 export function getCredentials () {
@@ -142,6 +146,19 @@ export function stopAskU2FDescription () {
 }
 
 
+export function startAskWebauthnDescription () {
+  return {
+    type: START_ASK_WEBAUTHN_DESCRIPTION,
+  };
+}
+
+export function stopAskWebauthnDescription () {
+  return {
+    type: STOP_ASK_WEBAUTHN_DESCRIPTION,
+  };
+}
+
+
 export function startU2fRegistration (description) {
   return {
     type: START_U2F_REGISTRATION,
@@ -154,6 +171,22 @@ export function startU2fRegistration (description) {
 export function stopU2fRegistration () {
   return {
     type: STOP_U2F_REGISTRATION
+  };
+}
+
+
+export function startWebauthnRegistration (description) {
+  return {
+    type: START_WEBAUTHN_REGISTRATION,
+    payload: {
+        description: description
+    }
+  };
+}
+
+export function stopWebauthnRegistration () {
+  return {
+    type: STOP_WEBAUTHN_REGISTRATION
   };
 }
 

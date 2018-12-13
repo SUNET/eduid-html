@@ -6,7 +6,9 @@ import { checkStatus, ajaxHeaders, putCsrfToken,
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
-         enrollU2FFail, stopU2fRegistration, registerU2FFail, tokenRemovedFail } from "actions/Security";
+         enrollU2FFail, stopU2fRegistration,
+	 registerU2FFail, tokenRemovedFail,
+         registerWebAuthnFail } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
 import {tokenVerifyFail} from "../actions/Security";
 
@@ -207,24 +209,31 @@ export function* verifyU2FToken (win) {
 export function* registerWebAuthn () {
     try {
         const state = yield select(state => state);
-        const response = yield call(beginWebAuthnRegistration, state.config);
-        if(response.errorCode) {
-          switch (response.errorCode) {
-	      // TODO XXX Add different notifications for different error codes
-            default:
-              yield put(eduidNotify('security.webauthn-registration-error', 'errors'));
-          }
-        } else {
-        }
-        yield put(stopU2fRegistration());
+        const options = yield call(beginWebAuthnRegistration, state.config);
+	const attestation = navigator.credentials.create(options);
+	const data = {
+	    attestationObject: attestation.response.attestationObject,
+	    clientDataJSON: attestation.response.clientDataJSON
+	}
+        const result = yield call(webAuthnRegistration, state.config, data);
+        yield put(result);
     } catch(error) {
-        const state = yield select(state => state);
+        yield* failRequest(error, registerWebAuthnFail);
     }
 }
 
 export function beginWebAuthnRegistration (config) {
     return window.fetch(config.SECURITY_URL + 'register/begin', {
         ...postRequest
+    })
+    .then(checkStatus)
+    .then(response => response.json())
+}
+
+export function webAuthnRegistration (config, data) {
+    return window.fetch(config.SECURITY_URL + 'register/complete', {
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())

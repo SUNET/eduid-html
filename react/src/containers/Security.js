@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
-          startU2fRegistration, stopU2fRegistration, postRemoveU2FToken,
-          startAskU2FDescription, stopAskU2FDescription, postVerifyU2FToken} from "actions/Security";
+         startU2fRegistration, stopU2fRegistration, postRemoveU2FToken,
+         startWebauthnRegistration, stopWebauthnRegistration,
+         startAskU2FDescription, stopAskU2FDescription, postVerifyU2FToken,
+         startAskWebauthnDescription, stopAskWebauthnDescription} from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
@@ -19,6 +21,8 @@ const mapStateToProps = (state, props) => {
      deleted: state.security.deleted,
      u2f_asking_description: state.security.u2f_asking_description,
      u2f_is_fetching: state.security.u2f_is_fetching,
+     webauthn_asking_description: state.security.webauthn_asking_description,
+     webauthn_is_fetching: state.security.webauthn_is_fetching,
      u2f_is_enrolled: state.security.u2f_is_enrolled
   }
 };
@@ -53,10 +57,22 @@ const mapDispatchToProps = (dispatch, props) => {
     handleStopAskingU2FDescription: function (e) {
         dispatch(stopAskU2FDescription());
     },
+    handleStartAskingWebauthnDescription: function (e) {
+        dispatch(eduidRMAllNotify());
+        dispatch(startAskWebauthnDescription());
+    },
+    handleStopAskingWebauthnDescription: function (e) {
+        dispatch(stopAskWebauthnDescription());
+    },
     handleStartU2fRegistration: function (e) {
         const description = document.getElementById('describeU2FTokenDialogControl').value;
         dispatch(stopAskU2FDescription());
         dispatch(startU2fRegistration(description));
+    },
+    handleStartWebauthnRegistration: function (e) {
+        const description = document.getElementById('describeWebauthnTokenDialogControl').value;
+        dispatch(stopAskWebauthnDescription());
+        dispatch(startWebauthnRegistration(description));
     },
     handleCloseU2fModal: function (e) {
         dispatch(stopU2fRegistration());

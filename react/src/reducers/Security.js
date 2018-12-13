@@ -14,9 +14,13 @@ const security = {
     location: '',
     deleted: false,
     u2f_asking_description: false,
+    webauthn_asking_description: false,
     u2f_token_description: '',
+    webauthn_token_description: '',
     u2f_is_fetching: false,
     u2f_failed: false,
+    webauthn_is_fetching: false,
+    webauthn_failed: false,
     u2f_is_enrolled: false,
     u2f_request: {},
     u2f_token_remove: '',
@@ -155,6 +159,22 @@ let securityReducer = (state=security, action) => {
         u2f_failed: false,
         u2f_is_enrolled: false,
         u2f_asking_description: false
+      };
+    case actions.START_ASK_WEBAUTHN_DESCRIPTION:
+      return {
+        ...state,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_is_enrolled: false,
+        webauthn_asking_description: true
+      };
+    case actions.STOP_ASK_WEBAUTHN_DESCRIPTION:
+      return {
+        ...state,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_is_enrolled: false,
+        webauthn_asking_description: false
       };
     case actions.GET_U2F_ENROLL_FAIL:
       return {
