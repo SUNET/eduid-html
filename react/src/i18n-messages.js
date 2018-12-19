@@ -977,15 +977,20 @@ const msgs = {
           id="security.remove"
           defaultMessage={`Remove`} />),
 
-    'security.verify': (
+    'security.status': (
         <FormattedMessage
-          id="security.verify"
-          defaultMessage={`Verify`} />),
+          id="security.status"
+          defaultMessage={`Status`} />),
 
-    'security.verified': (
+    'security.confirm_with_eid': (
         <FormattedMessage
-          id="security.verified"
-          defaultMessage={`Verified`} />),
+          id="security.confirm_with_eid"
+          defaultMessage={`Confirm with Freja eID`} />),
+
+    'security.confirmed': (
+        <FormattedMessage
+          id="security.confirmed"
+          defaultMessage={`Confirmed`} />),
 
     'security.main_title': (
         <FormattedMessage

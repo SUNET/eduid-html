@@ -656,12 +656,16 @@
     "defaultMessage": "Remove"
   },
   {
-    "id": "security.verify",
-    "defaultMessage": "Verify"
+    "id": "security.status",
+    "defaultMessage": "Status"
   },
   {
-    "id": "security.verified",
-    "defaultMessage": "Verified"
+    "id": "security.confirm_with_eid",
+    "defaultMessage": "Confirm with Freja eID"
+  },
+  {
+    "id": "security.confirmed",
+    "defaultMessage": "Confirmed"
   },
   {
     "id": "security.main_title",
