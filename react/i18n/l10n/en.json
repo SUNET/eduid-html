@@ -162,7 +162,7 @@
   "oc.get_qrcode": "SE-LEG",
   "oc.initialize_proofing": "SE-LEG",
   "oc.initialize_proofing_help_text": "To use this option you need to visit a <a href=\"https://www.sunet.se/samarbeten/projekt-nationell-tjanst-for-grundidentifiering/\" target=\"_blank\">SE-LEG RA</a> and show identification.",
-  "oc.instructions_step_1": "Visit the nearest library on this list: <ul><li>Mjölby: Burensköldsvägen 13</li><li>Motala: Repslagaregatan 1</li><li>Söderköping: Margaretagatan 19</li><li>Åtvidaberg: B-fabriksgränd 4</li></ul>",
+  "oc.instructions_step_1": "Visit the nearest library on this list: <ul><li>Mjölby: Burensköldsvägen 13</li><li>Motala: Repslagaregatan 1</li><li>Åtvidaberg: B-fabriksgränd 4</li></ul>",
   "oc.instructions_step_2": "Bring your chosen form of ID and the QR code below and ask the librarian for a verification of your eduID account.",
   "oc.instructions_step_3": "Within a couple of hours you account should be verified.",
   "oc.instructions_title": "How to confirm your account using SE-LEG",

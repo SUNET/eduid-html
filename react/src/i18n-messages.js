@@ -520,7 +520,7 @@ const msgs = {
     'oc.instructions_step_1': (
         <FormattedHTMLMessage
           id="oc.instructions_step_1"
-          defaultMessage={`Visit the nearest library on this list: <ul><li>Mjölby: Burensköldsvägen 13</li><li>Motala: Repslagaregatan 1</li><li>Söderköping: Margaretagatan 19</li><li>Åtvidaberg: B-fabriksgränd 4</li></ul>`} />),
+          defaultMessage={`Visit the nearest library on this list: <ul><li>Mjölby: Burensköldsvägen 13</li><li>Motala: Repslagaregatan 1</li><li>Åtvidaberg: B-fabriksgränd 4</li></ul>`} />),
 
     'oc.instructions_step_2': (
         <FormattedMessage
