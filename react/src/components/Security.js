@@ -26,7 +26,7 @@ class Security extends Component {
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             let btnRemove = '';
-            let btnVerify = '';
+            let btnConfirm = '';
             if (cred.credential_type === 'security.webauthn_credential_type') {
                 btnRemove = (<div className="btn-group btn-group-xs" role="group">
                               <button className="btn btn-link btn-remove-webauthn"
@@ -35,14 +35,14 @@ class Security extends Component {
                               </button>
                             </div>);
                 if (cred.verified) {
-                  btnVerify = (<div role="group">
-                                {this.props.l10n('security.verified')}
+                  btnConfirm = (<div role="group">
+                                {this.props.l10n('security.confirmed')}
                               </div>);
                 } else {
-                  btnVerify = (<div className="btn-group btn-group-xs" role="group">
+                  btnConfirm = (<div className="btn-group btn-group-xs" role="group">
                            <button className="btn btn-link btn-verify-webauthn"
                                    onClick={this.props.handleVerifyWebauthnToken}>
-                             {this.props.l10n('security.verify')}
+                             {this.props.l10n('security.confirm_with_eid')}
                            </button>
                          </div>);
                 }
@@ -57,7 +57,7 @@ class Security extends Component {
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.created_ts).toString()}>{date_created}</td>
                         <td data-toggle="tooltip" data-placement="top" title={new Date(cred.success_ts).toString()}>{date_success}</td>
                         <td>{cred.description}</td>
-                        <td>{btnVerify}</td>
+                        <td>{btnConfirm}</td>
                         <td>{btnRemove}</td>
                     </tr>
             );
@@ -77,7 +77,7 @@ class Security extends Component {
                     <th>{this.props.l10n('security.creation_date')}</th>
                     <th>{this.props.l10n('security.last_used')}</th>
                     <th>{this.props.l10n('security.description')}</th>
-                    <th>{this.props.l10n('security.verify')}</th>
+                    <th>{this.props.l10n('security.status')}</th>
                     <th>{this.props.l10n('security.remove')}</th>
                 </tr>
                 {creds_table}
