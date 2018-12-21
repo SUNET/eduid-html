@@ -132,19 +132,6 @@ export function* beginRegisterWebauthn () {
         const state = yield select(state => state);
         const result = yield call(beginWebauthnRegistration, state.config);
         yield put(result);
-        // yield put({type: GET_WEBAUTHN_BEGIN_SUCCESS,
-        //             payload: {'publicKey': {'attestation': 'none',
-        //        'authenticatorSelection': {'requireResidentKey': false,
-        //                                    'userVerification': 'preferred'},
-        //        'challenge': 'D\xea\xb1\xbb\xc2\x1d\x80\x1a\xf8\xef+\x90"]zrE\xfb\x00\xd8\xdc\x9f\xb5t\xdc\xd9\x11\x94\xcb}\x17\x1e',
-        //        'excludeCredentials': [],
-        //        'pubKeyCredParams': [{'alg': -7, 'type': 'public-key'}],
-        //        'rp': {'id': 'www.dev.eduid.se', 'name': 'Demo server'},
-        //        'timeout': 30000,
-        //        'user': {'displayName': 'A. User',
-        //                  'icon': 'https://example.com/image.png',
-        //                  'id': 'user_id',
-        //                 'name': 'a_user'}}}});
     } catch(error) {
         yield* failRequest(error, registerWebauthnFail);
     }
