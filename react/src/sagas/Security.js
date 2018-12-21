@@ -138,7 +138,7 @@ export function* beginRegisterWebauthn () {
 }
 
 export function beginWebauthnRegistration (config) {
-    return window.fetch(config.SECURITY_URL + 'register/begin', {
+    return window.fetch(config.SECURITY_URL + 'webauthn-register/begin', {
         ...postRequest
     })
     .then(checkStatus)
@@ -162,7 +162,7 @@ export function* registerWebauthn () {
 }
 
 export function webauthnRegistration (config, data) {
-    return window.fetch(config.SECURITY_URL + 'register/complete', {
+    return window.fetch(config.SECURITY_URL + 'webauthn-register/complete', {
         ...postRequest,
         body: JSON.stringify(data)
     })
