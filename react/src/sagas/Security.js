@@ -151,8 +151,8 @@ export function* registerWebauthn () {
         const state = yield select(state => state);
         const attestation = yield call(navigator.credentials.create, state.security.webauthn_options);
         const data = {
-            attestationObject: attestation.response.attestationObject,
-            clientDataJSON: attestation.response.clientDataJSON
+            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
+            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON)))
         }
         const result = yield call(webauthnRegistration, state.config, data);
         yield put(result);
