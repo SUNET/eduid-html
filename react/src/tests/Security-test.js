@@ -1098,7 +1098,7 @@ describe("Async component", () => {
 
     const data = {
         csrf_token: 'csrf-token',
-        keyHandle: 'dummy-key'
+        credential_key: 'dummy-key'
     };
 
     next = generator.next(mockState);

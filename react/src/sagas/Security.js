@@ -164,7 +164,7 @@ export function* removeU2FToken () {
         const state = yield select(state => state);
         const data = {
             csrf_token: state.config.csrf_token,
-            keyHandle: state.security.u2f_token_remove
+            credential_key: state.security.u2f_token_remove
         };
         const resp = yield call(removeToken, state.config, data);
         yield put(putCsrfToken(resp));
@@ -187,10 +187,10 @@ export function removeToken(config, data) {
 export function* verifyU2FToken (win) {
     try {
         const state = yield select(state => state);
-        const keyHandle = state.security.u2f_token_verify;
+        const credential_key = state.security.u2f_token_verify;
 
         let idpParam = '?idp=' + state.config.TOKEN_VERIFY_IDP;
-        let url = state.config.EIDAS_URL + 'verify-token/' + keyHandle + idpParam;
+        let url = state.config.EIDAS_URL + 'verify-token/' + credential_key + idpParam;
 
         if (win !== undefined && win.location !== undefined) {
             win.location.href = url;
