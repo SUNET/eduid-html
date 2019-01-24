@@ -162,6 +162,7 @@ let securityReducer = (state=security, action) => {
         webauthn_is_fetching: false,
         webauthn_failed: true,
         webauthn_begun: false,
+        webauthn_asking_description: false
         error: action.payload.error,
         message: action.payload.message
       };
@@ -171,7 +172,8 @@ let securityReducer = (state=security, action) => {
         webauthn_is_fetching: false,
         webauthn_failed: false,
         webauthn_begun: true,
-        webauthn_options: action.payload
+        webauthn_asking_description: false
+        webauthn_options: action.payload.webauthn_options
       };
     case actions.POST_WEBAUTHN_REMOVE:
       return {
