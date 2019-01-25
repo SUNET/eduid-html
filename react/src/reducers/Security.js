@@ -18,7 +18,7 @@ const security = {
     webauthn_is_fetching: false,
     webauthn_failed: false,
     webauthn_begun: false,
-    webauthn_options: {},
+    webauthn_attestation: {},
     webauthn_token_remove: '',
     webauthn_token_verify: ''
 };
@@ -162,7 +162,7 @@ let securityReducer = (state=security, action) => {
         webauthn_is_fetching: false,
         webauthn_failed: true,
         webauthn_begun: false,
-        webauthn_asking_description: false
+        webauthn_asking_description: false,
         error: action.payload.error,
         message: action.payload.message
       };
@@ -172,8 +172,8 @@ let securityReducer = (state=security, action) => {
         webauthn_is_fetching: false,
         webauthn_failed: false,
         webauthn_begun: true,
-        webauthn_asking_description: false
-        webauthn_options: action.payload.webauthn_options
+        webauthn_asking_description: false,
+        webauthn_attestation: action.payload.attestation
       };
     case actions.POST_WEBAUTHN_REMOVE:
       return {

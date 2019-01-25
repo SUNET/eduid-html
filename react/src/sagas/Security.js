@@ -130,13 +130,14 @@ export function* verifyWebauthnToken (win) {
 
 export function* beginRegisterWebauthn () {
     try {
+        console.log('Webauthn begin registration');
         const state = yield select(state => state);
-        if (state.security.webauthn_options) {return}
-        const options = yield call(beginWebauthnRegistration, state.config);
+        //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
+        const attestation = yield call(beginWebauthnRegistration, state.config);
         const action = {
             type: GET_WEBAUTHN_BEGIN_SUCCESS,
             payload: {
-                webauthn_options: options
+                attestation: attestation
             }
         };
         yield put(action);
@@ -151,18 +152,28 @@ export function beginWebauthnRegistration (config) {
         ...getRequest
     })
     .then(checkStatus)
-    .then(response => response.arrayBuffer())
+    .then(response => {
+        const resp = response.arrayBuffer();
+        console.log("Array Buffer options: ", resp);
+        return resp;
+    })
     .then(decode)
+    .then(options => {
+        console.log('Options ', options);    
+        return navigator.credentials.create(options);
+    })
 }
 
 
 export function* registerWebauthn () {
     try {
         const state = yield select(state => state);
-        const attestation = navigator.credentials.create.apply(window, state.security.webauthn_options);
+        const attestation = state.security.webauthn_attestation;
         const data = {
-            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
-            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON)))
+            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation))),
+            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
+            csrf_token: state.config.csrf_token,
+            description: state.security.webauthn_token_description
         }
         const result = yield call(webauthnRegistration, state.config, data);
         yield put(result);
