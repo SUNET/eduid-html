@@ -139,23 +139,6 @@ class Security extends Component {
               handleConfirm={this.props.handleStartWebauthnRegistration}
               is_fetching={false} />
 
-          <Modal show={this.props.webauthn_begun}>
-              <Modal.Header>
-                  <Modal.Title>{this.props.l10n('webauthn.action-required')}</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                  <p>{this.props.l10n('webauthn.push-the-button')}</p>
-              </Modal.Body>
-
-              <Modal.Footer>
-                  <EduIDButton className="cancel-button"
-                          id="cancel-webauthn"
-                          onClick={this.props.handleCloseWebauthnModal} >
-                       {this.props.l10n('cm.cancel')}
-                  </EduIDButton>
-              </Modal.Footer>
-          </Modal>
         </div>
     );
   }
@@ -177,7 +160,6 @@ Security.propTypes = {
   handleStopConfirmationDeletion: PropTypes.func,
   handleConfirmationDeletion: PropTypes.func,
   handleStartWebauthnRegistration: PropTypes.func,
-  handleCloseWebauthnModal: PropTypes.func
 }
 
 export default Security;

@@ -20,7 +20,6 @@ const mapStateToProps = (state, props) => {
         deleted: state.security.deleted,
         webauthn_asking_description: state.security.webauthn_asking_description,
         webauthn_is_fetching: state.security.webauthn_is_fetching,
-        webauthn_begun: state.security.webauthn_begun,
     }
 };
 
@@ -58,9 +57,6 @@ const mapDispatchToProps = (dispatch, props) => {
         const description = document.getElementById('describeWebauthnTokenDialogControl').value;
         dispatch(stopAskWebauthnDescription());
         dispatch(startWebauthnRegistration(description));
-    },
-    handleCloseWebauthnModal: function (e) {
-        dispatch(stopWebauthnRegistration());
     },
     handleRemoveWebauthnToken: function (e) {
         const token = e.target.closest('.webauthn-token-holder').dataset.token;
