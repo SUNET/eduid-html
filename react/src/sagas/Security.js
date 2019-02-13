@@ -169,13 +169,12 @@ export function* registerWebauthn () {
     try {
         const state = yield select(state => state);
         const attestation = state.security.webauthn_attestation;
-        const data = CBOR.encode({
-            attestationObject: new Uint8Array(attestation.response.attestationObject),
-            clientDataJSON: new Uint8Array(attestation.response.clientDataJSON),
-            description:  state.security.webauthn_token_description,
+        const data = {
+            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
+            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
             credentialId:  attestation.id,
-        });
-        console.log('Data to finish webauthn registration', data);
+            description:  state.security.webauthn_token_description,
+        }
         const result = yield call(webauthnRegistration, state.config, data);
         yield put(result);
     } catch(error) {
@@ -184,11 +183,9 @@ export function* registerWebauthn () {
 }
 
 export function webauthnRegistration (config, data) {
-    let cborPostReq = {...postRequest};
-    cborPostReq.headers['Content-Type'] = 'application/cbor'
     return window.fetch(config.SECURITY_URL + 'webauthn/register/complete', {
-        ...cborPostReq,
-        body: data
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
