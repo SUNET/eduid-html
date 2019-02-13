@@ -88,7 +88,7 @@ export function* removeWebauthnToken () {
         const state = yield select(state => state);
         const data = {
             csrf_token: state.config.csrf_token,
-            keyHandle: state.security.webauthn_token_remove
+            credential_key: state.security.webauthn_token_remove
         };
         const resp = yield call(removeToken, state.config, data);
         yield put(putCsrfToken(resp));
@@ -170,6 +170,7 @@ export function* registerWebauthn () {
         const state = yield select(state => state);
         const attestation = state.security.webauthn_attestation;
         const data = {
+            csrf_token: state.config.csrf_token,
             attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
             clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
             credentialId:  attestation.id,
