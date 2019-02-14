@@ -36,6 +36,7 @@
   "cm.lost_code": "Tappat bort din bekräftelsekod?",
   "cm.ok": "OK",
   "cm.resend_code": "Skicka bekräftelsekoden igen",
+  "cred.credential_type": "Credential type.",
   "csrf.try-again": "Ett problem (CSRF) uppstod. Var god försök igen.",
   "eidas.authn_context_mismatch": "Mottog fel representation av tillitsnivå",
   "eidas.error_missing_nin": "Skriv in ett personnummer och försök igen",

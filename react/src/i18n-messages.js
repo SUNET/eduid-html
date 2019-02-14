@@ -962,6 +962,11 @@ const msgs = {
     /* Security ************/
     /***********************/
 
+    'cred.credential_type': (
+        <FormattedMessage
+          id="cred.credential_type"
+          defaultMessage={`Credential type.`} />),
+
     'security.long_description': (
         <FormattedMessage
           id="security.long_description"

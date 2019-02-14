@@ -644,6 +644,10 @@
     "defaultMessage": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits."
   },
   {
+    "id": "cred.credential_type",
+    "defaultMessage": "Credential type."
+  },
+  {
     "id": "security.long_description",
     "defaultMessage": "Your eduID account password can be changed below."
   },

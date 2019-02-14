@@ -36,6 +36,7 @@
   "cm.lost_code": "Lost your confirmation code?",
   "cm.ok": "OK",
   "cm.resend_code": "Resend confirmation code",
+  "cred.credential_type": "Credential type.",
   "csrf.try-again": "There was a problem with your submission, please try again",
   "eidas.authn_context_mismatch": "Wrong authentication context received",
   "eidas.error_missing_nin": "Please add a national identity number and try again",
