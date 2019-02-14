@@ -145,7 +145,6 @@ let securityReducer = (state=security, action) => {
         ...state,
         webauthn_is_fetching: false,
         webauthn_failed: false,
-        webauthn_is_enrolled: false,
         webauthn_asking_description: true
       };
     case actions.STOP_ASK_WEBAUTHN_DESCRIPTION:
@@ -153,7 +152,6 @@ let securityReducer = (state=security, action) => {
         ...state,
         webauthn_is_fetching: false,
         webauthn_failed: false,
-        webauthn_is_enrolled: false,
         webauthn_asking_description: false
       };
     case actions.GET_WEBAUTHN_BEGIN_FAIL:
@@ -180,6 +178,15 @@ let securityReducer = (state=security, action) => {
         ...state,
         ...action.payload,
         webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_is_fetching: false,
+        is_fetching: false
+      };
+    case actions.GET_WEBAUTHN_REGISTER_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        webauthn_failed: true,
         webauthn_begun: false,
         webauthn_is_fetching: false,
         is_fetching: false

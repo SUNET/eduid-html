@@ -962,6 +962,12 @@ const msgs = {
     /* Security ************/
     /***********************/
 
+
+    'InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.': (
+        <FormattedMessage
+          id="InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party."
+          defaultMessage={`You are attempting to register an authenticator that contains one of the credentials already registered with the relying party`} />),
+
     'cred.credential_type': (
         <FormattedMessage
           id="cred.credential_type"

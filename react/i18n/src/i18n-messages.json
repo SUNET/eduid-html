@@ -644,6 +644,10 @@
     "defaultMessage": "Invalid telephone number. It must be a valid Swedish number, or written\n                            using international notation, starting with '+' and followed by 10-20 digits."
   },
   {
+    "id": "InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.",
+    "defaultMessage": "You are attempting to register an authenticator that contains one of the credentials already registered with the relying party"
+  },
+  {
     "id": "cred.credential_type",
     "defaultMessage": "Credential type."
   },

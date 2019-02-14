@@ -177,6 +177,7 @@ export function* registerWebauthn () {
             description:  state.security.webauthn_token_description,
         }
         const result = yield call(webauthnRegistration, state.config, data);
+        yield put(putCsrfToken(result));
         yield put(result);
     } catch(error) {
         yield* failRequest(error, registerWebauthnFail);
