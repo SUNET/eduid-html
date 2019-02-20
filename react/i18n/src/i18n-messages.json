@@ -844,6 +844,10 @@
     "defaultMessage": "Security key successfully removed"
   },
   {
+    "id": "security.webauthn-missing-pdata",
+    "defaultMessage": "You should add your personal data before adding a security token"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
