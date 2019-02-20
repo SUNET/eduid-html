@@ -1211,6 +1211,22 @@ const msgs = {
           id="security.webauthn_register_success"
           defaultMessage={`Security key successfully registered`} />),
 
+    'security.webauthn-token-removed': (
+        <FormattedMessage
+          id="security.webauthn-token-removed"
+          defaultMessage={`Security key successfully removed`} />),
+
+
+    'security.webauthn-missing-pdata': (
+        <FormattedMessage
+          id="security.webauthn-missing-pdata"
+          defaultMessage={`You should add your personal data before adding a security token`} />),
+
+    'security.webauthn.max_allowed_tokens': (
+        <FormattedMessage
+          id="security.webauthn.max_allowed_tokens"
+          defaultMessage={`You have reached the maximum allowed number of tokens`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"

@@ -840,6 +840,10 @@
     "defaultMessage": "Security key successfully registered"
   },
   {
+    "id": "security.webauthn-token-removed",
+    "defaultMessage": "Security key successfully removed"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },
