@@ -1040,11 +1040,15 @@ describe("Async component", () => {
       generator.next();
       let next = generator.next(mockState);
       expect(next.value).toEqual(call(beginWebauthnRegistration, mockState.config));      
+      const options = {'option': 'dummy'};
+      next = generator.next(options);
+      //expect(next.value).toEqual(call(navigator.credentials.create.bind(navigator.credentials), options));
+      const attestation = {'attestation': 'dummy'};
       const action = {
         type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
-        payload: {}
-      }
-      next = generator.next();
+          payload: {attestation: attestation}
+      };
+      next = generator.next(attestation);
       expect(next.value).toEqual(put(action));      
   });
 
