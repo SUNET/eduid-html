@@ -133,11 +133,17 @@ export function* beginRegisterWebauthn () {
         console.log('Webauthn begin registration');
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
-        const attestation = yield call(beginWebauthnRegistration, state.config);
-        const action = {
-            type: GET_WEBAUTHN_BEGIN_SUCCESS,
-            payload: {
-                attestation: attestation
+        const options = yield call(beginWebauthnRegistration, state.config);
+        let action;
+        if (options._status === "error") {
+            action = eduidNotify(options.message, 'errors');
+        } else {
+            const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), options);
+            action = {
+                type: GET_WEBAUTHN_BEGIN_SUCCESS,
+                payload: {
+                    attestation: attestation
+                }
             }
         };
         yield put(action);
@@ -159,8 +165,8 @@ export function beginWebauthnRegistration (config) {
     })
     .then(CBOR.decode)
     .then(options => {
-        console.log('Options ', options);    
-        return navigator.credentials.create(options);
+        console.log('Options ', options);
+        return options;
     })
 }
 
