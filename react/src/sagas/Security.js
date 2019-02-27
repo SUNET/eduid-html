@@ -136,7 +136,14 @@ export function* beginRegisterWebauthn () {
         const options = yield call(beginWebauthnRegistration, state.config);
         let action;
         if (options._status === "error") {
-            action = eduidNotify(options.message, 'errors');
+            action = {
+                type: GET_WEBAUTHN_BEGIN_FAIL,
+                error: true,
+                payload: {
+                    error: new Error(options.message),
+                    message: options.message
+                }
+            }
         } else {
             const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), options);
             action = {
