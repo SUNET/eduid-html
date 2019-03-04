@@ -133,7 +133,7 @@ export function* beginRegisterWebauthn () {
         console.log('Webauthn begin registration');
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
-        const action = yield call(beginWebauthnRegistration, state.config);
+        let action = yield call(beginWebauthnRegistration, state.config);
         if (action.payload.registration_data !== undefined) {
             const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), action.payload.registration_data);
             action = {
