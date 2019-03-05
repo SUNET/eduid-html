@@ -1043,9 +1043,15 @@ describe("Async component", () => {
       //expect(next.value).toEqual(call(navigator.credentials.create.bind(navigator.credentials), options));
       const action = {
         type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
-          payload: {registration_data: 'dummy registration data'}
+          payload: {
+              registration_data: 'dummy registration data',
+              csrf_token: 'dummy-token'
+          }
       };
-      generator.next(action);
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+
+      generator.next();
 
       const attestation = 'dummy attestation'
       const action2 = {
