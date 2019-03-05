@@ -134,6 +134,7 @@ export function* beginRegisterWebauthn () {
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
         let action = yield call(beginWebauthnRegistration, state.config);
+        yield put(putCsrfToken(action));
         if (action.payload.registration_data !== undefined) {
             const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), action.payload.registration_data);
             action = {
@@ -160,7 +161,7 @@ export function beginWebauthnRegistration (config) {
         if (response.payload.registration_data !== undefined) {
             const raw_rdata = response.payload.registration_data;
             const rdata = atob(raw_rdata);
-            const byte_rdata = Uint8Array.from(raw_rdata, c => c.charCodeAt(0));
+            const byte_rdata = Uint8Array.from(rdata, c => c.charCodeAt(0));
             response.payload.registration_data = CBOR.decode(byte_rdata.buffer);
         }
         console.log('Action config: ', response);    
