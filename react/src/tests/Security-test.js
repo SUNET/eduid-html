@@ -1040,16 +1040,28 @@ describe("Async component", () => {
       generator.next();
       let next = generator.next(mockState);
       expect(next.value).toEqual(call(beginWebauthnRegistration, mockState.config));      
-      const options = {'option': 'dummy'};
-      next = generator.next(options);
       //expect(next.value).toEqual(call(navigator.credentials.create.bind(navigator.credentials), options));
-      const attestation = {'attestation': 'dummy'};
       const action = {
         type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
-          payload: {attestation: attestation}
+          payload: {
+              registration_data: 'dummy registration data',
+              csrf_token: 'dummy-token'
+          }
       };
+      next = generator.next(action);
+      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+
+      generator.next();
+
+      const attestation = 'dummy attestation'
+      const action2 = {
+          type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
+          payload: {
+              attestation: attestation
+          }
+      }
       next = generator.next(attestation);
-      expect(next.value).toEqual(put(action));      
+      expect(next.value).toEqual(put(action2));      
   });
 
     it("Sagas Webauthn register", () => {

@@ -133,19 +133,10 @@ export function* beginRegisterWebauthn () {
         console.log('Webauthn begin registration');
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
-        const options = yield call(beginWebauthnRegistration, state.config);
-        let action;
-        if (options._status === "error") {
-            action = {
-                type: GET_WEBAUTHN_BEGIN_FAIL,
-                error: true,
-                payload: {
-                    error: new Error(options.message),
-                    message: options.message
-                }
-            }
-        } else {
-            const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), options);
+        let action = yield call(beginWebauthnRegistration, state.config);
+        yield put(putCsrfToken(action));
+        if (action.payload.registration_data !== undefined) {
+            const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), action.payload.registration_data);
             action = {
                 type: GET_WEBAUTHN_BEGIN_SUCCESS,
                 payload: {
@@ -165,15 +156,16 @@ export function beginWebauthnRegistration (config) {
         ...getRequest
     })
     .then(checkStatus)
+    .then(response => response.json())
     .then(response => {
-        const resp = response.arrayBuffer();
-        console.log("Array Buffer options: ", resp);
-        return resp;
-    })
-    .then(CBOR.decode)
-    .then(options => {
-        console.log('Options ', options);
-        return options;
+        if (response.payload.registration_data !== undefined) {
+            const raw_rdata = response.payload.registration_data;
+            const rdata = atob(raw_rdata);
+            const byte_rdata = Uint8Array.from(rdata, c => c.charCodeAt(0));
+            response.payload.registration_data = CBOR.decode(byte_rdata.buffer);
+        }
+        console.log('Action config: ', response);    
+        return response;
     })
 }
 
