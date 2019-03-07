@@ -756,12 +756,12 @@ const msgs = {
     'eidas.token_not_found': (
           <FormattedMessage
             id="eidas.token_not_found"
-            defaultMessage={`U2F token not found`} />),
+            defaultMessage={`Security key not found`} />),
 
     'eidas.token_not_in_credentials_used': (
           <FormattedMessage
             id="eidas.token_not_in_credentials_used"
-            defaultMessage={`U2F token not used for login`} />),
+            defaultMessage={`Security key not used for login`} />),
 
     'eidas.nin_not_matching': (
           <FormattedMessage
@@ -781,12 +781,17 @@ const msgs = {
     'eidas.token_verify_success': (
           <FormattedMessage
             id="eidas.token_verify_success"
-            defaultMessage={`U2F token verified successfully`} />),
+            defaultMessage={`Security key verified successfully`} />),
 
     'eidas.authn_context_mismatch': (
           <FormattedMessage
             id="eidas.authn_context_mismatch"
             defaultMessage={`Wrong authentication context received`} />),
+
+    'eidas.reauthn_expired': (
+      <FormattedMessage
+        id="eidas.reauthn_expired"
+        defaultMessage={`Authentication has expired. Please try again.`} />),
 
     /************************/
     /* PERSONAL DATA ********/

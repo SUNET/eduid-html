@@ -493,11 +493,11 @@
   },
   {
     "id": "eidas.token_not_found",
-    "defaultMessage": "U2F token not found"
+    "defaultMessage": "Security key not found"
   },
   {
     "id": "eidas.token_not_in_credentials_used",
-    "defaultMessage": "U2F token not used for login"
+    "defaultMessage": "Security key not used for login"
   },
   {
     "id": "eidas.nin_not_matching",
@@ -513,11 +513,15 @@
   },
   {
     "id": "eidas.token_verify_success",
-    "defaultMessage": "U2F token verified successfully"
+    "defaultMessage": "Security key verified successfully"
   },
   {
     "id": "eidas.authn_context_mismatch",
     "defaultMessage": "Wrong authentication context received"
+  },
+  {
+    "id": "eidas.reauthn_expired",
+    "defaultMessage": "Authentication has expired. Please try again."
   },
   {
     "id": "pd.long_description",

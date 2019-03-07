@@ -53,6 +53,7 @@
   "eidas.nin_already_verified": "Du har redan bekräftat din identitet",
   "eidas.nin_not_matching": "Den mottagna identiteten motsvarar inte den bekräftade identiteten på kontot",
   "eidas.nin_verify_success": "Din identitet är bekräftad",
+  "eidas.reauthn_expired": "Autentiseringen har gått ut. Var god försök igen.",
   "eidas.token_not_found": "Säkerhetsnyckeln hittades inte",
   "eidas.token_not_in_credentials_used": "Säkerhetsnyckeln användes inte vid inloggning",
   "eidas.token_verify_success": "Säkerhetsnyckeln verifierad",
