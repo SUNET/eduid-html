@@ -967,6 +967,17 @@ const msgs = {
     /* Security ************/
     /***********************/
 
+
+    'InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.': (
+        <FormattedMessage
+          id="InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party."
+          defaultMessage={`You are attempting to register an authenticator that contains one of the credentials already registered with the relying party`} />),
+
+    'cred.credential_type': (
+        <FormattedMessage
+          id="cred.credential_type"
+          defaultMessage={`Credential type.`} />),
+
     'security.long_description': (
         <FormattedMessage
           id="security.long_description"
@@ -1174,6 +1185,46 @@ const msgs = {
         <FormattedMessage
           id="security.u2f-describe-title"
           defaultMessage={`Enter a description for the U2F token you are about to register`} />),
+
+    'security.unknown_credential_type': (
+        <FormattedMessage
+          id="security.unknown_credential_type"
+          defaultMessage={`Credential with unknown type`} />),
+
+    'security.webauthn_credential_type': (
+        <FormattedMessage
+          id="security.webauthn_credential_type"
+          defaultMessage={`Webauthn Key`} />),
+
+    'security.add_webauthn_token': (
+        <FormattedMessage
+          id="security.add_webauthn_token"
+          defaultMessage={`Add Webauthn Token`} />),
+
+    'security.webauthn-describe-title': (
+        <FormattedMessage
+          id="security.webauthn-describe-title"
+          defaultMessage={`Enter a name for your security key`} />),
+
+    'security.webauthn.max_allowed_tokens': (
+        <FormattedMessage
+          id="security.webauthn.max_allowed_tokens"
+          defaultMessage={`You are not allowed to register more tokens.`} />),
+
+    'security.webauthn_register_success': (
+        <FormattedMessage
+          id="security.webauthn_register_success"
+          defaultMessage={`Security key successfully registered`} />),
+
+    'security.webauthn-token-removed': (
+        <FormattedMessage
+          id="security.webauthn-token-removed"
+          defaultMessage={`Security key successfully removed`} />),
+
+    'security.webauthn-missing-pdata': (
+        <FormattedMessage
+          id="security.webauthn-missing-pdata"
+          defaultMessage={`You should add your personal data before adding a security token`} />),
 
     'chpass.suggested_password': (
         <FormattedMessage

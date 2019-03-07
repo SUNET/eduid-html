@@ -3,24 +3,24 @@ import { connect } from 'react-redux';
 import Security from 'components/Security';
 import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassword,
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
-          startU2fRegistration, stopU2fRegistration, postRemoveU2FToken,
-          startAskU2FDescription, stopAskU2FDescription, postVerifyU2FToken} from "actions/Security";
+         postRemoveWebauthnToken, postVerifyWebauthnToken,
+         startWebauthnRegistration, stopWebauthnRegistration,
+         startAskWebauthnDescription, stopAskWebauthnDescription} from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
 
 const mapStateToProps = (state, props) => {
-  return {
-     credentials: state.security.credentials,
-     confirming_change: state.security.confirming_change,
-     confirming_deletion: state.security.confirming_deletion,
-     is_fetching: state.security.is_fetching,
-     redirect_to: state.security.location,
-     deleted: state.security.deleted,
-     u2f_asking_description: state.security.u2f_asking_description,
-     u2f_is_fetching: state.security.u2f_is_fetching,
-     u2f_is_enrolled: state.security.u2f_is_enrolled
-  }
+    return {
+        credentials: state.security.credentials,
+        confirming_change: state.security.confirming_change,
+        confirming_deletion: state.security.confirming_deletion,
+        is_fetching: state.security.is_fetching,
+        redirect_to: state.security.location,
+        deleted: state.security.deleted,
+        webauthn_asking_description: state.security.webauthn_asking_description,
+        webauthn_is_fetching: state.security.webauthn_is_fetching,
+    }
 };
 
 
@@ -46,28 +46,25 @@ const mapDispatchToProps = (dispatch, props) => {
     handleConfirmationDeletion: function (e) {
         dispatch(confirmDeletion());
     },
-    handleStartAskingU2FDescription: function (e) {
+    handleStartAskingWebauthnDescription: function (e) {
         dispatch(eduidRMAllNotify());
-        dispatch(startAskU2FDescription());
+        dispatch(startAskWebauthnDescription());
     },
-    handleStopAskingU2FDescription: function (e) {
-        dispatch(stopAskU2FDescription());
+    handleStopAskingWebauthnDescription: function (e) {
+        dispatch(stopAskWebauthnDescription());
     },
-    handleStartU2fRegistration: function (e) {
-        const description = document.getElementById('describeU2FTokenDialogControl').value;
-        dispatch(stopAskU2FDescription());
-        dispatch(startU2fRegistration(description));
+    handleStartWebauthnRegistration: function (e) {
+        const description = document.getElementById('describeWebauthnTokenDialogControl').value;
+        dispatch(stopAskWebauthnDescription());
+        dispatch(startWebauthnRegistration(description));
     },
-    handleCloseU2fModal: function (e) {
-        dispatch(stopU2fRegistration());
+    handleRemoveWebauthnToken: function (e) {
+        const token = e.target.closest('.webauthn-token-holder').dataset.token;
+        dispatch(postRemoveWebauthnToken(token));
     },
-    handleRemoveU2FToken: function (e) {
-        const token = e.target.closest('.u2f-token-holder').dataset.token;
-        dispatch(postRemoveU2FToken(token));
-    },
-    handleVerifyU2FToken: function (e) {
-        const token = e.target.closest('.u2f-token-holder').dataset.token;
-        dispatch(postVerifyU2FToken(token));
+    handleVerifyWebauthnToken: function (e) {
+        const token = e.target.closest('.webauthn-token-holder').dataset.token;
+        dispatch(postVerifyWebauthnToken(token));
     }
   }
 

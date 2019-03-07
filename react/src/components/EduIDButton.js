@@ -28,8 +28,12 @@ class EduIDButton extends Component {
   }
 }
 
-EduIDButton.PropTypes = {
-  spinning: PropTypes.string.bool
+EduIDButton.defaultProps = {
+  spinning: false
+}
+
+EduIDButton.propTypes = {
+  spinning: PropTypes.bool
 }
 
 export default EduIDButton;

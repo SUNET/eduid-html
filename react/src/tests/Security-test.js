@@ -1,7 +1,6 @@
 
 const mock = require('jest-mock');
 import React from 'react';
-import { register } from 'u2f-api'
 import { shallow, mount, render } from 'enzyme';
 import { put, select, call } from "redux-saga/effects";
 import expect, { createSpy, spyOn, isSpy } from "expect";
@@ -18,8 +17,8 @@ import { eduidNotify } from "actions/Notifications";
 
 import { requestCredentials, fetchCredentials,
   requestPasswordChange, postDeleteAccount, deleteAccount,
-  getU2FEnroll, enrollU2F, registerU2F, postU2FToken,
-  removeU2FToken, removeToken } from 'sagas/Security';
+  beginRegisterWebauthn, beginWebauthnRegistration, registerWebauthn, webauthnRegistration,
+  removeWebauthnToken, removeToken } from 'sagas/Security';
 
 import { addLocaleData } from 'react-intl';
 
@@ -123,84 +122,86 @@ describe("Security Actions", () => {
     expect(actions.removeAccountFail(err)).toEqual(expectedAction);
   });
 
-  it("Should start asking U2F description", () => {
+  it("Should start asking Webauthn description", () => {
     const expectedAction = {
-      type: actions.START_ASK_U2F_DESCRIPTION
+      type: actions.START_ASK_WEBAUTHN_DESCRIPTION
     };
-    expect(actions.startAskU2FDescription()).toEqual(expectedAction);
+    expect(actions.startAskWebauthnDescription()).toEqual(expectedAction);
   });
 
-  it("Should stop asking U2F description", () => {
+  it("Should stop asking Webauthn description", () => {
     const expectedAction = {
-      type: actions.STOP_ASK_U2F_DESCRIPTION
+      type: actions.STOP_ASK_WEBAUTHN_DESCRIPTION
     };
-    expect(actions.stopAskU2FDescription()).toEqual(expectedAction);
+    expect(actions.stopAskWebauthnDescription()).toEqual(expectedAction);
   });
 
-  it("Should start U2F registration", () => {
+  it("Should start Webauthn registration", () => {
     const expectedAction = {
-      type: actions.START_U2F_REGISTRATION,
+      type: actions.START_WEBAUTHN_REGISTRATION,
       payload: {
           description: 'description'
       }
     };
-    expect(actions.startU2fRegistration('description')).toEqual(expectedAction);
+    expect(actions.startWebauthnRegistration('description')).toEqual(expectedAction);
   });
 
-  it("Should stop U2F registration", () => {
+  it("Should stop Webauthn registration", () => {
     const expectedAction = {
-      type: actions.STOP_U2F_REGISTRATION,
+      type: actions.STOP_WEBAUTHN_REGISTRATION,
     };
-    expect(actions.stopU2fRegistration()).toEqual(expectedAction);
+    expect(actions.stopWebauthnRegistration()).toEqual(expectedAction);
   });
 
-  it("Should signal failure when trying to enroll for U2F", () => {
+  it("Should signal failure when trying to enroll for Webauthn", () => {
     const err = 'Bad error';
     const expectedAction = {
-      type: actions.GET_U2F_ENROLL_FAIL,
+      type: actions.GET_WEBAUTHN_BEGIN_FAIL,
       error: true,
       payload: {
         error: new Error(err),
         message: err
       }
     };
-    expect(actions.enrollU2FFail(err)).toEqual(expectedAction);
+    expect(actions.beginWebauthnFail(err)).toEqual(expectedAction);
   });
 
-  it("Should signal failure when trying to register for U2F", () => {
+  it("Should signal failure when trying to register for Webauthn", () => {
     const err = 'Bad error';
     const expectedAction = {
-      type: actions.GET_U2F_REGISTER_FAIL,
+      type: actions.GET_WEBAUTHN_REGISTER_FAIL,
       error: true,
       payload: {
         error: new Error(err),
         message: err
       }
     };
-    expect(actions.registerU2FFail(err)).toEqual(expectedAction);
+    expect(actions.registerWebauthnFail(err)).toEqual(expectedAction);
   });
 });
 
 describe("Reducers", () => {
 
-  const mockState = {
-    is_fetching: false,
-    failed: false,
-    error: '',
-    message: '',
-    credentials: [],
-    code: '',
-    confirming_change: false,
-    confirming_deletion: false,
-    location: '',
-    deleted: false,
-    u2f_asking_description: false,
-    u2f_token_description: '',
-    u2f_is_fetching: false,
-    u2f_failed: false,
-    u2f_is_enrolled: false,
-    u2f_request: {}
-  };
+    const mockState = {
+        is_fetching: false,
+        failed: false,
+        error: '',
+        message: '',
+        credentials: [],
+        code: '',
+        confirming_change: false,
+        confirming_deletion: false,
+        location: '',
+        deleted: false,
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
+    };
 
   it("Receives a GET_CREDENTIALS action", () => {
     expect(
@@ -222,12 +223,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -262,12 +265,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -299,42 +304,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
-      }
-    );
-  });
-
-  it("Receives a START_CHANGE_PASSWORD action", () => {
-    expect(
-      securityReducer(
-        mockState,
-        {
-          type: actions.START_CHANGE_PASSWORD
-        }
-      )
-    ).toEqual(
-      {
-        is_fetching: false,
-        failed: false,
-        error: '',
-        message: '',
-        credentials: [],
-        code: '',
-        confirming_change: true,
-        confirming_deletion: false,
-        location: '',
-        deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -359,12 +336,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -389,12 +368,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -426,12 +407,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -456,12 +439,14 @@ describe("Reducers", () => {
         confirming_deletion: true,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -486,12 +471,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -516,12 +503,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -546,12 +535,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -580,12 +571,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: location,
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -617,22 +610,24 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a START_ASK_U2F_DESCRIPTION action", () => {
+  it("Receives a START_ASK_WEBAUTHN_DESCRIPTION action", () => {
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.START_ASK_U2F_DESCRIPTION
+          type: actions.START_ASK_WEBAUTHN_DESCRIPTION
         }
       )
     ).toEqual(
@@ -647,22 +642,24 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: true,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: true,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a STOP_ASK_U2F_DESCRIPTION action", () => {
+  it("Receives a STOP_ASK_WEBAUTHN_DESCRIPTION action", () => {
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.STOP_ASK_U2F_DESCRIPTION
+          type: actions.STOP_ASK_WEBAUTHN_DESCRIPTION
         }
       )
     ).toEqual(
@@ -677,22 +674,24 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_asking_description: false,
-        u2f_token_description: '',
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_asking_description: false,
+        webauthn_token_description: '',
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a START_U2F_REGISTRATION action", () => {
+  it("Receives a START_WEBAUTHN_REGISTRATION action", () => {
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.START_U2F_REGISTRATION,
+          type: actions.START_WEBAUTHN_REGISTRATION,
           payload: {
               description: 'description'
           }
@@ -710,22 +709,24 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: 'description',
-        u2f_asking_description: false,
-        u2f_is_fetching: true,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_token_description: 'description',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: true,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a STOP_U2F_REGISTRATION action", () => {
+  it("Receives a STOP_WEBAUTHN_REGISTRATION action", () => {
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.STOP_U2F_REGISTRATION
+          type: actions.STOP_WEBAUTHN_REGISTRATION
         }
       )
     ).toEqual(
@@ -740,24 +741,27 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: '',
-        u2f_asking_description: false,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_token_description: '',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
+        webauthn_begun: false,
       }
     );
   });
 
-  it("Receives a GET_U2F_ENROLL_FAIL action", () => {
+  it("Receives a GET_WEBAUTHN_BEGIN_FAIL action", () => {
     const err = 'Error',
           error = new Error(err);
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_U2F_ENROLL_FAIL,
+          type: actions.GET_WEBAUTHN_BEGIN_FAIL,
           error: true,
           payload: {
             error: error,
@@ -777,17 +781,19 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: '',
-        u2f_asking_description: false,
-        u2f_is_fetching: false,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_token_description: '',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: false,
+        webauthn_failed: true,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a GET_U2F_ENROLL_SUCCESS action", () => {
+  it("Receives a GET_WEBAUTHN_BEGIN_SUCCESS action", () => {
     const challenge = 'dummy',
           version = 'v2',
           registerRequests = [{challenge: challenge, version: version}],
@@ -796,7 +802,7 @@ describe("Reducers", () => {
       securityReducer(
         mockState,
         {
-          type: actions.GET_U2F_ENROLL_SUCCESS,
+          type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
           payload: {
             registerRequests: registerRequests,
             appId: appId
@@ -815,27 +821,26 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: '',
-        u2f_asking_description: false,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: true,
-        u2f_request: {registerRequests: [{challenge: challenge,
-                                           version: version,
-                                           appId: appId}],
-                      appId: appId}
+        webauthn_token_description: '',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: true,
+        webauthn_attestation: undefined,
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a GET_U2F_REGISTER_FAIL action", () => {
+  it("Receives a GET_WEBAUTHN_REGISTER_FAIL action", () => {
     const err = 'Error',
           error = new Error(err);
     expect(
       securityReducer(
         mockState,
         {
-          type: actions.GET_U2F_REGISTER_FAIL,
+          type: actions.GET_WEBAUTHN_REGISTER_FAIL,
           error: true,
           payload: {
             error: error,
@@ -855,17 +860,19 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: '',
-        u2f_asking_description: false,
-        u2f_is_fetching: false,
-        u2f_failed: true,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_token_description: '',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: false,
+        webauthn_failed: true,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
 
-  it("Receives a POST_U2F_BIND_SUCCESS action", () => {
+  it("Receives a POST_WEBAUTHN_REGISTER_SUCCESS action", () => {
     const credentials = [
             {
               credential_type: 'password',
@@ -877,7 +884,7 @@ describe("Reducers", () => {
       securityReducer(
         mockState,
         {
-          type: actions.POST_U2F_BIND_SUCCESS,
+          type: actions.POST_WEBAUTHN_REGISTER_SUCCESS,
           payload: {
               credentials: credentials
           }
@@ -895,12 +902,14 @@ describe("Reducers", () => {
         confirming_deletion: false,
         location: '',
         deleted: false,
-        u2f_token_description: '',
-        u2f_asking_description: false,
-        u2f_is_fetching: false,
-        u2f_failed: false,
-        u2f_is_enrolled: false,
-        u2f_request: {}
+        webauthn_token_description: '',
+        webauthn_asking_description: false,
+        webauthn_is_fetching: false,
+        webauthn_failed: false,
+        webauthn_begun: false,
+        webauthn_attestation: {},
+        webauthn_token_remove: '',
+        webauthn_token_verify: '',
       }
     );
   });
@@ -916,23 +925,28 @@ const fakeStore = (state) => ({
 });
 
 const mockState = {
-  security: {
-    location: 'dummy-location',
-    u2f_request:{
-      registerRequests: [ 'dummy' ]
+    security: {
+        location: 'dummy-location',
+        webauthn_token_remove: 'dummy-key',
+        webauthn_attestation: {
+            id: 'dummy-id',
+            response: {
+                attestationObject: new ArrayBuffer('dummy attestation object'),
+                clientDataJSON: new ArrayBuffer('dummy client data'),
+            }
+        },
+        webauthn_token_description: 'dummy description'
     },
-    u2f_token_remove: 'dummy-key'
-  },
-  config: {
-    csrf_token: 'csrf-token',
-    DASHBOARD_URL: '/dummy-dash-url/',
-    TOKEN_SERVICE_URL: '/dummy-tok-url/',
-    SECURITY_URL: '/dummy-sec-url'
-  },
-  intl: {
-    locale: 'en',
-    messages: messages
-  }
+    config: {
+        csrf_token: 'csrf-token',
+        DASHBOARD_URL: '/dummy-dash-url/',
+        TOKEN_SERVICE_URL: '/dummy-tok-url/',
+        SECURITY_URL: '/dummy-sec-url'
+    },
+    intl: {
+        locale: 'en',
+        messages: messages
+    }
 };
 
 describe("Async component", () => {
@@ -1020,79 +1034,68 @@ describe("Async component", () => {
       expect(next.value).toEqual(put(action));      
   });
 
-  it("Sagas U2F enroll", () => {
+  it("Sagas Webauthn begin registration", () => {
 
-      const generator = getU2FEnroll();
+      const generator = beginRegisterWebauthn();
       generator.next();
       let next = generator.next(mockState);
-      expect(next.value).toEqual(call(enrollU2F, mockState.config));      
+      expect(next.value).toEqual(call(beginWebauthnRegistration, mockState.config));      
+      //expect(next.value).toEqual(call(navigator.credentials.create.bind(navigator.credentials), options));
       const action = {
-        type: actions.GET_U2F_ENROLL_SUCCESS,
-        payload: {
-          csrf_token: 'csrf-token',
-          u2f_request: 'dummy'
-        }
-      }
+        type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
+          payload: {
+              registration_data: 'dummy registration data',
+              csrf_token: 'dummy-token'
+          }
+      };
       next = generator.next(action);
       expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
-      next = generator.next();
-      delete(action.payload.csrf_token);
-      expect(next.value).toEqual(put(action));      
-  });
 
-  it("Sagas U2F register", () => {
-
-      const generator = registerU2F();
       generator.next();
-      let next = generator.next(mockState);
-      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
-      const response = {
-        registrationData: 'dummy-reg-data',
-        clientData: 'dummy-client-data'
-      };
-      const data = {
-        ...response,
-        version: 'U2F_V2',
-        csrf_token: mockState.config.csrf_token
-      };
-      next = generator.next(response);
-      expect(next.value).toEqual(call(postU2FToken, mockState.config, data));
-      const action = {
-        type: actions.POST_U2F_BIND_SUCCESS,
-        payload: {
-          csrf_token: mockState.config.csrf_token,
-          credentials: [ 'dummy-credentials' ]
-        }
+
+      const attestation = 'dummy attestation'
+      const action2 = {
+          type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
+          payload: {
+              attestation: attestation
+          }
       }
-      next = generator.next(action);
-      expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
-      expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
-      next = generator.next();
-      delete(action.payload.csrf_token);
-      expect(next.value).toEqual(put(action));      
-      next = generator.next();
-      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
+      next = generator.next(attestation);
+      expect(next.value).toEqual(put(action2));      
   });
 
-  it("Sagas U2F register error", () => {
+    it("Sagas Webauthn register", () => {
 
-      const generator = registerU2F();
-      generator.next();
-      let next = generator.next(mockState);
-      expect(next.value).toEqual(call(register, mockState.security.u2f_request.registerRequests));      
-      const response = {
-        errorCode: 1
-      };
-      next = generator.next(response);
-      expect(next.value.PUT.action.type).toEqual('NEW_NOTIFICATION');
-      next = generator.next();
-      expect(next.value.PUT.action.type).toEqual('STOP_U2F_REGISTRATION');
-  });
+        const generator = registerWebauthn();
+        generator.next();
+        let next = generator.next(mockState);
+        const attestation = mockState.security.webauthn_attestation;
+        const data = {
+            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
+            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
+            credentialId:  attestation.id,
+            description: mockState.security.webauthn_token_description,
+            csrf_token: mockState.config.csrf_token
+        };
+        expect(next.value).toEqual(call(webauthnRegistration, mockState.config, data));
+        const action = {
+            type: actions.POST_WEBAUTHN_REGISTER_SUCCESS,
+            payload: {
+                csrf_token: mockState.config.csrf_token,
+                credentials: [ 'dummy-credentials' ]
+            }
+        }
+        next = generator.next(action);
+        expect(next.value.PUT.action.type).toEqual('NEW_CSRF_TOKEN');
+        expect(next.value.PUT.action.payload.csrf_token).toEqual('csrf-token');
+        delete(action.payload.csrf_token);
+        next = generator.next();
+        expect(next.value.PUT.action.type).toEqual(actions.POST_WEBAUTHN_REGISTER_SUCCESS);
+    });
 
-  it("Sagas U2F remove token", () => {
+  it("Sagas Webauthn remove token", () => {
 
-    const generator = removeU2FToken();
+    const generator = removeWebauthnToken();
     let next = generator.next();
     expect(next.value.SELECT.args).toEqual([]);
 
@@ -1106,7 +1109,7 @@ describe("Async component", () => {
 
 
       const action = {
-        type: actions.POST_U2F_REMOVE_SUCCESS,
+        type: actions.POST_WEBAUTHN_REMOVE_SUCCESS,
         payload: {
           csrf_token: 'csrf-token',
         }
@@ -1130,15 +1133,14 @@ function setupComponent() {
     is_fetching: false,
     confirming_change: false,
     confirming_deletion: false,
-    u2f_is_fetching: false,
-    u2f_is_enrolled: false,
+    webauthn_is_fetching: false,
     handleStartConfirmationPassword: mock.fn(),
     handleStopConfirmationPassword: mock.fn(),
     handleConfirmationPassword: mock.fn(),
     handleStartConfirmationDeletion: mock.fn(),
     handleStopConfirmationDeletion: mock.fn(),
     handleConfirmationDeletion: mock.fn(),
-    handleStartU2fRegistration: mock.fn()
+    handleStartWebauthnRegistration: mock.fn()
   };
 
   const wrapper = shallow(<Provider store={fakeStore(mockState)}>
@@ -1156,10 +1158,10 @@ describe("Security Component", () => {
         const {wrapper, props} = setupComponent(),
             table = wrapper.find('table.passwords'),
             buttonChange = wrapper.find('EduIDButton#security-change-button'),
-            buttonU2F = wrapper.find('EduIDButton#security-u2f-button'),
+            buttonWebauthn = wrapper.find('EduIDButton#security-webauthn-button'),
             buttonDelete = wrapper.find('EduIDButton#delete-button'),
             modalChange = wrapper.find('GenericConfirmModal'),
-            modalU2FDescription = wrapper.find('ConfirmModal'),
+            modalWebauthnDescription = wrapper.find('ConfirmModal'),
             modalDelete = wrapper.find('DeleteModal');
     });
 });
@@ -1184,7 +1186,7 @@ describe("Security Container", () => {
             message: '',
             credentials: [{
                 created_ts: "2018-03-28T09:39:11.001371",
-                credential_type: "security.u2f_credential_type",
+                credential_type: "security.webauthn_credential_type",
                 description: "",
                 key: "dummy-key",
                 success_ts: "2018-03-28T09:39:11.001371"
@@ -1194,13 +1196,14 @@ describe("Security Container", () => {
             confirming_deletion: deleting,
             location: '',
             deleted: false,
-            u2f_asking_description: askingDescription,
-            u2f_token_description: '',
-            u2f_is_fetching: false,
-            u2f_failed: false,
-            u2f_is_enrolled: false,
-            u2f_request: {},
-            u2f_token_remove: 'dummy-token'
+            webauthn_asking_description: askingDescription,
+            webauthn_token_description: '',
+            webauthn_is_fetching: false,
+            webauthn_failed: false,
+            webauthn_begun: true,
+            webauthn_attestation: {},
+            webauthn_token_verify: '',
+            webauthn_token_remove: 'dummy-token'
         },
         config: {
             csrf_token: '',
@@ -1224,7 +1227,7 @@ describe("Security Container", () => {
         credentials: [],
         language: 'en',
         confirming_deletion: false,
-        u2f_asking_description: false
+        webauthn_asking_description: false
     };
 
     getWrapper = function ({ deleting=false,
@@ -1259,14 +1262,14 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls.length).toEqual(2);
   });
 
-  it("Clicks U2F", () => {
+  it("Clicks Webauthn", () => {
 
     expect(dispatch.mock.calls.length).toEqual(0);
     const wrapper = getWrapper();
-    wrapper.find('EduIDButton#security-u2f-button').simulate('click');
+    wrapper.find('EduIDButton#security-webauthn-button').simulate('click');
     expect(dispatch.mock.calls.length).toEqual(2);
     expect(dispatch.mock.calls[0][0].type).toEqual(notifyActions.RM_ALL_NOTIFICATION);
-    expect(dispatch.mock.calls[1][0].type).toEqual(actions.START_ASK_U2F_DESCRIPTION);
+    expect(dispatch.mock.calls[1][0].type).toEqual(actions.START_ASK_WEBAUTHN_DESCRIPTION);
   });
 
   it("Clicks delete", () => {
@@ -1297,12 +1300,12 @@ describe("Security Container", () => {
     expect(dispatch.mock.calls[0][0].type).toEqual(actions.POST_DELETE_ACCOUNT);
   });
 
-  it("Clicks remove U2F token", () => {
+  it("Clicks remove Webauthn token", () => {
 
     const newProps = {
         credentials: [{
             created_ts: "2018-03-28T09:39:11.001371",
-            credential_type: "security.u2f_credential_type",
+            credential_type: "security.webauthn_credential_type",
             description: "",
             key: "dummy-key",
             success_ts: "2018-03-28T09:39:11.001371"
@@ -1313,9 +1316,9 @@ describe("Security Container", () => {
 
     expect(dispatch.mock.calls.length).toEqual(0);
     const wrapper = getWrapper(true, newProps);
-    const btn = wrapper.find('button.btn-remove-u2f');
+    const btn = wrapper.find('button.btn-remove-webauthn');
     btn.simulate('click');
     expect(dispatch.mock.calls.length).toEqual(1);
-    expect(dispatch.mock.calls[0][0].type).toEqual("POST_U2F_U2F_REMOVE");
+    expect(dispatch.mock.calls[0][0].type).toEqual("POST_WEBAUTHN_WEBAUTHN_REMOVE");
   });
 });
