@@ -7,6 +7,7 @@
   "Missing error message": "Felmeddelande saknas",
   "No connection to authorization endpoint": "Anslutningen till auktoriseringsservern misslyckades. Var god försök senare",
   "Not a valid email address.": "Ogiltig e-postadress.",
+  "NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy.": "Registreringen av Säkerhetsnyckeln tog för lång tid. Var god försök igen.",
   "Temporary technical problems": "Temporärt tekniskt fel, var god försök senare",
   "account_linking.long_description": "Du kan länka andra konton till ditt eduID-konto.",
   "account_linking.main_title": "Kontolänkning",

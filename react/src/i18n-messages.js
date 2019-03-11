@@ -756,12 +756,12 @@ const msgs = {
     'eidas.token_not_found': (
           <FormattedMessage
             id="eidas.token_not_found"
-            defaultMessage={`Security key not found`} />),
+            defaultMessage={`Security Key not found`} />),
 
     'eidas.token_not_in_credentials_used': (
           <FormattedMessage
             id="eidas.token_not_in_credentials_used"
-            defaultMessage={`Security key not used for login`} />),
+            defaultMessage={`Security Key not used for login`} />),
 
     'eidas.nin_not_matching': (
           <FormattedMessage
@@ -781,7 +781,7 @@ const msgs = {
     'eidas.token_verify_success': (
           <FormattedMessage
             id="eidas.token_verify_success"
-            defaultMessage={`Security key verified successfully`} />),
+            defaultMessage={`Security Key verified successfully`} />),
 
     'eidas.authn_context_mismatch': (
           <FormattedMessage
@@ -973,6 +973,11 @@ const msgs = {
           id="InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party."
           defaultMessage={`You are attempting to register an authenticator that contains one of the credentials already registered with the relying party`} />),
 
+    'NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy.': (
+        <FormattedMessage
+          id="NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy."
+          defaultMessage={`Security Key registration timed out. Please try again.`} />),
+
     'cred.credential_type': (
         <FormattedMessage
           id="cred.credential_type"
@@ -1118,12 +1123,12 @@ const msgs = {
     'security.u2f.description_to_long': (
         <FormattedMessage
           id="security.u2f.description_to_long"
-          defaultMessage={`You tried to set a U2F token description long`} />),
+          defaultMessage={`You tried to set a too long Security Key description`} />),
 
     'security.add_u2f_token': (
         <FormattedMessage
           id="security.add_u2f_token"
-          defaultMessage={`Add U2F token`} />),
+          defaultMessage={`Add Security Key`} />),
 
     'security.u2f_registration_error_unknown': (
         <FormattedMessage
@@ -1159,12 +1164,12 @@ const msgs = {
     'security.u2f_credential_type': (
         <FormattedMessage
           id="security.u2f_credential_type"
-          defaultMessage={`U2F token`} />),
+          defaultMessage={`Security Key`} />),
 
     'security.u2f_register_success': (
         <FormattedMessage
           id="security.u2f_register_success"
-          defaultMessage={`U2F token successfully registered`} />),
+          defaultMessage={`Security Key successfully registered`} />),
 
     'u2f.action-required': (
         <FormattedMessage
@@ -1174,17 +1179,17 @@ const msgs = {
     'u2f.push-the-button': (
         <FormattedMessage
           id="u2f.push-the-button"
-          defaultMessage={`Please touch the button in your U2F key`} />),
+          defaultMessage={`Please touch the button on your Security Key`} />),
 
     'security.u2f-token-removed': (
         <FormattedMessage
           id="security.u2f-token-removed"
-          defaultMessage={`U2F token successfully removed`} />),
+          defaultMessage={`Security Key successfully removed`} />),
 
     'security.u2f-describe-title': (
         <FormattedMessage
           id="security.u2f-describe-title"
-          defaultMessage={`Enter a description for the U2F token you are about to register`} />),
+          defaultMessage={`Enter a name for your Security Key`} />),
 
     'security.unknown_credential_type': (
         <FormattedMessage
@@ -1194,37 +1199,37 @@ const msgs = {
     'security.webauthn_credential_type': (
         <FormattedMessage
           id="security.webauthn_credential_type"
-          defaultMessage={`Webauthn Key`} />),
+          defaultMessage={`Security Key`} />),
 
     'security.add_webauthn_token': (
         <FormattedMessage
           id="security.add_webauthn_token"
-          defaultMessage={`Add Webauthn Token`} />),
+          defaultMessage={`Add Security Key`} />),
 
     'security.webauthn-describe-title': (
         <FormattedMessage
           id="security.webauthn-describe-title"
-          defaultMessage={`Enter a name for your security key`} />),
+          defaultMessage={`Enter a name for your Security Key`} />),
 
     'security.webauthn.max_allowed_tokens': (
         <FormattedMessage
           id="security.webauthn.max_allowed_tokens"
-          defaultMessage={`You are not allowed to register more tokens.`} />),
+          defaultMessage={`You are not allowed to register more Security Keys.`} />),
 
     'security.webauthn_register_success': (
         <FormattedMessage
           id="security.webauthn_register_success"
-          defaultMessage={`Security key successfully registered`} />),
+          defaultMessage={`Security Key successfully registered`} />),
 
     'security.webauthn-token-removed': (
         <FormattedMessage
           id="security.webauthn-token-removed"
-          defaultMessage={`Security key successfully removed`} />),
+          defaultMessage={`Security Key successfully removed`} />),
 
     'security.webauthn-missing-pdata': (
         <FormattedMessage
           id="security.webauthn-missing-pdata"
-          defaultMessage={`You should add your personal data before adding a security token`} />),
+          defaultMessage={`You have to update your personal information before adding a Security Key`} />),
 
     'chpass.suggested_password': (
         <FormattedMessage
