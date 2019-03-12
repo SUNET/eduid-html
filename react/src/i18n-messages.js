@@ -1238,6 +1238,16 @@ const msgs = {
           id="security.webauthn-missing-pdata"
           defaultMessage={`You have to update your personal information before adding a Security Key`} />),
 
+    'security.webauthn-token-notfound': (
+        <FormattedMessage
+          id="security.webauthn-token-notfound"
+          defaultMessage={`Security token not found`} />),
+
+    'security.webauthn-noremove-last': (
+        <FormattedMessage
+          id="security.webauthn-noremove-last"
+          defaultMessage={`You are not allowed to remove your only security token`} />),
+
     'chpass.suggested_password': (
         <FormattedMessage
           id="chpass.suggested_password"
