@@ -860,6 +860,14 @@
     "defaultMessage": "You have to update your personal information before adding a Security Key"
   },
   {
+    "id": "security.webauthn-token-notfound",
+    "defaultMessage": "Security token not found"
+  },
+  {
+    "id": "security.webauthn-noremove-last",
+    "defaultMessage": "You are not allowed to remove your only security token"
+  },
+  {
     "id": "chpass.suggested_password",
     "defaultMessage": "Suggested password"
   },

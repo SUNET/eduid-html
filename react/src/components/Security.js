@@ -23,17 +23,21 @@ class Security extends Component {
         window.location.href = 'https://eduid.se';
         return null
     }
+    const tokens = this.props.credentials.filter((cred) =>
+                  (cred.credential_type !== 'security.password_credential_type'));
     let spinning = false,
         creds_table = this.props.credentials.map((cred, index) => {
             let btnRemove = '';
             let btnConfirm = '';
-            if (cred.credential_type === 'security.webauthn_credential_type') {
+            if (tokens.length > 1 && cred.credential_type !== 'security.password_credential_type') {
                 btnRemove = (<div className="btn-group btn-group-xs" role="group">
                               <button className="btn btn-link btn-remove-webauthn"
                                    onClick={this.props.handleRemoveWebauthnToken}>
                               {this.props.l10n('security.remove')}
                               </button>
-                            </div>);
+                             </div>);
+            }
+            if (cred.credential_type === 'security.webauthn_credential_type') {
                 if (cred.verified) {
                   btnConfirm = (<div role="group">
                                 {this.props.l10n('security.confirmed')}
