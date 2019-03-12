@@ -1057,6 +1057,7 @@ describe("Async component", () => {
       const action2 = {
           type: actions.GET_WEBAUTHN_BEGIN_SUCCESS,
           payload: {
+              registration_data: 'dummy registration data',
               attestation: attestation
           }
       }
