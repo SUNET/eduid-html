@@ -152,6 +152,20 @@ export function* beginRegisterWebauthn () {
     }
 }
 
+
+function safeDecodeCBOR (str) {
+    const bytes = atob(str.replace(/_/g, '/').replace(/-/g, '+'));
+    const buff = Uint8Array.from(bytes, c => c.charCodeAt(0));
+    return CBOR.decode(buff.buffer);
+}
+
+function safeEncode (obj) {
+    const bytesObj = String.fromCharCode.apply(null, new Uint8Array(obj));
+    const unsafeObj = btoa(bytesObj);
+    return unsafeObj.replace(/\//g, '_').replace(/\+/g, '-');
+}
+
+
 export function beginWebauthnRegistration (config) {
     return window.fetch(config.SECURITY_URL + 'webauthn/register/begin', {
         ...getRequest
@@ -160,10 +174,7 @@ export function beginWebauthnRegistration (config) {
     .then(response => response.json())
     .then(response => {
         if (response.payload.registration_data !== undefined) {
-            const raw_rdata = response.payload.registration_data;
-            const rdata = atob(raw_rdata.replace(/_/g, '/').replace(/-/g, '+'));
-            const byte_rdata = Uint8Array.from(rdata, c => c.charCodeAt(0));
-            response.payload.registration_data = CBOR.decode(byte_rdata.buffer);
+            response.payload.registration_data = safeDecodeCBOR(response.payload.registration_data);
         }
         console.log('Action config: ', response);    
         return response;
@@ -175,18 +186,10 @@ export function* registerWebauthn () {
     try {
         const state = yield select(state => state);
         const attestation = state.security.webauthn_attestation,
-              attestationObject = attestation.response.attestationObject,
-              bytes_attestationObject = String.fromCharCode.apply(null, new Uint8Array(attestationObject)),
-              unsafe_attestationObject = btoa(bytes_attestationObject),
-              b64_attestationObject = unsafe_attestationObject.replace(/\//g, '_').replace(/\+/g, '-'),
-              clientDataJSON = attestation.response.clientDataJSON,
-              bytes_clientDataJSON = String.fromCharCode.apply(null, new Uint8Array(clientDataJSON)),
-              unsafe_clientDataJSON = btoa(bytes_clientDataJSON),
-              b64_clientDataJSON = unsafe_clientDataJSON.replace(/\//g, '_').replace(/\+/g, '-'),
               data = {
                   csrf_token: state.config.csrf_token,
-                  attestationObject: b64_attestationObject,
-                  clientDataJSON: b64_clientDataJSON,
+                  attestationObject: safeEncode(attestation.response.attestationObject),
+                  clientDataJSON: safeEncode(attestation.response.clientDataJSON),
                   credentialId:  attestation.id,
                   description:  state.security.webauthn_token_description,
               };
