@@ -37,7 +37,7 @@ class Security extends Component {
                               </button>
                              </div>);
             }
-            if (cred.credential_type === 'security.webauthn_credential_type') {
+            if (cred.credential_type !== 'security.password_credential_type') {
                 if (cred.verified) {
                   btnConfirm = (<div role="group">
                                 {this.props.l10n('security.confirmed')}
