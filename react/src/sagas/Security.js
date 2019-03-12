@@ -154,6 +154,7 @@ export function* beginRegisterWebauthn () {
 
 
 function safeDecodeCBOR (str) {
+    str += '='.repeat(str.length % 4);
     const bytes = atob(str.replace(/_/g, '/').replace(/-/g, '+'));
     const buff = Uint8Array.from(bytes, c => c.charCodeAt(0));
     return CBOR.decode(buff.buffer);
@@ -162,7 +163,7 @@ function safeDecodeCBOR (str) {
 function safeEncode (obj) {
     const bytesObj = String.fromCharCode.apply(null, new Uint8Array(obj));
     const unsafeObj = btoa(bytesObj);
-    return unsafeObj.replace(/\//g, '_').replace(/\+/g, '-');
+    return unsafeObj.replace(/\//g, '_').replace(/\+/g, '-').replace(/=*$/, "");
 }
 
 
