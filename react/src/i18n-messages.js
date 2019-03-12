@@ -967,16 +967,23 @@ const msgs = {
     /* Security ************/
     /***********************/
 
-
+    // FF and Chrome webauthn error message
     'InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.': (
         <FormattedMessage
           id="InvalidStateError: The user attempted to register an authenticator that contains one of the credentials already registered with the relying party."
           defaultMessage={`You are attempting to register an authenticator that contains one of the credentials already registered with the relying party`} />),
 
+     // FF and Chrome webauthn error message
     'NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy.': (
         <FormattedMessage
           id="NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy."
-          defaultMessage={`Security Key registration timed out. Please try again.`} />),
+          defaultMessage={`Security Key registration either timed out or was cancelled. Please try again.`} />),
+
+     // Edge webauthn error message
+    'NotAllowedError': (
+        <FormattedMessage
+          id="NotAllowedError"
+          defaultMessage={`Security Key registration timed out or was cancelled. Please try again.`} />),
 
     'cred.credential_type': (
         <FormattedMessage

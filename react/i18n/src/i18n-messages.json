@@ -653,7 +653,11 @@
   },
   {
     "id": "NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy.",
-    "defaultMessage": "Security Key registration timed out. Please try again."
+    "defaultMessage": "Security Key registration either timed out or was cancelled. Please try again."
+  },
+  {
+    "id": "NotAllowedError",
+    "defaultMessage": "Security Key registration timed out or was cancelled. Please try again."
   },
   {
     "id": "cred.credential_type",

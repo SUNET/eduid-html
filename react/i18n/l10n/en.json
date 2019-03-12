@@ -7,6 +7,7 @@
   "Missing error message": "Missing error message",
   "No connection to authorization endpoint": "No connection to authorization endpoint, please try again later",
   "Not a valid email address.": "Not a valid email address.",
+  "NotAllowedError": "Security Key registration timed out or was cancelled. Please try again.",
   "NotAllowedError: The operation either timed out or was not allowed. See: https://w3c.github.io/webauthn/#sec-assertion-privacy.": "Security Key registration timed out. Please try again.",
   "Temporary technical problems": "Temporary technical problems, please try again later",
   "account_linking.long_description": "Here you can link other online accounts with you eduID account.",
