@@ -861,11 +861,11 @@
   },
   {
     "id": "security.webauthn-token-notfound",
-    "defaultMessage": "Security token not found"
+    "defaultMessage": "Security Key not found"
   },
   {
     "id": "security.webauthn-noremove-last",
-    "defaultMessage": "You are not allowed to remove your only security token"
+    "defaultMessage": "You are not allowed to remove your only Security Key"
   },
   {
     "id": "chpass.suggested_password",

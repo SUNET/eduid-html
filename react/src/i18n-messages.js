@@ -1241,12 +1241,12 @@ const msgs = {
     'security.webauthn-token-notfound': (
         <FormattedMessage
           id="security.webauthn-token-notfound"
-          defaultMessage={`Security token not found`} />),
+          defaultMessage={`Security Key not found`} />),
 
     'security.webauthn-noremove-last': (
         <FormattedMessage
           id="security.webauthn-noremove-last"
-          defaultMessage={`You are not allowed to remove your only security token`} />),
+          defaultMessage={`You are not allowed to remove your only Security Key`} />),
 
     'chpass.suggested_password': (
         <FormattedMessage
