@@ -157,6 +157,7 @@ let securityReducer = (state=security, action) => {
     case actions.GET_WEBAUTHN_BEGIN_FAIL:
       return {
         ...state,
+        is_fetching: false,
         webauthn_is_fetching: false,
         webauthn_failed: true,
         webauthn_begun: false,
@@ -167,6 +168,7 @@ let securityReducer = (state=security, action) => {
     case actions.GET_WEBAUTHN_BEGIN_SUCCESS:
       return {
         ...state,
+        is_fetching: false,
         webauthn_is_fetching: false,
         webauthn_failed: false,
         webauthn_begun: true,

@@ -6,6 +6,7 @@ import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
          tokenRemovedFail, registerWebauthnFail,
+         beginWebauthnFail,
          GET_WEBAUTHN_BEGIN_SUCCESS,
          GET_WEBAUTHN_BEGIN_FAIL } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
@@ -133,17 +134,17 @@ export function* beginRegisterWebauthn () {
         console.log('Webauthn begin registration');
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
-        let action = yield call(beginWebauthnRegistration, state.config);
-        yield put(putCsrfToken(action));
-        if (action.payload.registration_data !== undefined) {
-            const attestation = yield call(navigator.credentials.create.bind(navigator.credentials), action.payload.registration_data);
-            action = {
-                type: GET_WEBAUTHN_BEGIN_SUCCESS,
-                payload: {
-                    attestation: attestation
-                }
+        const action = yield call(beginWebauthnRegistration, state.config);
+        if (action.type === GET_WEBAUTHN_BEGIN_SUCCESS)  {
+            yield put(putCsrfToken(action));
+            if (action.payload.registration_data !== undefined) {
+                const attestation = yield call(navigator.credentials.create.bind(navigator.credentials),
+                                               action.payload.registration_data);
+                action.payload.attestation = attestation;
+            } else {
+                console.log('No webauthn registration data in the settigns');
             }
-        };
+        }
         yield put(action);
     } catch(error) {
         console.log('Problem begining webauthn registration', error);
