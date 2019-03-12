@@ -161,7 +161,7 @@ export function beginWebauthnRegistration (config) {
     .then(response => {
         if (response.payload.registration_data !== undefined) {
             const raw_rdata = response.payload.registration_data;
-            const rdata = atob(raw_rdata);
+            const rdata = atob(raw_rdata.replace(/_/g, '/').replace(/-/g, '+'));
             const byte_rdata = Uint8Array.from(rdata, c => c.charCodeAt(0));
             response.payload.registration_data = CBOR.decode(byte_rdata.buffer);
         }
@@ -174,14 +174,22 @@ export function beginWebauthnRegistration (config) {
 export function* registerWebauthn () {
     try {
         const state = yield select(state => state);
-        const attestation = state.security.webauthn_attestation;
-        const data = {
-            csrf_token: state.config.csrf_token,
-            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
-            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
-            credentialId:  attestation.id,
-            description:  state.security.webauthn_token_description,
-        }
+        const attestation = state.security.webauthn_attestation,
+              attestationObject = attestation.response.attestationObject,
+              bytes_attestationObject = String.fromCharCode.apply(null, new Uint8Array(attestationObject)),
+              unsafe_attestationObject = btoa(bytes_attestationObject),
+              b64_attestationObject = unsafe_attestationObject.replace(/\//g, '_').replace(/\+/g, '-'),
+              clientDataJSON = attestation.response.clientDataJSON,
+              bytes_clientDataJSON = String.fromCharCode.apply(null, new Uint8Array(clientDataJSON)),
+              unsafe_clientDataJSON = btoa(bytes_clientDataJSON),
+              b64_clientDataJSON = unsafe_clientDataJSON.replace(/\//g, '_').replace(/\+/g, '-'),
+              data = {
+                  csrf_token: state.config.csrf_token,
+                  attestationObject: b64_attestationObject,
+                  clientDataJSON: b64_clientDataJSON,
+                  credentialId:  attestation.id,
+                  description:  state.security.webauthn_token_description,
+              };
         const result = yield call(webauthnRegistration, state.config, data);
         yield put(putCsrfToken(result));
         yield put(result);
