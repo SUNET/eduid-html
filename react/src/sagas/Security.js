@@ -152,6 +152,21 @@ export function* beginRegisterWebauthn () {
     }
 }
 
+
+function safeDecodeCBOR (str) {
+    str += '='.repeat(str.length % 4);
+    const bytes = atob(str.replace(/_/g, '/').replace(/-/g, '+'));
+    const buff = Uint8Array.from(bytes, c => c.charCodeAt(0));
+    return CBOR.decode(buff.buffer);
+}
+
+function safeEncode (obj) {
+    const bytesObj = String.fromCharCode.apply(null, new Uint8Array(obj));
+    const unsafeObj = btoa(bytesObj);
+    return unsafeObj.replace(/\//g, '_').replace(/\+/g, '-').replace(/=*$/, "");
+}
+
+
 export function beginWebauthnRegistration (config) {
     return window.fetch(config.SECURITY_URL + 'webauthn/register/begin', {
         ...getRequest
@@ -160,10 +175,7 @@ export function beginWebauthnRegistration (config) {
     .then(response => response.json())
     .then(response => {
         if (response.payload.registration_data !== undefined) {
-            const raw_rdata = response.payload.registration_data;
-            const rdata = atob(raw_rdata);
-            const byte_rdata = Uint8Array.from(rdata, c => c.charCodeAt(0));
-            response.payload.registration_data = CBOR.decode(byte_rdata.buffer);
+            response.payload.registration_data = safeDecodeCBOR(response.payload.registration_data);
         }
         console.log('Action config: ', response);    
         return response;
@@ -174,14 +186,14 @@ export function beginWebauthnRegistration (config) {
 export function* registerWebauthn () {
     try {
         const state = yield select(state => state);
-        const attestation = state.security.webauthn_attestation;
-        const data = {
-            csrf_token: state.config.csrf_token,
-            attestationObject: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.attestationObject))),
-            clientDataJSON: btoa(String.fromCharCode.apply(null, new Uint8Array(attestation.response.clientDataJSON))),
-            credentialId:  attestation.id,
-            description:  state.security.webauthn_token_description,
-        }
+        const attestation = state.security.webauthn_attestation,
+              data = {
+                  csrf_token: state.config.csrf_token,
+                  attestationObject: safeEncode(attestation.response.attestationObject),
+                  clientDataJSON: safeEncode(attestation.response.clientDataJSON),
+                  credentialId:  attestation.id,
+                  description:  state.security.webauthn_token_description,
+              };
         const result = yield call(webauthnRegistration, state.config, data);
         yield put(putCsrfToken(result));
         yield put(result);
