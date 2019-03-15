@@ -20,7 +20,8 @@ const security = {
     webauthn_begun: false,
     webauthn_attestation: {},
     webauthn_token_remove: '',
-    webauthn_token_verify: ''
+    webauthn_token_verify: '',
+    webauthn_authenticator: 'unspecified'
 };
 
 
@@ -235,6 +236,11 @@ let securityReducer = (state=security, action) => {
         webauthn_begun: false,
         webauthn_is_fetching: false,
         is_fetching: false
+      };
+    case actions.AUTHENTICATOR:
+      return {
+        ...state,
+        webauthn_authenticator: action.payload.choice,
       };
     default:
       return state;

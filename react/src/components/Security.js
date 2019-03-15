@@ -14,6 +14,21 @@ import 'style/Security.scss';
 
 class Security extends Component {
 
+    checkWebauthnDevice () {
+            //Update UI to reflect availability of platform authenticator
+    if (PublicKeyCredential && typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable !== "function") {
+        markPlatformAuthenticatorUnavailable();
+    } else if (PublicKeyCredential && typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable === "function") {
+        PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then(available => {
+            if (!available) {
+                markPlatformAuthenticatorUnavailable();
+            } 
+        }).catch(e=>{
+            markPlatformAuthenticatorUnavailable();
+        });
+    }
+    }
+
   render () {
     if (this.props.redirect_to !== '') {
         window.location.href = this.props.redirect_to;
@@ -99,7 +114,15 @@ class Security extends Component {
             <EduIDButton bsStyle="primary"
                         id="security-webauthn-button"
                         spinning={spinning}
-                        onClick={this.props.handleStartAskingWebauthnDescription}>
+                        onClick={this.props.handleStartAskingKeyWebauthnDescription}>
+                      {this.props.l10n('security.add_webauthn_token')}
+            </EduIDButton>
+          </div>
+          <div id="add-webauthn-token-platform">
+            <EduIDButton bsStyle="primary"
+                        id="security-webauthn-platform-button"
+                        spinning={spinning}
+                        onClick={this.props.handleStartAskingDeviceWebauthnDescription}>
                       {this.props.l10n('security.add_webauthn_token')}
             </EduIDButton>
           </div>

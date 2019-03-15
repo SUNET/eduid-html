@@ -5,7 +5,8 @@ import { confirmPasswordChange, startConfirmationPassword, stopConfirmationPassw
          confirmDeletion, stopConfirmationDeletion, startConfirmationDeletion,
          postRemoveWebauthnToken, postVerifyWebauthnToken,
          startWebauthnRegistration, stopWebauthnRegistration,
-         startAskWebauthnDescription, stopAskWebauthnDescription} from "actions/Security";
+         startAskWebauthnDescription, stopAskWebauthnDescription,
+         chooseAuthenticator } from "actions/Security";
 import { eduidRMAllNotify } from "actions/Notifications";
 import i18n from 'i18n-messages';
 
@@ -20,6 +21,7 @@ const mapStateToProps = (state, props) => {
         deleted: state.security.deleted,
         webauthn_asking_description: state.security.webauthn_asking_description,
         webauthn_is_fetching: state.security.webauthn_is_fetching,
+        authenticator: state.security.webauthn_authenticator
     }
 };
 
@@ -46,8 +48,14 @@ const mapDispatchToProps = (dispatch, props) => {
     handleConfirmationDeletion: function (e) {
         dispatch(confirmDeletion());
     },
-    handleStartAskingWebauthnDescription: function (e) {
+    handleStartAskingKeyWebauthnDescription: function (e) {
         dispatch(eduidRMAllNotify());
+        dispatch(chooseAuthenticator('cross-platform'));
+        dispatch(startAskWebauthnDescription());
+    },
+    handleStartAskingDeviceWebauthnDescription: function (e) {
+        dispatch(eduidRMAllNotify());
+        dispatch(chooseAuthenticator('platform'));
         dispatch(startAskWebauthnDescription());
     },
     handleStopAskingWebauthnDescription: function (e) {

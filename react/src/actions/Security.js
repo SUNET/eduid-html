@@ -32,6 +32,7 @@ export const POST_WEBAUTHN_VERIFY = 'POST_WEBAUTHN_VERIFY';
 export const POST_WEBAUTHN_VERIFY_FAIL = 'POST_WEBAUTHN_VERIFY_FAIL';
 export const START_ASK_WEBAUTHN_DESCRIPTION = 'START_ASK_WEBAUTHN_DESCRIPTION';
 export const STOP_ASK_WEBAUTHN_DESCRIPTION = 'STOP_ASK_WEBAUTHN_DESCRIPTION';
+export const AUTHENTICATOR = 'AUTHENTICATOR';
 
 
 export function getCredentials () {
@@ -214,6 +215,15 @@ export function tokenVerifyFail (err) {
     payload: {
       error: new Error(err),
       message: err
+    }
+  };
+}
+
+export function chooseAuthenticator (choice) {
+  return {
+    type: AUTHENTICATOR,
+    payload: {
+      choice: choice
     }
   };
 }

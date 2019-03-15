@@ -134,7 +134,11 @@ export function* beginRegisterWebauthn () {
         console.log('Webauthn begin registration');
         const state = yield select(state => state);
         //if (state.security.webauthn_options.hasOwnProperty('publicKey')) {return}
-        const action = yield call(beginWebauthnRegistration, state.config);
+        const data = {
+            csrf_token: state.config.csrf_token,
+            authenticator: state.security.webauthn_authenticator,
+        };
+        const action = yield call(beginWebauthnRegistration, state.config, data);
         if (action.type === GET_WEBAUTHN_BEGIN_SUCCESS)  {
             yield put(putCsrfToken(action));
             if (action.payload.registration_data !== undefined) {
@@ -166,9 +170,10 @@ function safeEncode (obj) {
 }
 
 
-export function beginWebauthnRegistration (config) {
+export function beginWebauthnRegistration (config, data) {
     return window.fetch(config.SECURITY_URL + 'webauthn/register/begin', {
-        ...getRequest
+        ...postRequest,
+        body: JSON.stringify(data)
     })
     .then(checkStatus)
     .then(response => response.json())
