@@ -15,7 +15,7 @@ import 'style/Security.scss';
 class Security extends Component {
 
     checkWebauthnDevice () {
-        if (PublicKeyCredential === undefined ||
+        if (window.PublicKeyCredential === undefined ||
             typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable !== "function") {
             return false;
         }
