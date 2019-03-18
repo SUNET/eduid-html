@@ -837,11 +837,11 @@
   },
   {
     "id": "security.add_webauthn_token_key",
-    "defaultMessage": "Register a Security Key"
+    "defaultMessage": "Register a portable Security Key"
   },
   {
     "id": "security.add_webauthn_token_device",
-    "defaultMessage": "Register this device"
+    "defaultMessage": "Register this device as Security Key"
   },
   {
     "id": "security.for-second-factor",

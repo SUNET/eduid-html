@@ -1211,12 +1211,12 @@ const msgs = {
     'security.add_webauthn_token_key': (
         <FormattedMessage
           id="security.add_webauthn_token_key"
-          defaultMessage={`Register a Security Key`} />),
+          defaultMessage={`Register a portable Security Key`} />),
 
     'security.add_webauthn_token_device': (
         <FormattedMessage
           id="security.add_webauthn_token_device"
-          defaultMessage={`Register this device`} />),
+          defaultMessage={`Register this device as Security Key`} />),
 
     'security.for-second-factor': (
         <FormattedMessage
