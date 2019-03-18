@@ -110,7 +110,7 @@ class Security extends Component {
                       {this.props.l10n('security.change_password')}
             </EduIDButton>
           </div>
-          <p class="eduid-text-muted">{this.props.l10n('security.for-second-factor')}</p>
+          <p className="eduid-text-muted">{this.props.l10n('security.for-second-factor')}</p>
           <div id="register-webauthn-tokens-area">
             <div id="add-webauthn-token">
                 <EduIDButton bsStyle="primary"
@@ -132,7 +132,7 @@ class Security extends Component {
           <div className="second-block">
               <div className="intro">
                  <h4>{this.props.l10n('security.account_title')}</h4>
-                 <p class="eduid-text-muted">{this.props.l10n('security.account_description')}</p>
+                 <p className="eduid-text-muted">{this.props.l10n('security.account_description')}</p>
               </div>
               <EduIDButton className="btn btn-danger"
                            id="delete-button"
