@@ -5,10 +5,8 @@ import { checkStatus, ajaxHeaders, putCsrfToken,
 import { getCredentials, getCredentialsFail,
          stopConfirmationPassword, getPasswordChangeFail,
          postConfirmDeletion, accountRemovedFail,
-         tokenRemovedFail, registerWebauthnFail,
-         beginWebauthnFail,
-         GET_WEBAUTHN_BEGIN_SUCCESS,
-         GET_WEBAUTHN_BEGIN_FAIL } from "actions/Security";
+         tokenRemovedFail, beginWebauthnFail,
+         POST_WEBAUTHN_BEGIN_SUCCESS } from "actions/Security";
 import { eduidNotify } from "actions/Notifications";
 import {tokenVerifyFail} from "../actions/Security";
 import * as CBOR from "sagas/cbor";
@@ -139,7 +137,7 @@ export function* beginRegisterWebauthn () {
             authenticator: state.security.webauthn_authenticator,
         };
         const action = yield call(beginWebauthnRegistration, state.config, data);
-        if (action.type === GET_WEBAUTHN_BEGIN_SUCCESS)  {
+        if (action.type === POST_WEBAUTHN_BEGIN_SUCCESS)  {
             yield put(putCsrfToken(action));
             if (action.payload.registration_data !== undefined) {
                 const attestation = yield call(navigator.credentials.create.bind(navigator.credentials),
@@ -152,7 +150,7 @@ export function* beginRegisterWebauthn () {
         yield put(action);
     } catch(error) {
         console.log('Problem begining webauthn registration', error);
-        yield* failRequest(error, registerWebauthnFail);
+        yield* failRequest(error, beginWebauthnFail);
     }
 }
 
@@ -202,7 +200,7 @@ export function* registerWebauthn () {
         yield put(putCsrfToken(result));
         yield put(result);
     } catch(error) {
-        yield* failRequest(error, registerWebauthnFail);
+        yield* failRequest(error, beginWebauthnFail);
     }
 }
 

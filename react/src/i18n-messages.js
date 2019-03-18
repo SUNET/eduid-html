@@ -1208,10 +1208,15 @@ const msgs = {
           id="security.webauthn_credential_type"
           defaultMessage={`Security Key`} />),
 
-    'security.add_webauthn_token': (
+    'security.add_webauthn_token_key': (
         <FormattedMessage
-          id="security.add_webauthn_token"
-          defaultMessage={`Add Security Key`} />),
+          id="security.add_webauthn_token_key"
+          defaultMessage={`Register a Security Key with eduID`} />),
+
+    'security.add_webauthn_token_device': (
+        <FormattedMessage
+          id="security.add_webauthn_token_device"
+          defaultMessage={`Register this device with eduID`} />),
 
     'security.webauthn-describe-title': (
         <FormattedMessage

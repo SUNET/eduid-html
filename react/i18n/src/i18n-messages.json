@@ -836,8 +836,12 @@
     "defaultMessage": "Security Key"
   },
   {
-    "id": "security.add_webauthn_token",
-    "defaultMessage": "Add Security Key"
+    "id": "security.add_webauthn_token_key",
+    "defaultMessage": "Register a Security Key with eduID"
+  },
+  {
+    "id": "security.add_webauthn_token_device",
+    "defaultMessage": "Register this device with eduID"
   },
   {
     "id": "security.webauthn-describe-title",

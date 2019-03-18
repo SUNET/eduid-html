@@ -115,7 +115,7 @@ class Security extends Component {
                         id="security-webauthn-button"
                         spinning={spinning}
                         onClick={this.props.handleStartAskingKeyWebauthnDescription}>
-                      {this.props.l10n('security.add_webauthn_token')}
+                      {this.props.l10n('security.add_webauthn_token_key')}
             </EduIDButton>
           </div>
           <div id="add-webauthn-token-platform">
@@ -123,7 +123,7 @@ class Security extends Component {
                         id="security-webauthn-platform-button"
                         spinning={spinning}
                         onClick={this.props.handleStartAskingDeviceWebauthnDescription}>
-                      {this.props.l10n('security.add_webauthn_token')}
+                      {this.props.l10n('security.add_webauthn_token_device')}
             </EduIDButton>
           </div>
           <div className="second-block">
