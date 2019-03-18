@@ -1211,12 +1211,17 @@ const msgs = {
     'security.add_webauthn_token_key': (
         <FormattedMessage
           id="security.add_webauthn_token_key"
-          defaultMessage={`Register a Security Key with eduID`} />),
+          defaultMessage={`Register a Security Key`} />),
 
     'security.add_webauthn_token_device': (
         <FormattedMessage
           id="security.add_webauthn_token_device"
-          defaultMessage={`Register this device with eduID`} />),
+          defaultMessage={`Register this device`} />),
+
+    'security.for-second-factor': (
+        <FormattedMessage
+          id="security.for-second-factor"
+          defaultMessage={`Use the buttons below to register 2nd factors for authentication with eduID`} />),
 
     'security.webauthn-describe-title': (
         <FormattedMessage

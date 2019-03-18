@@ -837,11 +837,15 @@
   },
   {
     "id": "security.add_webauthn_token_key",
-    "defaultMessage": "Register a Security Key with eduID"
+    "defaultMessage": "Register a Security Key"
   },
   {
     "id": "security.add_webauthn_token_device",
-    "defaultMessage": "Register this device with eduID"
+    "defaultMessage": "Register this device"
+  },
+  {
+    "id": "security.for-second-factor",
+    "defaultMessage": "Use the buttons below to register 2nd factors for authentication with eduID"
   },
   {
     "id": "security.webauthn-describe-title",

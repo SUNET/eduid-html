@@ -268,6 +268,7 @@
   "security.credential": "Lösenord",
   "security.delete_account": "Ta bort eduID-kontot",
   "security.description": "Beskrivning",
+  "security.for-second-factor": "Register as 2nd factor for authentication",
   "security.last_used": "Användes senast",
   "security.long_description": "Här kan du byta lösenord för ditt eduID-konto.",
   "security.main_title": "Säkerhet",
