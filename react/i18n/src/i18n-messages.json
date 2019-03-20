@@ -836,8 +836,16 @@
     "defaultMessage": "Security Key"
   },
   {
-    "id": "security.add_webauthn_token",
-    "defaultMessage": "Add Security Key"
+    "id": "security.add_webauthn_token_key",
+    "defaultMessage": "Register a portable Security Key"
+  },
+  {
+    "id": "security.add_webauthn_token_device",
+    "defaultMessage": "Register this device as Security Key"
+  },
+  {
+    "id": "security.for-second-factor",
+    "defaultMessage": "Use the buttons below to register 2nd factors for authentication with eduID"
   },
   {
     "id": "security.webauthn-describe-title",

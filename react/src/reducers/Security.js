@@ -20,7 +20,8 @@ const security = {
     webauthn_begun: false,
     webauthn_attestation: {},
     webauthn_token_remove: '',
-    webauthn_token_verify: ''
+    webauthn_token_verify: '',
+    webauthn_authenticator: 'unspecified'
 };
 
 
@@ -154,18 +155,17 @@ let securityReducer = (state=security, action) => {
         webauthn_failed: false,
         webauthn_asking_description: false
       };
-    case actions.GET_WEBAUTHN_BEGIN_FAIL:
+    case actions.POST_WEBAUTHN_BEGIN_FAIL:
       return {
         ...state,
+        ...action.payload,
         is_fetching: false,
         webauthn_is_fetching: false,
         webauthn_failed: true,
         webauthn_begun: false,
         webauthn_asking_description: false,
-        error: action.payload.error,
-        message: action.payload.message
       };
-    case actions.GET_WEBAUTHN_BEGIN_SUCCESS:
+    case actions.POST_WEBAUTHN_BEGIN_SUCCESS:
       return {
         ...state,
         is_fetching: false,
@@ -180,15 +180,6 @@ let securityReducer = (state=security, action) => {
         ...state,
         ...action.payload,
         webauthn_failed: false,
-        webauthn_begun: false,
-        webauthn_is_fetching: false,
-        is_fetching: false
-      };
-    case actions.GET_WEBAUTHN_REGISTER_FAIL:
-      return {
-        ...state,
-        ...action.payload,
-        webauthn_failed: true,
         webauthn_begun: false,
         webauthn_is_fetching: false,
         is_fetching: false
@@ -235,6 +226,11 @@ let securityReducer = (state=security, action) => {
         webauthn_begun: false,
         webauthn_is_fetching: false,
         is_fetching: false
+      };
+    case actions.AUTHENTICATOR:
+      return {
+        ...state,
+        webauthn_authenticator: action.payload.choice,
       };
     default:
       return state;

@@ -21,9 +21,8 @@ export const GET_DELETE_ACCOUNT_SUCCESS = 'GET_SECURITY_ACCOUNT_TERMINATED_SUCCE
 export const GET_DELETE_ACCOUNT_FAIL = 'GET_SECURITY_ACCOUNT_TERMINATED_FAIL';
 export const START_WEBAUTHN_REGISTRATION = 'START_WEBAUTHN_REGISTRATION';
 export const STOP_WEBAUTHN_REGISTRATION = 'STOP_WEBAUTHN_REGISTRATION';
-export const GET_WEBAUTHN_BEGIN_FAIL = 'GET_WEBAUTHN_WEBAUTHN_REGISTER_BEGIN_FAIL';
-export const GET_WEBAUTHN_BEGIN_SUCCESS = 'GET_WEBAUTHN_WEBAUTHN_REGISTER_BEGIN_SUCCESS';
-export const GET_WEBAUTHN_REGISTER_FAIL = 'GET_WEBAUTHN_WEBAUTHN_REGISTER_FAIL';
+export const POST_WEBAUTHN_BEGIN_FAIL = 'POST_WEBAUTHN_WEBAUTHN_REGISTER_BEGIN_FAIL';
+export const POST_WEBAUTHN_BEGIN_SUCCESS = 'POST_WEBAUTHN_WEBAUTHN_REGISTER_BEGIN_SUCCESS';
 export const POST_WEBAUTHN_REGISTER_SUCCESS = 'POST_WEBAUTHN_WEBAUTHN_REGISTER_COMPLETE_SUCCESS';
 export const POST_WEBAUTHN_REMOVE = 'POST_WEBAUTHN_WEBAUTHN_REMOVE';
 export const POST_WEBAUTHN_REMOVE_SUCCESS = 'POST_WEBAUTHN_WEBAUTHN_REMOVE_SUCCESS';
@@ -32,6 +31,7 @@ export const POST_WEBAUTHN_VERIFY = 'POST_WEBAUTHN_VERIFY';
 export const POST_WEBAUTHN_VERIFY_FAIL = 'POST_WEBAUTHN_VERIFY_FAIL';
 export const START_ASK_WEBAUTHN_DESCRIPTION = 'START_ASK_WEBAUTHN_DESCRIPTION';
 export const STOP_ASK_WEBAUTHN_DESCRIPTION = 'STOP_ASK_WEBAUTHN_DESCRIPTION';
+export const AUTHENTICATOR = 'AUTHENTICATOR';
 
 
 export function getCredentials () {
@@ -158,18 +158,7 @@ export function stopWebauthnRegistration () {
 
 export function beginWebauthnFail (err) {
   return {
-    type: GET_WEBAUTHN_BEGIN_FAIL,
-    error: true,
-    payload: {
-      error: new Error(err),
-      message: err
-    }
-  };
-}
-
-export function registerWebauthnFail (err) {
-  return {
-    type: GET_WEBAUTHN_REGISTER_FAIL,
+    type: POST_WEBAUTHN_BEGIN_FAIL,
     error: true,
     payload: {
       error: new Error(err),
@@ -214,6 +203,15 @@ export function tokenVerifyFail (err) {
     payload: {
       error: new Error(err),
       message: err
+    }
+  };
+}
+
+export function chooseAuthenticator (choice) {
+  return {
+    type: AUTHENTICATOR,
+    payload: {
+      choice: choice
     }
   };
 }
