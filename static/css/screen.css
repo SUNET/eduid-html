@@ -1,3 +1,8 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html {
   height: 100%;
   width: 100vw;
@@ -27,7 +32,7 @@ h2 {
 p {
   font-size: 20px;
   line-height: 32px;
-  margin-top: 24px;
+  padding-top: 24px;
 }
 
 /* Structure */
@@ -49,8 +54,8 @@ p {
   width: 100%;
   /* margin: 0; */
   /* background-color: lightblue; */
-  padding: 0 20px;
-  /* margin-bottom: 500px; */
+  /* padding: 0 20px; */
+  margin-bottom: 348px;
 }
 
 .row h2,
@@ -68,7 +73,7 @@ p {
   background: url(../img/ds-eduID-logo-black320x120px.png);
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 5px 0;
+  margin: 5px 0 0 5px;
 }
 
 /* Icon */
@@ -78,7 +83,6 @@ p {
 
 /* Form */
 input[type="email"] {
-  padding-right: 0 20px 0 0;
   border-radius: 0;
   box-shadow: none;
   font-family: "ProximaNova-Regular";
@@ -89,6 +93,8 @@ input[type="email"] {
   border-bottom: solid 1px #161616;
   margin-top: 3rem;
   margin-bottom: 5rem;
+  width: 180%;
+  /* width: 100%; */
 }
 
 input::placeholder {
@@ -106,6 +112,24 @@ input:focus {
 }
 
 /* valid form input*/
+form {
+  /* background-color: lightblue; */
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group {
+  /* background-color: lightyellow; */
+  /* width: 100%; */
+  margin-bottom: 0;
+}
+
+/* div input[type="email"] {
+  width: 180%;
+} */
+
 .form-control {
   height: 48px;
   padding: 0;
@@ -126,7 +150,7 @@ input:focus {
 
 .form-control.is-valid:focus {
   border-color: #58b78c;
-  box-shadow: 0 0 0 0.2rem rgba(221, 101, 14, 0.1);
+  box-shadow: 0 0 0 0.2rem rgba(88, 183, 140, 0.25);
 }
 
 /* invalid form input */
@@ -137,6 +161,46 @@ input:focus {
 .form-control.is-invalid:focus {
   border-color: #b75865;
   box-shadow: 0 0 0 0.2rem rgba(183, 88, 101, 0.25);
+}
+
+.form-group.has-error .help-block {
+  border: none;
+  background-color: #ffe7dd;
+  padding: 0.3em 1em;
+}
+
+/*  error message */
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline {
+  color: #ff4500;
+  background-color: #ffe7dd;
+}
+
+.has-error .help-block {
+  display: flex;
+  margin: 0;
+  color: #ff4500;
+}
+
+.has-error .help-block span {
+  width: 58.3333333333%;
+  margin: 0 auto;
+}
+
+.help-block {
+  display: flex;
+  font-size: 20px;
+  position: absolute;
+  top: 348px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  color: #c7c7c7;
 }
 
 /* .eduid-field-error {
@@ -167,6 +231,7 @@ button.btn.btn-default {
   background-color: #ff4500;
   color: white;
   border: solid 1px transparent;
+  margin-bottom: 19px;
 }
 
 button.btn.btn-default:not(:disabled):hover {
@@ -191,31 +256,44 @@ button.btn.btn-default:disabled {
 }
 
 /* new content */
-/* .row h1::after {
-  content: "Welcome to eduID";
-  height: 500px;
+.row h1::after {
+  content: " Welcome to eduID";
   display: block;
-  background-color: yellow;
-  padding: 7rem 0 5rem;
+  position: relative;
+  font-size: 36px;
+  line-height: 44px;
+  padding: 136px 0 103px;
+  height: calc(60px + 112px + 96px + 80px - 5px);
   width: 58.3333333333%;
   margin: 0 auto;
 }
 
-/* /h1><h2>Reset your password to log in</h2></div> */
-
-/* #welcome {
-  padding: 7rem 0 5rem;
-  width: 58.3333333333%;
-  margin: 0 auto;
-}
-
-#welcome h2 {
-  display: inline-block;
-  text-decoration: none;
-  font-family: "ProximaNova-Regular";
+.row h2::before {
+  content: "Reset your password to log in";
+  display: block;
   color: #ff4500;
-  border-bottom: solid transparent 2px;
-} */
+  font-size: 28px;
+  line-height: 42px;
+  margin-top: 24;
+  font-weight: 400;
+  position: absolute;
+  top: 185px;
+  padding-left: 5px;
+  /* width: 58.3333333333%;
+  margin: 0 auto; */
+}
+
+.row h2::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 348px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #f4f4f4;
+  z-index: -1;
+}
 
 /* body,
 .well,
@@ -311,7 +389,7 @@ input:focus {
 } */
 
 /* Header */
-.header {
+/* .header {
   position: static;
   top: 0;
   left: 0;
@@ -341,7 +419,7 @@ input:focus {
 .header nav li.current-menu-item a {
   color: #fff;
   border-bottom: 3px solid #fff;
-}
+} */
 
 /* .header nav li.button { 
   float: right;
@@ -353,7 +431,7 @@ input:focus {
 .header nav li.button a {
   color: #fff;
   line-height: 32px;
-} */
+
 
 .header nav li a {
   line-height: 20px;
@@ -370,7 +448,7 @@ input:focus {
 .header nav a:hover {
   color: #fff;
   text-decoration: none;
-}
+} */
 /* .header .buttons {
   float: right;
 }
@@ -554,7 +632,7 @@ div.controls > span.uneditable-input {
   border-color: #fff;
   box-shadow: none;
 } */
-.form-horizontal .form-group {
+/* .form-horizontal .form-group {
   margin-left: 0;
 }
 .intro h4 {
@@ -565,7 +643,7 @@ div.controls > span.uneditable-input {
 .form-group.has-error .help-block {
   border: 2px solid #a94442;
   padding: 0.3em 1em;
-}
+} */
 
 #askDialogInput {
   min-width: 220px;
