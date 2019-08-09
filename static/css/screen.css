@@ -14,9 +14,10 @@ html {
 
 body {
   scroll-behavior: smooth;
-  flex: 1;
   font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
   line-height: 1.5;
+  color: #161616;
+  background-color: #f4f4f4;
   /* background-color: hotpink; */
   display: flex;
   flex: 1;
@@ -37,7 +38,7 @@ p {
 
 /* Structure */
 .container {
-  /* background-color: lightgray; */
+  /* background-color: yellow; */
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -51,10 +52,7 @@ p {
 }
 
 .row h1 {
-  width: 100%;
-  /* margin: 0; */
-  /* background-color: lightblue; */
-  /* padding: 0 20px; */
+  width: calc(100% - 5px);
   margin-bottom: 348px;
 }
 
@@ -63,7 +61,7 @@ p {
 .row form {
   width: 58.3333333333%;
   margin: 0 auto;
-  /* background-color: #f4f4f4; */
+  background-color: #f4f4f4;
 }
 
 /* Logo */
@@ -74,6 +72,7 @@ p {
   background-size: contain;
   background-repeat: no-repeat;
   margin: 5px 0 0 5px;
+  /* z-index: 2; */
 }
 
 /* Icon */
@@ -86,19 +85,21 @@ input[type="email"] {
   border-radius: 0;
   box-shadow: none;
   font-family: "ProximaNova-Regular";
+  font-weight: 500;
   color: #161616;
-  font-size: 36px;
   background-color: white;
   border: none;
   border-bottom: solid 1px #161616;
+  font-size: 24px;
   margin-top: 3rem;
   margin-bottom: 5rem;
-  width: 180%;
+  width: 150%;
   /* width: 100%; */
 }
 
-input::placeholder {
+input[type="email"]::placeholder {
   font-family: "ProximaNova-Regular";
+  color: #161616;
 }
 
 input:hover,
@@ -117,26 +118,22 @@ form {
   display: flex;
   flex: 1;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .form-group {
-  /* background-color: lightyellow; */
-  /* width: 100%; */
   margin-bottom: 0;
+  height: 100px;
 }
-
-/* div input[type="email"] {
-  width: 180%;
-} */
 
 .form-control {
   height: 48px;
-  padding: 0;
-  border-radius: 0;
+  /* padding: 0; */
+  padding: 0.375rem 0.75rem;
+  /* border-radius: 0;
   box-shadow: none;
   font-size: 24px;
-  font-family: "ProximaNova-Regular";
+  font-family: "ProximaNova-Regular"; */
 }
 
 .form-control:focus {
@@ -171,20 +168,16 @@ form {
 
 /*  error message */
 
-.has-error .help-block,
-.has-error .control-label,
-.has-error .radio,
-.has-error .checkbox,
-.has-error .radio-inline,
-.has-error .checkbox-inline {
+/* .has-error  {
   color: #ff4500;
-  background-color: #ffe7dd;
-}
+  background-color: #ffe7dd; */
+/* } */
 
 .has-error .help-block {
   display: flex;
   margin: 0;
   color: #ff4500;
+  background-color: #ffe7dd;
 }
 
 .has-error .help-block span {
@@ -231,7 +224,6 @@ button.btn.btn-default {
   background-color: #ff4500;
   color: white;
   border: solid 1px transparent;
-  margin-bottom: 19px;
 }
 
 button.btn.btn-default:not(:disabled):hover {
@@ -256,6 +248,19 @@ button.btn.btn-default:disabled {
 }
 
 /* new content */
+
+.row h1::before {
+  content: " ";
+  display: block;
+  height: 348px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -10;
+}
+
 .row h1::after {
   content: " Welcome to eduID";
   display: block;
@@ -274,25 +279,91 @@ button.btn.btn-default:disabled {
   color: #ff4500;
   font-size: 28px;
   line-height: 42px;
-  margin-top: 24;
   font-weight: 400;
   position: absolute;
   top: 185px;
-  padding-left: 5px;
-  /* width: 58.3333333333%;
-  margin: 0 auto; */
+  /* padding-left: 5px; */
+  width: 58.3333333333%;
+  margin: 24px auto 0;
 }
 
-.row h2::after {
+/* .row form::after {
   content: " ";
   display: block;
+  height: 100vh;
+  width: 100%;
   position: absolute;
   top: 348px;
+  top: 0; 
   right: 0;
   left: 0;
   bottom: 0;
+  height: 100vh;
   background-color: #f4f4f4;
-  z-index: -1;
+  // background-color: #f4f4f4; 
+  // z-index: -1; 
+} */
+
+/* reset password breakpoints */
+
+@media (max-width: 823px) {
+  .row h1::after,
+  .row h2::before,
+  .row h2 {
+    padding: 3rem 0 2rem;
+    width: 75%;
+  }
+  .row p,
+  .row form {
+    padding: 0;
+    width: 75%;
+  }
+  .row h1::after {
+    padding: 136px 0 103px;
+    height: calc(60px + 112px + 96px + 80px - 5px);
+  }
+  input[type="email"] {
+    width: 100%;
+    /* width: 100%; */
+  }
+  form {
+    flex-direction: column;
+  }
+  input,
+  button,
+  .form-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .row h1::after {
+    width: calc(100% - 40px);
+  }
+  .row h2::before,
+  .row h2 {
+    /* padding: 3rem 20px 2rem 0; */
+    width: calc(100% - 40px);
+  }
+  .row p,
+  .row form {
+    padding: 0;
+    width: calc(100% - 40px);
+  }
+  .row h1::after {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .row h2::before,
+  h2 {
+    font-size: 25px;
+    line-height: 30px;
+    margin-top: 10px;
+    top: 155px;
+  }
+}
+
+@media (max-width: 414px) {
 }
 
 /* body,
