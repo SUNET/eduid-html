@@ -1,4 +1,315 @@
-﻿body,
+﻿/* header */
+header {
+  width: calc(100% - 5px);
+  margin-bottom: 348px;
+  display: flex;
+  background-color: white;
+}
+
+ul {
+  display: flex;
+}
+
+/* header: hiding elements in the DOM */
+/* .clearfix, */
+.form-actions span a,
+legend,
+.button.white-border,
+.navbar-header,
+.navbar-brand {
+  display: none;
+}
+
+.col-md-12,
+form .well,
+.col-md-offset-3,
+.col-md-6 {
+  display: contents;
+}
+
+#eduid-idp-navbar {
+  display: contents;
+  border: none;
+  margin: 0;
+  padding: 0;
+  border: solid 3px red;
+}
+
+#eduid-idp-menu {
+  display: flex !important;
+  flex: 1;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+/* buttons */
+.button.orange {
+  font-family: "Akkurat";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+  height: 48px;
+  padding: 10px 20px;
+  border: solid 1px transparent;
+  box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.button.orange a {
+  color: #161616 !important;
+  text-decoration: none;
+}
+
+/* buttons: cancelling bootstrap styles  */
+.navbar-nav.navbar-right:last-child,
+.navbar-right {
+  float: none !important;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* structure */
+.container-fluid {
+  display: contents;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  flex: 1;
+  border-bottom: solid #ff4500 8px;
+}
+
+fieldset {
+  /* background-color: hotpink; */
+  display: flex;
+  flex: 1;
+}
+
+/* form */
+
+/* form {
+  background-color: lightpink;
+  display: flex;
+  flex: 1;
+} */
+
+label {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: "ProximaNova-Bold";
+  letter-spacing: 0.5px;
+  line-height: 1;
+  font-weight: 700;
+  color: #161616;
+  padding: 0 0 0 2px;
+  margin: 0;
+  text-align: left;
+}
+
+input[name="username"],
+input[name="password"] {
+  border-radius: 0;
+  box-shadow: none;
+  font-family: "ProximaNova-Regular";
+  font-weight: 500;
+  color: #161616;
+  background-color: white;
+  border: none;
+  border-bottom: solid 1px #161616;
+  font-size: 24px;
+  /* margin-top: 3rem; */
+  /* margin-bottom: 5rem; */
+  width: 100%;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+/* .control-group {
+  display: flex;
+  flex-direction: column;
+} */
+
+.control-group p:empty {
+  display: none;
+}
+
+.control-group p {
+  margin: 3rem 0 0 0;
+  width: 100%;
+  font-size: 20px;
+  line-height: 32px;
+  margin-top: 24px;
+  background: yellow;
+}
+
+.forgot-password {
+  margin: 3rem 0;
+  /* background: yellow; */
+  /* width: 100%; */
+  display: inline-block;
+  color: #ff4500 !important;
+  border-bottom: solid 1px transparent;
+  font-family: "Akkurat";
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 24px;
+}
+
+.forgot-password:hover {
+  border-bottom: solid 1px #ff4500;
+  text-decoration: none;
+}
+
+/* form: cancelling bootstrap styles */
+.form-horizontal .control-label {
+  padding-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+/* Button */
+button.btn {
+  font-family: "Akkurat";
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  height: 48px;
+  padding: 10px 20px;
+  box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+button.btn.btn-primary {
+  background-color: #ff4500;
+  color: white;
+  border: solid 1px transparent;
+}
+
+button.btn.btn-primary:not(:disabled):hover {
+  color: #ff4500;
+  background-color: #ffe7dd;
+  transform: scale(0.95);
+  border: solid 1px #ffe7dd;
+}
+
+button.btn.btn-primary:not(:disabled):not(.disabled):active,
+button.btn.btn-primary:not(:disabled):not(.disabled):focus,
+button.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+  color: #ff4500;
+  background-color: #ffe7dd;
+  transform: scale(0.95);
+  border: solid 1px #ffe7dd;
+}
+
+button.btn.btn-primary:disabled {
+  background-color: #d8d8d8;
+  border-color: #d8d8d8;
+}
+
+/* footer */
+.footer {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* header nav moved to footer */
+#eduid-idp-menu a,
+.footer p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 0;
+
+  /* z-index: 100; */
+}
+
+#eduid-idp-menu ul {
+  font-family: "Akkurat";
+  float: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: -100;
+}
+
+#eduid-idp-menu li {
+  margin: 24px 15px 20px 0;
+  padding: 0;
+}
+
+#eduid-idp-menu a {
+  margin: 0;
+  padding: 0;
+  color: #ff4500;
+  border-bottom: solid 1px transparent;
+}
+
+#eduid-idp-menu a:hover {
+  border-bottom: solid 1px #ff4500;
+}
+
+/* new content */
+.container::before {
+  content: " ";
+  display: block;
+  height: 350px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -10;
+}
+
+.container::after {
+  content: " Welcome to eduID";
+  /* background-color: yellow; */
+  /* display: block;*/
+  position: absolute;
+  top: 60px;
+  left: 20.888%;
+  font-size: 36px;
+  line-height: 44px;
+  padding: 112px 0 103px;
+  /* height: calc(112px + 96px + 80px - 5px); */
+  width: 58.3333333333%;
+  margin: 0 auto;
+}
+
+.row::after {
+  content: "Login to setup or edit your eduID";
+  display: block;
+  color: #ff4500;
+  font-size: 28px;
+  line-height: 42px;
+  font-weight: 400;
+  position: absolute;
+  top: 200px;
+  left: 20.888%;
+  /* padding-left: 5px; */
+  width: 58.3333333333%;
+  margin: 24px auto 0;
+}
+
+/* body,
 .well,
 .form-actions,
 .container .jumbotron {
@@ -36,13 +347,13 @@ h4,
 h5,
 h6 {
     color:#fff;
-}
+} */
 
 /* Text */
-h1,
+/* h1,
 h2,
 legend {
-    /*font-size:1.35em;*/
+    font-size:1.35em;
     font-size:72px;
     color:#fff;
 }
@@ -81,11 +392,10 @@ input {
 }
 input:focus {
     outline:0;
-}
-
+} */
 
 /* Header */
-.header .container {
+/* .header .container {
     padding: 0; }
 .header ul {
     margin: 0; }
@@ -177,13 +487,13 @@ input:focus {
     background:#fff;
     line-height:40px;
     padding:0 40px;
-}
+} 
 .logo {
-    width: 145px;
-    height: 50px;
-    background: url(../img/sprite.png) 1px 0 no-repeat;
+  width: 145px;
+  height: 50px;
+  background: url(../img/sprite.png) 1px 0 no-repeat;
 }
-
+/* 
 .media {
     position:absolute;
     left:50%;
@@ -263,13 +573,12 @@ a.btn-warning {
     border-color: #ebccd1;
     border: 2px solid #a94442;
     padding: .2em;
-}
-
+} */
 
 /* Buttons
     -------------------------------------------------------------------------------------- */
 
-.buttons .button {
+/* .buttons .button {
     padding: 0;
 }
 .buttons .button a {
@@ -321,10 +630,10 @@ input[type=submit].btn,
 button[type=submit].btn {
     display: block;
     margin-top: 20px;
-}
+} */
 
 /* Font face */
-@font-face {
+/* @font-face {
 	font-family: 'Roboto-Light';
 	src: url('../fonts/roboto-light-webfont.eot');
 	src: url('../fonts/roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
@@ -437,9 +746,9 @@ button[type=submit].btn {
     }
 
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) { */
 
-    /* Texts */
+/* Texts 
     legend {
         font-size:46px;
     }
@@ -462,7 +771,7 @@ button[type=submit].btn {
         z-index: 9999;
         padding:0;
     }
-    #header .container {
+    /* #header .container {
         padding:0;
     }
 
@@ -492,10 +801,10 @@ button[type=submit].btn {
 
     .profile-combo > .col-md-3 {
         padding:0;
-    }
+    } */
 
-    /* Paddings */
-    .form-horizontal {
+/* Paddings */
+/* .form-horizontal {
         padding-top:0!important;
         padding-bottom:0;
         margin-top:70px;
@@ -509,7 +818,7 @@ button[type=submit].btn {
     }
 
 
-    /* Buttons */
+    /* Buttons 
     .btn-success,
     .btn {
         margin-left:auto!important;
@@ -520,13 +829,13 @@ button[type=submit].btn {
         font-size:13px
     }
 
-    /* Footer */
+    /* Footer 
     .footer {
         padding:20px 0;
         height:auto;
     }
 
-    /* Pages */
+    /*Pages
     .tab-content {
         padding-right:0;
         padding-left:0;
@@ -628,9 +937,9 @@ button[type=submit].btn {
         width: 250px;
         margin-left: -125px;
     }
-}
+} */
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
 
     nav.navbar.navbar-default#eduid-idp-navbar {
         background-color: transparent;
@@ -641,4 +950,4 @@ button[type=submit].btn {
         display: none;
     }
 
-}
+} */

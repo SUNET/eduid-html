@@ -62,6 +62,8 @@ p {
   width: 58.3333333333%;
   margin: 0 auto;
   background-color: #f4f4f4;
+  box-shadow: none;
+  border: none;
 }
 
 /* Logo */
@@ -81,7 +83,7 @@ p {
 }
 
 /* Form */
-input[type="email"] {
+input[name="email"] {
   border-radius: 0;
   box-shadow: none;
   font-family: "ProximaNova-Regular";
@@ -363,8 +365,8 @@ button.btn.btn-default:disabled {
   }
 }
 
-@media (max-width: 414px) {
-}
+/* @media (max-width: 414px) {
+} */
 
 /* body,
 .well,
@@ -560,12 +562,12 @@ input:focus {
   color: #fff;
   line-height: 32px;
 } */
-
+/* 
 .container-fluid .jumbotron {
   color: #fff;
 }
 
-/* No javascript */
+/* No javascript 
 div#no-script {
   text-align: center;
   color: #cc3732;
@@ -573,10 +575,10 @@ div#no-script {
 
 div#content-block {
   display: none;
-}
+} */
 /* End no javascript */
 
-/* Main marketing message and sign up button */
+/* Main marketing message and sign up button 
 #content-block > h3:first-child {
   font-weight: bold;
   font-size: 32px;
@@ -614,7 +616,7 @@ div#content-block {
   font-size: 14px;
 }
 
-/* Help */
+/* Help 
 
 .jumbotron.eduid-help .panel-body,
 .jumbotron.eduid-help p {
@@ -634,7 +636,7 @@ div#content-block {
 }
 
 /* Navigation
--------------------------------------------------- */
+-------------------------------------------------- 
 
 div#eduid-dashboard-menu ul.nav.navbar-nav li a {
   padding: 15px 0;
@@ -657,7 +659,7 @@ div#eduid-dashboard-menu ul.nav.navbar-nav li a {
   display: inline-block;
 }
 
-/* forms ---------------*/
+/* forms ---------------
 
 form.form-inline div.alert {
   display: block;
@@ -674,7 +676,7 @@ form.form-horizontal label {
 /* .table-form .btn-link {
   padding: 0;
   margin-bottom: 0;
-} */
+}
 
 div.form-content {
   margin-top: 10px;
@@ -714,7 +716,7 @@ div.controls > span.uneditable-input {
 .form-group.has-error .help-block {
   border: 2px solid #a94442;
   padding: 0.3em 1em;
-} */
+} 
 
 #askDialogInput {
   min-width: 220px;
@@ -792,7 +794,7 @@ button[type="submit"].btn {
   vertical-align: middle;
   padding: 0 14px 0 10px;
   margin: 0 0 0 4px;
-} */
+}
 
 .pre-big {
   font-size: 150%;
@@ -872,7 +874,7 @@ button[type="submit"].btn {
 /* End Spinner
 -------------------------------------------------- */
 
-/* removing inlines */
+/* removing inlines 
 
 div.position-relative {
   position: relative;
@@ -929,7 +931,7 @@ ul.nav.navbar-nav li a {
   color: #3f5c57;
 }
 
-/* Footer */
+/* Footer 
 #footer {
   max-width: 1200px;
   margin: 0 auto;
@@ -1063,7 +1065,7 @@ div#footer span.langselector {
 
   font-weight: normal;
   font-style: normal;
-} */
+}
 
 @media only screen and (min-width: 960px) and (max-width: 1053px) {
   .header nav li {
@@ -1236,7 +1238,7 @@ div#footer span.langselector {
     margin: 7.5px 0px;
   }
 
-  /* Texts */
+  /* Texts 
   .jumbotron h1 {
     font-size: 36px;
     line-height: 1;
@@ -1285,7 +1287,7 @@ div#footer span.langselector {
     line-height: 1em;
   }
 
-  /* Paddings */
+  /* Paddings 
   .container-fluid .jumbotron {
     padding-top: 0 !important;
     padding-bottom: 0;
@@ -1299,7 +1301,7 @@ div#footer span.langselector {
     max-width: 1200px;
   }
 
-  /* Buttons */
+  /* Buttons
   .btn {
     margin-left: auto !important;
     margin-right: auto;
@@ -1307,14 +1309,14 @@ div#footer span.langselector {
     font-size: 13px;
   }
 
-  /* Footer */
+  /* Footer 
   #footer,
   .footer {
     padding: 20px 0;
     height: auto;
   }
 
-  /* Pages */
+  /* Pages 
 
   .tab-content {
     padding-right: 0;
@@ -1346,7 +1348,7 @@ div#footer span.langselector {
     display: none;
   }
 
-  /* main menu in small devices */
+  /* main menu in small devices 
 
   nav.navbar.navbar-default#eduid-navbar {
     background-color: #333;
@@ -1509,7 +1511,7 @@ p.eduid-strong {
 }
 
 /* Modals
--------------------------------------------------- */
+--------------------------------------------------
 
 h3.modal-title {
   color: #333;
@@ -1537,7 +1539,7 @@ div.modal-dialog div.modal-footer a {
   margin-bottom: 0px;
 }
 
-/* raise modal over menu */
+/* raise modal over menu 
 .modal {
   z-index: 10000 !important;
 }
@@ -1546,7 +1548,7 @@ div.modal-dialog div.modal-footer a {
 -------------------------------------------------- */
 
 /* Flash messages
--------------------------------------------------- */
+--------------------------------------------------
 
 .messages-center-block {
   float: none;
