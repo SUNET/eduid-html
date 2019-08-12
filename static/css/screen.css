@@ -130,12 +130,7 @@ form {
 
 .form-control {
   height: 48px;
-  /* padding: 0; */
   padding: 0.375rem 0.75rem;
-  /* border-radius: 0;
-  box-shadow: none;
-  font-size: 24px;
-  font-family: "ProximaNova-Regular"; */
 }
 
 .form-control:focus {
@@ -313,7 +308,7 @@ button.btn.btn-default:disabled {
   }
   .row p,
   .row form {
-    padding: 0;
+    padding: 56px 0;
     width: 75%;
   }
   .row h1::after {
@@ -341,7 +336,7 @@ button.btn.btn-default:disabled {
   }
   .row p,
   .row form {
-    padding: 0;
+    padding: 56px 0;
     width: calc(100% - 40px);
   }
   .row h1::after {

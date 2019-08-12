@@ -32,7 +32,6 @@ form .well,
   border: none;
   margin: 0;
   padding: 0;
-  border: solid 3px red;
 }
 
 #eduid-idp-menu {
@@ -93,6 +92,11 @@ fieldset {
   flex: 1;
 }
 
+.well {
+  min-height: auto;
+  padding: 112px 0;
+}
+
 /* .jumbotron - holds conetnt on server error page  */
 .jumbotron legend {
   display: block;
@@ -148,7 +152,6 @@ input[name="password"] {
   margin-bottom: 20px;
 }
 
-
 .control-group p:empty {
   display: none;
 }
@@ -159,13 +162,10 @@ input[name="password"] {
   font-size: 20px;
   line-height: 32px;
   margin-top: 24px;
-  background: yellow;
 }
 
 .forgot-password {
   margin: 3rem 0;
-  /* background: yellow; */
-  /* width: 100%; */
   display: inline-block;
   color: #ff4500 !important;
   border-bottom: solid 1px transparent;
@@ -241,8 +241,6 @@ button.btn.btn-primary:disabled {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 0;
-
-  /* z-index: 100; */
 }
 
 #eduid-idp-menu ul {
@@ -310,23 +308,24 @@ button.btn.btn-primary:disabled {
   position: absolute;
   top: 200px;
   left: 20.888%;
-  /* padding-left: 5px; */
   width: 58.3333333333%;
   margin: 24px auto 0;
 }
 
 @media (max-width: 823px) {
+  .row::after,
   .container::after {
     left: 12.5%;
     width: 75%;
   }
   .container .jumbotron {
-    padding: 0;
+    /* padding: 0; */
     width: 75%;
   }
 }
 
 @media (max-width: 768px) {
+  .row::after,
   .container::after {
     left: 20px;
     width: calc(100% - 40px);
