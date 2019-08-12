@@ -1,7 +1,7 @@
 ﻿/* header */
 header {
   width: calc(100% - 5px);
-  margin-bottom: 348px;
+  margin-bottom: 295px; /* 348px */
   display: flex;
   background-color: white;
 }
@@ -89,18 +89,33 @@ form .well,
 }
 
 fieldset {
-  /* background-color: hotpink; */
   display: flex;
   flex: 1;
 }
 
-/* form */
+/* .jumbotron - holds conetnt on server error page  */
+.jumbotron legend {
+  display: block;
+  border: none;
+  font-size: 24px;
+  line-height: 34px;
+  margin-top: 56px;
+  font-weight: 700;
+}
 
-/* form {
-  background-color: lightpink;
-  display: flex;
-  flex: 1;
-} */
+.jumbotron p {
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.container .jumbotron {
+  padding: 0;
+  background-color: #f4f4f4;
+  border-radius: 0;
+  width: 58.3333333333%;
+  margin: 0 auto;
+}
 
 label {
   font-size: 12px;
@@ -126,8 +141,6 @@ input[name="password"] {
   border: none;
   border-bottom: solid 1px #161616;
   font-size: 24px;
-  /* margin-top: 3rem; */
-  /* margin-bottom: 5rem; */
   width: 100%;
 }
 
@@ -135,10 +148,6 @@ input[name="password"] {
   margin-bottom: 20px;
 }
 
-/* .control-group {
-  display: flex;
-  flex-direction: column;
-} */
 
 .control-group p:empty {
   display: none;
@@ -281,15 +290,12 @@ button.btn.btn-primary:disabled {
 
 .container::after {
   content: " Welcome to eduID";
-  /* background-color: yellow; */
-  /* display: block;*/
   position: absolute;
   top: 60px;
   left: 20.888%;
   font-size: 36px;
   line-height: 44px;
   padding: 112px 0 103px;
-  /* height: calc(112px + 96px + 80px - 5px); */
   width: 58.3333333333%;
   margin: 0 auto;
 }
@@ -307,6 +313,27 @@ button.btn.btn-primary:disabled {
   /* padding-left: 5px; */
   width: 58.3333333333%;
   margin: 24px auto 0;
+}
+
+@media (max-width: 823px) {
+  .container::after {
+    left: 12.5%;
+    width: 75%;
+  }
+  .container .jumbotron {
+    padding: 0;
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container::after {
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+  .container .jumbotron {
+    width: calc(100% - 40px);
+  }
 }
 
 /* body,

@@ -269,6 +269,7 @@ button.btn.btn-default:disabled {
   position: relative;
   font-size: 36px;
   line-height: 44px;
+  font-weight: 500;
   padding: 136px 0 103px;
   height: calc(60px + 112px + 96px + 80px - 5px);
   width: 58.3333333333%;
@@ -276,35 +277,30 @@ button.btn.btn-default:disabled {
 }
 
 .row h2::before {
-  content: "Reset your password to log in";
+  content: "Reset your password to log in.";
   display: block;
   color: #ff4500;
   font-size: 28px;
   line-height: 42px;
-  font-weight: 400;
+  font-weight: 500;
   position: absolute;
   top: 185px;
-  /* padding-left: 5px; */
   width: 58.3333333333%;
   margin: 24px auto 0;
 }
 
-/* .row form::after {
-  content: " ";
+.jumbotron::before {
+  content: "Something went wrong!";
   display: block;
-  height: 100vh;
-  width: 100%;
+  color: #ff4500;
+  font-size: 28px;
+  line-height: 42px;
+  font-weight: 500;
   position: absolute;
-  top: 348px;
-  top: 0; 
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 100vh;
-  background-color: #f4f4f4;
-  // background-color: #f4f4f4; 
-  // z-index: -1; 
-} */
+  top: 185px;
+  width: 58.3333333333%;
+  margin: 44px auto 0;
+}
 
 /* reset password breakpoints */
 
@@ -326,7 +322,6 @@ button.btn.btn-default:disabled {
   }
   input[type="email"] {
     width: 100%;
-    /* width: 100%; */
   }
   form {
     flex-direction: column;
@@ -339,12 +334,9 @@ button.btn.btn-default:disabled {
 }
 
 @media (max-width: 768px) {
-  .row h1::after {
-    width: calc(100% - 40px);
-  }
+  .row h1::after,
   .row h2::before,
   .row h2 {
-    /* padding: 3rem 20px 2rem 0; */
     width: calc(100% - 40px);
   }
   .row p,
