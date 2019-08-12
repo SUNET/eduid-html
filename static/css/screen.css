@@ -96,6 +96,8 @@ input[name="email"] {
   margin-top: 3rem;
   margin-bottom: 5rem;
   width: 150%;
+  height: 48px;
+  padding: 0.375rem 0.75rem;
   /* width: 100%; */
 }
 
@@ -281,7 +283,7 @@ button.btn.btn-default:disabled {
   position: absolute;
   top: 185px;
   width: 58.3333333333%;
-  margin: 24px auto 0;
+  margin: 44px auto 0;
 }
 
 .jumbotron::before {
@@ -914,9 +916,9 @@ div.position-relative {
   border-color: transparent #ddd #ddd #ddd;
 }
 
-ul.nav.navbar-nav li a {
+/* ul.nav.navbar-nav li a {
   color: #3f5c57;
-}
+} */
 
 /* Footer 
 #footer {
