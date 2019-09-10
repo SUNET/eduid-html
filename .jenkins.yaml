@@ -1,46 +1,22 @@
-builders:
-  - script
 git:
   extensions:
     shallow_clone: true
-build_in_docker:
-  image: docker.sunet.se/sunet/docker-jenkins-node-job
-script:
-  - unset LD_LIBRARY_PATH
-  - node --version
-  - npm --version
-  - cd react
-  - npm install
-  - npm run-script test-headless
-  - npm run build && npm run build-pro
 clean_workspace: true
+builders:
+  - docker
+docker_name: eduid/eduid-html
+managed_scripts:
+  - docker_build_prep.sh
+  - docker_tag.sh
 copy_artifacts:
   project_name: eduid-front
   target_dir: react/build/front/
   flatten: true
-archive_artifacts:
-  include: "react/build/**/*"
 triggers:
   cron: "@weekly"
 upstream:
   - eduid-front
 slack:
   room: eduid-builds
-
-extra_jobs:
-  - name: eduid-html-docker
-    builders:
-      - docker
-    docker_name: eduid/eduid-html
-    archive_artifacts: ~
-    copy_artifacts:
-      project_name: eduid-html
-    managed_scripts:
-      - docker_build_prep.sh
-      - docker_tag.sh
-    triggers:
-      github_push: false
-      cron: ~
-    upstream:
-      - eduid-html
+clean_workspace: true
 
