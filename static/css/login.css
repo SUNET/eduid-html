@@ -324,6 +324,25 @@ ul.nav.navbar-nav li a:hover {
   margin: 44px auto 0;
 }
 
+.col-md-offset-3,
+.col-md-6,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12 {
+  margin-left: 0;
+  width: 100%;
+  float: none;
+}
+
 @media (max-width: 823px) {
   .row::after,
   .container::after {
