@@ -1,7 +1,7 @@
 ﻿/* header */
 header {
   width: calc(100% - 5px);
-  margin-bottom: 295px; 
+  margin-bottom: 295px;
   display: flex;
   background-color: white;
 }
@@ -90,6 +90,7 @@ form .well,
 
 fieldset {
   display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
