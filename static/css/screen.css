@@ -61,7 +61,7 @@ p {
 .row form {
   width: 58.3333333333%;
   margin: 0 auto;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
   box-shadow: none;
   border: none;
 }
