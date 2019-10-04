@@ -92,6 +92,8 @@ form .well,
 #content {
   flex: 1;
   border-bottom: solid #ff4500 8px;
+  background-color: #f4f4f4;
+  z-index: 100;
 }
 
 fieldset {
@@ -295,7 +297,6 @@ ul.nav.navbar-nav li a:hover {
   top: 0;
   right: 0;
   left: 0;
-  z-index: -10;
 }
 
 .container::after {
