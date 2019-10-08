@@ -56,6 +56,7 @@ p {
   width: calc(100% - 5px);
   margin-bottom: 348px;
 }
+.row h3,
 .row .buttons,
 .row h2,
 .row p,
@@ -319,6 +320,12 @@ button.btn.btn-default:disabled {
   float: none;
 }
 
+.screen-reader-text {
+  color: transparent;
+  height: 0;
+  width: 0;
+}
+
 /* reset password breakpoints */
 
 @media (max-width: 823px) {
@@ -372,12 +379,6 @@ button.btn.btn-default:disabled {
     margin-top: 10px;
     top: 155px;
   }
-}
-
-.screen-reader-text {
-  color: transparent;
-  height: 0;
-  width: 0;
 }
 
 /* @media (max-width: 414px) {
