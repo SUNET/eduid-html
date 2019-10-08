@@ -374,6 +374,12 @@ button.btn.btn-default:disabled {
   }
 }
 
+.screen-reader-text {
+  color: transparent;
+  height: 0;
+  width: 0;
+}
+
 /* @media (max-width: 414px) {
 } */
 
