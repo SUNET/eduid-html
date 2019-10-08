@@ -16,6 +16,7 @@ body {
   scroll-behavior: smooth;
   font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
   line-height: 1.5;
+  font-size: 16px !important;
   color: #161616;
   background-color: #f4f4f4;
   /* background-color: hotpink; */
@@ -55,7 +56,7 @@ p {
   width: calc(100% - 5px);
   margin-bottom: 348px;
 }
-
+.row .buttons,
 .row h2,
 .row p,
 .row form {

@@ -1,57 +1,139 @@
 <!DOCTYPE html>
 <html lang="sv-SE">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>eduID</title>
     <!-- <link rel='stylesheet' id='eduid-style-main-css' href='/assets/css/style.min.css' type='text/css' media='all' /> -->
-    <link rel='stylesheet' id='eduid-style-main-css' href='/static/css/screen.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='eduid-style-main-css' href='/static/css/login.css' type='text/css' media='all' />
+    <link
+      rel="stylesheet"
+      id="eduid-style-main-css"
+      href="/static/css/screen.css"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="eduid-style-main-css"
+      href="/static/css/login.css"
+      type="text/css"
+      media="all"
+    />
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/static/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="/static/manifest.json">
-    <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="/static/mstile-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/static/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/static/apple-touch-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/static/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/static/apple-touch-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/static/apple-touch-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/static/apple-touch-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/static/apple-touch-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/static/apple-touch-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/apple-touch-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/static/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/static/android-chrome-192x192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/static/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/static/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link rel="manifest" href="/static/manifest.json" />
+    <link
+      rel="mask-icon"
+      href="/static/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-TileImage" content="/static/mstile-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
 
-</head>
+  <body>
+    <div class="container">
+      <a class="skip-link screen-reader-text" href="#content"
+        >Skip to content</a
+      >
+      <header>
+        <div class="logo"></div>
+        <!-- <div id="mobile-nav">
+          <span></span>
+        </div> -->
+        <p>
+          <img
+            class="alignnone size-full"
+            src="/assets/images/sunet-gray.png"
+            alt="sunet-gray"
+            width="70"
+            height="40"
+          />
+          <img
+            class="alignnone size-full"
+            src="/assets/images/uhr-gray.png"
+            alt="uhr-gray"
+            width="110"
+            height="40"
+          />
+        </p>
+      </header>
 
-<body>
-  <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-  <header>
-    <div class="logo"></div>
-    <!-- <div id="mobile-nav">
-      <span></span>
-    </div> -->
-    <div class="buttons">
-      <button class="button orange">
-        <a href="https://signup.eduid.se/">Skapa konto</a>
-      </button>
-      <button class="button white-border">
-        <a href="https://dashboard.eduid.se/">Logga in</a>
-      </button>
-    </div>
-  </header>
-
-  <!-- <div id="side-nav" class="page-student">
+      <!-- <div id="side-nav" class="page-student">
       <ul></ul>
   </div> -->
 
-  <!-- <div id="wrapper" class="page-student"> -->
-    <!-- <section class="default fullscreen"> -->
+      <!-- <div id="wrapper" class="page-student"> -->
+      <!-- <section class="default fullscreen"> -->
       <!-- <div class="header">
         <div class="buttons">
           <div class="button orange">
@@ -63,36 +145,64 @@
         </div>
       </div> -->
       <!-- <div class="wrap"> -->
-        <!-- <span class="hidden page-title">Start</span> -->
-        <!-- <div class="holder">
+      <!-- <span class="hidden page-title">Start</span> -->
+      <!-- <div class="holder">
           <div class="center-vertical-holder">
             <div class="center-vertical">
               <div class="container">
                 <div class="row"> -->
-                  <!-- <div class="col-md-5 float-center">
+      <!-- <div class="col-md-5 float-center">
                     <img src="" data-src="/assets/images/start-2.gif" data-mobile-src="/assets/images/mobil-start.png" alt="start-2" class="mobile-featured-image attachment-post-thumbnail wp-post-image" />
                   </div> -->
-                  <div class="col-md-12 center-div text-center">
-                    <h2>e-konto för högskolan</h2>
-                    <h3 class="dark"> Använd eduID för att logga in på <a title="antagning.se" href="http://www.antagning.se">antagning.se</a> eller för att aktivera och hantera studentkonton på dina lärosäten – under hela din högskoletid.<br/>
-                    eduID ger dig ett konto som du kan använda från din första ansökan om högskoleutbildning, genom din studietid och även som alumn.</h3>
-                    <p>
-                      <img class="alignnone size-full" src="/assets/images/sunet-gray.png" alt="sunet-gray" width="70" height="40" />
-                      <img class="alignnone size-full" src="/assets/images/uhr-gray.png" alt="uhr-gray" width="110" height="40" />
-                    </p>
-                  </div>
-                <!-- </div>
+      <div id="content">
+        <div class="row">
+          <h2>e-konto för högskolan</h2>
+
+          <div class="buttons">
+            <button id="register" class="button orange">
+              <a href="https://signup.eduid.se/">Skapa konto</a>
+            </button>
+            <button id="login" class="button orange">
+              <a href="https://dashboard.eduid.se/">Logga in</a>
+            </button>
+          </div>
+
+          <h2>
+            Använd eduID för att logga in på
+            <a title="antagning.se" href="http://www.antagning.se"
+              >antagning.se</a
+            >
+            eller för att aktivera och hantera studentkonton på dina lärosäten
+            – under hela din högskoletid.<br />
+            eduID ger dig ett konto som du kan använda från din första ansökan
+            om högskoleutbildning, genom din studietid och även som alumn.
+          </h2>
+
+          <h2>Om eduID</h2>
+          <p>
+            eduID är en identitetsutgivare för alla SWAMID-anslutna
+            organisationer som har behov av väl identifierade och autentiserade
+            användare. Tjänsten är avsedd för organisationer, primärt lärosäten,
+            som är anslutna till SWAMID eller som tecknar separat avtal om
+            användning av eduID.
+          </p>
+          <p>
+            eduID är en tjänst framtagen av SUNET i samarbete med antagning.se
+          </p>
+        </div>
+      </div>
+      <!-- </div>
               </div>
             </div>
           </div>
         </div> -->
-        <!-- <div class="button-holder">
+      <!-- <div class="button-holder">
           <button class="button scroll-down"></button>
         </div>
       </div> -->
-    <!-- </section> -->
+      <!-- </section> -->
 
-    <!-- <section id="varfor-eduid" class="default">
+      <!-- <section id="varfor-eduid" class="default">
       <div class="wrap">
         <span class="hidden page-title">Varför eduID?</span>
         <div class="holder">
@@ -132,7 +242,7 @@
       </div>
     </section> -->
 
-    <!-- <section id="hur-kommer-jag-igang-med-eduid" class="default">
+      <!-- <section id="hur-kommer-jag-igang-med-eduid" class="default">
       <div class="wrap">
         <span class="hidden page-title">Hur kommer jag igång med eduID?</span>
         <div class="holder default">
@@ -179,7 +289,7 @@
                           <li>Vänta på mail från minmyndighetspost.se, logga in på eduid.se och bekräfta ditt konto.</li>
                           <li>Klart!</li>
                         </ul>-->
-                  <!-- <h3>Via brev till din folkbokföringsadress:</h3>
+      <!-- <h3>Via brev till din folkbokföringsadress:</h3>
                     <ul>
                       <li>Skapa ett eduID-konto med hjälp av en emailadress.</li>
                       <li>Skriv in ditt personnummer och välj ”Bekräfta via brev”.</li>
@@ -196,7 +306,7 @@
       </div>
     </section> -->
 
-    <!-- <section id="faq" class="default div-overflow  questions">
+      <!-- <section id="faq" class="default div-overflow  questions">
       <div class="wrap">
         <span class="hidden page-title">Vanliga frågor</span>
         <div class="holder">
@@ -292,13 +402,13 @@
                       </li>
                       <li> -->
 
-                    <!--<h3>Vad är Min myndighetspost?</h3>
+      <!--<h3>Vad är Min myndighetspost?</h3>
                         <p>eduID får <a href="https://www.sunet.se/sunet-mina-meddelanden/">inte längre
                         använda</a> sig av den statliga meddelandetjänsten <a href="https://minmyndighetspost.se">Min
                         myndighetspost</a> för att bekräfta användarnas personnummer. Vi hoppas
                         givetvis att detta kommer att ändras.</p>-->
 
-                        <!-- <h3>Vad är Freja eID?</h3>
+      <!-- <h3>Vad är Freja eID?</h3>
                         <p>Freja eID är en kostnadsfri tjänst som påminner om mobilt bankID utan att vara
                         knutet till att man har konto på en bank. I enkelhet går det till på så sätt att man
                         installerar <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID-appen</a>
@@ -379,7 +489,7 @@
                         brukar i de tjänster som använder det antas vara tilltalsnamn eller välkänt
                         smeknamn.</p> -->
 
-                    <!--<p><strong>Bekräfta din identitet med Min myndighetspost</strong><br>
+      <!--<p><strong>Bekräfta din identitet med Min myndighetspost</strong><br>
                         Lägg till ditt personnummer i fältet på bekräfta din identitet sidan för
                         att starta processen att bekräfta ditt personnummer. Ett meddelande skickas
                         då till din e-brevlåda hos Min myndighetspost (minmyndighetspost.se). I
@@ -389,7 +499,7 @@
                         kunna logga in på tjänster som kräver en bekräftad eduID, som
                         <a href="https://www.antagning.se">Antagning.se</a>.</p>-->
 
-                        <!-- <p><strong>Bekräfta din identitet med hjälp av Freja eID</strong><br>
+      <!-- <p><strong>Bekräfta din identitet med hjälp av Freja eID</strong><br>
                         När du har verifierat din identitet via <a href="https://frejaeid.com/skaffa-freja-eid/" target="_blank">Freja eID-appen</a> så loggar du in i eduID med webbläsaren i din mobiltelefonen. Lägg till ditt personnummer i fältet på “Bekräfta din identitet”-sidan för att starta processen.
                         Tryck sen på Freja eID-knappen och tryck på länken “Jag har Freja eID installerat”.
                         eduID kommer då att starta upp Freja eID-appen och du får godkänna att Freja eID skickar
@@ -457,42 +567,52 @@
       </div>
     </section> -->
 
-  <footer id="footer">
-    <span class="hidden page-title">Om eduID</span>
-      <!-- <div class="wrap">
+      <footer id="footer">
+        <!-- <span class="hidden page-title">Om eduID</span> -->
+        <!-- <div class="wrap">
         <div class="holder">
           <div class="center-vertical-holder">
             <div class="center-vertical">
               <div class="container">
                 <div class="row text-center"> -->
-    <h2>Om eduID</h2>
-    <p>eduID är en identitetsutgivare för alla SWAMID-anslutna organisationer som har behov av väl identifierade och autentiserade användare. Tjänsten är avsedd för organisationer, primärt lärosäten, som är anslutna till SWAMID eller som tecknar separat avtal om användning av eduID.</p>
-    <p>eduID är en tjänst framtagen av SUNET i samarbete med antagning.se</p>
-    <p>&nbsp;</p>
-    <p>
-      <img class="alignnone size-full" src="/assets/images/sunet-vit.png" alt="sunet-vit" width="70" height="40" />
-      <img class="alignnone size-full" src="/assets/images/uhr-vit2.png" alt="uhr-vit2" width="90" height="40" />
-    </p>
-    <nav>
-      <ul>
-        <!--  <li><a href="/">Student</a></li>
+
+        <!-- <p>&nbsp;</p>
+        <p>
+          <img
+            class="alignnone size-full"
+            src="/assets/images/sunet-vit.png"
+            alt="sunet-vit"
+            width="70"
+            height="40"
+          />
+          <img
+            class="alignnone size-full"
+            src="/assets/images/uhr-vit2.png"
+            alt="uhr-vit2"
+            width="90"
+            height="40"
+          />
+        </p> -->
+        <nav>
+          <ul>
+            <!--  <li><a href="/">Student</a></li>
                       <li><a href="/tekniker.html">Tekniker</a></li>
                       <li><a href="/personal.html">Personal</a></li>-->
-        <li><a href="/faq.html">Vanliga frågor</a></li>
-        <li><a href="/en/">English</a></li>
-        </ul>
-    </nav>
-                <!-- </div> -->
-                <!-- <div class="button-holder">
+            <li><a href="/faq.html">Vanliga frågor</a></li>
+            <li><a href="/en/">English</a></li>
+          </ul>
+        </nav>
+        <!-- </div> -->
+        <!-- <div class="button-holder">
                   <button class="button scroll-up">Till toppen</button>
                 </div> -->
-              <!-- </div>
+        <!-- </div>
             </div>
           </div>
         </div>
       </div> -->
-  </footer>
-  <!-- </div> -->
-  <script type='text/javascript' src='/scripts/combined.min.js'></script>
-</body>
+      </footer>
+    </div>
+    <script type="text/javascript" src="/scripts/combined.min.js"></script>
+  </body>
 </html>
