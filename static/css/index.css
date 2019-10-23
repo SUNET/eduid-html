@@ -162,12 +162,22 @@ a.button {
   text-transform: uppercase;
 }
 
-/* flexboxing */
+/* main structure of page */
 #content {
   display: flex;
   flex: 1;
 }
 
+.container {
+  padding: 0;
+  width: 58%;
+  /* max-width: 870px; */
+  max-width: 54.4rem;
+  margin: 0 auto;
+}
+
+
+/* footer */
 footer {
   border-top: solid #ff4500 8px;
 }
@@ -177,13 +187,4 @@ ul {
   justify-content: space-between;
   font-size: 1rem;
   margin: 1rem;
-}
-
-/* margin padding */
-.container {
-  padding: 0;
-  width: 58%;
-  /* max-width: 870px; */
-  max-width: 54.4rem;
-  margin: 0 auto;
 }
