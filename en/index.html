@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="sv-SE">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eduID</title>
-  <!-- <link rel='stylesheet' id='eduid-style-main-css' href='/assets/css/style.min.css' type='text/css' media='all' /> -->
-  <link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="/static/css/index.css" type="text/css" media="all" />
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
-  <!-- <link
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>eduID</title>
+    <!-- <link rel='stylesheet' id='eduid-style-main-css' href='/assets/css/style.min.css' type='text/css' media='all' /> -->
+    <link
+      rel="stylesheet"
+      href="/static/css/reset.css"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/index.css"
+      type="text/css"
+      media="all"
+    />
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <!-- <link
       rel="apple-touch-icon"
       sizes="57x57"
       href="/static/apple-touch-icon-57x57.png"
@@ -87,51 +96,62 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="msapplication-TileImage" content="/static/mstile-144x144.png" />
     <meta name="theme-color" content="#ffffff" />-->
-</head>
+  </head>
 
-<body>
-  <section class="banner">
-    <header>
-      <div class="logo"></div>
-      <img src="/assets/images/sunet-gray.png" alt="sunet-logo" width="70" height="40" />
-    </header>
-    <div class="container">
-      <h1 class="tagline">
-        eduID is easier and safer login.
-      </h1>
-    </div>
-  </section>
+  <body>
+    <section class="banner">
+      <header>
+        <div class="logo"></div>
+        <img
+          src="/assets/images/sunet-gray.png"
+          alt="sunet-logo"
+          width="70"
+          height="40"
+        />
+      </header>
+      <div class="container">
+        <h1 class="tagline">
+          eduID is easier and safer login.
+        </h1>
+      </div>
+    </section>
 
-  <section id="content">
-    <div class="container">
-      <div class="text-container">
-        <p class="intro">
-          Create an eduID and connect it to your Swedish national identity number to gain access to services and organisation related to higher education.
-        </p>
-        <p>
-          eduID is easier for you because you only have to remember one password and safer for the Universities becasue it is connecetd to a real individual.
+    <section id="content">
+      <div class="container">
+        <div class="text-container">
+          <p class="intro">
+            Create an eduID and connect it to your Swedish national identity
+            number to gain access to services and organisation related to higher
+            education.
+          </p>
+          <p>
+            eduID is easier for you because you only have to remember one
+            password and safer for the Universities becasue it is connecetd to a
+            real individual.
+          </p>
+        </div>
+        <a class="button" href="https://signup.eduid.se/">
+          <button id="register" class="settings-button">
+            Create your eduID
+          </button>
+        </a>
+
+        <p id="login">
+          If you already have eduID you can log in
+          <a class="text-link" href="https://dashboard.eduid.se/">here</a>.
         </p>
       </div>
-      <button id="register" class="settings-button">
-        <a class="button" href="https://signup.eduid.se/">Create your eduID</a>
-      </button>
+    </section>
 
-      <p id="login">
-        If you already have eduID you can log in 
-        <a class="text-link" href="https://dashboard.eduid.se/">here</a>.
-      </p>
-    </div>
-  </section>
+    <footer id="footer">
+      <nav>
+        <ul>
+          <li><a class="nav-link" href="/en/faq.html">Help</a></li>
+          <li><a class="nav-link" href="/">Svenska</a></li>
+        </ul>
+      </nav>
+    </footer>
 
-  <footer id="footer">
-    <nav>
-      <ul>
-        <li><a class="nav-link" href="/en/faq.html">Help</a></li>
-        <li><a class="nav-link" href="/">Svenska</a></li>
-      </ul>
-    </nav>
-  </footer>
-
-  <script type="text/javascript" src="/scripts/combined.min.js"></script>
-</body>
+    <script type="text/javascript" src="/scripts/combined.min.js"></script>
+  </body>
 </html>
