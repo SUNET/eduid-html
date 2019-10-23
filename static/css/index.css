@@ -1,0 +1,193 @@
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Akkurat";
+  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"),
+    url("../fonts/Akkurat-Mono.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Light";
+  src: url("../fonts/ProximaNova-Light.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Light.woff") format("woff"),
+    url("../fonts/ProximaNova-Light.woff2") format("woff2");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Regular";
+  src: url("../fonts/ProximaNova-Regular.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Regular.woff") format("woff"),
+    url("../fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Bold";
+  src: url("../fonts/ProximaNova-Bold.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Bold.woff") format("woff"),
+    url("../fonts/ProximaNova-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  height: 100vh;
+  font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #161616;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.banner {
+  background-color: white;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  margin: 6rem 0 3rem 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-top: 3.5rem;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding-top: 1.5rem;
+}
+
+.text-container {
+  margin-top: 1.5rem;
+}
+
+h1,
+h2,
+p.intro {
+  font-weight: 700;
+}
+
+/* link styles */
+a.text-link {
+  color: #ff4500;
+  border-bottom: solid #ff4500 2px;
+  text-decoration: none;
+}
+
+a.nav-link {
+  font-family: "Akkurat";
+  font-size: 1rem;
+  letter-spacing: 0.005em;
+  color: #ff4500;
+  border-bottom: solid transparent 1px;
+  text-decoration: none;
+}
+
+a.nav-link:hover {
+  border-bottom: solid #ff4500 1px;
+}
+
+a.text-link,
+a.nav-link {
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  border-bottom: solid transparent 1px;
+}
+
+/* Logo */
+.logo {
+  width: 10rem;
+  height: 3.125rem;
+  background: url(../img/ds-eduID-logo-black320x120px.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0.3125rem 0 0 0.3125rem;
+}
+
+/* button */
+button {
+  background-color: #ff4500;
+  height: 3rem;
+  border-radius: 20px;
+  border: solid 1px transparent;
+  padding: 0.625rem 1.25rem;
+  margin: 2rem 0 0 0;
+  box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(0.95);
+}
+
+a.button {
+  font-family: "Akkurat";
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* main structure of page */
+#content {
+  display: flex;
+  flex: 1;
+}
+
+.container {
+  padding: 0;
+  width: 58%;
+  /* max-width: 870px; */
+  max-width: 54.4rem;
+  margin: 0 auto;
+}
+
+
+/* footer */
+footer {
+  border-top: solid #ff4500 8px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+
