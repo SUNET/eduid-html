@@ -241,7 +241,7 @@ button.btn.btn-primary:disabled {
 }
 
 /* remove the footerin the DOM  */
-#eduid-idp-menu ul,
+/* #eduid-idp-menu ul, */
 .footer p {
   display: none;
 }
@@ -252,29 +252,33 @@ button.btn.btn-primary:disabled {
 } */
 
 /* header nav moved to footer */
-/* #eduid-idp-menu a,
+#eduid-idp-menu a,
 .footer p {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 0;
-} */
+}
 
-/* #eduid-idp-menu ul {
+#eduid-idp-menu ul {
   font-family: "Akkurat";
   float: none;
   margin: 0;
   padding: 0;
   width: 100%;
   position: fixed;
-  bottom: 0;
-  right: 15px;
+  bottom: 16px;
+  right: 16px;
   display: flex;
   justify-content: flex-end;
-} */
+}
 
-/* eduid-idp-menu li {
-  margin: 24px 15px 20px 0;
-  padding: 0;
+
+#eduid-idp-menu li {
+  display: none;
+}
+
+#eduid-idp-menu li:last-child {
+  display: block;
 }
 
 ul.nav.navbar-nav li a {
@@ -287,7 +291,7 @@ ul.nav.navbar-nav li a {
 ul.nav.navbar-nav li a:hover {
   color: #ff4500;
   border-bottom: solid 1px #ff4500;
-} */
+}
 
 /* new content */
 .container::before {
