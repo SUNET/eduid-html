@@ -293,7 +293,7 @@ ul.nav.navbar-nav li a:hover {
 .container::before {
   content: " ";
   display: block;
-  height: 237.2px;
+  height: 237px;
   background-color: white;
   position: absolute;
   top: 0;
@@ -303,7 +303,6 @@ ul.nav.navbar-nav li a:hover {
 
 .container::after {
   content: "eduID is easier and safer login.";
-  margin: 6rem 0 3rem 0;
   position: absolute;
   top: 146px;
   left: 20.888%;
