@@ -255,8 +255,8 @@ button.btn.btn-primary:disabled {
 #eduid-idp-menu a,
 .footer p {
   font-size: 16px;
-  line-height: 1.5;
-  margin-top: 0;
+  /* line-height: 1.5;
+  margin-top: 0; */
 }
 
 #eduid-idp-menu ul {
