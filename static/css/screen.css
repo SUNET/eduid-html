@@ -16,6 +16,7 @@ body {
   scroll-behavior: smooth;
   font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
   line-height: 1.5;
+  font-size: 16px !important;
   color: #161616;
   background-color: #f4f4f4;
   /* background-color: hotpink; */
@@ -55,7 +56,8 @@ p {
   width: calc(100% - 5px);
   margin-bottom: 219px;
 }
-
+.row h3,
+.row .buttons,
 .row h2,
 .row p,
 .row form {
@@ -319,6 +321,12 @@ button.btn.btn-default:disabled {
   margin-left: 0;
   width: 100%;
   float: none;
+}
+
+.screen-reader-text {
+  color: transparent;
+  height: 0;
+  width: 0;
 }
 
 /* reset password breakpoints */
