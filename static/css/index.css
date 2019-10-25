@@ -89,6 +89,12 @@ p {
   margin-top: 1.5rem;
 }
 
+.faq-container {
+  /* margin-top: 1.5rem; */
+  display: flex;
+  flex-direction: column;
+}
+
 h1,
 h2,
 p.intro {
@@ -136,6 +142,14 @@ a:hover {
 
 /* button */
 button {
+  font-family: "Akkurat";
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  text-transform: uppercase;
   background-color: #ff4500;
   height: 3rem;
   border-radius: 20px;
@@ -151,21 +165,11 @@ button:hover {
   transform: scale(0.95);
 }
 
-a.button {
-  font-family: "Akkurat";
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 2rem;
-  letter-spacing: 0.005em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
 /* main structure of page */
 #content {
   display: flex;
   flex: 1;
+  margin-bottom: 2rem;
 }
 
 .container {
@@ -176,13 +180,12 @@ a.button {
   margin: 0 auto;
 }
 
-
 /* footer */
 footer {
   border-top: solid #ff4500 8px;
 }
 
-ul {
+footer ul {
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
