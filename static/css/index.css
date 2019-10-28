@@ -137,7 +137,7 @@ a:hover {
   background: url(../img/ds-eduID-logo-black320x120px.png);
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 0.3125rem 0 0 0.3125rem;
+  /* margin: 0.3125rem 0 0 0.3125rem; */
 }
 
 /* button */
@@ -190,4 +190,22 @@ footer ul {
   justify-content: space-between;
   font-size: 1rem;
   margin: 1rem;
+}
+
+@media (max-width: 823px) {
+  .container {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 414px) {
+  .container {
+    width: calc(100% - 2rem - 2px);
+  }
 }
