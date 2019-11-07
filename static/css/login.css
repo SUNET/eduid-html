@@ -361,6 +361,9 @@ ul.nav.navbar-nav li a:hover {
 }
 
 @media (max-width: 823px) {
+  .row form {
+    padding: 56px 0;
+  }
   .row::after,
   .container::after {
     left: 12.5%;
@@ -380,7 +383,7 @@ ul.nav.navbar-nav li a:hover {
   }
   .container::before {
     height: 253px;
-  } 
+  }
   .container .jumbotron {
     width: calc(100% - 40px);
   }
