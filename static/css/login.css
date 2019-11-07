@@ -272,7 +272,6 @@ button.btn.btn-primary:disabled {
   justify-content: flex-end;
 }
 
-
 #eduid-idp-menu li {
   display: none;
 }
@@ -378,6 +377,9 @@ ul.nav.navbar-nav li a:hover {
   .container::after {
     left: 20px;
     width: calc(100% - 40px);
+  }
+  .container::before {
+    height: 253px;
   }
   .container .jumbotron {
     width: calc(100% - 40px);

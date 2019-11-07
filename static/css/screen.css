@@ -382,6 +382,9 @@ button.btn.btn-default:disabled {
     margin-top: 10px;
     top: 155px;
   }
+   .container::before {
+    height: 253px;
+  }
 }
 
 /* @media (max-width: 414px) {
