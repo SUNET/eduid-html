@@ -187,15 +187,15 @@ footer {
   align-items: baseline;
   justify-content: space-between;
   padding: 16px;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
- footer p,
+footer p,
 footer a {
   font-size: 1rem;
-  line-height: 1.0;
+  line-height: 1;
   padding-top: 0;
-} 
+}
 
 footer nav,
 footer ul {
