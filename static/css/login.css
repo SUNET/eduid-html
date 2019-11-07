@@ -313,7 +313,7 @@ ul.nav.navbar-nav li a:hover {
   font-weight: 700;
   line-height: 1.2;
   /* padding: 112px 0 103px; */
-  width: 58.3333333333%;
+  width: calc(58.3333333333% + 36px);
   margin: 0 auto;
 }
 

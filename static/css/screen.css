@@ -275,7 +275,7 @@ button.btn.btn-default:disabled {
   font-weight: 700;
   padding-top: 146px;
   /* height: calc(60px + 112px + 96px + 80px - 5px); */
-  width: calc(58.3333333333% + 16px);
+  width: calc(58.3333333333% + 36px);
   margin: 0 auto;
 }
 
