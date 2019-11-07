@@ -341,6 +341,7 @@ button.btn.btn-default:disabled {
   .row p,
   .row form {
     padding: 56px 0;
+    padding: 0;
     width: 75%;
   }
   .row h1::after {
@@ -369,6 +370,7 @@ button.btn.btn-default:disabled {
   .row p,
   .row form {
     padding: 56px 0;
+    /* padding: 0; */
     width: calc(100% - 40px);
   }
   .row h1::after {
@@ -381,9 +383,6 @@ button.btn.btn-default:disabled {
     line-height: 30px;
     margin-top: 10px;
     top: 155px;
-  }
-   .container::before {
-    height: 253px;
   }
 }
 
