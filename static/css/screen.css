@@ -129,7 +129,8 @@ form {
 
 .form-group {
   margin-bottom: 0;
-  height: 100px;
+  /* height: 100px; */
+  height: 100%;
 }
 
 .form-control {
@@ -313,6 +314,68 @@ button.btn.btn-default:disabled {
   color: transparent;
   height: 0;
   width: 0;
+}
+
+/*reset password styling */
+
+.tab-content.well {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0;
+  border: none;
+}
+
+.nav,
+.nav-tabs,
+.form,
+.tab-content {
+  border: none;
+  width: 58%;
+  margin: 0 auto;
+}
+
+.nav {
+  margin-top: 36px;
+}
+
+.nav ul {
+  border: none;
+}
+
+.nav li {
+  height: 48px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.nav li a {
+  font-family: "Akkurat";
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #161616;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #ff4500;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  border-bottom-color: transparent;
+}
+
+.form-group,
+.tab-content > .active {
+  display: contents;
+}
+
+.form-group p {
+  margin: 0 16px 16px 16px;
+  width: 100%;
 }
 
 /* reset password breakpoints */
