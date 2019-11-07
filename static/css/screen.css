@@ -340,7 +340,6 @@ button.btn.btn-default:disabled {
   }
   .row p,
   .row form {
-    padding: 56px 0;
     padding: 0;
     width: 75%;
   }
@@ -369,8 +368,7 @@ button.btn.btn-default:disabled {
   }
   .row p,
   .row form {
-    padding: 56px 0;
-    /* padding: 0; */
+    padding: 0;
     width: calc(100% - 40px);
   }
   .row h1::after {
