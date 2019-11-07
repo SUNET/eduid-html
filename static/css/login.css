@@ -332,7 +332,7 @@ ul.nav.navbar-nav li a:hover {
 }
 
 .footer::after {
-  content: "SUNET 2013-2019";
+  content: "© SUNET 2013-2019";
   display: block;
   /* color: #161616; */
   font-size: 16px;
