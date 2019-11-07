@@ -183,13 +183,29 @@ button:hover {
 /* footer */
 footer {
   border-top: solid #ff4500 8px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px;
+  font-size: 16px; 
 }
 
+ footer p,
+footer a {
+  font-size: 1rem;
+  line-height: 1.0;
+  padding-top: 0;
+} 
+
+footer nav,
 footer ul {
   display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-  margin: 1rem;
+  /* justify-content: space-between; */
+  /* margin: 1rem; */
+}
+
+footer li {
+  margin-right: 16px;
 }
 
 @media (max-width: 823px) {
