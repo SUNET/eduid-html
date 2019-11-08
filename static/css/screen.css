@@ -327,7 +327,6 @@ button.btn.btn-default:disabled {
   border: none;
 }
 
-.nav,
 .nav-tabs,
 .form,
 .tab-content {
@@ -344,7 +343,7 @@ button.btn.btn-default:disabled {
   border: none;
 }
 
-.nav li {
+.nav-tabs li {
   height: 48px;
   transition: all 0.5s ease;
   cursor: pointer;
