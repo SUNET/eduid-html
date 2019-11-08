@@ -386,7 +386,10 @@ button.btn.btn-default:disabled {
     width: 75%;
   }
   .row p,
-  .row form {
+  .row form,
+  .nav-tabs,
+  .form,
+  .tab-content {
     padding: 0;
     width: 75%;
   }
@@ -414,7 +417,10 @@ button.btn.btn-default:disabled {
     width: calc(100% - 40px);
   }
   .row p,
-  .row form {
+  .row form,
+  .nav-tabs,
+  .form,
+  .tab-content {
     padding: 0;
     width: calc(100% - 40px);
   }
