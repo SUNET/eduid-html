@@ -304,7 +304,6 @@ ul.nav.navbar-nav li a:hover {
   font-size: 36px;
   font-weight: 700;
   line-height: 1.2;
-  /* padding: 112px 0 103px; */
   width: calc(58.3333333333% + 36px);
   margin: 0 auto;
 }
@@ -312,21 +311,17 @@ ul.nav.navbar-nav li a:hover {
 .row::after {
   content: "Log in to setup or edit your eduID.";
   display: block;
-  /* color: #161616; */
   font-size: 24px;
   line-height: 1.2;
-  /* font-weight: 700; */
   position: absolute;
-  top: 285px;
+  top: 38%;
   left: 20.888%;
   width: 58.3333333333%;
-  /* margin: 44px auto 0; */
 }
 
 .footer::after {
   content: "© SUNET 2013-2019";
   display: block;
-  /* color: #161616; */
   font-size: 16px;
   line-height: 1.2;
   font-weight: 400;
