@@ -57,7 +57,7 @@ form .well,
   box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
   transition: all 0.5s ease;
   cursor: pointer;
-  margin: 16px 16px 0 0;
+  margin: 10px 0 0 0;
 }
 
 .button.orange a,
@@ -70,9 +70,7 @@ form .well,
 .navbar-nav.navbar-right:last-child,
 .navbar-right {
   float: none !important;
-  margin: 0;
-  display: flex;
-  align-items: center;
+  margin-right: 10px;
 }
 
 /* structure */
@@ -244,7 +242,6 @@ button.btn.btn-primary:disabled {
   display: none;
 }
 
-
 /* header nav moved to footer */
 #eduid-idp-menu a,
 .footer p {
@@ -306,17 +303,6 @@ ul.nav.navbar-nav li a:hover {
   line-height: 1.2;
   width: calc(58.3333333333% + 36px);
   margin: 0 auto;
-}
-
-.row::after {
-  content: "Log in to setup or edit your eduID.";
-  display: block;
-  font-size: 24px;
-  line-height: 1.2;
-  position: absolute;
-  top: 38%;
-  left: 20.888%;
-  width: 58.3333333333%;
 }
 
 .footer::after {
