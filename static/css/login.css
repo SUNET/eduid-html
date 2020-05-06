@@ -57,7 +57,7 @@ form .well,
   box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
   transition: all 0.5s ease;
   cursor: pointer;
-  margin: 16px 16px 0 0;
+  margin: 10px 0 0 0;
 }
 
 .button.orange a,
@@ -70,9 +70,9 @@ form .well,
 .navbar-nav.navbar-right:last-child,
 .navbar-right {
   float: none !important;
-  margin: 0;
-  display: flex;
-  align-items: center;
+  margin-right: 10px;
+  /* display: flex;
+  align-items: center; */
 }
 
 /* structure */
@@ -243,7 +243,6 @@ button.btn.btn-primary:disabled {
 .footer p {
   display: none;
 }
-
 
 /* header nav moved to footer */
 #eduid-idp-menu a,
