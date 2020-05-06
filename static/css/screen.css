@@ -9,7 +9,6 @@ html {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  /* background-color: yellow; */
 }
 
 body {
@@ -19,7 +18,6 @@ body {
   font-size: 16px !important;
   color: #161616;
   background-color: #f4f4f4;
-  /* background-color: hotpink; */
   display: flex;
   flex: 1;
 }
@@ -39,7 +37,6 @@ p {
 
 /* Structure */
 .container {
-  /* background-color: yellow; */
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -120,7 +117,6 @@ input:focus {
 
 /* valid form input*/
 form {
-  /* background-color: lightblue; */
   display: flex;
   flex: 1;
   justify-content: space-between;
@@ -249,12 +245,8 @@ button.btn.btn-default:disabled {
   border-color: #d8d8d8;
 }
 
-/* .row h2 {
-  display: none;
-} */
 
 /* new content */
-
 .row h1::before {
   content: " ";
   display: block;
@@ -334,10 +326,6 @@ button.btn.btn-default:disabled {
   width: 58%;
   margin: 0 auto;
 }
-
-/* .nav {
-  margin-top: 36px;
-} */
 
 .nav ul {
   border: none;
