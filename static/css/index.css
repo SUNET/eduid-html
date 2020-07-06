@@ -43,7 +43,7 @@ body {
   min-height: 100vh;
   font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #161616;
   background-color: #f4f4f4;
   display: flex;
@@ -137,6 +137,24 @@ a:hover {
   background: url(../img/ds-eduID-logo-black320x120px.png);
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+/* lists */
+ul .bullets {
+  list-style-type: disc;
+  margin-left: 1.75rem;
+}
+ul .bullets li {
+  margin: 0.5rem 0;
+}
+
+ul li {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+li span {
+  font-weight: 700;
 }
 
 /* button */
