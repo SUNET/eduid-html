@@ -202,7 +202,7 @@ footer {
   border-top: solid #ff4500 8px;
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 16px;
   font-size: 16px;
 }
