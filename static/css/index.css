@@ -139,6 +139,14 @@ a:hover {
   background-repeat: no-repeat;
 }
 
+.sunet-logo {
+  width: 10rem;
+  height: 3.125rem;
+  background: url(../img/ds-eduID-logo-black320x120px.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 /* lists */
 ul .bullets {
   list-style-type: disc;
