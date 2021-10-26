@@ -75,7 +75,7 @@ h1 {
 .tagline {
   display: flex;
   align-items: center;
-  margin: 5rem 0 2rem 0;
+  margin: 5rem 0 3rem 0;
 }
 
 h2 {
@@ -233,6 +233,9 @@ footer li {
   .container {
     width: 75%;
   }
+  .tagline {
+    margin: 5rem 0 2rem
+  }
 }
 
 @media (max-width: 768px) {
@@ -254,5 +257,9 @@ footer li {
   .sunet-logo {
     width: auto;
     height: 36px;
+  }
+
+  .tagline {
+    margin-bottom: 2.5rem;
   }
 }
