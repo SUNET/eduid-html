@@ -61,6 +61,11 @@ header {
   background-color: white;
 }
 
+.sunet-logo {
+  width: auto;
+  height: 50px;
+}
+
 h1 {
   font-size: 2.25rem;
   line-height: 1.2;
@@ -70,7 +75,7 @@ h1 {
 .tagline {
   display: flex;
   align-items: center;
-  margin: 6rem 0 3rem 0;
+  margin: 5rem 0 3rem 0;
 }
 
 h2 {
@@ -239,5 +244,15 @@ footer li {
 @media (max-width: 414px) {
   .container {
     width: calc(100% - 2rem - 2px);
+  }
+
+  .logo {
+    width: 105px;
+    height: 36px;
+  }
+
+  .sunet-logo {
+    width: auto;
+    height: 36px;
   }
 }
