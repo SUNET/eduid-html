@@ -21,7 +21,6 @@ COPY en /opt/eduid/www/en/
 COPY faq.html /opt/eduid/www/faq.html
 COPY index.html /opt/eduid/www/index.html
 COPY personal.html /opt/eduid/www/personal.html
-COPY scripts /opt/eduid/www/scripts/
 COPY tekniker.html /opt/eduid/www/tekniker.html
 
 # Copy react app and other webapp dependencies to /opt/eduid/static/
