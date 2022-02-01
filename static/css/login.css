@@ -306,7 +306,7 @@ ul.nav.navbar-nav li a:hover {
 }
 
 .footer::after {
-  content: "© SUNET 2013-2021";
+  content: "© SUNET 2013-2022";
   display: block;
   font-size: 16px;
   line-height: 1.2;
