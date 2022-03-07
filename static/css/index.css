@@ -51,6 +51,7 @@ header {
   display: flex;
   justify-content: space-between;
   margin: 1rem;
+  align-items: center;
 }
 
 .banner {
@@ -226,6 +227,23 @@ footer ul {
 
 footer li {
   margin-right: 16px;
+}
+
+a.header-button {
+  text-transform: none;
+  font-family: "Akkurat";
+  color: #ff4500;
+  border: solid 2px #ff4500;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+a.header-button:hover {
+  transform: scale(0.95);
 }
 
 @media (max-width: 823px) {
