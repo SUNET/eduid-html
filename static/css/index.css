@@ -111,7 +111,7 @@ a.text-link {
 
 a.nav-link {
   font-family: "Akkurat";
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.005em;
   color: #d3452e;
   border-bottom: solid transparent 1px;
@@ -203,18 +203,20 @@ footer {
   border-top: solid #ff4500 8px;
   display: flex;
   align-items: baseline;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 1.5rem 1rem;
   font-size: 0.9rem;
 }
 
-footer p,
-footer a {
-  font-size: 0.9rem;
+footer .sunet-logo {
+  width: auto;
+  height: 50px;
+  margin-right: 8px;
 }
 
-footer p {
-  margin-left: 8px;
+footer a {
+  font-size: 0.9rem;
+  text-decoration: none;
 }
 
 footer nav,
@@ -251,7 +253,7 @@ footer li {
     height: 36px;
   }
 
-  .sunet-logo {
+  header.sunet-logo {
     width: auto;
     height: 36px;
   }
