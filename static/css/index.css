@@ -5,16 +5,14 @@
 
 @font-face {
   font-family: "Akkurat";
-  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"),
-    url("../fonts/Akkurat-Mono.woff") format("woff");
+  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"), url("../fonts/Akkurat-Mono.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ProximaNova-Light";
-  src: url("../fonts/ProximaNova-Light.ttf") format("truetype"),
-    url("../fonts/ProximaNova-Light.woff") format("woff"),
+  src: url("../fonts/ProximaNova-Light.ttf") format("truetype"), url("../fonts/ProximaNova-Light.woff") format("woff"),
     url("../fonts/ProximaNova-Light.woff2") format("woff2");
 
   font-weight: normal;
@@ -24,16 +22,14 @@
 @font-face {
   font-family: "ProximaNova-Regular";
   src: url("../fonts/ProximaNova-Regular.ttf") format("truetype"),
-    url("../fonts/ProximaNova-Regular.woff") format("woff"),
-    url("../fonts/ProximaNova-Regular.woff2") format("woff2");
+    url("../fonts/ProximaNova-Regular.woff") format("woff"), url("../fonts/ProximaNova-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ProximaNova-Bold";
-  src: url("../fonts/ProximaNova-Bold.ttf") format("truetype"),
-    url("../fonts/ProximaNova-Bold.woff") format("woff"),
+  src: url("../fonts/ProximaNova-Bold.ttf") format("truetype"), url("../fonts/ProximaNova-Bold.woff") format("woff"),
     url("../fonts/ProximaNova-Bold.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
@@ -55,6 +51,7 @@ header {
   display: flex;
   justify-content: space-between;
   margin: 1rem;
+  align-items: center;
 }
 
 .banner {
@@ -115,15 +112,15 @@ a.text-link {
 
 a.nav-link {
   font-family: "Akkurat";
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.005em;
-  color: #ff4500;
+  color: #d3452e;
   border-bottom: solid transparent 1px;
   text-decoration: none;
 }
 
 a.nav-link:hover {
-  border-bottom: solid #ff4500 1px;
+  border-bottom: solid #d3452e 1px;
 }
 
 a.text-link,
@@ -207,17 +204,20 @@ footer {
   border-top: solid #ff4500 8px;
   display: flex;
   align-items: baseline;
-  justify-content: flex-end;
-  padding: 16px;
-  font-size: 16px;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
 }
 
-footer p,
+footer .sunet-logo {
+  width: auto;
+  height: 50px;
+  margin-right: 8px;
+}
+
 footer a {
-  font-size: 1rem;
-  line-height: 1;
-  padding-top: 0;
-  flex: 1;
+  font-size: 0.9rem;
+  text-decoration: none;
 }
 
 footer nav,
@@ -229,12 +229,29 @@ footer li {
   margin-right: 16px;
 }
 
+a.header-button {
+  text-transform: none;
+  font-family: "Akkurat";
+  color: #ff4500;
+  border: solid 2px #ff4500;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+a.header-button:hover {
+  transform: scale(0.95);
+}
+
 @media (max-width: 823px) {
   .container {
     width: 75%;
   }
   .tagline {
-    margin: 5rem 0 2rem
+    margin: 5rem 0 2rem;
   }
 }
 
@@ -254,7 +271,7 @@ footer li {
     height: 36px;
   }
 
-  .sunet-logo {
+  header.sunet-logo {
     width: auto;
     height: 36px;
   }
