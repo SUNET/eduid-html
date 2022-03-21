@@ -261,6 +261,12 @@ a.header-button:hover {
   }
 }
 
+@media (max-width: 568px) {
+  .tagline {
+    font-size: 1.75rem;
+  }
+}
+
 @media (max-width: 414px) {
   .container {
     width: calc(100% - 2rem - 2px);
