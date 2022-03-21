@@ -250,9 +250,6 @@ a.header-button:hover {
   .container {
     width: 75%;
   }
-  .tagline {
-    margin: 5rem 0 2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -264,6 +261,7 @@ a.header-button:hover {
 @media (max-width: 568px) {
   .tagline {
     font-size: 1.75rem;
+    margin: 1.5rem 0;
   }
 }
 
