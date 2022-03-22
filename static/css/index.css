@@ -66,7 +66,6 @@ header {
 h1 {
   font-size: 2.25rem;
   line-height: 1.2;
-  letter-spacing: 0.005em;
 }
 
 .tagline {
@@ -188,7 +187,6 @@ button:hover {
 #content {
   display: flex;
   flex: 1;
-  margin-bottom: 2rem;
 }
 
 .container {
@@ -201,12 +199,13 @@ button:hover {
 
 /* footer */
 footer {
-  border-top: solid #ff4500 8px;
+  border-top: solid #ff4500 6px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   padding: 1rem;
   font-size: 0.9rem;
+  margin-top: 6rem;
 }
 
 footer .sunet-logo {
@@ -220,13 +219,16 @@ footer a {
   text-decoration: none;
 }
 
-footer nav,
 footer ul {
   display: flex;
 }
 
-footer li {
-  margin-right: 16px;
+footer a.nav-link {
+  line-height: 1.7rem;
+}
+
+a.nav-link.help-link {
+  margin-right: 1rem;
 }
 
 a.header-button {
@@ -250,18 +252,26 @@ a.header-button:hover {
   .container {
     width: 75%;
   }
+  footer {
+    margin-top: 4rem;
+  }
 }
 
 @media (max-width: 768px) {
   button {
     width: 100%;
   }
+  .tagline {
+    margin: 1.5rem 0;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 568px) {
-  .tagline {
-    font-size: 1.75rem;
-    margin: 1.5rem 0;
+  .container {
+    width: 94%;
   }
 }
 
@@ -280,9 +290,9 @@ a.header-button:hover {
     height: 36px;
   }
 
-  .tagline {
+  /* .tagline {
     margin-bottom: 2.5rem;
-  }
+  } */
 
   footer {
     align-items: flex-end;
@@ -292,7 +302,7 @@ a.header-button:hover {
     flex-direction: column;
     align-items: flex-end;
   }
-  footer li {
+  a.nav-link.help-link {
     margin-right: 0px;
   }
 }
