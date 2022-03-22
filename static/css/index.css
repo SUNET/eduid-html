@@ -225,8 +225,8 @@ footer ul {
   display: flex;
 }
 
-footer li {
-  margin-right: 16px;
+a.nav-link.help-link {
+  margin-right: 1rem;
 }
 
 a.header-button {
@@ -267,6 +267,9 @@ a.header-button:hover {
 @media (max-width: 568px) {
   .tagline {
     font-size: 1.75rem;
+  }
+  .container {
+    width: 94%;
   }
 }
 
