@@ -201,7 +201,7 @@ button:hover {
 
 /* footer */
 footer {
-  border-top: solid #ff4500 8px;
+  border-top: solid #ff4500 6px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -256,12 +256,14 @@ a.header-button:hover {
   button {
     width: 100%;
   }
+  .tagline {
+    margin: 1.5rem 0;
+  }
 }
 
 @media (max-width: 568px) {
   .tagline {
     font-size: 1.75rem;
-    margin: 1.5rem 0;
   }
 }
 
@@ -280,9 +282,9 @@ a.header-button:hover {
     height: 36px;
   }
 
-  .tagline {
+  /* .tagline {
     margin-bottom: 2.5rem;
-  }
+  } */
 
   footer {
     align-items: flex-end;
