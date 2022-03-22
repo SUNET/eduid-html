@@ -283,4 +283,16 @@ a.header-button:hover {
   .tagline {
     margin-bottom: 2.5rem;
   }
+
+  footer {
+    align-items: flex-end;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  footer li {
+    margin-right: 0px;
+  }
 }
