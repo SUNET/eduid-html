@@ -66,7 +66,7 @@ header {
 h1 {
   font-size: 2.25rem;
   line-height: 1.2;
-  letter-spacing: 0.005em;
+  /* letter-spacing: 0.005em; */
 }
 
 .tagline {
@@ -258,6 +258,9 @@ a.header-button:hover {
   }
   .tagline {
     margin: 1.5rem 0;
+  }
+  h1 {
+    font-size: 1.75rem;
   }
 }
 
