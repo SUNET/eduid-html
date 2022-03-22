@@ -50,7 +50,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  margin: 1rem;
+  padding: 1rem;
   align-items: center;
 }
 
@@ -134,8 +134,8 @@ a:hover {
 
 /* Logo */
 .logo {
-  width: 10rem;
-  height: 3.125rem;
+  width: 140px;
+  height: 40px;
   background: url(../img/ds-eduID-logo-black320x120px.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -205,7 +205,7 @@ footer {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 2rem 1rem;
+  padding: 1rem;
   font-size: 0.9rem;
 }
 
@@ -250,14 +250,18 @@ a.header-button:hover {
   .container {
     width: 75%;
   }
-  .tagline {
-    margin: 5rem 0 2rem;
-  }
 }
 
 @media (max-width: 768px) {
   button {
     width: 100%;
+  }
+}
+
+@media (max-width: 568px) {
+  .tagline {
+    font-size: 1.75rem;
+    margin: 1.5rem 0;
   }
 }
 
@@ -278,5 +282,17 @@ a.header-button:hover {
 
   .tagline {
     margin-bottom: 2.5rem;
+  }
+
+  footer {
+    align-items: flex-end;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  footer li {
+    margin-right: 0px;
   }
 }
