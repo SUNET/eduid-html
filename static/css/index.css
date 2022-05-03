@@ -154,7 +154,8 @@ ul li {
   line-height: 1.4;
 }
 
-li span {
+li span,
+p strong {
   font-weight: 700;
 }
 
