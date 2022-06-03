@@ -66,12 +66,13 @@ header {
 h1 {
   font-size: 2.25rem;
   line-height: 1.2;
+  font-family: "ProximaNova-Light";
 }
 
 .tagline {
   display: flex;
   align-items: center;
-  margin: 5rem 0 3rem 0;
+  margin: 2rem 0 3rem;
 }
 
 h2 {
@@ -83,12 +84,12 @@ h2 {
 p {
   font-size: 1.25rem;
   line-height: 1.5;
-  padding-top: 1.5rem;
+  padding-bottom: 1rem;
 }
 
-.text-container {
+/* .text-container {
   margin-top: 1.5rem;
-}
+} */
 
 .faq-container {
   /* margin-top: 1.5rem; */
@@ -96,12 +97,21 @@ p {
   flex-direction: column;
 }
 
-h1,
-h2,
 p.intro {
-  font-weight: 700;
+  font-family: "ProximaNova-Bold";
+  font-size: 1.5rem;
 }
 
+hr {
+  margin: 2rem 0;
+  color: #d8d8d8;
+}
+
+@media (max-width: 414px) {
+  hr {
+    margin: 1rem 0;
+  }
+}
 /* link styles */
 a.text-link {
   color: #ff4500;
@@ -241,16 +251,26 @@ button:hover {
     margin: 0.5rem 0;
     width: auto;
   }
+  p {
+    font-size: 1.125rem;
+  }
+  p.intro {
+    font-size: 1.25rem;
+  }
 }
 
 /* main structure of page */
 #content {
+  padding-top: 3rem;
   display: flex;
   flex: 1;
 }
-
+@media (max-width: 414px) {
+  #content {
+    padding-top: 2rem;
+  }
+}
 .container {
-  padding: 0;
   width: 58%;
   /* max-width: 870px; */
   max-width: 54.4rem;
@@ -322,7 +342,7 @@ a.header-button:hover {
     width: 100%;
   }
   .tagline {
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
   h1 {
     font-size: 1.75rem;
