@@ -41,17 +41,17 @@ h1 {
   line-height: 1.2;
   font-family: "ProximaNova-Light";
 }
-
-h2 {
-  font-size: 1.5rem;
-  line-height: 1.5;
-  margin-top: 3.5rem;
+h4 {
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  font-family: "ProximaNova-Bold";
+  font-size: 1.25rem;
 }
 
 p {
   font-size: 1.25rem;
   line-height: 1.5;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 /** General **/
@@ -245,6 +245,7 @@ footer .text-link {
   h1 {
     font-size: 1.75rem;
   }
+
   p {
     font-size: 1.125rem;
   }
@@ -291,10 +292,20 @@ footer .text-link {
 }
 
 /** FAQ **/
-.faq-container {
-  /* margin-top: 1.5rem; */
-  display: flex;
-  flex-direction: column;
+.faq li {
+  margin-bottom: 1.5rem;
+}
+
+.faq h3 {
+  margin-bottom: 0.25rem;
+}
+
+.faq p {
+  font-size: 1.125rem;
+}
+
+.faq p:last-of-type {
+  margin-bottom: 0;
 }
 
 /* lists */
@@ -306,12 +317,6 @@ ul .bullets li {
   margin: 0.5rem 0;
 }
 
-ul li {
-  font-size: 1.25rem;
-  line-height: 1.4;
-}
-
-li span,
-p strong {
-  font-weight: 700;
+strong {
+  font-family: "ProximaNova-Bold";
 }
