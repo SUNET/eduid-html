@@ -1,3 +1,4 @@
+/** Typography **/
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,18 +36,55 @@
   font-style: normal;
 }
 
+strong {
+  font-family: "ProximaNova-Bold";
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-family: "ProximaNova-Light";
+}
+h4 {
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  font-family: "ProximaNova-Bold";
+  font-size: 1.25rem;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/** General **/
 body {
   min-height: 100vh;
   font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #161616;
-  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
 }
 
+.panel {
+  padding: 3rem 0 6rem;
+  display: flex;
+  flex: 1;
+  background-color: #f4f4f4;
+}
+
+.horizontal-content-margin {
+  padding: 0;
+  width: 58%;
+  max-width: 870px;
+  margin: 0 auto;
+}
+
+/* Header */
 header {
   display: flex;
   justify-content: space-between;
@@ -58,252 +96,218 @@ header {
   background-color: white;
 }
 
-.sunet-logo {
-  width: auto;
-  height: 50px;
-}
-
-h1 {
-  font-size: 2.25rem;
-  line-height: 1.2;
+.eduid-logo {
+  width: 117px;
+  height: 40px;
+  background: url(../img/ds-eduID-logo-black117x40px.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .tagline {
   display: flex;
   align-items: center;
-  margin: 5rem 0 3rem 0;
+  margin: 2rem 0 3rem;
 }
 
-h2 {
+/** Content **/
+.intro {
+  font-family: "ProximaNova-Bold";
   font-size: 1.5rem;
-  line-height: 1.5;
-  margin-top: 3.5rem;
 }
 
-p {
-  font-size: 1.25rem;
-  line-height: 1.5;
-  padding-top: 1.5rem;
+hr {
+  margin: 2rem 0;
+  height: 1px;
+  border: none;
+  background: #d8d8d8;
 }
 
-.text-container {
-  margin-top: 1.5rem;
-}
-
-.faq-container {
-  /* margin-top: 1.5rem; */
-  display: flex;
-  flex-direction: column;
-}
-
-h1,
-h2,
-p.intro {
-  font-weight: 700;
-}
-
-/* link styles */
+/* links */
 a.text-link {
   color: #ff4500;
-  border-bottom: solid #ff4500 2px;
-  text-decoration: none;
-}
-
-a.nav-link {
   font-family: "Akkurat";
-  font-size: 0.9rem;
-  letter-spacing: 0.005em;
-  color: #d3452e;
-  border-bottom: solid transparent 1px;
   text-decoration: none;
-}
-
-a.nav-link:hover {
-  border-bottom: solid #d3452e 1px;
-}
-
-a.text-link,
-a.nav-link {
   transition: all 0.2s ease;
-}
-
-a:hover {
-  border-bottom: solid transparent 1px;
-}
-
-/* Logo */
-.logo {
-  width: 140px;
-  height: 40px;
-  background: url(../img/ds-eduID-logo-black320x120px.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-/* lists */
-ul .bullets {
-  list-style-type: disc;
-  margin-left: 1.75rem;
-}
-ul .bullets li {
-  margin: 0.5rem 0;
-}
-
-ul li {
-  font-size: 1.25rem;
-  line-height: 1.4;
-}
-
-li span,
-p strong {
-  font-weight: 700;
-}
-
-/* button */
-button {
-  font-family: "Akkurat";
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 2rem;
-  letter-spacing: 0.005em;
-  text-decoration: none;
-  text-transform: uppercase;
-  background-color: #ff4500;
-  height: 3rem;
-  border-radius: 20px;
-  border: solid 1px transparent;
-  padding: 0.625rem 1.25rem;
-  margin: 2rem 0 0 0;
-  box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
-  transition: all 0.5s ease;
   cursor: pointer;
 }
+a.text-link:hover {
+  text-decoration: underline;
+}
 
-button:hover {
+/* buttons */
+.buttons {
+  display: flex;
+  column-gap: 1rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.btn {
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  display: inline-block;
+  font-family: "Akkurat";
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
   transform: scale(0.95);
 }
 
-/* main structure of page */
-#content {
-  display: flex;
-  flex: 1;
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
 }
 
-.container {
-  padding: 0;
-  width: 58%;
-  /* max-width: 870px; */
-  max-width: 54.4rem;
-  margin: 0 auto;
+.btn-primary {
+  color: #fff;
+  background-color: #ff4500;
+  box-shadow: none;
+  min-width: 100px;
+  padding: 1rem 1.25rem;
 }
 
-/* footer */
+.btn-secondary {
+  color: #ff4500;
+  border: solid 2px #ff4500;
+}
+
+/** FAQ **/
+.faq > li {
+  margin-bottom: 1.5rem;
+}
+
+.faq p {
+  font-size: inherit;
+}
+
+ul .bullets {
+  list-style-position: inside;
+  list-style-type: disc;
+}
+ul .bullets li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
 footer {
   border-top: solid #ff4500 6px;
+  background-color: #f4f4f4;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   padding: 1rem;
   font-size: 0.9rem;
-  margin-top: 6rem;
 }
 
-footer .sunet-logo {
+.logo-wrapper {
+  display: flex;
+  align-items: baseline;
+}
+
+.sunet-logo {
   width: auto;
   height: 50px;
   margin-right: 8px;
-}
-
-footer a {
-  font-size: 0.9rem;
-  text-decoration: none;
 }
 
 footer ul {
   display: flex;
 }
 
-footer a.nav-link {
+footer .text-link {
+  font-size: 0.9rem;
+  color: #d3452e;
   line-height: 1.7rem;
 }
 
-a.nav-link.help-link {
+.help-link {
   margin-right: 1rem;
 }
 
-a.header-button {
-  text-transform: none;
-  font-family: "Akkurat";
-  color: #ff4500;
-  border: solid 2px #ff4500;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 700;
-}
-
-a.header-button:hover {
-  transform: scale(0.95);
+/** Responsive **/
+@media (min-width: 414px) {
+  .buttons {
+    width: auto;
+  }
 }
 
 @media (max-width: 823px) {
-  .container {
-    width: 75%;
+  .horizontal-content-margin {
+    width: calc(80% - 2rem);
   }
-  footer {
-    margin-top: 4rem;
+  .tagline {
+    margin: 1rem 0 1.5rem;
+  }
+  .panel {
+    padding: 2rem 0 4rem;
   }
 }
 
 @media (max-width: 768px) {
-  button {
-    width: 100%;
-  }
-  .tagline {
-    margin: 1.5rem 0;
-  }
-  h1 {
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 568px) {
-  .container {
-    width: 94%;
-  }
-}
-
-@media (max-width: 414px) {
-  .container {
-    width: calc(100% - 2rem - 2px);
+  .horizontal-content-margin {
+    width: calc(80% - 1.25rem);
   }
 
-  .logo {
+  .eduid-logo {
     width: 105px;
     height: 36px;
   }
 
-  header.sunet-logo {
-    width: auto;
-    height: 36px;
+  h1 {
+    font-size: 1.75rem;
   }
 
-  /* .tagline {
-    margin-bottom: 2.5rem;
-  } */
+  p {
+    font-size: 1.125rem;
+  }
+  .intro {
+    font-size: 1.25rem;
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 568px) {
+  .horizontal-content-margin {
+    width: calc(100% - 2rem);
+  }
+}
+
+@media (max-width: 414px) {
+  .buttons {
+    flex-direction: column-reverse;
+  }
 
   footer {
     align-items: flex-end;
   }
-  nav ul {
+
+  footer ul {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
-  a.nav-link.help-link {
+
+  a.help-link {
     margin-right: 0px;
   }
 }
