@@ -36,6 +36,10 @@
   font-style: normal;
 }
 
+strong {
+  font-family: "ProximaNova-Bold";
+}
+
 h1 {
   font-size: 2.25rem;
   line-height: 1.2;
@@ -177,6 +181,23 @@ a.text-link:hover {
   border: solid 2px #ff4500;
 }
 
+/** FAQ **/
+.faq > li {
+  margin-bottom: 1.5rem;
+}
+
+.faq p {
+  font-size: inherit;
+}
+
+ul .bullets {
+  list-style-position: inside;
+  list-style-type: disc;
+}
+ul .bullets li {
+  margin-bottom: 0.5rem;
+}
+
 /* Footer */
 footer {
   border-top: solid #ff4500 6px;
@@ -289,34 +310,4 @@ footer .text-link {
   a.help-link {
     margin-right: 0px;
   }
-}
-
-/** FAQ **/
-.faq li {
-  margin-bottom: 1.5rem;
-}
-
-.faq h3 {
-  margin-bottom: 0.25rem;
-}
-
-.faq p {
-  font-size: 1.125rem;
-}
-
-.faq p:last-of-type {
-  margin-bottom: 0;
-}
-
-/* lists */
-ul .bullets {
-  list-style-type: disc;
-  margin-left: 1.75rem;
-}
-ul .bullets li {
-  margin: 0.5rem 0;
-}
-
-strong {
-  font-family: "ProximaNova-Bold";
 }
