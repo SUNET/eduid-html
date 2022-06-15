@@ -71,12 +71,14 @@ body {
 }
 
 .panel {
-  padding: 3rem 0 6rem;
+  padding-bottom: 6rem;
   display: flex;
   flex: 1;
   background-color: #f4f4f4;
 }
-
+.panel .content {
+  padding-top: 3rem;
+}
 .horizontal-content-margin {
   padding: 0;
   width: 58%;
@@ -253,7 +255,10 @@ footer .text-link {
     margin: 1rem 0 1.5rem;
   }
   .panel {
-    padding: 2rem 0 4rem;
+    padding-bottom: 4rem;
+  }
+  .panel .content {
+    padding-top: 2rem;
   }
 }
 
