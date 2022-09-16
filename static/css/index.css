@@ -128,7 +128,7 @@ hr {
 
 /* links */
 a.text-link {
-  color: #ff4500;
+  color: #cc3600;
   font-family: "Akkurat";
   text-decoration: none;
   transition: all 0.2s ease;
@@ -152,6 +152,7 @@ a.text-link:hover {
   vertical-align: middle;
   display: inline-block;
   font-family: "Akkurat";
+  letter-spacing: 1px;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
@@ -173,14 +174,15 @@ a.text-link:hover {
 
 .btn-primary {
   color: #fff;
-  background-color: #ff4500;
+  background-color: #db3a00;
+  border: solid 2px #ff4500;
   box-shadow: none;
   min-width: 100px;
-  padding: 1rem 1.25rem;
+  padding: 14px 1.125rem;
 }
 
 .btn-secondary {
-  color: #ff4500;
+  color: #cc3600;
   border: solid 2px #ff4500;
 }
 
@@ -232,7 +234,7 @@ footer ul {
 
 footer .text-link {
   font-size: 0.9rem;
-  color: #d3452e;
+  color: #cc3600;
   line-height: 1.7rem;
 }
 
