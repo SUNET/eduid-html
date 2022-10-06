@@ -101,7 +101,7 @@ header {
 .eduid-logo {
   width: 117px;
   height: 40px;
-  background: url(../img/ds-eduID-logo-black117x40px.png);
+  background: url(../img/eduID-logo.svg);
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
@@ -270,8 +270,8 @@ footer .text-link {
   }
 
   .eduid-logo {
-    width: 105px;
-    height: 36px;
+    width: 99px;
+    height: 34px;
   }
 
   h1.tagline {
@@ -300,6 +300,10 @@ footer .text-link {
 @media (max-width: 568px) {
   .horizontal-content-margin {
     width: calc(100% - 2rem);
+  }
+
+  header .btn {
+    align-self: flex-start;
   }
 }
 
