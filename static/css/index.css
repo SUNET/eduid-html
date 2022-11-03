@@ -300,9 +300,14 @@ footer .text-link {
     position: static;
     margin-bottom: 0;
   }
+  .faq-nav li {
+    display: inline-block;
+    margin: 0 1rem 0.375rem;
+  }
   .faq-nav li:first-child span {
     position: fixed;
-    left: 0;
+    left: 1rem;
+    padding-left: 0;
   }
 }
 
@@ -347,6 +352,12 @@ footer .text-link {
   header .btn {
     align-self: flex-start;
   }
+  .faq-nav {
+    margin-left: 0;
+  }
+  .faq-nav li:first-child span {
+    left: 0.125rem;
+  }
 }
 
 @media (max-width: 414px) {
@@ -366,5 +377,9 @@ footer .text-link {
 
   a.help-link {
     margin-right: 0px;
+  }
+  .faq-nav li {
+    display: block;
+    margin: 0 0 0.375rem;
   }
 }
