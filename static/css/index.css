@@ -215,13 +215,13 @@ a.text-link:hover {
 }
 
 .faq-content > li {
-  padding-top: 2rem;
   border-top: 1px solid #d8d8d8;
+  padding-top: 0.25rem;
   padding-bottom: 1rem;
 }
 
 .faq-content h3 {
-  padding-top: 0.5rem;
+  padding-top: 1.75rem;
 }
 
 .faq-content p {
@@ -354,7 +354,6 @@ footer .text-link {
     margin-bottom: 1rem;
   }
   .faq-content > li {
-    padding-top: 1.25rem;
     padding-bottom: 0.75rem;
   }
 }
