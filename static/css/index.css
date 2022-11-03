@@ -234,7 +234,7 @@ ul .bullets {
   margin-bottom: 1.5rem;
 }
 ul .bullets li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Footer */
@@ -352,9 +352,6 @@ footer .text-link {
   }
   ul .bullets {
     margin-bottom: 1rem;
-  }
-  ul .bullets li {
-    margin-bottom: 0.75rem;
   }
   .faq-content > li {
     padding-top: 1.25rem;
