@@ -231,6 +231,7 @@ a.text-link:hover {
 ul .bullets {
   list-style-position: inside;
   list-style-type: disc;
+  margin-bottom: 1.5rem;
 }
 ul .bullets li {
   margin-bottom: 1rem;
@@ -348,6 +349,9 @@ footer .text-link {
   }
   button {
     width: 100%;
+  }
+  ul .bullets {
+    margin-bottom: 1rem;
   }
   ul .bullets li {
     margin-bottom: 0.75rem;
