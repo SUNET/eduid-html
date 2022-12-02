@@ -45,6 +45,18 @@ h1.tagline {
   line-height: 1.2;
   font-family: "ProximaNova-Light";
 }
+h2 {
+  font-size: 1.65rem;
+  margin-bottom: 0.75em;
+  font-family: "ProximaNova-Bold";
+}
+h3 {
+  line-height: 1.2;
+  font-family: "ProximaNova-Light";
+  font-size: 1.5rem;
+  margin-bottom: 0.75em;
+  text-transform: uppercase;
+}
 h4 {
   line-height: 1.2;
   margin-bottom: 0.5em;
@@ -187,20 +199,28 @@ a.text-link:hover {
 }
 
 /** FAQ **/
-.faq > li {
-  margin-bottom: 1.5rem;
+
+.faq-content > li {
+  border-top: 1px solid #d8d8d8;
+  padding-top: 0.25rem;
+  padding-bottom: 1rem;
 }
 
-.faq p {
+.faq-content h3 {
+  padding-top: 1.75rem;
+}
+
+.faq-content p {
   font-size: inherit;
 }
 
 ul .bullets {
   list-style-position: inside;
   list-style-type: disc;
+  margin-bottom: 1.5rem;
 }
 ul .bullets li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Footer */
@@ -258,9 +278,23 @@ footer .text-link {
   }
   .panel {
     padding-bottom: 3rem;
+    flex-direction: column;
   }
   .panel .content {
     padding-top: 1.5rem;
+  }
+  .faq-nav {
+    position: static;
+    margin-bottom: 0;
+  }
+  .faq-nav li {
+    display: inline-block;
+    margin: 0 1rem 0.375rem;
+  }
+  .faq-nav li:first-child span {
+    position: fixed;
+    left: 1rem;
+    padding-left: 0;
   }
 }
 
@@ -277,7 +311,15 @@ footer .text-link {
   h1.tagline {
     font-size: 2rem;
   }
-
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
   p {
     font-size: 1.125rem;
   }
@@ -288,12 +330,17 @@ footer .text-link {
   hr {
     margin: 1.75rem 0;
   }
-
   .buttons {
     justify-content: center;
   }
   button {
     width: 100%;
+  }
+  ul .bullets {
+    margin-bottom: 1rem;
+  }
+  .faq-content > li {
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -304,6 +351,12 @@ footer .text-link {
 
   header .btn {
     align-self: flex-start;
+  }
+  .faq-nav {
+    margin-left: 0;
+  }
+  .faq-nav li:first-child span {
+    left: 0.125rem;
   }
 }
 
@@ -324,5 +377,8 @@ footer .text-link {
 
   a.help-link {
     margin-right: 0px;
+  }
+  .faq-nav li {
+    display: block;
   }
 }
