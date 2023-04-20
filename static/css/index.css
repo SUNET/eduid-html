@@ -198,31 +198,6 @@ a.text-link:hover {
   border: solid 2px #ff4500;
 }
 
-/** FAQ **/
-
-.faq-content > li {
-  border-top: 1px solid #d8d8d8;
-  padding-top: 0.25rem;
-  padding-bottom: 1rem;
-}
-
-.faq-content h3 {
-  padding-top: 1.75rem;
-}
-
-.faq-content p {
-  font-size: inherit;
-}
-
-ul .bullets {
-  list-style-position: inside;
-  list-style-type: disc;
-  margin-bottom: 1.5rem;
-}
-ul .bullets li {
-  margin-bottom: 0.75rem;
-}
-
 /* Footer */
 footer {
   border-top: solid #ff4500 6px;
@@ -338,9 +313,6 @@ footer .text-link {
   }
   ul .bullets {
     margin-bottom: 1rem;
-  }
-  .faq-content > li {
-    padding-bottom: 0.75rem;
   }
 }
 
