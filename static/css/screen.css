@@ -1,0 +1,533 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: "ProximaNova-Regular", Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  font-size: 16px !important;
+  color: #161616;
+  background-color: #f4f4f4;
+  display: flex;
+  flex: 1;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 34px;
+  margin-top: 56px;
+}
+
+p {
+  font-size: 20px;
+  line-height: 32px;
+  padding-top: 24px;
+}
+
+/* Structure */
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
+}
+
+.row h1 {
+  width: calc(100% - 5px);
+  margin-bottom: 219px;
+}
+.row h3,
+.row .buttons,
+.row h2,
+.row p,
+.row form {
+  width: 58.3333333333%;
+  margin: 0 auto;
+  /* background-color: #f4f4f4; */
+  box-shadow: none;
+  border: none;
+}
+
+/* Logo */
+.logo {
+  width: 160px;
+  height: 50px;
+  background: url(../img/ds-eduID-logo-black320x120px.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 16px 0 0 16px;
+  /* z-index: 2; */
+}
+
+/* Icon */
+.glyphicon.glyphicon-info-sign {
+  display: none;
+}
+
+/* Form */
+input[name="email"] {
+  border-radius: 0;
+  box-shadow: none;
+  font-family: "ProximaNova-Regular";
+  font-weight: 500;
+  color: #161616;
+  background-color: white;
+  border: none;
+  border-bottom: solid 1px #161616;
+  font-size: 24px;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  width: 150%;
+  height: 48px;
+  padding: 0.375rem 0.75rem;
+  /* width: 100%; */
+}
+
+input[type="email"]::placeholder {
+  font-family: "ProximaNova-Regular";
+  color: #161616;
+}
+
+input:hover,
+input:active {
+  border-bottom: solid 1px #161616;
+}
+
+input:focus {
+  outline: 0;
+  border-bottom: solid 1px #161616;
+}
+
+/* valid form input*/
+form {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.form-group {
+  margin-bottom: 0;
+  /* height: 100px; */
+  height: 100%;
+}
+
+.form-control {
+  height: 48px;
+  padding: 0.375rem 0.75rem;
+}
+
+.form-control:focus {
+  border-color: #161616;
+  box-shadow: none;
+}
+
+.form-control.is-valid {
+  border: 2px solid #58b78c;
+}
+
+.form-control.is-valid:focus {
+  border-color: #58b78c;
+  box-shadow: 0 0 0 0.2rem rgba(88, 183, 140, 0.25);
+}
+
+/* invalid form input */
+.form-control.is-invalid {
+  border: 2px solid #b75865;
+}
+
+.form-control.is-invalid:focus {
+  border-color: #b75865;
+  box-shadow: 0 0 0 0.2rem rgba(183, 88, 101, 0.25);
+}
+
+.form-group.has-error .help-block {
+  border: none;
+  background-color: #ffe7dd;
+  padding: 0.3em 1em;
+}
+
+/*  error message */
+
+/* .has-error  {
+  color: #ff4500;
+  background-color: #ffe7dd; */
+/* } */
+
+.has-error .help-block {
+  display: flex;
+  margin: 0;
+  color: #ff4500;
+  background-color: #ffe7dd;
+}
+
+.has-error .help-block span {
+  width: 58.3333333333%;
+  margin: 0 auto;
+}
+
+.help-block {
+  display: flex;
+  font-size: 20px;
+  position: absolute;
+  top: 219px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  color: #c7c7c7;
+}
+
+/* .eduid-field-error {
+  color: #b75865;
+  font-weight: 500;
+} */
+
+fieldset {
+  width: 100%;
+}
+
+/* Button */
+button.btn {
+  font-family: "Akkurat";
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  height: 48px;
+  padding: 10px 20px;
+  box-shadow: 0 5px 17px rgba(89, 89, 89, 0.07);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+button.btn.btn-default {
+  background-color: #ff4500;
+  color: white;
+  border: solid 1px transparent;
+}
+
+button.btn.btn-default:not(:disabled):hover {
+  color: #ff4500;
+  background-color: #ffe7dd;
+  transform: scale(0.95);
+  border: solid 1px #ffe7dd;
+}
+
+button.btn.btn-default:not(:disabled):not(.disabled):active,
+button.btn.btn-default:not(:disabled):not(.disabled):focus,
+button.btn.btn-default:not(:disabled):not(.disabled):active:focus {
+  color: #ff4500;
+  background-color: #ffe7dd;
+  transform: scale(0.95);
+  border: solid 1px #ffe7dd;
+}
+
+button.btn.btn-default:disabled {
+  background-color: #d8d8d8;
+  border-color: #d8d8d8;
+}
+
+
+/* new content */
+.row h1::before {
+  content: " ";
+  display: block;
+  height: 237px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -10;
+}
+
+.row h1::after {
+  content: "eduID is easier and safer login.";
+  display: block;
+  position: relative;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 700;
+  padding-top: 146px;
+  width: calc(58.3333333333% + 36px);
+  margin: 0 auto;
+}
+
+.jumbotron::before {
+  content: "Something went wrong!";
+  display: block;
+  font-size: 24px;
+  line-height: 1.2;
+  /* font-weight: 500; */
+  position: absolute;
+  top: 285px;
+  left: 20.888%;
+  width: 58.3333333333%;
+}
+
+.col-md-offset-3,
+.col-md-6,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12 {
+  margin-left: 0;
+  width: 100%;
+  float: none;
+}
+
+.screen-reader-text {
+  color: transparent;
+  height: 0;
+  width: 0;
+}
+
+/*reset password styling */
+
+.tab-content.well {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0;
+  border: none;
+}
+
+.nav-tabs,
+.form,
+.tab-content {
+  border: none;
+  width: 58%;
+  margin: 0 auto;
+}
+
+.nav ul {
+  border: none;
+}
+
+.nav-tabs li {
+  height: 48px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.nav li a {
+  font-family: "Akkurat";
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #161616;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #ff4500;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  border-bottom-color: transparent;
+}
+
+.form-group,
+.tab-content > .active {
+  display: contents;
+}
+
+.form-group p {
+  margin: 0 16px 16px 16px;
+  width: 100%;
+}
+
+/* reset password breakpoints */
+@media (max-width: 823px) {
+  .row h1::after,
+  .row h2::before,
+  .row h2 {
+    padding: 3rem 0 2rem;
+    width: 75%;
+  }
+  .row p,
+  .row form,
+  .nav-tabs,
+  .form,
+  .tab-content {
+    padding: 0;
+    width: 75%;
+  }
+  .row h1::after {
+    padding: 136px 0 103px;
+    height: calc(60px + 112px + 96px + 80px - 5px);
+  }
+  input[type="email"] {
+    width: 100%;
+  }
+  form {
+    flex-direction: column;
+  }
+  input,
+  button,
+  .form-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .row h1::after,
+  .row h2::before,
+  .row h2 {
+    width: calc(100% - 40px);
+  }
+  .row p,
+  .row form,
+  .nav-tabs,
+  .form,
+  .tab-content {
+    padding: 0;
+    width: calc(100% - 40px);
+  }
+  .row h1::after {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .row h2::before,
+  h2 {
+    font-size: 25px;
+    line-height: 30px;
+    margin-top: 10px;
+    top: 155px;
+  }
+}
+
+/* Spinner on buttons */
+
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  width: 0;
+
+  -webkit-transition: opacity 0.25s, width 0.25s;
+  -moz-transition: opacity 0.25s, width 0.25s;
+  -o-transition: opacity 0.25s, width 0.25s;
+  transition: opacity 0.25s, width 0.25s;
+}
+
+.has-spinner.loading {
+  opacity: 1;
+}
+
+.has-spinner.loading .spinner {
+  opacity: 1;
+  width: auto; /* This doesn't work, just fix for unkown width elements */
+}
+
+.has-spinner.btn-mini.active .spinner {
+  width: 10px;
+}
+
+.has-spinner.btn-sm.active .spinner {
+  width: 13px;
+}
+
+.has-spinner.btn.loading .spinner {
+  width: 16px;
+}
+
+.has-spinner.btn-lg.loading .spinner {
+  width: 19px;
+}
+
+/* Spinner
+-------------------------------------------------- */
+
+.glyphicon-spin {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+/* End Spinner
+-------------------------------------------------- */
+
+/* Fontface */
+
+@font-face {
+  font-family: "Akkurat";
+  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"),
+    url("../fonts/Akkurat-Mono.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Light";
+  src: url("../fonts/ProximaNova-Light.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Light.woff") format("woff"),
+    url("../fonts/ProximaNova-Light.woff2") format("woff2");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Regular";
+  src: url("../fonts/ProximaNova-Regular.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Regular.woff") format("woff"),
+    url("../fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNova-Bold";
+  src: url("../fonts/ProximaNova-Bold.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Bold.woff") format("woff"),
+    url("../fonts/ProximaNova-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
