@@ -18,7 +18,6 @@ COPY docker/html.conf /etc/nginx/sites-enabled/html.conf
 # Copy www.eduid.se content to /opt/eduid/www/
 COPY assets /opt/eduid/www/assets/
 COPY en /opt/eduid/www/en/
-COPY faq.html /opt/eduid/www/faq.html
 COPY index.html /opt/eduid/www/index.html
 
 # Copy react app and other webapp dependencies to /opt/eduid/static/
