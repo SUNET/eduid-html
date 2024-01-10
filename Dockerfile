@@ -1,9 +1,22 @@
 #
 # This image includes the static content that is served by eduID
 
+FROM docker.sunet.se/sunet/docker-jenkins-node-job AS build
+
+# Fetch JS applications to build
+RUN git clone https://github.com/SUNET/eduid-front.git
+RUN git clone https://github.com/SUNET/eduid-managed-accounts.git
+
+# Build eduid-front
+WORKDIR /eduid-front
+RUN make build
+# Build eduid-managed-accounts
+WORKDIR /eduid-managed-accounts
+RUN make build
+
 FROM debian:stable
 
-MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
+MAINTAINER eduid-dev <feedback@eduid.se>
 
 VOLUME ["/var/log/nginx"]
 
@@ -20,8 +33,9 @@ COPY assets /opt/eduid/www/assets/
 COPY en /opt/eduid/www/en/
 COPY index.html /opt/eduid/www/index.html
 
-# Copy react app and other webapp dependencies to /opt/eduid/static/
+# Copy react apps and other webapp dependencies to /opt/eduid/static/
 COPY static /opt/eduid/static/
-COPY react/build /opt/eduid/build/
+COPY --from=build /eduid-front/build /opt/eduid/eduid-front/
+COPY --from=build /eduid-managed-accounts/dist /opt/eduid/eduid-managed-accounts/
 
 CMD ["/start.sh"]

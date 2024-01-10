@@ -8,40 +8,11 @@ docker_name: eduid/eduid-html
 managed_scripts:
   - docker_build_prep.sh
   - docker_tag.sh
-copy_artifacts:
-  project_name: eduid-front
-  target_dir: react/build/front/
-  flatten: true
 triggers:
   cron: "@weekly"
 upstream:
   - eduid-front
+  - eduid-managed-accounts
 slack:
   room: eduid-builds
 clean_workspace: true
-
-extra_jobs:
-  - name: eduid-html-stable
-    git:
-      branch: stable
-      extensions:
-        shallow_clone: true
-    clean_workspace: true
-    builders:
-      - docker
-    docker_name: eduid/eduid-html-stable
-    managed_scripts:
-      - docker_build_prep.sh
-      - docker_tag.sh
-    copy_artifacts:
-      project_name: eduid-front-stable
-      target_dir: react/build/front/
-      flatten: true
-    triggers:
-      cron: "@weekly"
-    upstream:
-      - eduid-front-stable
-    slack:
-      room: eduid-builds
-    clean_workspace: true
-
