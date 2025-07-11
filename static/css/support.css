@@ -1,1 +1,129 @@
+body {
+  min-height: 100vh;
+  font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #161616;
+  scroll-behavior: smooth;
+  display: flex;
+  background-image: radial-gradient(ellipse at 112% 100%, #f4f4f4 0, #f4f4f4 45%, #fafafa 45%, #fafafa 75%, #fff 75%);
+  margin: 0;
+  flex-direction: column;
 
+  header {
+    padding: 1rem;
+    align-items: center;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+  }
+
+  .form-inline {
+    display: flex;
+    justify-content: space-between;
+
+    .eduid-logo {
+      width: 116px;
+      height: 40px;
+      background-image: url(../../static/img/eduid-logo-black.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin: 0;
+    }
+  }
+
+  .horizontal-content-margin {
+    padding: 0;
+    width: 58%;
+    max-width: 870px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    box-sizing: border-box;
+    font-family: "Inter-Regular", "Arial", "Helvetica", "sans-serif";
+    font-size: 1.25rem;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    width: 100%;
+    padding: 1.25rem 0.5rem;
+    height: 3rem;
+    border: 2px solid #f4f4f4;
+    margin-right: 1rem;
+  }
+
+  button {
+    letter-spacing: 1px;
+    color: #fff;
+    border: solid 2px #ff4500;
+    background-color: #db3a00;
+    box-shadow: none;
+    min-width: 100px;
+    padding: 0 1.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Akkurat", Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    line-height: 1;
+    text-transform: uppercase;
+    height: 3rem;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    outline: 0;
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+
+  .form-group {
+    display: flex;
+  }
+
+  .row {
+    margin: 0;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    margin-bottom: 2rem;
+  }
+
+  caption {
+    font-size: 1.8rem;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  h4 {
+    font-size: 21px;
+    padding: 1.5rem;
+    font-weight: 700;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    row-gap: 8px;
+    column-gap: 12px;
+    width: 100%;
+  }
+
+  td dl:not(:last-of-type) {
+    border-bottom: 2px dotted #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+}
