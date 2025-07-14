@@ -9,7 +9,6 @@ body {
   background-image: radial-gradient(ellipse at 112% 100%, #f4f4f4 0, #f4f4f4 45%, #fafafa 45%, #fafafa 75%, #fff 75%);
   margin: 0;
   flex-direction: column;
-
   header {
     padding: 1rem;
     align-items: center;
@@ -125,5 +124,35 @@ body {
     border-bottom: 2px dotted #ccc;
     padding-bottom: 8px;
     margin-bottom: 8px;
+  }
+
+  .table-bordered > tbody > tr > td.no-data {
+    border: none !important;
+  }
+
+  table:has(td.no-data) {
+    border: none;
+    display: flex;
+    align-items: center;
+
+    &.table-hover :hover {
+      background-color: transparent;
+      color: inherit;
+      cursor: default;
+    }
+  }
+
+  td.no-data {
+    border: none !important;
+    background-color: #ffe7dd;
+    border-radius: 2rem;
+    font-size: 1.25rem;
+    color: #c23400;
+    padding: 2px 7px;
+  }
+
+  .table > tbody > tr > th,
+  .table > tbody > tr > td {
+    border: 1px solid #ddd;
   }
 }
