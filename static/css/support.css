@@ -1,3 +1,12 @@
+/* Fontface */
+
+@font-face {
+  font-family: "Akkurat";
+  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"), url("../fonts/Akkurat-Mono.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   min-height: 100vh;
   font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
@@ -9,16 +18,24 @@ body {
   background-image: radial-gradient(ellipse at 112% 100%, #f4f4f4 0, #f4f4f4 45%, #fafafa 45%, #fafafa 75%, #fff 75%);
   margin: 0;
   flex-direction: column;
+
   header {
     padding: 1rem;
     align-items: center;
   }
 
+  div#user-data {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
   table {
-    width: 100%;
+    width: calc(100% - 40px);
+    border-collapse: collapse;
     max-width: 100%;
     margin-bottom: 20px;
     border: 1px solid #ddd;
+    margin-left: 20px;
   }
 
   .form-inline {
@@ -71,7 +88,7 @@ body {
     justify-content: center;
     font-family: "Akkurat", Arial, Helvetica, sans-serif;
     letter-spacing: 1px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1;
     text-transform: uppercase;
     height: 3rem;
@@ -89,17 +106,20 @@ body {
 
   .row {
     margin: 0;
+    padding-top: 20px;
     width: 100%;
     border: 2px solid #ccc;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-bottom: 2rem;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e5e5;
   }
 
   caption {
-    font-size: 1.8rem;
-    padding: 1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
     text-align: left;
+    margin-right: 1rem;
   }
 
   h3 {
@@ -108,8 +128,13 @@ body {
 
   h4 {
     font-size: 21px;
-    padding: 1.5rem;
     font-weight: 700;
+    margin-left: 20px;
+    margin-top: 0;
+  }
+
+  th {
+    text-align: left;
   }
 
   dl {
@@ -134,19 +159,13 @@ body {
     border: none;
     display: flex;
     align-items: center;
-
-    &.table-hover :hover {
-      background-color: transparent;
-      color: inherit;
-      cursor: default;
-    }
   }
 
   td.no-data {
     border: none !important;
     background-color: #ffe7dd;
     border-radius: 2rem;
-    font-size: 1.25rem;
+    font-size: 0.75rem;
     color: #c23400;
     padding: 2px 7px;
   }
@@ -154,5 +173,15 @@ body {
   .table > tbody > tr > th,
   .table > tbody > tr > td {
     border: 1px solid #ddd;
+    padding: 0.5rem;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  .table-hover > tbody > tr:hover > td:not(.no-data),
+  .table-hover > tbody > tr:hover > th {
+    background-color: #f5f5f5;
   }
 }
