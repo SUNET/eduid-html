@@ -178,7 +178,7 @@ body {
     }
   }
 
-  button#logout-button {
+  button.secondary-button {
     padding: 0.5rem 1rem;
     font-size: 13px;
     min-width: -moz-fit-content;
