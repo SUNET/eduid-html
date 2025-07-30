@@ -59,7 +59,7 @@ document.body.addEventListener("htmx:afterSettle", function () {
     const msg = document.createElement("p");
     msg.innerHTML =
       "It seems you don't have permission to access the support page.<br>" +
-      `Please <a href="${loginURL}">log in</a> to continue.`;
+      `Please <a href="${loginURL}">log in</a> first, then try again.`;
     msg.style.marginTop = "8px";
     msg.style.fontSize = "15px";
     msg.style.fontFamily = "Inter-regular";
