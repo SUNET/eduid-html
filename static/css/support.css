@@ -265,7 +265,7 @@ body {
 
   .table-hover > tbody > tr:hover > td:not(.no-data),
   .table-hover > tbody > tr:hover > th {
-    background-color: #fefefe;
+    background-color: #ebebeb;
   }
 
   .horizontal-content-margin {
