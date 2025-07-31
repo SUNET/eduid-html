@@ -9,6 +9,19 @@ document.addEventListener("htmx:afterSwap", function () {
       } else button.disabled = true;
     });
   }
+
+  const thElements = document.querySelectorAll("th");
+  thElements.forEach((th) => {
+    if (th.textContent.trim() === "Credentials") {
+      const description = document.createElement("p");
+      description.textContent = "login authentication methods (e.g., password, webauthn, security key).";
+      description.style.margin = "4px 0 0 0";
+      description.style.fontSize = "0.8em";
+      description.style.color = "#5e5e5e";
+      th.textContent = "Credentials";
+      th.appendChild(description);
+    }
+  });
 });
 
 document.body.addEventListener("htmx:afterSettle", function () {
