@@ -173,7 +173,7 @@ body {
     border-radius: 1.5rem;
     transition: all 0.3s ease;
     outline: 0;
-    &:hover {
+    &:not(:disabled):hover {
       transform: scale(0.95);
     }
   }
@@ -321,5 +321,8 @@ body {
     transition: all 0.2s ease;
     cursor: pointer;
     border-bottom: none;
+  }
+  .display-none {
+    display: none;
   }
 }
