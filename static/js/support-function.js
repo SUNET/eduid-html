@@ -28,10 +28,10 @@ document.body.addEventListener("htmx:afterSettle", function () {
   const errorDiv = document.getElementById("errors");
   let loginURL;
   if (location.hostname.includes("dev")) {
-    loginURL = "https://dev.eduid.se/";
+    loginURL = "https://dev.eduid.se/services/authn/support/login";
   } else if (location.hostname.includes("docker")) {
-    loginURL = "https://html.eduid.docker/";
-  } else loginURL = "https://eduid.se/";
+    loginURL = "https://dashboard.eduid.docker/services/authn/support/login";
+  } else loginURL = "https://dashboard.eduid.se/services/authn/support/login";
   if (errorDiv && errorDiv.textContent.trim().toLowerCase() === "not authorized" && !errorDiv.querySelector("p")) {
     const style = document.createElement("style");
     style.innerHTML = `
