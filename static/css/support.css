@@ -1,0 +1,328 @@
+/* Fontface */
+
+@font-face {
+  font-family: "Akkurat";
+  src: url("../fonts/Akkurat-Mono.ttf") format("truetype"), url("../fonts/Akkurat-Mono.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("../fonts/Inter-Bold.ttf") format("truetype"), url("../fonts/Inter-Bold.woff") format("woff"),
+    url("../fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("../fonts/Inter-SemiBold.ttf") format("truetype"), url("../fonts/Inter-SemiBold.woff") format("woff"),
+    url("../fonts/Inter-SemiBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("../fonts/Inter-Medium.ttf") format("truetype"), url("../fonts/Inter-Medium.woff") format("woff"),
+    url("../fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("../fonts/Inter-Regular.ttf") format("truetype"), url("../fonts/Inter-Regular.woff") format("woff"),
+    url("../fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter-Light";
+  src: url("../fonts/Inter-Light.ttf") format("truetype"), url("../fonts/Inter-Light.woff") format("woff"),
+    url("../fonts/Inter-Light.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #161616;
+  scroll-behavior: smooth;
+  display: flex;
+  background-image: radial-gradient(ellipse at 112% 100%, #f4f4f4 0, #f4f4f4 45%, #fafafa 45%, #fafafa 75%, #fff 75%);
+  margin: 0;
+  flex-direction: column;
+
+  header {
+    padding: 1rem;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h4 {
+    font-family: "Inter-SemiBold", Arial, Helvetica, sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 0;
+  }
+
+  div#user-data {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  table {
+    width: calc(100% - 40px);
+    border-collapse: collapse;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    margin-left: 20px;
+  }
+
+  .form-inline {
+    display: flex;
+    justify-content: space-between;
+
+    .eduid-logo {
+      width: 116px;
+      height: 40px;
+      background-image: url(../../static/img/eduid-logo-black.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin: 0;
+    }
+  }
+
+  .horizontal-content-margin {
+    padding: 0;
+    width: 58%;
+    max-width: 870px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-result-container {
+    display: flex;
+    flex-flow: column;
+    justify-items: center;
+    align-items: center;
+
+    h2 {
+      font-family: "Inter-SemiBold", Arial, Helvetica, sans-serif;
+      margin-bottom: 5rem;
+      margin-top: 0;
+    }
+    span.uppercase {
+      text-transform: uppercase;
+    }
+  }
+
+  label {
+    font-size: 1em;
+    display: block;
+  }
+
+  input {
+    box-sizing: border-box;
+    font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 1.25rem 0.5rem;
+    height: 3rem;
+    border: 2px solid #f4f4f4;
+    margin-right: 1rem;
+  }
+
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #fefefe inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  button {
+    letter-spacing: 1px;
+    color: #fff;
+    border: solid 2px #ff4500;
+    background-color: #db3a00;
+    box-shadow: none;
+    min-width: 100px;
+    padding: 0 1.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Akkurat", Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1;
+    text-transform: uppercase;
+    height: 3rem;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    outline: 0;
+    &:not(:disabled):hover {
+      transform: scale(0.95);
+    }
+  }
+
+  button.secondary-button {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    border: solid 2px #ff4500;
+    box-shadow: none;
+    color: #c23400;
+    background-color: #fefefe;
+  }
+
+  .form-group {
+    display: flex;
+  }
+
+  .row {
+    margin: 0;
+    padding-top: 20px;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    background-color: #fefefe;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  caption {
+    font-size: 1rem;
+    text-align: left;
+    margin-right: 1rem;
+  }
+
+  th {
+    text-align: left;
+    font-family: "Inter-Medium", Arial, Helvetica, sans-serif;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    row-gap: 8px;
+    column-gap: 12px;
+    width: 100%;
+  }
+
+  td dl:not(:last-of-type) {
+    border-bottom: 2px dotted #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+
+  .table-bordered > tbody > tr > td.no-data {
+    border: none !important;
+  }
+
+  table:has(td.no-data) {
+    border: none;
+    display: flex;
+    align-items: center;
+  }
+
+  td.no-data {
+    border: none !important;
+    background-color: #ffe7dd;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    color: #c23400;
+    padding: 2px 7px !important;
+  }
+
+  .table > tbody > tr > th,
+  .table > tbody > tr > td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  .table-hover > tbody > tr:hover > td:not(.no-data),
+  .table-hover > tbody > tr:hover > th {
+    background-color: #ebebeb;
+  }
+
+  .horizontal-content-margin {
+    max-width: 600px;
+    margin: 40px auto;
+
+    padding: 0 20px;
+  }
+
+  .form-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #5e5e5e;
+  }
+
+  .search-input-wrapper input {
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+
+  .search-input-wrapper input:focus {
+    outline: none;
+    border-color: #5e5e5e;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+    border-color: inherit;
+    color: #fefefe;
+  }
+
+  a {
+    color: #c23400;
+    font-family: "Akkurat", "Arial", "Helvetica", "sans-serif";
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-bottom: none;
+  }
+  .display-none {
+    display: none;
+  }
+}
