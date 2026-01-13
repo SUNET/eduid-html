@@ -1,3 +1,4 @@
+disabled: true
 git:
   extensions:
     shallow_clone: true
